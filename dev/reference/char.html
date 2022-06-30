@@ -47,6 +47,8 @@ useful for composing with other types."><meta property="og:image" content="https
     <a class="dropdown-item" href="../articles/extending.html">Extending tibble</a>
     <a class="dropdown-item" href="../articles/invariants.html">Invariants: Comparing behavior with data frames</a>
     <a class="dropdown-item" href="../articles/formats.html">Column formats</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">More articles...</a>
   </div>
 </li>
 <li class="nav-item dropdown">
@@ -96,36 +98,43 @@ useful for composing with other types.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">char</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">...</span>,
-  min_chars <span class="op">=</span> <span class="cn">NULL</span>,
-  shorten <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"back"</span>, <span class="st">"front"</span>, <span class="st">"mid"</span>, <span class="st">"abbreviate"</span><span class="op">)</span>
-<span class="op">)</span>
-
-<span class="fu">set_char_opts</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">...</span>,
-  min_chars <span class="op">=</span> <span class="cn">NULL</span>,
-  shorten <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"back"</span>, <span class="st">"front"</span>, <span class="st">"mid"</span>, <span class="st">"abbreviate"</span><span class="op">)</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">char</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  min_chars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  shorten <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"back"</span>, <span class="st">"front"</span>, <span class="st">"mid"</span>, <span class="st">"abbreviate"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_char_opts</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  min_chars <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  shorten <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"back"</span>, <span class="st">"front"</span>, <span class="st">"mid"</span>, <span class="st">"abbreviate"</span><span class="op">)</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
 <dd><p>A character vector.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>These dots are for future extensions and must be empty.</p></dd>
+
+
 <dt>min_chars</dt>
 <dd><p>The minimum width to allocate to this column, defaults to 15.
 The <code>"pillar.min_chars"</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a> is not consulted.</p></dd>
+
+
 <dt>shorten</dt>
 <dd><p>How to abbreviate the data if necessary:</p><ul><li><p><code>"back"</code> (default): add an ellipsis at the end</p></li>
 <li><p><code>"front"</code>: add an ellipsis at the front</p></li>
 <li><p><code>"mid"</code>: add an ellipsis in the middle</p></li>
 <li><p><code>"abbreviate"</code>: use <code><a href="https://rdrr.io/r/base/abbreviate.html" class="external-link">abbreviate()</a></code></p></li>
 </ul></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -135,23 +144,23 @@ The <code>"pillar.min_chars"</code> <a href="https://pillar.r-lib.org/reference/
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Display as a vector:</span></span>
-<span class="r-in"><span class="fu">char</span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Display as a vector:</span></span></span>
+<span class="r-in"><span><span class="fu">char</span><span class="op">(</span><span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;pillar_char[3]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] a b c</span>
-<span class="r-in"><span class="co"># Space constraints:</span></span>
-<span class="r-in"><span class="va">rand_strings</span> <span class="op">&lt;-</span> <span class="fu">stringi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_rand_strings.html" class="external-link">stri_rand_strings</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">22</span>, by <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Plain character vectors get truncated if space is limited:</span></span>
-<span class="r-in"><span class="va">data_with_id</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">{</span></span>
-<span class="r-in">  <span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span>
-<span class="r-in">    <span class="va">id</span>,</span>
-<span class="r-in">    some_number_1 <span class="op">=</span> <span class="fl">1</span>, some_number_2 <span class="op">=</span> <span class="fl">2</span>, some_number_3 <span class="op">=</span> <span class="fl">3</span>,</span>
-<span class="r-in">    some_number_4 <span class="op">=</span> <span class="fl">4</span>, some_number_5 <span class="op">=</span> <span class="fl">5</span>, some_number_6 <span class="op">=</span> <span class="fl">6</span>,</span>
-<span class="r-in">    some_number_7 <span class="op">=</span> <span class="fl">7</span>, some_number_8 <span class="op">=</span> <span class="fl">8</span>, some_number_9 <span class="op">=</span> <span class="fl">9</span></span>
-<span class="r-in">  <span class="op">)</span></span>
-<span class="r-in"><span class="op">}</span></span>
-<span class="r-in"><span class="fu">data_with_id</span><span class="op">(</span><span class="va">rand_strings</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="co"># Space constraints:</span></span></span>
+<span class="r-in"><span><span class="va">rand_strings</span> <span class="op">&lt;-</span> <span class="fu">stringi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_rand_strings.html" class="external-link">stri_rand_strings</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq</a></span><span class="op">(</span><span class="fl">40</span>, <span class="fl">22</span>, by <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Plain character vectors get truncated if space is limited:</span></span></span>
+<span class="r-in"><span><span class="va">data_with_id</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">id</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="va">id</span>,</span></span>
+<span class="r-in"><span>    some_number_1 <span class="op">=</span> <span class="fl">1</span>, some_number_2 <span class="op">=</span> <span class="fl">2</span>, some_number_3 <span class="op">=</span> <span class="fl">3</span>,</span></span>
+<span class="r-in"><span>    some_number_4 <span class="op">=</span> <span class="fl">4</span>, some_number_5 <span class="op">=</span> <span class="fl">5</span>, some_number_6 <span class="op">=</span> <span class="fl">6</span>,</span></span>
+<span class="r-in"><span>    some_number_7 <span class="op">=</span> <span class="fl">7</span>, some_number_8 <span class="op">=</span> <span class="fl">8</span>, some_number_9 <span class="op">=</span> <span class="fl">9</span></span></span>
+<span class="r-in"><span>  <span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">}</span></span></span>
+<span class="r-in"><span><span class="fu">data_with_id</span><span class="op">(</span><span class="va">rand_strings</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 10</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    id              some_number_1 some_number_2 some_number_3 some_number_4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>                   <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -167,9 +176,9 @@ The <code>"pillar.min_chars"</code> <a href="https://pillar.r-lib.org/reference/
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> YCRHBt1kj2i9Jn…             1             2             3             4</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 5 more variables: some_number_5 &lt;dbl&gt;, some_number_6 &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   some_number_7 &lt;dbl&gt;, some_number_8 &lt;dbl&gt;, some_number_9 &lt;dbl&gt;</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use char() to avoid or control truncation</span></span>
-<span class="r-in"><span class="fu">data_with_id</span><span class="op">(</span><span class="fu">char</span><span class="op">(</span><span class="va">rand_strings</span>, min_chars <span class="op">=</span> <span class="fl">24</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use char() to avoid or control truncation</span></span></span>
+<span class="r-in"><span><span class="fu">data_with_id</span><span class="op">(</span><span class="fu">char</span><span class="op">(</span><span class="va">rand_strings</span>, min_chars <span class="op">=</span> <span class="fl">24</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 10</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    id                            some_number_1 some_number_2 some_number_3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;char&gt;</span>                                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -186,7 +195,7 @@ The <code>"pillar.min_chars"</code> <a href="https://pillar.r-lib.org/reference/
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 6 more variables: some_number_4 &lt;dbl&gt;, some_number_5 &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   some_number_6 &lt;dbl&gt;, some_number_7 &lt;dbl&gt;, some_number_8 &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   some_number_9 &lt;dbl&gt;</span></span>
-<span class="r-in"><span class="fu">data_with_id</span><span class="op">(</span><span class="fu">char</span><span class="op">(</span><span class="va">rand_strings</span>, min_chars <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">data_with_id</span><span class="op">(</span><span class="fu">char</span><span class="op">(</span><span class="va">rand_strings</span>, min_chars <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 10</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    id                                       some_number_1 some_number_2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;char&gt;</span>                                           <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -203,7 +212,7 @@ The <code>"pillar.min_chars"</code> <a href="https://pillar.r-lib.org/reference/
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 7 more variables: some_number_3 &lt;dbl&gt;, some_number_4 &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   some_number_5 &lt;dbl&gt;, some_number_6 &lt;dbl&gt;, some_number_7 &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   some_number_8 &lt;dbl&gt;, some_number_9 &lt;dbl&gt;</span></span>
-<span class="r-in"><span class="fu">data_with_id</span><span class="op">(</span><span class="fu">char</span><span class="op">(</span><span class="va">rand_strings</span>, min_chars <span class="op">=</span> <span class="fl">24</span>, shorten <span class="op">=</span> <span class="st">"mid"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu">data_with_id</span><span class="op">(</span><span class="fu">char</span><span class="op">(</span><span class="va">rand_strings</span>, min_chars <span class="op">=</span> <span class="fl">24</span>, shorten <span class="op">=</span> <span class="st">"mid"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 10</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    id                            some_number_1 some_number_2 some_number_3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;char&gt;</span>                                <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
@@ -220,14 +229,14 @@ The <code>"pillar.min_chars"</code> <a href="https://pillar.r-lib.org/reference/
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># … with 6 more variables: some_number_4 &lt;dbl&gt;, some_number_5 &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   some_number_6 &lt;dbl&gt;, some_number_7 &lt;dbl&gt;, some_number_8 &lt;dbl&gt;,</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;">#   some_number_9 &lt;dbl&gt;</span></span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Lorem Ipsum, one sentence per row.</span></span>
-<span class="r-in"><span class="va">lipsum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="fu">stringi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_rand_lipsum.html" class="external-link">stri_rand_lipsum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="st">"(?&lt;=[.]) +"</span>, perl <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span>
-<span class="r-in"><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span>
-<span class="r-in">  back <span class="op">=</span> <span class="fu">char</span><span class="op">(</span><span class="va">lipsum</span>, shorten <span class="op">=</span> <span class="st">"back"</span><span class="op">)</span>,</span>
-<span class="r-in">  front <span class="op">=</span> <span class="fu">char</span><span class="op">(</span><span class="va">lipsum</span>, shorten <span class="op">=</span> <span class="st">"front"</span><span class="op">)</span>,</span>
-<span class="r-in">  mid <span class="op">=</span> <span class="fu">char</span><span class="op">(</span><span class="va">lipsum</span>, shorten <span class="op">=</span> <span class="st">"mid"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Lorem Ipsum, one sentence per row.</span></span></span>
+<span class="r-in"><span><span class="va">lipsum</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/unlist.html" class="external-link">unlist</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/strsplit.html" class="external-link">strsplit</a></span><span class="op">(</span><span class="fu">stringi</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/stringi/man/stri_rand_lipsum.html" class="external-link">stri_rand_lipsum</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="st">"(?&lt;=[.]) +"</span>, perl <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  back <span class="op">=</span> <span class="fu">char</span><span class="op">(</span><span class="va">lipsum</span>, shorten <span class="op">=</span> <span class="st">"back"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  front <span class="op">=</span> <span class="fu">char</span><span class="op">(</span><span class="va">lipsum</span>, shorten <span class="op">=</span> <span class="st">"front"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  mid <span class="op">=</span> <span class="fu">char</span><span class="op">(</span><span class="va">lipsum</span>, shorten <span class="op">=</span> <span class="st">"mid"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    back                                                        front mid  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;char&gt;</span>                                                      <span style="color: #949494; font-style: italic;">&lt;cha&gt;</span> <span style="color: #949494; font-style: italic;">&lt;cha&gt;</span></span>
@@ -241,7 +250,7 @@ The <code>"pillar.min_chars"</code> <a href="https://pillar.r-lib.org/reference/
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> Elit semper eu.                                             … eu. El…u.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> Sapien congue, dictum massa sed posuere sagittis.           …tis. Sa…s.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> Interdum ante aenean, nisi dapibus lacinia nulla laoreet, … …bus. In…s.</span>
-<span class="r-in"><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span>abbr <span class="op">=</span> <span class="fu">char</span><span class="op">(</span><span class="va">lipsum</span>, shorten <span class="op">=</span> <span class="st">"abbreviate"</span><span class="op">)</span><span class="op">)</span></span>
+<span class="r-in"><span><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span>abbr <span class="op">=</span> <span class="fu">char</span><span class="op">(</span><span class="va">lipsum</span>, shorten <span class="op">=</span> <span class="st">"abbreviate"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 1</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    abbr                                                                   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;char&gt;</span>                                                                 </span>
@@ -268,7 +277,7 @@ The <code>"pillar.min_chars"</code> <a href="https://pillar.r-lib.org/reference/
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.9000.</p>
 </div>
 
   </div></footer></body></html>

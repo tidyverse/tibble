@@ -45,6 +45,8 @@ See vignette("extending", package = "pillar") for details.'><meta property="og:i
     <a class="dropdown-item" href="../articles/extending.html">Extending tibble</a>
     <a class="dropdown-item" href="../articles/invariants.html">Invariants: Comparing behavior with data frames</a>
     <a class="dropdown-item" href="../articles/formats.html">Column formats</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">More articles...</a>
   </div>
 </li>
 <li class="nav-item dropdown">
@@ -93,31 +95,40 @@ See <code><a href="https://pillar.r-lib.org/articles/extending.html" class="exte
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">trunc_mat</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="cn">NULL</span>, width <span class="op">=</span> <span class="cn">NULL</span>, n_extra <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">trunc_mat</span><span class="op">(</span><span class="va">x</span>, n <span class="op">=</span> <span class="cn">NULL</span>, width <span class="op">=</span> <span class="cn">NULL</span>, n_extra <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
 <dd><p>Object to format or print.</p></dd>
+
+
 <dt>n</dt>
 <dd><p>Number of rows to show. If <code>NULL</code>, the default, will print all rows
 if less than option <code>tibble.print_max</code>. Otherwise, will print
 <code>tibble.print_min</code> rows.</p></dd>
+
+
 <dt>width</dt>
 <dd><p>Width of text output to generate. This defaults to <code>NULL</code>, which
 means use <code>getOption("tibble.width")</code> or (if also <code>NULL</code>)
 <code>getOption("width")</code>; the latter displays only the columns that fit on one
 screen. You can also set <code>options(tibble.width = Inf)</code> to override this
 default and always print all columns, this may be slow for very wide tibbles.</p></dd>
+
+
 <dt>n_extra</dt>
 <dd><p>Number of extra columns to print abbreviated information for,
 if the width is too small for the entire tibble. If <code>NULL</code>, the default,
 will print information about at most <code>tibble.max_extra_cols</code> extra columns.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An object with a <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> method that will print the input
+    
+
+<p>An object with a <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> method that will print the input
 similarly to a tibble.
 The internal data format is an implementation detail, do not rely on it.</p>
     </div>
@@ -133,7 +144,7 @@ The internal data format is an implementation detail, do not rely on it.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.9000.</p>
 </div>
 
   </div></footer></body></html>

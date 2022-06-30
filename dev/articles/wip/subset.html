@@ -51,7 +51,7 @@
 <li class="nav-item">
   <a class="nav-link" href="../../reference/index.html">Reference</a>
 </li>
-<li class="nav-item dropdown">
+<li class="active nav-item dropdown">
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../../articles/types.html">Column types</a>
@@ -62,6 +62,8 @@
     <a class="dropdown-item" href="../../articles/extending.html">Extending tibble</a>
     <a class="dropdown-item" href="../../articles/invariants.html">Invariants: Comparing behavior with data frames</a>
     <a class="dropdown-item" href="../../articles/formats.html">Column formats</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../../articles/index.html">More articles...</a>
   </div>
 </li>
 <li class="nav-item dropdown">
@@ -101,7 +103,7 @@
 
 
 <div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="../../logo.svg" class="logo" alt=""><h1>Subsetting</h1>
             
       
@@ -132,37 +134,37 @@
 Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" class="external-link">Jacqueline Nolis</a>
 </figcaption></figure><p>This vignette is an attempt to provide a comprehensive overview over the behavior of the subsetting operators <code>$</code>, <code>[[</code> and <code>[</code>, highlighting where the tibble implementation differs from the data frame implementation.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span>
-<span class="va">new_df</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
-  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>
-  <span class="va">df</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span>
-  <span class="va">df</span><span class="op">$</span><span class="va">cd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">9</span>, <span class="fl">10</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">12</span><span class="op">:</span><span class="fl">14</span>, <span class="st">"text"</span><span class="op">)</span>
-  <span class="va">df</span>
-<span class="op">}</span>
-<span class="va">new_tbl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span>
-  <span class="fu"><a href="../../reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="fu">new_df</span><span class="op">(</span><span class="op">)</span><span class="op">)</span>
-<span class="op">}</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></span>
+<span><span class="va">new_df</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span></span>
+<span>  <span class="va">df</span><span class="op">$</span><span class="va">b</span> <span class="op">&lt;-</span> <span class="va">letters</span><span class="op">[</span><span class="fl">5</span><span class="op">:</span><span class="fl">8</span><span class="op">]</span></span>
+<span>  <span class="va">df</span><span class="op">$</span><span class="va">cd</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">9</span>, <span class="fl">10</span><span class="op">:</span><span class="fl">11</span>, <span class="fl">12</span><span class="op">:</span><span class="fl">14</span>, <span class="st">"text"</span><span class="op">)</span></span>
+<span>  <span class="va">df</span></span>
+<span><span class="op">}</span></span>
+<span><span class="va">new_tbl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="fu"><a href="../../reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="fu">new_df</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
+<span><span class="op">}</span></span></code></pre></div>
 <p>Results of the same code for data frames and tibbles are presented side by side:</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">new_df</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt;   a b         cd</span>
-<span class="co">#&gt; 1 1 e          9</span>
-<span class="co">#&gt; 2 2 f     10, 11</span>
-<span class="co">#&gt; 3 3 g 12, 13, 14</span>
-<span class="co">#&gt; 4 4 h       text</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">new_df</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt;   a b         cd</span></span>
+<span><span class="co">#&gt; 1 1 e          9</span></span>
+<span><span class="co">#&gt; 2 2 f     10, 11</span></span>
+<span><span class="co">#&gt; 3 3 g 12, 13, 14</span></span>
+<span><span class="co">#&gt; 4 4 h       text</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">new_tbl</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
-<span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">new_tbl</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr></tbody></table>
 <p>In the following, if the results are identical (after converting to a data frame if necessary), only the tibble result is shown, as in the example below. This allows to spot differences easier.</p>
@@ -171,20 +173,20 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">new_tbl</span><span class="op">(</span><span class="op">)</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
-<span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">new_tbl</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr></tbody></table>
 <p>Subsetting operations are read-only. The same objects are reused in all examples:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">new_df</span><span class="op">(</span><span class="op">)</span>
-<span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu">new_tbl</span><span class="op">(</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">new_df</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu">new_tbl</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="section">$<a class="anchor" aria-label="anchor" href="#section"></a>
 </h2>
@@ -195,8 +197,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">$</span><span class="va">a</span>
-<span class="co">#&gt; [1] 1 2 3 4</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">$</span><span class="va">a</span></span>
+<span><span class="co">#&gt; [1] 1 2 3 4</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -204,8 +206,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">$</span><span class="st">"a"</span>
-<span class="co">#&gt; [1] 1 2 3 4</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">$</span><span class="st">"a"</span></span>
+<span><span class="co">#&gt; [1] 1 2 3 4</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -213,8 +215,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">$</span><span class="va">a</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
-<span class="co">#&gt; [1] 2 3</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">$</span><span class="va">a</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 2 3</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -222,60 +224,60 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">$</span><span class="va">cd</span>
-<span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt; [1] 9</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[2]]</span>
-<span class="co">#&gt; [1] 10 11</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[3]]</span>
-<span class="co">#&gt; [1] 12 13 14</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[4]]</span>
-<span class="co">#&gt; [1] "text"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">$</span><span class="va">cd</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; [1] 9</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; [1] 10 11</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt; [1] 12 13 14</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[4]]</span></span>
+<span><span class="co">#&gt; [1] "text"</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">$</span><span class="va">c</span>
-<span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt; [1] 9</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[2]]</span>
-<span class="co">#&gt; [1] 10 11</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[3]]</span>
-<span class="co">#&gt; [1] 12 13 14</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[4]]</span>
-<span class="co">#&gt; [1] "text"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">c</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; [1] 9</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; [1] 10 11</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt; [1] 12 13 14</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[4]]</span></span>
+<span><span class="co">#&gt; [1] "text"</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">$</span><span class="va">c</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">$</span><span class="va">c</span></span></code></pre></div>
 <div class="warning">
-<pre><code><span class="co">#&gt; Warning: Unknown or uninitialised</span>
-<span class="co">#&gt; column: `c`.</span></code></pre>
+<pre><code><span><span class="co">#&gt; Warning: Unknown or uninitialised</span></span>
+<span><span class="co">#&gt; column: `c`.</span></span></code></pre>
 </div>
-<pre><code><span class="co">#&gt; NULL</span></code></pre>
+<pre><code><span><span class="co">#&gt; NULL</span></span></code></pre>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">$</span><span class="va">d</span>
-<span class="co">#&gt; NULL</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">$</span><span class="va">d</span></span>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">$</span><span class="va">d</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">$</span><span class="va">d</span></span></code></pre></div>
 <div class="warning">
-<pre><code><span class="co">#&gt; Warning: Unknown or uninitialised</span>
-<span class="co">#&gt; column: `d`.</span></code></pre>
+<pre><code><span><span class="co">#&gt; Warning: Unknown or uninitialised</span></span>
+<span><span class="co">#&gt; column: `d`.</span></span></code></pre>
 </div>
-<pre><code><span class="co">#&gt; NULL</span></code></pre>
+<pre><code><span><span class="co">#&gt; NULL</span></span></code></pre>
 </td>
 </tr>
 </tbody></table>
@@ -290,8 +292,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt; [1] 1 2 3 4</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="st">"a"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 1 2 3 4</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -299,53 +301,53 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="st">"cd"</span>, exact <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt; [1] 9</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[2]]</span>
-<span class="co">#&gt; [1] 10 11</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[3]]</span>
-<span class="co">#&gt; [1] 12 13 14</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[4]]</span>
-<span class="co">#&gt; [1] "text"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="st">"cd"</span>, exact <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; [1] 9</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; [1] 10 11</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt; [1] 12 13 14</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[4]]</span></span>
+<span><span class="co">#&gt; [1] "text"</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[[</span><span class="st">"cd"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt; [1] 9</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[2]]</span>
-<span class="co">#&gt; [1] 10 11</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[3]]</span>
-<span class="co">#&gt; [1] 12 13 14</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[4]]</span>
-<span class="co">#&gt; [1] "text"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[[</span><span class="st">"cd"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; [1] 9</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; [1] 10 11</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt; [1] 12 13 14</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[4]]</span></span>
+<span><span class="co">#&gt; [1] "text"</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="st">"cd"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="st">"cd"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <div class="warning">
-<pre><code><span class="co">#&gt; Warning: `exact` ignored.</span></code></pre>
+<pre><code><span><span class="co">#&gt; Warning: `exact` ignored.</span></span></code></pre>
 </div>
-<pre><code><span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt; [1] 9</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[2]]</span>
-<span class="co">#&gt; [1] 10 11</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[3]]</span>
-<span class="co">#&gt; [1] 12 13 14</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[4]]</span>
-<span class="co">#&gt; [1] "text"</span></code></pre>
+<pre><code><span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; [1] 9</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; [1] 10 11</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt; [1] 12 13 14</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[4]]</span></span>
+<span><span class="co">#&gt; [1] "text"</span></span></code></pre>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -353,33 +355,33 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="st">"c"</span>, exact <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt; NULL</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="st">"c"</span>, exact <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[[</span><span class="st">"c"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt; [1] 9</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[2]]</span>
-<span class="co">#&gt; [1] 10 11</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[3]]</span>
-<span class="co">#&gt; [1] 12 13 14</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[4]]</span>
-<span class="co">#&gt; [1] "text"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[[</span><span class="st">"c"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; [1] 9</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; [1] 10 11</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt; [1] 12 13 14</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[4]]</span></span>
+<span><span class="co">#&gt; [1] "text"</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="st">"c"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="st">"c"</span>, exact <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <div class="warning">
-<pre><code><span class="co">#&gt; Warning: `exact` ignored.</span></code></pre>
+<pre><code><span><span class="co">#&gt; Warning: `exact` ignored.</span></span></code></pre>
 </div>
-<pre><code><span class="co">#&gt; NULL</span></code></pre>
+<pre><code><span><span class="co">#&gt; NULL</span></span></code></pre>
 </td>
 </tr>
 </tbody></table>
@@ -390,35 +392,35 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt; [1] 2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 2</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt; [1] 10 11</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 10 11</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt; [1] 10 11</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; [1] 10 11</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error in col[[i, exact = exact]]:</span>
-<span class="co">#&gt; subscript out of bounds</span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in col[[i, exact = exact]]:</span></span>
+<span><span class="co">#&gt; subscript out of bounds</span></span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location2()` at [0m
  [1m#&gt; tibble/R/subsetting.R:128:4: [0m
@@ -434,19 +436,19 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb36"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt; NULL</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb37"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt; NULL</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; NULL</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location2()` at [0m
  [1m#&gt; tibble/R/subsetting.R:128:4: [0m
@@ -464,8 +466,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">]</span><span class="op">]</span>
-<span class="co">#&gt; [1] 2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">]</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 2</span></span></code></pre></div>
 </td>
 </tr></tbody></table>
 </div>
@@ -479,77 +481,77 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="st">"a"</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span>
-<span class="co">#&gt;       a</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="st">"a"</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span></span>
+<span><span class="co">#&gt;       a</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></span></code></pre></div>
 <div class="warning">
-<pre><code><span class="co">#&gt; Warning in `[.data.frame`(df, "a",</span>
-<span class="co">#&gt; drop = FALSE): 'drop' argument will be</span>
-<span class="co">#&gt; ignored</span></code></pre>
+<pre><code><span><span class="co">#&gt; Warning in `[.data.frame`(df, "a",</span></span>
+<span><span class="co">#&gt; drop = FALSE): 'drop' argument will be</span></span>
+<span><span class="co">#&gt; ignored</span></span></code></pre>
 </div>
-<pre><code><span class="co">#&gt;   a</span>
-<span class="co">#&gt; 1 1</span>
-<span class="co">#&gt; 2 2</span>
-<span class="co">#&gt; 3 3</span>
-<span class="co">#&gt; 4 4</span></code></pre>
+<pre><code><span><span class="co">#&gt;   a</span></span>
+<span><span class="co">#&gt; 1 1</span></span>
+<span><span class="co">#&gt; 2 2</span></span>
+<span><span class="co">#&gt; 3 3</span></span>
+<span><span class="co">#&gt; 4 4</span></span></code></pre>
 </td>
 <td>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></span></code></pre></div>
 <div class="warning">
-<pre><code><span class="co">#&gt; Warning: `drop` argument ignored for</span>
-<span class="co">#&gt; subsetting a tibble with `x[j]`, it has</span>
-<span class="co">#&gt; an effect only for `x[i, j]`.</span></code></pre>
+<pre><code><span><span class="co">#&gt; Warning: `drop` argument ignored for</span></span>
+<span><span class="co">#&gt; subsetting a tibble with `x[j]`, it has</span></span>
+<span><span class="co">#&gt; an effect only for `x[i, j]`.</span></span></code></pre>
 </div>
-<pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span>
-<span class="co">#&gt;       a</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4</span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span></span>
+<span><span class="co">#&gt;       a</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4</span></span></code></pre>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></span></code></pre></div>
 <div class="warning">
-<pre><code><span class="co">#&gt; Warning in `[.data.frame`(df, "a", drop</span>
-<span class="co">#&gt; = TRUE): 'drop' argument will be ignored</span></code></pre>
+<pre><code><span><span class="co">#&gt; Warning in `[.data.frame`(df, "a", drop</span></span>
+<span><span class="co">#&gt; = TRUE): 'drop' argument will be ignored</span></span></code></pre>
 </div>
-<pre><code><span class="co">#&gt;   a</span>
-<span class="co">#&gt; 1 1</span>
-<span class="co">#&gt; 2 2</span>
-<span class="co">#&gt; 3 3</span>
-<span class="co">#&gt; 4 4</span></code></pre>
+<pre><code><span><span class="co">#&gt;   a</span></span>
+<span><span class="co">#&gt; 1 1</span></span>
+<span><span class="co">#&gt; 2 2</span></span>
+<span><span class="co">#&gt; 3 3</span></span>
+<span><span class="co">#&gt; 4 4</span></span></code></pre>
 </td>
 <td>
 <div class="sourceCode" id="cb51"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></span></code></pre></div>
 <div class="warning">
-<pre><code><span class="co">#&gt; Warning: `drop` argument ignored for</span>
-<span class="co">#&gt; subsetting a tibble with `x[j]`, it has</span>
-<span class="co">#&gt; an effect only for `x[i, j]`.</span></code></pre>
+<pre><code><span><span class="co">#&gt; Warning: `drop` argument ignored for</span></span>
+<span><span class="co">#&gt; subsetting a tibble with `x[j]`, it has</span></span>
+<span><span class="co">#&gt; an effect only for `x[i, j]`.</span></span></code></pre>
 </div>
-<pre><code><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span>
-<span class="co">#&gt;       a</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4</span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span></span>
+<span><span class="co">#&gt;       a</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4</span></span></code></pre>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -557,14 +559,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span>
-<span class="co">#&gt;       a</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span></span>
+<span><span class="co">#&gt;       a</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -572,22 +574,22 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">0</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 0</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">0</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 0</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, 4):</span>
-<span class="co">#&gt; undefined columns selected</span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in `[.data.frame`(df, 4):</span></span>
+<span><span class="co">#&gt; undefined columns selected</span></span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
  [1m#&gt; tibble/R/subsetting.R:238:4: [0m
@@ -600,58 +602,58 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="cn">NA</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="cn">NA</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, NA):</span>
-<span class="co">#&gt; undefined columns selected</span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in `[.data.frame`(df, NA):</span></span>
+<span><span class="co">#&gt; undefined columns selected</span></span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb62"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="cn">NA</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">NA</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column index with `[`</span>
-<span class="co">#&gt; at positions 1, 2, and 3.</span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column index with `[`</span></span>
+<span><span class="co">#&gt; at positions 1, 2, and 3.</span></span></code></pre>
 </div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb64"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="cn">NA_character_</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="cn">NA_character_</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error in `[.data.frame`(df,</span>
-<span class="co">#&gt; NA_character_): undefined columns</span>
-<span class="co">#&gt; selected</span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in `[.data.frame`(df,</span></span>
+<span><span class="co">#&gt; NA_character_): undefined columns</span></span>
+<span><span class="co">#&gt; selected</span></span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="cn">NA_character_</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">NA_character_</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column index with `[`</span>
-<span class="co">#&gt; at position 1.</span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column index with `[`</span></span>
+<span><span class="co">#&gt; at position 1.</span></span></code></pre>
 </div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="cn">NA_integer_</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="cn">NA_integer_</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error in `[.data.frame`(df,</span>
-<span class="co">#&gt; NA_integer_): undefined columns selected</span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in `[.data.frame`(df,</span></span>
+<span><span class="co">#&gt; NA_integer_): undefined columns selected</span></span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="cn">NA_integer_</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">NA_integer_</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column index with `[`</span>
-<span class="co">#&gt; at position 1.</span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column index with `[`</span></span>
+<span><span class="co">#&gt; at position 1.</span></span></code></pre>
 </div>
 </td>
 </tr>
@@ -661,19 +663,19 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="st">"a"</span><span class="op">]</span>
-<span class="co">#&gt; [1] 1 2 3 4</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="st">"a"</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 1 2 3 4</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb73"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="st">"a"</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span>
-<span class="co">#&gt;       a</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="st">"a"</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span></span>
+<span><span class="co">#&gt;       a</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -681,14 +683,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb74"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span>
-<span class="co">#&gt;       a</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span></span>
+<span><span class="co">#&gt;       a</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -696,26 +698,26 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb75"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span>
-<span class="co">#&gt; [1] 1 2 3 4</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 1 2 3 4</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb76"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>
-<span class="co">#&gt; [1] 1 2 3 4</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 1 2 3 4</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span>
-<span class="co">#&gt;       a</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">1</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span></span>
+<span><span class="co">#&gt;       a</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -723,22 +725,22 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fl">0</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 0</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">0</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 0</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, , 4):</span>
-<span class="co">#&gt; undefined columns selected</span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in `[.data.frame`(df, , 4):</span></span>
+<span><span class="co">#&gt; undefined columns selected</span></span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb81"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
  [1m#&gt; tibble/R/subsetting.R:238:4: [0m
@@ -751,58 +753,58 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb83"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="cn">NA</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="cn">NA</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, , NA):</span>
-<span class="co">#&gt; undefined columns selected</span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in `[.data.frame`(df, , NA):</span></span>
+<span><span class="co">#&gt; undefined columns selected</span></span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="cn">NA</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="cn">NA</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column index with `[`</span>
-<span class="co">#&gt; at positions 1, 2, and 3.</span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column index with `[`</span></span>
+<span><span class="co">#&gt; at positions 1, 2, and 3.</span></span></code></pre>
 </div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="cn">NA_character_</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="cn">NA_character_</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, ,</span>
-<span class="co">#&gt; NA_character_): undefined columns</span>
-<span class="co">#&gt; selected</span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in `[.data.frame`(df, ,</span></span>
+<span><span class="co">#&gt; NA_character_): undefined columns</span></span>
+<span><span class="co">#&gt; selected</span></span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="cn">NA_character_</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="cn">NA_character_</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column index with `[`</span>
-<span class="co">#&gt; at position 1.</span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column index with `[`</span></span>
+<span><span class="co">#&gt; at position 1.</span></span></code></pre>
 </div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb91"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="cn">NA_integer_</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="cn">NA_integer_</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, ,</span>
-<span class="co">#&gt; NA_integer_): undefined columns selected</span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in `[.data.frame`(df, ,</span></span>
+<span><span class="co">#&gt; NA_integer_): undefined columns selected</span></span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb93"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="cn">NA_integer_</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="cn">NA_integer_</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span>
-<span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column index with `[`</span>
-<span class="co">#&gt; at position 1.</span></code></pre>
+<pre><code><span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column index with `[`</span></span>
+<span><span class="co">#&gt; at position 1.</span></span></code></pre>
 </div>
 </td>
 </tr>
@@ -814,14 +816,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb95"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span>
-<span class="co">#&gt;       a b    </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span></span>
+<span><span class="co">#&gt;       a b    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -829,8 +831,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 0</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 0</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -838,14 +840,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span>
-<span class="co">#&gt;       a b    </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span></span>
+<span><span class="co">#&gt;       a b    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -853,28 +855,28 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb98"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
-<span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, 1:4):</span>
-<span class="co">#&gt; undefined columns selected</span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in `[.data.frame`(df, 1:4):</span></span>
+<span><span class="co">#&gt; undefined columns selected</span></span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
  [1m#&gt; tibble/R/subsetting.R:238:4: [0m
@@ -889,28 +891,28 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">0</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span>
-<span class="co">#&gt;       a b    </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">0</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span></span>
+<span><span class="co">#&gt;       a b    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb104"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error in `[.default`(df, -1:2): only 0's</span>
-<span class="co">#&gt; may be mixed with negative subscripts</span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in `[.default`(df, -1:2): only 0's</span></span>
+<span><span class="co">#&gt; may be mixed with negative subscripts</span></span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
  [1m#&gt; tibble/R/subsetting.R:238:4: [0m
@@ -928,14 +930,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb108"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span>
-<span class="co">#&gt;   b     cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span></span>
+<span><span class="co">#&gt;   b     cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> f     <span style="color: #949494;">&lt;int [2]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> g     <span style="color: #949494;">&lt;int [3]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -943,14 +945,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb109"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span>
-<span class="co">#&gt;   cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> <span style="color: #949494;">&lt;int [2]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="color: #949494;">&lt;int [3]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span></span>
+<span><span class="co">#&gt;   cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> <span style="color: #949494;">&lt;int [2]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="color: #949494;">&lt;int [3]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> <span style="color: #949494;">&lt;chr [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -958,8 +960,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb110"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 0</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 0</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -967,14 +969,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb111"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="cn">TRUE</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
-<span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">TRUE</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -982,8 +984,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="cn">FALSE</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 0</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">FALSE</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 0</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -991,14 +993,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span>
-<span class="co">#&gt;       a b    </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span></span>
+<span><span class="co">#&gt;       a b    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1006,29 +1008,29 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span>
-<span class="co">#&gt;   b    </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> e    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> f    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> g    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> h</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span></span>
+<span><span class="co">#&gt;   b    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> e    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> f    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> g    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> h</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb115"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt;   b</span>
-<span class="co">#&gt; 1 e</span>
-<span class="co">#&gt; 2 f</span>
-<span class="co">#&gt; 3 g</span>
-<span class="co">#&gt; 4 h</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt;   b</span></span>
+<span><span class="co">#&gt; 1 e</span></span>
+<span><span class="co">#&gt; 2 f</span></span>
+<span><span class="co">#&gt; 3 g</span></span>
+<span><span class="co">#&gt; 4 h</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb116"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
  [1m#&gt; tibble/R/subsetting.R:238:4: [0m
@@ -1044,16 +1046,16 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb118"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, c(FALSE,</span>
-<span class="co">#&gt; TRUE, FALSE, TRUE)): undefined columns</span>
-<span class="co">#&gt; selected</span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in `[.data.frame`(df, c(FALSE,</span></span>
+<span><span class="co">#&gt; TRUE, FALSE, TRUE)): undefined columns</span></span>
+<span><span class="co">#&gt; selected</span></span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
  [1m#&gt; tibble/R/subsetting.R:238:4: [0m
@@ -1075,14 +1077,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span>
-<span class="co">#&gt;       a b    </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span></span>
+<span><span class="co">#&gt;       a b    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1090,8 +1092,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb123"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 0</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 0</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1099,14 +1101,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span>
-<span class="co">#&gt;       a b    </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span></span>
+<span><span class="co">#&gt;       a b    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1114,28 +1116,28 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
-<span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, , 1:4):</span>
-<span class="co">#&gt; undefined columns selected</span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in `[.data.frame`(df, , 1:4):</span></span>
+<span><span class="co">#&gt; undefined columns selected</span></span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb128"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
  [1m#&gt; tibble/R/subsetting.R:238:4: [0m
@@ -1150,28 +1152,28 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span>
-<span class="co">#&gt;       a b    </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="fl">0</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span></span>
+<span><span class="co">#&gt;       a b    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb131"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error in .subset(x, j): only 0's may be</span>
-<span class="co">#&gt; mixed with negative subscripts</span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in .subset(x, j): only 0's may be</span></span>
+<span><span class="co">#&gt; mixed with negative subscripts</span></span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb133"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
  [1m#&gt; tibble/R/subsetting.R:238:4: [0m
@@ -1189,42 +1191,42 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb135"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span>
-<span class="co">#&gt;   b     cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span></span>
+<span><span class="co">#&gt;   b     cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> f     <span style="color: #949494;">&lt;int [2]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> g     <span style="color: #949494;">&lt;int [3]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb136"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt; [[1]]</span>
-<span class="co">#&gt; [1] 9</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[2]]</span>
-<span class="co">#&gt; [1] 10 11</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[3]]</span>
-<span class="co">#&gt; [1] 12 13 14</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; [[4]]</span>
-<span class="co">#&gt; [1] "text"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [[1]]</span></span>
+<span><span class="co">#&gt; [1] 9</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[2]]</span></span>
+<span><span class="co">#&gt; [1] 10 11</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[3]]</span></span>
+<span><span class="co">#&gt; [1] 12 13 14</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; [[4]]</span></span>
+<span><span class="co">#&gt; [1] "text"</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb137"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span>
-<span class="co">#&gt;   cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> <span style="color: #949494;">&lt;int [2]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="color: #949494;">&lt;int [3]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="op">-</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span></span>
+<span><span class="co">#&gt;   cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> <span style="color: #949494;">&lt;int [2]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="color: #949494;">&lt;int [3]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> <span style="color: #949494;">&lt;chr [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1232,8 +1234,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb138"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 0</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 0</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1241,14 +1243,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb139"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="cn">TRUE</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
-<span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="cn">TRUE</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1256,8 +1258,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb140"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="cn">FALSE</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 0</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="cn">FALSE</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 0</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1265,43 +1267,43 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb141"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span>
-<span class="co">#&gt;       a b    </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 2</span></span></span>
+<span><span class="co">#&gt;       a b    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb142"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt; [1] "e" "f" "g" "h"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] "e" "f" "g" "h"</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span>
-<span class="co">#&gt;   b    </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span> e    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span> f    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span> g    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span> h</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span></span>
+<span><span class="co">#&gt;   b    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> e    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> f    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> g    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> h</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb144"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt; [1] "e" "f" "g" "h"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] "e" "f" "g" "h"</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
  [1m#&gt; tibble/R/subsetting.R:238:4: [0m
@@ -1317,16 +1319,16 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error in `[.data.frame`(df, , c(FALSE,</span>
-<span class="co">#&gt; TRUE, FALSE, TRUE)): undefined columns</span>
-<span class="co">#&gt; selected</span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in `[.data.frame`(df, , c(FALSE,</span></span>
+<span><span class="co">#&gt; TRUE, FALSE, TRUE)): undefined columns</span></span>
+<span><span class="co">#&gt; selected</span></span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location()` at [0m
  [1m#&gt; tibble/R/subsetting.R:238:4: [0m
@@ -1348,34 +1350,34 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span>
-<span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb152"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fl">1</span>, , drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span>
-<span class="co">#&gt; $a</span>
-<span class="co">#&gt; [1] 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $b</span>
-<span class="co">#&gt; [1] "e"</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $cd</span>
-<span class="co">#&gt; $cd[[1]]</span>
-<span class="co">#&gt; [1] 9</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fl">1</span>, , drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></span>
+<span><span class="co">#&gt; $a</span></span>
+<span><span class="co">#&gt; [1] 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $b</span></span>
+<span><span class="co">#&gt; [1] "e"</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $cd</span></span>
+<span><span class="co">#&gt; $cd[[1]]</span></span>
+<span><span class="co">#&gt; [1] 9</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb153"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, , drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span>
-<span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, , drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1383,12 +1385,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb154"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span>
-<span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1396,10 +1398,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb155"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">0</span>, <span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 3</span></span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 3 variables: a &lt;int&gt;, b &lt;chr&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   cd &lt;list&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">0</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 3 variables: a &lt;int&gt;, b &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   cd &lt;list&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1407,10 +1409,10 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb156"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span>, <span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 3</span></span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 3 variables: a &lt;int&gt;, b &lt;chr&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   cd &lt;list&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 3 variables: a &lt;int&gt;, b &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   cd &lt;list&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1418,11 +1420,11 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb157"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">5</span>, <span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span>
-<span class="co">#&gt;       a b     cd    </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">5</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1430,12 +1432,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span>
-<span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">5</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1443,27 +1445,27 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span>, <span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 3</span></span>
-<span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb160"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span></span></code></pre></div>
 <div class="error">
-<pre><code><span class="co">#&gt; Error in xj[i]: only 0's may be mixed</span>
-<span class="co">#&gt; with negative subscripts</span></code></pre>
+<pre><code><span><span class="co">#&gt; Error in xj[i]: only 0's may be mixed</span></span>
+<span><span class="co">#&gt; with negative subscripts</span></span></code></pre>
 </div>
 </td>
 <td>
 <div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location()` at [0m
  [1m#&gt; tibble/R/subsetting.R:318:4: [0m
@@ -1481,14 +1483,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb164"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="cn">NA</span>, <span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
-<span class="co">#&gt;       a b     cd    </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">NA</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1496,11 +1498,11 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb165"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="cn">NA_integer_</span>, <span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span>
-<span class="co">#&gt;       a b     cd    </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">NA_integer_</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1508,12 +1510,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb166"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">)</span>, <span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span>
-<span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">NA</span>, <span class="fl">1</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>    <span style="color: #BB0000;">NA</span> <span style="color: #BB0000;">NA</span>    <span style="color: #949494;">&lt;NULL&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1524,14 +1526,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb167"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="cn">TRUE</span>, <span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
-<span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">TRUE</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1539,23 +1541,23 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb168"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="cn">FALSE</span>, <span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 3</span></span>
-<span class="co">#&gt; <span style="color: #949494;"># … with 3 variables: a &lt;int&gt;, b &lt;chr&gt;,</span></span>
-<span class="co">#&gt; <span style="color: #949494;">#   cd &lt;list&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">FALSE</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 3</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 3 variables: a &lt;int&gt;, b &lt;chr&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   cd &lt;list&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb169"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span>
-<span class="co">#&gt;   a b         cd</span>
-<span class="co">#&gt; 1 1 e          9</span>
-<span class="co">#&gt; 3 3 g 12, 13, 14</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt;   a b         cd</span></span>
+<span><span class="co">#&gt; 1 1 e          9</span></span>
+<span><span class="co">#&gt; 3 3 g 12, 13, 14</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb170"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location()` at [0m
  [1m#&gt; tibble/R/subsetting.R:320:4: [0m
@@ -1571,15 +1573,15 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb172"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span>
-<span class="co">#&gt;   a b         cd</span>
-<span class="co">#&gt; 1 1 e          9</span>
-<span class="co">#&gt; 3 3 g 12, 13, 14</span>
-<span class="co">#&gt; 4 4 h       text</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt;   a b         cd</span></span>
+<span><span class="co">#&gt; 1 1 e          9</span></span>
+<span><span class="co">#&gt; 3 3 g 12, 13, 14</span></span>
+<span><span class="co">#&gt; 4 4 h       text</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb173"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location()` at [0m
  [1m#&gt; tibble/R/subsetting.R:320:4: [0m
@@ -1597,26 +1599,26 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span>
-<span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb176"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span>
-<span class="co">#&gt;     a    b         cd</span>
-<span class="co">#&gt; 1   1    e          9</span>
-<span class="co">#&gt; 3   3    g 12, 13, 14</span>
-<span class="co">#&gt; NA NA &lt;NA&gt;       NULL</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></span>
+<span><span class="co">#&gt;     a    b         cd</span></span>
+<span><span class="co">#&gt; 1   1    e          9</span></span>
+<span><span class="co">#&gt; 3   3    g 12, 13, 14</span></span>
+<span><span class="co">#&gt; NA NA &lt;NA&gt;       NULL</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb177"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location()` at [0m
  [1m#&gt; tibble/R/subsetting.R:320:4: [0m
@@ -1636,16 +1638,16 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb179"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fl">1</span>, <span class="st">"a"</span><span class="op">]</span>
-<span class="co">#&gt; [1] 1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fl">1</span>, <span class="st">"a"</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb180"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="st">"a"</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 1</span></span>
-<span class="co">#&gt;       a</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="st">"a"</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 1</span></span></span>
+<span><span class="co">#&gt;       a</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1653,11 +1655,11 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb181"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 1</span></span>
-<span class="co">#&gt;       a</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 1</span></span></span>
+<span><span class="co">#&gt;       a</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1665,24 +1667,24 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb182"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span>
-<span class="co">#&gt; [1] 1</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb183"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span>
-<span class="co">#&gt; [1] 1 2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 1 2</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb184"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 1</span></span>
-<span class="co">#&gt;       a</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"a"</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 1</span></span></span>
+<span><span class="co">#&gt;       a</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1690,12 +1692,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb185"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 1</span></span>
-<span class="co">#&gt;       a</span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 1</span></span></span>
+<span><span class="co">#&gt;       a</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1703,8 +1705,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb186"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span>
-<span class="co">#&gt; [1] 1 2</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></span>
+<span><span class="co">#&gt; [1] 1 2</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1712,11 +1714,11 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb187"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span>
-<span class="co">#&gt;       a b    </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span></span>
+<span><span class="co">#&gt;       a b    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1724,30 +1726,30 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb188"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span>
-<span class="co">#&gt;       a b    </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span></span>
+<span><span class="co">#&gt;       a b    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb189"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span><span class="op">[</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span>
-<span class="co">#&gt; $a</span>
-<span class="co">#&gt; [1] 1</span>
-<span class="co">#&gt; </span>
-<span class="co">#&gt; $b</span>
-<span class="co">#&gt; [1] "e"</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></span>
+<span><span class="co">#&gt; $a</span></span>
+<span><span class="co">#&gt; [1] 1</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; $b</span></span>
+<span><span class="co">#&gt; [1] "e"</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb190"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span>
-<span class="co">#&gt;       a b    </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 2</span></span></span>
+<span><span class="co">#&gt;       a b    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1755,12 +1757,12 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb191"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span>
-<span class="co">#&gt;       a b    </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e    </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f</span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
+<span><span class="co">#&gt;       a b    </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e    </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1771,14 +1773,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb192"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span><span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
-<span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1786,14 +1788,14 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 <td>
 <div class="sourceCode" id="cb193"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span>
-<span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span>
-<span class="co">#&gt;       a b     cd       </span>
-<span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span>
-<span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>,<span class="op">]</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
+<span><span class="co">#&gt;       a b     cd       </span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 f     <span style="color: #949494;">&lt;int [2]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1813,7 +1815,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.9000.</p>
 </div>
 
   </div></footer>

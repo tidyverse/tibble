@@ -35,6 +35,8 @@
     <a class="dropdown-item" href="../articles/extending.html">Extending tibble</a>
     <a class="dropdown-item" href="../articles/invariants.html">Invariants: Comparing behavior with data frames</a>
     <a class="dropdown-item" href="../articles/formats.html">Column formats</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">More articles...</a>
   </div>
 </li>
 <li class="active nav-item dropdown">
@@ -285,8 +287,8 @@
 <li><p>Error: Expected a vector, not a <code>...</code> object</p></li>
 </ul><p>If you implement a class that wraps a list as S3 vector, you need to include <code>"list"</code> in the class:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="fu"><a href="https://rdrr.io/r/base/structure.html" class="external-link">structure</a></span><span class="op">(</span><span class="va">x</span>, class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"your_s3_class"</span>, <span class="st">"list"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/structure.html" class="external-link">structure</a></span><span class="op">(</span><span class="va">x</span>, class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"your_s3_class"</span>, <span class="st">"list"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p>Alternatively, implement a <code><a href="https://vctrs.r-lib.org/reference/vec_proxy.html" class="external-link">vec_proxy()</a></code> method as described in <a href="https://vctrs.r-lib.org/reference/vec_data.html" class="external-link uri">https://vctrs.r-lib.org/reference/vec_data.html</a>, or construct your class with <code><a href="https://vctrs.r-lib.org/reference/list_of.html" class="external-link">list_of()</a></code>.</p>
 </li>
 <li>
@@ -316,12 +318,12 @@
 <p>Example: <code>tibble(a = quote(b))</code> raises an error that inherits from <code>"tibble_error_column_must_be_vector"</code>, <code>"tibble_error"</code> and <code>"rlang_error"</code>, and from <code>"error"</code> and <code>"condition"</code> like all errors. Do not rely on the wording of <code>"tibble_error_column_must_be_vector"</code>, this is likely to change.</p>
 <p>Use the following pattern to catch errors emitted by tibble:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R">
-<span class="kw"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch</a></span><span class="op">(</span>
-  <span class="fu">your_code</span><span class="op">(</span><span class="op">)</span>,
-  tibble_error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">cnd</span><span class="op">)</span> <span class="op">{</span>
-  <span class="op">}</span>
-<span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/conditions.html" class="external-link">tryCatch</a></span><span class="op">(</span></span>
+<span>  <span class="fu">your_code</span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  tibble_error <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">cnd</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="op">}</span></span>
+<span><span class="op">)</span></span></code></pre></div>
 </li>
 <li><p>New <code><a href="../reference/tibble.html">tibble_row()</a></code> constructs tibbles that have exactly one row, or fails. Non-vector objects are automatically wrapped in a list, vectors (including lists) must have length one (<a href="https://github.com/tidyverse/tibble/issues/205" class="external-link">#205</a>).</p></li>
 <li><p>New <code><a href="../reference/as_tibble.html">as_tibble_row()</a></code> and <code><a href="../reference/as_tibble.html">as_tibble_col()</a></code> convert a bare vector to a one-row or one-column tibble, respectively. <code><a href="../reference/as_tibble.html">as_tibble_col()</a></code> also works for non-bare vectors. Using <code><a href="../reference/as_tibble.html">as_tibble()</a></code> for bare vectors is superseded (<a href="https://github.com/tidyverse/tibble/issues/447" class="external-link">#447</a>).</p></li>
@@ -392,7 +394,7 @@
 <p><code><a href="../reference/as_tibble.html">as_tibble.data.frame()</a></code> (and also <code><a href="../reference/as_tibble.html">as_tibble.matrix()</a></code>) strip row names by default. Code that relies on tibbles keeping row names now will see:</p>
 <ul><li>a different result when calling <code><a href="../reference/rownames.html">rownames()</a></code> or <code><a href="https://rdrr.io/r/base/row.names.html" class="external-link">row.names()</a></code>,</li>
 <li>rows full of <code>NA</code> values when subsetting rows with with a character vector, e.g. <code>as_tibble(mtcars)["Mazda RX4", ]</code>.</li>
-</ul><p>Call <code>pkgconfig::set_config("tibble::rownames", NA)</code> to revert to the old behavior of keeping row names. Packages that import <em>tibble</em> can call <code>set_config()</code> in their <code><a href="https://rdrr.io/r/base/ns-hooks.html" class="external-link">.onLoad()</a></code> function (<a href="https://github.com/tidyverse/tibble/issues/114" class="external-link">#114</a>).</p>
+</ul><p>Call <code>pkgconfig::set_config("tibble::rownames", NA)</code> to revert to the old behavior of keeping row names. Packages that import <em>tibble</em> can call <code>set_config()</code> in their <code>.onLoad()</code> function (<a href="https://github.com/tidyverse/tibble/issues/114" class="external-link">#114</a>).</p>
 </li>
 <li><p><code><a href="../reference/as_tibble.html">as_tibble()</a></code> drops extra classes, in particular <code>as_tibble.grouped_df()</code> now removes grouping (<a href="https://github.com/tidyverse/tibble/issues/535" class="external-link">#535</a>).</p></li>
 <li><p><code><a href="../reference/rownames.html">column_to_rownames()</a></code> now always coerces to a data frame, because row names are no longer supported in tibbles (<a href="https://github.com/tidyverse/tibble/issues/114" class="external-link">#114</a>).</p></li>
@@ -834,7 +836,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.5.9000.</p>
 </div>
 
   </div></footer></body></html>
