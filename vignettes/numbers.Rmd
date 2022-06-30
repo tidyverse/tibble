@@ -136,10 +136,17 @@ x <- num(c(1, 2, 4), notation = "eng")
 var(x)
 ```
 
+The `median()` function is worse, it breaks for `num()` objects:
+
+```{r numbers-16-a, error = TRUE}
+median(x)
+```
+
 One way to recover is to apply `num()` to the result:
 
 ```{r numbers-16a}
 num(var(x), notation = "eng")
+num(median(as.numeric(x)), notation = "eng")
 ```
 
 For automatic recovery, we can also define our version of `var()`, or even overwrite the base implementation.

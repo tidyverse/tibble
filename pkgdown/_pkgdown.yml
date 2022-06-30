@@ -56,6 +56,10 @@ reference:
   - contains("matrix")
 
 articles:
+- title: Get started
+  contents:
+  - tibble
+
 - title: Basics
   navbar: ~
   contents:
@@ -69,6 +73,11 @@ articles:
   - extending
   - invariants
   - formats
+
+- title: WIP
+  contents:
+  - wip/subset
+  - wip/subassign
 
 news:
   releases:
