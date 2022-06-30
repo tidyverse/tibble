@@ -210,6 +210,15 @@ var(x)
 #> [1] 2.333333
 ```
 
+The `median()` function is worse, it breaks for `num()` objects:
+
+
+```r
+median(x)
+#> Error in `median()`:
+#> ! `median.pillar_num()` not implemented.
+```
+
 One way to recover is to apply `num()` to the result:
 
 
@@ -217,6 +226,9 @@ One way to recover is to apply `num()` to the result:
 num(var(x), notation = "eng")
 #> <pillar_num(eng)[1]>
 #> [1] 2.33e0
+num(median(as.numeric(x)), notation = "eng")
+#> <pillar_num(eng)[1]>
+#> [1] 2e0
 ```
 
 For automatic recovery, we can also define our version of `var()`, or even overwrite the base implementation.
