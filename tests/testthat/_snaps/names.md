@@ -41,12 +41,9 @@
         * "..1" at location 1.
     Code
       repaired_names(c("a", "a"), repair_hint = FALSE, .name_repair = "universal")
-    Message
-      New names:
-      * `a` -> `a...1`
-      * `a` -> `a...2`
-    Output
-      [1] "a...1" "a...2"
+    Condition
+      Error in `nchar()`:
+      ! number of characters is not computable in "bytes" encoding, element 1
     Code
       repaired_names(c("a", "a"), repair_hint = FALSE, .name_repair = "universal",
       quiet = TRUE)
@@ -54,9 +51,7 @@
       [1] "a...1" "a...2"
     Code
       repaired_names(c("if"), repair_hint = FALSE, .name_repair = "universal")
-    Message
-      New names:
-      * `if` -> `.if`
-    Output
-      [1] ".if"
+    Condition
+      Error in `nchar()`:
+      ! number of characters is not computable in "bytes" encoding, element 1
 

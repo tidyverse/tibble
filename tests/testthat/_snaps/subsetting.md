@@ -36,10 +36,8 @@
     Code
       foo[1:5]
     Condition
-      Error in `vectbl_as_col_location()`:
-      ! Can't subset columns past the end.
-      i Locations 4 and 5 don't exist.
-      i There are only 3 columns.
+      Error in `nchar()`:
+      ! number of characters is not computable in "bytes" encoding, element 1
     Code
       foo[-1:1]
     Condition
@@ -64,10 +62,8 @@
     Code
       foo[-4]
     Condition
-      Error in `vectbl_as_col_location()`:
-      ! Can't negate columns past the end.
-      i Location 4 doesn't exist.
-      i There are only 3 columns.
+      Error in `nchar()`:
+      ! number of characters is not computable in "bytes" encoding, element 1
     Code
       foo[c(1:3, NA)]
     Condition
@@ -386,10 +382,8 @@
     Code
       foo[[3]]
     Condition
-      Error in `vec_as_location2_result()`:
-      ! Can't subset columns past the end.
-      i Location 3 doesn't exist.
-      i There are only 2 columns.
+      Error in `nchar()`:
+      ! number of characters is not computable in "bytes" encoding, element 1
     Code
       foo[[Inf]]
     Condition
@@ -589,17 +583,13 @@
     Code
       df[-4, ] <- 3
     Condition
-      Error in `numtbl_as_row_location_assign()`:
-      ! Can't negate rows past the end.
-      i Location 4 doesn't exist.
-      i There are only 2 rows.
+      Error in `nchar()`:
+      ! number of characters is not computable in "bytes" encoding, element 1
     Code
       df[-(4:5), ] <- 3
     Condition
-      Error in `numtbl_as_row_location_assign()`:
-      ! Can't negate rows past the end.
-      i Locations 4 and 5 don't exist.
-      i There are only 2 rows.
+      Error in `nchar()`:
+      ! number of characters is not computable in "bytes" encoding, element 1
     Code
       # # [<-.tbl_df and recycling
       df <- tibble(x = 1:3, y = x, z = y)
