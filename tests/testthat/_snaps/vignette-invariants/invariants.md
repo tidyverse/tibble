@@ -1947,6 +1947,7 @@ with_tbl2(tbl2[["tb"]] <- tbl[1, ])
 #> 4     1 e     <dbl [1]>     0     0
 #> # ... with 1 more variable:
 #> #   m[3:4] <dbl>
+#> # i Use `colnames()` to see all variable names
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1976,6 +1977,7 @@ with_tbl2(tbl2[["m"]] <- tbl2[["m"]][1, , drop = FALSE])
 #> 4    NA h     <chr [1]>     1     0
 #> # ... with 1 more variable:
 #> #   m[3:4] <dbl>
+#> # i Use `colnames()` to see all variable names
 ```
 
 </td></tr></tbody></table>
@@ -2289,6 +2291,7 @@ with_tbl2(tbl2[[1]] <- tbl2[[2]])
 #> 4      0     0     0     1     0     0
 #> # ... with 1 more variable:
 #> #   m[3:4] <dbl>
+#> # i Use `colnames()` to see all variable names
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2936,6 +2939,7 @@ with_tbl2(tbl2[1] <- tbl2[2])
 #> 4      0     0     0     1     0     0
 #> # ... with 1 more variable:
 #> #   m[3:4] <dbl>
+#> # i Use `colnames()` to see all variable names
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -4057,6 +4061,7 @@ with_tbl2(tbl2[2:4, ] <- tbl2[1, ])
 #> 4     1 e     <dbl [1]>     1     0
 #> # ... with 1 more variable:
 #> #   m[3:4] <dbl>
+#> # i Use `colnames()` to see all variable names
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -4633,6 +4638,7 @@ with_tbl2(tbl2[2:3, 2] <- tbl[1:2, 1])
 #> 4    NA h     <chr [1]>     0     0
 #> # ... with 1 more variable:
 #> #   m[3:4] <dbl>
+#> # i Use `colnames()` to see all variable names
 ```
 
 </td></tr></tbody></table>
@@ -4962,6 +4968,7 @@ with_tbl2(tbl2[[1, 1]] <- tbl[1, ])
 #> 4    NA h     <chr [1]>     0     0
 #> # ... with 1 more variable:
 #> #   m[3:4] <dbl>
+#> # i Use `colnames()` to see all variable names
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -4988,6 +4995,7 @@ with_tbl2(tbl2[1, ][[1]] <- tbl[1, ])
 #> 4    NA h     <chr [1]>     0     0
 #> # ... with 1 more variable:
 #> #   m[3:4] <dbl>
+#> # i Use `colnames()` to see all variable names
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -5017,6 +5025,7 @@ with_tbl2(tbl2[[1, 2]] <- t(1:4))
 #> 4    NA h     <chr [1]>     0     0
 #> # ... with 1 more variable:
 #> #   m[3:4] <dbl>
+#> # i Use `colnames()` to see all variable names
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -5043,6 +5052,7 @@ with_tbl2(tbl2[1, ][[2]] <- t(1:4))
 #> 4    NA h     <chr [1]>     0     0
 #> # ... with 1 more variable:
 #> #   m[3:4] <dbl>
+#> # i Use `colnames()` to see all variable names
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
