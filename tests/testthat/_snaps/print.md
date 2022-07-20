@@ -12,18 +12,21 @@
       #   qsec <dbl>, vs <dbl>,
       #   am <dbl>, gear <dbl>,
       #   carb <dbl>
+      # i Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names
     Code
       print_without_body(as_tibble(trees), n = 5L, width = 30L)
     Output
       # A tibble: 31 x 3
       <body created by pillar>
       # ... with 26 more rows
+      # i Use `print(n = ...)` to see more rows
     Code
       print_without_body(as_tibble(trees), n = -1L, width = 30L)
     Output
       # A tibble: 31 x 3
       <body created by pillar>
       # ... with 21 more rows
+      # i Use `print(n = ...)` to see more rows
     Code
       print_without_body(as_tibble(trees), n = Inf, width = 15L)
     Output
@@ -34,18 +37,21 @@
       #   more
       #   variable:
       #   Volume <dbl>
+      # i Use `colnames()` to see all variable names
     Code
       print_without_body(as_tibble(trees), n = NULL, width = 70L)
     Output
       # A tibble: 31 x 3
       <body created by pillar>
       # ... with 21 more rows
+      # i Use `print(n = ...)` to see more rows
     Code
       print_without_body(as_unknown_rows(trees), n = 10, width = 70L)
     Output
       # A tibble: ?? x 3
       <body created by pillar>
       # ... with more rows
+      # i Use `print(n = ...)` to see more rows
     Code
       print_without_body(as_unknown_rows(trees[1:9, ]), n = 10, width = 70L)
     Output
@@ -62,6 +68,7 @@
       # A tibble: ?? x 3
       <body created by pillar>
       # ... with more rows
+      # i Use `print(n = ...)` to see more rows
     Code
       print_without_body(df_all, n = NULL, width = 30L)
     Output
@@ -71,6 +78,7 @@
       #   e <fct>, f <date>,
       #   g <dttm>, h <list>,
       #   i <list>
+      # i Use `colnames()` to see all variable names
     Code
       print_without_body(df_all, n = NULL, width = 300L)
     Output
@@ -82,6 +90,7 @@
       # A tibble: 10,000 x 1
       <body created by pillar>
       # ... with 9,995 more rows
+      # i Use `print(n = ...)` to see more rows
     Code
       print_without_body(tibble(a = character(), b = logical()), width = 30L)
     Output
@@ -89,11 +98,13 @@
       <body created by pillar>
       # ... with 2 variables:
       #   a <chr>, b <lgl>
+      # i Use `colnames()` to see all variable names
     Code
       print_without_body(as_tibble(trees)[character()], n = 5L, width = 30L)
     Output
       # A tibble: 31 x 0
       <body created by pillar>
+      # i Use `print(n = ...)` to see more rows
     Code
       print_without_body(as_unknown_rows(trees[integer(), ]), n = 5L, width = 30L)
     Output
@@ -103,6 +114,7 @@
       #   Girth <dbl>,
       #   Height <dbl>,
       #   Volume <dbl>
+      # i Use `colnames()` to see all variable names
     Code
       print_without_body(as_unknown_rows(trees[, character()]), n = 5L, width = 30L)
     Output
@@ -110,12 +122,14 @@
       <body created by pillar>
       # ... with at least 5 rows
       #   total
+      # i Use `print(n = ...)` to see more rows
     Code
       print_without_body(as_unknown_rows(tibble(a = seq.int(10000))), n = 5L, width = 30L)
     Output
       # A tibble: ?? x 1
       <body created by pillar>
       # ... with more rows
+      # i Use `print(n = ...)` to see more rows
     Code
       print_with_mocked_format_body(trunc_mat(df_all, n = 1L, n_extra = 2L, width = 30L))
     Output
@@ -157,6 +171,7 @@
       7 2016-01-01 12:35:03 2016-01-01 12:35:03
       8 2016-01-01 12:35:04 2016-01-01 12:35:04
       # ... with 4 more rows
+      # i Use `print(n = ...)` to see more rows
     Code
       x <- c("成交日期", "合同录入日期")
       df <- setNames(tibble(1:3, 4:6), x)
