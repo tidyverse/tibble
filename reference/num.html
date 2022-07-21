@@ -11,7 +11,7 @@ and also in a tibble column.
 The formatting annotation and the class survives most arithmetic transformations,
 the most notable exceptions are var() and sd().
 set_num_opts() adds formatting options to an arbitrary numeric vector,
-useful for composing with other types."><title>Format a numeric vector — num • tibble</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Source%20Sans%20Pro-0.4.1/font.css" rel="stylesheet"><link href="../deps/_Source%20Code%20Pro-0.4.1/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Format a numeric vector — num"><meta property="og:description" content="
+useful for composing with other types."><title>Format a numeric vector — num • tibble</title><!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="../favicon-16x16.png"><link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png"><link rel="apple-touch-icon" type="image/png" sizes="180x180" href="../apple-touch-icon.png"><link rel="apple-touch-icon" type="image/png" sizes="120x120" href="../apple-touch-icon-120x120.png"><link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png"><link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png"><script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"><link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet"><script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.2/font.css" rel="stylesheet"><link href="../deps/Source_Code_Pro-0.4.2/font.css" rel="stylesheet"><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous"><!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Format a numeric vector — num"><meta property="og:description" content="
 Constructs a numeric vector that can be formatted with predefined
 significant digits, or with a maximum or fixed number of digits
 after the decimal point.
@@ -34,7 +34,7 @@ useful for composing with other types."><meta property="og:image" content="https
     
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.1.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.1.8</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -59,6 +59,8 @@ useful for composing with other types."><meta property="og:image" content="https
     <a class="dropdown-item" href="../articles/extending.html">Extending tibble</a>
     <a class="dropdown-item" href="../articles/invariants.html">Invariants: Comparing behavior with data frames</a>
     <a class="dropdown-item" href="../articles/formats.html">Column formats</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">More articles...</a>
   </div>
 </li>
 <li class="nav-item dropdown">
@@ -114,41 +116,47 @@ useful for composing with other types.</p>
 
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="fu">num</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">...</span>,
-  sigfig <span class="op">=</span> <span class="cn">NULL</span>,
-  digits <span class="op">=</span> <span class="cn">NULL</span>,
-  label <span class="op">=</span> <span class="cn">NULL</span>,
-  scale <span class="op">=</span> <span class="cn">NULL</span>,
-  notation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fit"</span>, <span class="st">"dec"</span>, <span class="st">"sci"</span>, <span class="st">"eng"</span>, <span class="st">"si"</span><span class="op">)</span>,
-  fixed_exponent <span class="op">=</span> <span class="cn">NULL</span>,
-  extra_sigfig <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span>
-
-<span class="fu">set_num_opts</span><span class="op">(</span>
-  <span class="va">x</span>,
-  <span class="va">...</span>,
-  sigfig <span class="op">=</span> <span class="cn">NULL</span>,
-  digits <span class="op">=</span> <span class="cn">NULL</span>,
-  label <span class="op">=</span> <span class="cn">NULL</span>,
-  scale <span class="op">=</span> <span class="cn">NULL</span>,
-  notation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fit"</span>, <span class="st">"dec"</span>, <span class="st">"sci"</span>, <span class="st">"eng"</span>, <span class="st">"si"</span><span class="op">)</span>,
-  fixed_exponent <span class="op">=</span> <span class="cn">NULL</span>,
-  extra_sigfig <span class="op">=</span> <span class="cn">NULL</span>
-<span class="op">)</span></code></pre></div>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">num</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  sigfig <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  digits <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  scale <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  notation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fit"</span>, <span class="st">"dec"</span>, <span class="st">"sci"</span>, <span class="st">"eng"</span>, <span class="st">"si"</span><span class="op">)</span>,</span>
+<span>  fixed_exponent <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  extra_sigfig <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="fu">set_num_opts</span><span class="op">(</span></span>
+<span>  <span class="va">x</span>,</span>
+<span>  <span class="va">...</span>,</span>
+<span>  sigfig <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  digits <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  label <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  scale <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  notation <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"fit"</span>, <span class="st">"dec"</span>, <span class="st">"sci"</span>, <span class="st">"eng"</span>, <span class="st">"si"</span><span class="op">)</span>,</span>
+<span>  fixed_exponent <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  extra_sigfig <span class="op">=</span> <span class="cn">NULL</span></span>
+<span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
     <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
     <dl><dt>x</dt>
 <dd><p>A numeric vector.</p></dd>
+
+
 <dt>...</dt>
 <dd><p>These dots are for future extensions and must be empty.</p></dd>
+
+
 <dt>sigfig</dt>
 <dd><p>Define the number of significant digits to show. Must be one or greater.
 The <code>"pillar.sigfig"</code> <a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">option</a> is not consulted.
 Can't be combined with <code>digits</code>.</p></dd>
+
+
 <dt>digits</dt>
 <dd><p>Number of digits after the decimal points to show.
 Positive numbers specify the exact number of digits to show.
@@ -156,12 +164,18 @@ Negative numbers specify (after negation) the maximum number of digits to show.
 With <code>digits = 2</code>, the numbers 1.2 and 1.234 are printed as 1.20 and 1.23,
 with <code>digits = -2</code> as 1.2 and 1.23, respectively.
 Can't be combined with <code>sigfig</code>.</p></dd>
+
+
 <dt>label</dt>
 <dd><p>A label to show instead of the type description.</p></dd>
+
+
 <dt>scale</dt>
 <dd><p>Multiplier to apply to the data before showing.
 Useful for displaying e.g. percentages.
 Must be combined with <code>label</code>.</p></dd>
+
+
 <dt>notation</dt>
 <dd><p>One of <code>"fit"</code>, <code>"dec"</code>, <code>"sci"</code>, <code>"eng"</code>, or <code>"si"</code>.</p><ul><li><p><code>"fit"</code>: Use decimal notation if it fits and if it consumes 13 digits or less,
 otherwise use scientific notation. (The default for numeric pillars.)</p></li>
@@ -171,13 +185,18 @@ otherwise use scientific notation. (The default for numeric pillars.)</p></li>
 using exponents that are a multiple of three.</p></li>
 <li><p><code>"si"</code>: Use SI notation, prefixes between <code>1e-24</code> and <code>1e24</code> are supported.</p></li>
 </ul></dd>
+
+
 <dt>fixed_exponent</dt>
 <dd><p>Use the same exponent for all numbers in scientific, engineering or SI notation.
 <code>-Inf</code> uses the smallest, <code>+Inf</code> the largest fixed_exponent present in the data.
 The default is to use varying exponents.</p></dd>
+
+
 <dt>extra_sigfig</dt>
 <dd><p>If <code>TRUE</code>, increase the number of significant digits if the data consists of
 numbers of the same magnitude with subtle differences.</p></dd>
+
 </dl></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -187,70 +206,70 @@ numbers of the same magnitude with subtle differences.</p></dd>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span class="co"># Display as a vector</span></span>
-<span class="r-in"><span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span><span class="op">)</span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Display as a vector</span></span></span>
+<span class="r-in"><span><span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;pillar_num[3]&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1]  900. 1000. 1100.</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Significant figures</span></span>
-<span class="r-in"><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span>
-<span class="r-in">  x3 <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, sigfig <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
-<span class="r-in">  x4 <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, sigfig <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>,</span>
-<span class="r-in">  x5 <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, sigfig <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>,</span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Significant figures</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  x3 <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, sigfig <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  x4 <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, sigfig <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  x5 <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, sigfig <span class="op">=</span> <span class="fl">5</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        x3      x4      x5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;num:3&gt;</span> <span style="color: #949494; font-style: italic;">&lt;num:4&gt;</span> <span style="color: #949494; font-style: italic;">&lt;num:5&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>    900.   900.5   900.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>   <span style="text-decoration: underline;">1</span>000.  <span style="text-decoration: underline;">1</span>000.   <span style="text-decoration: underline;">1</span>000.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>   <span style="text-decoration: underline;">1</span>100.  <span style="text-decoration: underline;">1</span>100.   <span style="text-decoration: underline;">1</span>100.5</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Maximum digits after the decimal points</span></span>
-<span class="r-in"><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span>
-<span class="r-in">  x0 <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, digits <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
-<span class="r-in">  x1 <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>,</span>
-<span class="r-in">  x2 <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span>,</span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Maximum digits after the decimal points</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  x0 <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, digits <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  x1 <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">1</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  x2 <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, digits <span class="op">=</span> <span class="op">-</span><span class="fl">2</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         x0       x1       x2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;num:.0&gt;</span> <span style="color: #949494; font-style: italic;">&lt;num:.1&gt;</span> <span style="color: #949494; font-style: italic;">&lt;num:.2&gt;</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>     900.    900.5    900.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span>    <span style="text-decoration: underline;">1</span>000.   <span style="text-decoration: underline;">1</span>000.5   <span style="text-decoration: underline;">1</span>000.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>    <span style="text-decoration: underline;">1</span>100.   <span style="text-decoration: underline;">1</span>100.5   <span style="text-decoration: underline;">1</span>100.5</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Use fixed digits and a currency label</span></span>
-<span class="r-in"><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span>
-<span class="r-in">  usd <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, digits <span class="op">=</span> <span class="fl">2</span>, label <span class="op">=</span> <span class="st">"USD"</span><span class="op">)</span>,</span>
-<span class="r-in">  gbp <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, digits <span class="op">=</span> <span class="fl">2</span>, label <span class="op">=</span> <span class="st">"£"</span><span class="op">)</span>,</span>
-<span class="r-in">  chf <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, digits <span class="op">=</span> <span class="fl">2</span>, label <span class="op">=</span> <span class="st">"SFr"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Use fixed digits and a currency label</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  usd <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, digits <span class="op">=</span> <span class="fl">2</span>, label <span class="op">=</span> <span class="st">"USD"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  gbp <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, digits <span class="op">=</span> <span class="fl">2</span>, label <span class="op">=</span> <span class="st">"£"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  chf <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">*</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.5</span>, digits <span class="op">=</span> <span class="fl">2</span>, label <span class="op">=</span> <span class="st">"SFr"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       usd     gbp     chf</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">USD</span>       <span style="color: #949494; font-style: italic;">£</span>     <span style="color: #949494; font-style: italic;">SFr</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span>  900.50  900.50  900.50</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> <span style="text-decoration: underline;">1</span>000.50 <span style="text-decoration: underline;">1</span>000.50 <span style="text-decoration: underline;">1</span>000.50</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> <span style="text-decoration: underline;">1</span>100.50 <span style="text-decoration: underline;">1</span>100.50 <span style="text-decoration: underline;">1</span>100.50</span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Scale</span></span>
-<span class="r-in"><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span>
-<span class="r-in">  small  <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">/</span> <span class="fl">1000</span> <span class="op">+</span> <span class="fl">0.00005</span>, label <span class="op">=</span> <span class="st">"%"</span>, scale <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span>
-<span class="r-in">  medium <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">/</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.0005</span>, label <span class="op">=</span> <span class="st">"%"</span>, scale <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span>
-<span class="r-in">  large  <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">/</span> <span class="fl">10</span> <span class="op">+</span> <span class="fl">0.005</span>, label <span class="op">=</span> <span class="st">"%"</span>, scale <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Scale</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  small  <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">/</span> <span class="fl">1000</span> <span class="op">+</span> <span class="fl">0.00005</span>, label <span class="op">=</span> <span class="st">"%"</span>, scale <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  medium <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">/</span> <span class="fl">100</span> <span class="op">+</span> <span class="fl">0.0005</span>, label <span class="op">=</span> <span class="st">"%"</span>, scale <span class="op">=</span> <span class="fl">100</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  large  <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">9</span><span class="op">:</span><span class="fl">11</span> <span class="op">/</span> <span class="fl">10</span> <span class="op">+</span> <span class="fl">0.005</span>, label <span class="op">=</span> <span class="st">"%"</span>, scale <span class="op">=</span> <span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   small medium large</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>       <span style="color: #949494; font-style: italic;">%</span>      <span style="color: #949494; font-style: italic;">%</span>     <span style="color: #949494; font-style: italic;">%</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> 0.905   9.05  90.5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> 1.00   10.0  100. </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> 1.10   11.0  110. </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Notation</span></span>
-<span class="r-in"><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span>
-<span class="r-in">  sci <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">13</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, notation <span class="op">=</span> <span class="st">"sci"</span><span class="op">)</span>,</span>
-<span class="r-in">  eng <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">13</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, notation <span class="op">=</span> <span class="st">"eng"</span><span class="op">)</span>,</span>
-<span class="r-in">  si  <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">13</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, notation <span class="op">=</span> <span class="st">"si"</span><span class="op">)</span>,</span>
-<span class="r-in">  dec <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">13</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, notation <span class="op">=</span> <span class="st">"dec"</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Notation</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  sci <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">13</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, notation <span class="op">=</span> <span class="st">"sci"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  eng <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">13</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, notation <span class="op">=</span> <span class="st">"eng"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  si  <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">13</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, notation <span class="op">=</span> <span class="st">"si"</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  dec <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">13</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span>, notation <span class="op">=</span> <span class="st">"dec"</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 20 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      sci     eng   si                   dec</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;sci&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;eng&gt;</span> <span style="color: #949494; font-style: italic;">&lt;si&gt;</span>                 <span style="color: #949494; font-style: italic;">&lt;dec&gt;</span></span>
@@ -274,13 +293,13 @@ numbers of the same magnitude with subtle differences.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">18</span> 1<span style="color: #949494;">e</span>+ 4  10<span style="color: #949494;">e</span>+ 3  10k   <span style="text-decoration: underline;">10</span>000              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">19</span> 1<span style="color: #949494;">e</span>+ 5 100<span style="color: #949494;">e</span>+ 3 100k  <span style="text-decoration: underline;">100</span>000              </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">20</span> 1<span style="color: #949494;">e</span>+ 6   1<span style="color: #949494;">e</span>+ 6   1M 1<span style="text-decoration: underline;">000</span>000              </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co"># Fixed exponent</span></span>
-<span class="r-in"><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span>
-<span class="r-in">  scimin <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">7</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op">*</span> <span class="fl">123</span>, notation <span class="op">=</span> <span class="st">"sci"</span>, fixed_exponent <span class="op">=</span> <span class="op">-</span><span class="cn">Inf</span><span class="op">)</span>,</span>
-<span class="r-in">  engmin <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">7</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op">*</span> <span class="fl">123</span>, notation <span class="op">=</span> <span class="st">"eng"</span>, fixed_exponent <span class="op">=</span> <span class="op">-</span><span class="cn">Inf</span><span class="op">)</span>,</span>
-<span class="r-in">  simin  <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">7</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op">*</span> <span class="fl">123</span>, notation <span class="op">=</span> <span class="st">"si"</span>, fixed_exponent <span class="op">=</span> <span class="op">-</span><span class="cn">Inf</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Fixed exponent</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  scimin <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">7</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op">*</span> <span class="fl">123</span>, notation <span class="op">=</span> <span class="st">"sci"</span>, fixed_exponent <span class="op">=</span> <span class="op">-</span><span class="cn">Inf</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  engmin <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">7</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op">*</span> <span class="fl">123</span>, notation <span class="op">=</span> <span class="st">"eng"</span>, fixed_exponent <span class="op">=</span> <span class="op">-</span><span class="cn">Inf</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  simin  <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">7</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op">*</span> <span class="fl">123</span>, notation <span class="op">=</span> <span class="st">"si"</span>, fixed_exponent <span class="op">=</span> <span class="op">-</span><span class="cn">Inf</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 14 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               scimin            engmin             simin</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                <span style="font-style: italic;">[</span><span style="color: #949494; font-style: italic;">e</span><span style="color: #BB0000; font-style: italic;">-5</span><span style="font-style: italic;">]</span>             <span style="font-style: italic;">[</span><span style="color: #949494; font-style: italic;">e</span><span style="color: #BB0000; font-style: italic;">-5</span><span style="font-style: italic;">]</span>               <span style="font-style: italic;">[µ]</span></span>
@@ -298,12 +317,12 @@ numbers of the same magnitude with subtle differences.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>   <span style="text-decoration: underline;">123</span>000<span style="text-decoration: underline;">000</span>000      1<span style="text-decoration: underline;">230</span>000<span style="text-decoration: underline;">000</span>000     1<span style="text-decoration: underline;">230</span>000<span style="text-decoration: underline;">000</span>000  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span>  1<span style="text-decoration: underline;">230</span>000<span style="text-decoration: underline;">000</span>000     12<span style="text-decoration: underline;">300</span>000<span style="text-decoration: underline;">000</span>000    12<span style="text-decoration: underline;">300</span>000<span style="text-decoration: underline;">000</span>000  </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> 12<span style="text-decoration: underline;">300</span>000<span style="text-decoration: underline;">000</span>000    123<span style="text-decoration: underline;">000</span>000<span style="text-decoration: underline;">000</span>000   123<span style="text-decoration: underline;">000</span>000<span style="text-decoration: underline;">000</span>000  </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span>
-<span class="r-in">  scismall <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">7</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op">*</span> <span class="fl">123</span>, notation <span class="op">=</span> <span class="st">"sci"</span>, fixed_exponent <span class="op">=</span> <span class="op">-</span><span class="fl">3</span><span class="op">)</span>,</span>
-<span class="r-in">  scilarge <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">7</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op">*</span> <span class="fl">123</span>, notation <span class="op">=</span> <span class="st">"sci"</span>, fixed_exponent <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span>
-<span class="r-in">  scimax   <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">7</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op">*</span> <span class="fl">123</span>, notation <span class="op">=</span> <span class="st">"sci"</span>, fixed_exponent <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  scismall <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">7</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op">*</span> <span class="fl">123</span>, notation <span class="op">=</span> <span class="st">"sci"</span>, fixed_exponent <span class="op">=</span> <span class="op">-</span><span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  scilarge <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">7</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op">*</span> <span class="fl">123</span>, notation <span class="op">=</span> <span class="st">"sci"</span>, fixed_exponent <span class="op">=</span> <span class="fl">3</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  scimax   <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10</span><span class="op">^</span><span class="op">(</span><span class="op">-</span><span class="fl">7</span><span class="op">:</span><span class="fl">6</span><span class="op">)</span> <span class="op">*</span> <span class="fl">123</span>, notation <span class="op">=</span> <span class="st">"sci"</span>, fixed_exponent <span class="op">=</span> <span class="cn">Inf</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 14 × 3</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>             scismall          scilarge            scimax</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>                <span style="font-style: italic;">[</span><span style="color: #949494; font-style: italic;">e</span><span style="color: #BB0000; font-style: italic;">-3</span><span style="font-style: italic;">]</span>              <span style="font-style: italic;">[</span><span style="color: #949494; font-style: italic;">e</span><span style="font-style: italic;">3]</span>              <span style="font-style: italic;">[</span><span style="color: #949494; font-style: italic;">e</span><span style="font-style: italic;">8]</span></span>
@@ -321,14 +340,14 @@ numbers of the same magnitude with subtle differences.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span>   <span style="text-decoration: underline;">1</span>230<span style="text-decoration: underline;">000</span>000        <span style="text-decoration: underline;">1</span>230            0.012<span style="text-decoration: underline;">3</span>           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span>  <span style="text-decoration: underline;">12</span>300<span style="text-decoration: underline;">000</span>000       <span style="text-decoration: underline;">12</span>300            0.123            </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> <span style="text-decoration: underline;">123</span>000<span style="text-decoration: underline;">000</span>000      <span style="text-decoration: underline;">123</span>000            1.23             </span>
-<span class="r-in"></span>
-<span class="r-in"><span class="co">#' Extra significant digits</span></span>
-<span class="r-in"><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span>
-<span class="r-in">  default <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">100</span> <span class="op">+</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">*</span> <span class="fl">0.001</span><span class="op">)</span>,</span>
-<span class="r-in">  extra1 <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">100</span> <span class="op">+</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">*</span> <span class="fl">0.001</span>, extra_sigfig <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span class="r-in">  extra2 <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">100</span> <span class="op">+</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">*</span> <span class="fl">0.0001</span>, extra_sigfig <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span>
-<span class="r-in">  extra3 <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10000</span> <span class="op">+</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">*</span> <span class="fl">0.00001</span>, extra_sigfig <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span>
-<span class="r-in"><span class="op">)</span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co">#' Extra significant digits</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="tibble.html">tibble</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>  default <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">100</span> <span class="op">+</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">*</span> <span class="fl">0.001</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  extra1 <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">100</span> <span class="op">+</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">*</span> <span class="fl">0.001</span>, extra_sigfig <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  extra2 <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">100</span> <span class="op">+</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">*</span> <span class="fl">0.0001</span>, extra_sigfig <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,</span></span>
+<span class="r-in"><span>  extra3 <span class="op">=</span> <span class="fu">num</span><span class="op">(</span><span class="fl">10000</span> <span class="op">+</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">*</span> <span class="fl">0.00001</span>, extra_sigfig <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 3 × 4</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   default  extra1   extra2      extra3</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;num&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;num&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;num&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;num&gt;</span></span>
@@ -348,7 +367,7 @@ numbers of the same magnitude with subtle differences.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+  <p></p><p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
   </div></footer></body></html>

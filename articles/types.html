@@ -14,9 +14,9 @@
 <link rel="apple-touch-icon" type="image/png" sizes="76x76" href="../apple-touch-icon-76x76.png">
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<link href="../deps/bootstrap-5.1.0/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.1.0/bootstrap.bundle.min.js"></script><link href="../deps/_Source%20Sans%20Pro-0.4.1/font.css" rel="stylesheet">
-<link href="../deps/_Source%20Code%20Pro-0.4.1/font.css" rel="stylesheet">
+<link href="../deps/bootstrap-5.1.3/bootstrap.min.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.1.3/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.2/font.css" rel="stylesheet">
+<link href="../deps/Source_Code_Pro-0.4.2/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.rawgit.com/afeld/bootstrap-toc/v1.0.1/dist/bootstrap-toc.min.js"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Column types">
@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.1.7</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.1.8</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -61,6 +61,8 @@
     <a class="dropdown-item" href="../articles/extending.html">Extending tibble</a>
     <a class="dropdown-item" href="../articles/invariants.html">Invariants: Comparing behavior with data frames</a>
     <a class="dropdown-item" href="../articles/formats.html">Column formats</a>
+    <div class="dropdown-divider"></div>
+    <a class="dropdown-item" href="../articles/index.html">More articles...</a>
   </div>
 </li>
 <li class="nav-item dropdown">
@@ -100,7 +102,7 @@
 
 
 <div class="row">
-  <main id="main"><div class="page-header">
+  <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Column types</h1>
             
       
@@ -111,7 +113,7 @@
     
     
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
@@ -301,57 +303,57 @@
 <h2 id="example-values">Example values<a class="anchor" aria-label="anchor" href="#example-values"></a>
 </h2>
 <p>The following overview contains example values for each type:</p>
-<pre><code><span class="co">#&gt; Rows: 1</span>
-<span class="co">#&gt; Columns: 23</span>
-<span class="co">#&gt; $ logical       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span>
-<span class="co">#&gt; $ integer       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1</span>
-<span class="co">#&gt; $ double        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.5</span>
-<span class="co">#&gt; $ character     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "A"</span>
-<span class="co">#&gt; $ complex       <span style="color: #949494; font-style: italic;">&lt;cpl&gt;</span> 0+1i</span>
-<span class="co">#&gt; $ raw           <span style="color: #949494; font-style: italic;">&lt;raw&gt;</span> 01</span>
-<span class="co">#&gt; $ list          <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> 1</span>
-<span class="co">#&gt; $ `named list`  <span style="color: #949494; font-style: italic;">&lt;named list&gt;</span> 1</span>
-<span class="co">#&gt; $ factor        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> A</span>
-<span class="co">#&gt; $ ordered       <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> a</span>
-<span class="co">#&gt; $ Date          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2022-04-26</span>
-<span class="co">#&gt; $ POSIXt        <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span> 2022-04-26 14:18:45</span>
-<span class="co">#&gt; $ difftime      <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span> 1 secs</span>
-<span class="co">#&gt; $ hms           <span style="color: #949494; font-style: italic;">&lt;time&gt;</span> 00:00:01</span>
-<span class="co">#&gt; $ integer64     <span style="color: #949494; font-style: italic;">&lt;int64&gt;</span> 10000000000</span>
-<span class="co">#&gt; $ blob          <span style="color: #949494; font-style: italic;">&lt;blob&gt;</span> 00</span>
-<span class="co">#&gt; $ data.frame    <span style="color: #949494; font-style: italic;">&lt;df[,1]&gt;</span> &lt;data.frame[1 x 1]&gt;</span>
-<span class="co">#&gt; $ tbl_df        <span style="color: #949494; font-style: italic;">&lt;tibble[,1]&gt;</span> &lt;tbl_df[1 x 1]&gt;</span>
-<span class="co">#&gt; $ AsIs          <span style="color: #949494; font-style: italic;">&lt;I&lt;int&gt;&gt;</span> 1</span>
-<span class="co">#&gt; $ unspecified   <span style="color: #949494; font-style: italic;">&lt;???&gt;</span> NA</span>
-<span class="co">#&gt; $ vctrs_list_of <span style="color: #949494; font-style: italic;">&lt;list&lt;int&gt;&gt;</span> 1</span>
-<span class="co">#&gt; $ vctrs_vctr    <span style="color: #949494; font-style: italic;">&lt;vctrs_vc&gt;</span> 1</span>
-<span class="co">#&gt; $ quosures      <span style="color: #949494; font-style: italic;">&lt;quos&gt;</span> &lt;~1&gt;</span></code></pre>
+<pre><code><span><span class="co">#&gt; Rows: 1</span></span>
+<span><span class="co">#&gt; Columns: 23</span></span>
+<span><span class="co">#&gt; $ logical       <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span> TRUE</span></span>
+<span><span class="co">#&gt; $ integer       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> 1</span></span>
+<span><span class="co">#&gt; $ double        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> 1.5</span></span>
+<span><span class="co">#&gt; $ character     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> "A"</span></span>
+<span><span class="co">#&gt; $ complex       <span style="color: #949494; font-style: italic;">&lt;cpl&gt;</span> 0+1i</span></span>
+<span><span class="co">#&gt; $ raw           <span style="color: #949494; font-style: italic;">&lt;raw&gt;</span> 01</span></span>
+<span><span class="co">#&gt; $ list          <span style="color: #949494; font-style: italic;">&lt;list&gt;</span> 1</span></span>
+<span><span class="co">#&gt; $ `named list`  <span style="color: #949494; font-style: italic;">&lt;named list&gt;</span> 1</span></span>
+<span><span class="co">#&gt; $ factor        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> A</span></span>
+<span><span class="co">#&gt; $ ordered       <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> a</span></span>
+<span><span class="co">#&gt; $ Date          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2022-07-21</span></span>
+<span><span class="co">#&gt; $ POSIXt        <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span> 2022-07-21 19:11:44</span></span>
+<span><span class="co">#&gt; $ difftime      <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span> 1 secs</span></span>
+<span><span class="co">#&gt; $ hms           <span style="color: #949494; font-style: italic;">&lt;time&gt;</span> 00:00:01</span></span>
+<span><span class="co">#&gt; $ integer64     <span style="color: #949494; font-style: italic;">&lt;int64&gt;</span> 10000000000</span></span>
+<span><span class="co">#&gt; $ blob          <span style="color: #949494; font-style: italic;">&lt;blob&gt;</span> 00</span></span>
+<span><span class="co">#&gt; $ data.frame    <span style="color: #949494; font-style: italic;">&lt;df[,1]&gt;</span> &lt;data.frame[1 x 1]&gt;</span></span>
+<span><span class="co">#&gt; $ tbl_df        <span style="color: #949494; font-style: italic;">&lt;tibble[,1]&gt;</span> &lt;tbl_df[1 x 1]&gt;</span></span>
+<span><span class="co">#&gt; $ AsIs          <span style="color: #949494; font-style: italic;">&lt;I&lt;int&gt;&gt;</span> 1</span></span>
+<span><span class="co">#&gt; $ unspecified   <span style="color: #949494; font-style: italic;">&lt;???&gt;</span> NA</span></span>
+<span><span class="co">#&gt; $ vctrs_list_of <span style="color: #949494; font-style: italic;">&lt;list&lt;int&gt;&gt;</span> 1</span></span>
+<span><span class="co">#&gt; $ vctrs_vctr    <span style="color: #949494; font-style: italic;">&lt;vctrs_vc&gt;</span> 1</span></span>
+<span><span class="co">#&gt; $ quosures      <span style="color: #949494; font-style: italic;">&lt;quos&gt;</span> &lt;~1&gt;</span></span></code></pre>
 </div>
 <div class="section level2">
 <h2 id="implementation">Implementation<a class="anchor" aria-label="anchor" href="#implementation"></a>
 </h2>
 <p>The column header is obtained by calling <code><a href="https://pillar.r-lib.org/reference/type_sum.html" class="external-link">pillar::type_sum()</a></code> on the column. This is an S3 method that can be overridden, but most of the time it is more useful to override <code><a href="https://vctrs.r-lib.org/reference/vec_ptype_full.html" class="external-link">vctrs::vec_ptype_abbr()</a></code>:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu">pillar</span><span class="fu">:::</span><span class="va">type_sum.default</span>
-<span class="co">#&gt; function (x) </span>
-<span class="co">#&gt; {</span>
-<span class="co">#&gt;     pillar_attr &lt;- attr(x, "pillar", exact = TRUE)</span>
-<span class="co">#&gt;     label &lt;- pillar_attr$label</span>
-<span class="co">#&gt;     if (!is.null(label)) {</span>
-<span class="co">#&gt;         return(I(label))</span>
-<span class="co">#&gt;     }</span>
-<span class="co">#&gt;     if (is.object(x) || vec_is(x)) {</span>
-<span class="co">#&gt;         return(vec_ptype_abbr(x))</span>
-<span class="co">#&gt;     }</span>
-<span class="co">#&gt;     switch(typeof(x), builtin = , special = , closure = "fn", </span>
-<span class="co">#&gt;         environment = "env", symbol = if (is_missing(x)) {</span>
-<span class="co">#&gt;             "missing"</span>
-<span class="co">#&gt;         } else {</span>
-<span class="co">#&gt;             "sym"</span>
-<span class="co">#&gt;         }, typeof(x))</span>
-<span class="co">#&gt; }</span>
-<span class="co">#&gt; &lt;bytecode: 0x55e13271ba68&gt;</span>
-<span class="co">#&gt; &lt;environment: namespace:pillar&gt;</span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu">pillar</span><span class="fu">:::</span><span class="va">type_sum.default</span></span>
+<span><span class="co">#&gt; function (x) </span></span>
+<span><span class="co">#&gt; {</span></span>
+<span><span class="co">#&gt;     pillar_attr &lt;- attr(x, "pillar", exact = TRUE)</span></span>
+<span><span class="co">#&gt;     label &lt;- pillar_attr$label</span></span>
+<span><span class="co">#&gt;     if (!is.null(label)) {</span></span>
+<span><span class="co">#&gt;         return(I(label))</span></span>
+<span><span class="co">#&gt;     }</span></span>
+<span><span class="co">#&gt;     if (is.object(x) || vec_is(x)) {</span></span>
+<span><span class="co">#&gt;         return(vec_ptype_abbr(x))</span></span>
+<span><span class="co">#&gt;     }</span></span>
+<span><span class="co">#&gt;     switch(typeof(x), builtin = , special = , closure = "fn", </span></span>
+<span><span class="co">#&gt;         environment = "env", symbol = if (is_missing(x)) {</span></span>
+<span><span class="co">#&gt;             "missing"</span></span>
+<span><span class="co">#&gt;         } else {</span></span>
+<span><span class="co">#&gt;             "sym"</span></span>
+<span><span class="co">#&gt;         }, typeof(x))</span></span>
+<span><span class="co">#&gt; }</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x55d7785bbec0&gt;</span></span>
+<span><span class="co">#&gt; &lt;environment: namespace:pillar&gt;</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
     </nav></aside>
@@ -368,7 +370,7 @@
 
 <div class="pkgdown-footer-right">
   <p></p>
-<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.3.9000.</p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.6.9000.</p>
 </div>
 
   </div></footer>
