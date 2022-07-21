@@ -1,5 +1,20 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.7.9001
+
+## Chore
+
+- Use snapshot tests (#1240).
+
+- Pass error call to `vec_as_location()` (#1237).
+
+- Import ellipsis from rlang (#1155).
+
+## Documentation
+
+- Mention `median()` in Recovery section of `vignette("numbers")` (#1197).
+
+
 # tibble 3.1.7.9000
 
 - Same as previous version.
