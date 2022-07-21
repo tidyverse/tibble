@@ -6,3 +6,4 @@
 #   qsec <dbl>, vs <dbl>,
 #   am <dbl>, gear <dbl>,
 #   carb <dbl>
+# ℹ Use `print(n = ...)` to see more rows, and `colnames()` to see all variable names

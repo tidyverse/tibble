@@ -2,3 +2,4 @@
 <body created by pillar>
 # … with at least 5 rows
 #   total
+# ℹ Use `print(n = ...)` to see more rows
