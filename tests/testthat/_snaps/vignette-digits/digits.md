@@ -126,7 +126,7 @@ To show a fixed number of decimal digits, use `num()` with a `digits` argument:
 
 ```r
 num(c(1.2345, 12.345, 123.45, 1234.5, 12345), digits = 2)
-#> <pillar_num:.2![5]>
+#> <pillar_num[5]>
 #> [1]     1.23    12.35   123.45  1234.50 12345.00
 ```
 
@@ -211,15 +211,15 @@ The `notation` argument to `num()` offers more options:
 
 ```r
 num(12345678901234567, notation = "dec")
-#> <pillar_num(dec)[1]>
+#> <pillar_num[1]>
 #> [1] 12345678901234568
 num(12345678901234567, notation = "sci")
-#> <pillar_num(sci)[1]>
+#> <pillar_num[1]>
 #> [1] 1.234568e16
 num(12345678901234567, notation = "eng")
-#> <pillar_num(eng)[1]>
+#> <pillar_num[1]>
 #> [1] 12.34568e15
 num(12345678901234567, notation = "si")
-#> <pillar_num(si)[1]>
+#> <pillar_num[1]>
 #> [1] 12.34568P
 ```
