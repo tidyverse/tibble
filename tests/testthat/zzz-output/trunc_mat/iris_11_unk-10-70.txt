@@ -1,4 +1,0 @@
-# A tibble: ?? × 5
-<body created by pillar>
-# … with more rows
-# ℹ Use `print(n = ...)` to see more rows
