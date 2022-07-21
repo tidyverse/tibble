@@ -6,3 +6,4 @@
 #   Petal.Length <dbl>,
 #   Petal.Width <dbl>,
 #   Species <fct>
+# ℹ Use `colnames()` to see all variable names

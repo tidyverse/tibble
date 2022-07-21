@@ -2,3 +2,4 @@
 <body created by pillar>
 # … with 2 variables:
 #   a <chr>, b <lgl>
+# ℹ Use `colnames()` to see all variable names

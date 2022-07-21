@@ -4,3 +4,4 @@
 #   e <fct>, f <date>,
 #   g <dttm>, h <list>,
 #   i <list>
+# ℹ Use `colnames()` to see all variable names
