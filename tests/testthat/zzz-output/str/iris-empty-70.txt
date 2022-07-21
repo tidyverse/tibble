@@ -1,2 +1,0 @@
-tibble [150 × 0] (S3: tbl_df/tbl/data.frame)
- Named list()

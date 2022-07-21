@@ -1,3 +1,0 @@
-tibble [1 × 2] (S3: tbl_df/tbl/data.frame)
- $ mean(x): num 5
- $ var(x) : num 3

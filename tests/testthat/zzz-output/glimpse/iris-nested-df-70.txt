@@ -1,4 +1,0 @@
-Rows: 3
-Columns: 2
-$ Species <fct> setosa, versicolor, virginica
-$ data    <list> [<data.frame[50 x 5]>, <data.frame[50 x 5]>, <data…
