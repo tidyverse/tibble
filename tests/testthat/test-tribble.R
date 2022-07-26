@@ -167,6 +167,7 @@ test_that("names stripped at appropriate time (#775)", {
 })
 
 test_that("lubridate::Period (#784)", {
+  skip_if_not_installed("lubridate")
   expect_equal(
     tribble(~x, lubridate::days(1), lubridate::days(2)),
     tibble(x = lubridate::days(1:2))
