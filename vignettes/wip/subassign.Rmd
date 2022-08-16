@@ -76,7 +76,7 @@ The `with_*()` functions allow for a more concise notation
 ```{r with-df-def}
 with_df <- function(code, verbose = FALSE) {
   code <- rlang::enexpr(code)
-  
+
   full_code <- rlang::quo({
     df <- new_df()
     !!code
@@ -91,7 +91,7 @@ with_df <- function(code, verbose = FALSE) {
 ```{r with-tbl-def, include = FALSE}
 with_tbl <- function(code, verbose = FALSE) {
   code <- rlang::enexpr(code)
-  
+
   full_code <- rlang::quo({
     tbl <- new_tbl()
     !!code
@@ -160,8 +160,12 @@ with_df(df$a[1:4] <- 4:3)
 For columns of the stricter `"vctrs_vctr"` class, this class implements the check, which then works identically for data frames and tibbles:
 
 ```{r vctrs}
-with_df({ df$v = vctrs::new_vctr(1:4); df$v[1:2] <- vctrs::new_vctr(4:3)})
-with_df({ df$v = vctrs::new_vctr(1:4); df$v[1:2] <- vctrs::new_vctr(letters[4:3])})
+with_df({
+  df$v = vctrs::new_vctr(1:4); df$v[1:2] <- vctrs::new_vctr(4:3)
+})
+with_df({
+  df$v = vctrs::new_vctr(1:4); df$v[1:2] <- vctrs::new_vctr(letters[4:3])
+})
 ```
 
 ## [[<-
@@ -304,15 +308,15 @@ with_df(df[] <- data.frame(4:1, "x", 2))
 with_df(df[] <- data.frame(1, "x", 2))
 with_df(df[] <- data.frame(1, "x", 2, 3))
 with_df(df[] <- df)
-with_df(df[,] <- 1)
-with_df(df[,] <- 4:1)
-with_df(df[,] <- 3:1)
-with_df(df[,] <- 5:1)
-with_df(df[,] <- data.frame(1, "x"))
-with_df(df[,] <- data.frame(4:1, "x", 2))
-with_df(df[,] <- data.frame(1, "x", 2))
-with_df(df[,] <- data.frame(1, "x", 2, 3))
-with_df(df[,] <- df)
+with_df(df[, ] <- 1)
+with_df(df[, ] <- 4:1)
+with_df(df[, ] <- 3:1)
+with_df(df[, ] <- 5:1)
+with_df(df[, ] <- data.frame(1, "x"))
+with_df(df[, ] <- data.frame(4:1, "x", 2))
+with_df(df[, ] <- data.frame(1, "x", 2))
+with_df(df[, ] <- data.frame(1, "x", 2, 3))
+with_df(df[, ] <- df)
 ```
 
 ### Subset assignment

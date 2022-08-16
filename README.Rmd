@@ -61,7 +61,7 @@ This will work for reasonable inputs that are already data.frames, lists, matric
 You can also create a new tibble from column vectors with `tibble()`:
 
 ```{r}
-tibble(x = 1:5, y = 1, z = x ^ 2 + y)
+tibble(x = 1:5, y = 1, z = x^2 + y)
 ```
 
 `tibble()` does much less than `data.frame()`: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates `row.names()`. You can read more about these features in `vignette("tibble")`.

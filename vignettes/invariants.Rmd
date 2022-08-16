@@ -724,14 +724,20 @@ with_df2(df2[2:3, 2] <- df[1:2, 1])
 A notable exception is the population of a column full of `NA` (which is of type `logical`), or the use of `NA` on the right-hand side of the assignment.
 
 ```{r bracket-i-j-na-init, dftbl = TRUE}
-with_df({df$x <- NA; df[2:3, "x"] <- 3:2})
-with_df({df[2:3, 2:3] <- NA})
+with_df({
+  df$x <- NA; df[2:3, "x"] <- 3:2
+})
+with_df({
+  df[2:3, 2:3] <- NA
+})
 ```
 
 For programming, it is always safer (and faster) to use the correct type of `NA` to initialize columns.
 
 ```{r bracket-i-j-typed-na-init, dftbl = TRUE}
-with_df({df$x <- NA_integer_; df[2:3, "x"] <- 3:2})
+with_df({
+  df$x <- NA_integer_; df[2:3, "x"] <- 3:2
+})
 ```
 
 
