@@ -192,7 +192,7 @@ In some cases, the ideal formatting changes after a transformation.
 num(1:3 + 0.125, digits = 4)
 #> <pillar_num:.4![3]>
 #> [1] 1.1250 2.1250 3.1250
-transf <- 10 ^ num(1:3 + 0.125, digits = 4)
+transf <- 10^num(1:3 + 0.125, digits = 4)
 transf
 #> <pillar_num:.4![3]>
 #> [1]   13.3352  133.3521 1333.5214
