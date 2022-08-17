@@ -331,6 +331,9 @@ tbl[[1:2]]
 #> tibble 3.0.0.
 #> Recursive subsetting is deprecated for
 #> tibbles.
+#> Call
+#> `lifecycle::last_lifecycle_warnings()`
+#> to see where this warning was generated.
 ```
 
 </div>
@@ -547,7 +550,7 @@ tbl[[4]]
 <div class="error">
 
 ```
-#> Error in `vec_as_location2_result()`:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Can't subset columns past the end.
 #> i Location 4 doesn't exist.
 #> i There are only 3 columns.
@@ -1223,6 +1226,9 @@ tbl[10, ]
 #> tibble 3.0.0.
 #> Use `NA_integer_` as row index to obtain
 #> a row full of `NA` values.
+#> Call
+#> `lifecycle::last_lifecycle_warnings()`
+#> to see where this warning was generated.
 ```
 
 </div>
@@ -1256,6 +1262,9 @@ tbl["x", ]
 #> 3.0.0.
 #> Use `NA_integer_` as row index to obtain
 #> a row full of `NA` values.
+#> Call
+#> `lifecycle::last_lifecycle_warnings()`
+#> to see where this warning was generated.
 ```
 
 </div>
@@ -4331,6 +4340,9 @@ with_tbl(tbl[as.character(-(1:3)), ] <- tbl[1, ])
 #> 3.0.0.
 #> Use `NA_integer_` as row index to obtain
 #> a row full of `NA` values.
+#> Call
+#> `lifecycle::last_lifecycle_warnings()`
+#> to see where this warning was generated.
 ```
 
 </div><div class="error">
@@ -4367,6 +4379,9 @@ with_tbl(tbl[as.character(3:5), ] <- tbl[1, ])
 #> 3.0.0.
 #> Use `NA_integer_` as row index to obtain
 #> a row full of `NA` values.
+#> Call
+#> `lifecycle::last_lifecycle_warnings()`
+#> to see where this warning was generated.
 ```
 
 </div><div class="error">
@@ -4405,6 +4420,9 @@ with_tbl(tbl[as.character(-(3:5)), ] <- tbl[1, ])
 #> 3.0.0.
 #> Use `NA_integer_` as row index to obtain
 #> a row full of `NA` values.
+#> Call
+#> `lifecycle::last_lifecycle_warnings()`
+#> to see where this warning was generated.
 ```
 
 </div><div class="error">
@@ -4564,13 +4582,11 @@ with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
 <div class="error">
 
 ```
-#> Error in `df_cast_opts()`:
-#> ! Data frame must have names.
-#> i In file 'type-data-frame.c' at line
-#> 683.
-#> i This is an internal error in the vctrs
-#> package, please report it to the package
-#> authors.
+#> Error:
+#> ! Assigned data `tbl2[1:2, 1]` must be
+#> compatible with existing data.
+#> i Error occurred for column `li`.
+#> x Can't convert <tbl_df> to <list>.
 ```
 
 </div></td></tr><tr style="vertical-align:top"><td>
@@ -4648,78 +4664,60 @@ A notable exception is the population of a column full of `NA` (which is of type
 <table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
 ```r
-with_df({df$x <- NA; df[2:3, "x"] <- 3:2})
-#>    n c         li  x
-#> 1  1 e          9 NA
-#> 2 NA f     10, 11  3
-#> 3  3 g 12, 13, 14  2
-#> 4 NA h       text NA
+with_df({
+with_tbl({
+  df$x <- NA; df[2:3, "x"] <- 3:2
+  tbl$x <- NA; tbl[2:3, "x"] <- 3:2
+
+})
+with_df({
+with_tbl({
+  df[2:3, 2:3] <- NA
+  tbl[2:3, 2:3] <- NA
+
+})
 ```
 
-</td><td>
+<div class="error">
 
-```r
-with_tbl({tbl$x <- NA; tbl[2:3, "x"] <- 3:2})
-#> # A tibble: 4 x 4
-#>       n c     li            x
-#>   <int> <chr> <list>    <int>
-#> 1     1 e     <dbl [1]>    NA
-#> 2    NA f     <int [2]>     3
-#> 3     3 g     <int [3]>     2
-#> 4    NA h     <chr [1]>    NA
+```
+#> Error: <text>:13:0: unexpected end of
+#> input
+#> 11:
+#> 12: })
+#> ^
 ```
 
-</td></tr><tr style="vertical-align:top"><td>
-
-```r
-with_df({df[2:3, 2:3] <- NA})
-#>    n    c   li
-#> 1  1    e    9
-#> 2 NA <NA>   NA
-#> 3  3 <NA>   NA
-#> 4 NA    h text
-```
-
-</td><td>
-
-```r
-with_tbl({tbl[2:3, 2:3] <- NA})
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2    NA <NA>  <NULL>   
-#> 3     3 <NA>  <NULL>   
-#> 4    NA h     <chr [1]>
-```
+</div>
 
 </td></tr></tbody></table>
 
 For programming, it is always safer (and faster) to use the correct type of `NA` to initialize columns.
 
-<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
-
-```r
-with_df({df$x <- NA_integer_; df[2:3, "x"] <- 3:2})
-#>    n c         li  x
-#> 1  1 e          9 NA
-#> 2 NA f     10, 11  3
-#> 3  3 g 12, 13, 14  2
-#> 4 NA h       text NA
-```
+<table class="dftbl"><tbody><tr><td>
 
 </td><td>
 
 ```r
-with_tbl({tbl$x <- NA_integer_; tbl[2:3, "x"] <- 3:2})
-#> # A tibble: 4 x 4
-#>       n c     li            x
-#>   <int> <chr> <list>    <int>
-#> 1     1 e     <dbl [1]>    NA
-#> 2    NA f     <int [2]>     3
-#> 3     3 g     <int [3]>     2
-#> 4    NA h     <chr [1]>    NA
+with_df({
+with_tbl({
+  df$x <- NA_integer_; df[2:3, "x"] <- 3:2
+  tbl$x <- NA_integer_; tbl[2:3, "x"] <- 3:2
+
+})
 ```
+
+<div class="error">
+
+```
+#> Error: <text>:7:0: unexpected end of
+#> input
+#> 5:
+#> 6: })
+#> ^
+```
+
+</div>
 
 </td></tr></tbody></table>
 

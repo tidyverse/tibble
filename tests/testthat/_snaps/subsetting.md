@@ -116,6 +116,7 @@
       Warning:
       The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
       Use `NA_integer_` as row index to obtain a row full of `NA` values.
+      Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
     Code
       foo[-1:1, ]
     Condition
@@ -143,6 +144,7 @@
       Warning:
       The `i` argument of `[.tbl_df` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
       Use `NA_integer_` as row index to obtain a row full of `NA` values.
+      Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
     Code
       foo[array(1, dim = c(1, 1, 1)), ]
     Condition
@@ -308,18 +310,21 @@
       Warning:
       The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
       Use `NA_integer_` as row index to obtain a row full of `NA` values.
+      Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
     Code
       invisible(foo[-(3:5), ])
     Condition
       Warning:
       The `i` argument of `[.tbl_df` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
       Use `NA_integer_` as row index to obtain a row full of `NA` values.
+      Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
     Code
       invisible(foo["x", ])
     Condition
       Warning:
       The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
       Use `NA_integer_` as row index to obtain a row full of `NA` values.
+      Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
     Code
       # # [.tbl_df and logical recycling
       foo <- tibble(a = 1:4, b = a)
@@ -386,7 +391,7 @@
     Code
       foo[[3]]
     Condition
-      Error in `vec_as_location2_result()`:
+      Error in `vectbl_as_col_location2()`:
       ! Can't subset columns past the end.
       i Location 3 doesn't exist.
       i There are only 2 columns.
@@ -407,7 +412,7 @@
     Code
       foo[[foo]]
     Condition
-      Error:
+      Error in `vectbl_as_col_subscript2()`:
       ! Must extract column with a single valid subscript.
       x Subscript `foo` has the wrong type `tbl_df<
         x: integer
@@ -475,12 +480,14 @@
       Warning:
       The `i` argument of `[` can't be a matrix as of tibble 3.0.0.
       Convert to a vector.
+      Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
     Code
       invisible(foo[matrix(rep(TRUE, 10), ncol = 1), ])
     Condition
       Warning:
       The `i` argument of `[` can't be a matrix as of tibble 3.0.0.
       Convert to a vector.
+      Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
     Code
       # # [<-.tbl_df rejects unknown row indexes
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
@@ -899,7 +906,7 @@
     Code
       foo[[foo]] <- 1
     Condition
-      Error:
+      Error in `vectbl_as_col_subscript2()`:
       ! Must assign to column with a single valid subscript.
       x Subscript `foo` has the wrong type `tbl_df<
         x: integer

@@ -54,7 +54,7 @@ Similarly, `char()` allows customizing the display of character columns.
 
 ```r
 num(-1:3, notation = "sci")
-#> <pillar_num(sci)[5]>
+#> <pillar_num[5]>
 #> [1] -1e0  0    1e0  2e0  3e0
 tibble(
   x4 = num(8:12 * 100 + 0.5, digits = 4),
@@ -110,6 +110,15 @@ markets
 #> # i Use `print(n = ...)` to see more rows
 markets %>%
   mutate(across(-time, num, digits = 3))
+#> Warning: The `...` argument of `across()` is deprecated as of dplyr 1.1.0.
+#> Supply arguments directly to `.fns` through a lambda instead.
+#> 
+#>   # Previously
+#>   across(a:b, mean, na.rm = TRUE)
+#> 
+#>   # Now
+#>   across(a:b, ~mean(.x, na.rm = TRUE))
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 #> # A tibble: 1,860 x 5
 #>     time       DAX       SMI       CAC      FTSE
 #>    <dbl> <num:.3!> <num:.3!> <num:.3!> <num:.3!>
@@ -151,13 +160,13 @@ num(1) + 2
 #> <pillar_num[1]>
 #> [1] 3
 num(3.23456, sigfig = 4) - num(2)
-#> <pillar_num:4[1]>
+#> <pillar_num[1]>
 #> [1] 1.235
 num(4, sigfig = 2) * num(3, digits = 2)
-#> <pillar_num:2[1]>
+#> <pillar_num[1]>
 #> [1] 12
 num(3, digits = 2) * num(4, sigfig = 2)
-#> <pillar_num:.2![1]>
+#> <pillar_num[1]>
 #> [1] 12.00
 -num(2)
 #> <pillar_num[1]>
@@ -171,13 +180,13 @@ Similarly, for mathematical operations, the formatting is inherited.
 
 ```r
 min(num(1:3, label = "$"))
-#> <pillar_num{$}[1]>
+#> <pillar_num[1]>
 #> [1] 1
 mean(num(1:3, notation = "eng"))
-#> <pillar_num(eng)[1]>
+#> <pillar_num[1]>
 #> [1] 2e0
 sin(num(1:3, label = "%", scale = 100))
-#> <pillar_num{%}*100[3]>
+#> <pillar_num[3]>
 #> [1] 84.1 90.9 14.1
 ```
 
@@ -190,14 +199,14 @@ In some cases, the ideal formatting changes after a transformation.
 
 ```r
 num(1:3 + 0.125, digits = 4)
-#> <pillar_num:.4![3]>
+#> <pillar_num[3]>
 #> [1] 1.1250 2.1250 3.1250
-transf <- 10 ^ num(1:3 + 0.125, digits = 4)
+transf <- 10^num(1:3 + 0.125, digits = 4)
 transf
-#> <pillar_num:.4![3]>
+#> <pillar_num[3]>
 #> [1]   13.3352  133.3521 1333.5214
 num(transf, sigfig = 3)
-#> <pillar_num:3[3]>
+#> <pillar_num[3]>
 #> [1]   13.3  133.  1334.
 ```
 
@@ -226,10 +235,10 @@ One way to recover is to apply `num()` to the result:
 
 ```r
 num(var(x), notation = "eng")
-#> <pillar_num(eng)[1]>
+#> <pillar_num[1]>
 #> [1] 2.33e0
 num(median(as.numeric(x)), notation = "eng")
-#> <pillar_num(eng)[1]>
+#> <pillar_num[1]>
 #> [1] 2e0
 ```
 
@@ -243,7 +252,7 @@ var_ <- function(x, ...) {
   vctrs::vec_restore(out, x)
 }
 var_(x)
-#> <pillar_num(eng)[1]>
+#> <pillar_num[1]>
 #> [1] 2.33e0
 ```
 
@@ -264,9 +273,9 @@ var_ <- make_restore(var)
 sd_ <- make_restore(sd)
 
 var_(x)
-#> <pillar_num(eng)[1]>
+#> <pillar_num[1]>
 #> [1] 2.33e0
 sd_(x)
-#> <pillar_num(eng)[1]>
+#> <pillar_num[1]>
 #> [1] 1.53e0
 ```
