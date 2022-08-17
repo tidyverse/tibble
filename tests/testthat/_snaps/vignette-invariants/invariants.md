@@ -4648,78 +4648,60 @@ A notable exception is the population of a column full of `NA` (which is of type
 <table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
 ```r
-with_df({df$x <- NA; df[2:3, "x"] <- 3:2})
-#>    n c         li  x
-#> 1  1 e          9 NA
-#> 2 NA f     10, 11  3
-#> 3  3 g 12, 13, 14  2
-#> 4 NA h       text NA
+with_df({
+with_tbl({
+  df$x <- NA; df[2:3, "x"] <- 3:2
+  tbl$x <- NA; tbl[2:3, "x"] <- 3:2
+
+})
+with_df({
+with_tbl({
+  df[2:3, 2:3] <- NA
+  tbl[2:3, 2:3] <- NA
+
+})
 ```
 
-</td><td>
+<div class="error">
 
-```r
-with_tbl({tbl$x <- NA; tbl[2:3, "x"] <- 3:2})
-#> # A tibble: 4 x 4
-#>       n c     li            x
-#>   <int> <chr> <list>    <int>
-#> 1     1 e     <dbl [1]>    NA
-#> 2    NA f     <int [2]>     3
-#> 3     3 g     <int [3]>     2
-#> 4    NA h     <chr [1]>    NA
+```
+#> Error: <text>:13:0: unexpected end of
+#> input
+#> 11:
+#> 12: })
+#> ^
 ```
 
-</td></tr><tr style="vertical-align:top"><td>
-
-```r
-with_df({df[2:3, 2:3] <- NA})
-#>    n    c   li
-#> 1  1    e    9
-#> 2 NA <NA>   NA
-#> 3  3 <NA>   NA
-#> 4 NA    h text
-```
-
-</td><td>
-
-```r
-with_tbl({tbl[2:3, 2:3] <- NA})
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2    NA <NA>  <NULL>   
-#> 3     3 <NA>  <NULL>   
-#> 4    NA h     <chr [1]>
-```
+</div>
 
 </td></tr></tbody></table>
 
 For programming, it is always safer (and faster) to use the correct type of `NA` to initialize columns.
 
-<table class="dftbl"><tbody><tr style="vertical-align:top"><td>
-
-```r
-with_df({df$x <- NA_integer_; df[2:3, "x"] <- 3:2})
-#>    n c         li  x
-#> 1  1 e          9 NA
-#> 2 NA f     10, 11  3
-#> 3  3 g 12, 13, 14  2
-#> 4 NA h       text NA
-```
+<table class="dftbl"><tbody><tr><td>
 
 </td><td>
 
 ```r
-with_tbl({tbl$x <- NA_integer_; tbl[2:3, "x"] <- 3:2})
-#> # A tibble: 4 x 4
-#>       n c     li            x
-#>   <int> <chr> <list>    <int>
-#> 1     1 e     <dbl [1]>    NA
-#> 2    NA f     <int [2]>     3
-#> 3     3 g     <int [3]>     2
-#> 4    NA h     <chr [1]>    NA
+with_df({
+with_tbl({
+  df$x <- NA_integer_; df[2:3, "x"] <- 3:2
+  tbl$x <- NA_integer_; tbl[2:3, "x"] <- 3:2
+
+})
 ```
+
+<div class="error">
+
+```
+#> Error: <text>:7:0: unexpected end of
+#> input
+#> 5:
+#> 6: })
+#> ^
+```
+
+</div>
 
 </td></tr></tbody></table>
 
