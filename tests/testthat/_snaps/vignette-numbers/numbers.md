@@ -107,7 +107,6 @@ markets
 #>  9 1992. 1635. 1698. 1754  2510.
 #> 10 1992. 1646. 1716. 1754. 2497.
 #> # ... with 1,850 more rows
-#> # i Use `print(n = ...)` to see more rows
 markets %>%
   mutate(across(-time, num, digits = 3))
 #> # A tibble: 1,860 x 5
@@ -124,7 +123,6 @@ markets %>%
 #>  9 1992.  1635.470  1697.500  1754.000  2510.500
 #> 10 1992.  1645.890  1716.300  1754.300  2497.400
 #> # ... with 1,850 more rows
-#> # i Use `print(n = ...)` to see more rows
 ```
 
 ## Computing on `num`
@@ -192,7 +190,7 @@ In some cases, the ideal formatting changes after a transformation.
 num(1:3 + 0.125, digits = 4)
 #> <pillar_num:.4![3]>
 #> [1] 1.1250 2.1250 3.1250
-transf <- 10 ^ num(1:3 + 0.125, digits = 4)
+transf <- 10^num(1:3 + 0.125, digits = 4)
 transf
 #> <pillar_num:.4![3]>
 #> [1]   13.3352  133.3521 1333.5214
