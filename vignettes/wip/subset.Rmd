@@ -253,5 +253,5 @@ Indexes can be omitted altogether, no differences here:
 
 ```{r bracket-empty, dftbl = TRUE}
 df[]
-df[, ]
+df[,]
 ```

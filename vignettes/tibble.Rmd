@@ -33,13 +33,13 @@ It encapsulates best practices for data frames:
   * It never changes an input's type (i.e., no more `stringsAsFactors = FALSE`!).
 
     ```{r}
-tibble(x = letters)
+    tibble(x = letters)
     ```
 
     This makes it easier to use with list-columns:
 
     ```{r}
-tibble(x = 1:3, y = list(1:5, 1:10, 1:20))
+    tibble(x = 1:3, y = list(1:5, 1:10, 1:20))
     ```
 
     List-columns are often created by `tidyr::nest()`, but they can be useful to
@@ -48,14 +48,14 @@ tibble(x = 1:3, y = list(1:5, 1:10, 1:20))
   * It never adjusts the names of variables:
 
     ```{r}
-names(data.frame(`crazy name` = 1))
-names(tibble(`crazy name` = 1))
+    names(data.frame(`crazy name` = 1))
+    names(tibble(`crazy name` = 1))
     ```
 
   * It evaluates its arguments lazily and sequentially:
 
     ```{r}
-tibble(x = 1:5, y = x^2)
+    tibble(x = 1:5, y = x ^ 2)
     ```
 
   * It never uses `row.names()`.
