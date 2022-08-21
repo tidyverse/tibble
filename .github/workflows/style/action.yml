@@ -9,8 +9,10 @@ runs:
         set -x
         scope=$( ( grep Config/autostyle/scope DESCRIPTION || true ) | cut -d " " -f 2)
         strict=$( ( grep Config/autostyle/strict DESCRIPTION || true ) | cut -d " " -f 2)
+        rmd=$( ( grep Config/autostyle/rmd DESCRIPTION || true ) | cut -d " " -f 2)
         echo ::set-output name=scope::$scope
         echo ::set-output name=strict::$strict
+        echo ::set-output name=rmd::$rmd
       shell: bash
 
     - uses: actions/cache@v2
@@ -47,9 +49,17 @@ runs:
       run: |
         strict <- as.logical("${{ steps.check.outputs.strict }}")
         if (is.na(strict)) {
-          strict = FALSE
+          strict <- FALSE
         }
-        styler::style_pkg(scope = "${{ steps.check.outputs.scope }}", strict = strict)
+        rmd <- as.logical("${{ steps.check.outputs.rmd }}")
+        if (is.na(rmd)) {
+          rmd <- TRUE
+        }
+        styler::style_pkg(
+          scope = "${{ steps.check.outputs.scope }}",
+          strict = strict,
+          filetype = c("R", "Rprofile", if (rmd) c("Rmd", "Rmarkdown", "Rnw", "Qmd"))
+        )
       shell: Rscript {0}
 
     - name: Show cache again
