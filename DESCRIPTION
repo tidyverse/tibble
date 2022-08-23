@@ -38,7 +38,7 @@ Imports:
     pkgconfig,
     rlang (>= 1.0.2),
     utils,
-    vctrs (>= 0.3.8)
+    vctrs (>= 0.4.0)
 Suggests: 
     bench,
     bit64,
