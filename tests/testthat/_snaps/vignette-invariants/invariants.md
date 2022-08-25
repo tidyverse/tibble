@@ -547,7 +547,7 @@ tbl[[4]]
 <div class="error">
 
 ```
-#> Error in `vec_as_location2_result()`:
+#> Error in `vectbl_as_col_location2()`:
 #> ! Can't subset columns past the end.
 #> i Location 4 doesn't exist.
 #> i There are only 3 columns.
@@ -4559,13 +4559,11 @@ with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
 <div class="error">
 
 ```
-#> Error in `df_cast_opts()`:
-#> ! Data frame must have names.
-#> i In file 'type-data-frame.c' at line
-#> 683.
-#> i This is an internal error in the vctrs
-#> package, please report it to the package
-#> authors.
+#> Error:
+#> ! Assigned data `tbl2[1:2, 1]` must be
+#> compatible with existing data.
+#> i Error occurred for column `li`.
+#> x Can't convert <tbl_df> to <list>.
 ```
 
 </div></td></tr><tr style="vertical-align:top"><td>
