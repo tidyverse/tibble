@@ -109,6 +109,14 @@ markets
 #> # ... with 1,850 more rows
 markets %>%
   mutate(across(-time, num, digits = 3))
+#> Warning: The `...` argument of `across()` is deprecated as of dplyr 1.1.0.
+#> Supply arguments directly to `.fns` through a lambda instead.
+#> 
+#>   # Previously
+#>   across(a:b, mean, na.rm = TRUE)
+#> 
+#>   # Now
+#>   across(a:b, ~mean(.x, na.rm = TRUE))
 #> # A tibble: 1,860 x 5
 #>     time       DAX       SMI       CAC      FTSE
 #>    <dbl> <num:.3!> <num:.3!> <num:.3!> <num:.3!>
