@@ -646,7 +646,7 @@ tbl_subassign_col <- function(x, j, value) {
   }
 
   # Remove
-  j_remove <- j[!is_data & !is.na(j)]
+  j_remove <- j[!is_data]
   if (length(j_remove) > 0) x <- x[-j_remove]
 
   # Restore
