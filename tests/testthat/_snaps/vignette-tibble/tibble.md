@@ -43,7 +43,6 @@ It encapsulates best practices for data frames:
     #>  9 i    
     #> 10 j    
     #> # ... with 16 more rows
-    #> # i Use `print(n = ...)` to see more rows
     ```
 
     This makes it easier to use with list-columns:
@@ -124,7 +123,6 @@ timing
 #> # ... with 6 more variables: n_itr <int>, total_time <bench_tm>, result <list>,
 #> #   memory <list>, time <list>, gc <list>, and abbreviated variable names
 #> #   1: expression, 2: `itr/sec`, 3: mem_alloc
-#> # i Use `colnames()` to see all variable names
 ```
 
 The speed of `as.data.frame()` is not usually a bottleneck when used interactively, but can be a problem when combining thousands of messy inputs into one tidy data frame.
@@ -140,7 +138,7 @@ It also prints an abbreviated description of the column type, and uses font styl
 
 
 ```r
-tibble(x = -5:100, y = 123.456 * (3 ^ x))
+tibble(x = -5:100, y = 123.456 * (3^x))
 #> # A tibble: 106 x 2
 #>        x         y
 #>    <int>     <dbl>
@@ -155,7 +153,6 @@ tibble(x = -5:100, y = 123.456 * (3 ^ x))
 #>  9     3  3333.   
 #> 10     4 10000.   
 #> # ... with 96 more rows
-#> # i Use `print(n = ...)` to see more rows
 ```
 
 Numbers are displayed with three significant figures by default, and a trailing dot that indicates the existence of a fractional component.
@@ -284,11 +281,9 @@ This also extends to tibbles with *zero* rows, which is sometimes important for 
 tibble(a = 1, b = integer())
 #> # A tibble: 0 x 2
 #> # ... with 2 variables: a <dbl>, b <int>
-#> # i Use `colnames()` to see all variable names
 tibble(a = integer(), b = 1)
 #> # A tibble: 0 x 2
 #> # ... with 2 variables: a <int>, b <dbl>
-#> # i Use `colnames()` to see all variable names
 ```
 
 
