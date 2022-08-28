@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.8.9001
+
+## Chore
+
+- Require vctrs >= 0.4.1 and pillar >= 1.8.1
+
+- Skip tests if suggested packages not available (#1246, @MichaelChirico).
+
+
 # tibble 3.1.8.9000
 
 - Internal changes only.
