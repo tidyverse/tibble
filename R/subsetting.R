@@ -627,7 +627,6 @@ is_tight_sequence_at_end <- function(i_new, n) {
 }
 
 tbl_subassign_col <- function(x, j, value) {
-  is_data <- !vapply(value, is.null, NA)
   nrow <- fast_nrow(x)
 
   x <- unclass(x)
@@ -640,14 +639,21 @@ tbl_subassign_col <- function(x, j, value) {
   }
 
   # Update
-  for (jj in which(is_data)) {
+  to_remove <- integer()
+  for (jj in seq_along(value)) {
     ji <- j[[jj]]
-    x[[ji]] <- value[[jj]]
+    value_jj <- value[[jj]]
+    if (!is.null(value_jj)) {
+      x[[ji]] <- value_jj
+    } else {
+      to_remove <- c(to_remove, ji)
+    }
   }
 
   # Remove
-  j_remove <- j[!is_data]
-  if (length(j_remove) > 0) x <- x[-j_remove]
+  if (length(to_remove) > 0) {
+    x <- x[-to_remove]
+  }
 
   # Restore
   set_tibble_class(x, nrow)
