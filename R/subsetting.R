@@ -362,7 +362,7 @@ fix_oob_negative <- function(i, n, warn = TRUE) {
 fix_oob_invalid <- function(i, is_na_orig) {
   oob <- which(is.na(i) & !is_na_orig)
 
-  if (has_length(oob)) {
+  if (length(oob) > 0) {
     deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must use valid row names')",
       details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
       env = foreign_caller_env()
@@ -457,7 +457,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
       new <- which(j > length(x))
 
       # Fill up columns if necessary
-      if (has_length(new)) {
+      if (length(new) > 0) {
         init <- map(value[new], vec_slice, rep(NA_integer_, fast_nrow(x)))
         x <- tbl_subassign_col(x, j[new], init)
       }
@@ -509,7 +509,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
 
     j <- match(names, names(x))
     new <- which(is.na(j))
-    if (has_length(new)) {
+    if (length(new) > 0) {
       j[new] <- seq.int(length(x) + 1L, length.out = length(new))
     }
   } else if (is_bare_numeric(j)) {
@@ -633,7 +633,7 @@ tbl_subassign_col <- function(x, j, value) {
 
   # Grow, assign new names
   new <- which(j > length(x))
-  if (has_length(new)) {
+  if (length(new) > 0) {
     length(x) <- max(j[new])
     names(x)[j[new]] <- names2(j)[new]
   }
@@ -646,7 +646,7 @@ tbl_subassign_col <- function(x, j, value) {
 
   # Remove
   j_remove <- j[!is_data & !is.na(j)]
-  if (has_length(j_remove)) x <- x[-j_remove]
+  if (length(j_remove) > 0) x <- x[-j_remove]
 
   # Restore
   set_tibble_class(x, nrow)
