@@ -243,7 +243,7 @@ NULL
 
     xo <- .subset(x, j)
 
-    if (anyDuplicated(j)) {
+    if (anyDuplicated.default(j)) {
       xo <- set_repaired_names(xo, repair_hint = FALSE, .name_repair = "minimal")
     }
 
@@ -362,7 +362,7 @@ fix_oob_negative <- function(i, n, warn = TRUE) {
 fix_oob_invalid <- function(i, is_na_orig) {
   oob <- which(is.na(i) & !is_na_orig)
 
-  if (has_length(oob)) {
+  if (length(oob) > 0) {
     deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must use valid row names')",
       details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
       env = foreign_caller_env()
@@ -457,7 +457,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
       new <- which(j > length(x))
 
       # Fill up columns if necessary
-      if (has_length(new)) {
+      if (length(new) > 0) {
         init <- map(value[new], vec_slice, rep(NA_integer_, fast_nrow(x)))
         x <- tbl_subassign_col(x, j[new], init)
       }
@@ -475,7 +475,7 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
   if (is.null(i)) {
     i
   } else if (is_bare_numeric(i)) {
-    if (anyDuplicated(i)) {
+    if (anyDuplicated.default(i)) {
       cnd_signal(error_duplicate_row_subscript_for_assignment(i))
     }
 
@@ -488,7 +488,7 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
     vectbl_as_row_location(i, fast_nrow(x), i_arg, assign = TRUE)
   } else {
     i <- vectbl_as_row_index(i, x, i_arg, assign = TRUE)
-    if (anyDuplicated(i, incomparables = NA)) {
+    if (anyDuplicated.default(i, incomparables = NA)) {
       cnd_signal(error_duplicate_row_subscript_for_assignment(i))
     }
     i
@@ -509,7 +509,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
 
     j <- match(names, names(x))
     new <- which(is.na(j))
-    if (has_length(new)) {
+    if (length(new) > 0) {
       j[new] <- seq.int(length(x) + 1L, length.out = length(new))
     }
   } else if (is_bare_numeric(j)) {
@@ -558,11 +558,12 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
     names[old] <- names(x)[j[old]]
   }
 
-  if (anyDuplicated(j)) {
+  if (anyDuplicated.default(j)) {
     cnd_signal(error_duplicate_column_subscript_for_assignment(j))
   }
 
-  set_names(j, names)
+  names(j) <- names
+  j
 }
 
 numtbl_as_row_location_assign <- function(i, n, i_arg) {
@@ -626,27 +627,33 @@ is_tight_sequence_at_end <- function(i_new, n) {
 }
 
 tbl_subassign_col <- function(x, j, value) {
-  is_data <- !vapply(value, is.null, NA)
   nrow <- fast_nrow(x)
 
   x <- unclass(x)
 
   # Grow, assign new names
   new <- which(j > length(x))
-  if (has_length(new)) {
+  if (length(new) > 0) {
     length(x) <- max(j[new])
     names(x)[j[new]] <- names2(j)[new]
   }
 
   # Update
-  for (jj in which(is_data)) {
+  to_remove <- integer()
+  for (jj in seq_along(value)) {
     ji <- j[[jj]]
-    x[[ji]] <- value[[jj]]
+    value_jj <- value[[jj]]
+    if (!is.null(value_jj)) {
+      x[[ji]] <- value_jj
+    } else {
+      to_remove <- c(to_remove, ji)
+    }
   }
 
   # Remove
-  j_remove <- j[!is_data & !is.na(j)]
-  if (has_length(j_remove)) x <- x[-j_remove]
+  if (length(to_remove) > 0) {
+    x <- x[-to_remove]
+  }
 
   # Restore
   set_tibble_class(x, nrow)
