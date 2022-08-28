@@ -2,16 +2,11 @@
 
 # tibble 3.1.9
 
-## Chore
+## Internal
 
-- Require vctrs >= 0.4.1 and pillar >= 1.8.1
+- Require vctrs >= 0.4.1 and pillar >= 1.8.1 (#1352, @gadenbuie).
 
-Closes #1352.
-
-
-# tibble 3.1.8.9000
-
-- Internal changes only.
+- Skip tests if suggested packages not available (#1246, @MichaelChirico).
 
 
 # tibble 3.1.8
