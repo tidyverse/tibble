@@ -562,7 +562,8 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
     cnd_signal(error_duplicate_column_subscript_for_assignment(j))
   }
 
-  set_names(j, names)
+  names(j) <- names
+  j
 }
 
 numtbl_as_row_location_assign <- function(i, n, i_arg) {
