@@ -243,7 +243,7 @@ NULL
 
     xo <- .subset(x, j)
 
-    if (anyDuplicated(j)) {
+    if (anyDuplicated.default(j)) {
       xo <- set_repaired_names(xo, repair_hint = FALSE, .name_repair = "minimal")
     }
 
@@ -475,7 +475,7 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
   if (is.null(i)) {
     i
   } else if (is_bare_numeric(i)) {
-    if (anyDuplicated(i)) {
+    if (anyDuplicated.default(i)) {
       cnd_signal(error_duplicate_row_subscript_for_assignment(i))
     }
 
@@ -488,7 +488,7 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
     vectbl_as_row_location(i, fast_nrow(x), i_arg, assign = TRUE)
   } else {
     i <- vectbl_as_row_index(i, x, i_arg, assign = TRUE)
-    if (anyDuplicated(i, incomparables = NA)) {
+    if (anyDuplicated.default(i, incomparables = NA)) {
       cnd_signal(error_duplicate_row_subscript_for_assignment(i))
     }
     i
@@ -558,7 +558,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
     names[old] <- names(x)[j[old]]
   }
 
-  if (anyDuplicated(j)) {
+  if (anyDuplicated.default(j)) {
     cnd_signal(error_duplicate_column_subscript_for_assignment(j))
   }
 
