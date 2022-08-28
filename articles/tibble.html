@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.1.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.1.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -137,8 +137,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> h    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> i    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> j    </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 16 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 16 more rows</span></span></span></code></pre></div>
 <p>This makes it easier to use with list-columns:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
@@ -198,8 +197,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 7 more variables: n_gc &lt;dbl&gt;, n_itr &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   total_time &lt;bench_tm&gt;, result &lt;list&gt;, memory &lt;list&gt;, time &lt;list&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   gc &lt;list&gt;, and abbreviated variable names ¹​expression, ²​`itr/sec`,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ³​mem_alloc</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   ³​mem_alloc</span></span></span></code></pre>
 <p>The speed of <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> is not usually a bottleneck when used interactively, but can be a problem when combining thousands of messy inputs into one tidy data frame.</p>
 </div>
 <div class="section level2">
@@ -211,7 +209,7 @@
 </h3>
 <p>When you print a tibble, it only shows the first ten rows and all the columns that fit on one screen. It also prints an abbreviated description of the column type, and uses font styles and color for highlighting:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">:</span><span class="fl">100</span>, y <span class="op">=</span> <span class="fl">123.456</span> <span class="op">*</span> <span class="op">(</span><span class="fl">3</span> <span class="op">^</span> <span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="op">-</span><span class="fl">5</span><span class="op">:</span><span class="fl">100</span>, y <span class="op">=</span> <span class="fl">123.456</span> <span class="op">*</span> <span class="op">(</span><span class="fl">3</span><span class="op">^</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 106 × 2</span></span></span>
 <span><span class="co">#&gt;        x         y</span></span>
 <span><span class="co">#&gt;    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -225,8 +223,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     2  <span style="text-decoration: underline;">1</span>111.   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     3  <span style="text-decoration: underline;">3</span>333.   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     4 <span style="text-decoration: underline;">10</span>000.   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 96 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 96 more rows</span></span></span></code></pre></div>
 <p>Numbers are displayed with three significant figures by default, and a trailing dot that indicates the existence of a fractional component.</p>
 <p>You can control the default appearance with options:</p>
 <ul>
@@ -320,11 +317,9 @@
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 2</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 2 variables: a &lt;dbl&gt;, b &lt;int&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span>
 <span><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 2 variables: a &lt;int&gt;, b &lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `colnames()` to see all variable names</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 2 variables: a &lt;int&gt;, b &lt;dbl&gt;</span></span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="arithmetic-operations">Arithmetic operations<a class="anchor" aria-label="anchor" href="#arithmetic-operations"></a>

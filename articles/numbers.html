@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.1.8</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.1.9</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -188,7 +188,6 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="text-decoration: underline;">1</span>992. <span style="text-decoration: underline;">1</span>635. <span style="text-decoration: underline;">1</span>698. <span style="text-decoration: underline;">1</span>754  <span style="text-decoration: underline;">2</span>510.</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">1</span>992. <span style="text-decoration: underline;">1</span>646. <span style="text-decoration: underline;">1</span>716. <span style="text-decoration: underline;">1</span>754. <span style="text-decoration: underline;">2</span>497.</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># … with 1,850 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span>
 <span><span class="va">markets</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="op">-</span><span class="va">time</span>, <span class="va">num</span>, digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1,860 × 5</span></span></span>
@@ -204,8 +203,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> <span style="text-decoration: underline;">1</span>992.  <span style="text-decoration: underline;">1</span>640.170  <span style="text-decoration: underline;">1</span>703.600  <span style="text-decoration: underline;">1</span>757.400  <span style="text-decoration: underline;">2</span>508.400</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> <span style="text-decoration: underline;">1</span>992.  <span style="text-decoration: underline;">1</span>635.470  <span style="text-decoration: underline;">1</span>697.500  <span style="text-decoration: underline;">1</span>754.000  <span style="text-decoration: underline;">2</span>510.500</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> <span style="text-decoration: underline;">1</span>992.  <span style="text-decoration: underline;">1</span>645.890  <span style="text-decoration: underline;">1</span>716.300  <span style="text-decoration: underline;">1</span>754.300  <span style="text-decoration: underline;">2</span>497.400</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 1,850 more rows</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ Use `print(n = ...)` to see more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 1,850 more rows</span></span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="computing-on-num">Computing on <code>num</code><a class="anchor" aria-label="anchor" href="#computing-on-num"></a>
@@ -261,7 +259,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">+</span> <span class="fl">0.125</span>, digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;pillar_num:.4![3]&gt;</span></span>
 <span><span class="co">#&gt; [1] 1.1250 2.1250 3.1250</span></span>
-<span><span class="va">transf</span> <span class="op">&lt;-</span> <span class="fl">10</span> <span class="op">^</span> <span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">+</span> <span class="fl">0.125</span>, digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
+<span><span class="va">transf</span> <span class="op">&lt;-</span> <span class="fl">10</span><span class="op">^</span><span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">+</span> <span class="fl">0.125</span>, digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="va">transf</span></span>
 <span><span class="co">#&gt; &lt;pillar_num:.4![3]&gt;</span></span>
 <span><span class="co">#&gt; [1]   13.3352  133.3521 1333.5214</span></span>
