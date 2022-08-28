@@ -454,10 +454,10 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
       if (!is.null(j_arg)) {
         j <- vectbl_as_new_col_index(j, x, j_arg, names2(value), value_arg)
       }
-      new <- which(j > length(x))
 
       # Fill up columns if necessary
-      if (length(new) > 0) {
+      new <- attr(j, "new")
+      if (!is.null(new)) {
         init <- map(value[new], vec_slice, rep(NA_integer_, fast_nrow(x)))
         x <- tbl_subassign_col(x, j[new], init)
       }
@@ -510,7 +510,10 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
     j <- match(names, names(x))
     new <- which(is.na(j))
     if (length(new) > 0) {
+      # FIXME: Check consistency with assigning to the same existing column twice
       j[new] <- seq.int(length(x) + 1L, length.out = length(new))
+    } else {
+      new <- NULL
     }
   } else if (is_bare_numeric(j)) {
     if (anyNA(j)) {
@@ -536,6 +539,8 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
     if (length(new) > 0) {
       j[new] <- j_new
       names[new][names[new] == ""] <- paste0("...", j_new)
+    } else {
+      new <- NULL
     }
 
     names[old] <- names(x)[j[old]]
@@ -556,6 +561,8 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
 
     old <- (j <= length(x))
     names[old] <- names(x)[j[old]]
+
+    new <- NULL
   }
 
   if (anyDuplicated.default(j)) {
@@ -563,6 +570,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
   }
 
   names(j) <- names
+  attr(j, "new") <- new
   j
 }
 
@@ -632,8 +640,8 @@ tbl_subassign_col <- function(x, j, value) {
   x <- unclass(x)
 
   # Grow, assign new names
-  new <- which(j > length(x))
-  if (length(new) > 0) {
+  new <- attr(j, "new")
+  if (!is.null(new)) {
     length(x) <- max(j[new])
     names(x)[j[new]] <- names2(j)[new]
   }
