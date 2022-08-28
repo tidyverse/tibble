@@ -34,11 +34,11 @@ Imports:
     lifecycle (>= 1.0.0),
     magrittr,
     methods,
-    pillar (>= 1.7.0),
+    pillar (>= 1.8.1),
     pkgconfig,
     rlang (>= 1.0.2),
     utils,
-    vctrs (>= 0.3.8)
+    vctrs (>= 0.4.1)
 Suggests: 
     bench,
     bit64,
