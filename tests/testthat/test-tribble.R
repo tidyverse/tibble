@@ -167,6 +167,7 @@ test_that("names stripped at appropriate time (#775)", {
 })
 
 test_that("lubridate::Period (#784)", {
+  skip_if_not_installed("lubridate")
   expect_equal(
     tribble(~x, lubridate::days(1), lubridate::days(2)),
     tibble(x = lubridate::days(1:2))
@@ -174,6 +175,7 @@ test_that("lubridate::Period (#784)", {
 })
 
 test_that("formattable (#785)", {
+  skip_if_not_installed("formattable")
   expect_equal(
     tribble(~x, formattable::formattable(1.0, 1), formattable::formattable(2.0, 1)),
     tibble(x = formattable::formattable(1:2 + 0, 1))
