@@ -246,17 +246,20 @@ NULL
     if (anyDuplicated.default(j)) {
       xo <- set_repaired_names(xo, repair_hint = FALSE, .name_repair = "minimal")
     }
-
-    xo <- set_tibble_class(xo, nrow = fast_nrow(x))
   }
 
-  if (!is.null(i)) {
-    xo <- tbl_subset_row(xo, i = i, i_arg)
+  if (is.null(i)) {
+    nrow <- fast_nrow(x)
+  } else {
+    i <- vectbl_as_row_index(i, x, i_arg)
+    xo <- lapply(xo, vec_slice, i = i)
+    nrow <- length(i)
   }
 
   if (drop && length(xo) == 1L) {
     tbl_subset2(xo, 1L, j_arg)
   } else {
+    attr(xo, "row.names") <- .set_row_names(nrow)
     vectbl_restore(xo, x)
   }
 }
@@ -413,28 +416,23 @@ tbl_subset2 <- function(x, j, j_arg) {
   .subset2(x, j)
 }
 
-tbl_subset_row <- function(x, i, i_arg) {
-  if (is.null(i)) return(x)
-  i <- vectbl_as_row_index(i, x, i_arg)
-  xo <- lapply(unclass(x), vec_slice, i = i)
-  set_tibble_class(xo, nrow = length(i))
-}
-
 tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
   if (is.null(i)) {
+    xo <- unclass(x)
+
     value <- vectbl_wrap_rhs_col(value, value_arg)
 
     if (is.null(j)) {
-      j <- seq_along(x)
+      j <- seq_along(xo)
       names(j) <- names2(j)
     } else if (!is.null(j_arg)) {
-      j <- vectbl_as_new_col_index(j, x, j_arg, names2(value), value_arg)
+      j <- vectbl_as_new_col_index(j, xo, j_arg, names2(value), value_arg)
     }
 
-    value <- vectbl_recycle_rhs_rows(value, fast_nrow(x), i_arg = NULL, value_arg)
+    value <- vectbl_recycle_rhs_rows(value, fast_nrow(xo), i_arg = NULL, value_arg)
     value <- vectbl_recycle_rhs_cols(value, length(j))
 
-    xo <- tbl_subassign_col(x, j, value)
+    xo <- tbl_subassign_col(xo, j, value)
   } else if (is.null(i_arg)) {
     # x[NULL, ...] <- value
     return(x)
@@ -445,26 +443,29 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
     x <- tbl_expand_to_nrow(x, i)
     value <- vectbl_wrap_rhs_row(value, value_arg)
 
+    # Only after tbl_expand_to_nrow() which needs data frame
+    xo <- unclass(x)
+
     if (is.null(j)) {
-      xo <- tbl_subassign_row(x, i, value, i_arg, value_arg)
+      xo <- tbl_subassign_row(xo, i, value, i_arg, value_arg)
     } else {
       # Optimization: match only once
       # (Invariant: x[[j]] is equivalent to x[[vec_as_location(j)]],
       # allowed by corollary that only existing columns can be updated)
       if (!is.null(j_arg)) {
-        j <- vectbl_as_new_col_index(j, x, j_arg, names2(value), value_arg)
+        j <- vectbl_as_new_col_index(j, xo, j_arg, names2(value), value_arg)
       }
-      new <- which(j > length(x))
 
       # Fill up columns if necessary
-      if (length(new) > 0) {
-        init <- map(value[new], vec_slice, rep(NA_integer_, fast_nrow(x)))
-        x <- tbl_subassign_col(x, j[new], init)
+      new <- attr(j, "new")
+      if (!is.null(new)) {
+        init <- map(value[new], vec_slice, rep(NA_integer_, fast_nrow(xo)))
+        xo <- tbl_subassign_col(xo, j[new], init)
       }
 
-      xj <- .subset(x, j)
+      xj <- .subset(xo, j)
       xj <- tbl_subassign_row(xj, i, value, i_arg, value_arg)
-      xo <- tbl_subassign_col(x, j, unclass(xj))
+      xo <- tbl_subassign_col(xo, j, xj)
     }
   }
 
@@ -510,7 +511,10 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
     j <- match(names, names(x))
     new <- which(is.na(j))
     if (length(new) > 0) {
+      # FIXME: Check consistency with assigning to the same existing column twice
       j[new] <- seq.int(length(x) + 1L, length.out = length(new))
+    } else {
+      new <- NULL
     }
   } else if (is_bare_numeric(j)) {
     if (anyNA(j)) {
@@ -536,6 +540,8 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
     if (length(new) > 0) {
       j[new] <- j_new
       names[new][names[new] == ""] <- paste0("...", j_new)
+    } else {
+      new <- NULL
     }
 
     names[old] <- names(x)[j[old]]
@@ -556,6 +562,8 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
 
     old <- (j <= length(x))
     names[old] <- names(x)[j[old]]
+
+    new <- NULL
   }
 
   if (anyDuplicated.default(j)) {
@@ -563,6 +571,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
   }
 
   names(j) <- names
+  attr(j, "new") <- new
   j
 }
 
@@ -629,11 +638,9 @@ is_tight_sequence_at_end <- function(i_new, n) {
 tbl_subassign_col <- function(x, j, value) {
   nrow <- fast_nrow(x)
 
-  x <- unclass(x)
-
   # Grow, assign new names
-  new <- which(j > length(x))
-  if (length(new) > 0) {
+  new <- attr(j, "new")
+  if (!is.null(new)) {
     length(x) <- max(j[new])
     names(x)[j[new]] <- names2(j)[new]
   }
@@ -655,8 +662,9 @@ tbl_subassign_col <- function(x, j, value) {
     x <- x[-to_remove]
   }
 
-  # Restore
-  set_tibble_class(x, nrow)
+  # Can be destroyed by setting length
+  attr(x, "row.names") <- .set_row_names(nrow)
+  x
 }
 
 tbl_expand_to_nrow <- function(x, i) {
@@ -678,8 +686,6 @@ tbl_expand_to_nrow <- function(x, i) {
 }
 
 tbl_subassign_row <- function(x, i, value, i_arg, value_arg) {
-  nrow <- fast_nrow(x)
-  x <- unclass(x)
   recycled_value <- vectbl_recycle_rhs_cols(value, length(x))
 
   withCallingHandlers(
@@ -694,7 +700,7 @@ tbl_subassign_row <- function(x, i, value, i_arg, value_arg) {
     }
   )
 
-  set_tibble_class(x, nrow)
+  x
 }
 
 fast_nrow <- function(x) {
@@ -758,11 +764,6 @@ result_vectbl_wrap_rhs <- function(value) {
   }
 }
 
-vectbl_recycle_rhs <- function(value, nrow, ncol, i_arg, value_arg) {
-  value <- vectbl_recycle_rhs_rows(value, nrow, i_arg, value_arg)
-  vectbl_recycle_rhs_cols(value, ncol)
-}
-
 vectbl_recycle_rhs_rows <- function(value, nrow, i_arg, value_arg) {
   if (length(value) > 0L) {
     withCallingHandlers(
@@ -787,13 +788,6 @@ vectbl_recycle_rhs_cols <- function(value, ncol) {
   }
 
   value
-}
-
-# Dedicated functions for faster subsetting
-set_tibble_class <- function(x, nrow) {
-  attr(x, "row.names") <- .set_row_names(nrow)
-  class(x) <- tibble_class
-  x
 }
 
 # External ----------------------------------------------------------------

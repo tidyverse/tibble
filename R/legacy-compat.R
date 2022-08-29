@@ -12,5 +12,8 @@ tbl_subset_col <- function(x, j, j_arg) {
   if (anyDuplicated(j)) {
     xo <- set_repaired_names(xo, repair_hint = FALSE, .name_repair = "minimal")
   }
-  set_tibble_class(xo, nrow = fast_nrow(x))
+
+  attr(xo, "row.names") <- .set_row_names(fast_nrow(x))
+  class(xo) <- tibble_class
+  xo
 }
