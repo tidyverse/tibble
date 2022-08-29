@@ -662,8 +662,9 @@ tbl_subassign_col <- function(x, j, value) {
     x <- x[-to_remove]
   }
 
-  # Restore
-  set_tibble_class(x, nrow)
+  # Can be destroyed by setting length
+  attr(x, "row.names") <- .set_row_names(nrow)
+  x
 }
 
 tbl_expand_to_nrow <- function(x, i) {
