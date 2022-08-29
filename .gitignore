@@ -1,4 +1,5 @@
 *.o
+*.gcda
 src/*.o-*
 src-i386/
 src-x64/
@@ -15,3 +16,5 @@ vignettes/*.R
 .drake
 CRAN-RELEASE
 docs
+.vscode/
+src/version.txt
