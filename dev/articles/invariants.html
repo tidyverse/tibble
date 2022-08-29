@@ -302,7 +302,7 @@
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"n"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
- [1m#&gt; tibble/R/subsetting.R:410:4: [0m
+ [1m#&gt; tibble/R/subsetting.R:413:4: [0m
 #&gt;  [33m! [39m Must extract column with a single
 #&gt; valid subscript.
 #&gt;  [31m✖ [39m Subscript `c("n", "c")` has size 2 but
@@ -321,7 +321,7 @@
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="cn">TRUE</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
- [1m#&gt; tibble/R/subsetting.R:410:4: [0m
+ [1m#&gt; tibble/R/subsetting.R:413:4: [0m
 #&gt;  [33m! [39m Must extract column with a single
 #&gt; valid subscript.
 #&gt;  [31m✖ [39m Subscript `TRUE` has the wrong type
@@ -344,7 +344,7 @@
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="va">mean</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
- [1m#&gt; tibble/R/subsetting.R:410:4: [0m
+ [1m#&gt; tibble/R/subsetting.R:413:4: [0m
 #&gt;  [33m! [39m Must extract column with a single
 #&gt; valid subscript.
 #&gt;  [31m✖ [39m Subscript `mean` has the wrong type
@@ -367,7 +367,7 @@
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="cn">NA</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
- [1m#&gt; tibble/R/subsetting.R:410:4: [0m
+ [1m#&gt; tibble/R/subsetting.R:413:4: [0m
 #&gt;  [33m! [39m Must extract column with a single
 #&gt; valid subscript.
 #&gt;  [31m✖ [39m Subscript `NA` can't be `NA`.</code></pre>
@@ -385,7 +385,7 @@
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="cn">NA_character_</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
- [1m#&gt; tibble/R/subsetting.R:410:4: [0m
+ [1m#&gt; tibble/R/subsetting.R:413:4: [0m
 #&gt;  [33m! [39m Must extract column with a single
 #&gt; valid subscript.
 #&gt;  [31m✖ [39m Subscript `NA_character_` can't be
@@ -404,7 +404,7 @@
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="cn">NA_integer_</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
- [1m#&gt; tibble/R/subsetting.R:394:8: [0m
+ [1m#&gt; tibble/R/subsetting.R:397:8: [0m
 #&gt;  [33m! [39m Must extract column with a single
 #&gt; valid subscript.
 #&gt;  [31m✖ [39m Subscript `NA_integer_` can't be `NA`.</code></pre>
@@ -426,7 +426,7 @@
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
- [1m#&gt; tibble/R/subsetting.R:394:8: [0m
+ [1m#&gt; tibble/R/subsetting.R:397:8: [0m
 #&gt;  [33m! [39m Must extract column with a single
 #&gt; valid subscript.
 #&gt;  [31m✖ [39m Subscript `-1` has value -1 but must
@@ -465,7 +465,7 @@
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="fl">1.5</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
- [1m#&gt; tibble/R/subsetting.R:394:8: [0m
+ [1m#&gt; tibble/R/subsetting.R:397:8: [0m
 #&gt;  [33m! [39m Must extract column with a single
 #&gt; valid subscript.
 #&gt;  [31m✖ [39m Subscript `1.5` has the wrong type
@@ -485,7 +485,7 @@
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="cn">Inf</span><span class="op">]</span><span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_col_location2()` at [0m
- [1m#&gt; tibble/R/subsetting.R:394:8: [0m
+ [1m#&gt; tibble/R/subsetting.R:397:8: [0m
 #&gt;  [33m! [39m Must extract column with a single
 #&gt; valid subscript.
 #&gt;  [31m✖ [39m Subscript `Inf` has the wrong type
@@ -796,7 +796,7 @@
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="va">mean</span>, <span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location()` at [0m
- [1m#&gt; tibble/R/subsetting.R:320:4: [0m
+ [1m#&gt; tibble/R/subsetting.R:323:4: [0m
 #&gt;  [33m! [39m Must subset rows with a valid
 #&gt; subscript vector.
 #&gt;  [31m✖ [39m Subscript `mean` has the wrong type
@@ -820,7 +820,7 @@
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location()` at [0m
- [1m#&gt; tibble/R/subsetting.R:320:4: [0m
+ [1m#&gt; tibble/R/subsetting.R:323:4: [0m
 #&gt;  [33m! [39m Must subset rows with a valid
 #&gt; subscript vector.
 #&gt;  [31m✖ [39m Subscript `list(1)` has the wrong type
@@ -906,7 +906,7 @@
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_row_location()` at [0m
- [1m#&gt; tibble/R/subsetting.R:320:4: [0m
+ [1m#&gt; tibble/R/subsetting.R:323:4: [0m
 #&gt;  [33m! [39m Must subset rows with a valid
 #&gt; subscript vector.
 #&gt;  [34mℹ [39m Logical subscripts must match the size
@@ -1135,7 +1135,7 @@
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in [0m
  [1m#&gt; `numtbl_as_col_location_assign()` at [0m
- [1m#&gt; tibble/R/subsetting.R:520:4: [0m
+ [1m#&gt; tibble/R/subsetting.R:524:4: [0m
 #&gt;  [33m! [39m Can't assign to columns beyond the end
 #&gt; with non-consecutive locations.
 #&gt;  [34mℹ [39m Input has size 3.
@@ -1302,7 +1302,7 @@
 <code class="sourceCode R"><span><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_new_col_index()` at [0m
- [1m#&gt; tibble/R/subsetting.R:431:6: [0m
+ [1m#&gt; tibble/R/subsetting.R:429:6: [0m
 #&gt;  [33m! [39m Can't recycle `list(0, 0, 0)` (size 3)
 #&gt; to size 2.</code></pre>
 </div>
@@ -1323,7 +1323,7 @@
 <code class="sourceCode R"><span><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in  [1m [1m`vectbl_as_new_col_index()` at [0m
- [1m#&gt; tibble/R/subsetting.R:431:6: [0m
+ [1m#&gt; tibble/R/subsetting.R:429:6: [0m
 #&gt;  [33m! [39m Can't recycle `list(0, 0)` (size 2) to
 #&gt; size 3.</code></pre>
 </div>
@@ -1439,7 +1439,7 @@
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in [0m
  [1m#&gt; `numtbl_as_col_location_assign()` at [0m
- [1m#&gt; tibble/R/subsetting.R:520:4: [0m
+ [1m#&gt; tibble/R/subsetting.R:524:4: [0m
 #&gt;  [33m! [39m Can't assign to columns beyond the end
 #&gt; with non-consecutive locations.
 #&gt;  [34mℹ [39m Input has size 3.
@@ -1996,7 +1996,7 @@
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in [0m
  [1m#&gt; `numtbl_as_row_location_assign()` at [0m
- [1m#&gt; tibble/R/subsetting.R:485:4: [0m
+ [1m#&gt; tibble/R/subsetting.R:486:4: [0m
 #&gt;  [33m! [39m Can't assign to rows beyond the end
 #&gt; with non-consecutive locations.
 #&gt;  [34mℹ [39m Input has size 4.
@@ -2021,7 +2021,7 @@
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in [0m
  [1m#&gt; `numtbl_as_row_location_assign()` at [0m
- [1m#&gt; tibble/R/subsetting.R:485:4: [0m
+ [1m#&gt; tibble/R/subsetting.R:486:4: [0m
 #&gt;  [33m! [39m Can't negate rows past the end.
 #&gt;  [1m [22m [36mℹ [39m Location 5 doesn't exist.
 #&gt;  [36mℹ [39m There are only 4 rows.</code></pre>
@@ -2044,7 +2044,7 @@
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in [0m
  [1m#&gt; `numtbl_as_row_location_assign()` at [0m
- [1m#&gt; tibble/R/subsetting.R:485:4: [0m
+ [1m#&gt; tibble/R/subsetting.R:486:4: [0m
 #&gt;  [33m! [39m Can't negate rows past the end.
 #&gt;  [1m [22m [36mℹ [39m Locations 5, 6, and 7 don't
 #&gt; exist.
@@ -2068,7 +2068,7 @@
 <div class="error">
 <pre><code>#&gt;  [1m [33mError [39m in [0m
  [1m#&gt; `numtbl_as_row_location_assign()` at [0m
- [1m#&gt; tibble/R/subsetting.R:485:4: [0m
+ [1m#&gt; tibble/R/subsetting.R:486:4: [0m
 #&gt;  [33m! [39m Can't negate rows past the end.
 #&gt;  [1m [22m [36mℹ [39m Location 6 doesn't exist.
 #&gt;  [36mℹ [39m There are only 4 rows.</code></pre>
