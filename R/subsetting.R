@@ -646,10 +646,21 @@ tbl_subassign_col_r <- function(x, j, value) {
 
   # Grow, assign new names
   new <- attr(j, "new")
+  if (is.null(new)) {
+    n_new <- 0
+  } else {
+    n_new <- max(j[new]) - length(x)
+  }
+
+  # Grow, assign new names
   if (!is.null(new)) {
-    length(x) <- max(j[new])
+    length(x) <- length(x) + n_new
     names(x)[j[new]] <- names2(j)[new]
   }
+
+  order_j <- order(j)
+  value <- value[order_j]
+  j <- j[order_j]
 
   # Update
   to_remove <- integer()
