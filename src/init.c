@@ -9,6 +9,7 @@ static const R_CallMethodDef CallEntries[] = {
   {"tibble_string_to_indices", (DL_FUNC) &tibble_string_to_indices, 1},
   {"tibble_restore_impl", (DL_FUNC) &tibble_restore_impl, 2},
   {"tibble_need_coerce", (DL_FUNC) &tibble_need_coerce, 1},
+  {"tibble_tbl_subassign_col", (DL_FUNC) &tbl_subassign_col, 3},
 
   {NULL, NULL, 0}
 };

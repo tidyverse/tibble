@@ -636,6 +636,12 @@ is_tight_sequence_at_end <- function(i_new, n) {
 }
 
 tbl_subassign_col <- function(x, j, value) {
+  c <- .Call(`tibble_tbl_subassign_col`, x, j, value)
+  r <- tbl_subassign_col_r(x, j, value)
+  r
+}
+
+tbl_subassign_col_r <- function(x, j, value) {
   nrow <- fast_nrow(x)
 
   # Grow, assign new names
