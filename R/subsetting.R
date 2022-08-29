@@ -462,7 +462,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
 
       xj <- .subset(x, j)
       xj <- tbl_subassign_row(xj, i, value, i_arg, value_arg)
-      xo <- tbl_subassign_col(x, j, unclass(xj))
+      xo <- tbl_subassign_col(x, j, xj)
     }
   }
 
@@ -684,7 +684,6 @@ tbl_expand_to_nrow <- function(x, i) {
 }
 
 tbl_subassign_row <- function(x, i, value, i_arg, value_arg) {
-  nrow <- fast_nrow(x)
   x <- unclass(x)
   recycled_value <- vectbl_recycle_rhs_cols(value, length(x))
 
@@ -700,7 +699,7 @@ tbl_subassign_row <- function(x, i, value, i_arg, value_arg) {
     }
   )
 
-  set_tibble_class(x, nrow)
+  x
 }
 
 fast_nrow <- function(x) {
