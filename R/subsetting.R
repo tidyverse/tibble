@@ -443,26 +443,29 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
     x <- tbl_expand_to_nrow(x, i)
     value <- vectbl_wrap_rhs_row(value, value_arg)
 
+    # Only after tbl_expand_to_nrow() which needs data frame
+    xo <- unclass(x)
+
     if (is.null(j)) {
-      xo <- tbl_subassign_row(x, i, value, i_arg, value_arg)
+      xo <- tbl_subassign_row(xo, i, value, i_arg, value_arg)
     } else {
       # Optimization: match only once
       # (Invariant: x[[j]] is equivalent to x[[vec_as_location(j)]],
       # allowed by corollary that only existing columns can be updated)
       if (!is.null(j_arg)) {
-        j <- vectbl_as_new_col_index(j, x, j_arg, names2(value), value_arg)
+        j <- vectbl_as_new_col_index(j, xo, j_arg, names2(value), value_arg)
       }
 
       # Fill up columns if necessary
       new <- attr(j, "new")
       if (!is.null(new)) {
-        init <- map(value[new], vec_slice, rep(NA_integer_, fast_nrow(x)))
-        x <- tbl_subassign_col(x, j[new], init)
+        init <- map(value[new], vec_slice, rep(NA_integer_, fast_nrow(xo)))
+        xo <- tbl_subassign_col(xo, j[new], init)
       }
 
-      xj <- .subset(x, j)
+      xj <- .subset(xo, j)
       xj <- tbl_subassign_row(xj, i, value, i_arg, value_arg)
-      xo <- tbl_subassign_col(x, j, xj)
+      xo <- tbl_subassign_col(xo, j, xj)
     }
   }
 
@@ -635,8 +638,6 @@ is_tight_sequence_at_end <- function(i_new, n) {
 tbl_subassign_col <- function(x, j, value) {
   nrow <- fast_nrow(x)
 
-  x <- unclass(x)
-
   # Grow, assign new names
   new <- attr(j, "new")
   if (!is.null(new)) {
@@ -684,7 +685,6 @@ tbl_expand_to_nrow <- function(x, i) {
 }
 
 tbl_subassign_row <- function(x, i, value, i_arg, value_arg) {
-  x <- unclass(x)
   recycled_value <- vectbl_recycle_rhs_cols(value, length(x))
 
   withCallingHandlers(
