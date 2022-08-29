@@ -246,17 +246,20 @@ NULL
     if (anyDuplicated.default(j)) {
       xo <- set_repaired_names(xo, repair_hint = FALSE, .name_repair = "minimal")
     }
-
-    xo <- set_tibble_class(xo, nrow = fast_nrow(x))
   }
 
-  if (!is.null(i)) {
-    xo <- tbl_subset_row(xo, i = i, i_arg)
+  if (is.null(i)) {
+    nrow <- fast_nrow(x)
+  } else {
+    i <- vectbl_as_row_index(i, x, i_arg)
+    xo <- lapply(xo, vec_slice, i = i)
+    nrow <- length(i)
   }
 
   if (drop && length(xo) == 1L) {
     tbl_subset2(xo, 1L, j_arg)
   } else {
+    attr(xo, "row.names") <- .set_row_names(nrow)
     vectbl_restore(xo, x)
   }
 }
@@ -411,13 +414,6 @@ tbl_subset2 <- function(x, j, j_arg) {
   }
 
   .subset2(x, j)
-}
-
-tbl_subset_row <- function(x, i, i_arg) {
-  if (is.null(i)) return(x)
-  i <- vectbl_as_row_index(i, x, i_arg)
-  xo <- lapply(unclass(x), vec_slice, i = i)
-  set_tibble_class(xo, nrow = length(i))
 }
 
 tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
