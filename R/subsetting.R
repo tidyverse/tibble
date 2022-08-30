@@ -642,60 +642,7 @@ tbl_subassign_col <- function(x, j, value) {
     j <- j[order_j]
   }
 
-  # c <- .Call(`tibble_tbl_subassign_col`, x, j, value)
-  r <- tbl_subassign_col_r(x, j, value)
-  r
-}
-
-tbl_subassign_col_r <- function(x, j, value) {
-  nrow <- fast_nrow(x)
-
-  j_max <- max(c(j, length(x)))
-  n_old <- sum(vapply(value, is.null, NA))
-
-  xo_idx <- integer(j_max - n_old)
-
-  jj <- 1
-  xoj <- 1
-  xj <- 1
-  while(xoj <= length(xo_idx)) {
-    if (jj <= length(j) && xj == j[[jj]]) {
-      xj <- xj + 1
-      if (!is.null(value[[jj]])) {
-        xo_idx[[xoj]] <- -jj
-        xoj <- xoj + 1
-      }
-      jj <- jj + 1
-    } else {
-      xo_idx[[xoj]] <- xj
-      xoj <- xoj + 1
-      xj <- xj + 1
-    }
-  }
-
-  while(jj <= length(j)) {
-    stopifnot(is.null(value[[jj]]))
-    jj <- jj + 1
-  }
-
-  xo <- vector("list", length(xo_idx))
-  mostattributes(xo) <- attributes(x)
-  names(xo) <- rep("", length(xo_idx))
-
-  for (xoj in seq_along(xo_idx)) {
-    xj <- xo_idx[[xoj]]
-    if (xj > 0) {
-      xo[[xoj]] <- x[[xj]]
-      names(xo)[[xoj]] <- names(x)[[xj]]
-    } else {
-      xo[[xoj]] <- value[[-xj]]
-      names(xo)[[xoj]] <- names(j)[[-xj]]
-    }
-  }
-
-  # Can be destroyed by setting length
-  attr(xo, "row.names") <- .set_row_names(nrow)
-  xo
+  .Call(`tibble_tbl_subassign_col`, x, j, value)
 }
 
 tbl_expand_to_nrow <- function(x, i) {

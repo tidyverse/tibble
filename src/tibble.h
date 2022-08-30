@@ -4,6 +4,8 @@
 #define R_NO_REMAP
 #include <Rinternals.h>
 
+#include "stdbool.h"
+
 SEXP tibble_matrixToDataFrame(SEXP xSEXP);
 SEXP tibble_string_to_indices(SEXP x);
 SEXP tibble_need_coerce(SEXP x);
