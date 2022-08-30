@@ -636,7 +636,13 @@ is_tight_sequence_at_end <- function(i_new, n) {
 }
 
 tbl_subassign_col <- function(x, j, value) {
-  c <- .Call(`tibble_tbl_subassign_col`, x, j, value)
+  if (length(j) > 1) {
+    order_j <- order(j)
+    value <- value[order_j]
+    j <- j[order_j]
+  }
+
+  # c <- .Call(`tibble_tbl_subassign_col`, x, j, value)
   r <- tbl_subassign_col_r(x, j, value)
   r
 }
@@ -644,44 +650,52 @@ tbl_subassign_col <- function(x, j, value) {
 tbl_subassign_col_r <- function(x, j, value) {
   nrow <- fast_nrow(x)
 
-  # Grow, assign new names
-  new <- attr(j, "new")
-  if (is.null(new)) {
-    n_new <- 0
-  } else {
-    n_new <- max(j[new]) - length(x)
-  }
+  j_max <- max(c(j, length(x)))
+  n_old <- sum(vapply(value, is.null, NA))
 
-  # Grow, assign new names
-  if (!is.null(new)) {
-    length(x) <- length(x) + n_new
-    names(x)[j[new]] <- names2(j)[new]
-  }
+  xo_idx <- integer(j_max - n_old)
 
-  order_j <- order(j)
-  value <- value[order_j]
-  j <- j[order_j]
-
-  # Update
-  to_remove <- integer()
-  for (jj in seq_along(value)) {
-    ji <- j[[jj]]
-    value_jj <- value[[jj]]
-    if (!is.null(value_jj)) {
-      x[[ji]] <- value_jj
+  jj <- 1
+  xoj <- 1
+  xj <- 1
+  while(xoj <= length(xo_idx)) {
+    if (jj <= length(j) && xj == j[[jj]]) {
+      xj <- xj + 1
+      if (!is.null(value[[jj]])) {
+        xo_idx[[xoj]] <- -jj
+        xoj <- xoj + 1
+      }
+      jj <- jj + 1
     } else {
-      to_remove <- c(to_remove, ji)
+      xo_idx[[xoj]] <- xj
+      xoj <- xoj + 1
+      xj <- xj + 1
     }
   }
 
-  # Remove
-  if (length(to_remove) > 0) {
-    x <- x[-to_remove]
+  while(jj <= length(j)) {
+    stopifnot(is.null(value[[jj]]))
+    jj <- jj + 1
+  }
+
+  xo <- vector("list", length(xo_idx))
+  mostattributes(xo) <- attributes(x)
+  names(xo) <- rep("", length(xo_idx))
+
+  for (xoj in seq_along(xo_idx)) {
+    xj <- xo_idx[[xoj]]
+    if (xj > 0) {
+      xo[[xoj]] <- x[[xj]]
+      names(xo)[[xoj]] <- names(x)[[xj]]
+    } else {
+      xo[[xoj]] <- value[[-xj]]
+      names(xo)[[xoj]] <- names(j)[[-xj]]
+    }
   }
 
   # Can be destroyed by setting length
-  attr(x, "row.names") <- .set_row_names(nrow)
-  x
+  attr(xo, "row.names") <- .set_row_names(nrow)
+  xo
 }
 
 tbl_expand_to_nrow <- function(x, i) {
