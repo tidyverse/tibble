@@ -34,3 +34,5 @@
 ^configure$
 ^R/aaa-r-version\.R$
 ^src/version\.txt$
+^\.Renviron$
+^src/Makevars\.debug$
