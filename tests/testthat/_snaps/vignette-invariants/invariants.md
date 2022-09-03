@@ -69,14 +69,12 @@ new_df()
 </td><td>
 
 ```r
-new_tbl()
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2    NA f     <int [2]>
-#> 3     3 g     <int [3]>
-#> 4    NA h     <chr [1]>
+new_df()
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr></tbody></table>
@@ -138,6 +136,8 @@ new_tbl()
 
 </td></tr></tbody></table>
 
+
+
 For subset assignment (subassignment, for short), we need a fresh copy of the data for each test.
 The `with_*()` functions (omitted here for brevity) allow for a more concise notation.
 These functions take an assignment expression, execute it on a fresh copy of the data, and return the data for printing.
@@ -164,19 +164,17 @@ with_df(df$n <- rev(df$n), verbose = TRUE)
 </td><td>
 
 ```r
-with_tbl(tbl$n <- rev(tbl$n), verbose = TRUE)
+with_df(tbl$n <- rev(tbl$n), verbose = TRUE)
 #> {
-#>   tbl <- new_tbl()
+#>   df <- new_df()
 #>   tbl$n <- rev(tbl$n)
-#>   tbl
+#>   df
 #> }
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1    NA e     <dbl [1]>
-#> 2     3 f     <int [2]>
-#> 3    NA g     <int [3]>
-#> 4     1 h     <chr [1]>
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr></tbody></table>
@@ -228,7 +226,7 @@ identical(df[[3]], .subset2(df, 3))
 </td><td>
 
 ```r
-identical(tbl[[3]], .subset2(tbl, 3))
+identical(tbl[[3]], .subset2(df, 3))
 #> [1] TRUE
 ```
 
@@ -242,7 +240,7 @@ identical(df2[["df"]], .subset2(df2, "df"))
 </td><td>
 
 ```r
-identical(tbl2[["tbl"]], .subset2(tbl2, "tbl"))
+identical(tbl2[["df"]], .subset2(df2, "df"))
 #> [1] TRUE
 ```
 
@@ -605,7 +603,7 @@ tbl[[Inf]]
 
 </td></tr></tbody></table>
 
-Character OOB access is silent because a common package idiom is to check for the absence of a column with `is.null(df[[var]])`.
+Character OOB access is silent because a common package idiom is to check for the absence of a column with `is.null(tbl[[var]])`.
 
 <table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
@@ -695,8 +693,8 @@ identical(df2$tb, df2[["tb"]])
 </td><td>
 
 ```r
-identical(tbl2$tb, tbl2[["tb"]])
-#> [1] TRUE
+identical(df2$tb, tbl2[["tb"]])
+#> [1] FALSE
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -709,14 +707,14 @@ identical(df2$m, df2[["m"]])
 </td><td>
 
 ```r
-identical(tbl2$m, tbl2[["m"]])
+identical(df2$m, tbl2[["m"]])
 #> [1] TRUE
 ```
 
 </td></tr></tbody></table>
 
 Unlike data frames, tibbles do not partially match names.
-Because `df$x` is rarely used in packages, it can raise a warning:
+Because `tbl$x` is rarely used in packages, it can raise a warning:
 
 <table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
@@ -849,7 +847,7 @@ tbl[c(1, 1)]
 
 For tibbles with repeated column names, subsetting by name uses the first matching column.
 
-`nrow(df[j])` equals `nrow(df)`.
+`nrow(tbl[j])` equals `nrow(df)`.
 
 <table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
@@ -883,7 +881,7 @@ df[is.na(df)]
 </td><td>
 
 ```r
-tbl[is.na(tbl)]
+tbl[is.na(df)]
 #> [1] NA NA
 ```
 
@@ -925,7 +923,7 @@ df[!is.na(df)]
 </td><td>
 
 ```r
-tbl[!is.na(tbl)]
+tbl[!is.na(df)]
 ```
 
 <div class="error">
@@ -1488,9 +1486,10 @@ A more efficient implementation of `x[[i, j]]` would check that `j` is a scalar 
 
 
 ```r
-df[[1, 1]]
+tbl[[1, 1]]
 #> [1] 1
-df[[1, 3]]
+tbl[[1, 3]]
+#> [[1]]
 #> [1] 9
 ```
 
@@ -1519,14 +1518,12 @@ with_df(df[[1]] <- 0)
 </td><td>
 
 ```r
-with_tbl(tbl[[1]] <- 0)
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <dbl> <chr> <list>   
-#> 1     0 e     <dbl [1]>
-#> 2     0 f     <int [2]>
-#> 3     0 g     <int [3]>
-#> 4     0 h     <chr [1]>
+with_df(tbl[[1]] <- 0)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1543,14 +1540,12 @@ with_df(df[[3]] <- 4:1)
 </td><td>
 
 ```r
-with_tbl(tbl[[3]] <- 4:1)
-#> # A tibble: 4 x 3
-#>       n c        li
-#>   <int> <chr> <int>
-#> 1     1 e         4
-#> 2    NA f         3
-#> 3     3 g         2
-#> 4    NA h         1
+with_df(tbl[[3]] <- 4:1)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1567,14 +1562,12 @@ with_df2(df2[[1]] <- 0)
 </td><td>
 
 ```r
-with_tbl2(tbl2[[1]] <- 0)
-#> # A tibble: 4 x 2
-#>      tb m[,1]  [,2]  [,3]  [,4]
-#>   <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1     0     1     0     0     0
-#> 2     0     0     1     0     0
-#> 3     0     0     0     1     0
-#> 4     0     0     0     0     1
+with_df2(tbl2[[1]] <- 0)
+#>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
+#> 1    1    e          9   1   0   0   0
+#> 2   NA    f     10, 11   0   1   0   0
+#> 3    3    g 12, 13, 14   0   0   1   0
+#> 4   NA    h       text   0   0   0   1
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1591,14 +1584,12 @@ with_df2(df2[[2]] <- 4:1)
 </td><td>
 
 ```r
-with_tbl2(tbl2[[2]] <- 4:1)
-#> # A tibble: 4 x 2
-#>    tb$n $c    $li           m
-#>   <int> <chr> <list>    <int>
-#> 1     1 e     <dbl [1]>     4
-#> 2    NA f     <int [2]>     3
-#> 3     3 g     <int [3]>     2
-#> 4    NA h     <chr [1]>     1
+with_df2(tbl2[[2]] <- 4:1)
+#>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
+#> 1    1    e          9   1   0   0   0
+#> 2   NA    f     10, 11   0   1   0   0
+#> 3    3    g 12, 13, 14   0   0   1   0
+#> 4   NA    h       text   0   0   0   1
 ```
 
 </td></tr></tbody></table>
@@ -1617,14 +1608,12 @@ with_df(df[[1]] <- 0)
 </td><td>
 
 ```r
-with_tbl(tbl[[1]] <- 0)
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <dbl> <chr> <list>   
-#> 1     0 e     <dbl [1]>
-#> 2     0 f     <int [2]>
-#> 3     0 g     <int [3]>
-#> 4     0 h     <chr [1]>
+with_df(tbl[[1]] <- 0)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1641,14 +1630,12 @@ with_df(df[["c"]] <- 0)
 </td><td>
 
 ```r
-with_tbl(tbl[["c"]] <- 0)
-#> # A tibble: 4 x 3
-#>       n     c li       
-#>   <int> <dbl> <list>   
-#> 1     1     0 <dbl [1]>
-#> 2    NA     0 <int [2]>
-#> 3     3     0 <int [3]>
-#> 4    NA     0 <chr [1]>
+with_df(tbl[["c"]] <- 0)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr></tbody></table>
@@ -1667,7 +1654,7 @@ with_df(df[[TRUE]] <- 0)
 </td><td>
 
 ```r
-with_tbl(tbl[[TRUE]] <- 0)
+with_df(tbl[[TRUE]] <- 0)
 ```
 
 <div class="error">
@@ -1698,7 +1685,7 @@ with_df(df[[1:3]] <- 0)
 </div></td><td>
 
 ```r
-with_tbl(tbl[[1:3]] <- 0)
+with_df(tbl[[1:3]] <- 0)
 ```
 
 <div class="error">
@@ -1727,7 +1714,7 @@ with_df(df[[c("n", "c")]] <- 0)
 </div></td><td>
 
 ```r
-with_tbl(tbl[[c("n", "c")]] <- 0)
+with_df(tbl[[c("n", "c")]] <- 0)
 ```
 
 <div class="error">
@@ -1757,7 +1744,7 @@ with_df(df[[FALSE]] <- 0)
 </div></td><td>
 
 ```r
-with_tbl(tbl[[FALSE]] <- 0)
+with_df(tbl[[FALSE]] <- 0)
 ```
 
 <div class="error">
@@ -1787,7 +1774,7 @@ with_df(df[[1:2]] <- 0)
 </div></td><td>
 
 ```r
-with_tbl(tbl[[1:2]] <- 0)
+with_df(tbl[[1:2]] <- 0)
 ```
 
 <div class="error">
@@ -1817,7 +1804,7 @@ with_df(df[[NA_integer_]] <- 0)
 </div></td><td>
 
 ```r
-with_tbl(tbl[[NA_integer_]] <- 0)
+with_df(tbl[[NA_integer_]] <- 0)
 ```
 
 <div class="error">
@@ -1846,7 +1833,7 @@ with_df(df[[NA]] <- 0)
 </div></td><td>
 
 ```r
-with_tbl(tbl[[NA]] <- 0)
+with_df(tbl[[NA]] <- 0)
 ```
 
 <div class="error">
@@ -1875,7 +1862,7 @@ with_df(df[[NA_character_]] <- 0)
 </div></td><td>
 
 ```r
-with_tbl(tbl[[NA_character_]] <- 0)
+with_df(tbl[[NA_character_]] <- 0)
 ```
 
 <div class="error">
@@ -1910,14 +1897,12 @@ with_df(df[["li"]] <- list(0))
 </td><td>
 
 ```r
-with_tbl(tbl[["li"]] <- list(0))
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2    NA f     <dbl [1]>
-#> 3     3 g     <dbl [1]>
-#> 4    NA h     <dbl [1]>
+with_df(tbl[["li"]] <- list(0))
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1937,16 +1922,12 @@ with_df2(df2[["tb"]] <- df[1, ])
 </div></td><td>
 
 ```r
-with_tbl2(tbl2[["tb"]] <- tbl[1, ])
-#> # A tibble: 4 x 2
-#>    tb$n $c    $li       m[,1]  [,2]
-#>   <int> <chr> <list>    <dbl> <dbl>
-#> 1     1 e     <dbl [1]>     1     0
-#> 2     1 e     <dbl [1]>     0     1
-#> 3     1 e     <dbl [1]>     0     0
-#> 4     1 e     <dbl [1]>     0     0
-#> # ... with 1 more variable:
-#> #   m[3:4] <dbl>
+with_df2(tbl2[["tb"]] <- tbl[1, ])
+#>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
+#> 1    1    e          9   1   0   0   0
+#> 2   NA    f     10, 11   0   1   0   0
+#> 3    3    g 12, 13, 14   0   0   1   0
+#> 4   NA    h       text   0   0   0   1
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1966,16 +1947,12 @@ with_df2(df2[["m"]] <- df2[["m"]][1, , drop = FALSE])
 </div></td><td>
 
 ```r
-with_tbl2(tbl2[["m"]] <- tbl2[["m"]][1, , drop = FALSE])
-#> # A tibble: 4 x 2
-#>    tb$n $c    $li       m[,1]  [,2]
-#>   <int> <chr> <list>    <dbl> <dbl>
-#> 1     1 e     <dbl [1]>     1     0
-#> 2    NA f     <int [2]>     1     0
-#> 3     3 g     <int [3]>     1     0
-#> 4    NA h     <chr [1]>     1     0
-#> # ... with 1 more variable:
-#> #   m[3:4] <dbl>
+with_df2(tbl2[["m"]] <- tbl2[["m"]][1, , drop = FALSE])
+#>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
+#> 1    1    e          9   1   0   0   0
+#> 2   NA    f     10, 11   0   1   0   0
+#> 3    3    g 12, 13, 14   0   0   1   0
+#> 4   NA    h       text   0   0   0   1
 ```
 
 </td></tr></tbody></table>
@@ -1994,14 +1971,12 @@ with_df(df[[1]] <- 1)
 </td><td>
 
 ```r
-with_tbl(tbl[[1]] <- 1)
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <dbl> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2     1 f     <int [2]>
-#> 3     1 g     <int [3]>
-#> 4     1 h     <chr [1]>
+with_df(tbl[[1]] <- 1)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2018,14 +1993,12 @@ with_df(df[[1]] <- 4:1)
 </td><td>
 
 ```r
-with_tbl(tbl[[1]] <- 4:1)
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     4 e     <dbl [1]>
-#> 2     3 f     <int [2]>
-#> 3     2 g     <int [3]>
-#> 4     1 h     <chr [1]>
+with_df(tbl[[1]] <- 4:1)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2045,7 +2018,7 @@ with_df(df[[1]] <- 3:1)
 </div></td><td>
 
 ```r
-with_tbl(tbl[[1]] <- 3:1)
+with_df(tbl[[1]] <- 3:1)
 ```
 
 <div class="error">
@@ -2073,7 +2046,7 @@ with_df(df[[1]] <- 2:1)
 </td><td>
 
 ```r
-with_tbl(tbl[[1]] <- 2:1)
+with_df(tbl[[1]] <- 2:1)
 ```
 
 <div class="error">
@@ -2108,14 +2081,12 @@ with_df(df[["x"]] <- 0)
 </td><td>
 
 ```r
-with_tbl(tbl[["x"]] <- 0)
-#> # A tibble: 4 x 4
-#>       n c     li            x
-#>   <int> <chr> <list>    <dbl>
-#> 1     1 e     <dbl [1]>     0
-#> 2    NA f     <int [2]>     0
-#> 3     3 g     <int [3]>     0
-#> 4    NA h     <chr [1]>     0
+with_df(tbl[["x"]] <- 0)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2132,14 +2103,12 @@ with_df(df[[4]] <- 0)
 </td><td>
 
 ```r
-with_tbl(tbl[[4]] <- 0)
-#> # A tibble: 4 x 4
-#>       n c     li         ...4
-#>   <int> <chr> <list>    <dbl>
-#> 1     1 e     <dbl [1]>     0
-#> 2    NA f     <int [2]>     0
-#> 3     3 g     <int [3]>     0
-#> 4    NA h     <chr [1]>     0
+with_df(tbl[[4]] <- 0)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2170,7 +2139,7 @@ with_df(df[[5]] <- 0)
 </td><td>
 
 ```r
-with_tbl(tbl[[5]] <- 0)
+with_df(tbl[[5]] <- 0)
 ```
 
 <div class="error">
@@ -2191,7 +2160,7 @@ with_tbl(tbl[[5]] <- 0)
 
 <!-- HW: should we permitted oob assignment with numeric j? It's a bit weird to create a column with unknonw column -->
 
-`df[[j]] <- a` replaces the complete column so can change the type.
+`tbl[[j]] <- a` replaces the complete column so can change the type.
 
 <table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
@@ -2207,14 +2176,12 @@ with_df(df[[1]] <- df[[2]])
 </td><td>
 
 ```r
-with_tbl(tbl[[1]] <- tbl[[2]])
-#> # A tibble: 4 x 3
-#>   n     c     li       
-#>   <chr> <chr> <list>   
-#> 1 e     e     <dbl [1]>
-#> 2 f     f     <int [2]>
-#> 3 g     g     <int [3]>
-#> 4 h     h     <chr [1]>
+with_df(tbl[[1]] <- tbl[[2]])
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2231,14 +2198,12 @@ with_df(df[[2]] <- df[[3]])
 </td><td>
 
 ```r
-with_tbl(tbl[[2]] <- tbl[[3]])
-#> # A tibble: 4 x 3
-#>       n c         li       
-#>   <int> <list>    <list>   
-#> 1     1 <dbl [1]> <dbl [1]>
-#> 2    NA <int [2]> <int [2]>
-#> 3     3 <int [3]> <int [3]>
-#> 4    NA <chr [1]> <chr [1]>
+with_df(tbl[[2]] <- tbl[[3]])
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2255,14 +2220,12 @@ with_df(df[[3]] <- df2[[1]])
 </td><td>
 
 ```r
-with_tbl(tbl[[3]] <- tbl2[[1]])
-#> # A tibble: 4 x 3
-#>       n c      li$n $c    $li      
-#>   <int> <chr> <int> <chr> <list>   
-#> 1     1 e         1 e     <dbl [1]>
-#> 2    NA f        NA f     <int [2]>
-#> 3     3 g         3 g     <int [3]>
-#> 4    NA h        NA h     <chr [1]>
+with_df(tbl[[3]] <- tbl2[[1]])
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2279,16 +2242,12 @@ with_df2(df2[[1]] <- df2[[2]])
 </td><td>
 
 ```r
-with_tbl2(tbl2[[1]] <- tbl2[[2]])
-#> # A tibble: 4 x 2
-#>   tb[,1]  [,2]  [,3]  [,4] m[,1]  [,2]
-#>    <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1      1     0     0     0     1     0
-#> 2      0     1     0     0     0     1
-#> 3      0     0     1     0     0     0
-#> 4      0     0     0     1     0     0
-#> # ... with 1 more variable:
-#> #   m[3:4] <dbl>
+with_df2(tbl2[[1]] <- tbl2[[2]])
+#>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
+#> 1    1    e          9   1   0   0   0
+#> 2   NA    f     10, 11   0   1   0   0
+#> 3    3    g 12, 13, 14   0   0   1   0
+#> 4   NA    h       text   0   0   0   1
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2305,14 +2264,12 @@ with_df2(df2[[2]] <- df[[1]])
 </td><td>
 
 ```r
-with_tbl2(tbl2[[2]] <- tbl[[1]])
-#> # A tibble: 4 x 2
-#>    tb$n $c    $li           m
-#>   <int> <chr> <list>    <int>
-#> 1     1 e     <dbl [1]>     1
-#> 2    NA f     <int [2]>    NA
-#> 3     3 g     <int [3]>     3
-#> 4    NA h     <chr [1]>    NA
+with_df2(tbl2[[2]] <- tbl[[1]])
+#>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
+#> 1    1    e          9   1   0   0   0
+#> 2   NA    f     10, 11   0   1   0   0
+#> 3    3    g 12, 13, 14   0   0   1   0
+#> 4   NA    h       text   0   0   0   1
 ```
 
 </td></tr></tbody></table>
@@ -2333,14 +2290,12 @@ with_df(df[[1]] <- NULL)
 </td><td>
 
 ```r
-with_tbl(tbl[[1]] <- NULL)
-#> # A tibble: 4 x 2
-#>   c     li       
-#>   <chr> <list>   
-#> 1 e     <dbl [1]>
-#> 2 f     <int [2]>
-#> 3 g     <int [3]>
-#> 4 h     <chr [1]>
+with_df(tbl[[1]] <- NULL)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2357,14 +2312,12 @@ with_df2(df2[[2]] <- NULL)
 </td><td>
 
 ```r
-with_tbl2(tbl2[[2]] <- NULL)
-#> # A tibble: 4 x 1
-#>    tb$n $c    $li      
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2    NA f     <int [2]>
-#> 3     3 g     <int [3]>
-#> 4    NA h     <chr [1]>
+with_df2(tbl2[[2]] <- NULL)
+#>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
+#> 1    1    e          9   1   0   0   0
+#> 2   NA    f     10, 11   0   1   0   0
+#> 3    3    g 12, 13, 14   0   0   1   0
+#> 4   NA    h       text   0   0   0   1
 ```
 
 </td></tr></tbody></table>
@@ -2385,14 +2338,12 @@ with_df(df[["q"]] <- NULL)
 </td><td>
 
 ```r
-with_tbl(tbl[["q"]] <- NULL)
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2    NA f     <int [2]>
-#> 3     3 g     <int [3]>
-#> 4    NA h     <chr [1]>
+with_df(tbl[["q"]] <- NULL)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr></tbody></table>
@@ -2417,14 +2368,12 @@ with_df(df$n <- 0)
 </td><td>
 
 ```r
-with_tbl(tbl$n <- 0)
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <dbl> <chr> <list>   
-#> 1     0 e     <dbl [1]>
-#> 2     0 f     <int [2]>
-#> 3     0 g     <int [3]>
-#> 4     0 h     <chr [1]>
+with_df(tbl$n <- 0)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2441,14 +2390,12 @@ with_df(df[["n"]] <- 0)
 </td><td>
 
 ```r
-with_tbl(tbl[["n"]] <- 0)
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <dbl> <chr> <list>   
-#> 1     0 e     <dbl [1]>
-#> 2     0 f     <int [2]>
-#> 3     0 g     <int [3]>
-#> 4     0 h     <chr [1]>
+with_df(tbl[["n"]] <- 0)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr></tbody></table>
@@ -2467,14 +2414,12 @@ with_df(df$"n" <- 0)
 </td><td>
 
 ```r
-with_tbl(tbl$"n" <- 0)
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <dbl> <chr> <list>   
-#> 1     0 e     <dbl [1]>
-#> 2     0 f     <int [2]>
-#> 3     0 g     <int [3]>
-#> 4     0 h     <chr [1]>
+with_df(tbl$"n" <- 0)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr></tbody></table>
@@ -2495,14 +2440,12 @@ with_df(df$l <- 0)
 </td><td>
 
 ```r
-with_tbl(tbl$l <- 0)
-#> # A tibble: 4 x 4
-#>       n c     li            l
-#>   <int> <chr> <list>    <dbl>
-#> 1     1 e     <dbl [1]>     0
-#> 2    NA f     <int [2]>     0
-#> 3     3 g     <int [3]>     0
-#> 4    NA h     <chr [1]>     0
+with_df(tbl$l <- 0)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2519,14 +2462,12 @@ with_df(df[["l"]] <- 0)
 </td><td>
 
 ```r
-with_tbl(tbl[["l"]] <- 0)
-#> # A tibble: 4 x 4
-#>       n c     li            l
-#>   <int> <chr> <list>    <dbl>
-#> 1     1 e     <dbl [1]>     0
-#> 2    NA f     <int [2]>     0
-#> 3     3 g     <int [3]>     0
-#> 4    NA h     <chr [1]>     0
+with_df(tbl[["l"]] <- 0)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr></tbody></table>
@@ -2554,14 +2495,12 @@ with_df(df[1:2] <- list("x", 4:1))
 </td><td>
 
 ```r
-with_tbl(tbl[1:2] <- list("x", 4:1))
-#> # A tibble: 4 x 3
-#>   n         c li       
-#>   <chr> <int> <list>   
-#> 1 x         4 <dbl [1]>
-#> 2 x         3 <int [2]>
-#> 3 x         2 <int [3]>
-#> 4 x         1 <chr [1]>
+with_df(tbl[1:2] <- list("x", 4:1))
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2578,14 +2517,12 @@ with_df(df[c("li", "x", "c")] <- list("x", 4:1, NULL))
 </td><td>
 
 ```r
-with_tbl(tbl[c("li", "x", "c")] <- list("x", 4:1, NULL))
-#> # A tibble: 4 x 3
-#>       n li        x
-#>   <int> <chr> <int>
-#> 1     1 x         4
-#> 2    NA x         3
-#> 3     3 x         2
-#> 4    NA x         1
+with_df(tbl[c("li", "x", "c")] <- list("x", 4:1, NULL))
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr></tbody></table>
@@ -2606,14 +2543,12 @@ with_df(df[1:2] <- list(1))
 </td><td>
 
 ```r
-with_tbl(tbl[1:2] <- list(1))
-#> # A tibble: 4 x 3
-#>       n     c li       
-#>   <dbl> <dbl> <list>   
-#> 1     1     1 <dbl [1]>
-#> 2     1     1 <int [2]>
-#> 3     1     1 <int [3]>
-#> 4     1     1 <chr [1]>
+with_df(tbl[1:2] <- list(1))
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2643,7 +2578,7 @@ with_df(df[1:2] <- list(0, 0, 0))
 </td><td>
 
 ```r
-with_tbl(tbl[1:2] <- list(0, 0, 0))
+with_df(tbl[1:2] <- list(0, 0, 0))
 ```
 
 <div class="error">
@@ -2668,7 +2603,7 @@ with_df(df[1:3] <- list(0, 0))
 </td><td>
 
 ```r
-with_tbl(tbl[1:3] <- list(0, 0))
+with_df(tbl[1:3] <- list(0, 0))
 ```
 
 <div class="error">
@@ -2702,7 +2637,7 @@ with_df(df[c(1, 1)] <- list(1, 2))
 </div></td><td>
 
 ```r
-with_tbl(tbl[c(1, 1)] <- list(1, 2))
+with_df(tbl[c(1, 1)] <- list(1, 2))
 ```
 
 <div class="error">
@@ -2733,14 +2668,12 @@ with_df(df[1:2] <- list(NULL, 4:1))
 </td><td>
 
 ```r
-with_tbl(tbl[1:2] <- list(NULL, 4:1))
-#> # A tibble: 4 x 2
-#>       c li       
-#>   <int> <list>   
-#> 1     4 <dbl [1]>
-#> 2     3 <int [2]>
-#> 3     2 <int [3]>
-#> 4     1 <chr [1]>
+with_df(tbl[1:2] <- list(NULL, 4:1))
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr></tbody></table>
@@ -2765,7 +2698,7 @@ with_df(df[NA] <- list("x"))
 </div></td><td>
 
 ```r
-with_tbl(tbl[NA] <- list("x"))
+with_df(tbl[NA] <- list("x"))
 ```
 
 <div class="error">
@@ -2794,7 +2727,7 @@ with_df(df[NA_integer_] <- list("x"))
 </div></td><td>
 
 ```r
-with_tbl(tbl[NA_integer_] <- list("x"))
+with_df(tbl[NA_integer_] <- list("x"))
 ```
 
 <div class="error">
@@ -2823,7 +2756,7 @@ with_df(df[NA_character_] <- list("x"))
 </div></td><td>
 
 ```r
-with_tbl(tbl[NA_character_] <- list("x"))
+with_df(tbl[NA_character_] <- list("x"))
 ```
 
 <div class="error">
@@ -2854,14 +2787,12 @@ with_df(df[1] <- df[2])
 </td><td>
 
 ```r
-with_tbl(tbl[1] <- tbl[2])
-#> # A tibble: 4 x 3
-#>   n     c     li       
-#>   <chr> <chr> <list>   
-#> 1 e     e     <dbl [1]>
-#> 2 f     f     <int [2]>
-#> 3 g     g     <int [3]>
-#> 4 h     h     <chr [1]>
+with_df(tbl[1] <- tbl[2])
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2878,14 +2809,12 @@ with_df(df[2] <- df[3])
 </td><td>
 
 ```r
-with_tbl(tbl[2] <- tbl[3])
-#> # A tibble: 4 x 3
-#>       n c         li       
-#>   <int> <list>    <list>   
-#> 1     1 <dbl [1]> <dbl [1]>
-#> 2    NA <int [2]> <int [2]>
-#> 3     3 <int [3]> <int [3]>
-#> 4    NA <chr [1]> <chr [1]>
+with_df(tbl[2] <- tbl[3])
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2902,14 +2831,12 @@ with_df(df[3] <- df2[1])
 </td><td>
 
 ```r
-with_tbl(tbl[3] <- tbl2[1])
-#> # A tibble: 4 x 3
-#>       n c      li$n $c    $li      
-#>   <int> <chr> <int> <chr> <list>   
-#> 1     1 e         1 e     <dbl [1]>
-#> 2    NA f        NA f     <int [2]>
-#> 3     3 g         3 g     <int [3]>
-#> 4    NA h        NA h     <chr [1]>
+with_df(tbl[3] <- tbl2[1])
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2926,16 +2853,12 @@ with_df2(df2[1] <- df2[2])
 </td><td>
 
 ```r
-with_tbl2(tbl2[1] <- tbl2[2])
-#> # A tibble: 4 x 2
-#>   tb[,1]  [,2]  [,3]  [,4] m[,1]  [,2]
-#>    <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1      1     0     0     0     1     0
-#> 2      0     1     0     0     0     1
-#> 3      0     0     1     0     0     0
-#> 4      0     0     0     1     0     0
-#> # ... with 1 more variable:
-#> #   m[3:4] <dbl>
+with_df2(tbl2[1] <- tbl2[2])
+#>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
+#> 1    1    e          9   1   0   0   0
+#> 2   NA    f     10, 11   0   1   0   0
+#> 3    3    g 12, 13, 14   0   0   1   0
+#> 4   NA    h       text   0   0   0   1
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2952,14 +2875,12 @@ with_df2(df2[2] <- df[1])
 </td><td>
 
 ```r
-with_tbl2(tbl2[2] <- tbl[1])
-#> # A tibble: 4 x 2
-#>    tb$n $c    $li           m
-#>   <int> <chr> <list>    <int>
-#> 1     1 e     <dbl [1]>     1
-#> 2    NA f     <int [2]>    NA
-#> 3     3 g     <int [3]>     3
-#> 4    NA h     <chr [1]>    NA
+with_df2(tbl2[2] <- tbl[1])
+#>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
+#> 1    1    e          9   1   0   0   0
+#> 2   NA    f     10, 11   0   1   0   0
+#> 3    3    g 12, 13, 14   0   0   1   0
+#> 4   NA    h       text   0   0   0   1
 ```
 
 </td></tr></tbody></table>
@@ -2981,14 +2902,12 @@ with_df(df[c("x", "y")] <- tibble("x", x = 4:1))
 </td><td>
 
 ```r
-with_tbl(tbl[c("x", "y")] <- tibble("x", x = 4:1))
-#> # A tibble: 4 x 5
-#>       n c     li        x         y
-#>   <int> <chr> <list>    <chr> <int>
-#> 1     1 e     <dbl [1]> x         4
-#> 2    NA f     <int [2]> x         3
-#> 3     3 g     <int [3]> x         2
-#> 4    NA h     <chr [1]> x         1
+with_df(tbl[c("x", "y")] <- tibble("x", x = 4:1))
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3005,14 +2924,12 @@ with_df(df[3:4] <- list("x", x = 4:1))
 </td><td>
 
 ```r
-with_tbl(tbl[3:4] <- list("x", x = 4:1))
-#> # A tibble: 4 x 4
-#>       n c     li        x
-#>   <int> <chr> <chr> <int>
-#> 1     1 e     x         4
-#> 2    NA f     x         3
-#> 3     3 g     x         2
-#> 4    NA h     x         1
+with_df(tbl[3:4] <- list("x", x = 4:1))
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3029,14 +2946,12 @@ with_df(df[4] <- list(4:1))
 </td><td>
 
 ```r
-with_tbl(tbl[4] <- list(4:1))
-#> # A tibble: 4 x 4
-#>       n c     li         ...4
-#>   <int> <chr> <list>    <int>
-#> 1     1 e     <dbl [1]>     4
-#> 2    NA f     <int [2]>     3
-#> 3     3 g     <int [3]>     2
-#> 4    NA h     <chr [1]>     1
+with_df(tbl[4] <- list(4:1))
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3056,7 +2971,7 @@ with_df(df[5] <- list(4:1))
 </div></td><td>
 
 ```r
-with_tbl(tbl[5] <- list(4:1))
+with_df(tbl[5] <- list(4:1))
 ```
 
 <div class="error">
@@ -3091,14 +3006,12 @@ with_df(df[is.na(df)] <- 4)
 </td><td>
 
 ```r
-with_tbl(tbl[is.na(tbl)] <- 4)
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2     4 f     <int [2]>
-#> 3     3 g     <int [3]>
-#> 4     4 h     <chr [1]>
+with_df(tbl[is.na(df)] <- 4)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3115,15 +3028,15 @@ with_df(df[is.na(df)] <- 1:2)
 </td><td>
 
 ```r
-with_tbl(tbl[is.na(tbl)] <- 1:2)
+with_df(tbl[is.na(df)] <- 1:2)
 ```
 
 <div class="error">
 
 ```
 #> Error:
-#> ! Subscript `is.na(tbl)` is a matrix,
-#> the data `1:2` must have size 1.
+#> ! Subscript `is.na(df)` is a matrix, the
+#> data `1:2` must have size 1.
 ```
 
 </div></td></tr><tr style="vertical-align:top"><td>
@@ -3140,7 +3053,7 @@ with_df(df[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
 </td><td>
 
 ```r
-with_tbl(tbl[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
+with_df(tbl[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
 ```
 
 <div class="error">
@@ -3177,14 +3090,12 @@ with_df(df[1:2] <- matrix(8:1, ncol = 2))
 </td><td>
 
 ```r
-with_tbl(tbl[1:2] <- matrix(8:1, ncol = 2))
-#> # A tibble: 4 x 3
-#>       n     c li       
-#>   <int> <int> <list>   
-#> 1     8     4 <dbl [1]>
-#> 2     7     3 <int [2]>
-#> 3     6     2 <int [3]>
-#> 4     5     1 <chr [1]>
+with_df(tbl[1:2] <- matrix(8:1, ncol = 2))
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3201,7 +3112,7 @@ with_df(df[1:3, 1:2] <- matrix(6:1, ncol = 2))
 </td><td>
 
 ```r
-with_tbl(tbl[1:3, 1:2] <- matrix(6:1, ncol = 2))
+with_df(tbl[1:3, 1:2] <- matrix(6:1, ncol = 2))
 ```
 
 <div class="error">
@@ -3229,14 +3140,12 @@ with_df(df[1:2] <- array(4:1, dim = c(4, 1, 1)))
 </td><td>
 
 ```r
-with_tbl(tbl[1:2] <- array(4:1, dim = c(4, 1, 1)))
-#> # A tibble: 4 x 3
-#>       n     c li       
-#>   <int> <int> <list>   
-#> 1     4     4 <dbl [1]>
-#> 2     3     3 <int [2]>
-#> 3     2     2 <int [3]>
-#> 4     1     1 <chr [1]>
+with_df(tbl[1:2] <- array(4:1, dim = c(4, 1, 1)))
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3253,14 +3162,12 @@ with_df(df[1:2] <- array(8:1, dim = c(4, 2, 1)))
 </td><td>
 
 ```r
-with_tbl(tbl[1:2] <- array(8:1, dim = c(4, 2, 1)))
-#> # A tibble: 4 x 3
-#>       n     c li       
-#>   <int> <int> <list>   
-#> 1     8     4 <dbl [1]>
-#> 2     7     3 <int [2]>
-#> 3     6     2 <int [3]>
-#> 4     5     1 <chr [1]>
+with_df(tbl[1:2] <- array(8:1, dim = c(4, 2, 1)))
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3277,7 +3184,7 @@ with_df(df[1:2] <- array(8:1, dim = c(2, 1, 4)))
 </td><td>
 
 ```r
-with_tbl(tbl[1:2] <- array(8:1, dim = c(2, 1, 4)))
+with_df(tbl[1:2] <- array(8:1, dim = c(2, 1, 4)))
 ```
 
 <div class="error">
@@ -3303,7 +3210,7 @@ with_df(df[1:2] <- array(8:1, dim = c(4, 1, 2)))
 </td><td>
 
 ```r
-with_tbl(tbl[1:2] <- array(8:1, dim = c(4, 1, 2)))
+with_df(tbl[1:2] <- array(8:1, dim = c(4, 1, 2)))
 ```
 
 <div class="error">
@@ -3338,14 +3245,12 @@ with_df(df[1] <- 0)
 </td><td>
 
 ```r
-with_tbl(tbl[1] <- 0)
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <dbl> <chr> <list>   
-#> 1     0 e     <dbl [1]>
-#> 2     0 f     <int [2]>
-#> 3     0 g     <int [3]>
-#> 4     0 h     <chr [1]>
+with_df(tbl[1] <- 0)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3362,14 +3267,12 @@ with_df(df[1] <- list(0))
 </td><td>
 
 ```r
-with_tbl(tbl[1] <- list(0))
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <dbl> <chr> <list>   
-#> 1     0 e     <dbl [1]>
-#> 2     0 f     <int [2]>
-#> 3     0 g     <int [3]>
-#> 4     0 h     <chr [1]>
+with_df(tbl[1] <- list(0))
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr></tbody></table>
@@ -3390,14 +3293,12 @@ with_df(df[1] <- list(matrix(1:8, ncol = 2)))
 </td><td>
 
 ```r
-with_tbl(tbl[1] <- list(matrix(1:8, ncol = 2)))
-#> # A tibble: 4 x 3
-#>   n[,1]  [,2] c     li       
-#>   <int> <int> <chr> <list>   
-#> 1     1     5 e     <dbl [1]>
-#> 2     2     6 f     <int [2]>
-#> 3     3     7 g     <int [3]>
-#> 4     4     8 h     <chr [1]>
+with_df(tbl[1] <- list(matrix(1:8, ncol = 2)))
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3420,14 +3321,12 @@ with_df(df[1:2] <- list(matrix(1:8, ncol = 2)))
 </td><td>
 
 ```r
-with_tbl(tbl[1:2] <- list(matrix(1:8, ncol = 2)))
-#> # A tibble: 4 x 3
-#>   n[,1]  [,2] c[,1]  [,2] li       
-#>   <int> <int> <int> <int> <list>   
-#> 1     1     5     1     5 <dbl [1]>
-#> 2     2     6     2     6 <int [2]>
-#> 3     3     7     3     7 <int [3]>
-#> 4     4     8     4     8 <chr [1]>
+with_df(tbl[1:2] <- list(matrix(1:8, ncol = 2)))
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr></tbody></table>
@@ -3451,14 +3350,12 @@ with_df(df[1] <- NULL)
 </td><td>
 
 ```r
-with_tbl(tbl[1] <- NULL)
-#> # A tibble: 4 x 2
-#>   c     li       
-#>   <chr> <list>   
-#> 1 e     <dbl [1]>
-#> 2 f     <int [2]>
-#> 3 g     <int [3]>
-#> 4 h     <chr [1]>
+with_df(tbl[1] <- NULL)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3475,14 +3372,12 @@ with_df(df[, 2:3] <- NULL)
 </td><td>
 
 ```r
-with_tbl(tbl[, 2:3] <- NULL)
-#> # A tibble: 4 x 1
-#>       n
-#>   <int>
-#> 1     1
-#> 2    NA
-#> 3     3
-#> 4    NA
+with_df(tbl[, 2:3] <- NULL)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3501,7 +3396,7 @@ with_df(df[1, 2:3] <- NULL)
 </div></td><td>
 
 ```r
-with_tbl(tbl[1, 2:3] <- NULL)
+with_df(tbl[1, 2:3] <- NULL)
 ```
 
 <div class="error">
@@ -3539,7 +3434,7 @@ with_df(df[1] <- mean)
 </div></td><td>
 
 ```r
-with_tbl(tbl[1] <- mean)
+with_df(tbl[1] <- mean)
 ```
 
 <div class="error">
@@ -3609,7 +3504,7 @@ with_df(df[1] <- lm(mpg ~ wt, data = mtcars))
 </div></td><td>
 
 ```r
-with_tbl(tbl[1] <- lm(mpg ~ wt, data = mtcars))
+with_df(tbl[1] <- lm(mpg ~ wt, data = mtcars))
 ```
 
 <div class="error">
@@ -3647,14 +3542,12 @@ with_df(df[2:3, ] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl(tbl[2:3, ] <- tbl[1, ])
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2     1 e     <dbl [1]>
-#> 3     1 e     <dbl [1]>
-#> 4    NA h     <chr [1]>
+with_df(tbl[2:3, ] <- tbl[1, ])
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3671,14 +3564,12 @@ with_df(df[c(FALSE, TRUE, TRUE, FALSE), ] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl(tbl[c(FALSE, TRUE, TRUE, FALSE), ] <- tbl[1, ])
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2     1 e     <dbl [1]>
-#> 3     1 e     <dbl [1]>
-#> 4    NA h     <chr [1]>
+with_df(tbl[c(FALSE, TRUE, TRUE, FALSE), ] <- tbl[1, ])
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr></tbody></table>
@@ -3697,7 +3588,7 @@ with_df(df[0:2, ] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl(tbl[0:2, ] <- tbl[1, ])
+with_df(tbl[0:2, ] <- tbl[1, ])
 ```
 
 <div class="error">
@@ -3726,7 +3617,7 @@ with_df(df[0, ] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl(tbl[0, ] <- tbl[1, ])
+with_df(tbl[0, ] <- tbl[1, ])
 ```
 
 <div class="error">
@@ -3755,14 +3646,12 @@ with_df(df[-2, ] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl(tbl[-2, ] <- tbl[1, ])
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2    NA f     <int [2]>
-#> 3     1 e     <dbl [1]>
-#> 4     1 e     <dbl [1]>
+with_df(tbl[-2, ] <- tbl[1, ])
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3781,7 +3670,7 @@ with_df(df[-1:2, ] <- df[1, ])
 </div></td><td>
 
 ```r
-with_tbl(tbl[-1:2, ] <- tbl[1, ])
+with_df(tbl[-1:2, ] <- tbl[1, ])
 ```
 
 <div class="error">
@@ -3815,7 +3704,7 @@ with_df(df[NA_integer_, ] <- df[1, ])
 </div></td><td>
 
 ```r
-with_tbl(tbl[NA_integer_, ] <- tbl[1, ])
+with_df(tbl[NA_integer_, ] <- tbl[1, ])
 ```
 
 <div class="error">
@@ -3848,7 +3737,7 @@ with_df2(df2[NA_integer_, ] <- df2[1, ])
 </div></td><td>
 
 ```r
-with_tbl2(tbl2[NA_integer_, ] <- tbl2[1, ])
+with_df2(tbl2[NA_integer_, ] <- tbl2[1, ])
 ```
 
 <div class="error">
@@ -3877,14 +3766,12 @@ with_df(df[TRUE, ] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl(tbl[TRUE, ] <- tbl[1, ])
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2     1 e     <dbl [1]>
-#> 3     1 e     <dbl [1]>
-#> 4     1 e     <dbl [1]>
+with_df(tbl[TRUE, ] <- tbl[1, ])
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3901,14 +3788,12 @@ with_df(df[FALSE, ] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl(tbl[FALSE, ] <- tbl[1, ])
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2    NA f     <int [2]>
-#> 3     3 g     <int [3]>
-#> 4    NA h     <chr [1]>
+with_df(tbl[FALSE, ] <- tbl[1, ])
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3929,7 +3814,7 @@ with_df(df[NA, ] <- df[1, ])
 </div></td><td>
 
 ```r
-with_tbl(tbl[NA, ] <- tbl[1, ])
+with_df(tbl[NA, ] <- tbl[1, ])
 ```
 
 <div class="error">
@@ -3960,14 +3845,12 @@ with_df(df[2:3, ] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl(tbl[2:3, ] <- tbl[1, ])
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2     1 e     <dbl [1]>
-#> 3     1 e     <dbl [1]>
-#> 4    NA h     <chr [1]>
+with_df(tbl[2:3, ] <- tbl[1, ])
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3984,14 +3867,12 @@ with_df(df[2:3, ] <- list(df$n[1], df$c[1:2], df$li[1]))
 </td><td>
 
 ```r
-with_tbl(tbl[2:3, ] <- list(tbl$n[1], tbl$c[1:2], tbl$li[1]))
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2     1 e     <dbl [1]>
-#> 3     1 f     <dbl [1]>
-#> 4    NA h     <chr [1]>
+with_df(tbl[2:3, ] <- list(tbl$n[1], tbl$c[1:2], tbl$li[1]))
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -4011,7 +3892,7 @@ with_df(df[2:4, ] <- df[1:2, ])
 </div></td><td>
 
 ```r
-with_tbl(tbl[2:4, ] <- tbl[1:2, ])
+with_df(tbl[2:4, ] <- tbl[1:2, ])
 ```
 
 <div class="error">
@@ -4047,16 +3928,12 @@ with_df2(df2[2:4, ] <- df2[1, ])
 </div></td><td>
 
 ```r
-with_tbl2(tbl2[2:4, ] <- tbl2[1, ])
-#> # A tibble: 4 x 2
-#>    tb$n $c    $li       m[,1]  [,2]
-#>   <int> <chr> <list>    <dbl> <dbl>
-#> 1     1 e     <dbl [1]>     1     0
-#> 2     1 e     <dbl [1]>     1     0
-#> 3     1 e     <dbl [1]>     1     0
-#> 4     1 e     <dbl [1]>     1     0
-#> # ... with 1 more variable:
-#> #   m[3:4] <dbl>
+with_df2(tbl2[2:4, ] <- tbl2[1, ])
+#>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
+#> 1    1    e          9   1   0   0   0
+#> 2   NA    f     10, 11   0   1   0   0
+#> 3    3    g 12, 13, 14   0   0   1   0
+#> 4   NA    h       text   0   0   0   1
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -4077,7 +3954,7 @@ with_df2(df2[2:4, ] <- df2[2:3, ])
 </div></td><td>
 
 ```r
-with_tbl2(tbl2[2:4, ] <- tbl2[2:3, ])
+with_df2(tbl2[2:4, ] <- tbl2[2:3, ])
 ```
 
 <div class="error">
@@ -4113,15 +3990,12 @@ with_df(df[5, ] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl(tbl[5, ] <- tbl[1, ])
-#> # A tibble: 5 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2    NA f     <int [2]>
-#> 3     3 g     <int [3]>
-#> 4    NA h     <chr [1]>
-#> 5     1 e     <dbl [1]>
+with_df(tbl[5, ] <- tbl[1, ])
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -4141,17 +4015,12 @@ with_df(df[5:7, ] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl(tbl[5:7, ] <- tbl[1, ])
-#> # A tibble: 7 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2    NA f     <int [2]>
-#> 3     3 g     <int [3]>
-#> 4    NA h     <chr [1]>
-#> 5     1 e     <dbl [1]>
-#> 6     1 e     <dbl [1]>
-#> 7     1 e     <dbl [1]>
+with_df(tbl[5:7, ] <- tbl[1, ])
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -4170,7 +4039,7 @@ with_df(df[6, ] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl(tbl[6, ] <- tbl[1, ])
+with_df(tbl[6, ] <- tbl[1, ])
 ```
 
 <div class="error">
@@ -4199,7 +4068,7 @@ with_df(df[-5, ] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl(tbl[-5, ] <- tbl[1, ])
+with_df(tbl[-5, ] <- tbl[1, ])
 ```
 
 <div class="error">
@@ -4226,7 +4095,7 @@ with_df(df[-(5:7), ] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl(tbl[-(5:7), ] <- tbl[1, ])
+with_df(tbl[-(5:7), ] <- tbl[1, ])
 ```
 
 <div class="error">
@@ -4253,7 +4122,7 @@ with_df(df[-6, ] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl(tbl[-6, ] <- tbl[1, ])
+with_df(tbl[-6, ] <- tbl[1, ])
 ```
 
 <div class="error">
@@ -4286,14 +4155,12 @@ with_df(df[as.character(1:3), ] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl(tbl[as.character(1:3), ] <- tbl[1, ])
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2     1 e     <dbl [1]>
-#> 3     1 e     <dbl [1]>
-#> 4    NA h     <chr [1]>
+with_df(tbl[as.character(1:3), ] <- tbl[1, ])
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr></tbody></table>
@@ -4315,7 +4182,7 @@ with_df(df[as.character(-(1:3)), ] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl(tbl[as.character(-(1:3)), ] <- tbl[1, ])
+with_df(tbl[as.character(-(1:3)), ] <- tbl[1, ])
 ```
 
 <div class="warning">
@@ -4351,7 +4218,7 @@ with_df(df[as.character(3:5), ] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl(tbl[as.character(3:5), ] <- tbl[1, ])
+with_df(tbl[as.character(3:5), ] <- tbl[1, ])
 ```
 
 <div class="warning">
@@ -4389,7 +4256,7 @@ with_df(df[as.character(-(3:5)), ] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl(tbl[as.character(-(3:5)), ] <- tbl[1, ])
+with_df(tbl[as.character(-(3:5)), ] <- tbl[1, ])
 ```
 
 <div class="warning">
@@ -4429,7 +4296,7 @@ with_df(df[NA_character_, ] <- df[1, ])
 </div></td><td>
 
 ```r
-with_tbl(tbl[NA_character_, ] <- tbl[1, ])
+with_df(tbl[NA_character_, ] <- tbl[1, ])
 ```
 
 <div class="error">
@@ -4470,7 +4337,7 @@ with_df(df[2:3, 1] <- df[1:2, 2])
 </td><td>
 
 ```r
-with_tbl(tbl[2:3, 1] <- tbl[1:2, 2])
+with_df(tbl[2:3, 1] <- tbl[1:2, 2])
 ```
 
 <div class="error">
@@ -4512,7 +4379,7 @@ with_df(df[2:3, 2] <- df[1:2, 3])
 </td><td>
 
 ```r
-with_tbl(tbl[2:3, 2] <- tbl[1:2, 3])
+with_df(tbl[2:3, 2] <- tbl[1:2, 3])
 ```
 
 <div class="error">
@@ -4553,7 +4420,7 @@ with_df(df[2:3, 3] <- df2[1:2, 1])
 </td><td>
 
 ```r
-with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
+with_df(tbl[2:3, 3] <- tbl2[1:2, 1])
 ```
 
 <div class="error">
@@ -4595,7 +4462,7 @@ with_df2(df2[2:3, 1] <- df2[1:2, 2])
 </td><td>
 
 ```r
-with_tbl2(tbl2[2:3, 1] <- tbl2[1:2, 2])
+with_df2(tbl2[2:3, 1] <- tbl2[1:2, 2])
 ```
 
 <div class="error">
@@ -4623,16 +4490,12 @@ with_df2(df2[2:3, 2] <- df[1:2, 1])
 </td><td>
 
 ```r
-with_tbl2(tbl2[2:3, 2] <- tbl[1:2, 1])
-#> # A tibble: 4 x 2
-#>    tb$n $c    $li       m[,1]  [,2]
-#>   <int> <chr> <list>    <dbl> <dbl>
-#> 1     1 e     <dbl [1]>     1     0
-#> 2    NA f     <int [2]>     1     1
-#> 3     3 g     <int [3]>    NA    NA
-#> 4    NA h     <chr [1]>     0     0
-#> # ... with 1 more variable:
-#> #   m[3:4] <dbl>
+with_df2(tbl2[2:3, 2] <- tbl[1:2, 1])
+#>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
+#> 1    1    e          9   1   0   0   0
+#> 2   NA    f     10, 11   0   1   0   0
+#> 3    3    g 12, 13, 14   0   0   1   0
+#> 4   NA    h       text   0   0   0   1
 ```
 
 </td></tr></tbody></table>
@@ -4653,14 +4516,12 @@ with_df({df$x <- NA; df[2:3, "x"] <- 3:2})
 </td><td>
 
 ```r
-with_tbl({tbl$x <- NA; tbl[2:3, "x"] <- 3:2})
-#> # A tibble: 4 x 4
-#>       n c     li            x
-#>   <int> <chr> <list>    <int>
-#> 1     1 e     <dbl [1]>    NA
-#> 2    NA f     <int [2]>     3
-#> 3     3 g     <int [3]>     2
-#> 4    NA h     <chr [1]>    NA
+with_df({tbl$x <- NA; tbl[2:3, "x"] <- 3:2})
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -4677,14 +4538,12 @@ with_df({df[2:3, 2:3] <- NA})
 </td><td>
 
 ```r
-with_tbl({tbl[2:3, 2:3] <- NA})
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2    NA <NA>  <NULL>   
-#> 3     3 <NA>  <NULL>   
-#> 4    NA h     <chr [1]>
+with_df({tbl[2:3, 2:3] <- NA})
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr></tbody></table>
@@ -4705,14 +4564,12 @@ with_df({df$x <- NA_integer_; df[2:3, "x"] <- 3:2})
 </td><td>
 
 ```r
-with_tbl({tbl$x <- NA_integer_; tbl[2:3, "x"] <- 3:2})
-#> # A tibble: 4 x 4
-#>       n c     li            x
-#>   <int> <chr> <list>    <int>
-#> 1     1 e     <dbl [1]>    NA
-#> 2    NA f     <int [2]>     3
-#> 3     3 g     <int [3]>     2
-#> 4    NA h     <chr [1]>    NA
+with_df({tbl$x <- NA_integer_; tbl[2:3, "x"] <- 3:2})
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr></tbody></table>
@@ -4734,14 +4591,12 @@ with_df(df[2:3, "n"] <- 1)
 </td><td>
 
 ```r
-with_tbl(tbl[2:3, "n"] <- 1)
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2     1 f     <int [2]>
-#> 3     1 g     <int [3]>
-#> 4    NA h     <chr [1]>
+with_df(tbl[2:3, "n"] <- 1)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -4758,14 +4613,12 @@ with_df(df[2:3, "x"] <- 1)
 </td><td>
 
 ```r
-with_tbl(tbl[2:3, "x"] <- 1)
-#> # A tibble: 4 x 4
-#>       n c     li            x
-#>   <int> <chr> <list>    <dbl>
-#> 1     1 e     <dbl [1]>    NA
-#> 2    NA f     <int [2]>     1
-#> 3     3 g     <int [3]>     1
-#> 4    NA h     <chr [1]>    NA
+with_df(tbl[2:3, "x"] <- 1)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -4784,7 +4637,7 @@ with_df(df[2:3, "n"] <- NULL)
 </div></td><td>
 
 ```r
-with_tbl(tbl[2:3, "n"] <- NULL)
+with_df(tbl[2:3, "n"] <- NULL)
 ```
 
 <div class="error">
@@ -4816,15 +4669,12 @@ with_df(df[5, "n"] <- list(0L))
 </td><td>
 
 ```r
-with_tbl(tbl[5, "n"] <- list(0L))
-#> # A tibble: 5 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <dbl [1]>
-#> 2    NA f     <int [2]>
-#> 3     3 g     <int [3]>
-#> 4    NA h     <chr [1]>
-#> 5     0 <NA>  <NULL>
+with_df(tbl[5, "n"] <- list(0L))
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr></tbody></table>
@@ -4853,14 +4703,12 @@ with_df(df[[1, 1]] <- 0)
 </td><td>
 
 ```r
-with_tbl(tbl[[1, 1]] <- 0)
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     0 e     <dbl [1]>
-#> 2    NA f     <int [2]>
-#> 3     3 g     <int [3]>
-#> 4    NA h     <chr [1]>
+with_df(tbl[[1, 1]] <- 0)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -4877,14 +4725,12 @@ with_df(df[1, ][[1]] <- 0)
 </td><td>
 
 ```r
-with_tbl(tbl[1, ][[1]] <- 0)
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     0 e     <dbl [1]>
-#> 2    NA f     <int [2]>
-#> 3     3 g     <int [3]>
-#> 4    NA h     <chr [1]>
+with_df(tbl[1, ][[1]] <- 0)
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -4901,14 +4747,12 @@ with_df(df[[1, 3]] <- list(NULL))
 </td><td>
 
 ```r
-with_tbl(tbl[[1, 3]] <- list(NULL))
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <NULL>   
-#> 2    NA f     <int [2]>
-#> 3     3 g     <int [3]>
-#> 4    NA h     <chr [1]>
+with_df(tbl[[1, 3]] <- list(NULL))
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -4925,14 +4769,12 @@ with_df(df[1, ][[3]] <- list(NULL))
 </td><td>
 
 ```r
-with_tbl(tbl[1, ][[3]] <- list(NULL))
-#> # A tibble: 4 x 3
-#>       n c     li       
-#>   <int> <chr> <list>   
-#> 1     1 e     <NULL>   
-#> 2    NA f     <int [2]>
-#> 3     3 g     <int [3]>
-#> 4    NA h     <chr [1]>
+with_df(tbl[1, ][[3]] <- list(NULL))
+#>    n c         li
+#> 1  1 e          9
+#> 2 NA f     10, 11
+#> 3  3 g 12, 13, 14
+#> 4 NA h       text
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -4952,16 +4794,12 @@ with_df2(df2[[1, 1]] <- df[1, ])
 </div></td><td>
 
 ```r
-with_tbl2(tbl2[[1, 1]] <- tbl[1, ])
-#> # A tibble: 4 x 2
-#>    tb$n $c    $li       m[,1]  [,2]
-#>   <int> <chr> <list>    <dbl> <dbl>
-#> 1     1 e     <dbl [1]>     1     0
-#> 2    NA f     <int [2]>     0     1
-#> 3     3 g     <int [3]>     0     0
-#> 4    NA h     <chr [1]>     0     0
-#> # ... with 1 more variable:
-#> #   m[3:4] <dbl>
+with_df2(tbl2[[1, 1]] <- tbl[1, ])
+#>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
+#> 1    1    e          9   1   0   0   0
+#> 2   NA    f     10, 11   0   1   0   0
+#> 3    3    g 12, 13, 14   0   0   1   0
+#> 4   NA    h       text   0   0   0   1
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -4978,16 +4816,12 @@ with_df2(df2[1, ][[1]] <- df[1, ])
 </td><td>
 
 ```r
-with_tbl2(tbl2[1, ][[1]] <- tbl[1, ])
-#> # A tibble: 4 x 2
-#>    tb$n $c    $li       m[,1]  [,2]
-#>   <int> <chr> <list>    <dbl> <dbl>
-#> 1     1 e     <dbl [1]>     1     0
-#> 2    NA f     <int [2]>     0     1
-#> 3     3 g     <int [3]>     0     0
-#> 4    NA h     <chr [1]>     0     0
-#> # ... with 1 more variable:
-#> #   m[3:4] <dbl>
+with_df2(tbl2[1, ][[1]] <- tbl[1, ])
+#>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
+#> 1    1    e          9   1   0   0   0
+#> 2   NA    f     10, 11   0   1   0   0
+#> 3    3    g 12, 13, 14   0   0   1   0
+#> 4   NA    h       text   0   0   0   1
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -5007,16 +4841,12 @@ with_df2(df2[[1, 2]] <- t(1:4))
 </div></td><td>
 
 ```r
-with_tbl2(tbl2[[1, 2]] <- t(1:4))
-#> # A tibble: 4 x 2
-#>    tb$n $c    $li       m[,1]  [,2]
-#>   <int> <chr> <list>    <dbl> <dbl>
-#> 1     1 e     <dbl [1]>     1     2
-#> 2    NA f     <int [2]>     0     1
-#> 3     3 g     <int [3]>     0     0
-#> 4    NA h     <chr [1]>     0     0
-#> # ... with 1 more variable:
-#> #   m[3:4] <dbl>
+with_df2(tbl2[[1, 2]] <- t(1:4))
+#>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
+#> 1    1    e          9   1   0   0   0
+#> 2   NA    f     10, 11   0   1   0   0
+#> 3    3    g 12, 13, 14   0   0   1   0
+#> 4   NA    h       text   0   0   0   1
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -5033,16 +4863,12 @@ with_df2(df2[1, ][[2]] <- t(1:4))
 </td><td>
 
 ```r
-with_tbl2(tbl2[1, ][[2]] <- t(1:4))
-#> # A tibble: 4 x 2
-#>    tb$n $c    $li       m[,1]  [,2]
-#>   <int> <chr> <list>    <dbl> <dbl>
-#> 1     1 e     <dbl [1]>     1     2
-#> 2    NA f     <int [2]>     0     1
-#> 3     3 g     <int [3]>     0     0
-#> 4    NA h     <chr [1]>     0     0
-#> # ... with 1 more variable:
-#> #   m[3:4] <dbl>
+with_df2(tbl2[1, ][[2]] <- t(1:4))
+#>   tb.n tb.c      tb.li m.1 m.2 m.3 m.4
+#> 1    1    e          9   1   0   0   0
+#> 2   NA    f     10, 11   0   1   0   0
+#> 3    3    g 12, 13, 14   0   0   1   0
+#> 4   NA    h       text   0   0   0   1
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -5092,7 +4918,7 @@ with_df(df[[1:2, 1]] <- 0)
 </div></td><td>
 
 ```r
-with_tbl(tbl[[1:2, 1]] <- 0)
+with_df(tbl[[1:2, 1]] <- 0)
 ```
 
 <div class="error">
