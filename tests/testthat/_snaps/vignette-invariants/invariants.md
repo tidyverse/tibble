@@ -787,7 +787,7 @@ tbl$not_present
 ### Definition of `x[j]`
 
 `j` is converted to an integer vector by `vec_as_index(j, ncol(x), names = names(x))`.
-Then `x[c(j_1, j_2, ..., j_n)]` is equivalent to `tibble(x[[j_1]], x[[j_2]], ..., x[[j_3]])`, keeping the corresponding column names.
+Then `x[c(j_1, j_2, ..., j_n)]` is equivalent to `tibble(x[[j_1]], x[[j_2]], ..., x[[j_n]])`, keeping the corresponding column names.
 This implies that `j` must be a numeric or character vector, or a logical vector with length 1 or `ncol(x)`.[^subset-extract-commute]
 
 [^subset-extract-commute]: `x[j][[jj]]` is equal to `x[[ j[[jj]] ]]`, in particular `x[j][[1]]` is equal to `x[[j]]` for scalar numeric or integer `j`.
@@ -3631,7 +3631,7 @@ with_tbl(tbl[1] <- lm(mpg ~ wt, data = mtcars))
 
 `x[i, ] <- a` is the same as `vec_slice(x[[j_1]], i) <- a[[1]]`,  `vec_slice(x[[j_2]], i) <- a[[2]]`, ... .[^row-assign-symmetry]
 
-[^row-assign-symmetry]: `x[i, ]` is symmetrically for subset and subassignment.
+[^row-assign-symmetry]: `x[i, ]` is symmetrical for subset and subassignment.
 
 <table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
@@ -4450,7 +4450,7 @@ with_tbl(tbl[NA_character_, ] <- tbl[1, ])
 
 `x[i, j] <- a` is equivalent to `x[i, ][j] <- a`.[^bracket-assign-flip]
 
-[^bracket-assign-flip]: `x[i, j]` is symmetrically for subsetting and subassignment.
+[^bracket-assign-flip]: `x[i, j]` is symmetrical for subsetting and subassignment.
 A more efficient implementation of `x[i, j] <- a` would forward to `x[j][i, ] <- a`.
 
 Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
@@ -4835,7 +4835,7 @@ with_tbl(tbl[5, "n"] <- list(0L))
 `i` must be a numeric vector of length 1.
 `x[[i, j]] <- a` is equivalent to `x[i, ][[j]] <- a`.[^double-bracket-ij-symmetry]
 
-[^double-bracket-ij-symmetry]: `x[[i, j]]` is symmetrically for subsetting and subassignment.
+[^double-bracket-ij-symmetry]: `x[[i, j]]` is symmetrical for subsetting and subassignment.
 An efficient implementation would check that `i` and `j` are scalar and forward to `x[i, j][[1]] <- a`.
 
 
