@@ -5,8 +5,6 @@ set_dftbl_hooks <- function() {
   set_dftbl_knit_hook(width)
   set_dftbl_source_hook()
   set_dftbl_chunk_hook()
-  set_dftbl_error_hook()
-  set_dftbl_warning_hook()
 }
 
 # Defines a `dftbl` knitr option. If this chunk option is set, code is duplicated
@@ -147,42 +145,4 @@ set_dftbl_chunk_hook <- function() {
   }
 
   knitr::knit_hooks$set(chunk = dftbl_chunk_hook)
-}
-
-# I don't understand why knitr doesn't wrap error output.
-set_dftbl_error_hook <- function() {
-  # Need to use a closure here to daisy-chain hooks
-
-  old_error_hook <- knitr::knit_hooks$get("error")
-
-  dftbl_error_hook <- function(x, options) {
-    if (isTRUE(options$dftbl)) {
-      x <- strsplit(x, "\n", fixed = TRUE)[[1]]
-      x <- unlist(map(x, fansi::strwrap_sgr, getOption("width") + 4, prefix = "#> ", initial = ""))
-      x <- paste(paste0(x, "\n"), collapse = "")
-    }
-    x <- old_error_hook(x, options)
-    paste0('<div class="error">', x, '</div>')
-  }
-
-  knitr::knit_hooks$set(error = dftbl_error_hook)
-}
-
-# I don't understand why knitr doesn't wrap warning output.
-set_dftbl_warning_hook <- function() {
-  # Need to use a closure here to daisy-chain hooks
-
-  old_warning_hook <- knitr::knit_hooks$get("warning")
-
-  dftbl_warning_hook <- function(x, options) {
-    if (isTRUE(options$dftbl)) {
-      x <- strsplit(x, "\n", fixed = TRUE)[[1]]
-      x <- unlist(map(x, fansi::strwrap_sgr, getOption("width") + 4, prefix = "#> ", initial = ""))
-      x <- paste(paste0(x, "\n"), collapse = "")
-    }
-    x <- old_warning_hook(x, options)
-    paste0('<div class="warning">', x, '</div>')
-  }
-
-  knitr::knit_hooks$set(warning = dftbl_warning_hook)
 }
