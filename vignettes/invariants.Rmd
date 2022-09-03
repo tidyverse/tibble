@@ -644,7 +644,7 @@ with_df(df[1] <- lm(mpg ~ wt, data = mtcars))
 
 `x[i, ] <- a` is the same as `vec_slice(x[[j_1]], i) <- a[[1]]`,  `vec_slice(x[[j_2]], i) <- a[[2]]`, ... .[^row-assign-symmetry]
 
-[^row-assign-symmetry]: `x[i, ]` is symmetrically for subset and subassignment.
+[^row-assign-symmetry]: `x[i, ]` is symmetrical for subset and subassignment.
 
 ```{r bracket-i-assign, dftbl = TRUE}
 with_df(df[2:3, ] <- df[1, ])
@@ -707,7 +707,7 @@ with_df(df[NA_character_, ] <- df[1, ])
 
 `x[i, j] <- a` is equivalent to `x[i, ][j] <- a`.[^bracket-assign-flip]
 
-[^bracket-assign-flip]: `x[i, j]` is symmetrically for subsetting and subassignment.
+[^bracket-assign-flip]: `x[i, j]` is symmetrical for subsetting and subassignment.
 A more efficient implementation of `x[i, j] <- a` would forward to `x[j][i, ] <- a`.
 
 Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
@@ -755,7 +755,7 @@ with_df(df[5, "n"] <- list(0L))
 `i` must be a numeric vector of length 1.
 `x[[i, j]] <- a` is equivalent to `x[i, ][[j]] <- a`.[^double-bracket-ij-symmetry]
 
-[^double-bracket-ij-symmetry]: `x[[i, j]]` is symmetrically for subsetting and subassignment.
+[^double-bracket-ij-symmetry]: `x[[i, j]]` is symmetrical for subsetting and subassignment.
 An efficient implementation would check that `i` and `j` are scalar and forward to `x[i, j][[1]] <- a`.
 
 
