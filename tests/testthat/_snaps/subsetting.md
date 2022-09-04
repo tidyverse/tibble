@@ -747,7 +747,7 @@
       df <- tibble(x = 1:3, y = letters[1:3], z = as.list(1:3))
       df[1:3, 1:2] <- df[2:3]
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Assigned data `df[2:3]` must be compatible with existing data.
       i Error occurred for column `x`.
       Caused by error in `vec_assign()`:
@@ -755,7 +755,7 @@
     Code
       df[1:3, 1:2] <- df[1]
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Assigned data `df[1]` must be compatible with existing data.
       i Error occurred for column `y`.
       Caused by error in `vec_assign()`:
@@ -763,7 +763,7 @@
     Code
       df[1:3, 1:2] <- df[[1]]
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Assigned data `df[[1]]` must be compatible with existing data.
       i Error occurred for column `y`.
       Caused by error in `vec_assign()`:
@@ -771,7 +771,7 @@
     Code
       df[1:3, 1:3] <- df[3:1]
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Assigned data `df[3:1]` must be compatible with existing data.
       i Error occurred for column `x`.
       Caused by error in `vec_assign()`:
