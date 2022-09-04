@@ -177,10 +177,20 @@
       x These names are invalid:
         * "..1" at location 1.
     Code
-      as_tibble(set_names(list(1:26), paste0("..", 1:26)))
+      as_tibble(set_names(as.list(1:26), paste0("..", 1:26)))
     Condition
-      Error in `set_names()`:
-      ! The size of `nm` (26) must be compatible with the size of `x` (1).
+      Error:
+      ! Columns 1, 2, 3, 4, 5, and 21 more must not have names of the form ... or ..j.
+      Use `.name_repair` to specify repair.
+      Caused by error in `repaired_names()`:
+      ! Names can't be of the form `...` or `..j`.
+      x These names are invalid:
+        * "..1" at location 1.
+        * "..2" at location 2.
+        * "..3" at location 3.
+        * "..4" at location 4.
+        * "..5" at location 5.
+        * ...
     Code
       as_tibble(list(a = 1, a = 1))
     Condition
@@ -255,10 +265,20 @@
       x These names are invalid:
         * "..1" at location 1.
     Code
-      as_tibble_row(set_names(list(1:26), paste0("..", 1:26)))
+      as_tibble_row(set_names(as.list(1:26), paste0("..", 1:26)))
     Condition
-      Error in `set_names()`:
-      ! The size of `nm` (26) must be compatible with the size of `x` (1).
+      Error:
+      ! Columns 1, 2, 3, 4, 5, and 21 more must not have names of the form ... or ..j.
+      Use `.name_repair` to specify repair.
+      Caused by error in `repaired_names()`:
+      ! Names can't be of the form `...` or `..j`.
+      x These names are invalid:
+        * "..1" at location 1.
+        * "..2" at location 2.
+        * "..3" at location 3.
+        * "..4" at location 4.
+        * "..5" at location 5.
+        * ...
     Code
       as_tibble_row(list(a = 1, a = 1))
     Condition
