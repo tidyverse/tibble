@@ -121,13 +121,17 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
 
 # Errors ------------------------------------------------------------------
 
+msg_names_must_have_length <- function(length, n) {
+  paste0("`names` must have length ", n, ", not ", length, ".")
+}
+
 abort_names_must_be_non_null <- function() {
   tibble_abort("`names` must not be `NULL`.")
 }
 
 abort_names_must_have_length <- function(length, n) {
   tibble_abort(
-    paste0("`names` must have length ", n, ", not ", length, "."),
+    msg_names_must_have_length(length, n),
     expected = n,
     actual = length
   )
