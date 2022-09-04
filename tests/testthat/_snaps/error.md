@@ -8,7 +8,8 @@
     Code
       invalid_df("must be numeric", c("col1", "col2"))
     Output
-      [1] "Columns `col1` and `col2` must be numeric."
+                                                   
+      "Columns `col1` and `col2` must be numeric." 
     Code
       use_repair(TRUE)
     Output
