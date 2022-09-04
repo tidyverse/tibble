@@ -7,7 +7,7 @@
     Code
       repaired_names("", repair_hint = FALSE)
     Condition
-      Error:
+      Error in `abort_column_names_cannot_be_empty()`:
       ! Column 1 must be named.
       Caused by error in `repaired_names()`:
       ! Names can't be empty.
@@ -15,7 +15,7 @@
     Code
       repaired_names("", repair_hint = TRUE)
     Condition
-      Error:
+      Error in `abort_column_names_cannot_be_empty()`:
       ! Column 1 must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -24,7 +24,7 @@
     Code
       repaired_names(c("a", "a"), repair_hint = FALSE)
     Condition
-      Error:
+      Error in `repaired_names()`:
       ! Column name `a` must not be duplicated.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
@@ -33,7 +33,7 @@
     Code
       repaired_names("..1", repair_hint = FALSE)
     Condition
-      Error:
+      Error in `abort_column_names_cannot_be_dot_dot()`:
       ! Column 1 must not have names of the form ... or ..j.
       Caused by error in `repaired_names()`:
       ! Names can't be of the form `...` or `..j`.

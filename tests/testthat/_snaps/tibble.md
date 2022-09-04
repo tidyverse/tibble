@@ -3,8 +3,9 @@
     Code
       tibble(a = 1, a = 1)
     Condition
-      Error:
-      ! Column name `a` must not be duplicated.Use `.name_repair` to specify repair.
+      Error in `tibble()`:
+      ! Column name `a` must not be duplicated.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
