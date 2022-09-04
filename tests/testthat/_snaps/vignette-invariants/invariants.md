@@ -337,7 +337,7 @@ df[[c("n", "c")]]
 
 ```r
 tbl[[c("n", "c")]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[c("n", "c")]]`:
 #> ! Must extract column with a single valid subscript.
 #> x Subscript `c("n", "c")` has size 2 but must be size 1.
 ```
@@ -353,7 +353,7 @@ df[[TRUE]]
 
 ```r
 tbl[[TRUE]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[TRUE]]`:
 #> ! Must extract column with a single valid subscript.
 #> x Subscript `TRUE` has the wrong type `logical`.
 #> i It must be numeric or character.
@@ -370,7 +370,7 @@ df[[mean]]
 
 ```r
 tbl[[mean]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[mean]]`:
 #> ! Must extract column with a single valid subscript.
 #> x Subscript `mean` has the wrong type `function`.
 #> i It must be numeric or character.
@@ -391,7 +391,7 @@ df[[NA]]
 
 ```r
 tbl[[NA]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[NA]]`:
 #> ! Must extract column with a single valid subscript.
 #> x Subscript `NA` can't be `NA`.
 ```
@@ -407,7 +407,7 @@ df[[NA_character_]]
 
 ```r
 tbl[[NA_character_]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[NA_character_]]`:
 #> ! Must extract column with a single valid subscript.
 #> x Subscript `NA_character_` can't be `NA`.
 ```
@@ -423,7 +423,7 @@ df[[NA_integer_]]
 
 ```r
 tbl[[NA_integer_]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[NA_integer_]]`:
 #> ! Must extract column with a single valid subscript.
 #> x Subscript `NA_integer_` can't be `NA`.
 ```
@@ -439,7 +439,7 @@ df[[-1]]
 
 ```r
 tbl[[-1]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[-1]]`:
 #> ! Must extract column with a single valid subscript.
 #> x Subscript `-1` has value -1 but must be a positive location.
 ```
@@ -472,7 +472,7 @@ df[[1.5]]
 
 ```r
 tbl[[1.5]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[1.5]]`:
 #> ! Must extract column with a single valid subscript.
 #> x Subscript `1.5` has the wrong type `double`.
 #> i It must be numeric or character.
@@ -489,7 +489,7 @@ df[[Inf]]
 
 ```r
 tbl[[Inf]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[Inf]]`:
 #> ! Must extract column with a single valid subscript.
 #> x Subscript `Inf` has the wrong type `double`.
 #> i It must be numeric or character.
@@ -1468,7 +1468,7 @@ with_df(df[[TRUE]] <- 0)
 
 ```r
 with_tbl(tbl[[TRUE]] <- 0)
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `[[<-`:
 #> ! Must assign to column with a single valid subscript.
 #> x Subscript `TRUE` has the wrong type `logical`.
 #> i It must be numeric or character.
@@ -1485,7 +1485,7 @@ with_df(df[[1:3]] <- 0)
 
 ```r
 with_tbl(tbl[[1:3]] <- 0)
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `[[<-`:
 #> ! Must assign to column with a single valid subscript.
 #> x Subscript `1:3` has size 3 but must be size 1.
 ```
@@ -1501,7 +1501,7 @@ with_df(df[[c("n", "c")]] <- 0)
 
 ```r
 with_tbl(tbl[[c("n", "c")]] <- 0)
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `[[<-`:
 #> ! Must assign to column with a single valid subscript.
 #> x Subscript `c("n", "c")` has size 2 but must be size 1.
 ```
@@ -1517,7 +1517,7 @@ with_df(df[[FALSE]] <- 0)
 
 ```r
 with_tbl(tbl[[FALSE]] <- 0)
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `[[<-`:
 #> ! Must assign to column with a single valid subscript.
 #> x Subscript `FALSE` has the wrong type `logical`.
 #> i It must be numeric or character.
@@ -1534,7 +1534,7 @@ with_df(df[[1:2]] <- 0)
 
 ```r
 with_tbl(tbl[[1:2]] <- 0)
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `[[<-`:
 #> ! Must assign to column with a single valid subscript.
 #> x Subscript `1:2` has size 2 but must be size 1.
 ```
@@ -1550,7 +1550,7 @@ with_df(df[[NA_integer_]] <- 0)
 
 ```r
 with_tbl(tbl[[NA_integer_]] <- 0)
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `[[<-`:
 #> ! Must assign to column with a single valid subscript.
 #> x Subscript `NA_integer_` can't be `NA`.
 ```
@@ -1566,7 +1566,7 @@ with_df(df[[NA]] <- 0)
 
 ```r
 with_tbl(tbl[[NA]] <- 0)
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `[[<-`:
 #> ! Must assign to column with a single valid subscript.
 #> x Subscript `NA` can't be `NA`.
 ```
@@ -1582,7 +1582,7 @@ with_df(df[[NA_character_]] <- 0)
 
 ```r
 with_tbl(tbl[[NA_character_]] <- 0)
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `[[<-`:
 #> ! Must assign to column with a single valid subscript.
 #> x Subscript `NA_character_` can't be `NA`.
 ```
