@@ -615,7 +615,7 @@ vectbl_as_col_location <- function(j,
                                    names = NULL,
                                    j_arg,
                                    assign = FALSE,
-                                   call = my_caller_call()) {
+                                   call = my_caller_env()) {
   subclass_col_index_errors(
     vec_as_location(j, n, names, call = call),
     j_arg = j_arg,
