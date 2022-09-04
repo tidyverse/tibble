@@ -872,7 +872,7 @@ abort_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg, par
   )
 }
 
-abort_assign_incompatible_type <- function(x, value, j, value_arg, parent = NULL, call = my_caller_call()) {
+abort_assign_incompatible_type <- function(x, value, j, value_arg, parent = NULL, call = my_caller_env()) {
   name <- names(x)[[j]]
 
   tibble_abort(
