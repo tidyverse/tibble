@@ -773,7 +773,7 @@ vectbl_recycle_rhs_rows <- function(value, nrow, i_arg, value_arg) {
         }
       },
       vctrs_error_recycle_incompatible_size = function(cnd) {
-        cnd_signal(error_assign_incompatible_size(nrow, value, j, i_arg, value_arg))
+        abort_assign_incompatible_size(nrow, value, j, i_arg, value_arg, cnd)
       }
     )
   }
@@ -797,36 +797,6 @@ vectbl_restore <- function(xo, x) {
 }
 
 # Errors ------------------------------------------------------------------
-
-error_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg) {
-  if (is.null(i_arg)) {
-    target <- "existing data"
-    existing <- pluralise_count("Existing data has ", nrow, " row(s)")
-  } else {
-    target <- paste0("row subscript ", tick(as_label(i_arg)))
-    existing <- pluralise_count("", nrow, " row(s) must be assigned")
-  }
-
-  new <- paste0(pluralise_count("has ", vec_size(value[[j]]), " row(s)"))
-  if (length(value) != 1) {
-    new <- paste0("Element ", j, " of assigned data ", new)
-  } else {
-    new <- paste0("Assigned data ", new)
-  }
-
-  tibble_error(
-    bullets(
-      paste0("Assigned data ", tick(as_label(value_arg)), " must be compatible with ", target, ":"),
-      x = existing,
-      x = new,
-      i = if (nrow != 1) "Only vectors of size 1 are recycled",
-      i = if (nrow == 1 && vec_size(value[[j]]) != 1) "Row updates require a list value. Do you need `list()` or `as.list()`?"
-    ),
-    expected = nrow,
-    actual = vec_size(value[[j]]),
-    j = j
-  )
-}
 
 abort_need_rhs_vector <- function(value_arg) {
   tibble_abort(paste0(tick(as_label(value_arg)), " must be a vector, a bare list, a data frame or a matrix."))
@@ -871,7 +841,7 @@ abort_duplicate_row_subscript_for_assignment <- function(i) {
   tibble_abort(pluralise_commas("Row index(es) ", i, " [is](are) used more than once for assignment."), i = i)
 }
 
-abort_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg) {
+abort_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg, parent = NULL) {
   if (is.null(i_arg)) {
     target <- "existing data"
     existing <- pluralise_count("Existing data has ", nrow, " row(s)")
@@ -897,7 +867,8 @@ abort_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg) {
     ),
     expected = nrow,
     actual = vec_size(value[[j]]),
-    j = j
+    j = j,
+    parent = parent
   )
 }
 
