@@ -781,10 +781,10 @@ vectbl_recycle_rhs_rows <- function(value, nrow, i_arg, value_arg, call = my_cal
   value
 }
 
-vectbl_recycle_rhs_cols <- function(value, ncol) {
+vectbl_recycle_rhs_cols <- function(value, ncol, call = my_caller_env()) {
   if (length(value) != 1L || ncol != 1L) {
     # Errors have been caught beforehand in vectbl_as_new_col_index()
-    value <- vec_recycle(value, ncol)
+    value <- vec_recycle(value, ncol, call = call)
   }
 
   value
