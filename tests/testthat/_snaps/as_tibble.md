@@ -179,7 +179,7 @@
     Code
       as_tibble(set_names(as.list(1:26), paste0("..", 1:26)))
     Condition
-      Error:
+      Error in `as_tibble()`:
       ! Columns 1, 2, 3, 4, 5, and 21 more must not have names of the form ... or ..j.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -267,7 +267,7 @@
     Code
       as_tibble_row(set_names(as.list(1:26), paste0("..", 1:26)))
     Condition
-      Error:
+      Error in `as_tibble_row()`:
       ! Columns 1, 2, 3, 4, 5, and 21 more must not have names of the form ... or ..j.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:

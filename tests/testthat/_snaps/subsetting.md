@@ -386,7 +386,7 @@
     Code
       foo[[3]]
     Condition
-      Error in `vectbl_as_col_location2()`:
+      Error in `foo[[3]]`:
       ! Can't subset columns past the end.
       i Location 3 doesn't exist.
       i There are only 2 columns.
@@ -407,7 +407,7 @@
     Code
       foo[[foo]]
     Condition
-      Error in `vectbl_as_col_subscript2()`:
+      Error in `foo[[foo]]`:
       ! Must extract column with a single valid subscript.
       x Subscript `foo` has the wrong type `tbl_df<
         x: integer
@@ -926,7 +926,7 @@
     Code
       foo[[foo]] <- 1
     Condition
-      Error in `vectbl_as_col_subscript2()`:
+      Error in `[[<-`:
       ! Must assign to column with a single valid subscript.
       x Subscript `foo` has the wrong type `tbl_df<
         x: integer
