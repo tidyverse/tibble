@@ -60,7 +60,7 @@
     Code
       as_tibble(table(c(1, 1, 1, 2, 2, 2), c(3, 4, 5, 3, 4, 5)))
     Condition
-      Error in `abort_column_names_cannot_be_empty()`:
+      Error in `as_tibble.table()`:
       ! Columns 1 and 2 must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -133,7 +133,7 @@
     Code
       as_tibble(list(1))
     Condition
-      Error in `abort_column_names_cannot_be_empty()`:
+      Error in `as_tibble.list()`:
       ! Column 1 must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -142,7 +142,7 @@
     Code
       as_tibble(list(1, 2))
     Condition
-      Error in `abort_column_names_cannot_be_empty()`:
+      Error in `as_tibble.list()`:
       ! Columns 1 and 2 must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -151,7 +151,7 @@
     Code
       as_tibble(list(a = 1, 2))
     Condition
-      Error in `abort_column_names_cannot_be_empty()`:
+      Error in `as_tibble.list()`:
       ! Column 2 must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -160,7 +160,7 @@
     Code
       as_tibble(as.list(1:26))
     Condition
-      Error in `abort_column_names_cannot_be_empty()`:
+      Error in `as_tibble.list()`:
       ! Columns 1, 2, 3, 4, 5, and 21 more must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -169,7 +169,7 @@
     Code
       as_tibble(set_names(list(1), "..1"))
     Condition
-      Error in `abort_column_names_cannot_be_dot_dot()`:
+      Error in `as_tibble.list()`:
       ! Column 1 must not have names of the form ... or ..j.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -221,7 +221,7 @@
     Code
       as_tibble_row(list(1))
     Condition
-      Error in `abort_column_names_cannot_be_empty()`:
+      Error in `as_tibble_row()`:
       ! Column 1 must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -230,7 +230,7 @@
     Code
       as_tibble_row(list(1, 2))
     Condition
-      Error in `abort_column_names_cannot_be_empty()`:
+      Error in `as_tibble_row()`:
       ! Columns 1 and 2 must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -239,7 +239,7 @@
     Code
       as_tibble_row(list(a = 1, 2))
     Condition
-      Error in `abort_column_names_cannot_be_empty()`:
+      Error in `as_tibble_row()`:
       ! Column 2 must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -248,7 +248,7 @@
     Code
       as_tibble_row(as.list(1:26))
     Condition
-      Error in `abort_column_names_cannot_be_empty()`:
+      Error in `as_tibble_row()`:
       ! Columns 1, 2, 3, 4, 5, and 21 more must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -257,7 +257,7 @@
     Code
       as_tibble_row(set_names(list(1), "..1"))
     Condition
-      Error in `abort_column_names_cannot_be_dot_dot()`:
+      Error in `as_tibble_row()`:
       ! Column 1 must not have names of the form ... or ..j.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:

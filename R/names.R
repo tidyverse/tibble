@@ -26,21 +26,20 @@ repaired_names <- function(name,
 # Errors ------------------------------------------------------------------
 
 abort_column_names_cannot_be_empty <- function(names, repair_hint, details = NULL, parent = NULL, call = my_caller_call()) {
-  tibble_abort(invalid_df("must be named", names, use_repair(repair_hint)), names = names, parent = parent)
+  tibble_abort(invalid_df("must be named", names, use_repair(repair_hint)), names = names, parent = parent, call = call)
 }
 
 abort_column_names_cannot_be_dot_dot <- function(names, repair_hint, parent = NULL, call = my_caller_call()) {
-  tibble_abort(invalid_df("must not have names of the form ... or ..j", names, use_repair(repair_hint)), names = names, parent = parent)
+  tibble_abort(invalid_df("must not have names of the form ... or ..j", names, use_repair(repair_hint)), names = names, parent = parent, call = call)
 }
 
 abort_column_names_must_be_unique <- function(names, repair_hint, parent = NULL, call = my_caller_call()) {
-  tibble_abort(invalid_df("must not be duplicated", names, use_repair(repair_hint), message = "Column name(s)"), call = call, names = names, parent = parent)
+  tibble_abort(invalid_df("must not be duplicated", names, use_repair(repair_hint), message = "Column name(s)"), names = names, parent = parent, call = call)
 }
 
 # Subclassing errors ------------------------------------------------------
 
 subclass_name_repair_errors <- function(expr, name, details = NULL, repair_hint = FALSE, call = my_caller_call()) {
-  force(call)
   withCallingHandlers(
     expr,
 
