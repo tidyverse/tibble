@@ -9,7 +9,8 @@ test_that("tibble_error()", {
       class = c("tibble_error_foo", "tibble_error"),
       message = "message",
       foo = 42,
-      bar = 7
+      bar = 7,
+      use_cli_format = TRUE
     )
   )
 })
