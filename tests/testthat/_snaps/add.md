@@ -28,18 +28,36 @@
     Code
       add_column(tibble(a = 1), a = 1)
     Condition
-      Error in `error_column_names_must_be_unique()`:
-      ! could not find function "error_column_names_must_be_unique"
+      Error:
+      ! Column name `a` must not be duplicated.Use `.name_repair` to specify repair.
+      Caused by error in `repaired_names()`:
+      ! Names must be unique.
+      x These names are duplicated:
+        * "a" at locations 1 and 2.
     Code
       add_column(tibble(a = 1, b = 2), a = 1, b = 2)
     Condition
-      Error in `error_column_names_must_be_unique()`:
-      ! could not find function "error_column_names_must_be_unique"
+      Error:
+      ! Column names `a` and `b` must not be duplicated.Use `.name_repair` to specify repair.
+      Caused by error in `repaired_names()`:
+      ! Names must be unique.
+      x These names are duplicated:
+        * "a" at locations 1 and 3.
+        * "b" at locations 2 and 4.
     Code
       add_column(tibble(!!!set_names(letters)), !!!set_names(letters))
     Condition
-      Error in `error_column_names_must_be_unique()`:
-      ! could not find function "error_column_names_must_be_unique"
+      Error:
+      ! Column names `a`, `b`, `c`, `d`, `e`, and 21 more must not be duplicated.Use `.name_repair` to specify repair.
+      Caused by error in `repaired_names()`:
+      ! Names must be unique.
+      x These names are duplicated:
+        * "a" at locations 1 and 27.
+        * "b" at locations 2 and 28.
+        * "c" at locations 3 and 29.
+        * "d" at locations 4 and 30.
+        * "e" at locations 5 and 31.
+        * ...
     Code
       add_column(tibble(a = 2:3), b = 4:6)
     Condition

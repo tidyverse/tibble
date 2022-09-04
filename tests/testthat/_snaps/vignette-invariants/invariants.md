@@ -1722,7 +1722,11 @@ with_df(df[[1]] <- 3:1)
 
 ```r
 with_tbl(tbl[[1]] <- 3:1)
-#> Error in error_assign_incompatible_size(nrow, value, j, i_arg, value_arg): could not find function "error_assign_incompatible_size"
+#> Error:
+#> ! Assigned data `3:1` must be compatible with existing data.
+#> x Existing data has 4 rows.
+#> x Assigned data has 3 rows.
+#> i Only vectors of size 1 are recycled.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1740,7 +1744,11 @@ with_df(df[[1]] <- 2:1)
 
 ```r
 with_tbl(tbl[[1]] <- 2:1)
-#> Error in error_assign_incompatible_size(nrow, value, j, i_arg, value_arg): could not find function "error_assign_incompatible_size"
+#> Error:
+#> ! Assigned data `2:1` must be compatible with existing data.
+#> x Existing data has 4 rows.
+#> x Assigned data has 2 rows.
+#> i Only vectors of size 1 are recycled.
 ```
 
 </td></tr></tbody></table>
@@ -2669,7 +2677,10 @@ with_df(df[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
 
 ```r
 with_tbl(tbl[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
-#> Error in error_assign_incompatible_type(x, rep(list(value), j), j, value_arg, : could not find function "error_assign_incompatible_type"
+#> Error:
+#> ! Assigned data `4` must be compatible with existing data.
+#> i Error occurred for column `c`.
+#> x Can't convert <double> to <character>.
 ```
 
 </td></tr></tbody></table>
@@ -3355,7 +3366,11 @@ with_df(df[2:4, ] <- df[1:2, ])
 
 ```r
 with_tbl(tbl[2:4, ] <- tbl[1:2, ])
-#> Error in error_assign_incompatible_size(nrow, value, j, i_arg, value_arg): could not find function "error_assign_incompatible_size"
+#> Error:
+#> ! Assigned data `tbl[1:2, ]` must be compatible with row subscript `2:4`.
+#> x 3 rows must be assigned.
+#> x Element 1 of assigned data has 2 rows.
+#> i Only vectors of size 1 are recycled.
 ```
 
 </td></tr></tbody></table>
@@ -3393,7 +3408,11 @@ with_df2(df2[2:4, ] <- df2[2:3, ])
 
 ```r
 with_tbl2(tbl2[2:4, ] <- tbl2[2:3, ])
-#> Error in error_assign_incompatible_size(nrow, value, j, i_arg, value_arg): could not find function "error_assign_incompatible_size"
+#> Error:
+#> ! Assigned data `tbl2[2:3, ]` must be compatible with row subscript `2:4`.
+#> x 3 rows must be assigned.
+#> x Element 1 of assigned data has 2 rows.
+#> i Only vectors of size 1 are recycled.
 ```
 
 </td></tr></tbody></table>

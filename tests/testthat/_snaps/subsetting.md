@@ -615,18 +615,27 @@
     Code
       df[1, ] <- 1:3
     Condition
-      Error in `error_assign_incompatible_size()`:
-      ! could not find function "error_assign_incompatible_size"
+      Error:
+      ! Assigned data `1:3` must be compatible with row subscript `1`.
+      x 1 row must be assigned.
+      x Assigned data has 3 rows.
+      i Row updates require a list value. Do you need `list()` or `as.list()`?
     Code
       df[1:2, ] <- 1:3
     Condition
-      Error in `error_assign_incompatible_size()`:
-      ! could not find function "error_assign_incompatible_size"
+      Error:
+      ! Assigned data `1:3` must be compatible with row subscript `1:2`.
+      x 2 rows must be assigned.
+      x Assigned data has 3 rows.
+      i Only vectors of size 1 are recycled.
     Code
       df[, ] <- 1:2
     Condition
-      Error in `error_assign_incompatible_size()`:
-      ! could not find function "error_assign_incompatible_size"
+      Error:
+      ! Assigned data `1:2` must be compatible with existing data.
+      x Existing data has 3 rows.
+      x Assigned data has 2 rows.
+      i Only vectors of size 1 are recycled.
     Code
       df[1, ] <- list(a = 1:3, b = 1)
     Condition
@@ -650,43 +659,67 @@
     Code
       df[1, 1:2] <- list(a = 1:3, b = 1)
     Condition
-      Error in `error_assign_incompatible_size()`:
-      ! could not find function "error_assign_incompatible_size"
+      Error:
+      ! Assigned data `list(a = 1:3, b = 1)` must be compatible with row subscript `1`.
+      x 1 row must be assigned.
+      x Element 1 of assigned data has 3 rows.
+      i Row updates require a list value. Do you need `list()` or `as.list()`?
     Code
       df[1, 1:2] <- list(a = 1, b = 1:3)
     Condition
-      Error in `error_assign_incompatible_size()`:
-      ! could not find function "error_assign_incompatible_size"
+      Error:
+      ! Assigned data `list(a = 1, b = 1:3)` must be compatible with row subscript `1`.
+      x 1 row must be assigned.
+      x Element 2 of assigned data has 3 rows.
+      i Row updates require a list value. Do you need `list()` or `as.list()`?
     Code
       df[1:2, 1:2] <- list(a = 1:3, b = 1)
     Condition
-      Error in `error_assign_incompatible_size()`:
-      ! could not find function "error_assign_incompatible_size"
+      Error:
+      ! Assigned data `list(a = 1:3, b = 1)` must be compatible with row subscript `1:2`.
+      x 2 rows must be assigned.
+      x Element 1 of assigned data has 3 rows.
+      i Only vectors of size 1 are recycled.
     Code
       df[1:2, 1:2] <- list(a = 1, b = 1:3)
     Condition
-      Error in `error_assign_incompatible_size()`:
-      ! could not find function "error_assign_incompatible_size"
+      Error:
+      ! Assigned data `list(a = 1, b = 1:3)` must be compatible with row subscript `1:2`.
+      x 2 rows must be assigned.
+      x Element 2 of assigned data has 3 rows.
+      i Only vectors of size 1 are recycled.
     Code
       df[1, ] <- list(a = 1:3, b = 1, c = 1:3)
     Condition
-      Error in `error_assign_incompatible_size()`:
-      ! could not find function "error_assign_incompatible_size"
+      Error:
+      ! Assigned data `list(a = 1:3, b = 1, c = 1:3)` must be compatible with row subscript `1`.
+      x 1 row must be assigned.
+      x Element 1 of assigned data has 3 rows.
+      i Row updates require a list value. Do you need `list()` or `as.list()`?
     Code
       df[1, ] <- list(a = 1, b = 1:3, c = 1:3)
     Condition
-      Error in `error_assign_incompatible_size()`:
-      ! could not find function "error_assign_incompatible_size"
+      Error:
+      ! Assigned data `list(a = 1, b = 1:3, c = 1:3)` must be compatible with row subscript `1`.
+      x 1 row must be assigned.
+      x Element 2 of assigned data has 3 rows.
+      i Row updates require a list value. Do you need `list()` or `as.list()`?
     Code
       df[1:2, ] <- list(a = 1:3, b = 1, c = 1:3)
     Condition
-      Error in `error_assign_incompatible_size()`:
-      ! could not find function "error_assign_incompatible_size"
+      Error:
+      ! Assigned data `list(a = 1:3, b = 1, c = 1:3)` must be compatible with row subscript `1:2`.
+      x 2 rows must be assigned.
+      x Element 1 of assigned data has 3 rows.
+      i Only vectors of size 1 are recycled.
     Code
       df[1:2, ] <- list(a = 1, b = 1:3, c = 1:3)
     Condition
-      Error in `error_assign_incompatible_size()`:
-      ! could not find function "error_assign_incompatible_size"
+      Error:
+      ! Assigned data `list(a = 1, b = 1:3, c = 1:3)` must be compatible with row subscript `1:2`.
+      x 2 rows must be assigned.
+      x Element 2 of assigned data has 3 rows.
+      i Only vectors of size 1 are recycled.
     Code
       # # [<-.tbl_df and coercion
       df <- tibble(x = 1:3, y = letters[1:3], z = as.list(1:3))
@@ -789,8 +822,10 @@
       foo <- tibble(a = 1:3, b = letters[1:3])
       foo[!is.na(foo)] <- "bogus"
     Condition
-      Error in `error_assign_incompatible_type()`:
-      ! could not find function "error_assign_incompatible_type"
+      Error:
+      ! Assigned data `"bogus"` must be compatible with existing data.
+      i Error occurred for column `a`.
+      x Can't convert <character> to <integer>.
     Code
       foo[as.matrix("x")] <- NA
     Condition
@@ -927,18 +962,27 @@
       df <- tibble(x = 1:3)
       df[["x"]] <- 8:9
     Condition
-      Error in `error_assign_incompatible_size()`:
-      ! could not find function "error_assign_incompatible_size"
+      Error:
+      ! Assigned data `8:9` must be compatible with existing data.
+      x Existing data has 3 rows.
+      x Assigned data has 2 rows.
+      i Only vectors of size 1 are recycled.
     Code
       df[["w"]] <- 8:9
     Condition
-      Error in `error_assign_incompatible_size()`:
-      ! could not find function "error_assign_incompatible_size"
+      Error:
+      ! Assigned data `8:9` must be compatible with existing data.
+      x Existing data has 3 rows.
+      x Assigned data has 2 rows.
+      i Only vectors of size 1 are recycled.
     Code
       df[["a"]] <- character()
     Condition
-      Error in `error_assign_incompatible_size()`:
-      ! could not find function "error_assign_incompatible_size"
+      Error:
+      ! Assigned data `character()` must be compatible with existing data.
+      x Existing data has 3 rows.
+      x Assigned data has 0 rows.
+      i Only vectors of size 1 are recycled.
     Code
       # # [<-.tbl_df throws an error with invalid values
       df <- tibble(x = 1:2, y = x)
@@ -956,16 +1000,25 @@
       df <- tibble(x = 1:3)
       df$x <- 8:9
     Condition
-      Error in `error_assign_incompatible_size()`:
-      ! could not find function "error_assign_incompatible_size"
+      Error:
+      ! Assigned data `8:9` must be compatible with existing data.
+      x Existing data has 3 rows.
+      x Assigned data has 2 rows.
+      i Only vectors of size 1 are recycled.
     Code
       df$w <- 8:9
     Condition
-      Error in `error_assign_incompatible_size()`:
-      ! could not find function "error_assign_incompatible_size"
+      Error:
+      ! Assigned data `8:9` must be compatible with existing data.
+      x Existing data has 3 rows.
+      x Assigned data has 2 rows.
+      i Only vectors of size 1 are recycled.
     Code
       df$a <- character()
     Condition
-      Error in `error_assign_incompatible_size()`:
-      ! could not find function "error_assign_incompatible_size"
+      Error:
+      ! Assigned data `character()` must be compatible with existing data.
+      x Existing data has 3 rows.
+      x Assigned data has 0 rows.
+      i Only vectors of size 1 are recycled.
 
