@@ -226,6 +226,10 @@ check_names_before_after_character <- function(j, names) {
 
 # Errors ------------------------------------------------------------------
 
+msg_unknown_column_names <- function(names) {
+  pluralise_commas("Can't find column(s) ", tick(names), " in `.data`.")
+}
+
 abort_add_rows_to_grouped_df <- function() {
   tibble_abort("Can't add rows to grouped data frames.")
 }
@@ -234,7 +238,7 @@ abort_incompatible_new_rows <- function(names) {
   tibble_abort(
     problems(
       "New rows can't add columns:",
-      cnd_message(error_unknown_column_names(names))
+      msg_unknown_column_names(names)
     ),
     names = names
   )

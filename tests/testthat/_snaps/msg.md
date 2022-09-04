@@ -10,15 +10,24 @@
     Code
       print_error(abort_incompatible_new_rows("a"))
     Output
-      <simpleError in error_unknown_column_names(names): could not find function "error_unknown_column_names">
+      <error/tibble_error_incompatible_new_rows>
+      Error in `abort_incompatible_new_rows()`:
+      ! New rows can't add columns.
+      x Can't find column `a` in `.data`.
     Code
       print_error(abort_incompatible_new_rows(letters[2:3]))
     Output
-      <simpleError in error_unknown_column_names(names): could not find function "error_unknown_column_names">
+      <error/tibble_error_incompatible_new_rows>
+      Error in `abort_incompatible_new_rows()`:
+      ! New rows can't add columns.
+      x Can't find columns `b` and `c` in `.data`.
     Code
       print_error(abort_incompatible_new_rows(LETTERS))
     Output
-      <simpleError in error_unknown_column_names(names): could not find function "error_unknown_column_names">
+      <error/tibble_error_incompatible_new_rows>
+      Error in `abort_incompatible_new_rows()`:
+      ! New rows can't add columns.
+      x Can't find columns `A`, `B`, `C`, `D`, `E`, and 21 more in `.data`.
     Code
       print_error(abort_both_before_after())
     Output
