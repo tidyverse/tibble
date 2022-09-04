@@ -575,7 +575,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
   j
 }
 
-numtbl_as_row_location_assign <- function(i, n, i_arg, call = my_caller_call()) {
+numtbl_as_row_location_assign <- function(i, n, i_arg, call = my_caller_env()) {
   subclass_row_index_errors(
     num_as_location(i, n, missing = "error", oob = "extend", zero = "error", call = call),
     i_arg = i_arg, assign = TRUE
