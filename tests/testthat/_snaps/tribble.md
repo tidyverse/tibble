@@ -28,8 +28,10 @@
     Code
       tribble(~b, 1, "a")
     Condition
-      Error in `tibble_abort_class()`:
-      ! could not find function "tibble_abort_class"
+      Error in `tribble()`:
+      ! Can't create column `b`
+      Caused by error:
+      ! Can't combine `..1` <double> and `..2` <character>.
     Code
       frame_matrix(1)
     Condition
