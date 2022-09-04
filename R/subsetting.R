@@ -582,7 +582,7 @@ numtbl_as_row_location_assign <- function(i, n, i_arg, call = my_caller_env()) {
   )
 }
 
-vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE, call = my_caller_call()) {
+vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE, call = my_caller_env()) {
   if (is_bare_atomic(i) && is.matrix(i) && ncol(i) == 1) {
     what <- paste0(
       "tibble::", if (assign) "`[<-`" else "`[`",
