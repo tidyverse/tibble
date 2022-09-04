@@ -603,9 +603,9 @@ vectbl_as_row_location2 <- function(i, n, i_arg, assign = FALSE, call = my_calle
   subclass_row_index_errors(vec_as_location2(i, n, call = call), i_arg = i_arg, assign = assign)
 }
 
-numtbl_as_col_location_assign <- function(j, n, j_arg) {
+numtbl_as_col_location_assign <- function(j, n, j_arg, call = my_caller_env()) {
   subclass_col_index_errors(
-    num_as_location(j, n, missing = "error", oob = "extend", zero = "error"),
+    num_as_location(j, n, missing = "error", oob = "extend", zero = "error", call = call),
     j_arg = j_arg, assign = TRUE
   )
 }
