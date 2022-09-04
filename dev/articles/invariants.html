@@ -525,7 +525,7 @@
 <div class="section level3">
 <h3 id="definition-of-xj-1">Definition of <code>x[j]</code><a class="anchor" aria-label="anchor" href="#definition-of-xj-1"></a>
 </h3>
-<p><code>j</code> is converted to an integer vector by <code>vec_as_index(j, ncol(x), names = names(x))</code>. Then <code>x[c(j_1, j_2, ..., j_n)]</code> is equivalent to <code>tibble(x[[j_1]], x[[j_2]], ..., x[[j_3]])</code>, keeping the corresponding column names. This implies that <code>j</code> must be a numeric or character vector, or a logical vector with length 1 or <code>ncol(x)</code>.<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;&lt;code&gt;x[j][[jj]]&lt;/code&gt; is equal to &lt;code&gt;x[[ j[[jj]] ]]&lt;/code&gt;, in particular &lt;code&gt;x[j][[1]]&lt;/code&gt; is equal to &lt;code&gt;x[[j]]&lt;/code&gt; for scalar numeric or integer &lt;code&gt;j&lt;/code&gt;.&lt;/p&gt;"><sup>1</sup></a></p>
+<p><code>j</code> is converted to an integer vector by <code>vec_as_index(j, ncol(x), names = names(x))</code>. Then <code>x[c(j_1, j_2, ..., j_n)]</code> is equivalent to <code>tibble(x[[j_1]], x[[j_2]], ..., x[[j_n]])</code>, keeping the corresponding column names. This implies that <code>j</code> must be a numeric or character vector, or a logical vector with length 1 or <code>ncol(x)</code>.<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;&lt;code&gt;x[j][[jj]]&lt;/code&gt; is equal to &lt;code&gt;x[[ j[[jj]] ]]&lt;/code&gt;, in particular &lt;code&gt;x[j][[1]]&lt;/code&gt; is equal to &lt;code&gt;x[[j]]&lt;/code&gt; for scalar numeric or integer &lt;code&gt;j&lt;/code&gt;.&lt;/p&gt;"><sup>1</sup></a></p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 </td>
