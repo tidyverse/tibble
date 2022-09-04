@@ -575,7 +575,7 @@
       df <- tibble(x = 1:2, y = x)
       df[4:5] <- 3
     Condition
-      Error in `numtbl_as_col_location_assign()`:
+      Error in `[<-`:
       ! Can't assign to columns beyond the end with non-consecutive locations.
       i Input has size 2.
       x Subscript `4:5` contains non-consecutive location 4.
@@ -968,7 +968,7 @@
       df <- tibble(x = 1:2, y = x)
       df[[4]] <- 3
     Condition
-      Error in `numtbl_as_col_location_assign()`:
+      Error in `[[<-`:
       ! Can't assign to columns beyond the end with non-consecutive locations.
       i Input has size 2.
       x Subscript `4` contains non-consecutive location 4.
