@@ -615,7 +615,7 @@
     Code
       df[1, ] <- 1:3
     Condition
-      Error in `abort_assign_incompatible_size()`:
+      Error in `[<-`:
       ! Assigned data `1:3` must be compatible with row subscript `1`.
       x 1 row must be assigned.
       x Assigned data has 3 rows.
@@ -625,7 +625,7 @@
     Code
       df[1:2, ] <- 1:3
     Condition
-      Error in `abort_assign_incompatible_size()`:
+      Error in `[<-`:
       ! Assigned data `1:3` must be compatible with row subscript `1:2`.
       x 2 rows must be assigned.
       x Assigned data has 3 rows.
@@ -635,7 +635,7 @@
     Code
       df[, ] <- 1:2
     Condition
-      Error in `abort_assign_incompatible_size()`:
+      Error in `[<-`:
       ! Assigned data `1:2` must be compatible with existing data.
       x Existing data has 3 rows.
       x Assigned data has 2 rows.
@@ -665,7 +665,7 @@
     Code
       df[1, 1:2] <- list(a = 1:3, b = 1)
     Condition
-      Error in `abort_assign_incompatible_size()`:
+      Error in `[<-`:
       ! Assigned data `list(a = 1:3, b = 1)` must be compatible with row subscript `1`.
       x 1 row must be assigned.
       x Element 1 of assigned data has 3 rows.
@@ -675,7 +675,7 @@
     Code
       df[1, 1:2] <- list(a = 1, b = 1:3)
     Condition
-      Error in `abort_assign_incompatible_size()`:
+      Error in `[<-`:
       ! Assigned data `list(a = 1, b = 1:3)` must be compatible with row subscript `1`.
       x 1 row must be assigned.
       x Element 2 of assigned data has 3 rows.
@@ -685,7 +685,7 @@
     Code
       df[1:2, 1:2] <- list(a = 1:3, b = 1)
     Condition
-      Error in `abort_assign_incompatible_size()`:
+      Error in `[<-`:
       ! Assigned data `list(a = 1:3, b = 1)` must be compatible with row subscript `1:2`.
       x 2 rows must be assigned.
       x Element 1 of assigned data has 3 rows.
@@ -695,7 +695,7 @@
     Code
       df[1:2, 1:2] <- list(a = 1, b = 1:3)
     Condition
-      Error in `abort_assign_incompatible_size()`:
+      Error in `[<-`:
       ! Assigned data `list(a = 1, b = 1:3)` must be compatible with row subscript `1:2`.
       x 2 rows must be assigned.
       x Element 2 of assigned data has 3 rows.
@@ -705,7 +705,7 @@
     Code
       df[1, ] <- list(a = 1:3, b = 1, c = 1:3)
     Condition
-      Error in `abort_assign_incompatible_size()`:
+      Error in `[<-`:
       ! Assigned data `list(a = 1:3, b = 1, c = 1:3)` must be compatible with row subscript `1`.
       x 1 row must be assigned.
       x Element 1 of assigned data has 3 rows.
@@ -715,7 +715,7 @@
     Code
       df[1, ] <- list(a = 1, b = 1:3, c = 1:3)
     Condition
-      Error in `abort_assign_incompatible_size()`:
+      Error in `[<-`:
       ! Assigned data `list(a = 1, b = 1:3, c = 1:3)` must be compatible with row subscript `1`.
       x 1 row must be assigned.
       x Element 2 of assigned data has 3 rows.
@@ -725,7 +725,7 @@
     Code
       df[1:2, ] <- list(a = 1:3, b = 1, c = 1:3)
     Condition
-      Error in `abort_assign_incompatible_size()`:
+      Error in `[<-`:
       ! Assigned data `list(a = 1:3, b = 1, c = 1:3)` must be compatible with row subscript `1:2`.
       x 2 rows must be assigned.
       x Element 1 of assigned data has 3 rows.
@@ -735,7 +735,7 @@
     Code
       df[1:2, ] <- list(a = 1, b = 1:3, c = 1:3)
     Condition
-      Error in `abort_assign_incompatible_size()`:
+      Error in `[<-`:
       ! Assigned data `list(a = 1, b = 1:3, c = 1:3)` must be compatible with row subscript `1:2`.
       x 2 rows must be assigned.
       x Element 2 of assigned data has 3 rows.
@@ -989,7 +989,7 @@
       df <- tibble(x = 1:3)
       df[["x"]] <- 8:9
     Condition
-      Error in `abort_assign_incompatible_size()`:
+      Error in `[[<-`:
       ! Assigned data `8:9` must be compatible with existing data.
       x Existing data has 3 rows.
       x Assigned data has 2 rows.
@@ -999,7 +999,7 @@
     Code
       df[["w"]] <- 8:9
     Condition
-      Error in `abort_assign_incompatible_size()`:
+      Error in `[[<-`:
       ! Assigned data `8:9` must be compatible with existing data.
       x Existing data has 3 rows.
       x Assigned data has 2 rows.
@@ -1009,7 +1009,7 @@
     Code
       df[["a"]] <- character()
     Condition
-      Error in `abort_assign_incompatible_size()`:
+      Error in `[[<-`:
       ! Assigned data `character()` must be compatible with existing data.
       x Existing data has 3 rows.
       x Assigned data has 0 rows.
@@ -1033,7 +1033,7 @@
       df <- tibble(x = 1:3)
       df$x <- 8:9
     Condition
-      Error in `abort_assign_incompatible_size()`:
+      Error in `$<-`:
       ! Assigned data `8:9` must be compatible with existing data.
       x Existing data has 3 rows.
       x Assigned data has 2 rows.
@@ -1043,7 +1043,7 @@
     Code
       df$w <- 8:9
     Condition
-      Error in `abort_assign_incompatible_size()`:
+      Error in `$<-`:
       ! Assigned data `8:9` must be compatible with existing data.
       x Existing data has 3 rows.
       x Assigned data has 2 rows.
@@ -1053,7 +1053,7 @@
     Code
       df$a <- character()
     Condition
-      Error in `abort_assign_incompatible_size()`:
+      Error in `$<-`:
       ! Assigned data `character()` must be compatible with existing data.
       x Existing data has 3 rows.
       x Assigned data has 0 rows.
