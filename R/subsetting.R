@@ -685,7 +685,7 @@ tbl_expand_to_nrow <- function(x, i) {
   x
 }
 
-tbl_subassign_row <- function(x, i, value, i_arg, value_arg, call = my_caller_call()) {
+tbl_subassign_row <- function(x, i, value, i_arg, value_arg, call = my_caller_env()) {
   recycled_value <- vectbl_recycle_rhs_cols(value, length(x))
 
   withCallingHandlers(
