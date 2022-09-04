@@ -599,7 +599,7 @@ vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE, call = my_caller
   subclass_row_index_errors(vec_as_location(i, n, call = call), i_arg = i_arg, assign = assign)
 }
 
-vectbl_as_row_location2 <- function(i, n, i_arg, assign = FALSE, call = my_caller_call()) {
+vectbl_as_row_location2 <- function(i, n, i_arg, assign = FALSE, call = my_caller_env()) {
   subclass_row_index_errors(vec_as_location2(i, n, call = call), i_arg = i_arg, assign = assign)
 }
 
