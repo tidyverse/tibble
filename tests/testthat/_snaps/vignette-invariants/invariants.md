@@ -992,7 +992,7 @@ df[mean, ]
 
 ```r
 tbl[mean, ]
-#> Error in `[.tbl_df`:
+#> Error in `tbl[mean, ]`:
 #> ! Must subset rows with a valid subscript vector.
 #> x Subscript `mean` has the wrong type `function`.
 #> i It must be logical, numeric, or character.
@@ -1009,7 +1009,7 @@ df[list(1), ]
 
 ```r
 tbl[list(1), ]
-#> Error in `[.tbl_df`:
+#> Error in `tbl[list(1), ]`:
 #> ! Must subset rows with a valid subscript vector.
 #> x Subscript `list(1)` has the wrong type `list`.
 #> i It must be logical, numeric, or character.
@@ -1096,7 +1096,7 @@ df[c(TRUE, FALSE), ]
 
 ```r
 tbl[c(TRUE, FALSE), ]
-#> Error in `[.tbl_df`:
+#> Error in `tbl[c(TRUE, FALSE), ]`:
 #> ! Must subset rows with a valid subscript vector.
 #> i Logical subscripts must match the size of the indexed input.
 #> x Input has size 4 but subscript `c(TRUE, FALSE)` has size 2.
