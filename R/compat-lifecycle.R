@@ -48,4 +48,28 @@ foreign_caller_env <- function(my_env = ns_env()) {
   caller
 }
 
+my_caller_env <- function(my_env = ns_env()) {
+  for (n in 2:10) {
+    caller <- caller_env(n)
+    if (!is_reference(env_parent(caller), my_env)) {
+      return(caller_env(n - 1))
+    }
+  }
+
+  # Safety net
+  caller
+}
+
+my_caller_call <- function(my_env = ns_env()) {
+  for (n in 2:10) {
+    caller <- caller_env(n)
+    if (!is_reference(env_parent(caller), my_env)) {
+      return(caller_call(n - 1))
+    }
+  }
+
+  # Safety net
+  caller
+}
+
 # nocov end
