@@ -107,7 +107,7 @@
       foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
       foo[0.5, ]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[0.5, ]`:
       ! Must subset rows with a valid subscript vector.
       x Can't convert from `i` <double> to <integer> due to loss of precision.
     Code
@@ -119,21 +119,21 @@
     Code
       foo[-1:1, ]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[-1:1, ]`:
       ! Must subset rows with a valid subscript vector.
       x Negative and positive locations can't be mixed.
       i Subscript `-1:1` has a positive value at location 3.
     Code
       foo[c(-1, 1), ]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[c(-1, 1), ]`:
       ! Must subset rows with a valid subscript vector.
       x Negative and positive locations can't be mixed.
       i Subscript `c(-1, 1)` has a positive value at location 2.
     Code
       foo[c(-1, NA), ]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[c(-1, NA), ]`:
       ! Must subset rows with a valid subscript vector.
       x Negative locations can't have missing values.
       i Subscript `c(-1, NA)` has a missing value at location 2.
@@ -146,20 +146,20 @@
     Code
       foo[array(1, dim = c(1, 1, 1)), ]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[array(1, dim = c(1, 1, 1)), ]`:
       ! Must subset rows with a valid subscript vector.
       x Subscript `array(1, dim = c(1, 1, 1))` must be a simple vector, not an array.
     Code
       foo[mean, ]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[mean, ]`:
       ! Must subset rows with a valid subscript vector.
       x Subscript `mean` has the wrong type `function`.
       i It must be logical, numeric, or character.
     Code
       foo[foo, ]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[foo, ]`:
       ! Must subset rows with a valid subscript vector.
       x Subscript `foo` has the wrong type `tbl_df<
         x: integer
@@ -204,21 +204,21 @@
       foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
       foo[c(TRUE, TRUE), ]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[c(TRUE, TRUE), ]`:
       ! Must subset rows with a valid subscript vector.
       i Logical subscripts must match the size of the indexed input.
       x Input has size 3 but subscript `c(TRUE, TRUE)` has size 2.
     Code
       foo[c(TRUE, TRUE, FALSE, FALSE), ]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[c(TRUE, TRUE, FALSE, FALSE), ]`:
       ! Must subset rows with a valid subscript vector.
       i Logical subscripts must match the size of the indexed input.
       x Input has size 3 but subscript `c(TRUE, TRUE, FALSE, FALSE)` has size 4.
     Code
       foo[array(TRUE, dim = c(1, 1, 1)), ]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[array(TRUE, dim = c(1, 1, 1)), ]`:
       ! Must subset rows with a valid subscript vector.
       x Subscript `array(TRUE, dim = c(1, 1, 1))` must be a simple vector, not an array.
     Code
@@ -255,14 +255,14 @@
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[list(1:3), ]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[list(1:3), ]`:
       ! Must subset rows with a valid subscript vector.
       x Subscript `list(1:3)` has the wrong type `list`.
       i It must be logical, numeric, or character.
     Code
       foo[as.list(1:3), ]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[as.list(1:3), ]`:
       ! Must subset rows with a valid subscript vector.
       x Subscript `as.list(1:3)` has the wrong type `list`.
       i It must be logical, numeric, or character.
@@ -274,7 +274,7 @@
     Code
       foo[Sys.Date(), ]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[Sys.Date(), ]`:
       ! Must subset rows with a valid subscript vector.
       x Subscript `Sys.Date()` has the wrong type `date`.
       i It must be logical, numeric, or character.
@@ -325,7 +325,7 @@
       foo <- tibble(a = 1:4, b = a)
       foo[c(TRUE, FALSE), ]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[c(TRUE, FALSE), ]`:
       ! Must subset rows with a valid subscript vector.
       i Logical subscripts must match the size of the indexed input.
       x Input has size 4 but subscript `c(TRUE, FALSE)` has size 2.
@@ -486,14 +486,14 @@
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[list(1:3), ] <- 1
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Must assign to rows with a valid subscript vector.
       x Subscript `list(1:3)` has the wrong type `list`.
       i It must be logical, numeric, or character.
     Code
       foo[as.list(1:3), ] <- 1
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Must assign to rows with a valid subscript vector.
       x Subscript `as.list(1:3)` has the wrong type `list`.
       i It must be logical, numeric, or character.
@@ -505,7 +505,7 @@
     Code
       foo[Sys.Date(), ] <- 1
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Must assign to rows with a valid subscript vector.
       x Subscript `Sys.Date()` has the wrong type `date`.
       i It must be logical, numeric, or character.
