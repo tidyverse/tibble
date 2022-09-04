@@ -582,21 +582,21 @@
     Code
       df[4:5, ] <- 3
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Can't assign to rows beyond the end with non-consecutive locations.
       i Input has size 2.
       x Subscript `4:5` contains non-consecutive location 4.
     Code
       df[-4, ] <- 3
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Can't negate rows past the end.
       i Location 4 doesn't exist.
       i There are only 2 rows.
     Code
       df[-(4:5), ] <- 3
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Can't negate rows past the end.
       i Locations 4 and 5 don't exist.
       i There are only 2 rows.
