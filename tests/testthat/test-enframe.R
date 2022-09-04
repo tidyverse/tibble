@@ -118,7 +118,7 @@ test_that("can roundtrip record", {
 
 
 test_that("output test", {
-  expect_snapshot_with_error({
+  expect_snapshot(error = TRUE, {
     enframe(1:3, value = NULL)
 
     nrow(enframe(Titanic))

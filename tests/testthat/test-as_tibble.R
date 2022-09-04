@@ -741,7 +741,7 @@ test_that("converting from matrix uses implicit row names when `rownames =` is p
 })
 
 test_that("output test", {
-  expect_snapshot_with_error({
+  expect_snapshot(error = TRUE, {
     as_tibble(list(1))
     as_tibble(list(1, 2))
     as_tibble(list(a = 1, 2))

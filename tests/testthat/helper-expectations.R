@@ -14,18 +14,6 @@ expect_cnd_equivalent <- function(actual, expected) {
   expect_equal(actual, expected)
 }
 
-expect_snapshot_with_error <- function(code) {
-  code <- rlang::enexpr(code)
-
-  if (packageVersion("testthat") >= "3.1.1") {
-    rlang::eval_tidy(rlang::quo(expect_snapshot(variant = rlang_variant(), !!code, error = TRUE)))
-  } else if (packageVersion("testthat") > "3.0.0") {
-    rlang::eval_tidy(rlang::quo(expect_snapshot(!!code, error = TRUE)))
-  } else {
-    rlang::eval_tidy(rlang::quo(expect_snapshot(!!code)))
-  }
-}
-
 rlang_variant <- function() {
   NULL
 }

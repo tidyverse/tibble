@@ -762,7 +762,7 @@ test_that("$<- recycles only values of length one", {
 })
 
 test_that("output test", {
-  expect_snapshot_with_error({
+  expect_snapshot(error = TRUE, {
     "# [.tbl_df is careful about names (#1245)"
     foo <- tibble(x = 1:10, y = 1:10)
     foo[c("x", "y", "z")]
