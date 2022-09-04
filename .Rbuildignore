@@ -36,3 +36,4 @@
 ^src/version\.txt$
 ^\.Renviron$
 ^src/Makevars\.debug$
+^\.vscode$
