@@ -774,6 +774,9 @@ vectbl_recycle_rhs_rows <- function(value, nrow, i_arg, value_arg, call = my_cal
       },
       vctrs_error_recycle_incompatible_size = function(cnd) {
         abort_assign_incompatible_size(nrow, value, j, i_arg, value_arg, cnd, call = call)
+      },
+      vctrs_error_scalar_type = function(cnd) {
+        abort_assign_vector(value, j, value_arg, cnd, call = call)
       }
     )
   }
@@ -884,6 +887,16 @@ abort_assign_incompatible_type <- function(x, value, j, value_arg, parent = NULL
     expected = x[[j]],
     actual = value[[j]],
     name = name,
+    j = j,
+    parent = parent,
+    call = call
+  )
+}
+
+abort_assign_vector <- function(value, j, value_arg, parent = NULL, call = my_caller_env()) {
+  tibble_abort(
+    paste0("Assigned data ", tick(as_label(value_arg)), " must be a vector."),
+    actual = value[[j]],
     j = j,
     parent = parent,
     call = call
