@@ -3,8 +3,12 @@
     Code
       tibble(a = 1, a = 1)
     Condition
-      Error in `error_column_names_must_be_unique()`:
-      ! could not find function "error_column_names_must_be_unique"
+      Error:
+      ! Column name `a` must not be duplicated.Use `.name_repair` to specify repair.
+      Caused by error in `repaired_names()`:
+      ! Names must be unique.
+      x These names are duplicated:
+        * "a" at locations 1 and 2.
     Code
       tibble(a = new_environment())
     Condition
