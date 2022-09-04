@@ -615,27 +615,33 @@
     Code
       df[1, ] <- 1:3
     Condition
-      Error:
+      Error in `abort_assign_incompatible_size()`:
       ! Assigned data `1:3` must be compatible with row subscript `1`.
       x 1 row must be assigned.
       x Assigned data has 3 rows.
       i Row updates require a list value. Do you need `list()` or `as.list()`?
+      Caused by error in `vectbl_recycle_rhs_rows()`:
+      ! Can't recycle input of size 3 to size 1.
     Code
       df[1:2, ] <- 1:3
     Condition
-      Error:
+      Error in `abort_assign_incompatible_size()`:
       ! Assigned data `1:3` must be compatible with row subscript `1:2`.
       x 2 rows must be assigned.
       x Assigned data has 3 rows.
       i Only vectors of size 1 are recycled.
+      Caused by error in `vectbl_recycle_rhs_rows()`:
+      ! Can't recycle input of size 3 to size 2.
     Code
       df[, ] <- 1:2
     Condition
-      Error:
+      Error in `abort_assign_incompatible_size()`:
       ! Assigned data `1:2` must be compatible with existing data.
       x Existing data has 3 rows.
       x Assigned data has 2 rows.
       i Only vectors of size 1 are recycled.
+      Caused by error in `vectbl_recycle_rhs_rows()`:
+      ! Can't recycle input of size 2 to size 3.
     Code
       df[1, ] <- list(a = 1:3, b = 1)
     Condition
@@ -659,67 +665,83 @@
     Code
       df[1, 1:2] <- list(a = 1:3, b = 1)
     Condition
-      Error:
+      Error in `abort_assign_incompatible_size()`:
       ! Assigned data `list(a = 1:3, b = 1)` must be compatible with row subscript `1`.
       x 1 row must be assigned.
       x Element 1 of assigned data has 3 rows.
       i Row updates require a list value. Do you need `list()` or `as.list()`?
+      Caused by error in `vectbl_recycle_rhs_rows()`:
+      ! Can't recycle input of size 3 to size 1.
     Code
       df[1, 1:2] <- list(a = 1, b = 1:3)
     Condition
-      Error:
+      Error in `abort_assign_incompatible_size()`:
       ! Assigned data `list(a = 1, b = 1:3)` must be compatible with row subscript `1`.
       x 1 row must be assigned.
       x Element 2 of assigned data has 3 rows.
       i Row updates require a list value. Do you need `list()` or `as.list()`?
+      Caused by error in `vectbl_recycle_rhs_rows()`:
+      ! Can't recycle input of size 3 to size 1.
     Code
       df[1:2, 1:2] <- list(a = 1:3, b = 1)
     Condition
-      Error:
+      Error in `abort_assign_incompatible_size()`:
       ! Assigned data `list(a = 1:3, b = 1)` must be compatible with row subscript `1:2`.
       x 2 rows must be assigned.
       x Element 1 of assigned data has 3 rows.
       i Only vectors of size 1 are recycled.
+      Caused by error in `vectbl_recycle_rhs_rows()`:
+      ! Can't recycle input of size 3 to size 2.
     Code
       df[1:2, 1:2] <- list(a = 1, b = 1:3)
     Condition
-      Error:
+      Error in `abort_assign_incompatible_size()`:
       ! Assigned data `list(a = 1, b = 1:3)` must be compatible with row subscript `1:2`.
       x 2 rows must be assigned.
       x Element 2 of assigned data has 3 rows.
       i Only vectors of size 1 are recycled.
+      Caused by error in `vectbl_recycle_rhs_rows()`:
+      ! Can't recycle input of size 3 to size 2.
     Code
       df[1, ] <- list(a = 1:3, b = 1, c = 1:3)
     Condition
-      Error:
+      Error in `abort_assign_incompatible_size()`:
       ! Assigned data `list(a = 1:3, b = 1, c = 1:3)` must be compatible with row subscript `1`.
       x 1 row must be assigned.
       x Element 1 of assigned data has 3 rows.
       i Row updates require a list value. Do you need `list()` or `as.list()`?
+      Caused by error in `vectbl_recycle_rhs_rows()`:
+      ! Can't recycle input of size 3 to size 1.
     Code
       df[1, ] <- list(a = 1, b = 1:3, c = 1:3)
     Condition
-      Error:
+      Error in `abort_assign_incompatible_size()`:
       ! Assigned data `list(a = 1, b = 1:3, c = 1:3)` must be compatible with row subscript `1`.
       x 1 row must be assigned.
       x Element 2 of assigned data has 3 rows.
       i Row updates require a list value. Do you need `list()` or `as.list()`?
+      Caused by error in `vectbl_recycle_rhs_rows()`:
+      ! Can't recycle input of size 3 to size 1.
     Code
       df[1:2, ] <- list(a = 1:3, b = 1, c = 1:3)
     Condition
-      Error:
+      Error in `abort_assign_incompatible_size()`:
       ! Assigned data `list(a = 1:3, b = 1, c = 1:3)` must be compatible with row subscript `1:2`.
       x 2 rows must be assigned.
       x Element 1 of assigned data has 3 rows.
       i Only vectors of size 1 are recycled.
+      Caused by error in `vectbl_recycle_rhs_rows()`:
+      ! Can't recycle input of size 3 to size 2.
     Code
       df[1:2, ] <- list(a = 1, b = 1:3, c = 1:3)
     Condition
-      Error:
+      Error in `abort_assign_incompatible_size()`:
       ! Assigned data `list(a = 1, b = 1:3, c = 1:3)` must be compatible with row subscript `1:2`.
       x 2 rows must be assigned.
       x Element 2 of assigned data has 3 rows.
       i Only vectors of size 1 are recycled.
+      Caused by error in `vectbl_recycle_rhs_rows()`:
+      ! Can't recycle input of size 3 to size 2.
     Code
       # # [<-.tbl_df and coercion
       df <- tibble(x = 1:3, y = letters[1:3], z = as.list(1:3))
@@ -967,27 +989,33 @@
       df <- tibble(x = 1:3)
       df[["x"]] <- 8:9
     Condition
-      Error:
+      Error in `abort_assign_incompatible_size()`:
       ! Assigned data `8:9` must be compatible with existing data.
       x Existing data has 3 rows.
       x Assigned data has 2 rows.
       i Only vectors of size 1 are recycled.
+      Caused by error in `vectbl_recycle_rhs_rows()`:
+      ! Can't recycle input of size 2 to size 3.
     Code
       df[["w"]] <- 8:9
     Condition
-      Error:
+      Error in `abort_assign_incompatible_size()`:
       ! Assigned data `8:9` must be compatible with existing data.
       x Existing data has 3 rows.
       x Assigned data has 2 rows.
       i Only vectors of size 1 are recycled.
+      Caused by error in `vectbl_recycle_rhs_rows()`:
+      ! Can't recycle input of size 2 to size 3.
     Code
       df[["a"]] <- character()
     Condition
-      Error:
+      Error in `abort_assign_incompatible_size()`:
       ! Assigned data `character()` must be compatible with existing data.
       x Existing data has 3 rows.
       x Assigned data has 0 rows.
       i Only vectors of size 1 are recycled.
+      Caused by error in `vectbl_recycle_rhs_rows()`:
+      ! Can't recycle input of size 0 to size 3.
     Code
       # # [<-.tbl_df throws an error with invalid values
       df <- tibble(x = 1:2, y = x)
@@ -1005,25 +1033,31 @@
       df <- tibble(x = 1:3)
       df$x <- 8:9
     Condition
-      Error:
+      Error in `abort_assign_incompatible_size()`:
       ! Assigned data `8:9` must be compatible with existing data.
       x Existing data has 3 rows.
       x Assigned data has 2 rows.
       i Only vectors of size 1 are recycled.
+      Caused by error in `vectbl_recycle_rhs_rows()`:
+      ! Can't recycle input of size 2 to size 3.
     Code
       df$w <- 8:9
     Condition
-      Error:
+      Error in `abort_assign_incompatible_size()`:
       ! Assigned data `8:9` must be compatible with existing data.
       x Existing data has 3 rows.
       x Assigned data has 2 rows.
       i Only vectors of size 1 are recycled.
+      Caused by error in `vectbl_recycle_rhs_rows()`:
+      ! Can't recycle input of size 2 to size 3.
     Code
       df$a <- character()
     Condition
-      Error:
+      Error in `abort_assign_incompatible_size()`:
       ! Assigned data `character()` must be compatible with existing data.
       x Existing data has 3 rows.
       x Assigned data has 0 rows.
       i Only vectors of size 1 are recycled.
+      Caused by error in `vectbl_recycle_rhs_rows()`:
+      ! Can't recycle input of size 0 to size 3.
 
