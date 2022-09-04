@@ -848,7 +848,7 @@
       foo <- tibble(a = 1:3, b = letters[1:3])
       foo[!is.na(foo)] <- "bogus"
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Assigned data `"bogus"` must be compatible with existing data.
       i Error occurred for column `a`.
       Caused by error in `vec_assign()`:
