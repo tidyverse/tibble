@@ -419,7 +419,7 @@ test_that("new_tibble checks", {
   expect_identical(new_tibble(list(a = 1:3, b = 4:6), nrow = 3), tibble(a = 1:3, b = 4:6))
   expect_legacy_error(
     new_tibble(1:3, nrow = 1),
-    error_new_tibble_must_be_list(),
+    abort_new_tibble_must_be_list(),
     fixed = TRUE
   )
 })

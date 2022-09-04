@@ -5,7 +5,7 @@ tbl_subset_col <- function(x, j, j_arg) {
   j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = FALSE)
 
   if (anyNA(j)) {
-    cnd_signal(error_na_column_index(which(is.na(j))))
+    abort_na_column_index(which(is.na(j)))
   }
 
   xo <- .subset(x, j)

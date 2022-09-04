@@ -1722,11 +1722,7 @@ with_df(df[[1]] <- 3:1)
 
 ```r
 with_tbl(tbl[[1]] <- 3:1)
-#> Error:
-#> ! Assigned data `3:1` must be compatible with existing data.
-#> x Existing data has 4 rows.
-#> x Assigned data has 3 rows.
-#> i Only vectors of size 1 are recycled.
+#> Error in error_assign_incompatible_size(nrow, value, j, i_arg, value_arg): could not find function "error_assign_incompatible_size"
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1744,11 +1740,7 @@ with_df(df[[1]] <- 2:1)
 
 ```r
 with_tbl(tbl[[1]] <- 2:1)
-#> Error:
-#> ! Assigned data `2:1` must be compatible with existing data.
-#> x Existing data has 4 rows.
-#> x Assigned data has 2 rows.
-#> i Only vectors of size 1 are recycled.
+#> Error in error_assign_incompatible_size(nrow, value, j, i_arg, value_arg): could not find function "error_assign_incompatible_size"
 ```
 
 </td></tr></tbody></table>
@@ -2314,7 +2306,7 @@ with_df(df[c(1, 1)] <- list(1, 2))
 
 ```r
 with_tbl(tbl[c(1, 1)] <- list(1, 2))
-#> Error:
+#> Error in `[<-.tbl_df`:
 #> ! Column index 1 is used more than once for assignment.
 ```
 
@@ -2361,7 +2353,7 @@ with_df(df[NA] <- list("x"))
 
 ```r
 with_tbl(tbl[NA] <- list("x"))
-#> Error:
+#> Error in `[<-.tbl_df`:
 #> ! Can't use NA as column index with `[` at positions 1, 2, and 3.
 ```
 
@@ -2376,7 +2368,7 @@ with_df(df[NA_integer_] <- list("x"))
 
 ```r
 with_tbl(tbl[NA_integer_] <- list("x"))
-#> Error:
+#> Error in `[<-.tbl_df`:
 #> ! Can't use NA as column index in a tibble for assignment.
 ```
 
@@ -2391,7 +2383,7 @@ with_df(df[NA_character_] <- list("x"))
 
 ```r
 with_tbl(tbl[NA_character_] <- list("x"))
-#> Error:
+#> Error in `[<-.tbl_df`:
 #> ! Can't use NA as column index in a tibble for assignment.
 ```
 
@@ -2658,7 +2650,7 @@ with_df(df[is.na(df)] <- 1:2)
 
 ```r
 with_tbl(tbl[is.na(tbl)] <- 1:2)
-#> Error:
+#> Error in `[<-.tbl_df`:
 #> ! Subscript `is.na(tbl)` is a matrix, the data `1:2` must have size 1.
 ```
 
@@ -2677,10 +2669,7 @@ with_df(df[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
 
 ```r
 with_tbl(tbl[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
-#> Error:
-#> ! Assigned data `4` must be compatible with existing data.
-#> i Error occurred for column `c`.
-#> x Can't convert <double> to <character>.
+#> Error in error_assign_incompatible_type(x, rep(list(value), j), j, value_arg, : could not find function "error_assign_incompatible_type"
 ```
 
 </td></tr></tbody></table>
@@ -2730,7 +2719,7 @@ with_df(df[1:3, 1:2] <- matrix(6:1, ncol = 2))
 
 ```r
 with_tbl(tbl[1:3, 1:2] <- matrix(6:1, ncol = 2))
-#> Error:
+#> Error in `abort_assign_incompatible_type()`:
 #> ! Assigned data `matrix(6:1, ncol = 2)` must be compatible with existing data.
 #> i Error occurred for column `c`.
 #> x Can't convert <integer> to <character>.
@@ -2799,7 +2788,7 @@ with_df(df[1:2] <- array(8:1, dim = c(2, 1, 4)))
 
 ```r
 with_tbl(tbl[1:2] <- array(8:1, dim = c(2, 1, 4)))
-#> Error:
+#> Error in `[<-.tbl_df`:
 #> ! `array(8:1, dim = c(2, 1, 4))` must be a vector, a bare list, a data frame, a matrix, or NULL.
 ```
 
@@ -2818,7 +2807,7 @@ with_df(df[1:2] <- array(8:1, dim = c(4, 1, 2)))
 
 ```r
 with_tbl(tbl[1:2] <- array(8:1, dim = c(4, 1, 2)))
-#> Error:
+#> Error in `[<-.tbl_df`:
 #> ! `array(8:1, dim = c(4, 1, 2))` must be a vector, a bare list, a data frame, a matrix, or NULL.
 ```
 
@@ -3001,7 +2990,7 @@ with_df(df[1, 2:3] <- NULL)
 
 ```r
 with_tbl(tbl[1, 2:3] <- NULL)
-#> Error:
+#> Error in `[<-.tbl_df`:
 #> ! `NULL` must be a vector, a bare list, a data frame or a matrix.
 ```
 
@@ -3024,7 +3013,7 @@ with_df(df[1] <- mean)
 
 ```r
 with_tbl(tbl[1] <- mean)
-#> Error:
+#> Error in `[<-.tbl_df`:
 #> ! `mean` must be a vector, a bare list, a data frame, a matrix, or NULL.
 ```
 
@@ -3059,7 +3048,7 @@ with_df(df[1] <- lm(mpg ~ wt, data = mtcars))
 
 ```r
 with_tbl(tbl[1] <- lm(mpg ~ wt, data = mtcars))
-#> Error:
+#> Error in `[<-.tbl_df`:
 #> ! `lm(mpg ~ wt, data = mtcars)` must be a vector, a bare list, a data frame, a matrix, or NULL.
 ```
 
@@ -3299,7 +3288,7 @@ with_df(df[NA, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[NA, ] <- tbl[1, ])
-#> Error:
+#> Error in `[<-.tbl_df`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
 
@@ -3366,11 +3355,7 @@ with_df(df[2:4, ] <- df[1:2, ])
 
 ```r
 with_tbl(tbl[2:4, ] <- tbl[1:2, ])
-#> Error:
-#> ! Assigned data `tbl[1:2, ]` must be compatible with row subscript `2:4`.
-#> x 3 rows must be assigned.
-#> x Element 1 of assigned data has 2 rows.
-#> i Only vectors of size 1 are recycled.
+#> Error in error_assign_incompatible_size(nrow, value, j, i_arg, value_arg): could not find function "error_assign_incompatible_size"
 ```
 
 </td></tr></tbody></table>
@@ -3408,11 +3393,7 @@ with_df2(df2[2:4, ] <- df2[2:3, ])
 
 ```r
 with_tbl2(tbl2[2:4, ] <- tbl2[2:3, ])
-#> Error:
-#> ! Assigned data `tbl2[2:3, ]` must be compatible with row subscript `2:4`.
-#> x 3 rows must be assigned.
-#> x Element 1 of assigned data has 2 rows.
-#> i Only vectors of size 1 are recycled.
+#> Error in error_assign_incompatible_size(nrow, value, j, i_arg, value_arg): could not find function "error_assign_incompatible_size"
 ```
 
 </td></tr></tbody></table>
@@ -3612,7 +3593,7 @@ with_df(df[as.character(-(1:3)), ] <- df[1, ])
 with_tbl(tbl[as.character(-(1:3)), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> Use `NA_integer_` as row index to obtain a row full of `NA` values.
-#> Error:
+#> Error in `[<-.tbl_df`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
 
@@ -3634,7 +3615,7 @@ with_df(df[as.character(3:5), ] <- df[1, ])
 with_tbl(tbl[as.character(3:5), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> Use `NA_integer_` as row index to obtain a row full of `NA` values.
-#> Error:
+#> Error in `[<-.tbl_df`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
 
@@ -3658,7 +3639,7 @@ with_df(df[as.character(-(3:5)), ] <- df[1, ])
 with_tbl(tbl[as.character(-(3:5)), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> Use `NA_integer_` as row index to obtain a row full of `NA` values.
-#> Error:
+#> Error in `[<-.tbl_df`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
 
@@ -3673,7 +3654,7 @@ with_df(df[NA_character_, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[NA_character_, ] <- tbl[1, ])
-#> Error:
+#> Error in `[<-.tbl_df`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
 
@@ -3706,7 +3687,7 @@ with_df(df[2:3, 1] <- df[1:2, 2])
 
 ```r
 with_tbl(tbl[2:3, 1] <- tbl[1:2, 2])
-#> Error:
+#> Error in `abort_assign_incompatible_type()`:
 #> ! Assigned data `tbl[1:2, 2]` must be compatible with existing data.
 #> i Error occurred for column `n`.
 #> x Can't convert <character> to <integer>.
@@ -3731,7 +3712,7 @@ with_df(df[2:3, 2] <- df[1:2, 3])
 
 ```r
 with_tbl(tbl[2:3, 2] <- tbl[1:2, 3])
-#> Error:
+#> Error in `abort_assign_incompatible_type()`:
 #> ! Assigned data `tbl[1:2, 3]` must be compatible with existing data.
 #> i Error occurred for column `c`.
 #> x Can't convert <list> to <character>.
@@ -3780,7 +3761,7 @@ with_df2(df2[2:3, 1] <- df2[1:2, 2])
 
 ```r
 with_tbl2(tbl2[2:3, 1] <- tbl2[1:2, 2])
-#> Error:
+#> Error in `abort_assign_incompatible_type()`:
 #> ! Assigned data `tbl2[1:2, 2]` must be compatible with existing data.
 #> i Error occurred for column `tb`.
 #> x Can't convert <double[,4]> to <tbl_df>.
@@ -3956,7 +3937,7 @@ with_df(df[2:3, "n"] <- NULL)
 
 ```r
 with_tbl(tbl[2:3, "n"] <- NULL)
-#> Error:
+#> Error in `[<-.tbl_df`:
 #> ! `NULL` must be a vector, a bare list, a data frame or a matrix.
 ```
 
