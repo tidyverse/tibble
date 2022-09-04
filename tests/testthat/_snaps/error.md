@@ -1,9 +1,9 @@
 # output test
 
     Code
-      invalid_df("must be integer", "col", "Fix this.")
+      invalid_df("must be integer", "col", "\nFix this.")
     Output
-      [1] "Column `col` must be integer.Fix this."
+      [1] "Column `col` must be integer.\nFix this."
     Code
       invalid_df("must be numeric", c("col1", "col2"))
     Output
