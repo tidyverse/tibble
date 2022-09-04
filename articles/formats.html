@@ -35,7 +35,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.1.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.1.8</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -141,11 +141,11 @@
 <span><span class="co">#&gt; The following objects are masked from 'package:base':</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     intersect, setdiff, setequal, union</span></span>
-<span><span class="va">tbl2</span> <span class="op">&lt;-</span></span>
+<span><span class="va">tbl2</span> <span class="op">&lt;-</span> </span>
 <span>  <span class="va">tbl</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    y <span class="op">=</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span>,</span>
-<span>    z <span class="op">=</span> <span class="va">x</span> <span class="op">*</span> <span class="va">x</span>,</span>
+<span>    y <span class="op">=</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span>, </span>
+<span>    z <span class="op">=</span> <span class="va">x</span> <span class="op">*</span> <span class="va">x</span>, </span>
 <span>    v <span class="op">=</span> <span class="va">y</span> <span class="op">+</span> <span class="va">z</span>,</span>
 <span>    lag <span class="op">=</span> <span class="fu">lag</span><span class="op">(</span><span class="va">x</span>, default <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,</span>
 <span>    sin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
@@ -162,9 +162,9 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    11.000    12.000   121.000   133.000    10.000   -1.000 111.667     1</span></span></code></pre></div>
 <p>Summaries also maintain the formatting.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tbl2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">lag</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
-<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">tbl2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">lag</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
+<span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span>z <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">z</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">ungroup</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 2</span></span></span>
 <span><span class="co">#&gt;         lag         z</span></span>
@@ -175,33 +175,33 @@
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">stocks</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand_grid.html" class="external-link">expand_grid</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>, year <span class="op">=</span> <span class="fl">2018</span><span class="op">:</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">stocks</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/expand_grid.html" class="external-link">expand_grid</a></span><span class="op">(</span>id <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>, year <span class="op">=</span> <span class="fl">2018</span><span class="op">:</span><span class="fl">2022</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span>stock <span class="op">=</span> <span class="fu"><a href="https://renkun-ken.github.io/formattable/reference/currency.html" class="external-link">currency</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">20</span><span class="op">)</span> <span class="op">*</span> <span class="fl">10000</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">stocks</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">stocks</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://tidyr.tidyverse.org/reference/pivot_wider.html" class="external-link">pivot_wider</a></span><span class="op">(</span><span class="va">id</span>, names_from <span class="op">=</span> <span class="va">year</span>, values_from <span class="op">=</span> <span class="va">stock</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 6</span></span></span>
 <span><span class="co">#&gt;   id       `2018`    `2019`    `2020`    `2021`    `2022`</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1       $928.08 $2,049.94 $4,133.85 $1,609.24 $2,962.41</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2       $840.36 $4,935.52 $2,604.75 $4,788.26 $8,294.47</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 3     $3,387.78 $2,750.23 $8,331.00 $7,674.72   $648.78</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 4     $8,521.72 $2,827.01 $2,026.99 $8,956.84 $5,643.50</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1        $28.48 $6,536.66 $5,540.04 $5,694.50 $3,778.72</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2     $7,651.91 $1,688.48 $5,097.87 $8,707.85 $7,127.99</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 3     $7,928.64 $1,786.02 $4,223.73 $2,350.04 $3,779.18</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 4       $380.05 $4,798.98 $6,210.83 $2,545.90 $9,180.68</span></span></code></pre></div>
 <p>For ggplot2 we need to do <a href="https://github.com/tidyverse/ggplot2/pull/4065" class="external-link">some work</a> to show apply the formatting to the scales.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># Needs https://github.com/tidyverse/ggplot2/pull/4065 or similar</span></span>
-<span><span class="va">stocks</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">stocks</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">stock</span>, color <span class="op">=</span> <span class="va">id</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="formats_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
 <p>It pays off to specify formatting very early in the process. The diagram below shows the principal stages of data analysis and exploration from “R for data science”.</p>
-<div id="htmlwidget-164299ecc9e8afb2bb49" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-164299ecc9e8afb2bb49">{"x":{"diagram":["graph TD","  Import --> Tidy","  Tidy --> Transform","  Transform --> Visualize","  Visualize --> Communicate","  Visualize --> Model","  Model -.-> Transform"]},"evals":[],"jsHooks":[]}</script><p>The subsequent diagram adds data formats, communication options, and explicit data formatting. The original r4ds transitions are highlighted in bold. There are two principal options where to apply formatting for results: right before communicating them, or right after importing.</p>
-<div id="htmlwidget-5b543b9a1d967db8fcbf" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-5b543b9a1d967db8fcbf">{"x":{"diagram":["graph TD","  .csv --> Import","  API --> Import","  DBI --> Import","  dbplyr --> Import","  Import -.-> Format[Format for analysis]","  Format -.-> Tidy","","  subgraph r4ds","  Import ==> Tidy","  Tidy ==> Transform","  Transform ==> Visualize","  Visualize ==> Model","  Model -.-> Transform","  Visualize ==> Communicate","  end","","  Visualize -.-> FormatComm[Format for communication]","  FormatComm -.-> Communicate","","  FormatComm -- Apply formatting early --> Format","","  dbplyr -.-> Tidy","  dbplyr -.-> Transform","  dbplyr -.-> Visualize","","  Communicate --> gt","  Communicate --> ggplot2","  Communicate --> DT","  Communicate --> plotly"]},"evals":[],"jsHooks":[]}</script><p>Applying formatting early in the process gives the added benefit of showing the data in a useful format during the “Tidy”, “Transform”, and “Visualize” stages. For this to be useful, we need to ensure that the formatting options applied early:</p>
+<div id="htmlwidget-7a9270568b7e23040f60" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-7a9270568b7e23040f60">{"x":{"diagram":["graph TD","  Import --> Tidy","  Tidy --> Transform","  Transform --> Visualize","  Visualize --> Communicate","  Visualize --> Model","  Model -.-> Transform"]},"evals":[],"jsHooks":[]}</script><p>The subsequent diagram adds data formats, communication options, and explicit data formatting. The original r4ds transitions are highlighted in bold. There are two principal options where to apply formatting for results: right before communicating them, or right after importing.</p>
+<div id="htmlwidget-669c74b2c3c43854ce21" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-669c74b2c3c43854ce21">{"x":{"diagram":["graph TD","  .csv --> Import","  API --> Import","  DBI --> Import","  dbplyr --> Import","  Import -.-> Format[Format for analysis]","  Format -.-> Tidy","","  subgraph r4ds","  Import ==> Tidy","  Tidy ==> Transform","  Transform ==> Visualize","  Visualize ==> Model","  Model -.-> Transform","  Visualize ==> Communicate","  end","","  Visualize -.-> FormatComm[Format for communication]","  FormatComm -.-> Communicate","","  FormatComm -- Apply formatting early --> Format","","  dbplyr -.-> Tidy","  dbplyr -.-> Transform","  dbplyr -.-> Visualize","","  Communicate --> gt","  Communicate --> ggplot2","  Communicate --> DT","  Communicate --> plotly"]},"evals":[],"jsHooks":[]}</script><p>Applying formatting early in the process gives the added benefit of showing the data in a useful format during the “Tidy”, “Transform”, and “Visualize” stages. For this to be useful, we need to ensure that the formatting options applied early:</p>
 <ul>
 <li>give a good user experience for analysis
 <ul>
@@ -220,11 +220,11 @@
 </ul>
 <p>Ensuring stickiness is difficult, and is insufficient for a dbplyr workflow where parts of the “Tidy”, “Transform” or even “Visualize” stages are run on the database. Often it’s possible to derive a rule-based approach for formatting.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">tbl3</span> <span class="op">&lt;-</span></span>
-<span>  <span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>id <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, x <span class="op">=</span> <span class="fl">9</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<code class="sourceCode R"><span><span class="va">tbl3</span> <span class="op">&lt;-</span> </span>
+<span>  <span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>id <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, x <span class="op">=</span> <span class="fl">9</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
-<span>    y <span class="op">=</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span>,</span>
-<span>    z <span class="op">=</span> <span class="va">x</span> <span class="op">*</span> <span class="va">x</span>,</span>
+<span>    y <span class="op">=</span> <span class="va">x</span> <span class="op">+</span> <span class="fl">1</span>, </span>
+<span>    z <span class="op">=</span> <span class="va">x</span> <span class="op">*</span> <span class="va">x</span>, </span>
 <span>    v <span class="op">=</span> <span class="va">y</span> <span class="op">+</span> <span class="va">z</span>,</span>
 <span>    lag <span class="op">=</span> <span class="fu">lag</span><span class="op">(</span><span class="va">x</span>, default <span class="op">=</span> <span class="va">x</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span>,</span>
 <span>    sin <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Trig.html" class="external-link">sin</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>,</span>
@@ -240,7 +240,7 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> b        10    11   100   111     9 -<span style="color: #BB0000;">0.544</span>  112.     1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> c        11    12   121   133    10 -<span style="color: #BB0000;">1.00</span>   112.     1</span></span>
 <span></span>
-<span><span class="va">tbl3</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">tbl3</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span></span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="va">is.numeric</span><span class="op">)</span>, <span class="va">digits</span>, <span class="fl">3</span><span class="op">)</span>,</span>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">is.numeric</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">50</span><span class="op">)</span>, <span class="va">digits</span>, <span class="fl">1</span><span class="op">)</span></span>
@@ -258,7 +258,7 @@
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu">where</span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">is.numeric</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">50</span><span class="op">)</span>, <span class="va">digits</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">tbl3</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
+<span><span class="va">tbl3</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> </span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">rules</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 9</span></span></span>
 <span><span class="co">#&gt;   id            x         y         z         v     lag    sin  mean   var</span></span>
