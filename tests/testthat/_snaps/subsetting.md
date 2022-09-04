@@ -605,7 +605,7 @@
       df <- tibble(x = 1:3, y = x, z = y)
       df[1:2] <- list(0, 0, 0)
     Condition
-      Error in `vectbl_as_new_col_index()`:
+      Error in `[<-`:
       ! Can't recycle `list(0, 0, 0)` (size 3) to size 2.
     Code
       df[] <- list(0, 0)
