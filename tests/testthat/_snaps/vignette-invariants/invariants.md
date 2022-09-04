@@ -2735,7 +2735,7 @@ with_df(df[1:3, 1:2] <- matrix(6:1, ncol = 2))
 
 ```r
 with_tbl(tbl[1:3, 1:2] <- matrix(6:1, ncol = 2))
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! Assigned data `matrix(6:1, ncol = 2)` must be compatible with existing data.
 #> i Error occurred for column `c`.
 #> Caused by error in `vec_assign()`:
@@ -3716,7 +3716,7 @@ with_df(df[2:3, 1] <- df[1:2, 2])
 
 ```r
 with_tbl(tbl[2:3, 1] <- tbl[1:2, 2])
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! Assigned data `tbl[1:2, 2]` must be compatible with existing data.
 #> i Error occurred for column `n`.
 #> Caused by error in `vec_assign()`:
@@ -3742,7 +3742,7 @@ with_df(df[2:3, 2] <- df[1:2, 3])
 
 ```r
 with_tbl(tbl[2:3, 2] <- tbl[1:2, 3])
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! Assigned data `tbl[1:2, 3]` must be compatible with existing data.
 #> i Error occurred for column `c`.
 #> Caused by error in `vec_assign()`:
@@ -3792,7 +3792,7 @@ with_df2(df2[2:3, 1] <- df2[1:2, 2])
 
 ```r
 with_tbl2(tbl2[2:3, 1] <- tbl2[1:2, 2])
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! Assigned data `tbl2[1:2, 2]` must be compatible with existing data.
 #> i Error occurred for column `tb`.
 #> Caused by error in `vec_assign()`:
