@@ -3,7 +3,7 @@ invalid_df <- function(problem, vars, extra = NULL, message = "Column(s)") {
     vars <- tick(vars)
   }
 
-  c(
+  vec_c(
     pluralise_commas(paste0(message, " "), vars, paste0(" ", problem, ".")),
     i = extra
   )
