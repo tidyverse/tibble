@@ -4218,7 +4218,7 @@ df[[1:2, 1]]
 
 ```r
 tbl[[1:2, 1]]
-#> Error in `[[.tbl_df`:
+#> Error in `tbl[[1:2, 1]]`:
 #> ! Must extract row with a single valid subscript.
 #> x Subscript `1:2` has size 2 but must be size 1.
 ```
@@ -4234,7 +4234,7 @@ with_df(df[[1:2, 1]] <- 0)
 
 ```r
 with_tbl(tbl[[1:2, 1]] <- 0)
-#> Error in `[[<-.tbl_df`:
+#> Error in `[[<-`:
 #> ! Must assign to row with a single valid subscript.
 #> x Subscript `1:2` has size 2 but must be size 1.
 ```

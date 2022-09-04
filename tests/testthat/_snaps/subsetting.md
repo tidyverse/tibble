@@ -936,27 +936,27 @@
     Code
       foo[[1:3, 1]] <- 1
     Condition
-      Error in `[[<-.tbl_df`:
+      Error in `[[<-`:
       ! Must assign to row with a single valid subscript.
       x Subscript `1:3` has size 3 but must be size 1.
     Code
       foo[[TRUE, 1]] <- 1
     Condition
-      Error in `[[<-.tbl_df`:
+      Error in `[[<-`:
       ! Must assign to row with a single valid subscript.
       x Subscript `TRUE` has the wrong type `logical`.
       i It must be numeric or character.
     Code
       foo[[mean, 1]] <- 1
     Condition
-      Error in `[[<-.tbl_df`:
+      Error in `[[<-`:
       ! Must assign to row with a single valid subscript.
       x Subscript `mean` has the wrong type `function`.
       i It must be numeric or character.
     Code
       foo[[foo, 1]] <- 1
     Condition
-      Error in `[[<-.tbl_df`:
+      Error in `[[<-`:
       ! Must assign to row with a single valid subscript.
       x Subscript `foo` has the wrong type `tbl_df<
         x: integer
