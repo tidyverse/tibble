@@ -475,8 +475,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></span>
 <span><span class="co">#&gt; Warning in `[.data.frame`(df, "a",</span></span>
-<span><span class="co">#&gt; drop = FALSE): 'drop' argument will be</span></span>
-<span><span class="co">#&gt; ignored</span></span>
+<span><span class="co">#&gt; drop = FALSE): 'drop' argument will</span></span>
+<span><span class="co">#&gt; be ignored</span></span>
 <span><span class="co">#&gt;   a</span></span>
 <span><span class="co">#&gt; 1 1</span></span>
 <span><span class="co">#&gt; 2 2</span></span>
@@ -487,8 +487,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span></span>
 <span><span class="co">#&gt; Warning: `drop` argument ignored for</span></span>
-<span><span class="co">#&gt; subsetting a tibble with `x[j]`, it has</span></span>
-<span><span class="co">#&gt; an effect only for `x[i, j]`.</span></span>
+<span><span class="co">#&gt; subsetting a tibble with `x[j]`, it</span></span>
+<span><span class="co">#&gt; has an effect only for `x[i, j]`.</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span></span>
 <span><span class="co">#&gt;       a</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
@@ -502,8 +502,9 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <td>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Warning in `[.data.frame`(df, "a", drop</span></span>
-<span><span class="co">#&gt; = TRUE): 'drop' argument will be ignored</span></span>
+<span><span class="co">#&gt; Warning in `[.data.frame`(df, "a",</span></span>
+<span><span class="co">#&gt; drop = TRUE): 'drop' argument will</span></span>
+<span><span class="co">#&gt; be ignored</span></span>
 <span><span class="co">#&gt;   a</span></span>
 <span><span class="co">#&gt; 1 1</span></span>
 <span><span class="co">#&gt; 2 2</span></span>
@@ -514,8 +515,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="st">"a"</span>, drop <span class="op">=</span> <span class="cn">TRUE</span><span class="op">]</span></span>
 <span><span class="co">#&gt; Warning: `drop` argument ignored for</span></span>
-<span><span class="co">#&gt; subsetting a tibble with `x[j]`, it has</span></span>
-<span><span class="co">#&gt; an effect only for `x[i, j]`.</span></span>
+<span><span class="co">#&gt; subsetting a tibble with `x[j]`, it</span></span>
+<span><span class="co">#&gt; has an effect only for `x[i, j]`.</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 1</span></span></span>
 <span><span class="co">#&gt;       a</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
@@ -574,8 +575,9 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">NA</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column index</span></span>
-<span><span class="co">#&gt;   with `[` at positions 1, 2, and 3.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column</span></span>
+<span><span class="co">#&gt;   index with `[` at positions 1, 2,</span></span>
+<span><span class="co">#&gt;   and 3.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -588,8 +590,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">NA_character_</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column index</span></span>
-<span><span class="co">#&gt;   with `[` at position 1.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column</span></span>
+<span><span class="co">#&gt;   index with `[` at position 1.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -602,8 +604,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">NA_integer_</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column index</span></span>
-<span><span class="co">#&gt;   with `[` at position 1.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column</span></span>
+<span><span class="co">#&gt;   index with `[` at position 1.</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -703,8 +705,9 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="cn">NA</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column index</span></span>
-<span><span class="co">#&gt;   with `[` at positions 1, 2, and 3.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column</span></span>
+<span><span class="co">#&gt;   index with `[` at positions 1, 2,</span></span>
+<span><span class="co">#&gt;   and 3.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -717,8 +720,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="cn">NA_character_</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column index</span></span>
-<span><span class="co">#&gt;   with `[` at position 1.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column</span></span>
+<span><span class="co">#&gt;   index with `[` at position 1.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -731,8 +734,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="cn">NA_integer_</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column index</span></span>
-<span><span class="co">#&gt;   with `[` at position 1.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column</span></span>
+<span><span class="co">#&gt;   index with `[` at position 1.</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1199,7 +1202,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <td>
 <div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[, c(FALSE, TRUE, FALSE, TRUE)]`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[, c(FALSE, TRUE, FALSE,</span></span></span>
+<span><span class="co"><span style="font-weight: bold;">#&gt; TRUE)]`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset columns with a valid subscript vector.</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size of the indexed input.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 3 but subscript `c(FALSE, TRUE, FALSE, TRUE)` has size 4.</span></span></code></pre></div>
@@ -1263,8 +1267,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb106"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fl">0</span>, <span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 3</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 3 variables: a &lt;int&gt;, b &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   cd &lt;list&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 3 variables: a &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   b &lt;chr&gt;, cd &lt;list&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1274,8 +1278,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb107"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span>, <span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 3</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 3 variables: a &lt;int&gt;, b &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   cd &lt;list&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 3 variables: a &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   b &lt;chr&gt;, cd &lt;list&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1397,8 +1401,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb117"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">FALSE</span>, <span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 3</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 3 variables: a &lt;int&gt;, b &lt;chr&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   cd &lt;list&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 3 variables: a &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   b &lt;chr&gt;, cd &lt;list&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">

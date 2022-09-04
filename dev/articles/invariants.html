@@ -395,7 +395,7 @@
 <td>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `vec_as_location2_result()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `vectbl_as_col_location2()` at tibble/R/subsetting.R:397:8:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns past the end.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Location 4 doesn't exist.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> There are only 3 columns.</span></span></code></pre></div>
@@ -939,7 +939,8 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span>     0     1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span>     0     0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span>     0     0</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 1 more variable: m[3:4] &lt;dbl&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 1 more variable:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   m[3:4] &lt;dbl&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -958,7 +959,8 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    <span style="color: #BB0000;">NA</span> f     <span style="color: #949494;">&lt;int [2]&gt;</span>     1     0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span>     1     0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    <span style="color: #BB0000;">NA</span> h     <span style="color: #949494;">&lt;chr [1]&gt;</span>     1     0</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 1 more variable: m[3:4] &lt;dbl&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 1 more variable:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   m[3:4] &lt;dbl&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1005,10 +1007,11 @@
 <td>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in format.data.frame(if (omit)</span></span>
-<span><span class="co">#&gt; x[seq_len(n0), , drop = FALSE] else</span></span>
-<span><span class="co">#&gt; x, : corrupt data frame: columns will be</span></span>
-<span><span class="co">#&gt; truncated or padded with NAs</span></span>
+<span><span class="co">#&gt; Warning in format.data.frame(if</span></span>
+<span><span class="co">#&gt; (omit) x[seq_len(n0), , drop =</span></span>
+<span><span class="co">#&gt; FALSE] else x, : corrupt data frame:</span></span>
+<span><span class="co">#&gt; columns will be truncated or padded</span></span>
+<span><span class="co">#&gt; with NAs</span></span>
 <span><span class="co">#&gt;    n c         li      V5</span></span>
 <span><span class="co">#&gt; 1  1 e          9 NULL  0</span></span>
 <span><span class="co">#&gt; 2 NA f     10, 11 &lt;NA&gt;  0</span></span>
@@ -1167,8 +1170,9 @@
 <div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
-<span><span class="co">#&gt; 1:2, value = list(0, 0, 0)): provided 3</span></span>
-<span><span class="co">#&gt; variables to replace 2 variables</span></span>
+<span><span class="co">#&gt; 1:2, value = list(0, 0, 0)):</span></span>
+<span><span class="co">#&gt; provided 3 variables to replace 2</span></span>
+<span><span class="co">#&gt; variables</span></span>
 <span><span class="co">#&gt;   n c         li</span></span>
 <span><span class="co">#&gt; 1 0 0          9</span></span>
 <span><span class="co">#&gt; 2 0 0     10, 11</span></span>
@@ -1211,8 +1215,8 @@
 <div class="sourceCode" id="cb92"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Column index 1 is used more</span></span>
-<span><span class="co">#&gt;   than once for assignment.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Column index 1 is used</span></span>
+<span><span class="co">#&gt;   more than once for assignment.</span></span></code></pre></div>
 </td>
 </tr></tbody></table>
 <p>If <code>a</code> contains <code>NULL</code> values, the corresponding columns are removed <em>after</em> updating (i.e. position indexes refer to columns before any modifications).</p>
@@ -1341,9 +1345,9 @@
 <div class="sourceCode" id="cb103"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Subscript `is.na(tbl)` is a</span></span>
-<span><span class="co">#&gt;   matrix, the data `1:2` must have size</span></span>
-<span><span class="co">#&gt;   1.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Subscript `is.na(tbl)` is</span></span>
+<span><span class="co">#&gt;   a matrix, the data `1:2` must</span></span>
+<span><span class="co">#&gt;   have size 1.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1405,8 +1409,8 @@
 <code class="sourceCode R"><span><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/matrix.html" class="external-link">matrix</a></span><span class="op">(</span><span class="fl">6</span><span class="op">:</span><span class="fl">1</span>, ncol <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `matrix(6:1,</span></span>
-<span><span class="co">#&gt;   ncol = 2)` must be compatible with</span></span>
-<span><span class="co">#&gt;   existing data.</span></span>
+<span><span class="co">#&gt;   ncol = 2)` must be compatible</span></span>
+<span><span class="co">#&gt;   with existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `c`.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;integer&gt; to</span></span>
 <span><span class="co">#&gt;   &lt;character&gt;.</span></span></code></pre></div>
@@ -1456,9 +1460,10 @@
 <div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">2</span>, <span class="fl">1</span>, <span class="fl">4</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `array(8:1, dim = c(2, 1, 4))`</span></span>
-<span><span class="co">#&gt;   must be a vector, a bare list, a data</span></span>
-<span><span class="co">#&gt;   frame, a matrix, or NULL.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `array(8:1, dim = c(2, 1,</span></span>
+<span><span class="co">#&gt;   4))` must be a vector, a bare</span></span>
+<span><span class="co">#&gt;   list, a data frame, a matrix, or</span></span>
+<span><span class="co">#&gt;   NULL.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1475,9 +1480,10 @@
 <div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/array.html" class="external-link">array</a></span><span class="op">(</span><span class="fl">8</span><span class="op">:</span><span class="fl">1</span>, dim <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">4</span>, <span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `array(8:1, dim = c(4, 1, 2))`</span></span>
-<span><span class="co">#&gt;   must be a vector, a bare list, a data</span></span>
-<span><span class="co">#&gt;   frame, a matrix, or NULL.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `array(8:1, dim = c(4, 1,</span></span>
+<span><span class="co">#&gt;   2))` must be a vector, a bare</span></span>
+<span><span class="co">#&gt;   list, a data frame, a matrix, or</span></span>
+<span><span class="co">#&gt;   NULL.</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1606,7 +1612,8 @@
 <code class="sourceCode R"><span><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `NULL` must be a vector, a</span></span>
-<span><span class="co">#&gt;   bare list, a data frame or a matrix.</span></span></code></pre></div>
+<span><span class="co">#&gt;   bare list, a data frame or a</span></span>
+<span><span class="co">#&gt;   matrix.</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1628,32 +1635,36 @@
 <code class="sourceCode R"><span><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">mean</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `mean` must be a vector, a</span></span>
-<span><span class="co">#&gt;   bare list, a data frame, a matrix, or</span></span>
-<span><span class="co">#&gt;   NULL.</span></span></code></pre></div>
+<span><span class="co">#&gt;   bare list, a data frame, a</span></span>
+<span><span class="co">#&gt;   matrix, or NULL.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
-<span><span class="co">#&gt; 1, value = structure(list(coefficients</span></span>
-<span><span class="co">#&gt; = c(`(Intercept)` = 37.285126167342, :</span></span>
+<span><span class="co">#&gt; Warning in</span></span>
+<span><span class="co">#&gt; `[&lt;-.data.frame`(`*tmp*`, 1, value</span></span>
+<span><span class="co">#&gt; = structure(list(coefficients =</span></span>
+<span><span class="co">#&gt; c(`(Intercept)` = 37.285126167342, :</span></span>
 <span><span class="co">#&gt; replacement element 2 has 32 rows to</span></span>
 <span><span class="co">#&gt; replace 4 rows</span></span>
-<span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
-<span><span class="co">#&gt; 1, value = structure(list(coefficients</span></span>
-<span><span class="co">#&gt; = c(`(Intercept)` = 37.285126167342, :</span></span>
+<span><span class="co">#&gt; Warning in</span></span>
+<span><span class="co">#&gt; `[&lt;-.data.frame`(`*tmp*`, 1, value</span></span>
+<span><span class="co">#&gt; = structure(list(coefficients =</span></span>
+<span><span class="co">#&gt; c(`(Intercept)` = 37.285126167342, :</span></span>
 <span><span class="co">#&gt; replacement element 3 has 32 rows to</span></span>
 <span><span class="co">#&gt; replace 4 rows</span></span>
-<span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
-<span><span class="co">#&gt; 1, value = structure(list(coefficients</span></span>
-<span><span class="co">#&gt; = c(`(Intercept)` = 37.285126167342, :</span></span>
+<span><span class="co">#&gt; Warning in</span></span>
+<span><span class="co">#&gt; `[&lt;-.data.frame`(`*tmp*`, 1, value</span></span>
+<span><span class="co">#&gt; = structure(list(coefficients =</span></span>
+<span><span class="co">#&gt; c(`(Intercept)` = 37.285126167342, :</span></span>
 <span><span class="co">#&gt; replacement element 5 has 32 rows to</span></span>
 <span><span class="co">#&gt; replace 4 rows</span></span>
-<span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
-<span><span class="co">#&gt; 1, value = structure(list(coefficients</span></span>
-<span><span class="co">#&gt; = c(`(Intercept)` = 37.285126167342, :</span></span>
+<span><span class="co">#&gt; Warning in</span></span>
+<span><span class="co">#&gt; `[&lt;-.data.frame`(`*tmp*`, 1, value</span></span>
+<span><span class="co">#&gt; = structure(list(coefficients =</span></span>
+<span><span class="co">#&gt; c(`(Intercept)` = 37.285126167342, :</span></span>
 <span><span class="co">#&gt; replacement element 7 has 5 rows to</span></span>
 <span><span class="co">#&gt; replace 4 rows</span></span>
 <span><span class="co">#&gt; Error in `[&lt;-.data.frame`(`*tmp*`, 1, value = structure(list(coefficients = c(`(Intercept)` = 37.285126167342, : replacement element 10 has 3 rows, need 4</span></span></code></pre></div>
@@ -1662,9 +1673,10 @@
 <div class="sourceCode" id="cb126"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `lm(mpg ~ wt, data = mtcars)`</span></span>
-<span><span class="co">#&gt;   must be a vector, a bare list, a data</span></span>
-<span><span class="co">#&gt;   frame, a matrix, or NULL.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `lm(mpg ~ wt, data =</span></span>
+<span><span class="co">#&gt;   mtcars)` must be a vector, a bare</span></span>
+<span><span class="co">#&gt;   list, a data frame, a matrix, or</span></span>
+<span><span class="co">#&gt;   NULL.</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1750,12 +1762,13 @@
 <code class="sourceCode R"><span><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `tbl[1:2, ]`</span></span>
-<span><span class="co">#&gt;   must be compatible with row subscript</span></span>
-<span><span class="co">#&gt;   `2:4`.</span></span>
+<span><span class="co">#&gt;   must be compatible with row</span></span>
+<span><span class="co">#&gt;   subscript `2:4`.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> 3 rows must be assigned.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Element 1 of assigned data has 2</span></span>
 <span><span class="co">#&gt;   rows.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Only vectors of size 1 are recycled.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Only vectors of size 1 are</span></span>
+<span><span class="co">#&gt;   recycled.</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1850,8 +1863,8 @@
 <code class="sourceCode R"><span><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">5</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `numtbl_as_row_location_assign()` at tibble/R/subsetting.R:486:4:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't negate rows past the end.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Locations 5, 6, and 7 don't</span></span>
-<span><span class="co">#&gt;   exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Locations 5, 6, and 7</span></span>
+<span><span class="co">#&gt;   don't exist.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> There are only 4 rows.</span></span></code></pre></div>
 </td>
 </tr>
@@ -1915,9 +1928,9 @@
 <div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `tbl[1:2, 2]`</span></span>
-<span><span class="co">#&gt;   must be compatible with existing</span></span>
-<span><span class="co">#&gt;   data.</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `tbl[1:2,</span></span>
+<span><span class="co">#&gt;   2]` must be compatible with</span></span>
+<span><span class="co">#&gt;   existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `n`.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;character&gt; to</span></span>
 <span><span class="co">#&gt;   &lt;integer&gt;.</span></span></code></pre></div>
@@ -1941,11 +1954,12 @@
 <div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `tbl[1:2, 3]`</span></span>
-<span><span class="co">#&gt;   must be compatible with existing</span></span>
-<span><span class="co">#&gt;   data.</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `tbl[1:2,</span></span>
+<span><span class="co">#&gt;   3]` must be compatible with</span></span>
+<span><span class="co">#&gt;   existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `c`.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;list&gt; to &lt;character&gt;.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;list&gt; to</span></span>
+<span><span class="co">#&gt;   &lt;character&gt;.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1953,9 +1967,9 @@
 <div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">df2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
-<span><span class="co">#&gt; 2:3, 3, value = structure(list(n =</span></span>
-<span><span class="co">#&gt; c(1L, : provided 3 variables to replace</span></span>
-<span><span class="co">#&gt; 1 variables</span></span>
+<span><span class="co">#&gt; 2:3, 3, value = structure(list(n</span></span>
+<span><span class="co">#&gt; = c(1L, : provided 3 variables to</span></span>
+<span><span class="co">#&gt; replace 1 variables</span></span>
 <span><span class="co">#&gt;    n c   li</span></span>
 <span><span class="co">#&gt; 1  1 e    9</span></span>
 <span><span class="co">#&gt; 2 NA f    1</span></span>
@@ -1965,10 +1979,12 @@
 <td>
 <div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `df_cast_opts()`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Data frame must have names.</span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> In file <span style="color: #0000BB;">type-data-frame.c</span> at line 683.</span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> This is an internal error in the vctrs package, please report it to the package authors.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `tbl2[1:2,</span></span>
+<span><span class="co">#&gt;   1]` must be compatible with</span></span>
+<span><span class="co">#&gt;   existing data.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `li`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;tbl_df&gt; to &lt;list&gt;.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1977,7 +1993,8 @@
 <code class="sourceCode R"><span><span class="fu">with_df2</span><span class="op">(</span><span class="va">df2</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">df2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in matrix(value, n, p): data</span></span>
 <span><span class="co">#&gt; length [8] is not a sub-multiple or</span></span>
-<span><span class="co">#&gt; multiple of the number of columns [3]</span></span>
+<span><span class="co">#&gt; multiple of the number of columns</span></span>
+<span><span class="co">#&gt; [3]</span></span>
 <span><span class="co">#&gt;   tb.n tb.c tb.li m.1 m.2 m.3 m.4</span></span>
 <span><span class="co">#&gt; 1    1    e     9   1   0   0   0</span></span>
 <span><span class="co">#&gt; 2    1    0     0   0   1   0   0</span></span>
@@ -1988,9 +2005,9 @@
 <div class="sourceCode" id="cb151"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_tbl2</span><span class="op">(</span><span class="va">tbl2</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `tbl2[1:2, 2]`</span></span>
-<span><span class="co">#&gt;   must be compatible with existing</span></span>
-<span><span class="co">#&gt;   data.</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `tbl2[1:2,</span></span>
+<span><span class="co">#&gt;   2]` must be compatible with</span></span>
+<span><span class="co">#&gt;   existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `tb`.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert &lt;double[,4]&gt; to</span></span>
 <span><span class="co">#&gt;   &lt;tbl_df&gt;.</span></span></code></pre></div>
@@ -2009,7 +2026,8 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    <span style="color: #BB0000;">NA</span> f     <span style="color: #949494;">&lt;int [2]&gt;</span>     1     1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    <span style="color: #BB0000;">NA</span> h     <span style="color: #949494;">&lt;chr [1]&gt;</span>     0     0</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 1 more variable: m[3:4] &lt;dbl&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 1 more variable:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   m[3:4] &lt;dbl&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -2119,7 +2137,8 @@
 <code class="sourceCode R"><span><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="st">"n"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> `NULL` must be a vector, a</span></span>
-<span><span class="co">#&gt;   bare list, a data frame or a matrix.</span></span></code></pre></div>
+<span><span class="co">#&gt;   bare list, a data frame or a</span></span>
+<span><span class="co">#&gt;   matrix.</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
