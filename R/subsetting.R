@@ -575,14 +575,14 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
   j
 }
 
-numtbl_as_row_location_assign <- function(i, n, i_arg) {
+numtbl_as_row_location_assign <- function(i, n, i_arg, call = my_caller_call()) {
   subclass_row_index_errors(
-    num_as_location(i, n, missing = "error", oob = "extend", zero = "error"),
+    num_as_location(i, n, missing = "error", oob = "extend", zero = "error", call = call),
     i_arg = i_arg, assign = TRUE
   )
 }
 
-vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE) {
+vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE, call = my_caller_call()) {
   if (is_bare_atomic(i) && is.matrix(i) && ncol(i) == 1) {
     what <- paste0(
       "tibble::", if (assign) "`[<-`" else "`[`",
@@ -596,11 +596,11 @@ vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE) {
     i <- i[, 1]
   }
 
-  subclass_row_index_errors(vec_as_location(i, n), i_arg = i_arg, assign = assign)
+  subclass_row_index_errors(vec_as_location(i, n, call = call), i_arg = i_arg, assign = assign)
 }
 
-vectbl_as_row_location2 <- function(i, n, i_arg, assign = FALSE) {
-  subclass_row_index_errors(vec_as_location2(i, n), i_arg = i_arg, assign = assign)
+vectbl_as_row_location2 <- function(i, n, i_arg, assign = FALSE, call = my_caller_call()) {
+  subclass_row_index_errors(vec_as_location2(i, n, call = call), i_arg = i_arg, assign = assign)
 }
 
 numtbl_as_col_location_assign <- function(j, n, j_arg) {

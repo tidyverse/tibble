@@ -992,7 +992,7 @@ df[mean, ]
 
 ```r
 tbl[mean, ]
-#> Error in `vectbl_as_row_location()`:
+#> Error in `[.tbl_df`:
 #> ! Must subset rows with a valid subscript vector.
 #> x Subscript `mean` has the wrong type `function`.
 #> i It must be logical, numeric, or character.
@@ -1009,7 +1009,7 @@ df[list(1), ]
 
 ```r
 tbl[list(1), ]
-#> Error in `vectbl_as_row_location()`:
+#> Error in `[.tbl_df`:
 #> ! Must subset rows with a valid subscript vector.
 #> x Subscript `list(1)` has the wrong type `list`.
 #> i It must be logical, numeric, or character.
@@ -1096,7 +1096,7 @@ df[c(TRUE, FALSE), ]
 
 ```r
 tbl[c(TRUE, FALSE), ]
-#> Error in `vectbl_as_row_location()`:
+#> Error in `[.tbl_df`:
 #> ! Must subset rows with a valid subscript vector.
 #> i Logical subscripts must match the size of the indexed input.
 #> x Input has size 4 but subscript `c(TRUE, FALSE)` has size 2.
@@ -3160,7 +3160,7 @@ with_df(df[0:2, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[0:2, ] <- tbl[1, ])
-#> Error in `numtbl_as_row_location_assign()`:
+#> Error in `[<-.tbl_df`:
 #> ! Must assign to rows with a valid subscript vector.
 #> x Subscript `0:2` can't contain `0` values.
 #> i It has a `0` value at location 1.
@@ -3181,7 +3181,7 @@ with_df(df[0, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[0, ] <- tbl[1, ])
-#> Error in `numtbl_as_row_location_assign()`:
+#> Error in `[<-.tbl_df`:
 #> ! Must assign to rows with a valid subscript vector.
 #> x Subscript `0` can't contain `0` values.
 #> i It has a `0` value at location 1.
@@ -3222,7 +3222,7 @@ with_df(df[-1:2, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[-1:2, ] <- tbl[1, ])
-#> Error in `numtbl_as_row_location_assign()`:
+#> Error in `[<-.tbl_df`:
 #> ! Must assign to rows with a valid subscript vector.
 #> x Subscript `-1:2` can't contain `0` values.
 #> i It has a `0` value at location 2.
@@ -3239,7 +3239,7 @@ with_df(df[NA_integer_, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[NA_integer_, ] <- tbl[1, ])
-#> Error in `numtbl_as_row_location_assign()`:
+#> Error in `[<-.tbl_df`:
 #> ! Must assign to rows with a valid subscript vector.
 #> x Subscript `NA_integer_` can't contain missing values.
 #> x It has a missing value at location 1.
@@ -3256,7 +3256,7 @@ with_df2(df2[NA_integer_, ] <- df2[1, ])
 
 ```r
 with_tbl2(tbl2[NA_integer_, ] <- tbl2[1, ])
-#> Error in `numtbl_as_row_location_assign()`:
+#> Error in `[<-.tbl_df`:
 #> ! Must assign to rows with a valid subscript vector.
 #> x Subscript `NA_integer_` can't contain missing values.
 #> x It has a missing value at location 1.
@@ -3519,7 +3519,7 @@ with_df(df[6, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[6, ] <- tbl[1, ])
-#> Error in `numtbl_as_row_location_assign()`:
+#> Error in `[<-.tbl_df`:
 #> ! Can't assign to rows beyond the end with non-consecutive locations.
 #> i Input has size 4.
 #> x Subscript `6` contains non-consecutive location 6.
@@ -3540,7 +3540,7 @@ with_df(df[-5, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[-5, ] <- tbl[1, ])
-#> Error in `numtbl_as_row_location_assign()`:
+#> Error in `[<-.tbl_df`:
 #> ! Can't negate rows past the end.
 #> i Location 5 doesn't exist.
 #> i There are only 4 rows.
@@ -3561,7 +3561,7 @@ with_df(df[-(5:7), ] <- df[1, ])
 
 ```r
 with_tbl(tbl[-(5:7), ] <- tbl[1, ])
-#> Error in `numtbl_as_row_location_assign()`:
+#> Error in `[<-.tbl_df`:
 #> ! Can't negate rows past the end.
 #> i Locations 5, 6, and 7 don't exist.
 #> i There are only 4 rows.
@@ -3582,7 +3582,7 @@ with_df(df[-6, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[-6, ] <- tbl[1, ])
-#> Error in `numtbl_as_row_location_assign()`:
+#> Error in `[<-.tbl_df`:
 #> ! Can't negate rows past the end.
 #> i Location 6 doesn't exist.
 #> i There are only 4 rows.
@@ -4250,7 +4250,7 @@ df[[1:2, 1]]
 
 ```r
 tbl[[1:2, 1]]
-#> Error in `vectbl_as_row_location2()`:
+#> Error in `[[.tbl_df`:
 #> ! Must extract row with a single valid subscript.
 #> x Subscript `1:2` has size 2 but must be size 1.
 ```
@@ -4266,7 +4266,7 @@ with_df(df[[1:2, 1]] <- 0)
 
 ```r
 with_tbl(tbl[[1:2, 1]] <- 0)
-#> Error in `vectbl_as_row_location2()`:
+#> Error in `[[<-.tbl_df`:
 #> ! Must assign to row with a single valid subscript.
 #> x Subscript `1:2` has size 2 but must be size 1.
 ```
