@@ -1,17 +1,16 @@
-invalid_df <- function(problem, vars, ...) {
+invalid_df <- function(problem, vars, extra = NULL, message = "Column(s)") {
   if (is.character(vars)) {
     vars <- tick(vars)
   }
 
-  pluralise_commas(
-    "Column(s) ",
-    vars,
-    paste0(" ", problem, ".", ...)
+  c(
+    pluralise_commas(paste0(message, " "), vars, paste0(" ", problem, ".")),
+    i = extra
   )
 }
 
 use_repair <- function(repair_hint) {
-  if (repair_hint) "\nUse `.name_repair` to specify repair."
+  if (repair_hint) "Use `.name_repair` to specify repair."
 }
 
 tibble_error_class <- function(class) {
