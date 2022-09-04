@@ -61,34 +61,34 @@ test_that("[.tbl_df is careful about names (#1245)", {
   foo <- tibble(x = 1:10, y = 1:10)
   expect_legacy_error(
     foo["z"],
-    error_unknown_names("z"),
+    abort_unknown_names("z"),
     fixed = TRUE
   )
   expect_legacy_error(
     foo[c("x", "y", "z")],
-    error_unknown_names("z"),
+    abort_unknown_names("z"),
     fixed = TRUE
   )
 
   expect_legacy_error(
     foo[, "z"],
-    error_unknown_names("z"),
+    abort_unknown_names("z"),
     fixed = TRUE
   )
   expect_legacy_error(
     foo[, c("x", "y", "z")],
-    error_unknown_names("z"),
+    abort_unknown_names("z"),
     fixed = TRUE
   )
 
   expect_legacy_error(
     foo[as.matrix("x")],
-    error_dim_column_index(as.matrix("x")),
+    abort_dim_column_index(as.matrix("x")),
     fixed = TRUE
   )
   expect_legacy_error(
     foo[array("x", dim = c(1, 1, 1))],
-    error_dim_column_index(array("x", dim = c(1, 1, 1))),
+    abort_dim_column_index(array("x", dim = c(1, 1, 1))),
     fixed = TRUE
   )
 })
@@ -99,12 +99,12 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
 
   expect_legacy_error(
     foo[0.5],
-    error_nonint_column_index(1, 0.5),
+    abort_nonint_column_index(1, 0.5),
     fixed = TRUE
   )
   expect_legacy_error(
     foo[1:5],
-    error_large_column_index(3, 4:5, 4:5),
+    abort_large_column_index(3, 4:5, 4:5),
     fixed = TRUE
   )
 
@@ -114,23 +114,23 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
 
   expect_legacy_error(
     foo[-4],
-    error_small_column_index(3, 1, -4),
+    abort_small_column_index(3, 1, -4),
     fixed = TRUE
   )
   expect_legacy_error(
     foo[c(1:3, NA)],
-    error_na_column_index(),
+    abort_na_column_index(),
     fixed = TRUE
   )
 
   expect_legacy_error(
     foo[as.matrix(1)],
-    error_dim_column_index(as.matrix("x")),
+    abort_dim_column_index(as.matrix("x")),
     fixed = TRUE
   )
   expect_legacy_error(
     foo[array(1, dim = c(1, 1, 1))],
-    error_dim_column_index(array("x", dim = c(1, 1, 1))),
+    abort_dim_column_index(array("x", dim = c(1, 1, 1))),
     fixed = TRUE
   )
 })
@@ -144,28 +144,28 @@ test_that("[.tbl_df is careful about column flags (#83)", {
 
   expect_legacy_error(
     foo[c(TRUE, TRUE)],
-    error_mismatch_column_flag(3, 2),
+    abort_mismatch_column_flag(3, 2),
     fixed = TRUE
   )
   expect_legacy_error(
     foo[c(TRUE, TRUE, FALSE, FALSE)],
-    error_mismatch_column_flag(3, 4),
+    abort_mismatch_column_flag(3, 4),
     fixed = TRUE
   )
   expect_legacy_error(
     foo[c(TRUE, TRUE, NA)],
-    error_na_column_flag(),
+    abort_na_column_flag(),
     fixed = TRUE
   )
 
   expect_legacy_error(
     foo[as.matrix(TRUE)],
-    error_dim_column_index(as.matrix("x")),
+    abort_dim_column_index(as.matrix("x")),
     fixed = TRUE
   )
   expect_legacy_error(
     foo[array(TRUE, dim = c(1, 1, 1))],
-    error_dim_column_index(array("x", dim = c(1, 1, 1))),
+    abort_dim_column_index(array("x", dim = c(1, 1, 1))),
     fixed = TRUE
   )
 })
@@ -174,27 +174,27 @@ test_that("[.tbl_df rejects unknown column indexes (#83)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_legacy_error(
     foo[list(1:3)],
-    error_unsupported_index(list(1:3)),
+    abort_unsupported_index(list(1:3)),
     fixed = TRUE
   )
   expect_legacy_error(
     foo[as.list(1:3)],
-    error_unsupported_index(as.list(1:3)),
+    abort_unsupported_index(as.list(1:3)),
     fixed = TRUE
   )
   expect_legacy_error(
     foo[factor(1:3)],
-    error_unsupported_index(factor(1:3)),
+    abort_unsupported_index(factor(1:3)),
     fixed = TRUE
   )
   expect_legacy_error(
     foo[Sys.Date()],
-    error_unsupported_index(Sys.Date()),
+    abort_unsupported_index(Sys.Date()),
     fixed = TRUE
   )
   expect_legacy_error(
     foo[Sys.time()],
-    error_unsupported_index(Sys.time()),
+    abort_unsupported_index(Sys.time()),
     fixed = TRUE
   )
 })
@@ -432,12 +432,12 @@ test_that("new_tibble checks (2)", {
   expect_legacy_error(
     new_tibble(list(a = 1)),
     class = get_defunct_error_class(),
-    error_new_tibble_needs_nrow(),
+    abort_new_tibble_needs_nrow(),
     fixed = TRUE
   )
   expect_legacy_error(
     new_tibble(list(1), nrow = NULL),
-    error_new_tibble_needs_nrow(),
+    abort_new_tibble_needs_nrow(),
     fixed = TRUE
   )
 })
@@ -447,7 +447,7 @@ test_that("new_tibble checks (3)", {
 
   expect_legacy_error(
     new_tibble(list(1), nrow = 1),
-    error_names_must_be_non_null(repair_hint = FALSE),
+    abort_names_must_be_non_null(repair_hint = FALSE),
     fixed = TRUE
   )
   expect_error(
@@ -475,14 +475,14 @@ test_that("new_tibble checks (3)", {
 test_that("validate_tibble() checks", {
   expect_legacy_error(
     validate_tibble(new_tibble(list(a = 1, b = 2:3), nrow = 1)),
-    error_inconsistent_cols(1, c("a", "b"), 1:2, "`nrow` argument"),
+    abort_inconsistent_cols(1, c("a", "b"), 1:2, "`nrow` argument"),
     fixed = TRUE
   )
 
   skip_brk_inner_dim_not_stripped()
   expect_error(
     validate_tibble(new_tibble(list(a = array(1:3)), nrow = 3)),
-    error_1d_array_column(),
+    abort_1d_array_column(),
     fixed = TRUE
   )
 })
