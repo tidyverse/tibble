@@ -119,23 +119,6 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
   x
 }
 
-cnd_names_non_null <- function(name) {
-  if (is.null(name)) {
-    error_names_must_be_non_null()
-  } else {
-    invisible()
-  }
-}
-
-cnd_names_non_na <- function(name) {
-  bad_name <- which(is.na(name))
-  if (has_length(bad_name)) {
-    error_column_names_cannot_be_empty(bad_name, repair_hint = FALSE)
-  } else {
-    invisible()
-  }
-}
-
 # Errors ------------------------------------------------------------------
 
 error_names_must_be_non_null <- function() {
