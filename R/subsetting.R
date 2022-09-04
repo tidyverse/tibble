@@ -694,7 +694,7 @@ tbl_subassign_row <- function(x, i, value, i_arg, value_arg, call = my_caller_en
     },
     vctrs_error = function(cnd) {
       # Side effect: check if `value` can be recycled
-      vectbl_recycle_rhs_rows(value, length(i), i_arg, value_arg)
+      vectbl_recycle_rhs_rows(value, length(i), i_arg, value_arg, call = call)
 
       abort_assign_incompatible_type(x, recycled_value, j, value_arg, cnd, call = call)
     }
@@ -764,7 +764,7 @@ result_vectbl_wrap_rhs <- function(value) {
   }
 }
 
-vectbl_recycle_rhs_rows <- function(value, nrow, i_arg, value_arg) {
+vectbl_recycle_rhs_rows <- function(value, nrow, i_arg, value_arg, call = my_caller_env()) {
   if (length(value) > 0L) {
     withCallingHandlers(
       for (j in seq_along(value)) {
@@ -773,7 +773,7 @@ vectbl_recycle_rhs_rows <- function(value, nrow, i_arg, value_arg) {
         }
       },
       vctrs_error_recycle_incompatible_size = function(cnd) {
-        abort_assign_incompatible_size(nrow, value, j, i_arg, value_arg, cnd)
+        abort_assign_incompatible_size(nrow, value, j, i_arg, value_arg, cnd, call = call)
       }
     )
   }
@@ -841,7 +841,7 @@ abort_duplicate_row_subscript_for_assignment <- function(i) {
   tibble_abort(pluralise_commas("Row index(es) ", i, " [is](are) used more than once for assignment."), i = i)
 }
 
-abort_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg, parent = NULL) {
+abort_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg, parent = NULL, call = my_caller_env()) {
   if (is.null(i_arg)) {
     target <- "existing data"
     existing <- pluralise_count("Existing data has ", nrow, " row(s)")
@@ -868,7 +868,8 @@ abort_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg, par
     expected = nrow,
     actual = vec_size(value[[j]]),
     j = j,
-    parent = parent
+    parent = parent,
+    call = call
   )
 }
 
