@@ -126,19 +126,17 @@ validate_tibble <- function(x) {
   x
 }
 
-cnd_signal_if <- function(x) {
-  if (!is.null(x)) {
-    cnd_signal(x)
-  }
-}
-
-check_minimal <- function(name) {
-  cnd_signal_if(cnd_names_non_null(name))
-  cnd_signal_if(cnd_names_non_na(name))
-}
-
 check_minimal_names <- function(x) {
-  check_minimal(names(x))
+  names <- names(x)
+
+  if (is.null(names)) {
+    abort_names_must_be_non_null()
+  }
+
+  if (anyNA(names)) {
+    abort_column_names_cannot_be_empty(which(is.na(name)), repair_hint = FALSE)
+  }
+
   invisible(x)
 }
 
