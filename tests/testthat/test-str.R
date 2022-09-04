@@ -28,9 +28,6 @@ test_that("output test", {
     "non-tibble"
     str(5)
 
-    trees2 <- as_unknown_rows(trees)
-    str(trees2, width = 70L)
-
     Volume <- unique(trees$Volume)
     data <- unname(split(trees, trees$Volume))
     nested_trees_df <- tibble(Volume, data)
@@ -39,5 +36,12 @@ test_that("output test", {
     data <- map(data, as_tibble)
     nested_trees_tbl <- tibble(Volume, data)
     str(nested_trees_tbl, width = 70L)
+  })
+
+  skip_if_not_installed("vctrs", "0.4.1.9000")
+
+  expect_snapshot({
+    trees2 <- as_unknown_rows(trees)
+    str(trees2, width = 70L)
   })
 })
