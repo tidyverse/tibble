@@ -28,8 +28,9 @@
     Code
       add_column(tibble(a = 1), a = 1)
     Condition
-      Error:
-      ! Column name `a` must not be duplicated.Use `.name_repair` to specify repair.
+      Error in `add_column()`:
+      ! Column name `a` must not be duplicated.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
@@ -37,8 +38,9 @@
     Code
       add_column(tibble(a = 1, b = 2), a = 1, b = 2)
     Condition
-      Error:
-      ! Column names `a` and `b` must not be duplicated.Use `.name_repair` to specify repair.
+      Error in `add_column()`:
+      ! Column names `a` and `b` must not be duplicated.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
@@ -47,8 +49,9 @@
     Code
       add_column(tibble(!!!set_names(letters)), !!!set_names(letters))
     Condition
-      Error:
-      ! Column names `a`, `b`, `c`, `d`, `e`, and 21 more must not be duplicated.Use `.name_repair` to specify repair.
+      Error in `add_column()`:
+      ! Column names `a`, `b`, `c`, `d`, `e`, and 21 more must not be duplicated.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:

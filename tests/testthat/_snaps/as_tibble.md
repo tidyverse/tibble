@@ -50,8 +50,9 @@
     Code
       as_tibble(table(a = c(1, 1, 1, 2, 2, 2), a = c(3, 4, 5, 3, 4, 5)))
     Condition
-      Error:
-      ! Column name `a` must not be duplicated.Use `.name_repair` to specify repair.
+      Error in `as_tibble.table()`:
+      ! Column name `a` must not be duplicated.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
@@ -59,7 +60,7 @@
     Code
       as_tibble(table(c(1, 1, 1, 2, 2, 2), c(3, 4, 5, 3, 4, 5)))
     Condition
-      Error:
+      Error in `abort_column_names_cannot_be_empty()`:
       ! Columns 1 and 2 must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -132,7 +133,7 @@
     Code
       as_tibble(list(1))
     Condition
-      Error:
+      Error in `abort_column_names_cannot_be_empty()`:
       ! Column 1 must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -141,7 +142,7 @@
     Code
       as_tibble(list(1, 2))
     Condition
-      Error:
+      Error in `abort_column_names_cannot_be_empty()`:
       ! Columns 1 and 2 must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -150,7 +151,7 @@
     Code
       as_tibble(list(a = 1, 2))
     Condition
-      Error:
+      Error in `abort_column_names_cannot_be_empty()`:
       ! Column 2 must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -159,7 +160,7 @@
     Code
       as_tibble(as.list(1:26))
     Condition
-      Error:
+      Error in `abort_column_names_cannot_be_empty()`:
       ! Columns 1, 2, 3, 4, 5, and 21 more must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -168,7 +169,7 @@
     Code
       as_tibble(set_names(list(1), "..1"))
     Condition
-      Error:
+      Error in `abort_column_names_cannot_be_dot_dot()`:
       ! Column 1 must not have names of the form ... or ..j.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -193,8 +194,9 @@
     Code
       as_tibble(list(a = 1, a = 1))
     Condition
-      Error:
-      ! Column name `a` must not be duplicated.Use `.name_repair` to specify repair.
+      Error in `as_tibble.list()`:
+      ! Column name `a` must not be duplicated.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
@@ -202,8 +204,9 @@
     Code
       as_tibble(list(a = 1, a = 1, b = 1, b = 1))
     Condition
-      Error:
-      ! Column names `a` and `b` must not be duplicated.Use `.name_repair` to specify repair.
+      Error in `as_tibble.list()`:
+      ! Column names `a` and `b` must not be duplicated.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
@@ -218,7 +221,7 @@
     Code
       as_tibble_row(list(1))
     Condition
-      Error:
+      Error in `abort_column_names_cannot_be_empty()`:
       ! Column 1 must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -227,7 +230,7 @@
     Code
       as_tibble_row(list(1, 2))
     Condition
-      Error:
+      Error in `abort_column_names_cannot_be_empty()`:
       ! Columns 1 and 2 must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -236,7 +239,7 @@
     Code
       as_tibble_row(list(a = 1, 2))
     Condition
-      Error:
+      Error in `abort_column_names_cannot_be_empty()`:
       ! Column 2 must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -245,7 +248,7 @@
     Code
       as_tibble_row(as.list(1:26))
     Condition
-      Error:
+      Error in `abort_column_names_cannot_be_empty()`:
       ! Columns 1, 2, 3, 4, 5, and 21 more must be named.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -254,7 +257,7 @@
     Code
       as_tibble_row(set_names(list(1), "..1"))
     Condition
-      Error:
+      Error in `abort_column_names_cannot_be_dot_dot()`:
       ! Column 1 must not have names of the form ... or ..j.
       Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
@@ -279,8 +282,9 @@
     Code
       as_tibble_row(list(a = 1, a = 1))
     Condition
-      Error:
-      ! Column name `a` must not be duplicated.Use `.name_repair` to specify repair.
+      Error in `as_tibble_row()`:
+      ! Column name `a` must not be duplicated.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
@@ -288,8 +292,9 @@
     Code
       as_tibble_row(list(a = 1, a = 1, b = 1, b = 1))
     Condition
-      Error:
-      ! Column names `a` and `b` must not be duplicated.Use `.name_repair` to specify repair.
+      Error in `as_tibble_row()`:
+      ! Column names `a` and `b` must not be duplicated.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
