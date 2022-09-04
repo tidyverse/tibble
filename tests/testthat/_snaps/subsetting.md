@@ -610,7 +610,7 @@
     Code
       df[] <- list(0, 0)
     Condition
-      Error in `vectbl_recycle_rhs_cols()`:
+      Error in `[<-`:
       ! Can't recycle input of size 2 to size 3.
     Code
       df[1, ] <- 1:3
@@ -645,22 +645,22 @@
     Code
       df[1, ] <- list(a = 1:3, b = 1)
     Condition
-      Error in `vectbl_recycle_rhs_cols()`:
+      Error in `[<-`:
       ! Can't recycle input of size 2 to size 3.
     Code
       df[1, ] <- list(a = 1, b = 1:3)
     Condition
-      Error in `vectbl_recycle_rhs_cols()`:
+      Error in `[<-`:
       ! Can't recycle input of size 2 to size 3.
     Code
       df[1:2, ] <- list(a = 1:3, b = 1)
     Condition
-      Error in `vectbl_recycle_rhs_cols()`:
+      Error in `[<-`:
       ! Can't recycle input of size 2 to size 3.
     Code
       df[1:2, ] <- list(a = 1, b = 1:3)
     Condition
-      Error in `vectbl_recycle_rhs_cols()`:
+      Error in `[<-`:
       ! Can't recycle input of size 2 to size 3.
     Code
       df[1, 1:2] <- list(a = 1:3, b = 1)
