@@ -52,7 +52,7 @@
     Condition
       Error:
       ! Column name `a` must not be duplicated.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
@@ -62,7 +62,7 @@
     Condition
       Error:
       ! Columns 1 and 2 must be named.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names can't be empty.
       x Empty names found at locations 1 and 2.
@@ -135,7 +135,7 @@
     Condition
       Error:
       ! Column 1 must be named.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names can't be empty.
       x Empty name found at location 1.
@@ -144,7 +144,7 @@
     Condition
       Error:
       ! Columns 1 and 2 must be named.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names can't be empty.
       x Empty names found at locations 1 and 2.
@@ -153,7 +153,7 @@
     Condition
       Error:
       ! Column 2 must be named.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names can't be empty.
       x Empty name found at location 2.
@@ -162,7 +162,7 @@
     Condition
       Error:
       ! Columns 1, 2, 3, 4, 5, and 21 more must be named.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names can't be empty.
       x Empty names found at locations 1, 2, 3, 4, 5, etc.
@@ -171,7 +171,7 @@
     Condition
       Error:
       ! Column 1 must not have names of the form ... or ..j.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names can't be of the form `...` or `..j`.
       x These names are invalid:
@@ -186,7 +186,7 @@
     Condition
       Error:
       ! Column name `a` must not be duplicated.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
@@ -196,7 +196,7 @@
     Condition
       Error:
       ! Column names `a` and `b` must not be duplicated.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
@@ -213,7 +213,7 @@
     Condition
       Error:
       ! Column 1 must be named.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names can't be empty.
       x Empty name found at location 1.
@@ -222,7 +222,7 @@
     Condition
       Error:
       ! Columns 1 and 2 must be named.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names can't be empty.
       x Empty names found at locations 1 and 2.
@@ -231,7 +231,7 @@
     Condition
       Error:
       ! Column 2 must be named.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names can't be empty.
       x Empty name found at location 2.
@@ -240,7 +240,7 @@
     Condition
       Error:
       ! Columns 1, 2, 3, 4, 5, and 21 more must be named.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names can't be empty.
       x Empty names found at locations 1, 2, 3, 4, 5, etc.
@@ -249,7 +249,7 @@
     Condition
       Error:
       ! Column 1 must not have names of the form ... or ..j.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names can't be of the form `...` or `..j`.
       x These names are invalid:
@@ -264,7 +264,7 @@
     Condition
       Error:
       ! Column name `a` must not be duplicated.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
@@ -274,7 +274,7 @@
     Condition
       Error:
       ! Column names `a` and `b` must not be duplicated.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:

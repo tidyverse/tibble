@@ -34,7 +34,7 @@ error_column_names_cannot_be_dot_dot <- function(names, repair_hint, parent = NU
 }
 
 error_column_names_must_be_unique <- function(names, repair_hint, parent = NULL) {
-  tibble_error(pluralise_commas("Column name(s) ", tick(names), " must not be duplicated.", use_repair(repair_hint)), names = names, parent = parent)
+  tibble_error(invalid_df("must not be duplicated", names, use_repair(repair_hint), message = "Column name(s)"), names = names, parent = parent)
 }
 
 # Subclassing errors ------------------------------------------------------
