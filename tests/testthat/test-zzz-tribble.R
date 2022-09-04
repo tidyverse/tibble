@@ -86,21 +86,21 @@ test_that("tribble() errs appropriately on bad calls", {
   # no colname
   expect_legacy_error(
     tribble(1, 2, 3),
-    error_tribble_needs_columns(),
+    abort_tribble_needs_columns(),
     fixed = TRUE
   )
 
   # invalid colname syntax
   expect_legacy_error(
     tribble(a ~ b),
-    error_tribble_lhs_column_syntax(quote(a)),
+    abort_tribble_lhs_column_syntax(quote(a)),
     fixed = TRUE
   )
 
   # invalid colname syntax
   expect_legacy_error(
     tribble(~ a + b),
-    error_tribble_rhs_column_syntax(quote(a + b)),
+    abort_tribble_rhs_column_syntax(quote(a + b)),
     fixed = TRUE
   )
 
@@ -119,7 +119,7 @@ test_that("tribble() errs appropriately on bad calls", {
       1, 2,
       3, 4, 5
     ),
-    error_tribble_non_rectangular(3, 5),
+    abort_tribble_non_rectangular(3, 5),
     fixed = TRUE
   )
 
@@ -129,7 +129,7 @@ test_that("tribble() errs appropriately on bad calls", {
       1, 2, 3, 4, 5,
       6, 7, 8, 9,
     ),
-    error_tribble_non_rectangular(4, 9),
+    abort_tribble_non_rectangular(4, 9),
     fixed = TRUE
   )
 })
@@ -193,7 +193,7 @@ test_that("frame_matrix cannot have list columns", {
       "a", 1:3,
       "b", 4:6
     ),
-    error_frame_matrix_list(c(2, 4)),
+    abort_frame_matrix_list(c(2, 4)),
     fixed = TRUE
   )
 })

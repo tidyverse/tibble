@@ -56,7 +56,7 @@ test_that("can enframe without names", {
 test_that("can't use value = NULL", {
   expect_legacy_error(
     enframe(letters, value = NULL),
-    error_enframe_value_null(),
+    abort_enframe_value_null(),
     fixed = TRUE
   )
 })
@@ -66,7 +66,7 @@ test_that("can't pass objects with dimensions", {
 
   expect_legacy_error(
     enframe(iris),
-    error_enframe_has_dim(iris),
+    abort_enframe_has_dim(iris),
     fixed = TRUE
   )
 })

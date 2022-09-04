@@ -15,7 +15,7 @@ test_that("bogus columns raise an error", {
   skip_enh_tibble_null()
   expect_error(
     tibble(a = NULL),
-    error_column_scalar_type("a", "NULL"),
+    abort_column_scalar_type("a", "NULL"),
     fixed = TRUE
   )
 })
@@ -23,12 +23,12 @@ test_that("bogus columns raise an error", {
 test_that("bogus columns raise an error", {
   expect_legacy_error(
     tibble(a = new.env()),
-    error_column_scalar_type("a", "environment"),
+    abort_column_scalar_type("a", "environment"),
     fixed = TRUE
   )
   expect_legacy_error(
     tibble(a = quote(a)),
-    error_column_scalar_type("a", "name"),
+    abort_column_scalar_type("a", "name"),
     fixed = TRUE
   )
 })
@@ -38,7 +38,7 @@ test_that("length 1 vectors are recycled", {
   expect_equal(nrow(tibble(x = 1:10, y = 1)), 10)
   expect_legacy_error(
     tibble(x = 1:10, y = 1:2),
-    error_inconsistent_cols(NULL, c("x", "y"), c(10, 2), NA),
+    abort_inconsistent_cols(NULL, c("x", "y"), c(10, 2), NA),
     fixed = TRUE
   )
 })
@@ -132,12 +132,12 @@ test_that("columns are recycled to common length", {
 test_that("columns must be same length", {
   expect_legacy_error(
     as_tibble(list(x = 1:2, y = 1:3)),
-    error_inconsistent_cols(NULL, c("x", "y"), 2:3, NA),
+    abort_inconsistent_cols(NULL, c("x", "y"), 2:3, NA),
     fixed = TRUE
   )
   expect_legacy_error(
     as_tibble(list(x = 1:2, y = 1:3, z = 1:4)),
-    error_inconsistent_cols(
+    abort_inconsistent_cols(
       NULL,
       c("x", "y", "z"),
       2:4,
@@ -147,7 +147,7 @@ test_that("columns must be same length", {
   )
   expect_legacy_error(
     as_tibble(list(x = 1:4, y = 1:2, z = 1:2)),
-    error_inconsistent_cols(
+    abort_inconsistent_cols(
       NULL,
       c("x", "y", "z"),
       c(4, 2, 2),
@@ -157,7 +157,7 @@ test_that("columns must be same length", {
   )
   expect_legacy_error(
     as_tibble(list(x = 1, y = 1:4, z = 1:2)),
-    error_inconsistent_cols(
+    abort_inconsistent_cols(
       NULL,
       c("y", "z"),
       c(4, 2),
@@ -167,7 +167,7 @@ test_that("columns must be same length", {
   )
   expect_legacy_error(
     as_tibble(list(x = 1:2, y = 1:4, z = 1)),
-    error_inconsistent_cols(
+    abort_inconsistent_cols(
       NULL,
       c("x", "y"),
       c(2, 4),
@@ -270,28 +270,28 @@ test_that("as_tibble() checks for `unique` names by default (#278)", {
   l1 <- list(1:10)
   expect_legacy_error(
     as_tibble(l1),
-    error_column_must_be_named(1, repair_hint = TRUE),
+    abort_column_must_be_named(1, repair_hint = TRUE),
     fixed = TRUE
   )
 
   l2 <- list(x = 1, 2)
   expect_legacy_error(
     as_tibble(l2),
-    error_column_must_be_named(2, repair_hint = TRUE),
+    abort_column_must_be_named(2, repair_hint = TRUE),
     fixed = TRUE
   )
 
   l3 <- list(x = 1, ... = 2)
   expect_legacy_error(
     as_tibble(l3),
-    error_column_must_not_be_dot_dot(2, repair_hint = TRUE),
+    abort_column_must_not_be_dot_dot(2, repair_hint = TRUE),
     fixed = TRUE
   )
 
   l4 <- list(x = 1, ..1 = 2)
   expect_legacy_error(
     as_tibble(l4),
-    error_column_must_not_be_dot_dot(2, repair_hint = TRUE),
+    abort_column_must_not_be_dot_dot(2, repair_hint = TRUE),
     fixed = TRUE
   )
 
@@ -300,7 +300,7 @@ test_that("as_tibble() checks for `unique` names by default (#278)", {
   df <- new_tibble(df, nrow = 1)
   expect_legacy_error(
     as_tibble(df),
-    error_column_must_be_named(1:2, repair_hint = TRUE),
+    abort_column_must_be_named(1:2, repair_hint = TRUE),
     fixed = TRUE
   )
 })
@@ -427,7 +427,7 @@ test_that("as_tibble.table() supports .name_repair", {
 
   expect_legacy_error(
     as_tibble(x),
-    error_column_names_must_be_unique("a")
+    abort_column_names_must_be_unique("a")
   )
   expect_identical(
     names(as_tibble(x, .name_repair = "minimal")),
@@ -535,12 +535,12 @@ test_that("as_tibble() throws an error when user turns missing row names into co
   df <- data.frame(a = 1:3, b = 2:4)
   expect_legacy_error(
     as_tibble(df, rownames = "id"),
-    error_as_tibble_needs_rownames(),
+    abort_as_tibble_needs_rownames(),
     fixed = TRUE
   )
   expect_legacy_error(
     as_tibble(df[0, ], rownames = "id"),
-    error_as_tibble_needs_rownames(),
+    abort_as_tibble_needs_rownames(),
     fixed = TRUE
   )
 })
@@ -561,7 +561,7 @@ test_that("POSIXlt isn't a valid column", {
   skip_enh_posixlt_supported()
   expect_legacy_error(
     check_valid_cols(list(x = as.POSIXlt(Sys.time()))),
-    error_time_column_must_be_posixct("x"),
+    abort_time_column_must_be_posixct("x"),
     fixed = TRUE
   )
 })
@@ -569,7 +569,7 @@ test_that("POSIXlt isn't a valid column", {
 test_that("NULL isn't a valid column", {
   expect_legacy_error(
     check_valid_cols(list(a = NULL)),
-    error_column_scalar_type("a", "NULL"),
+    abort_column_scalar_type("a", "NULL"),
     fixed = TRUE
   )
 })
@@ -612,7 +612,7 @@ test_that("`validate` triggers deprecation message, but then works", {
       "deprecated",
       fixed = TRUE
     ),
-    error_column_must_be_named(2, repair_hint = TRUE)
+    abort_column_must_be_named(2, repair_hint = TRUE)
   )
 
   expect_warning(
@@ -639,7 +639,7 @@ test_that("`validate` triggers deprecation message, but then works", {
       "deprecated",
       fixed = TRUE
     ),
-    error_column_must_be_named(2, repair_hint = TRUE)
+    abort_column_must_be_named(2, repair_hint = TRUE)
   )
 })
 
@@ -653,7 +653,7 @@ test_that("Consistent `validate` and `.name_repair` used together keep silent.",
       as_tibble(list(a = 1, "hi"), validate = TRUE, .name_repair = "check_unique"),
       NA
     ),
-    error_column_must_be_named(2, repair_hint = TRUE)
+    abort_column_must_be_named(2, repair_hint = TRUE)
   )
 
   expect_warning(
@@ -677,7 +677,7 @@ test_that("Consistent `validate` and `.name_repair` used together keep silent.",
       as_tibble(df, validate = TRUE, .name_repair = "check_unique"),
       NA
     ),
-    error_column_must_be_named(2, repair_hint = TRUE)
+    abort_column_must_be_named(2, repair_hint = TRUE)
   )
 })
 
@@ -689,7 +689,7 @@ test_that("Inconsistent `validate` and `.name_repair` used together raise a warn
       as_tibble(list(a = 1, "hi"), validate = FALSE, .name_repair = "check_unique"),
       "precedence"
     ),
-    error_column_must_be_named(2, repair_hint = TRUE)
+    abort_column_must_be_named(2, repair_hint = TRUE)
   )
 
   expect_warning(
@@ -713,7 +713,7 @@ test_that("Inconsistent `validate` and `.name_repair` used together raise a warn
       as_tibble(df, validate = FALSE, .name_repair = "check_unique"),
       "precedence"
     ),
-    error_column_must_be_named(2, repair_hint = TRUE)
+    abort_column_must_be_named(2, repair_hint = TRUE)
   )
 })
 
