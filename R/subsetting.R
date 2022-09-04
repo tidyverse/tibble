@@ -623,8 +623,8 @@ vectbl_as_col_location <- function(j,
   )
 }
 
-vectbl_as_col_location2 <- function(j, n, names = NULL, j_arg, assign = FALSE) {
-  subclass_col_index_errors(vec_as_location2(j, n, names), j_arg = j_arg, assign = assign)
+vectbl_as_col_location2 <- function(j, n, names = NULL, j_arg, assign = FALSE, call = my_caller_env()) {
+  subclass_col_index_errors(vec_as_location2(j, n, names, call = call), j_arg = j_arg, assign = assign)
 }
 
 vectbl_as_col_subscript2 <- function(j, j_arg, assign = FALSE) {

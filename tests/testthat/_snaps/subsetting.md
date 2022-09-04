@@ -5,13 +5,13 @@
       foo <- tibble(x = 1:10, y = 1:10)
       foo[c("x", "y", "z")]
     Condition
-      Error in `foo[c("x", "y", "z")]`:
+      Error in `[.tbl_df`:
       ! Can't subset columns that don't exist.
       x Column `z` doesn't exist.
     Code
       foo[c("w", "x", "y", "z")]
     Condition
-      Error in `foo[c("w", "x", "y", "z")]`:
+      Error in `[.tbl_df`:
       ! Can't subset columns that don't exist.
       x Columns `w` and `z` don't exist.
     Code
@@ -22,7 +22,7 @@
     Code
       foo[array("x", dim = c(1, 1, 1))]
     Condition
-      Error in `foo[array("x", dim = c(1, 1, 1))]`:
+      Error in `[.tbl_df`:
       ! Must subset columns with a valid subscript vector.
       x Subscript `array("x", dim = c(1, 1, 1))` must be a simple vector, not an array.
     Code
@@ -30,41 +30,41 @@
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[0.5]
     Condition
-      Error in `foo[0.5]`:
+      Error in `[.tbl_df`:
       ! Must subset columns with a valid subscript vector.
       x Can't convert from `j` <double> to <integer> due to loss of precision.
     Code
       foo[1:5]
     Condition
-      Error in `foo[1:5]`:
+      Error in `[.tbl_df`:
       ! Can't subset columns past the end.
       i Locations 4 and 5 don't exist.
       i There are only 3 columns.
     Code
       foo[-1:1]
     Condition
-      Error in `foo[-1:1]`:
+      Error in `[.tbl_df`:
       ! Must subset columns with a valid subscript vector.
       x Negative and positive locations can't be mixed.
       i Subscript `-1:1` has a positive value at location 3.
     Code
       foo[c(-1, 1)]
     Condition
-      Error in `foo[c(-1, 1)]`:
+      Error in `[.tbl_df`:
       ! Must subset columns with a valid subscript vector.
       x Negative and positive locations can't be mixed.
       i Subscript `c(-1, 1)` has a positive value at location 2.
     Code
       foo[c(-1, NA)]
     Condition
-      Error in `foo[c(-1, NA)]`:
+      Error in `[.tbl_df`:
       ! Must subset columns with a valid subscript vector.
       x Negative locations can't have missing values.
       i Subscript `c(-1, NA)` has a missing value at location 2.
     Code
       foo[-4]
     Condition
-      Error in `foo[-4]`:
+      Error in `[.tbl_df`:
       ! Can't negate columns past the end.
       i Location 4 doesn't exist.
       i There are only 3 columns.
@@ -81,20 +81,20 @@
     Code
       foo[array(1, dim = c(1, 1, 1))]
     Condition
-      Error in `foo[array(1, dim = c(1, 1, 1))]`:
+      Error in `[.tbl_df`:
       ! Must subset columns with a valid subscript vector.
       x Subscript `array(1, dim = c(1, 1, 1))` must be a simple vector, not an array.
     Code
       foo[mean]
     Condition
-      Error in `foo[mean]`:
+      Error in `[.tbl_df`:
       ! Must subset columns with a valid subscript vector.
       x Subscript `mean` has the wrong type `function`.
       i It must be logical, numeric, or character.
     Code
       foo[foo]
     Condition
-      Error in `foo[foo]`:
+      Error in `[.tbl_df`:
       ! Must subset columns with a valid subscript vector.
       x Subscript `foo` has the wrong type `tbl_df<
         x: integer
@@ -172,14 +172,14 @@
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[c(TRUE, TRUE)]
     Condition
-      Error in `foo[c(TRUE, TRUE)]`:
+      Error in `[.tbl_df`:
       ! Must subset columns with a valid subscript vector.
       i Logical subscripts must match the size of the indexed input.
       x Input has size 3 but subscript `c(TRUE, TRUE)` has size 2.
     Code
       foo[c(TRUE, TRUE, FALSE, FALSE)]
     Condition
-      Error in `foo[c(TRUE, TRUE, FALSE, FALSE)]`:
+      Error in `[.tbl_df`:
       ! Must subset columns with a valid subscript vector.
       i Logical subscripts must match the size of the indexed input.
       x Input has size 3 but subscript `c(TRUE, TRUE, FALSE, FALSE)` has size 4.
@@ -196,7 +196,7 @@
     Code
       foo[array(TRUE, dim = c(1, 1, 1))]
     Condition
-      Error in `foo[array(TRUE, dim = c(1, 1, 1))]`:
+      Error in `[.tbl_df`:
       ! Must subset columns with a valid subscript vector.
       x Subscript `array(TRUE, dim = c(1, 1, 1))` must be a simple vector, not an array.
     Code
@@ -226,27 +226,27 @@
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[list(1:3)]
     Condition
-      Error in `foo[list(1:3)]`:
+      Error in `[.tbl_df`:
       ! Must subset columns with a valid subscript vector.
       x Subscript `list(1:3)` has the wrong type `list`.
       i It must be logical, numeric, or character.
     Code
       foo[as.list(1:3)]
     Condition
-      Error in `foo[as.list(1:3)]`:
+      Error in `[.tbl_df`:
       ! Must subset columns with a valid subscript vector.
       x Subscript `as.list(1:3)` has the wrong type `list`.
       i It must be logical, numeric, or character.
     Code
       foo[factor(1:3)]
     Condition
-      Error in `foo[factor(1:3)]`:
+      Error in `[.tbl_df`:
       ! Can't subset columns that don't exist.
       x Columns `1`, `2`, and `3` don't exist.
     Code
       foo[Sys.Date()]
     Condition
-      Error in `foo[Sys.Date()]`:
+      Error in `[.tbl_df`:
       ! Must subset columns with a valid subscript vector.
       x Subscript `Sys.Date()` has the wrong type `date`.
       i It must be logical, numeric, or character.
@@ -297,7 +297,7 @@
     Code
       foo[array("x", dim = c(1, 1, 1))]
     Condition
-      Error in `foo[array("x", dim = c(1, 1, 1))]`:
+      Error in `[.tbl_df`:
       ! Must subset columns with a valid subscript vector.
       x Subscript `array("x", dim = c(1, 1, 1))` must be a simple vector, not an array.
     Code
@@ -354,32 +354,32 @@
     Code
       foo[[1:3]]
     Condition
-      Error in `vectbl_as_col_location2()`:
+      Error in `foo[[1:3]]`:
       ! Must extract column with a single valid subscript.
       x Subscript `1:3` has size 3 but must be size 1.
     Code
       foo[[letters[1:3]]]
     Condition
-      Error in `vectbl_as_col_location2()`:
+      Error in `foo[[letters[1:3]]]`:
       ! Must extract column with a single valid subscript.
       x Subscript `letters[1:3]` has size 3 but must be size 1.
     Code
       foo[[TRUE]]
     Condition
-      Error in `vectbl_as_col_location2()`:
+      Error in `foo[[TRUE]]`:
       ! Must extract column with a single valid subscript.
       x Subscript `TRUE` has the wrong type `logical`.
       i It must be numeric or character.
     Code
       foo[[-1]]
     Condition
-      Error in `vectbl_as_col_location2()`:
+      Error in `foo[[-1]]`:
       ! Must extract column with a single valid subscript.
       x Subscript `-1` has value -1 but must be a positive location.
     Code
       foo[[1.5]]
     Condition
-      Error in `vectbl_as_col_location2()`:
+      Error in `foo[[1.5]]`:
       ! Must extract column with a single valid subscript.
       x Subscript `1.5` has the wrong type `double`.
       i It must be numeric or character.
@@ -393,14 +393,14 @@
     Code
       foo[[Inf]]
     Condition
-      Error in `vectbl_as_col_location2()`:
+      Error in `foo[[Inf]]`:
       ! Must extract column with a single valid subscript.
       x Subscript `Inf` has the wrong type `double`.
       i It must be numeric or character.
     Code
       foo[[mean]]
     Condition
-      Error in `vectbl_as_col_location2()`:
+      Error in `foo[[mean]]`:
       ! Must extract column with a single valid subscript.
       x Subscript `mean` has the wrong type `function`.
       i It must be numeric or character.
@@ -419,7 +419,7 @@
       foo <- tibble(x = 1:10, y = 1:10)
       foo[[NA]]
     Condition
-      Error in `vectbl_as_col_location2()`:
+      Error in `foo[[NA]]`:
       ! Must extract column with a single valid subscript.
       x Subscript `NA` can't be `NA`.
     Code
@@ -443,27 +443,27 @@
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[list(1:3)] <- 1
     Condition
-      Error in `[<-`:
+      Error in `[<-.tbl_df`:
       ! Must assign to columns with a valid subscript vector.
       x Subscript `list(1:3)` has the wrong type `list`.
       i It must be logical, numeric, or character.
     Code
       foo[as.list(1:3)] <- 1
     Condition
-      Error in `[<-`:
+      Error in `[<-.tbl_df`:
       ! Must assign to columns with a valid subscript vector.
       x Subscript `as.list(1:3)` has the wrong type `list`.
       i It must be logical, numeric, or character.
     Code
       foo[factor(1:3)] <- 1
     Condition
-      Error in `[<-`:
+      Error in `[<-.tbl_df`:
       ! Can't assign to columns that don't exist.
       x Columns `1`, `2`, and `3` don't exist.
     Code
       foo[Sys.Date()] <- 1
     Condition
-      Error in `[<-`:
+      Error in `[<-.tbl_df`:
       ! Must assign to columns with a valid subscript vector.
       x Subscript `Sys.Date()` has the wrong type `date`.
       i It must be logical, numeric, or character.
@@ -894,32 +894,32 @@
     Code
       foo[[1:3]] <- 1
     Condition
-      Error in `vectbl_as_col_location2()`:
+      Error in `[[<-`:
       ! Must assign to column with a single valid subscript.
       x Subscript `1:3` has size 3 but must be size 1.
     Code
       foo[[letters[1:3]]] <- 1
     Condition
-      Error in `vectbl_as_col_location2()`:
+      Error in `[[<-`:
       ! Must assign to column with a single valid subscript.
       x Subscript `letters[1:3]` has size 3 but must be size 1.
     Code
       foo[[TRUE]] <- 1
     Condition
-      Error in `vectbl_as_col_location2()`:
+      Error in `[[<-`:
       ! Must assign to column with a single valid subscript.
       x Subscript `TRUE` has the wrong type `logical`.
       i It must be numeric or character.
     Code
       foo[[NA_integer_]] <- 1
     Condition
-      Error in `vectbl_as_col_location2()`:
+      Error in `[[<-`:
       ! Must assign to column with a single valid subscript.
       x Subscript `NA_integer_` can't be `NA`.
     Code
       foo[[mean]] <- 1
     Condition
-      Error in `vectbl_as_col_location2()`:
+      Error in `[[<-`:
       ! Must assign to column with a single valid subscript.
       x Subscript `mean` has the wrong type `function`.
       i It must be numeric or character.
