@@ -185,11 +185,11 @@ turn_frame_data_into_frame_matrix <- function(names, rest) {
   frame_mat
 }
 
-subclass_tribble_c_errors <- function(name, code) {
+subclass_tribble_c_errors <- function(name, code, call = my_caller_env()) {
   withCallingHandlers(
     code,
     vctrs_error = function(cnd) {
-      abort_tribble_c(name, cnd)
+      abort_tribble_c(name, cnd, call)
     }
   )
 }
@@ -234,8 +234,10 @@ abort_frame_matrix_list <- function(pos) {
   ))
 }
 
-abort_tribble_c <- function(name, cnd) {
-  cnd$message <- paste0("Can't create column ", tick(name), ": ", cnd_header(cnd))
-  cnd$class <- c(tibble_abort_class("tribble_c"), class(cnd))
-  cnd
+abort_tribble_c <- function(name, cnd, call = my_caller_env()) {
+  tibble_abort(
+    paste0("Can't create column ", tick(name)),
+    parent = cnd,
+    call = call
+  )
 }
