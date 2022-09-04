@@ -39,7 +39,7 @@ abort_column_names_must_be_unique <- function(names, repair_hint, parent = NULL,
 
 # Subclassing errors ------------------------------------------------------
 
-subclass_name_repair_errors <- function(expr, name, details = NULL, repair_hint = FALSE, call = my_caller_call()) {
+subclass_name_repair_errors <- function(expr, name, details = NULL, repair_hint = FALSE, call = my_caller_env()) {
   withCallingHandlers(
     expr,
 
