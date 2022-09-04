@@ -74,7 +74,7 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.1
 Config/testthat/edition: 3
 Config/testthat/parallel: true
-Config/testthat/start-first: subsetting, as_tibble, add, invariants
+Config/testthat/start-first: vignette-formats, subsetting, as_tibble, add, invariants
 Config/autostyle/scope: line_breaks
 Config/autostyle/strict: true
 Config/autostyle/rmd: false
