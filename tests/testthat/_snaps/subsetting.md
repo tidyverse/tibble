@@ -17,7 +17,7 @@
     Code
       foo[as.matrix("x")]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[as.matrix("x")]`:
       ! Subscript `as.matrix("x")` is a matrix, it must be of type logical.
     Code
       foo[array("x", dim = c(1, 1, 1))]
@@ -71,12 +71,12 @@
     Code
       foo[c(1:3, NA)]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[c(1:3, NA)]`:
       ! Can't use NA as column index with `[` at position 4.
     Code
       foo[as.matrix(1)]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[as.matrix(1)]`:
       ! Subscript `as.matrix(1)` is a matrix, it must be of type logical.
     Code
       foo[array(1, dim = c(1, 1, 1))]
@@ -186,12 +186,12 @@
     Code
       foo[c(TRUE, TRUE, NA)]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[c(TRUE, TRUE, NA)]`:
       ! Can't use NA as column index with `[` at position 3.
     Code
       foo[as.matrix(TRUE)]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[as.matrix(TRUE)]`:
       ! Subscript `as.matrix(TRUE)` is a matrix, it must have the same dimensions as the input.
     Code
       foo[array(TRUE, dim = c(1, 1, 1))]
@@ -292,7 +292,7 @@
     Code
       foo[as.matrix("x")]
     Condition
-      Error in `[.tbl_df`:
+      Error in `foo[as.matrix("x")]`:
       ! Subscript `as.matrix("x")` is a matrix, it must be of type logical.
     Code
       foo[array("x", dim = c(1, 1, 1))]
@@ -334,22 +334,22 @@
       foo <- tibble(x = 1:10, y = 1:10)
       foo[[]]
     Condition
-      Error in `[[.tbl_df`:
+      Error in `foo[[]]`:
       ! Subscript can't be missing for tibbles in `[[`.
     Code
       foo[[, 1]]
     Condition
-      Error in `[[.tbl_df`:
+      Error in `foo[[, 1]]`:
       ! Subscript can't be missing for tibbles in `[[`.
     Code
       foo[[1, ]]
     Condition
-      Error in `[[.tbl_df`:
+      Error in `foo[[1, ]]`:
       ! Subscript can't be missing for tibbles in `[[`.
     Code
       foo[[, ]]
     Condition
-      Error in `[[.tbl_df`:
+      Error in `foo[[, ]]`:
       ! Subscript can't be missing for tibbles in `[[`.
     Code
       foo[[1:3]]
@@ -514,29 +514,29 @@
       df <- tibble(x = 1:2, y = x)
       df[c(1, 1)] <- 3
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Column index 1 is used more than once for assignment.
     Code
       df[, c(1, 1)] <- 3
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Column index 1 is used more than once for assignment.
     Code
       df[c(1, 1), ] <- 3
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Row index 1 is used more than once for assignment.
     Code
       # # [<-.tbl_df throws an error with NA indexes
       df <- tibble(x = 1:2, y = x)
       df[NA] <- 3
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Can't use NA as column index with `[` at positions 1 and 2.
     Code
       df[NA, ] <- 3
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Can't use NA as row index in a tibble for assignment.
     Code
       # # [<-.tbl_df and logical indexes
@@ -563,12 +563,12 @@
       df <- tibble(x = 1:2, y = x)
       df[] <- mean
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! `mean` must be a vector, a bare list, a data frame, a matrix, or NULL.
     Code
       df[] <- lm(y ~ x, df)
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! `lm(y ~ x, df)` must be a vector, a bare list, a data frame, a matrix, or NULL.
     Code
       # # [<-.tbl_df throws an error with OOB assignment
@@ -779,7 +779,7 @@
     Code
       df[1:3, 1:3] <- NULL
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! `NULL` must be a vector, a bare list, a data frame or a matrix.
     Code
       # # [<-.tbl_df and overwriting NA
@@ -856,40 +856,40 @@
     Code
       foo[as.matrix("x")] <- NA
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Subscript `as.matrix("x")` is a matrix, it must be of type logical.
     Code
       foo[array("x", dim = c(1, 1, 1))] <- NA
       foo[is.na(foo)] <- 1:3
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Subscript `is.na(foo)` is a matrix, the data `1:3` must have size 1.
     Code
       foo[is.na(foo)] <- lm(a ~ b, foo)
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! Subscript `is.na(foo)` is a matrix, the data `lm(a ~ b, foo)` must be a vector of size 1.
     Code
       # # [[<-.tbl_df rejects invalid column indexes
       foo <- tibble(x = 1:10, y = 1:10)
       foo[[]] <- 1
     Condition
-      Error in `[[<-.tbl_df`:
+      Error in `[[<-`:
       ! Subscript can't be missing for tibbles in `[[<-`.
     Code
       foo[[, 1]] <- 1
     Condition
-      Error in `[[<-.tbl_df`:
+      Error in `[[<-`:
       ! Subscript can't be missing for tibbles in `[[<-`.
     Code
       foo[[1, ]] <- 1
     Condition
-      Error in `[[<-.tbl_df`:
+      Error in `[[<-`:
       ! Subscript can't be missing for tibbles in `[[<-`.
     Code
       foo[[, ]] <- 1
     Condition
-      Error in `[[<-.tbl_df`:
+      Error in `[[<-`:
       ! Subscript can't be missing for tibbles in `[[<-`.
     Code
       foo[[1:3]] <- 1
@@ -1021,12 +1021,12 @@
       df <- tibble(x = 1:2, y = x)
       df[1] <- lm(y ~ x, df)
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! `lm(y ~ x, df)` must be a vector, a bare list, a data frame, a matrix, or NULL.
     Code
       df[1:2, 1] <- NULL
     Condition
-      Error in `[<-.tbl_df`:
+      Error in `[<-`:
       ! `NULL` must be a vector, a bare list, a data frame or a matrix.
     Code
       # # $<- recycles only values of length one

@@ -215,7 +215,7 @@
     Code
       as_tibble(list(a = new_environment()))
     Condition
-      Error in `as_tibble.list()`:
+      Error in `as_tibble()`:
       ! All columns in a tibble must be vectors.
       x Column `a` is an environment.
     Code

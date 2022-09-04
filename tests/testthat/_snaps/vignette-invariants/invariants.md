@@ -2325,7 +2325,7 @@ with_df(df[c(1, 1)] <- list(1, 2))
 
 ```r
 with_tbl(tbl[c(1, 1)] <- list(1, 2))
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! Column index 1 is used more than once for assignment.
 ```
 
@@ -2372,7 +2372,7 @@ with_df(df[NA] <- list("x"))
 
 ```r
 with_tbl(tbl[NA] <- list("x"))
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! Can't use NA as column index with `[` at positions 1, 2, and 3.
 ```
 
@@ -2387,7 +2387,7 @@ with_df(df[NA_integer_] <- list("x"))
 
 ```r
 with_tbl(tbl[NA_integer_] <- list("x"))
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! Can't use NA as column index in a tibble for assignment.
 ```
 
@@ -2402,7 +2402,7 @@ with_df(df[NA_character_] <- list("x"))
 
 ```r
 with_tbl(tbl[NA_character_] <- list("x"))
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! Can't use NA as column index in a tibble for assignment.
 ```
 
@@ -2674,7 +2674,7 @@ with_df(df[is.na(df)] <- 1:2)
 
 ```r
 with_tbl(tbl[is.na(tbl)] <- 1:2)
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! Subscript `is.na(tbl)` is a matrix, the data `1:2` must have size 1.
 ```
 
@@ -2817,7 +2817,7 @@ with_df(df[1:2] <- array(8:1, dim = c(2, 1, 4)))
 
 ```r
 with_tbl(tbl[1:2] <- array(8:1, dim = c(2, 1, 4)))
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! `array(8:1, dim = c(2, 1, 4))` must be a vector, a bare list, a data frame, a matrix, or NULL.
 ```
 
@@ -2836,7 +2836,7 @@ with_df(df[1:2] <- array(8:1, dim = c(4, 1, 2)))
 
 ```r
 with_tbl(tbl[1:2] <- array(8:1, dim = c(4, 1, 2)))
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! `array(8:1, dim = c(4, 1, 2))` must be a vector, a bare list, a data frame, a matrix, or NULL.
 ```
 
@@ -3019,7 +3019,7 @@ with_df(df[1, 2:3] <- NULL)
 
 ```r
 with_tbl(tbl[1, 2:3] <- NULL)
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! `NULL` must be a vector, a bare list, a data frame or a matrix.
 ```
 
@@ -3042,7 +3042,7 @@ with_df(df[1] <- mean)
 
 ```r
 with_tbl(tbl[1] <- mean)
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! `mean` must be a vector, a bare list, a data frame, a matrix, or NULL.
 ```
 
@@ -3081,7 +3081,7 @@ with_df(df[1] <- lm(mpg ~ wt, data = mtcars))
 
 ```r
 with_tbl(tbl[1] <- lm(mpg ~ wt, data = mtcars))
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! `lm(mpg ~ wt, data = mtcars)` must be a vector, a bare list, a data frame, a matrix, or NULL.
 ```
 
@@ -3321,7 +3321,7 @@ with_df(df[NA, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[NA, ] <- tbl[1, ])
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
 
@@ -3638,7 +3638,7 @@ with_df(df[as.character(-(1:3)), ] <- df[1, ])
 with_tbl(tbl[as.character(-(1:3)), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> Use `NA_integer_` as row index to obtain a row full of `NA` values.
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
 
@@ -3660,7 +3660,7 @@ with_df(df[as.character(3:5), ] <- df[1, ])
 with_tbl(tbl[as.character(3:5), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> Use `NA_integer_` as row index to obtain a row full of `NA` values.
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
 
@@ -3684,7 +3684,7 @@ with_df(df[as.character(-(3:5)), ] <- df[1, ])
 with_tbl(tbl[as.character(-(3:5)), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> Use `NA_integer_` as row index to obtain a row full of `NA` values.
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
 
@@ -3699,7 +3699,7 @@ with_df(df[NA_character_, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[NA_character_, ] <- tbl[1, ])
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
 
@@ -3991,7 +3991,7 @@ with_df(df[2:3, "n"] <- NULL)
 
 ```r
 with_tbl(tbl[2:3, "n"] <- NULL)
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! `NULL` must be a vector, a bare list, a data frame or a matrix.
 ```
 
