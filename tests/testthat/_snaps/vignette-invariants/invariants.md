@@ -455,7 +455,7 @@ df[[4]]
 
 ```r
 tbl[[4]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[4]]`:
 #> ! Can't subset columns past the end.
 #> i Location 4 doesn't exist.
 #> i There are only 3 columns.
@@ -3784,10 +3784,11 @@ with_df(df[2:3, 3] <- df2[1:2, 1])
 
 ```r
 with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
-#> Error:
+#> Error in `[<-`:
 #> ! Assigned data `tbl2[1:2, 1]` must be compatible with existing data.
 #> i Error occurred for column `li`.
-#> x Can't convert <tbl_df> to <list>.
+#> Caused by error in `vec_assign()`:
+#> ! Can't convert <tbl_df> to <list>.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
