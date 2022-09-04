@@ -36,7 +36,7 @@
     Condition
       Error:
       ! Column name `a` must not be duplicated.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
@@ -46,7 +46,7 @@
     Condition
       Error:
       ! Column names `a` and `b` must not be duplicated.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
@@ -62,7 +62,7 @@
     Condition
       Error:
       ! Column names `a`, `b`, `c`, `d`, `e`, and 21 more must not be duplicated.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:

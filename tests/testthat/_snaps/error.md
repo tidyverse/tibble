@@ -1,9 +1,9 @@
 # output test
 
     Code
-      invalid_df("must be integer", "col", "\nFix this.")
+      invalid_df("must be integer", "col", "Fix this.")
     Output
-      [1] "Column `col` must be integer.\nFix this."
+      [1] "Column `col` must be integer.Fix this."
     Code
       invalid_df("must be numeric", c("col1", "col2"))
     Output
@@ -11,7 +11,7 @@
     Code
       use_repair(TRUE)
     Output
-      [1] "\nUse .name_repair to specify repair."
+      [1] "\nUse `.name_repair` to specify repair."
     Code
       use_repair(FALSE)
 

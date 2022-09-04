@@ -5,7 +5,7 @@
     Condition
       Error:
       ! Column name `a` must not be duplicated.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names must be unique.
       x These names are duplicated:
