@@ -938,7 +938,8 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span>     0     1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span>     0     0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     1 e     <span style="color: #949494;">&lt;dbl [1]&gt;</span>     0     0</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 1 more variable: m[3:4] &lt;dbl&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 1 more variable:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   m[3:4] &lt;dbl&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -957,7 +958,8 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    <span style="color: #BB0000;">NA</span> f     <span style="color: #949494;">&lt;int [2]&gt;</span>     1     0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span>     1     0</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    <span style="color: #BB0000;">NA</span> h     <span style="color: #949494;">&lt;chr [1]&gt;</span>     1     0</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 1 more variable: m[3:4] &lt;dbl&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 1 more variable:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   m[3:4] &lt;dbl&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1004,10 +1006,11 @@
 <td>
 <div class="sourceCode" id="cb78"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in format.data.frame(if (omit)</span></span>
-<span><span class="co">#&gt; x[seq_len(n0), , drop = FALSE] else</span></span>
-<span><span class="co">#&gt; x, : corrupt data frame: columns will be</span></span>
-<span><span class="co">#&gt; truncated or padded with NAs</span></span>
+<span><span class="co">#&gt; Warning in format.data.frame(if</span></span>
+<span><span class="co">#&gt; (omit) x[seq_len(n0), , drop =</span></span>
+<span><span class="co">#&gt; FALSE] else x, : corrupt data frame:</span></span>
+<span><span class="co">#&gt; columns will be truncated or padded</span></span>
+<span><span class="co">#&gt; with NAs</span></span>
 <span><span class="co">#&gt;    n c         li      V5</span></span>
 <span><span class="co">#&gt; 1  1 e          9 NULL  0</span></span>
 <span><span class="co">#&gt; 2 NA f     10, 11 &lt;NA&gt;  0</span></span>
@@ -1166,8 +1169,9 @@
 <div class="sourceCode" id="cb87"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
-<span><span class="co">#&gt; 1:2, value = list(0, 0, 0)): provided 3</span></span>
-<span><span class="co">#&gt; variables to replace 2 variables</span></span>
+<span><span class="co">#&gt; 1:2, value = list(0, 0, 0)):</span></span>
+<span><span class="co">#&gt; provided 3 variables to replace 2</span></span>
+<span><span class="co">#&gt; variables</span></span>
 <span><span class="co">#&gt;   n c         li</span></span>
 <span><span class="co">#&gt; 1 0 0          9</span></span>
 <span><span class="co">#&gt; 2 0 0     10, 11</span></span>
@@ -1620,24 +1624,28 @@
 <td>
 <div class="sourceCode" id="cb125"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/lm.html" class="external-link">lm</a></span><span class="op">(</span><span class="va">mpg</span> <span class="op">~</span> <span class="va">wt</span>, data <span class="op">=</span> <span class="va">mtcars</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
-<span><span class="co">#&gt; 1, value = structure(list(coefficients</span></span>
-<span><span class="co">#&gt; = c(`(Intercept)` = 37.285126167342, :</span></span>
+<span><span class="co">#&gt; Warning in</span></span>
+<span><span class="co">#&gt; `[&lt;-.data.frame`(`*tmp*`, 1, value</span></span>
+<span><span class="co">#&gt; = structure(list(coefficients =</span></span>
+<span><span class="co">#&gt; c(`(Intercept)` = 37.285126167342, :</span></span>
 <span><span class="co">#&gt; replacement element 2 has 32 rows to</span></span>
 <span><span class="co">#&gt; replace 4 rows</span></span>
-<span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
-<span><span class="co">#&gt; 1, value = structure(list(coefficients</span></span>
-<span><span class="co">#&gt; = c(`(Intercept)` = 37.285126167342, :</span></span>
+<span><span class="co">#&gt; Warning in</span></span>
+<span><span class="co">#&gt; `[&lt;-.data.frame`(`*tmp*`, 1, value</span></span>
+<span><span class="co">#&gt; = structure(list(coefficients =</span></span>
+<span><span class="co">#&gt; c(`(Intercept)` = 37.285126167342, :</span></span>
 <span><span class="co">#&gt; replacement element 3 has 32 rows to</span></span>
 <span><span class="co">#&gt; replace 4 rows</span></span>
-<span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
-<span><span class="co">#&gt; 1, value = structure(list(coefficients</span></span>
-<span><span class="co">#&gt; = c(`(Intercept)` = 37.285126167342, :</span></span>
+<span><span class="co">#&gt; Warning in</span></span>
+<span><span class="co">#&gt; `[&lt;-.data.frame`(`*tmp*`, 1, value</span></span>
+<span><span class="co">#&gt; = structure(list(coefficients =</span></span>
+<span><span class="co">#&gt; c(`(Intercept)` = 37.285126167342, :</span></span>
 <span><span class="co">#&gt; replacement element 5 has 32 rows to</span></span>
 <span><span class="co">#&gt; replace 4 rows</span></span>
-<span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
-<span><span class="co">#&gt; 1, value = structure(list(coefficients</span></span>
-<span><span class="co">#&gt; = c(`(Intercept)` = 37.285126167342, :</span></span>
+<span><span class="co">#&gt; Warning in</span></span>
+<span><span class="co">#&gt; `[&lt;-.data.frame`(`*tmp*`, 1, value</span></span>
+<span><span class="co">#&gt; = structure(list(coefficients =</span></span>
+<span><span class="co">#&gt; c(`(Intercept)` = 37.285126167342, :</span></span>
 <span><span class="co">#&gt; replacement element 7 has 5 rows to</span></span>
 <span><span class="co">#&gt; replace 4 rows</span></span>
 <span><span class="co">#&gt; Error in `[&lt;-.data.frame`(`*tmp*`, 1, value = structure(list(coefficients = c(`(Intercept)` = 37.285126167342, : replacement element 10 has 3 rows, need 4</span></span></code></pre></div>
@@ -1829,8 +1837,8 @@
 <code class="sourceCode R"><span><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="op">(</span><span class="fl">5</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">tbl</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `numtbl_as_row_location_assign()` at tibble/R/subsetting.R:485:4:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't negate rows past the end.</span></span>
-<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Locations 5, 6, and 7 don't</span></span>
-<span><span class="co">#&gt;   exist.</span></span>
+<span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Locations 5, 6, and 7</span></span>
+<span><span class="co">#&gt;   don't exist.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> There are only 4 rows.</span></span></code></pre></div>
 </td>
 </tr>
@@ -1927,9 +1935,9 @@
 <div class="sourceCode" id="cb148"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">df2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
-<span><span class="co">#&gt; 2:3, 3, value = structure(list(n =</span></span>
-<span><span class="co">#&gt; c(1L, : provided 3 variables to replace</span></span>
-<span><span class="co">#&gt; 1 variables</span></span>
+<span><span class="co">#&gt; 2:3, 3, value = structure(list(n</span></span>
+<span><span class="co">#&gt; = c(1L, : provided 3 variables to</span></span>
+<span><span class="co">#&gt; replace 1 variables</span></span>
 <span><span class="co">#&gt;    n c   li</span></span>
 <span><span class="co">#&gt; 1  1 e    9</span></span>
 <span><span class="co">#&gt; 2 NA f    1</span></span>
@@ -1951,7 +1959,8 @@
 <code class="sourceCode R"><span><span class="fu">with_df2</span><span class="op">(</span><span class="va">df2</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">df2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in matrix(value, n, p): data</span></span>
 <span><span class="co">#&gt; length [8] is not a sub-multiple or</span></span>
-<span><span class="co">#&gt; multiple of the number of columns [3]</span></span>
+<span><span class="co">#&gt; multiple of the number of columns</span></span>
+<span><span class="co">#&gt; [3]</span></span>
 <span><span class="co">#&gt;   tb.n tb.c tb.li m.1 m.2 m.3 m.4</span></span>
 <span><span class="co">#&gt; 1    1    e     9   1   0   0   0</span></span>
 <span><span class="co">#&gt; 2    1    0     0   0   1   0   0</span></span>
@@ -1980,7 +1989,8 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    <span style="color: #BB0000;">NA</span> f     <span style="color: #949494;">&lt;int [2]&gt;</span>     1     1</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 g     <span style="color: #949494;">&lt;int [3]&gt;</span>    <span style="color: #BB0000;">NA</span>    <span style="color: #BB0000;">NA</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>    <span style="color: #BB0000;">NA</span> h     <span style="color: #949494;">&lt;chr [1]&gt;</span>     0     0</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 1 more variable: m[3:4] &lt;dbl&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># … with 1 more variable:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;">#   m[3:4] &lt;dbl&gt;</span></span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>

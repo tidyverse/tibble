@@ -511,9 +511,9 @@
 <td>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">a</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in df$a[1:3] &lt;- 4:3: number of</span></span>
-<span><span class="co">#&gt; items to replace is not a multiple of</span></span>
-<span><span class="co">#&gt; replacement length</span></span>
+<span><span class="co">#&gt; Warning in df$a[1:3] &lt;- 4:3:</span></span>
+<span><span class="co">#&gt; number of items to replace is not a</span></span>
+<span><span class="co">#&gt; multiple of replacement length</span></span>
 <span><span class="co">#&gt;   a b         cd</span></span>
 <span><span class="co">#&gt; 1 4 e          9</span></span>
 <span><span class="co">#&gt; 2 3 f     10, 11</span></span>
@@ -523,9 +523,9 @@
 <td>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_tbl</span><span class="op">(</span><span class="va">tbl</span><span class="op">$</span><span class="va">a</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">4</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in tbl$a[1:3] &lt;- 4:3: number of</span></span>
-<span><span class="co">#&gt; items to replace is not a multiple of</span></span>
-<span><span class="co">#&gt; replacement length</span></span>
+<span><span class="co">#&gt; Warning in tbl$a[1:3] &lt;- 4:3:</span></span>
+<span><span class="co">#&gt; number of items to replace is not a</span></span>
+<span><span class="co">#&gt; multiple of replacement length</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 3</span></span></span>
 <span><span class="co">#&gt;       a b     cd       </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>   </span></span>
@@ -703,10 +703,11 @@
 <td>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="st">"x"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in format.data.frame(if (omit)</span></span>
-<span><span class="co">#&gt; x[seq_len(n0), , drop = FALSE] else</span></span>
-<span><span class="co">#&gt; x, : corrupt data frame: columns will be</span></span>
-<span><span class="co">#&gt; truncated or padded with NAs</span></span>
+<span><span class="co">#&gt; Warning in format.data.frame(if</span></span>
+<span><span class="co">#&gt; (omit) x[seq_len(n0), , drop =</span></span>
+<span><span class="co">#&gt; FALSE] else x, : corrupt data frame:</span></span>
+<span><span class="co">#&gt; columns will be truncated or padded</span></span>
+<span><span class="co">#&gt; with NAs</span></span>
 <span><span class="co">#&gt;   a b         cd      V5</span></span>
 <span><span class="co">#&gt; 1 1 e          9 NULL  x</span></span>
 <span><span class="co">#&gt; 2 2 f     10, 11 &lt;NA&gt;  x</span></span>
@@ -1591,8 +1592,9 @@
 <td>
 <div class="sourceCode" id="cb114"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">1</span>, b <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">]</span>, c <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`, ,</span></span>
-<span><span class="co">#&gt; c("a", "b"), value = structure(list(:</span></span>
+<span><span class="co">#&gt; Warning in</span></span>
+<span><span class="co">#&gt; `[&lt;-.data.frame`(`*tmp*`, , c("a",</span></span>
+<span><span class="co">#&gt; "b"), value = structure(list(:</span></span>
 <span><span class="co">#&gt; provided 3 variables to replace 2</span></span>
 <span><span class="co">#&gt; variables</span></span>
 <span><span class="co">#&gt;   a b         cd</span></span>
@@ -1927,8 +1929,8 @@
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span>, d <span class="op">=</span> <span class="st">"z"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
 <span><span class="co">#&gt; 2:3, , value = structure(list(a =</span></span>
-<span><span class="co">#&gt; 1, : provided 4 variables to replace 3</span></span>
-<span><span class="co">#&gt; variables</span></span>
+<span><span class="co">#&gt; 1, : provided 4 variables to replace</span></span>
+<span><span class="co">#&gt; 3 variables</span></span>
 <span><span class="co">#&gt;   a b   cd</span></span>
 <span><span class="co">#&gt; 1 1 e    9</span></span>
 <span><span class="co">#&gt; 2 1 x    y</span></span>
@@ -1962,17 +1964,17 @@
 <div class="sourceCode" id="cb149"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">0</span><span class="op">:</span><span class="fl">1</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="../../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, b <span class="op">=</span> <span class="st">"x"</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="st">"y"</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
-<span><span class="co">#&gt; 0:1, , value = structure(list(a = 1:2, :</span></span>
-<span><span class="co">#&gt; replacement element 1 has 2 rows to</span></span>
-<span><span class="co">#&gt; replace 1 rows</span></span>
+<span><span class="co">#&gt; 0:1, , value = structure(list(a =</span></span>
+<span><span class="co">#&gt; 1:2, : replacement element 1 has 2</span></span>
+<span><span class="co">#&gt; rows to replace 1 rows</span></span>
 <span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
-<span><span class="co">#&gt; 0:1, , value = structure(list(a = 1:2, :</span></span>
-<span><span class="co">#&gt; replacement element 2 has 2 rows to</span></span>
-<span><span class="co">#&gt; replace 1 rows</span></span>
+<span><span class="co">#&gt; 0:1, , value = structure(list(a =</span></span>
+<span><span class="co">#&gt; 1:2, : replacement element 2 has 2</span></span>
+<span><span class="co">#&gt; rows to replace 1 rows</span></span>
 <span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
-<span><span class="co">#&gt; 0:1, , value = structure(list(a = 1:2, :</span></span>
-<span><span class="co">#&gt; replacement element 3 has 2 rows to</span></span>
-<span><span class="co">#&gt; replace 1 rows</span></span>
+<span><span class="co">#&gt; 0:1, , value = structure(list(a =</span></span>
+<span><span class="co">#&gt; 1:2, : replacement element 3 has 2</span></span>
+<span><span class="co">#&gt; rows to replace 1 rows</span></span>
 <span><span class="co">#&gt;   a b         cd</span></span>
 <span><span class="co">#&gt; 1 1 x          y</span></span>
 <span><span class="co">#&gt; 2 2 f     10, 11</span></span>
@@ -2127,9 +2129,10 @@
 <td>
 <div class="sourceCode" id="cb162"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`, ,</span></span>
-<span><span class="co">#&gt; value = structure(list(X1 = 1, X.x. =</span></span>
-<span><span class="co">#&gt; "x", : provided 4 variables to replace 3</span></span>
+<span><span class="co">#&gt; Warning in</span></span>
+<span><span class="co">#&gt; `[&lt;-.data.frame`(`*tmp*`, , value =</span></span>
+<span><span class="co">#&gt; structure(list(X1 = 1, X.x. = "x", :</span></span>
+<span><span class="co">#&gt; provided 4 variables to replace 3</span></span>
 <span><span class="co">#&gt; variables</span></span>
 <span><span class="co">#&gt;   a b cd</span></span>
 <span><span class="co">#&gt; 1 1 x  2</span></span>
@@ -2276,10 +2279,10 @@
 <td>
 <div class="sourceCode" id="cb175"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span>,<span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span><span class="fl">1</span>, <span class="st">"x"</span>, <span class="fl">2</span>, <span class="fl">3</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`, , ,</span></span>
-<span><span class="co">#&gt; value = structure(list(X1 = 1, :</span></span>
-<span><span class="co">#&gt; provided 4 variables to replace 3</span></span>
-<span><span class="co">#&gt; variables</span></span>
+<span><span class="co">#&gt; Warning in</span></span>
+<span><span class="co">#&gt; `[&lt;-.data.frame`(`*tmp*`, , , value</span></span>
+<span><span class="co">#&gt; = structure(list(X1 = 1, : provided</span></span>
+<span><span class="co">#&gt; 4 variables to replace 3 variables</span></span>
 <span><span class="co">#&gt;   a b cd</span></span>
 <span><span class="co">#&gt; 1 1 x  2</span></span>
 <span><span class="co">#&gt; 2 1 x  2</span></span>
