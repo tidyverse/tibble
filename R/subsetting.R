@@ -685,7 +685,7 @@ tbl_expand_to_nrow <- function(x, i) {
   x
 }
 
-tbl_subassign_row <- function(x, i, value, i_arg, value_arg) {
+tbl_subassign_row <- function(x, i, value, i_arg, value_arg, call = my_caller_call()) {
   recycled_value <- vectbl_recycle_rhs_cols(value, length(x))
 
   withCallingHandlers(
@@ -696,7 +696,7 @@ tbl_subassign_row <- function(x, i, value, i_arg, value_arg) {
       # Side effect: check if `value` can be recycled
       vectbl_recycle_rhs_rows(value, length(i), i_arg, value_arg)
 
-      abort_assign_incompatible_type(x, recycled_value, j, value_arg, cnd_message(cnd))
+      abort_assign_incompatible_type(x, recycled_value, j, value_arg, cnd, call = call)
     }
   )
 
@@ -828,22 +828,6 @@ error_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg) {
   )
 }
 
-error_assign_incompatible_type <- function(x, value, j, value_arg, message) {
-  name <- names(x)[[j]]
-
-  tibble_error(
-    bullets(
-      paste0("Assigned data ", tick(as_label(value_arg)), " must be compatible with existing data:"),
-      i = paste0("Error occurred for column ", tick(name)),
-      x = message
-    ),
-    expected = x[[j]],
-    actual = value[[j]],
-    name = name,
-    j = j
-  )
-}
-
 abort_need_rhs_vector <- function(value_arg) {
   tibble_abort(paste0(tick(as_label(value_arg)), " must be a vector, a bare list, a data frame or a matrix."))
 }
@@ -917,19 +901,20 @@ abort_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg) {
   )
 }
 
-abort_assign_incompatible_type <- function(x, value, j, value_arg, message) {
+abort_assign_incompatible_type <- function(x, value, j, value_arg, parent = NULL, call = my_caller_call()) {
   name <- names(x)[[j]]
 
   tibble_abort(
     bullets(
       paste0("Assigned data ", tick(as_label(value_arg)), " must be compatible with existing data:"),
-      i = paste0("Error occurred for column ", tick(name)),
-      x = message
+      i = paste0("Error occurred for column ", tick(name))
     ),
     expected = x[[j]],
     actual = value[[j]],
     name = name,
-    j = j
+    j = j,
+    parent = parent,
+    call = call
   )
 }
 

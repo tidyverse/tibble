@@ -12,7 +12,7 @@ tbl_subset_matrix <- function(x, j, j_arg) {
   unname(vec_c(!!!values, .name_spec = ~.x))
 }
 
-tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg) {
+tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg, call = my_caller_call()) {
   # FIXME: use size argument in vctrs >= 0.3.0
 
   if (!vec_is(value)) {
@@ -31,7 +31,7 @@ tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg) {
       x[[j]] <- vectbl_assign(x[[j]], cells[[j]], value)
     },
     vctrs_error_incompatible_type = function(cnd) {
-      cnd_signal(error_assign_incompatible_type(x, rep(list(value), j), j, value_arg, cnd_message(cnd)))
+      abort_assign_incompatible_type(x, rep(list(value), j), j, value_arg, cnd, call = call)
     }
   )
 

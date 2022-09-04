@@ -599,7 +599,7 @@ test_that("[<-.tbl_df supports matrix on the RHS (#762)", {
     df[1:3, 1:2] <- matrix(6:1, ncol = 2),
     abort_assign_incompatible_type(
       df, as.data.frame(matrix(6:1, ncol = 2)), 2, quote(matrix(6:1, ncol = 2)),
-      cnd_message(tryCatch(vctrs::vec_assign(letters, 1:3, 3:1), error = identity))
+      tryCatch(vctrs::vec_assign(letters, 1:3, 3:1), error = identity)
     )
   )
   expect_tibble_abort(

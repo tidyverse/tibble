@@ -725,31 +725,35 @@
       df <- tibble(x = 1:3, y = letters[1:3], z = as.list(1:3))
       df[1:3, 1:2] <- df[2:3]
     Condition
-      Error in `abort_assign_incompatible_type()`:
+      Error in `[<-.tbl_df`:
       ! Assigned data `df[2:3]` must be compatible with existing data.
       i Error occurred for column `x`.
-      x Can't convert <character> to <integer>.
+      Caused by error in `vec_assign()`:
+      ! Can't convert <character> to <integer>.
     Code
       df[1:3, 1:2] <- df[1]
     Condition
-      Error in `abort_assign_incompatible_type()`:
+      Error in `[<-.tbl_df`:
       ! Assigned data `df[1]` must be compatible with existing data.
       i Error occurred for column `y`.
-      x Can't convert <integer> to <character>.
+      Caused by error in `vec_assign()`:
+      ! Can't convert <integer> to <character>.
     Code
       df[1:3, 1:2] <- df[[1]]
     Condition
-      Error in `abort_assign_incompatible_type()`:
+      Error in `[<-.tbl_df`:
       ! Assigned data `df[[1]]` must be compatible with existing data.
       i Error occurred for column `y`.
-      x Can't convert <integer> to <character>.
+      Caused by error in `vec_assign()`:
+      ! Can't convert <integer> to <character>.
     Code
       df[1:3, 1:3] <- df[3:1]
     Condition
-      Error in `abort_assign_incompatible_type()`:
+      Error in `[<-.tbl_df`:
       ! Assigned data `df[3:1]` must be compatible with existing data.
       i Error occurred for column `x`.
-      x Can't convert <list> to <integer>.
+      Caused by error in `vec_assign()`:
+      ! Can't convert <list> to <integer>.
     Code
       df[1:3, 1:3] <- NULL
     Condition
@@ -822,10 +826,11 @@
       foo <- tibble(a = 1:3, b = letters[1:3])
       foo[!is.na(foo)] <- "bogus"
     Condition
-      Error:
+      Error in `[<-.tbl_df`:
       ! Assigned data `"bogus"` must be compatible with existing data.
       i Error occurred for column `a`.
-      x Can't convert <character> to <integer>.
+      Caused by error in `vec_assign()`:
+      ! Can't convert <character> to <integer>.
     Code
       foo[as.matrix("x")] <- NA
     Condition

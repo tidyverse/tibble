@@ -3,8 +3,9 @@
     Code
       foo[m] <- 1
     Condition
-      Error:
+      Error in `[<-.tbl_df`:
       ! Assigned data `1` must be compatible with existing data.
       i Error occurred for column `z`.
-      x Can't convert <double> to <character>.
+      Caused by error in `vec_assign()`:
+      ! Can't convert <double> to <character>.
 
