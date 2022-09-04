@@ -2693,7 +2693,7 @@ with_df(df[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
 
 ```r
 with_tbl(tbl[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
-#> Error in `[<-.tbl_df`:
+#> Error in `[<-`:
 #> ! Assigned data `4` must be compatible with existing data.
 #> i Error occurred for column `c`.
 #> Caused by error in `vec_assign()`:
