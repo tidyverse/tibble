@@ -659,7 +659,7 @@ tbl$not_present
 ### Definition of `x[j]`
 
 `j` is converted to an integer vector by `vec_as_index(j, ncol(x), names = names(x))`.
-Then `x[c(j_1, j_2, ..., j_n)]` is equivalent to `tibble(x[[j_1]], x[[j_2]], ..., x[[j_3]])`, keeping the corresponding column names.
+Then `x[c(j_1, j_2, ..., j_n)]` is equivalent to `tibble(x[[j_1]], x[[j_2]], ..., x[[j_n]])`, keeping the corresponding column names.
 This implies that `j` must be a numeric or character vector, or a logical vector with length 1 or `ncol(x)`.[^subset-extract-commute]
 
 [^subset-extract-commute]: `x[j][[jj]]` is equal to `x[[ j[[jj]] ]]`, in particular `x[j][[1]]` is equal to `x[[j]]` for scalar numeric or integer `j`.
