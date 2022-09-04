@@ -3,18 +3,21 @@
     Code
       add_row(tibble(), a = 1)
     Condition
-      Error in `error_unknown_column_names()`:
-      ! could not find function "error_unknown_column_names"
+      Error in `add_row()`:
+      ! New rows can't add columns.
+      x Can't find column `a` in `.data`.
     Code
       add_row(tibble(), a = 1, b = 2)
     Condition
-      Error in `error_unknown_column_names()`:
-      ! could not find function "error_unknown_column_names"
+      Error in `add_row()`:
+      ! New rows can't add columns.
+      x Can't find columns `a` and `b` in `.data`.
     Code
       add_row(tibble(), !!!set_names(letters))
     Condition
-      Error in `error_unknown_column_names()`:
-      ! could not find function "error_unknown_column_names"
+      Error in `add_row()`:
+      ! New rows can't add columns.
+      x Can't find columns `a`, `b`, `c`, `d`, `e`, and 21 more in `.data`.
     Code
       add_row(dplyr::group_by(tibble(a = 1), a))
     Condition
