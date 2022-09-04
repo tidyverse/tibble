@@ -312,11 +312,11 @@ check_all_lengths_one <- function(x) {
 
   bad_lengths <- which(sizes != 1)
   if (!is_empty(bad_lengths)) {
-    cnd_signal(abort_as_tibble_row_size_one(
+    abort_as_tibble_row_size_one(
       seq_along(x)[bad_lengths],
       names2(x)[bad_lengths],
       sizes[bad_lengths]
-    ))
+    )
   }
 }
 
