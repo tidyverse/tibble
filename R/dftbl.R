@@ -1,5 +1,5 @@
 set_dftbl_hooks <- function() {
-  width <- 40
+  width <- 36
 
   set_dftbl_opts_hook(width)
   set_dftbl_knit_hook(width)
