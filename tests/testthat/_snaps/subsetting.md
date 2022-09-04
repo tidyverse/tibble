@@ -977,12 +977,16 @@
       df <- tibble(x = 1:2, y = x)
       df[[1]] <- mean
     Condition
-      Error in `vec_size()`:
+      Error in `[[<-`:
+      ! Assigned data `mean` must be a vector.
+      Caused by error in `vec_size()`:
       ! `x` must be a vector, not a function.
     Code
       df[[1]] <- lm(y ~ x, df)
     Condition
-      Error in `vec_size()`:
+      Error in `[[<-`:
+      ! Assigned data `lm(y ~ x, df)` must be a vector.
+      Caused by error in `vec_size()`:
       ! `x` must be a vector, not a <lm> object.
     Code
       # # [[<-.tbl_df recycles only values of length one

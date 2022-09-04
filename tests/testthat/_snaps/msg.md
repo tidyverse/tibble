@@ -332,6 +332,12 @@
       ! Assigned data `rhs` must be compatible with existing data.
       i Error occurred for column `a`.
     Code
+      print_error(abort_assign_vector(list("c"), 1, quote(rhs)))
+    Output
+      <error/tibble_error_assign_vector>
+      Error in `abort_assign_vector()`:
+      ! Assigned data `rhs` must be a vector.
+    Code
       # # subsetting-matrix
       print_error(abort_subset_matrix_must_be_logical(quote(is.na(x) + 1)))
     Output

@@ -2287,7 +2287,7 @@ with_df(df[1:2] <- list(0, 0, 0))
 
 ```r
 with_tbl(tbl[1:2] <- list(0, 0, 0))
-#> Error in `vectbl_as_new_col_index()`:
+#> Error in `[<-`:
 #> ! Can't recycle `list(0, 0, 0)` (size 3) to size 2.
 ```
 
@@ -2306,7 +2306,7 @@ with_df(df[1:3] <- list(0, 0))
 
 ```r
 with_tbl(tbl[1:3] <- list(0, 0))
-#> Error in `vectbl_as_new_col_index()`:
+#> Error in `[<-`:
 #> ! Can't recycle `list(0, 0)` (size 2) to size 3.
 ```
 

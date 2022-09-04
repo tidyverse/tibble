@@ -88,6 +88,7 @@ test_that("output test", {
     print_error(abort_assign_incompatible_size(4, list(1:4, 3:4), 2, quote(4:1), quote(rhs)))
 
     print_error(abort_assign_incompatible_type(tibble(a = 1), list("c"), 1, quote(rhs)))
+    print_error(abort_assign_vector(list("c"), 1, quote(rhs)))
 
     "# subsetting-matrix"
     print_error(abort_subset_matrix_must_be_logical(quote(is.na(x) + 1)))
