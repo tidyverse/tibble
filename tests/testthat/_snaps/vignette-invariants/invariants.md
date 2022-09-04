@@ -2677,10 +2677,11 @@ with_df(df[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
 
 ```r
 with_tbl(tbl[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
-#> Error:
+#> Error in `[<-.tbl_df`:
 #> ! Assigned data `4` must be compatible with existing data.
 #> i Error occurred for column `c`.
-#> x Can't convert <double> to <character>.
+#> Caused by error in `vec_assign()`:
+#> ! Can't convert <double> to <character>.
 ```
 
 </td></tr></tbody></table>
@@ -2730,10 +2731,11 @@ with_df(df[1:3, 1:2] <- matrix(6:1, ncol = 2))
 
 ```r
 with_tbl(tbl[1:3, 1:2] <- matrix(6:1, ncol = 2))
-#> Error in `abort_assign_incompatible_type()`:
+#> Error in `[<-.tbl_df`:
 #> ! Assigned data `matrix(6:1, ncol = 2)` must be compatible with existing data.
 #> i Error occurred for column `c`.
-#> x Can't convert <integer> to <character>.
+#> Caused by error in `vec_assign()`:
+#> ! Can't convert <integer> to <character>.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3706,10 +3708,11 @@ with_df(df[2:3, 1] <- df[1:2, 2])
 
 ```r
 with_tbl(tbl[2:3, 1] <- tbl[1:2, 2])
-#> Error in `abort_assign_incompatible_type()`:
+#> Error in `[<-.tbl_df`:
 #> ! Assigned data `tbl[1:2, 2]` must be compatible with existing data.
 #> i Error occurred for column `n`.
-#> x Can't convert <character> to <integer>.
+#> Caused by error in `vec_assign()`:
+#> ! Can't convert <character> to <integer>.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3731,10 +3734,11 @@ with_df(df[2:3, 2] <- df[1:2, 3])
 
 ```r
 with_tbl(tbl[2:3, 2] <- tbl[1:2, 3])
-#> Error in `abort_assign_incompatible_type()`:
+#> Error in `[<-.tbl_df`:
 #> ! Assigned data `tbl[1:2, 3]` must be compatible with existing data.
 #> i Error occurred for column `c`.
-#> x Can't convert <list> to <character>.
+#> Caused by error in `vec_assign()`:
+#> ! Can't convert <list> to <character>.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3780,10 +3784,11 @@ with_df2(df2[2:3, 1] <- df2[1:2, 2])
 
 ```r
 with_tbl2(tbl2[2:3, 1] <- tbl2[1:2, 2])
-#> Error in `abort_assign_incompatible_type()`:
+#> Error in `[<-.tbl_df`:
 #> ! Assigned data `tbl2[1:2, 2]` must be compatible with existing data.
 #> i Error occurred for column `tb`.
-#> x Can't convert <double[,4]> to <tbl_df>.
+#> Caused by error in `vec_assign()`:
+#> ! Can't convert <double[,4]> to <tbl_df>.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>

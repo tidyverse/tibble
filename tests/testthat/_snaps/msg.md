@@ -316,13 +316,12 @@
       i Only vectors of size 1 are recycled.
     Code
       print_error(abort_assign_incompatible_type(tibble(a = 1), list("c"), 1, quote(
-        rhs), "Can't frobnicate."))
+        rhs)))
     Output
       <error/tibble_error_assign_incompatible_type>
       Error in `abort_assign_incompatible_type()`:
       ! Assigned data `rhs` must be compatible with existing data.
       i Error occurred for column `a`.
-      x Can't frobnicate.
     Code
       # # subsetting-matrix
       print_error(abort_subset_matrix_must_be_logical(quote(is.na(x) + 1)))
