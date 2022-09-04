@@ -34,6 +34,6 @@
 ^configure$
 ^R/aaa-r-version\.R$
 ^src/version\.txt$
-^\.Renviron$
+^\.Rprofile$
 ^src/Makevars\.debug$
 ^\.vscode$
