@@ -227,7 +227,7 @@ test_that("tribble and frame_matrix cannot have named arguments", {
 })
 
 test_that("output test", {
-  expect_snapshot_with_error({
+  expect_snapshot(error = TRUE, {
     tribble(1)
     tribble(~a, ~b, 1)
     tribble(a ~ b, 1)

@@ -15,7 +15,7 @@ test_that("repaired_names()", {
 test_that("output test", {
   skip_if_not_installed("vctrs", "0.3.8.9001")
 
-  expect_snapshot_with_error({
+  expect_snapshot(error = TRUE, {
     repaired_names(letters[1:3], repair_hint = FALSE)
     repaired_names("", repair_hint = FALSE)
     repaired_names("", repair_hint = TRUE)

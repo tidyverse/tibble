@@ -98,7 +98,7 @@ test_that("work around structure() bug (#852)", {
 })
 
 test_that("output test", {
-  expect_snapshot_with_error({
+  expect_snapshot(error = TRUE, {
     rownames_to_column(mtcars, "cyl")
     rowid_to_column(trees, "Volume")
 

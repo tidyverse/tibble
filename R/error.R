@@ -18,6 +18,16 @@ tibble_error_class <- function(class) {
 }
 
 # Errors get a class name derived from the name of the calling function
+tibble_abort <- function(x, ..., parent = NULL) {
+  abort_call <- sys.call(-1)
+  fn_name <- as_name(abort_call[[1]])
+  class <- tibble_error_class(gsub("^abort_", "", fn_name))
+
+  call <- my_caller_call()
+
+  abort(x, class, ..., call = call, parent = parent)
+}
+
 tibble_error <- function(x, ..., parent = NULL) {
   call <- sys.call(-1)
   fn_name <- as_name(call[[1]])
