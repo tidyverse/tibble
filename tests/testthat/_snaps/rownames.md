@@ -3,29 +3,21 @@
     Code
       rownames_to_column(mtcars, "cyl")
     Condition
-      Error:
-      ! Column name `cyl` must not be duplicated.
-      Caused by error in `repaired_names()`:
-      ! Names must be unique.
-      x These names are duplicated:
-        * "cyl" at locations 2 and 12.
+      Error in `error_column_names_must_be_unique()`:
+      ! could not find function "error_column_names_must_be_unique"
     Code
       rowid_to_column(trees, "Volume")
     Condition
-      Error:
-      ! Column name `Volume` must not be duplicated.
-      Caused by error in `repaired_names()`:
-      ! Names must be unique.
-      x These names are duplicated:
-        * "Volume" at locations 3 and 4.
+      Error in `error_column_names_must_be_unique()`:
+      ! could not find function "error_column_names_must_be_unique"
     Code
       column_to_rownames(mtcars, "cyl")
     Condition
-      Error:
+      Error in `column_to_rownames()`:
       ! `.data` must be a data frame without row names.
     Code
       column_to_rownames(trees, "foo")
     Condition
-      Error:
+      Error in `column_to_rownames()`:
       ! Can't find column `foo` in `.data`.
 

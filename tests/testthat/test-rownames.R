@@ -22,9 +22,9 @@ test_that("rownames_to_column keeps the tbl classes (#882)", {
   expect_false(has_rownames(res))
   expect_equal(class(res), class(mtcars))
   expect_equal(res$rowname, rownames(mtcars))
-  expect_tibble_error(
+  expect_tibble_abort(
     rownames_to_column(mtcars, "wt"),
-    error_column_names_must_be_unique("wt", repair = FALSE)
+    abort_column_names_must_be_unique("wt", repair = FALSE)
   )
 
   mtcars2 <- as_tibble(mtcars, rownames = NA)
@@ -33,9 +33,9 @@ test_that("rownames_to_column keeps the tbl classes (#882)", {
   expect_false(has_rownames(res1))
   expect_equal(class(res1), class(mtcars2))
   expect_equal(res1$`Make&Model`, rownames(mtcars))
-  expect_tibble_error(
+  expect_tibble_abort(
     rownames_to_column(mtcars2, "wt"),
-    error_column_names_must_be_unique("wt", repair = FALSE)
+    abort_column_names_must_be_unique("wt", repair = FALSE)
   )
 })
 
@@ -44,9 +44,9 @@ test_that("rowid_to_column keeps the tbl classes", {
   expect_false(has_rownames(res))
   expect_equal(class(res), class(mtcars))
   expect_equal(res$rowid, seq_len(nrow(mtcars)))
-  expect_tibble_error(
+  expect_tibble_abort(
     rowid_to_column(mtcars, "wt"),
-    error_column_names_must_be_unique("wt", repair = FALSE)
+    abort_column_names_must_be_unique("wt", repair = FALSE)
   )
 
   mtcars2 <- as_tibble(mtcars, rownames = NA)
@@ -55,9 +55,9 @@ test_that("rowid_to_column keeps the tbl classes", {
   expect_false(has_rownames(res1))
   expect_equal(class(res1), class(mtcars2))
   expect_equal(res1$row_id, seq_len(nrow(mtcars)))
-  expect_tibble_error(
+  expect_tibble_abort(
     rowid_to_column(mtcars2, "wt"),
-    error_column_names_must_be_unique("wt", repair = FALSE)
+    abort_column_names_must_be_unique("wt", repair = FALSE)
   )
 })
 
@@ -79,13 +79,13 @@ test_that("column_to_rownames returns tbl", {
   expect_warning(res <- column_to_rownames(res0, var = "num"), NA)
   expect_true(has_rownames(res))
   expect_equal(rownames(res), as.character(mtcars1$num))
-  expect_tibble_error(
+  expect_tibble_abort(
     column_to_rownames(res),
-    error_already_has_rownames()
+    abort_already_has_rownames()
   )
-  expect_tibble_error(
+  expect_tibble_abort(
     column_to_rownames(rownames_to_column(mtcars1, var), "num2"),
-    error_unknown_column_names("num2")
+    abort_unknown_column_names("num2")
   )
 })
 

@@ -433,9 +433,9 @@ test_that("error_name_repair_arg()", {
   )
 })
 
-test_that("error_new_tibble_must_be_list()", {
+test_that("abort_new_tibble_must_be_list()", {
   expect_equal(
-    error_new_tibble_must_be_list(),
+    abort_new_tibble_must_be_list(),
     "Must pass a list as `x` argument to `new_tibble()`."
   )
 })

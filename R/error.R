@@ -25,7 +25,7 @@ tibble_abort <- function(x, ..., parent = NULL) {
 
   call <- my_caller_call()
 
-  abort(x, class, ..., call = call, parent = parent)
+  abort(x, class, ..., call = call, parent = parent, use_cli_format = TRUE)
 }
 
 tibble_error <- function(x, ..., parent = NULL) {

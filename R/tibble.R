@@ -234,7 +234,7 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
       if (single_row) {
         if (vec_is(res)) {
           if (vec_size(res) != 1) {
-            cnd_signal(error_tibble_row_size_one(j, given_col_names[[j]], vec_size(res)))
+            abort_tibble_row_size_one(j, given_col_names[[j]], vec_size(res))
           }
         } else {
           res <- list(res)
@@ -327,25 +327,25 @@ vectbl_recycle_rows <- function(x, n, j, name) {
     name <- j
   }
 
-  cnd_signal(error_incompatible_size(n, name, size, "Existing data"))
+  abort_incompatible_size(n, name, size, "Existing data")
 }
 
 # Errors ------------------------------------------------------------------
 
-error_tibble_row_size_one <- function(j, name, size) {
+abort_tibble_row_size_one <- function(j, name, size) {
   if (name != "") {
     desc <- tick(name)
   } else {
     desc <- paste0("at position ", j)
   }
 
-  tibble_error(problems(
+  tibble_abort(problems(
     "All vectors must be size one, use `list()` to wrap.",
     paste0("Column ", desc, " is of size ", size, ".")
   ))
 }
 
-error_incompatible_size <- function(.rows, vars, vars_len, rows_source) {
+abort_incompatible_size <- function(.rows, vars, vars_len, rows_source) {
   vars_split <- split(vars, vars_len)
 
   vars_split[["1"]] <- NULL
@@ -364,7 +364,7 @@ error_incompatible_size <- function(.rows, vars, vars_len, rows_source) {
     paste0("Size ", x, ": ", pluralise_commas(text, y))
   })
 
-  tibble_error(bullets(
+  tibble_abort(bullets(
     "Tibble columns must have compatible sizes:",
     if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
     problems,

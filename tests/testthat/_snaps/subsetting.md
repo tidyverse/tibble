@@ -17,7 +17,7 @@
     Code
       foo[as.matrix("x")]
     Condition
-      Error:
+      Error in `[.tbl_df`:
       ! Subscript `as.matrix("x")` is a matrix, it must be of type logical.
     Code
       foo[array("x", dim = c(1, 1, 1))]
@@ -71,12 +71,12 @@
     Code
       foo[c(1:3, NA)]
     Condition
-      Error:
+      Error in `[.tbl_df`:
       ! Can't use NA as column index with `[` at position 4.
     Code
       foo[as.matrix(1)]
     Condition
-      Error:
+      Error in `[.tbl_df`:
       ! Subscript `as.matrix(1)` is a matrix, it must be of type logical.
     Code
       foo[array(1, dim = c(1, 1, 1))]
@@ -186,12 +186,12 @@
     Code
       foo[c(TRUE, TRUE, NA)]
     Condition
-      Error:
+      Error in `[.tbl_df`:
       ! Can't use NA as column index with `[` at position 3.
     Code
       foo[as.matrix(TRUE)]
     Condition
-      Error:
+      Error in `[.tbl_df`:
       ! Subscript `as.matrix(TRUE)` is a matrix, it must have the same dimensions as the input.
     Code
       foo[array(TRUE, dim = c(1, 1, 1))]
@@ -292,7 +292,7 @@
     Code
       foo[as.matrix("x")]
     Condition
-      Error:
+      Error in `[.tbl_df`:
       ! Subscript `as.matrix("x")` is a matrix, it must be of type logical.
     Code
       foo[array("x", dim = c(1, 1, 1))]
@@ -334,22 +334,22 @@
       foo <- tibble(x = 1:10, y = 1:10)
       foo[[]]
     Condition
-      Error:
+      Error in `[[.tbl_df`:
       ! Subscript can't be missing for tibbles in `[[`.
     Code
       foo[[, 1]]
     Condition
-      Error:
+      Error in `[[.tbl_df`:
       ! Subscript can't be missing for tibbles in `[[`.
     Code
       foo[[1, ]]
     Condition
-      Error:
+      Error in `[[.tbl_df`:
       ! Subscript can't be missing for tibbles in `[[`.
     Code
       foo[[, ]]
     Condition
-      Error:
+      Error in `[[.tbl_df`:
       ! Subscript can't be missing for tibbles in `[[`.
     Code
       foo[[1:3]]
@@ -514,29 +514,29 @@
       df <- tibble(x = 1:2, y = x)
       df[c(1, 1)] <- 3
     Condition
-      Error:
+      Error in `[<-.tbl_df`:
       ! Column index 1 is used more than once for assignment.
     Code
       df[, c(1, 1)] <- 3
     Condition
-      Error:
+      Error in `[<-.tbl_df`:
       ! Column index 1 is used more than once for assignment.
     Code
       df[c(1, 1), ] <- 3
     Condition
-      Error:
+      Error in `[<-.tbl_df`:
       ! Row index 1 is used more than once for assignment.
     Code
       # # [<-.tbl_df throws an error with NA indexes
       df <- tibble(x = 1:2, y = x)
       df[NA] <- 3
     Condition
-      Error:
+      Error in `[<-.tbl_df`:
       ! Can't use NA as column index with `[` at positions 1 and 2.
     Code
       df[NA, ] <- 3
     Condition
-      Error:
+      Error in `[<-.tbl_df`:
       ! Can't use NA as row index in a tibble for assignment.
     Code
       # # [<-.tbl_df and logical indexes
@@ -563,12 +563,12 @@
       df <- tibble(x = 1:2, y = x)
       df[] <- mean
     Condition
-      Error:
+      Error in `[<-.tbl_df`:
       ! `mean` must be a vector, a bare list, a data frame, a matrix, or NULL.
     Code
       df[] <- lm(y ~ x, df)
     Condition
-      Error:
+      Error in `[<-.tbl_df`:
       ! `lm(y ~ x, df)` must be a vector, a bare list, a data frame, a matrix, or NULL.
     Code
       # # [<-.tbl_df throws an error with OOB assignment
@@ -615,27 +615,18 @@
     Code
       df[1, ] <- 1:3
     Condition
-      Error:
-      ! Assigned data `1:3` must be compatible with row subscript `1`.
-      x 1 row must be assigned.
-      x Assigned data has 3 rows.
-      i Row updates require a list value. Do you need `list()` or `as.list()`?
+      Error in `error_assign_incompatible_size()`:
+      ! could not find function "error_assign_incompatible_size"
     Code
       df[1:2, ] <- 1:3
     Condition
-      Error:
-      ! Assigned data `1:3` must be compatible with row subscript `1:2`.
-      x 2 rows must be assigned.
-      x Assigned data has 3 rows.
-      i Only vectors of size 1 are recycled.
+      Error in `error_assign_incompatible_size()`:
+      ! could not find function "error_assign_incompatible_size"
     Code
       df[, ] <- 1:2
     Condition
-      Error:
-      ! Assigned data `1:2` must be compatible with existing data.
-      x Existing data has 3 rows.
-      x Assigned data has 2 rows.
-      i Only vectors of size 1 are recycled.
+      Error in `error_assign_incompatible_size()`:
+      ! could not find function "error_assign_incompatible_size"
     Code
       df[1, ] <- list(a = 1:3, b = 1)
     Condition
@@ -659,101 +650,77 @@
     Code
       df[1, 1:2] <- list(a = 1:3, b = 1)
     Condition
-      Error:
-      ! Assigned data `list(a = 1:3, b = 1)` must be compatible with row subscript `1`.
-      x 1 row must be assigned.
-      x Element 1 of assigned data has 3 rows.
-      i Row updates require a list value. Do you need `list()` or `as.list()`?
+      Error in `error_assign_incompatible_size()`:
+      ! could not find function "error_assign_incompatible_size"
     Code
       df[1, 1:2] <- list(a = 1, b = 1:3)
     Condition
-      Error:
-      ! Assigned data `list(a = 1, b = 1:3)` must be compatible with row subscript `1`.
-      x 1 row must be assigned.
-      x Element 2 of assigned data has 3 rows.
-      i Row updates require a list value. Do you need `list()` or `as.list()`?
+      Error in `error_assign_incompatible_size()`:
+      ! could not find function "error_assign_incompatible_size"
     Code
       df[1:2, 1:2] <- list(a = 1:3, b = 1)
     Condition
-      Error:
-      ! Assigned data `list(a = 1:3, b = 1)` must be compatible with row subscript `1:2`.
-      x 2 rows must be assigned.
-      x Element 1 of assigned data has 3 rows.
-      i Only vectors of size 1 are recycled.
+      Error in `error_assign_incompatible_size()`:
+      ! could not find function "error_assign_incompatible_size"
     Code
       df[1:2, 1:2] <- list(a = 1, b = 1:3)
     Condition
-      Error:
-      ! Assigned data `list(a = 1, b = 1:3)` must be compatible with row subscript `1:2`.
-      x 2 rows must be assigned.
-      x Element 2 of assigned data has 3 rows.
-      i Only vectors of size 1 are recycled.
+      Error in `error_assign_incompatible_size()`:
+      ! could not find function "error_assign_incompatible_size"
     Code
       df[1, ] <- list(a = 1:3, b = 1, c = 1:3)
     Condition
-      Error:
-      ! Assigned data `list(a = 1:3, b = 1, c = 1:3)` must be compatible with row subscript `1`.
-      x 1 row must be assigned.
-      x Element 1 of assigned data has 3 rows.
-      i Row updates require a list value. Do you need `list()` or `as.list()`?
+      Error in `error_assign_incompatible_size()`:
+      ! could not find function "error_assign_incompatible_size"
     Code
       df[1, ] <- list(a = 1, b = 1:3, c = 1:3)
     Condition
-      Error:
-      ! Assigned data `list(a = 1, b = 1:3, c = 1:3)` must be compatible with row subscript `1`.
-      x 1 row must be assigned.
-      x Element 2 of assigned data has 3 rows.
-      i Row updates require a list value. Do you need `list()` or `as.list()`?
+      Error in `error_assign_incompatible_size()`:
+      ! could not find function "error_assign_incompatible_size"
     Code
       df[1:2, ] <- list(a = 1:3, b = 1, c = 1:3)
     Condition
-      Error:
-      ! Assigned data `list(a = 1:3, b = 1, c = 1:3)` must be compatible with row subscript `1:2`.
-      x 2 rows must be assigned.
-      x Element 1 of assigned data has 3 rows.
-      i Only vectors of size 1 are recycled.
+      Error in `error_assign_incompatible_size()`:
+      ! could not find function "error_assign_incompatible_size"
     Code
       df[1:2, ] <- list(a = 1, b = 1:3, c = 1:3)
     Condition
-      Error:
-      ! Assigned data `list(a = 1, b = 1:3, c = 1:3)` must be compatible with row subscript `1:2`.
-      x 2 rows must be assigned.
-      x Element 2 of assigned data has 3 rows.
-      i Only vectors of size 1 are recycled.
+      Error in `error_assign_incompatible_size()`:
+      ! could not find function "error_assign_incompatible_size"
     Code
       # # [<-.tbl_df and coercion
       df <- tibble(x = 1:3, y = letters[1:3], z = as.list(1:3))
       df[1:3, 1:2] <- df[2:3]
     Condition
-      Error:
+      Error in `abort_assign_incompatible_type()`:
       ! Assigned data `df[2:3]` must be compatible with existing data.
       i Error occurred for column `x`.
       x Can't convert <character> to <integer>.
     Code
       df[1:3, 1:2] <- df[1]
     Condition
-      Error:
+      Error in `abort_assign_incompatible_type()`:
       ! Assigned data `df[1]` must be compatible with existing data.
       i Error occurred for column `y`.
       x Can't convert <integer> to <character>.
     Code
       df[1:3, 1:2] <- df[[1]]
     Condition
-      Error:
+      Error in `abort_assign_incompatible_type()`:
       ! Assigned data `df[[1]]` must be compatible with existing data.
       i Error occurred for column `y`.
       x Can't convert <integer> to <character>.
     Code
       df[1:3, 1:3] <- df[3:1]
     Condition
-      Error:
+      Error in `abort_assign_incompatible_type()`:
       ! Assigned data `df[3:1]` must be compatible with existing data.
       i Error occurred for column `x`.
       x Can't convert <list> to <integer>.
     Code
       df[1:3, 1:3] <- NULL
     Condition
-      Error:
+      Error in `[<-.tbl_df`:
       ! `NULL` must be a vector, a bare list, a data frame or a matrix.
     Code
       # # [<-.tbl_df and overwriting NA
@@ -822,47 +789,45 @@
       foo <- tibble(a = 1:3, b = letters[1:3])
       foo[!is.na(foo)] <- "bogus"
     Condition
-      Error:
-      ! Assigned data `"bogus"` must be compatible with existing data.
-      i Error occurred for column `a`.
-      x Can't convert <character> to <integer>.
+      Error in `error_assign_incompatible_type()`:
+      ! could not find function "error_assign_incompatible_type"
     Code
       foo[as.matrix("x")] <- NA
     Condition
-      Error:
+      Error in `[<-.tbl_df`:
       ! Subscript `as.matrix("x")` is a matrix, it must be of type logical.
     Code
       foo[array("x", dim = c(1, 1, 1))] <- NA
       foo[is.na(foo)] <- 1:3
     Condition
-      Error:
+      Error in `[<-.tbl_df`:
       ! Subscript `is.na(foo)` is a matrix, the data `1:3` must have size 1.
     Code
       foo[is.na(foo)] <- lm(a ~ b, foo)
     Condition
-      Error:
+      Error in `[<-.tbl_df`:
       ! Subscript `is.na(foo)` is a matrix, the data `lm(a ~ b, foo)` must be a vector of size 1.
     Code
       # # [[<-.tbl_df rejects invalid column indexes
       foo <- tibble(x = 1:10, y = 1:10)
       foo[[]] <- 1
     Condition
-      Error:
+      Error in `[[<-.tbl_df`:
       ! Subscript can't be missing for tibbles in `[[<-`.
     Code
       foo[[, 1]] <- 1
     Condition
-      Error:
+      Error in `[[<-.tbl_df`:
       ! Subscript can't be missing for tibbles in `[[<-`.
     Code
       foo[[1, ]] <- 1
     Condition
-      Error:
+      Error in `[[<-.tbl_df`:
       ! Subscript can't be missing for tibbles in `[[<-`.
     Code
       foo[[, ]] <- 1
     Condition
-      Error:
+      Error in `[[<-.tbl_df`:
       ! Subscript can't be missing for tibbles in `[[<-`.
     Code
       foo[[1:3]] <- 1
@@ -962,63 +927,45 @@
       df <- tibble(x = 1:3)
       df[["x"]] <- 8:9
     Condition
-      Error:
-      ! Assigned data `8:9` must be compatible with existing data.
-      x Existing data has 3 rows.
-      x Assigned data has 2 rows.
-      i Only vectors of size 1 are recycled.
+      Error in `error_assign_incompatible_size()`:
+      ! could not find function "error_assign_incompatible_size"
     Code
       df[["w"]] <- 8:9
     Condition
-      Error:
-      ! Assigned data `8:9` must be compatible with existing data.
-      x Existing data has 3 rows.
-      x Assigned data has 2 rows.
-      i Only vectors of size 1 are recycled.
+      Error in `error_assign_incompatible_size()`:
+      ! could not find function "error_assign_incompatible_size"
     Code
       df[["a"]] <- character()
     Condition
-      Error:
-      ! Assigned data `character()` must be compatible with existing data.
-      x Existing data has 3 rows.
-      x Assigned data has 0 rows.
-      i Only vectors of size 1 are recycled.
+      Error in `error_assign_incompatible_size()`:
+      ! could not find function "error_assign_incompatible_size"
     Code
       # # [<-.tbl_df throws an error with invalid values
       df <- tibble(x = 1:2, y = x)
       df[1] <- lm(y ~ x, df)
     Condition
-      Error:
+      Error in `[<-.tbl_df`:
       ! `lm(y ~ x, df)` must be a vector, a bare list, a data frame, a matrix, or NULL.
     Code
       df[1:2, 1] <- NULL
     Condition
-      Error:
+      Error in `[<-.tbl_df`:
       ! `NULL` must be a vector, a bare list, a data frame or a matrix.
     Code
       # # $<- recycles only values of length one
       df <- tibble(x = 1:3)
       df$x <- 8:9
     Condition
-      Error:
-      ! Assigned data `8:9` must be compatible with existing data.
-      x Existing data has 3 rows.
-      x Assigned data has 2 rows.
-      i Only vectors of size 1 are recycled.
+      Error in `error_assign_incompatible_size()`:
+      ! could not find function "error_assign_incompatible_size"
     Code
       df$w <- 8:9
     Condition
-      Error:
-      ! Assigned data `8:9` must be compatible with existing data.
-      x Existing data has 3 rows.
-      x Assigned data has 2 rows.
-      i Only vectors of size 1 are recycled.
+      Error in `error_assign_incompatible_size()`:
+      ! could not find function "error_assign_incompatible_size"
     Code
       df$a <- character()
     Condition
-      Error:
-      ! Assigned data `character()` must be compatible with existing data.
-      x Existing data has 3 rows.
-      x Assigned data has 0 rows.
-      i Only vectors of size 1 are recycled.
+      Error in `error_assign_incompatible_size()`:
+      ! could not find function "error_assign_incompatible_size"
 

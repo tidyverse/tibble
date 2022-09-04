@@ -131,7 +131,7 @@ check_valid_cols <- function(x, pos = NULL) {
   is_xd <- which(!map_lgl(x, is_valid_col))
   if (has_length(is_xd)) {
     classes <- map_chr(x[is_xd], friendly_type_of)
-    cnd_signal(error_column_scalar_type(names_x[is_xd], pos[is_xd], classes))
+    abort_column_scalar_type(names_x[is_xd], pos[is_xd], classes)
   }
 
   # 657
@@ -159,7 +159,7 @@ recycle_columns <- function(x, .rows, lengths) {
   if (is_empty(different_len)) return(new_tibble(x, nrow = nrow, subclass = NULL))
 
   if (any(lengths[different_len] != 1)) {
-    cnd_signal(error_incompatible_size(.rows, names(x), lengths, "Requested with `.rows` argument"))
+    abort_incompatible_size(.rows, names(x), lengths, "Requested with `.rows` argument")
   }
 
   if (nrow != 1L) {
@@ -288,7 +288,7 @@ as_tibble.default <- function(x, ...) {
 as_tibble_row <- function(x,
                           .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   if (!vec_is(x)) {
-    cnd_signal(error_as_tibble_row_vector(x))
+    abort_as_tibble_row_vector(x)
   }
 
   names <- vectbl_names2(x, .name_repair = .name_repair)
@@ -312,7 +312,7 @@ check_all_lengths_one <- function(x) {
 
   bad_lengths <- which(sizes != 1)
   if (!is_empty(bad_lengths)) {
-    cnd_signal(error_as_tibble_row_size_one(
+    cnd_signal(abort_as_tibble_row_size_one(
       seq_along(x)[bad_lengths],
       names2(x)[bad_lengths],
       sizes[bad_lengths]
@@ -348,8 +348,8 @@ matrixToDataFrame <- function(x) {
 
 # Errors ------------------------------------------------------------------
 
-error_column_scalar_type <- function(names, positions, classes) {
-  tibble_error(
+abort_column_scalar_type <- function(names, positions, classes) {
+  tibble_abort(
     problems(
       "All columns in a tibble must be vectors:",
       x = paste0("Column ", name_or_pos(names, positions), " is ", classes)
@@ -358,17 +358,17 @@ error_column_scalar_type <- function(names, positions, classes) {
   )
 }
 
-error_as_tibble_row_vector <- function(x) {
-  tibble_error(paste0(
+abort_as_tibble_row_vector <- function(x) {
+  tibble_abort(paste0(
     "`x` must be a vector in `as_tibble_row()`, not ", class(x)[[1]], "."
   ))
 }
 
-error_as_tibble_row_size_one <- function(j, name, size) {
+abort_as_tibble_row_size_one <- function(j, name, size) {
   desc <- tick(name)
   desc[name == ""] <- paste0("at position ", j[name == ""])
 
-  tibble_error(problems(
+  tibble_abort(problems(
     "All elements must be size one, use `list()` to wrap.",
     paste0("Element ", desc, " is of size ", size, ".")
   ))
