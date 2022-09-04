@@ -1828,7 +1828,7 @@ with_df(df[[5]] <- 0)
 
 ```r
 with_tbl(tbl[[5]] <- 0)
-#> Error in `numtbl_as_col_location_assign()`:
+#> Error in `[[<-`:
 #> ! Can't assign to columns beyond the end with non-consecutive locations.
 #> i Input has size 3.
 #> x Subscript `5` contains non-consecutive location 5.
@@ -2625,7 +2625,7 @@ with_df(df[5] <- list(4:1))
 
 ```r
 with_tbl(tbl[5] <- list(4:1))
-#> Error in `numtbl_as_col_location_assign()`:
+#> Error in `[<-`:
 #> ! Can't assign to columns beyond the end with non-consecutive locations.
 #> i Input has size 3.
 #> x Subscript `5` contains non-consecutive location 5.
