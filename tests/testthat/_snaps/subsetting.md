@@ -443,27 +443,27 @@
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[list(1:3)] <- 1
     Condition
-      Error in `vectbl_as_new_col_index()`:
+      Error in `[<-`:
       ! Must assign to columns with a valid subscript vector.
       x Subscript `list(1:3)` has the wrong type `list`.
       i It must be logical, numeric, or character.
     Code
       foo[as.list(1:3)] <- 1
     Condition
-      Error in `vectbl_as_new_col_index()`:
+      Error in `[<-`:
       ! Must assign to columns with a valid subscript vector.
       x Subscript `as.list(1:3)` has the wrong type `list`.
       i It must be logical, numeric, or character.
     Code
       foo[factor(1:3)] <- 1
     Condition
-      Error in `vectbl_as_new_col_index()`:
+      Error in `[<-`:
       ! Can't assign to columns that don't exist.
       x Columns `1`, `2`, and `3` don't exist.
     Code
       foo[Sys.Date()] <- 1
     Condition
-      Error in `vectbl_as_new_col_index()`:
+      Error in `[<-`:
       ! Must assign to columns with a valid subscript vector.
       x Subscript `Sys.Date()` has the wrong type `date`.
       i It must be logical, numeric, or character.
