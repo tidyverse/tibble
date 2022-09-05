@@ -134,7 +134,7 @@ check_minimal_names <- function(x) {
   }
 
   if (anyNA(names)) {
-    abort_column_names_cannot_be_empty(which(is.na(name)), repair_hint = FALSE)
+    abort_column_names_cannot_be_empty(which(is.na(names)), repair_hint = FALSE)
   }
 
   invisible(x)
