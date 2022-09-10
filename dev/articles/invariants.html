@@ -412,8 +412,7 @@
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="fl">1.5</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `vectbl_as_col_location2()` at tibble/R/subsetting.R:397:8:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract column with a single valid subscript.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `1.5` has the wrong type `double`.</span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> It must be numeric or character.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert from `j` &lt;double&gt; to &lt;integer&gt; due to loss of precision.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -427,8 +426,7 @@
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="cn">Inf</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `vectbl_as_col_location2()` at tibble/R/subsetting.R:397:8:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract column with a single valid subscript.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `Inf` has the wrong type `double`.</span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> It must be numeric or character.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Can't convert from `j` &lt;double&gt; to &lt;integer&gt; due to loss of precision.</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -1686,7 +1684,7 @@
 <div class="section level2">
 <h2 id="row-subassignment-xi---list---">Row subassignment: <code>x[i, ] &lt;- list(...)</code><a class="anchor" aria-label="anchor" href="#row-subassignment-xi---list---"></a>
 </h2>
-<p><code>x[i, ] &lt;- a</code> is the same as <code>vec_slice(x[[j_1]], i) &lt;- a[[1]]</code>, <code>vec_slice(x[[j_2]], i) &lt;- a[[2]]</code>, … .<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;&lt;code&gt;x[i, ]&lt;/code&gt; is symmetrically for subset and subassignment.&lt;/p&gt;"><sup>7</sup></a></p>
+<p><code>x[i, ] &lt;- a</code> is the same as <code>vec_slice(x[[j_1]], i) &lt;- a[[1]]</code>, <code>vec_slice(x[[j_2]], i) &lt;- a[[2]]</code>, … .<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;&lt;code&gt;x[i, ]&lt;/code&gt; is symmetrical for subset and subassignment.&lt;/p&gt;"><sup>7</sup></a></p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1911,7 +1909,7 @@
 <div class="section level3">
 <h3 id="definition-of-xi-j---a">Definition of <code>x[i, j] &lt;- a</code><a class="anchor" aria-label="anchor" href="#definition-of-xi-j---a"></a>
 </h3>
-<p><code>x[i, j] &lt;- a</code> is equivalent to <code>x[i, ][j] &lt;- a</code>.<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;&lt;code&gt;x[i, j]&lt;/code&gt; is symmetrically for subsetting and subassignment. A more efficient implementation of &lt;code&gt;x[i, j] &amp;lt;- a&lt;/code&gt; would forward to &lt;code&gt;x[j][i, ] &amp;lt;- a&lt;/code&gt;.&lt;/p&gt;"><sup>8</sup></a></p>
+<p><code>x[i, j] &lt;- a</code> is equivalent to <code>x[i, ][j] &lt;- a</code>.<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;&lt;code&gt;x[i, j]&lt;/code&gt; is symmetrical for subsetting and subassignment. A more efficient implementation of &lt;code&gt;x[i, j] &amp;lt;- a&lt;/code&gt; would forward to &lt;code&gt;x[j][i, ] &amp;lt;- a&lt;/code&gt;.&lt;/p&gt;"><sup>8</sup></a></p>
 <p>Subassignment to <code>x[i, j]</code> is stricter for tibbles than for data frames. <code>x[i, j] &lt;- a</code> can’t change the data type of existing columns.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
@@ -2163,7 +2161,7 @@
 <div class="section level3">
 <h3 id="definition-of-xi-j---a-1">Definition of <code>x[[i, j]] &lt;- a</code><a class="anchor" aria-label="anchor" href="#definition-of-xi-j---a-1"></a>
 </h3>
-<p><code>i</code> must be a numeric vector of length 1. <code>x[[i, j]] &lt;- a</code> is equivalent to <code>x[i, ][[j]] &lt;- a</code>.<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;&lt;code&gt;x[[i, j]]&lt;/code&gt; is symmetrically for subsetting and subassignment. An efficient implementation would check that &lt;code&gt;i&lt;/code&gt; and &lt;code&gt;j&lt;/code&gt; are scalar and forward to &lt;code&gt;x[i, j][[1]] &amp;lt;- a&lt;/code&gt;.&lt;/p&gt;"><sup>9</sup></a></p>
+<p><code>i</code> must be a numeric vector of length 1. <code>x[[i, j]] &lt;- a</code> is equivalent to <code>x[i, ][[j]] &lt;- a</code>.<a class="footnote-ref" tabindex="0" data-bs-toggle="popover" data-bs-content="&lt;p&gt;&lt;code&gt;x[[i, j]]&lt;/code&gt; is symmetrical for subsetting and subassignment. An efficient implementation would check that &lt;code&gt;i&lt;/code&gt; and &lt;code&gt;j&lt;/code&gt; are scalar and forward to &lt;code&gt;x[i, j][[1]] &amp;lt;- a&lt;/code&gt;.&lt;/p&gt;"><sup>9</sup></a></p>
 <p>NB: <code>vec_size(a)</code> must equal 1. Unlike <code>x[i, ] &lt;-</code>, <code>x[[i, ]] &lt;-</code> is not valid.</p>
 </div>
 </div>
