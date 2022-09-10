@@ -474,8 +474,7 @@ df[[1.5]]
 tbl[[1.5]]
 #> Error in `vectbl_as_col_location2()`:
 #> ! Must extract column with a single valid subscript.
-#> x Subscript `1.5` has the wrong type `double`.
-#> i It must be numeric or character.
+#> x Can't convert from `j` <double> to <integer> due to loss of precision.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -491,8 +490,7 @@ df[[Inf]]
 tbl[[Inf]]
 #> Error in `vectbl_as_col_location2()`:
 #> ! Must extract column with a single valid subscript.
-#> x Subscript `Inf` has the wrong type `double`.
-#> i It must be numeric or character.
+#> x Can't convert from `j` <double> to <integer> due to loss of precision.
 ```
 
 </td></tr></tbody></table>
