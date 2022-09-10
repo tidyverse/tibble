@@ -3087,7 +3087,7 @@ with_tbl(tbl[1] <- lm(mpg ~ wt, data = mtcars))
 
 `x[i, ] <- a` is the same as `vec_slice(x[[j_1]], i) <- a[[1]]`,  `vec_slice(x[[j_2]], i) <- a[[2]]`, ... .[^row-assign-symmetry]
 
-[^row-assign-symmetry]: `x[i, ]` is symmetrically for subset and subassignment.
+[^row-assign-symmetry]: `x[i, ]` is symmetrical for subset and subassignment.
 
 <table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
@@ -3701,7 +3701,7 @@ with_tbl(tbl[NA_character_, ] <- tbl[1, ])
 
 `x[i, j] <- a` is equivalent to `x[i, ][j] <- a`.[^bracket-assign-flip]
 
-[^bracket-assign-flip]: `x[i, j]` is symmetrically for subsetting and subassignment.
+[^bracket-assign-flip]: `x[i, j]` is symmetrical for subsetting and subassignment.
 A more efficient implementation of `x[i, j] <- a` would forward to `x[j][i, ] <- a`.
 
 Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
@@ -4020,7 +4020,7 @@ with_tbl(tbl[5, "n"] <- list(0L))
 `i` must be a numeric vector of length 1.
 `x[[i, j]] <- a` is equivalent to `x[i, ][[j]] <- a`.[^double-bracket-ij-symmetry]
 
-[^double-bracket-ij-symmetry]: `x[[i, j]]` is symmetrically for subsetting and subassignment.
+[^double-bracket-ij-symmetry]: `x[[i, j]]` is symmetrical for subsetting and subassignment.
 An efficient implementation would check that `i` and `j` are scalar and forward to `x[i, j][[1]] <- a`.
 
 
