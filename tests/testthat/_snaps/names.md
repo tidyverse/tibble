@@ -30,6 +30,7 @@
       ! Names must be unique.
       x These names are duplicated:
         * "a" at locations 1 and 2.
+      i Use argument `.name_repair` to specify repair strategy.
     Code
       repaired_names("..1", repair_hint = FALSE)
     Condition
