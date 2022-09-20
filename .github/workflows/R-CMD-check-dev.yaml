@@ -36,6 +36,9 @@ jobs:
   check-matrix:
     runs-on: ubuntu-18.04
     needs: matrix
+
+    name: Check deps
+
     steps:
       - name: Install json2yaml
         run: |
@@ -95,7 +98,7 @@ jobs:
   R-CMD-check-dev:
     needs:
     - matrix
-    - base
+    - R-CMD-check-base
 
     runs-on: ubuntu-18.04
 
