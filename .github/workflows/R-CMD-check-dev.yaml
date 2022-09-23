@@ -36,6 +36,9 @@ jobs:
   check-matrix:
     runs-on: ubuntu-18.04
     needs: matrix
+
+    name: Check deps
+
     steps:
       - name: Install json2yaml
         run: |
@@ -48,8 +51,54 @@ jobs:
           echo $matrix | jq .
           echo $matrix | json2yaml
 
+  R-CMD-check-base:
+    runs-on: ubuntu-18.04
+
+    name: base
+
+    # Begin custom: services
+    # End custom: services
+
+    strategy:
+      fail-fast: false
+      matrix: ${{fromJson(needs.matrix.outputs.matrix)}}
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - uses: ./.github/workflows/custom/before-install
+        if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
+
+      - uses: ./.github/workflows/install
+        with:
+          install-r: false
+          cache-version: rcc-dev-base-1
+          needs: check
+          extra-packages: "any::rcmdcheck any::remotes ."
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Session info
+        run: |
+          options(width = 100)
+          if (!requireNamespace("sessioninfo", quietly = TRUE)) install.packages("sessioninfo")
+          pkgs <- installed.packages()[, "Package"]
+          sessioninfo::session_info(pkgs, include_base = TRUE)
+        shell: Rscript {0}
+
+      - uses: ./.github/workflows/custom/after-install
+        if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
+
+      - uses: ./.github/workflows/update-snapshots
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+
+      - uses: ./.github/workflows/check
+        with:
+          results: ${{ matrix.package }}
+
   R-CMD-check-dev:
-    needs: matrix
+    needs:
+    - matrix
+    - R-CMD-check-base
 
     runs-on: ubuntu-18.04
 

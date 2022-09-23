@@ -38,6 +38,7 @@
       ! Names must be unique.
       x These names are duplicated:
         * "a" at locations 1 and 2.
+      i Use argument `.name_repair` to specify repair strategy.
     Code
       add_column(tibble(a = 1, b = 2), a = 1, b = 2)
     Condition
@@ -49,6 +50,7 @@
       x These names are duplicated:
         * "a" at locations 1 and 3.
         * "b" at locations 2 and 4.
+      i Use argument `.name_repair` to specify repair strategy.
     Code
       add_column(tibble(!!!set_names(letters)), !!!set_names(letters))
     Condition
@@ -64,6 +66,7 @@
         * "d" at locations 4 and 30.
         * "e" at locations 5 and 31.
         * ...
+      i Use argument `.name_repair` to specify repair strategy.
     Code
       add_column(tibble(a = 2:3), b = 4:6)
     Condition
