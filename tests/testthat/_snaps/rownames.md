@@ -9,7 +9,6 @@
       ! Names must be unique.
       x These names are duplicated:
         * "cyl" at locations 2 and 12.
-      i Use argument `.name_repair` to specify repair strategy.
     Code
       rowid_to_column(trees, "Volume")
     Condition
@@ -19,7 +18,6 @@
       ! Names must be unique.
       x These names are duplicated:
         * "Volume" at locations 3 and 4.
-      i Use argument `.name_repair` to specify repair strategy.
     Code
       column_to_rownames(mtcars, "cyl")
     Condition
