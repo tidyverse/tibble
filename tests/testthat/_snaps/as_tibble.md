@@ -57,7 +57,6 @@
       ! Names must be unique.
       x These names are duplicated:
         * "a" at locations 1 and 2.
-      i Use argument `.name_repair` to specify repair strategy.
     Code
       as_tibble(table(c(1, 1, 1, 2, 2, 2), c(3, 4, 5, 3, 4, 5)))
     Condition
@@ -202,7 +201,6 @@
       ! Names must be unique.
       x These names are duplicated:
         * "a" at locations 1 and 2.
-      i Use argument `.name_repair` to specify repair strategy.
     Code
       as_tibble(list(a = 1, a = 1, b = 1, b = 1))
     Condition
@@ -214,7 +212,6 @@
       x These names are duplicated:
         * "a" at locations 1 and 2.
         * "b" at locations 3 and 4.
-      i Use argument `.name_repair` to specify repair strategy.
     Code
       as_tibble(list(a = new_environment()))
     Condition
@@ -292,7 +289,6 @@
       ! Names must be unique.
       x These names are duplicated:
         * "a" at locations 1 and 2.
-      i Use argument `.name_repair` to specify repair strategy.
     Code
       as_tibble_row(list(a = 1, a = 1, b = 1, b = 1))
     Condition
@@ -304,7 +300,6 @@
       x These names are duplicated:
         * "a" at locations 1 and 2.
         * "b" at locations 3 and 4.
-      i Use argument `.name_repair` to specify repair strategy.
     Code
       as_tibble_row(list(a = new_environment()))
     Condition

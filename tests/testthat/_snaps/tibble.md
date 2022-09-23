@@ -10,7 +10,6 @@
       ! Names must be unique.
       x These names are duplicated:
         * "a" at locations 1 and 2.
-      i Use argument `.name_repair` to specify repair strategy.
     Code
       tibble(a = new_environment())
     Condition
