@@ -28,8 +28,7 @@ enframe <- function(x, name = "name", value = "value") {
     x <- logical()
   }
 
-  # FIXME: Enable again for data frames, add test
-  if (!vec_is(x) || is.data.frame(x)) {
+  if (!vec_is(x)) {
     cnd_signal(error_enframe_must_be_vector(x))
   }
 
