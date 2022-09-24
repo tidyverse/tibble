@@ -275,7 +275,8 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># but it forces you to take charge of names, if they need repair:</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span>, x <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Error : Column name `x` must not be duplicated.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in tibble(x = 1, x = 2) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Column name `x` must not be duplicated.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Use `.name_repair` to specify repair.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `repaired_names()` at tibble/R/names.R:12:2:</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> Names must be unique.</span>
@@ -378,7 +379,8 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Data can not contain tibbles or matrices with incompatible number of rows:</span></span></span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="fu">tibble</span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, b <span class="op">=</span> <span class="fu">tibble</span><span class="op">(</span>c <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">7</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Error : Tibble columns must have compatible sizes.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in tibble(a = 1:3, b = tibble(c = 4:7)) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Tibble columns must have compatible sizes.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Size 3: Existing data.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">•</span> Size 4: Column `b`.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Only values of size one are recycled.</span>

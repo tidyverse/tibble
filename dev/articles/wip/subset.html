@@ -410,7 +410,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <td>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `vectbl_as_row_location2()` at tibble/R/subsetting.R:128:4:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[[1:2, "cd"]]`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract row with a single valid subscript.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `1:2` has size 2 but must be size 1.</span></span></code></pre></div>
 </td>
@@ -433,7 +433,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <td>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `vectbl_as_row_location2()` at tibble/R/subsetting.R:128:4:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[[1:2, "c"]]`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract row with a single valid subscript.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `1:2` has size 2 but must be size 1.</span></span></code></pre></div>
 </td>
@@ -574,7 +574,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <td>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">NA</span><span class="op">]</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[NA]`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column</span></span>
 <span><span class="co">#&gt;   index with `[` at positions 1, 2,</span></span>
 <span><span class="co">#&gt;   and 3.</span></span></code></pre></div>
@@ -589,7 +589,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <td>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">NA_character_</span><span class="op">]</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[NA_character_]`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column</span></span>
 <span><span class="co">#&gt;   index with `[` at position 1.</span></span></code></pre></div>
 </td>
@@ -603,7 +603,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <td>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">NA_integer_</span><span class="op">]</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[NA_integer_]`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column</span></span>
 <span><span class="co">#&gt;   index with `[` at position 1.</span></span></code></pre></div>
 </td>
@@ -704,7 +704,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <td>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="cn">NA</span><span class="op">]</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[, NA]`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column</span></span>
 <span><span class="co">#&gt;   index with `[` at positions 1, 2,</span></span>
 <span><span class="co">#&gt;   and 3.</span></span></code></pre></div>
@@ -719,7 +719,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <td>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="cn">NA_character_</span><span class="op">]</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[, NA_character_]`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column</span></span>
 <span><span class="co">#&gt;   index with `[` at position 1.</span></span></code></pre></div>
 </td>
@@ -733,7 +733,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <td>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="cn">NA_integer_</span><span class="op">]</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;">:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[, NA_integer_]`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column</span></span>
 <span><span class="co">#&gt;   index with `[` at position 1.</span></span></code></pre></div>
 </td>
@@ -1330,7 +1330,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <td>
 <div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `vectbl_as_row_location()` at tibble/R/subsetting.R:321:4:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[-1:2, ]`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset rows with a valid subscript vector.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Negative and positive locations can't be mixed.</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Subscript `-1:2` has 2 positive values at locations 3 and 4.</span></span></code></pre></div>
@@ -1416,7 +1416,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <td>
 <div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `vectbl_as_row_location()` at tibble/R/subsetting.R:323:4:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[c(TRUE, FALSE), ]`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset rows with a valid subscript vector.</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size of the indexed input.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 4 but subscript `c(TRUE, FALSE)` has size 2.</span></span></code></pre></div>
@@ -1434,7 +1434,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <td>
 <div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `vectbl_as_row_location()` at tibble/R/subsetting.R:323:4:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[c(TRUE, FALSE, TRUE), ]`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset rows with a valid subscript vector.</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size of the indexed input.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 4 but subscript `c(TRUE, FALSE, TRUE)` has size 3.</span></span></code></pre></div>
@@ -1465,7 +1465,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <td>
 <div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `vectbl_as_row_location()` at tibble/R/subsetting.R:323:4:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[c(TRUE, FALSE, TRUE, FALSE,</span></span></span>
+<span><span class="co"><span style="font-weight: bold;">#&gt;     TRUE), ]`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset rows with a valid subscript vector.</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size of the indexed input.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 4 but subscript `c(TRUE, FALSE, TRUE, FALSE, TRUE)` has size 5.</span></span></code></pre></div>
