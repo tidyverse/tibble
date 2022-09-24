@@ -1,3 +1,9 @@
+all_subset <- function(x) {
+  subset.tbl_df(x)
+  subset2.tbl_df(x)
+  dollar.tbl_df(x)
+}
+
 #' Subsetting tibbles
 #'
 #' @description
@@ -78,7 +84,7 @@ NULL
 #' @rdname subsetting
 #' @param name A [name] or a string.
 #' @export
-`$.tbl_df` <- function(x, name) {
+`dollar.tbl_df` <- function(x, name) {
   out <- .subset2(x, name)
   if (is.null(out)) {
     warn(paste0("Unknown or uninitialised column: ", tick(name), "."))
@@ -91,7 +97,7 @@ NULL
 #' @param ... Ignored.
 #' @param exact Ignored, with a warning.
 #' @export
-`[[.tbl_df` <- function(x, i, j, ..., exact = TRUE) {
+`subset2.tbl_df` <- function(x, i, j, ..., exact = TRUE) {
   if (!exact) {
     warn("`exact` ignored.")
   }
@@ -132,7 +138,7 @@ NULL
 #' @param drop Coerce to a vector if fetching one column via `tbl[, j]` .
 #'   Default `FALSE`, ignored when accessing a column via `tbl[j]` .
 #' @export
-`[.tbl_df` <- function(x, i, j, drop = FALSE, ...) {
+`subset.tbl_df` <- function(x, i, j, drop = FALSE, ...) {
   i_arg <- substitute(i)
   j_arg <- substitute(j)
 

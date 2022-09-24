@@ -1,6 +1,12 @@
+all_subassign <- function(x) {
+  subassign.tbl_df(x)
+  subassign2.tbl_df(x)
+  dollar_assign.tbl_df(x)
+}
+
 #' @rdname subsetting
 #' @export
-`$<-.tbl_df` <- function(x, name, value) {
+`dollar_assign.tbl_df` <- function(x, name, value) {
   value_arg <- substitute(value)
   j <- vectbl_as_new_col_index(as_string(name), x, name, value_arg = value_arg)
 
@@ -13,7 +19,7 @@
 
 #' @rdname subsetting
 #' @export
-`[[<-.tbl_df` <- function(x, i, j, ..., value) {
+`subassign2.tbl_df` <- function(x, i, j, ..., value) {
   i_arg <- substitute(i)
   j_arg <- substitute(j)
   value_arg <- substitute(value)
@@ -64,7 +70,7 @@
 
 #' @rdname subsetting
 #' @export
-`[<-.tbl_df` <- function(x, i, j, ..., value) {
+`subassign.tbl_df` <- function(x, i, j, ..., value) {
   i_arg <- substitute(i)
   j_arg <- substitute(j)
   value_arg <- substitute(value)
