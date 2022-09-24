@@ -194,14 +194,13 @@ NULL
     return(out)
   }
 
-  if (is.null(i)) {
-    nrow <- fast_nrow(x)
-  } else {
+  attr(xo, "row.names") <- .set_row_names(fast_nrow(x))
+  out <- vectbl_restore(xo, x)
+
+  if (!is.null(i)) {
     i <- vectbl_as_row_index(i, x, i_arg)
-    xo <- lapply(xo, vec_slice, i = i)
-    nrow <- length(i)
+    out <- vec_slice(out, i)
   }
 
-  attr(xo, "row.names") <- .set_row_names(nrow)
-  vectbl_restore(xo, x)
+  out
 }
