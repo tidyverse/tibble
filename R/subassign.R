@@ -96,6 +96,11 @@
     j_arg <- NULL
   }
 
+  # Convert to row index
+  if (!is.null(i)) {
+    i <- vectbl_as_new_row_index(i, x, i_arg)
+  }
+
   # Wrap value in a list if needed
   if (is.null(i)) {
     if (is.null(value)) {
@@ -140,8 +145,6 @@ tbl_subassign <- function(x, i, j, value, i_arg, value_arg) {
 
     xo <- tbl_subassign_col(xo, j, value)
   } else {
-    i <- vectbl_as_new_row_index(i, x, i_arg)
-
     # Fill up rows first if necessary
     x <- tbl_expand_to_nrow(x, i)
 
