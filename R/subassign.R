@@ -73,22 +73,23 @@
   }
 
   if (missing(j)) {
-    j <- NULL
-    j_arg <- NULL
+    if (nargs() >= 4) {
+      j <- NULL
+      j_arg <- NULL
+    } else {
+      j <- i
+      i <- NULL
+      j_arg <- i_arg
+      i_arg <- NULL
+
+      # Special case:
+      if (is.matrix(j)) {
+        return(tbl_subassign_matrix(x, j, value, j_arg, substitute(value)))
+      }
+    }
   } else if (is.null(j)) {
     j <- integer()
-  }
-
-  if (is.null(j) && nargs() < 4) {
-    j <- i
-    i <- NULL
-    j_arg <- i_arg
-    i_arg <- NULL
-
-    # Special case:
-    if (is.matrix(j)) {
-      return(tbl_subassign_matrix(x, j, value, j_arg, substitute(value)))
-    }
+    j_arg <- NULL
   }
 
   tbl_subassign(x, i, j, value, i_arg, j_arg, substitute(value))
