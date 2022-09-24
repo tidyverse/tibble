@@ -100,6 +100,13 @@
 #' Powers $<-, [[<- and [<- for tibbles.
 #' @noRd
 tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
+  # Weird corner case
+  if (!is.null(i) && is.null(i_arg)) {
+    # x[NULL, ...] <- value
+    return(x)
+  }
+
+  # Wrap value in a list if needed
   if (is.null(i)) {
     if (is.null(value)) {
       value <- list(value)
@@ -130,9 +137,6 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
     value <- vectbl_recycle_rhs_cols(value, length(j))
 
     xo <- tbl_subassign_col(xo, j, value)
-  } else if (is.null(i_arg)) {
-    # x[NULL, ...] <- value
-    return(x)
   } else {
     i <- vectbl_as_new_row_index(i, x, i_arg)
 
