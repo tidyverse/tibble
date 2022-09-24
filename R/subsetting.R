@@ -115,62 +115,6 @@ tbl_subset2 <- function(x, j, j_arg) {
   .subset2(x, j)
 }
 
-tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
-  if (is.null(i)) {
-    xo <- unclass(x)
-
-    value <- vectbl_wrap_rhs_col(value, value_arg)
-
-    if (is.null(j)) {
-      j <- seq_along(xo)
-      names(j) <- names2(j)
-    } else if (!is.null(j_arg)) {
-      j <- vectbl_as_new_col_index(j, xo, j_arg, names2(value), value_arg)
-    }
-
-    value <- vectbl_recycle_rhs_rows(value, fast_nrow(xo), i_arg = NULL, value_arg)
-    value <- vectbl_recycle_rhs_cols(value, length(j))
-
-    xo <- tbl_subassign_col(xo, j, value)
-  } else if (is.null(i_arg)) {
-    # x[NULL, ...] <- value
-    return(x)
-  } else {
-    i <- vectbl_as_new_row_index(i, x, i_arg)
-
-    # Fill up rows first if necessary
-    x <- tbl_expand_to_nrow(x, i)
-    value <- vectbl_wrap_rhs_row(value, value_arg)
-
-    # Only after tbl_expand_to_nrow() which needs data frame
-    xo <- unclass(x)
-
-    if (is.null(j)) {
-      xo <- tbl_subassign_row(xo, i, value, i_arg, value_arg)
-    } else {
-      # Optimization: match only once
-      # (Invariant: x[[j]] is equivalent to x[[vec_as_location(j)]],
-      # allowed by corollary that only existing columns can be updated)
-      if (!is.null(j_arg)) {
-        j <- vectbl_as_new_col_index(j, xo, j_arg, names2(value), value_arg)
-      }
-
-      # Fill up columns if necessary
-      new <- attr(j, "new")
-      if (!is.null(new)) {
-        init <- map(value[new], vec_slice, rep(NA_integer_, fast_nrow(xo)))
-        xo <- tbl_subassign_col(xo, j[new], init)
-      }
-
-      xj <- .subset(xo, j)
-      xj <- tbl_subassign_row(xj, i, value, i_arg, value_arg)
-      xo <- tbl_subassign_col(xo, j, xj)
-    }
-  }
-
-  vectbl_restore(xo, x)
-}
-
 vectbl_as_new_row_index <- function(i, x, i_arg) {
   if (is.null(i)) {
     i
