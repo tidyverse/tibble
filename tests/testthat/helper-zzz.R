@@ -175,18 +175,6 @@ two_to_three_dots <- function(...) {
   skip_legacy()
 }
 
-# FIXME: Inline
-expect_output_file_rel <- function(x, filename) {
-  withr::with_options(
-    list(digits = 4, width = 80, cli.unicode = l10n_info()$`UTF-8`),
-    eval_tidy(quo(expect_snapshot({{ x }})))
-  )
-}
-
-expect_output_knit <- function(knit, filename, envir = parent.frame()) {
-  expect_output_file_rel(cat(knit), filename)
-}
-
 expect_output <- function(...) {
   suppressWarnings(testthat::expect_output(...))
 }
