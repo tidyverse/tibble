@@ -66,6 +66,7 @@
 `[<-.tbl_df` <- function(x, i, j, ..., value) {
   i_arg <- substitute(i)
   j_arg <- substitute(j)
+  value_arg <- substitute(value)
 
   if (missing(i)) {
     i <- NULL
@@ -86,7 +87,7 @@
 
       # Special case:
       if (is.matrix(j)) {
-        return(tbl_subassign_matrix(x, j, value, j_arg, substitute(value)))
+        return(tbl_subassign_matrix(x, j, value, j_arg, value_arg))
       }
     }
   } else if (is.null(j)) {
@@ -94,7 +95,7 @@
     j_arg <- NULL
   }
 
-  tbl_subassign(x, i, j, value, i_arg, j_arg, substitute(value))
+  tbl_subassign(x, i, j, value, i_arg, j_arg, value_arg)
 }
 
 
