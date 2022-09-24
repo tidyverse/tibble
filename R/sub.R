@@ -373,3 +373,37 @@ vectbl_restore <- function(xo, x) {
 abort_na_column_index <- function(j) {
   tibble_abort(pluralise_commas("Can't use NA as column index with `[` at position(s) ", j, "."), j = j)
 }
+
+abort_subset_columns_non_missing_only <- function() {
+  tibble_abort("Subscript can't be missing for tibbles in `[[`.")
+}
+
+# Subclassing errors ------------------------------------------------------
+
+subclass_col_index_errors <- function(expr, j_arg, assign) {
+  withCallingHandlers(
+    expr,
+    vctrs_error_subscript = function(cnd) {
+      cnd$subscript_arg <- j_arg
+      cnd$subscript_elt <- "column"
+      if (isTRUE(assign) && !isTRUE(cnd$subscript_action %in% c("negate"))) {
+        cnd$subscript_action <- "assign"
+      }
+      cnd_signal(cnd)
+    }
+  )
+}
+
+subclass_row_index_errors <- function(expr, i_arg, assign) {
+  withCallingHandlers(
+    expr,
+    vctrs_error_subscript = function(cnd) {
+      cnd$subscript_arg <- i_arg
+      cnd$subscript_elt <- "row"
+      if (isTRUE(assign) && !isTRUE(cnd$subscript_action %in% c("negate"))) {
+        cnd$subscript_action <- "assign"
+      }
+      cnd_signal(cnd)
+    }
+  )
+}
