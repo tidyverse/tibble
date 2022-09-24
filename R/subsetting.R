@@ -257,7 +257,7 @@ NULL
   }
 
   if (drop && length(xo) == 1L) {
-    tbl_subset2(xo, 1L, j_arg)
+    tbl_subset2(xo, j = 1L)
   } else {
     attr(xo, "row.names") <- .set_row_names(nrow)
     vectbl_restore(xo, x)
