@@ -1,5 +1,30 @@
 <!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
 
+# tibble 3.1.8.9002
+
+## Features
+
+- Correct top-level calls are shown for the vast majority of errors (#1379).
+
+- Using cli for formatting conditions (#1387).
+
+## Chore
+
+- Check if R version changed (#1365).
+
+- Define responsibility for setting row names and class (#1364).
+
+## Documentation
+
+- Update example for `nrow` argument to `new_tibble()` (@heavywatal, #1394).
+
+- Remove ANSI escapes from invariants article on pkgdown (#1374).
+
+## Performance
+
+- Reduce overhead of single-column subset assignment (#1363).
+
+
 # tibble 3.1.8.9001
 
 ## Chore
