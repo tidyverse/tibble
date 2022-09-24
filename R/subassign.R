@@ -221,7 +221,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
   }
 
   if (anyDuplicated.default(j)) {
-    abort_duplicate_column_subscript_for_assignment(j)
+    abort_assign_duplicate_column_subscript(j)
   }
 
   names(j) <- names

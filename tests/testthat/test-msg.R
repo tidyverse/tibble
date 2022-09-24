@@ -76,8 +76,8 @@ test_that("output test", {
     print_error(abort_subset_columns_non_missing_only())
     print_error(abort_assign_columns_non_missing_only())
 
-    print_error(abort_duplicate_column_subscript_for_assignment(c(1, 1)))
-    print_error(abort_duplicate_column_subscript_for_assignment(c(1, 1, 2, 2)))
+    print_error(abort_assign_duplicate_column_subscript(c(1, 1)))
+    print_error(abort_assign_duplicate_column_subscript(c(1, 1, 2, 2)))
 
     print_error(abort_assign_rows_non_na_only())
 

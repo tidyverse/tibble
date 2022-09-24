@@ -20,7 +20,7 @@ abort_assign_columns_non_missing_only <- function() {
   tibble_abort("Subscript can't be missing for tibbles in `[[<-`.")
 }
 
-abort_duplicate_column_subscript_for_assignment <- function(j) {
+abort_assign_duplicate_column_subscript <- function(j) {
   j <- unique(j[duplicated(j)])
   tibble_abort(pluralise_commas("Column index(es) ", j, " [is](are) used more than once for assignment."), j = j)
 }
