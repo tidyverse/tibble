@@ -30,7 +30,10 @@ test_that("trunc_mat output matches known output", {
 
   mtcars2 <- as_tibble(mtcars, rownames = NA)
 
-  local_options(digits = 4, width = 80, cli.unicode = l10n_info()$`UTF-8`)
+  local_options(
+    digits = 4, width = 80, cli.unicode = l10n_info()$`UTF-8`,
+    pillar.max_footer_lines = NULL
+  )
 
   expect_snapshot({
     print_without_body(mtcars2, n = 8L, width = 30L)
