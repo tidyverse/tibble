@@ -69,13 +69,18 @@
   j_arg <- substitute(j)
   value_arg <- substitute(value)
 
+  # The order is important: first check missingness of i...
   if (missing(i)) {
     i <- NULL
     i_arg <- NULL
   } else if (is.null(i)) {
     i <- integer()
+  } else if (is.matrix(i) && missing(j) && nargs() < 4) {
+    # Special case:
+    return(tbl_subassign_matrix(x, i, value, i_arg, value_arg))
   }
 
+  # ...then missingness of j
   if (missing(j)) {
     if (nargs() >= 4) {
       j <- NULL
@@ -85,11 +90,6 @@
       i <- NULL
       j_arg <- i_arg
       i_arg <- NULL
-
-      # Special case:
-      if (is.matrix(j)) {
-        return(tbl_subassign_matrix(x, j, value, j_arg, value_arg))
-      }
     }
   } else if (is.null(j)) {
     j <- integer()
