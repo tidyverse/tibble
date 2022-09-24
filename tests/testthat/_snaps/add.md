@@ -30,40 +30,32 @@
       ! Can't specify both `.before` and `.after`.
     Code
       add_column(tibble(a = 1), a = 1)
-    Condition
-      Error in `add_column()`:
-      ! Column name `a` must not be duplicated.
-      Use `.name_repair` to specify repair.
-      Caused by error in `repaired_names()`:
-      ! Names must be unique.
-      x These names are duplicated:
-        * "a" at locations 1 and 2.
+    Output
+      # A tibble: 1 x 2
+            a   a.1
+        <dbl> <dbl>
+      1     1     1
     Code
       add_column(tibble(a = 1, b = 2), a = 1, b = 2)
-    Condition
-      Error in `add_column()`:
-      ! Column names `a` and `b` must not be duplicated.
-      Use `.name_repair` to specify repair.
-      Caused by error in `repaired_names()`:
-      ! Names must be unique.
-      x These names are duplicated:
-        * "a" at locations 1 and 3.
-        * "b" at locations 2 and 4.
+    Output
+      # A tibble: 1 x 4
+            a     b   a.1   b.1
+        <dbl> <dbl> <dbl> <dbl>
+      1     1     2     1     2
     Code
       add_column(tibble(!!!set_names(letters)), !!!set_names(letters))
-    Condition
-      Error in `add_column()`:
-      ! Column names `a`, `b`, `c`, `d`, `e`, and 21 more must not be duplicated.
-      Use `.name_repair` to specify repair.
-      Caused by error in `repaired_names()`:
-      ! Names must be unique.
-      x These names are duplicated:
-        * "a" at locations 1 and 27.
-        * "b" at locations 2 and 28.
-        * "c" at locations 3 and 29.
-        * "d" at locations 4 and 30.
-        * "e" at locations 5 and 31.
-        * ...
+    Output
+      # A tibble: 1 x 52
+        a     b     c     d     e     f     g     h     i     j     k     l     m    
+        <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr> <chr>
+      1 a     b     c     d     e     f     g     h     i     j     k     l     m    
+      # ... with 39 more variables: n <chr>, o <chr>, p <chr>, q <chr>, r <chr>,
+      #   s <chr>, t <chr>, u <chr>, v <chr>, w <chr>, x <chr>, y <chr>, z <chr>,
+      #   a.1 <chr>, b.1 <chr>, c.1 <chr>, d.1 <chr>, e.1 <chr>, f.1 <chr>,
+      #   g.1 <chr>, h.1 <chr>, i.1 <chr>, j.1 <chr>, k.1 <chr>, l.1 <chr>,
+      #   m.1 <chr>, n.1 <chr>, o.1 <chr>, p.1 <chr>, q.1 <chr>, r.1 <chr>,
+      #   s.1 <chr>, t.1 <chr>, u.1 <chr>, v.1 <chr>, w.1 <chr>, x.1 <chr>,
+      #   y.1 <chr>, z.1 <chr>
     Code
       add_column(tibble(a = 2:3), b = 4:6)
     Condition

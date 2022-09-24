@@ -5,435 +5,411 @@
       foo <- tibble(x = 1:10, y = 1:10)
       foo[c("x", "y", "z")]
     Condition
-      Error in `foo[c("x", "y", "z")]`:
-      ! Can't subset columns that don't exist.
-      x Column `z` doesn't exist.
+      Error in `[.data.frame`:
+      ! undefined columns selected
     Code
       foo[c("w", "x", "y", "z")]
     Condition
-      Error in `foo[c("w", "x", "y", "z")]`:
-      ! Can't subset columns that don't exist.
-      x Columns `w` and `z` don't exist.
+      Error in `[.data.frame`:
+      ! undefined columns selected
     Code
       foo[as.matrix("x")]
-    Condition
-      Error in `foo[as.matrix("x")]`:
-      ! Subscript `as.matrix("x")` is a matrix, it must be of type logical.
+    Output
+      [1] NA
     Code
       foo[array("x", dim = c(1, 1, 1))]
-    Condition
-      Error in `foo[array("x", dim = c(1, 1, 1))]`:
-      ! Must subset columns with a valid subscript vector.
-      x Subscript `array("x", dim = c(1, 1, 1))` must be a simple vector, not an array.
+    Output
+      # A tibble: 10 x 1
+             x
+         <int>
+       1     1
+       2     2
+       3     3
+       4     4
+       5     5
+       6     6
+       7     7
+       8     8
+       9     9
+      10    10
     Code
       # # [.tbl_df is careful about column indexes (#83)
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[0.5]
-    Condition
-      Error in `foo[0.5]`:
-      ! Must subset columns with a valid subscript vector.
-      x Can't convert from `j` <double> to <integer> due to loss of precision.
+    Output
+      # A tibble: 10 x 0
     Code
       foo[1:5]
     Condition
-      Error in `foo[1:5]`:
-      ! Can't subset columns past the end.
-      i Locations 4 and 5 don't exist.
-      i There are only 3 columns.
+      Error in `[.data.frame`:
+      ! undefined columns selected
     Code
       foo[-1:1]
     Condition
-      Error in `foo[-1:1]`:
-      ! Must subset columns with a valid subscript vector.
-      x Negative and positive locations can't be mixed.
-      i Subscript `-1:1` has a positive value at location 3.
+      Error in `[.default`:
+      ! only 0's may be mixed with negative subscripts
     Code
       foo[c(-1, 1)]
     Condition
-      Error in `foo[c(-1, 1)]`:
-      ! Must subset columns with a valid subscript vector.
-      x Negative and positive locations can't be mixed.
-      i Subscript `c(-1, 1)` has a positive value at location 2.
+      Error in `[.default`:
+      ! only 0's may be mixed with negative subscripts
     Code
       foo[c(-1, NA)]
     Condition
-      Error in `foo[c(-1, NA)]`:
-      ! Must subset columns with a valid subscript vector.
-      x Negative locations can't have missing values.
-      i Subscript `c(-1, NA)` has a missing value at location 2.
+      Error in `[.default`:
+      ! only 0's may be mixed with negative subscripts
     Code
       foo[-4]
-    Condition
-      Error in `foo[-4]`:
-      ! Can't negate columns past the end.
-      i Location 4 doesn't exist.
-      i There are only 3 columns.
+    Output
+      # A tibble: 10 x 3
+             x     y     z
+         <int> <int> <int>
+       1     1     1     1
+       2     2     2     2
+       3     3     3     3
+       4     4     4     4
+       5     5     5     5
+       6     6     6     6
+       7     7     7     7
+       8     8     8     8
+       9     9     9     9
+      10    10    10    10
     Code
       foo[c(1:3, NA)]
     Condition
-      Error in `foo[c(1:3, NA)]`:
-      ! Can't use NA as column index with `[` at position 4.
+      Error in `[.data.frame`:
+      ! undefined columns selected
     Code
       foo[as.matrix(1)]
-    Condition
-      Error in `foo[as.matrix(1)]`:
-      ! Subscript `as.matrix(1)` is a matrix, it must be of type logical.
+    Output
+      [1] 1
     Code
       foo[array(1, dim = c(1, 1, 1))]
-    Condition
-      Error in `foo[array(1, dim = c(1, 1, 1))]`:
-      ! Must subset columns with a valid subscript vector.
-      x Subscript `array(1, dim = c(1, 1, 1))` must be a simple vector, not an array.
+    Output
+      # A tibble: 10 x 1
+             x
+         <int>
+       1     1
+       2     2
+       3     3
+       4     4
+       5     5
+       6     6
+       7     7
+       8     8
+       9     9
+      10    10
     Code
       foo[mean]
     Condition
-      Error in `foo[mean]`:
-      ! Must subset columns with a valid subscript vector.
-      x Subscript `mean` has the wrong type `function`.
-      i It must be logical, numeric, or character.
+      Error in `[.default`:
+      ! invalid subscript type 'closure'
     Code
       foo[foo]
     Condition
-      Error in `foo[foo]`:
-      ! Must subset columns with a valid subscript vector.
-      x Subscript `foo` has the wrong type `tbl_df<
-        x: integer
-        y: integer
-        z: integer
-      >`.
-      i It must be logical, numeric, or character.
+      Error in `[.default`:
+      ! invalid subscript type 'list'
     Code
       # # [.tbl_df is careful about row indexes
       foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
       foo[0.5, ]
-    Condition
-      Error in `foo[0.5, ]`:
-      ! Must subset rows with a valid subscript vector.
-      x Can't convert from `i` <double> to <integer> due to loss of precision.
+    Output
+      # A tibble: 0 x 3
+      # ... with 3 variables: x <int>, y <int>, z <int>
     Code
       invisible(foo[1:5, ])
-    Condition
-      Warning:
-      The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
-      Use `NA_integer_` as row index to obtain a row full of `NA` values.
-    Code
       foo[-1:1, ]
     Condition
-      Error in `foo[-1:1, ]`:
-      ! Must subset rows with a valid subscript vector.
-      x Negative and positive locations can't be mixed.
-      i Subscript `-1:1` has a positive value at location 3.
+      Error in `xj[i]`:
+      ! only 0's may be mixed with negative subscripts
     Code
       foo[c(-1, 1), ]
     Condition
-      Error in `foo[c(-1, 1), ]`:
-      ! Must subset rows with a valid subscript vector.
-      x Negative and positive locations can't be mixed.
-      i Subscript `c(-1, 1)` has a positive value at location 2.
+      Error in `xj[i]`:
+      ! only 0's may be mixed with negative subscripts
     Code
       foo[c(-1, NA), ]
     Condition
-      Error in `foo[c(-1, NA), ]`:
-      ! Must subset rows with a valid subscript vector.
-      x Negative locations can't have missing values.
-      i Subscript `c(-1, NA)` has a missing value at location 2.
+      Error in `xj[i]`:
+      ! only 0's may be mixed with negative subscripts
     Code
       invisible(foo[-4, ])
-    Condition
-      Warning:
-      The `i` argument of `[.tbl_df` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
-      Use `NA_integer_` as row index to obtain a row full of `NA` values.
-    Code
       foo[array(1, dim = c(1, 1, 1)), ]
-    Condition
-      Error in `foo[array(1, dim = c(1, 1, 1)), ]`:
-      ! Must subset rows with a valid subscript vector.
-      x Subscript `array(1, dim = c(1, 1, 1))` must be a simple vector, not an array.
+    Output
+      # A tibble: 1 x 3
+            x     y     z
+      * <int> <int> <int>
+      1     1     1     1
     Code
       foo[mean, ]
     Condition
-      Error in `foo[mean, ]`:
-      ! Must subset rows with a valid subscript vector.
-      x Subscript `mean` has the wrong type `function`.
-      i It must be logical, numeric, or character.
+      Error in `xj[i]`:
+      ! invalid subscript type 'closure'
     Code
       foo[foo, ]
     Condition
-      Error in `foo[foo, ]`:
-      ! Must subset rows with a valid subscript vector.
-      x Subscript `foo` has the wrong type `tbl_df<
-        x: integer
-        y: integer
-        z: integer
-      >`.
-      i It must be logical, numeric, or character.
+      Error in `xj[i]`:
+      ! invalid subscript type 'list'
     Code
       # # [.tbl_df is careful about column flags (#83)
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[c(TRUE, TRUE)]
-    Condition
-      Error in `foo[c(TRUE, TRUE)]`:
-      ! Must subset columns with a valid subscript vector.
-      i Logical subscripts must match the size of the indexed input.
-      x Input has size 3 but subscript `c(TRUE, TRUE)` has size 2.
+    Output
+      # A tibble: 10 x 3
+             x     y     z
+         <int> <int> <int>
+       1     1     1     1
+       2     2     2     2
+       3     3     3     3
+       4     4     4     4
+       5     5     5     5
+       6     6     6     6
+       7     7     7     7
+       8     8     8     8
+       9     9     9     9
+      10    10    10    10
     Code
       foo[c(TRUE, TRUE, FALSE, FALSE)]
-    Condition
-      Error in `foo[c(TRUE, TRUE, FALSE, FALSE)]`:
-      ! Must subset columns with a valid subscript vector.
-      i Logical subscripts must match the size of the indexed input.
-      x Input has size 3 but subscript `c(TRUE, TRUE, FALSE, FALSE)` has size 4.
+    Output
+      # A tibble: 10 x 2
+             x     y
+         <int> <int>
+       1     1     1
+       2     2     2
+       3     3     3
+       4     4     4
+       5     5     5
+       6     6     6
+       7     7     7
+       8     8     8
+       9     9     9
+      10    10    10
     Code
       foo[c(TRUE, TRUE, NA)]
     Condition
-      Error in `foo[c(TRUE, TRUE, NA)]`:
-      ! Can't use NA as column index with `[` at position 3.
+      Error in `[.data.frame`:
+      ! undefined columns selected
     Code
       foo[as.matrix(TRUE)]
-    Condition
-      Error in `foo[as.matrix(TRUE)]`:
-      ! Subscript `as.matrix(TRUE)` is a matrix, it must have the same dimensions as the input.
+    Output
+       [1]  1  2  3  4  5  6  7  8  9 10  1  2  3  4  5  6  7  8  9 10  1  2  3  4  5
+      [26]  6  7  8  9 10
     Code
       foo[array(TRUE, dim = c(1, 1, 1))]
-    Condition
-      Error in `foo[array(TRUE, dim = c(1, 1, 1))]`:
-      ! Must subset columns with a valid subscript vector.
-      x Subscript `array(TRUE, dim = c(1, 1, 1))` must be a simple vector, not an array.
+    Output
+      # A tibble: 10 x 3
+             x     y     z
+         <int> <int> <int>
+       1     1     1     1
+       2     2     2     2
+       3     3     3     3
+       4     4     4     4
+       5     5     5     5
+       6     6     6     6
+       7     7     7     7
+       8     8     8     8
+       9     9     9     9
+      10    10    10    10
     Code
       # # [.tbl_df is careful about row flags
       foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
       foo[c(TRUE, TRUE), ]
-    Condition
-      Error in `foo[c(TRUE, TRUE), ]`:
-      ! Must subset rows with a valid subscript vector.
-      i Logical subscripts must match the size of the indexed input.
-      x Input has size 3 but subscript `c(TRUE, TRUE)` has size 2.
+    Output
+      # A tibble: 3 x 3
+            x     y     z
+      * <int> <int> <int>
+      1     1     1     1
+      2     2     2     2
+      3     3     3     3
     Code
       foo[c(TRUE, TRUE, FALSE, FALSE), ]
-    Condition
-      Error in `foo[c(TRUE, TRUE, FALSE, FALSE), ]`:
-      ! Must subset rows with a valid subscript vector.
-      i Logical subscripts must match the size of the indexed input.
-      x Input has size 3 but subscript `c(TRUE, TRUE, FALSE, FALSE)` has size 4.
+    Output
+      # A tibble: 2 x 3
+            x     y     z
+      * <int> <int> <int>
+      1     1     1     1
+      2     2     2     2
     Code
       foo[array(TRUE, dim = c(1, 1, 1)), ]
-    Condition
-      Error in `foo[array(TRUE, dim = c(1, 1, 1)), ]`:
-      ! Must subset rows with a valid subscript vector.
-      x Subscript `array(TRUE, dim = c(1, 1, 1))` must be a simple vector, not an array.
+    Output
+      # A tibble: 3 x 3
+            x     y     z
+      * <int> <int> <int>
+      1     1     1     1
+      2     2     2     2
+      3     3     3     3
     Code
       # # [.tbl_df rejects unknown column indexes (#83)
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[list(1:3)]
     Condition
-      Error in `foo[list(1:3)]`:
-      ! Must subset columns with a valid subscript vector.
-      x Subscript `list(1:3)` has the wrong type `list`.
-      i It must be logical, numeric, or character.
+      Error in `[.default`:
+      ! invalid subscript type 'list'
     Code
       foo[as.list(1:3)]
     Condition
-      Error in `foo[as.list(1:3)]`:
-      ! Must subset columns with a valid subscript vector.
-      x Subscript `as.list(1:3)` has the wrong type `list`.
-      i It must be logical, numeric, or character.
+      Error in `[.default`:
+      ! invalid subscript type 'list'
     Code
       foo[factor(1:3)]
-    Condition
-      Error in `foo[factor(1:3)]`:
-      ! Can't subset columns that don't exist.
-      x Columns `1`, `2`, and `3` don't exist.
+    Output
+      # A tibble: 10 x 3
+             x     y     z
+         <int> <int> <int>
+       1     1     1     1
+       2     2     2     2
+       3     3     3     3
+       4     4     4     4
+       5     5     5     5
+       6     6     6     6
+       7     7     7     7
+       8     8     8     8
+       9     9     9     9
+      10    10    10    10
     Code
       foo[Sys.Date()]
     Condition
-      Error in `foo[Sys.Date()]`:
-      ! Must subset columns with a valid subscript vector.
-      x Subscript `Sys.Date()` has the wrong type `date`.
-      i It must be logical, numeric, or character.
+      Error in `[.data.frame`:
+      ! undefined columns selected
     Code
       # # [.tbl_df rejects unknown row indexes
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[list(1:3), ]
     Condition
-      Error in `foo[list(1:3), ]`:
-      ! Must subset rows with a valid subscript vector.
-      x Subscript `list(1:3)` has the wrong type `list`.
-      i It must be logical, numeric, or character.
+      Error in `xj[i]`:
+      ! invalid subscript type 'list'
     Code
       foo[as.list(1:3), ]
     Condition
-      Error in `foo[as.list(1:3), ]`:
-      ! Must subset rows with a valid subscript vector.
-      x Subscript `as.list(1:3)` has the wrong type `list`.
-      i It must be logical, numeric, or character.
+      Error in `xj[i]`:
+      ! invalid subscript type 'list'
     Code
       foo[factor(1:3), ]
-    Condition
-      Error in `vec_as_location()`:
-      ! Can't use character names to index an unnamed vector.
+    Output
+      # A tibble: 3 x 3
+            x     y     z
+      * <int> <int> <int>
+      1     1     1     1
+      2     2     2     2
+      3     3     3     3
     Code
       foo[Sys.Date(), ]
-    Condition
-      Error in `foo[Sys.Date(), ]`:
-      ! Must subset rows with a valid subscript vector.
-      x Subscript `Sys.Date()` has the wrong type `date`.
-      i It must be logical, numeric, or character.
+    Output
+      # A tibble: 1 x 3
+            x     y     z
+      * <int> <int> <int>
+      1    NA    NA    NA
     Code
       # # [.tbl_df and matrix subsetting
       foo <- tibble(a = 1:3, b = letters[1:3])
       foo[is.na(foo)]
     Output
-      <unspecified> [0]
+      character(0)
     Code
       foo[!is.na(foo)]
-    Condition
-      Error:
-      ! Can't combine `a` <integer> and `b` <character>.
+    Output
+      [1] "1" "2" "3" "a" "b" "c"
     Code
       foo[as.matrix("x")]
-    Condition
-      Error in `foo[as.matrix("x")]`:
-      ! Subscript `as.matrix("x")` is a matrix, it must be of type logical.
+    Output
+      [1] NA
     Code
       foo[array("x", dim = c(1, 1, 1))]
     Condition
-      Error in `foo[array("x", dim = c(1, 1, 1))]`:
-      ! Must subset columns with a valid subscript vector.
-      x Subscript `array("x", dim = c(1, 1, 1))` must be a simple vector, not an array.
+      Error in `[.data.frame`:
+      ! undefined columns selected
     Code
       # # [.tbl_df and OOB indexing
       foo <- tibble(a = 1:3, b = letters[1:3])
       invisible(foo[3:5, ])
-    Condition
-      Warning:
-      The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
-      Use `NA_integer_` as row index to obtain a row full of `NA` values.
-    Code
       invisible(foo[-(3:5), ])
-    Condition
-      Warning:
-      The `i` argument of `[.tbl_df` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
-      Use `NA_integer_` as row index to obtain a row full of `NA` values.
-    Code
       invisible(foo["x", ])
-    Condition
-      Warning:
-      The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
-      Use `NA_integer_` as row index to obtain a row full of `NA` values.
-    Code
       # # [.tbl_df and logical recycling
       foo <- tibble(a = 1:4, b = a)
       foo[c(TRUE, FALSE), ]
-    Condition
-      Error in `foo[c(TRUE, FALSE), ]`:
-      ! Must subset rows with a valid subscript vector.
-      i Logical subscripts must match the size of the indexed input.
-      x Input has size 4 but subscript `c(TRUE, FALSE)` has size 2.
+    Output
+      # A tibble: 2 x 2
+            a     b
+      * <int> <int>
+      1     1     1
+      2     3     3
     Code
       # # [[.tbl_df rejects invalid column indexes
       foo <- tibble(x = 1:10, y = 1:10)
       foo[[]]
     Condition
-      Error in `foo[[]]`:
-      ! Subscript can't be missing for tibbles in `[[`.
+      Error:
+      ! argument "i" is missing, with no default
     Code
       foo[[, 1]]
     Condition
-      Error in `foo[[, 1]]`:
-      ! Subscript can't be missing for tibbles in `[[`.
+      Error in `[[.data.frame`:
+      ! argument "..1" is missing, with no default
     Code
       foo[[1, ]]
     Condition
-      Error in `foo[[1, ]]`:
-      ! Subscript can't be missing for tibbles in `[[`.
+      Error in `[[.data.frame`:
+      ! argument "..2" is missing, with no default
     Code
       foo[[, ]]
     Condition
-      Error in `foo[[, ]]`:
-      ! Subscript can't be missing for tibbles in `[[`.
+      Error in `[[.data.frame`:
+      ! argument "..2" is missing, with no default
     Code
       foo[[1:3]]
     Condition
-      Error in `foo[[1:3]]`:
-      ! Must extract column with a single valid subscript.
-      x Subscript `1:3` has size 3 but must be size 1.
+      Error in `.subset2()`:
+      ! recursive indexing failed at level 2
     Code
       foo[[letters[1:3]]]
     Condition
-      Error in `foo[[letters[1:3]]]`:
-      ! Must extract column with a single valid subscript.
-      x Subscript `letters[1:3]` has size 3 but must be size 1.
+      Error in `.subset2()`:
+      ! no such index at level 1
     Code
       foo[[TRUE]]
-    Condition
-      Error in `foo[[TRUE]]`:
-      ! Must extract column with a single valid subscript.
-      x Subscript `TRUE` has the wrong type `logical`.
-      i It must be numeric or character.
+    Output
+       [1]  1  2  3  4  5  6  7  8  9 10
     Code
       foo[[-1]]
-    Condition
-      Error in `foo[[-1]]`:
-      ! Must extract column with a single valid subscript.
-      x Subscript `-1` has value -1 but must be a positive location.
+    Output
+       [1]  1  2  3  4  5  6  7  8  9 10
     Code
       foo[[1.5]]
-    Condition
-      Error in `foo[[1.5]]`:
-      ! Must extract column with a single valid subscript.
-      x Can't convert from `j` <double> to <integer> due to loss of precision.
+    Output
+       [1]  1  2  3  4  5  6  7  8  9 10
     Code
       foo[[3]]
     Condition
-      Error in `foo[[3]]`:
-      ! Can't subset columns past the end.
-      i Location 3 doesn't exist.
-      i There are only 2 columns.
+      Error in `.subset2()`:
+      ! subscript out of bounds
     Code
       foo[[Inf]]
-    Condition
-      Error in `foo[[Inf]]`:
-      ! Must extract column with a single valid subscript.
-      x Can't convert from `j` <double> to <integer> due to loss of precision.
+    Output
+      NULL
     Code
       foo[[mean]]
     Condition
-      Error in `foo[[mean]]`:
-      ! Must extract column with a single valid subscript.
-      x Subscript `mean` has the wrong type `function`.
-      i It must be numeric or character.
+      Error in `.subset2()`:
+      ! invalid subscript type 'closure'
     Code
       foo[[foo]]
     Condition
-      Error in `foo[[foo]]`:
-      ! Must extract column with a single valid subscript.
-      x Subscript `foo` has the wrong type `tbl_df<
-        x: integer
-        y: integer
-      >`.
-      i It must be numeric or character.
+      Error in `.subset2()`:
+      ! invalid subscript type 'list'
     Code
       # # [[.tbl_df throws error with NA index
       foo <- tibble(x = 1:10, y = 1:10)
       foo[[NA]]
-    Condition
-      Error in `foo[[NA]]`:
-      ! Must extract column with a single valid subscript.
-      x Subscript `NA` can't be `NA`.
+    Output
+      NULL
     Code
       # # $.tbl_df and partial matching/invalid columns
       foo <- tibble(data = 1:10)
       foo$d
-    Condition
-      Warning:
-      Unknown or uninitialised column: `d`.
     Output
-      NULL
+       [1]  1  2  3  4  5  6  7  8  9 10
     Code
       foo$e
-    Condition
-      Warning:
-      Unknown or uninitialised column: `e`.
     Output
       NULL
     Code
@@ -441,101 +417,72 @@
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[list(1:3)] <- 1
     Condition
-      Error in `[<-`:
-      ! Must assign to columns with a valid subscript vector.
-      x Subscript `list(1:3)` has the wrong type `list`.
-      i It must be logical, numeric, or character.
+      Error in `min()`:
+      ! invalid 'type' (list) of argument
     Code
       foo[as.list(1:3)] <- 1
     Condition
-      Error in `[<-`:
-      ! Must assign to columns with a valid subscript vector.
-      x Subscript `as.list(1:3)` has the wrong type `list`.
-      i It must be logical, numeric, or character.
+      Error in `min()`:
+      ! invalid 'type' (list) of argument
     Code
       foo[factor(1:3)] <- 1
     Condition
-      Error in `[<-`:
-      ! Can't assign to columns that don't exist.
-      x Columns `1`, `2`, and `3` don't exist.
+      Error in `Summary.factor()`:
+      ! 'min' not meaningful for factors
     Code
       foo[Sys.Date()] <- 1
     Condition
-      Error in `[<-`:
-      ! Must assign to columns with a valid subscript vector.
-      x Subscript `Sys.Date()` has the wrong type `date`.
-      i It must be logical, numeric, or character.
+      Error in `[<-.data.frame`:
+      ! new columns would leave holes after existing columns
     Code
       # # [.tbl_df emits lifecycle warnings with one-column matrix indexes (#760)
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       invisible(foo[matrix(1:2, ncol = 1), ])
-    Condition
-      Warning:
-      The `i` argument of `[` can't be a matrix as of tibble 3.0.0.
-      Convert to a vector.
-    Code
       invisible(foo[matrix(rep(TRUE, 10), ncol = 1), ])
-    Condition
-      Warning:
-      The `i` argument of `[` can't be a matrix as of tibble 3.0.0.
-      Convert to a vector.
-    Code
       # # [<-.tbl_df rejects unknown row indexes
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       foo[list(1:3), ] <- 1
     Condition
-      Error in `[<-`:
-      ! Must assign to rows with a valid subscript vector.
-      x Subscript `list(1:3)` has the wrong type `list`.
-      i It must be logical, numeric, or character.
+      Error in `[<-.data.frame`:
+      ! 'list' object cannot be coerced to type 'integer'
     Code
       foo[as.list(1:3), ] <- 1
     Condition
-      Error in `[<-`:
-      ! Must assign to rows with a valid subscript vector.
-      x Subscript `as.list(1:3)` has the wrong type `list`.
-      i It must be logical, numeric, or character.
+      Error in `max()`:
+      ! invalid 'type' (list) of argument
     Code
       foo[factor(1:3), ] <- 1
     Condition
-      Error in `vec_as_location()`:
-      ! Can't use character names to index an unnamed vector.
+      Warning in `Ops.factor()`:
+      '>=' not meaningful for factors
+      Error in `Summary.factor()`:
+      ! 'max' not meaningful for factors
     Code
       foo[Sys.Date(), ] <- 1
-    Condition
-      Error in `[<-`:
-      ! Must assign to rows with a valid subscript vector.
-      x Subscript `Sys.Date()` has the wrong type `date`.
-      i It must be logical, numeric, or character.
-    Code
       # # [<-.tbl_df throws an error with duplicate indexes (#658)
       df <- tibble(x = 1:2, y = x)
       df[c(1, 1)] <- 3
     Condition
-      Error in `[<-`:
-      ! Column index 1 is used more than once for assignment.
+      Error in `[<-.data.frame`:
+      ! duplicate subscripts for columns
     Code
       df[, c(1, 1)] <- 3
     Condition
-      Error in `[<-`:
-      ! Column index 1 is used more than once for assignment.
+      Error in `[<-.data.frame`:
+      ! duplicate subscripts for columns
     Code
       df[c(1, 1), ] <- 3
-    Condition
-      Error in `[<-`:
-      ! Row index 1 is used more than once for assignment.
-    Code
       # # [<-.tbl_df throws an error with NA indexes
       df <- tibble(x = 1:2, y = x)
       df[NA] <- 3
     Condition
-      Error in `[<-`:
-      ! Can't use NA as column index with `[` at positions 1 and 2.
+      Error in `[<-.data.frame`:
+      ! missing values are not allowed in subscripted assignments of data frames
     Code
       df[NA, ] <- 3
     Condition
-      Error in `[<-`:
-      ! Can't use NA as row index in a tibble for assignment.
+      Error in `[<-.data.frame`:
+      ! missing values are not allowed in subscripted assignments of data frames
     Code
       # # [<-.tbl_df and logical indexes
       df <- tibble(x = 1:2, y = x)
@@ -561,225 +508,120 @@
       df <- tibble(x = 1:2, y = x)
       df[] <- mean
     Condition
-      Error in `[<-`:
-      ! `mean` must be a vector, a bare list, a data frame, a matrix, or NULL.
+      Error in `as.vector()`:
+      ! cannot coerce type 'closure' to vector of type 'any'
     Code
       df[] <- lm(y ~ x, df)
     Condition
-      Error in `[<-`:
-      ! `lm(y ~ x, df)` must be a vector, a bare list, a data frame, a matrix, or NULL.
+      Warning in `[<-.data.frame`:
+      replacement element 7 has 5 rows to replace 2 rows
+      Warning in `[<-.data.frame`:
+      replacement element 10 has 3 rows to replace 2 rows
+      Warning in `[<-.data.frame`:
+      replacement element 11 has 3 rows to replace 2 rows
+      Error in `terms.formula()`:
+      ! invalid model formula in ExtractVars
     Code
       # # [<-.tbl_df throws an error with OOB assignment
       df <- tibble(x = 1:2, y = x)
       df[4:5] <- 3
     Condition
-      Error in `[<-`:
-      ! Can't assign to columns beyond the end with non-consecutive locations.
-      i Input has size 2.
-      x Subscript `4:5` contains non-consecutive location 4.
+      Error in `[<-.data.frame`:
+      ! new columns would leave holes after existing columns
     Code
       df[4:5, ] <- 3
-    Condition
-      Error in `[<-`:
-      ! Can't assign to rows beyond the end with non-consecutive locations.
-      i Input has size 2.
-      x Subscript `4:5` contains non-consecutive location 4.
-    Code
       df[-4, ] <- 3
-    Condition
-      Error in `[<-`:
-      ! Can't negate rows past the end.
-      i Location 4 doesn't exist.
-      i There are only 2 rows.
-    Code
       df[-(4:5), ] <- 3
-    Condition
-      Error in `[<-`:
-      ! Can't negate rows past the end.
-      i Locations 4 and 5 don't exist.
-      i There are only 2 rows.
-    Code
       # # [<-.tbl_df and recycling
       df <- tibble(x = 1:3, y = x, z = y)
       df[1:2] <- list(0, 0, 0)
     Condition
-      Error in `[<-`:
-      ! Can't recycle `list(0, 0, 0)` (size 3) to size 2.
+      Warning in `[<-.data.frame`:
+      provided 3 variables to replace 2 variables
     Code
       df[] <- list(0, 0)
-    Condition
-      Error in `[<-`:
-      ! Can't recycle input of size 2 to size 3.
-    Code
       df[1, ] <- 1:3
-    Condition
-      Error in `[<-`:
-      ! Assigned data `1:3` must be compatible with row subscript `1`.
-      x 1 row must be assigned.
-      x Assigned data has 3 rows.
-      i Row updates require a list value. Do you need `list()` or `as.list()`?
-      Caused by error in `vectbl_recycle_rhs_rows()`:
-      ! Can't recycle input of size 3 to size 1.
-    Code
       df[1:2, ] <- 1:3
-    Condition
-      Error in `[<-`:
-      ! Assigned data `1:3` must be compatible with row subscript `1:2`.
-      x 2 rows must be assigned.
-      x Assigned data has 3 rows.
-      i Only vectors of size 1 are recycled.
-      Caused by error in `vectbl_recycle_rhs_rows()`:
-      ! Can't recycle input of size 3 to size 2.
-    Code
       df[, ] <- 1:2
     Condition
-      Error in `[<-`:
-      ! Assigned data `1:2` must be compatible with existing data.
-      x Existing data has 3 rows.
-      x Assigned data has 2 rows.
-      i Only vectors of size 1 are recycled.
-      Caused by error in `vectbl_recycle_rhs_rows()`:
-      ! Can't recycle input of size 2 to size 3.
+      Error in `[<-.data.frame`:
+      ! replacement has 2 items, need 9
     Code
       df[1, ] <- list(a = 1:3, b = 1)
     Condition
-      Error in `[<-`:
-      ! Can't recycle input of size 2 to size 3.
+      Warning in `[<-.data.frame`:
+      replacement element 1 has 3 rows to replace 1 rows
     Code
       df[1, ] <- list(a = 1, b = 1:3)
     Condition
-      Error in `[<-`:
-      ! Can't recycle input of size 2 to size 3.
+      Warning in `[<-.data.frame`:
+      replacement element 2 has 3 rows to replace 1 rows
     Code
       df[1:2, ] <- list(a = 1:3, b = 1)
     Condition
-      Error in `[<-`:
-      ! Can't recycle input of size 2 to size 3.
+      Warning in `[<-.data.frame`:
+      replacement element 1 has 3 rows to replace 2 rows
     Code
       df[1:2, ] <- list(a = 1, b = 1:3)
     Condition
-      Error in `[<-`:
-      ! Can't recycle input of size 2 to size 3.
+      Warning in `[<-.data.frame`:
+      replacement element 2 has 3 rows to replace 2 rows
     Code
       df[1, 1:2] <- list(a = 1:3, b = 1)
     Condition
-      Error in `[<-`:
-      ! Assigned data `list(a = 1:3, b = 1)` must be compatible with row subscript `1`.
-      x 1 row must be assigned.
-      x Element 1 of assigned data has 3 rows.
-      i Row updates require a list value. Do you need `list()` or `as.list()`?
-      Caused by error in `vectbl_recycle_rhs_rows()`:
-      ! Can't recycle input of size 3 to size 1.
+      Warning in `[<-.data.frame`:
+      replacement element 1 has 3 rows to replace 1 rows
     Code
       df[1, 1:2] <- list(a = 1, b = 1:3)
     Condition
-      Error in `[<-`:
-      ! Assigned data `list(a = 1, b = 1:3)` must be compatible with row subscript `1`.
-      x 1 row must be assigned.
-      x Element 2 of assigned data has 3 rows.
-      i Row updates require a list value. Do you need `list()` or `as.list()`?
-      Caused by error in `vectbl_recycle_rhs_rows()`:
-      ! Can't recycle input of size 3 to size 1.
+      Warning in `[<-.data.frame`:
+      replacement element 2 has 3 rows to replace 1 rows
     Code
       df[1:2, 1:2] <- list(a = 1:3, b = 1)
     Condition
-      Error in `[<-`:
-      ! Assigned data `list(a = 1:3, b = 1)` must be compatible with row subscript `1:2`.
-      x 2 rows must be assigned.
-      x Element 1 of assigned data has 3 rows.
-      i Only vectors of size 1 are recycled.
-      Caused by error in `vectbl_recycle_rhs_rows()`:
-      ! Can't recycle input of size 3 to size 2.
+      Warning in `[<-.data.frame`:
+      replacement element 1 has 3 rows to replace 2 rows
     Code
       df[1:2, 1:2] <- list(a = 1, b = 1:3)
     Condition
-      Error in `[<-`:
-      ! Assigned data `list(a = 1, b = 1:3)` must be compatible with row subscript `1:2`.
-      x 2 rows must be assigned.
-      x Element 2 of assigned data has 3 rows.
-      i Only vectors of size 1 are recycled.
-      Caused by error in `vectbl_recycle_rhs_rows()`:
-      ! Can't recycle input of size 3 to size 2.
+      Warning in `[<-.data.frame`:
+      replacement element 2 has 3 rows to replace 2 rows
     Code
       df[1, ] <- list(a = 1:3, b = 1, c = 1:3)
     Condition
-      Error in `[<-`:
-      ! Assigned data `list(a = 1:3, b = 1, c = 1:3)` must be compatible with row subscript `1`.
-      x 1 row must be assigned.
-      x Element 1 of assigned data has 3 rows.
-      i Row updates require a list value. Do you need `list()` or `as.list()`?
-      Caused by error in `vectbl_recycle_rhs_rows()`:
-      ! Can't recycle input of size 3 to size 1.
+      Warning in `[<-.data.frame`:
+      replacement element 1 has 3 rows to replace 1 rows
+      Warning in `[<-.data.frame`:
+      replacement element 3 has 3 rows to replace 1 rows
     Code
       df[1, ] <- list(a = 1, b = 1:3, c = 1:3)
     Condition
-      Error in `[<-`:
-      ! Assigned data `list(a = 1, b = 1:3, c = 1:3)` must be compatible with row subscript `1`.
-      x 1 row must be assigned.
-      x Element 2 of assigned data has 3 rows.
-      i Row updates require a list value. Do you need `list()` or `as.list()`?
-      Caused by error in `vectbl_recycle_rhs_rows()`:
-      ! Can't recycle input of size 3 to size 1.
+      Warning in `[<-.data.frame`:
+      replacement element 2 has 3 rows to replace 1 rows
+      Warning in `[<-.data.frame`:
+      replacement element 3 has 3 rows to replace 1 rows
     Code
       df[1:2, ] <- list(a = 1:3, b = 1, c = 1:3)
     Condition
-      Error in `[<-`:
-      ! Assigned data `list(a = 1:3, b = 1, c = 1:3)` must be compatible with row subscript `1:2`.
-      x 2 rows must be assigned.
-      x Element 1 of assigned data has 3 rows.
-      i Only vectors of size 1 are recycled.
-      Caused by error in `vectbl_recycle_rhs_rows()`:
-      ! Can't recycle input of size 3 to size 2.
+      Warning in `[<-.data.frame`:
+      replacement element 1 has 3 rows to replace 2 rows
+      Warning in `[<-.data.frame`:
+      replacement element 3 has 3 rows to replace 2 rows
     Code
       df[1:2, ] <- list(a = 1, b = 1:3, c = 1:3)
     Condition
-      Error in `[<-`:
-      ! Assigned data `list(a = 1, b = 1:3, c = 1:3)` must be compatible with row subscript `1:2`.
-      x 2 rows must be assigned.
-      x Element 2 of assigned data has 3 rows.
-      i Only vectors of size 1 are recycled.
-      Caused by error in `vectbl_recycle_rhs_rows()`:
-      ! Can't recycle input of size 3 to size 2.
+      Warning in `[<-.data.frame`:
+      replacement element 2 has 3 rows to replace 2 rows
+      Warning in `[<-.data.frame`:
+      replacement element 3 has 3 rows to replace 2 rows
     Code
       # # [<-.tbl_df and coercion
       df <- tibble(x = 1:3, y = letters[1:3], z = as.list(1:3))
       df[1:3, 1:2] <- df[2:3]
-    Condition
-      Error in `[<-`:
-      ! Assigned data `df[2:3]` must be compatible with existing data.
-      i Error occurred for column `x`.
-      Caused by error in `vec_assign()`:
-      ! Can't convert <character> to <integer>.
-    Code
       df[1:3, 1:2] <- df[1]
-    Condition
-      Error in `[<-`:
-      ! Assigned data `df[1]` must be compatible with existing data.
-      i Error occurred for column `y`.
-      Caused by error in `vec_assign()`:
-      ! Can't convert <integer> to <character>.
-    Code
       df[1:3, 1:2] <- df[[1]]
-    Condition
-      Error in `[<-`:
-      ! Assigned data `df[[1]]` must be compatible with existing data.
-      i Error occurred for column `y`.
-      Caused by error in `vec_assign()`:
-      ! Can't convert <integer> to <character>.
-    Code
       df[1:3, 1:3] <- df[3:1]
-    Condition
-      Error in `[<-`:
-      ! Assigned data `df[3:1]` must be compatible with existing data.
-      i Error occurred for column `x`.
-      Caused by error in `vec_assign()`:
-      ! Can't convert <list> to <integer>.
-    Code
       df[1:3, 1:3] <- NULL
-    Condition
-      Error in `[<-`:
-      ! `NULL` must be a vector, a bare list, a data frame or a matrix.
-    Code
       # # [<-.tbl_df and overwriting NA
       df <- tibble(x = rep(NA, 3), z = matrix(NA, ncol = 2, dimnames = list(NULL, c(
         "a", "b"))))
@@ -833,6 +675,10 @@
       df[1, "d"] <- NA
       df[1, "e"] <- NA
       df[1, "f"] <- NA
+    Condition
+      Error in `x[[jj]][iseq] <- vjj`:
+      ! incompatible types (from logical to raw) in subassignment type fix
+    Code
       df[1, "g"] <- NA
       df[1, "h"] <- NA
       df
@@ -845,221 +691,152 @@
       # # [<-.tbl_df and matrix subsetting
       foo <- tibble(a = 1:3, b = letters[1:3])
       foo[!is.na(foo)] <- "bogus"
-    Condition
-      Error in `[<-`:
-      ! Assigned data `"bogus"` must be compatible with existing data.
-      i Error occurred for column `a`.
-      Caused by error in `vec_assign()`:
-      ! Can't convert <character> to <integer>.
-    Code
       foo[as.matrix("x")] <- NA
     Condition
-      Error in `[<-`:
-      ! Subscript `as.matrix("x")` is a matrix, it must be of type logical.
+      Error in `[<-.data.frame`:
+      ! unsupported matrix index in replacement
     Code
       foo[array("x", dim = c(1, 1, 1))] <- NA
       foo[is.na(foo)] <- 1:3
-    Condition
-      Error in `[<-`:
-      ! Subscript `is.na(foo)` is a matrix, the data `1:3` must have size 1.
-    Code
       foo[is.na(foo)] <- lm(a ~ b, foo)
     Condition
-      Error in `[<-`:
-      ! Subscript `is.na(foo)` is a matrix, the data `lm(a ~ b, foo)` must be a vector of size 1.
+      Warning in `storage.mode(v) <- "double"`:
+      NAs introduced by coercion
+      Error in `contrasts<-`:
+      ! contrasts can be applied only to factors with 2 or more levels
     Code
       # # [[<-.tbl_df rejects invalid column indexes
       foo <- tibble(x = 1:10, y = 1:10)
       foo[[]] <- 1
     Condition
-      Error in `[[<-`:
-      ! Subscript can't be missing for tibbles in `[[<-`.
+      Error in `x[[i]] <- value`:
+      ! [[ ]] with missing subscript
     Code
       foo[[, 1]] <- 1
     Condition
-      Error in `[[<-`:
-      ! Subscript can't be missing for tibbles in `[[<-`.
+      Error in `[[<-.data.frame`:
+      ! only valid calls are x[[j]] <- value or x[[i,j]] <- value
     Code
       foo[[1, ]] <- 1
     Condition
-      Error in `[[<-`:
-      ! Subscript can't be missing for tibbles in `[[<-`.
+      Error in `[[<-.data.frame`:
+      ! only valid calls are x[[j]] <- value or x[[i,j]] <- value
     Code
       foo[[, ]] <- 1
     Condition
-      Error in `[[<-`:
-      ! Subscript can't be missing for tibbles in `[[<-`.
+      Error in `[[<-.data.frame`:
+      ! only valid calls are x[[j]] <- value or x[[i,j]] <- value
     Code
       foo[[1:3]] <- 1
     Condition
       Error in `[[<-`:
-      ! Must assign to column with a single valid subscript.
-      x Subscript `1:3` has size 3 but must be size 1.
+      ! recursive indexing failed at level 2
     Code
       foo[[letters[1:3]]] <- 1
     Condition
       Error in `[[<-`:
-      ! Must assign to column with a single valid subscript.
-      x Subscript `letters[1:3]` has size 3 but must be size 1.
+      ! no such index at level 1
     Code
       foo[[TRUE]] <- 1
-    Condition
-      Error in `[[<-`:
-      ! Must assign to column with a single valid subscript.
-      x Subscript `TRUE` has the wrong type `logical`.
-      i It must be numeric or character.
-    Code
       foo[[NA_integer_]] <- 1
     Condition
-      Error in `[[<-`:
-      ! Must assign to column with a single valid subscript.
-      x Subscript `NA_integer_` can't be `NA`.
+      Error in `x[[i]] <- value`:
+      ! attempt to select more than one element in integerOneIndex
     Code
       foo[[mean]] <- 1
     Condition
-      Error in `[[<-`:
-      ! Must assign to column with a single valid subscript.
-      x Subscript `mean` has the wrong type `function`.
-      i It must be numeric or character.
+      Error in `x[[i]] <- value`:
+      ! invalid subscript type 'closure'
     Code
       foo[[foo]] <- 1
     Condition
-      Error in `[[<-`:
-      ! Must assign to column with a single valid subscript.
-      x Subscript `foo` has the wrong type `tbl_df<
-        x: integer
-        y: integer
-      >`.
-      i It must be numeric or character.
+      Error in `x[[i]] <- value`:
+      ! invalid subscript type 'list'
     Code
       foo[[1:3, 1]] <- 1
     Condition
-      Error in `[[<-`:
-      ! Must assign to row with a single valid subscript.
-      x Subscript `1:3` has size 3 but must be size 1.
+      Error in `[[<-.data.frame`:
+      ! only a single element should be replaced
     Code
       foo[[TRUE, 1]] <- 1
     Condition
-      Error in `[[<-`:
-      ! Must assign to row with a single valid subscript.
-      x Subscript `TRUE` has the wrong type `logical`.
-      i It must be numeric or character.
+      Error in `[[<-.data.frame`:
+      ! only a single element should be replaced
     Code
       foo[[mean, 1]] <- 1
     Condition
-      Error in `[[<-`:
-      ! Must assign to row with a single valid subscript.
-      x Subscript `mean` has the wrong type `function`.
-      i It must be numeric or character.
+      Error in `i >= 0L`:
+      ! comparison (5) is possible only for atomic and list types
     Code
       foo[[foo, 1]] <- 1
     Condition
-      Error in `[[<-`:
-      ! Must assign to row with a single valid subscript.
-      x Subscript `foo` has the wrong type `tbl_df<
-        x: integer
-        y: integer
-      >`.
-      i It must be numeric or character.
+      Error in `seq_len(nrows)[i]`:
+      ! invalid subscript type 'list'
     Code
       # # [[<-.tbl_df throws an error with OOB assignment
       df <- tibble(x = 1:2, y = x)
       df[[4]] <- 3
-    Condition
-      Error in `[[<-`:
-      ! Can't assign to columns beyond the end with non-consecutive locations.
-      i Input has size 2.
-      x Subscript `4` contains non-consecutive location 4.
-    Code
       # # [[<-.tbl_df throws an error with bad RHS
       df <- tibble(x = 1:2, y = x)
       df[[1]] <- mean
     Condition
-      Error in `[[<-`:
-      ! Assigned data `mean` must be a vector.
-      Caused by error in `vec_size()`:
-      ! `x` must be a vector, not a function.
+      Error in `rep()`:
+      ! attempt to replicate an object of type 'closure'
     Code
       df[[1]] <- lm(y ~ x, df)
     Condition
-      Error in `[[<-`:
-      ! Assigned data `lm(y ~ x, df)` must be a vector.
-      Caused by error in `vec_size()`:
-      ! `x` must be a vector, not a <lm> object.
+      Error in `[[<-.data.frame`:
+      ! replacement has 12 rows, data has 2
     Code
       # # [[<-.tbl_df recycles only values of length one
       df <- tibble(x = 1:3)
       df[["x"]] <- 8:9
     Condition
-      Error in `[[<-`:
-      ! Assigned data `8:9` must be compatible with existing data.
-      x Existing data has 3 rows.
-      x Assigned data has 2 rows.
-      i Only vectors of size 1 are recycled.
-      Caused by error in `vectbl_recycle_rhs_rows()`:
-      ! Can't recycle input of size 2 to size 3.
+      Error in `[[<-.data.frame`:
+      ! replacement has 2 rows, data has 3
     Code
       df[["w"]] <- 8:9
     Condition
-      Error in `[[<-`:
-      ! Assigned data `8:9` must be compatible with existing data.
-      x Existing data has 3 rows.
-      x Assigned data has 2 rows.
-      i Only vectors of size 1 are recycled.
-      Caused by error in `vectbl_recycle_rhs_rows()`:
-      ! Can't recycle input of size 2 to size 3.
+      Error in `[[<-.data.frame`:
+      ! replacement has 2 rows, data has 3
     Code
       df[["a"]] <- character()
     Condition
-      Error in `[[<-`:
-      ! Assigned data `character()` must be compatible with existing data.
-      x Existing data has 3 rows.
-      x Assigned data has 0 rows.
-      i Only vectors of size 1 are recycled.
-      Caused by error in `vectbl_recycle_rhs_rows()`:
-      ! Can't recycle input of size 0 to size 3.
+      Error in `[[<-.data.frame`:
+      ! replacement has 0 rows, data has 3
     Code
       # # [<-.tbl_df throws an error with invalid values
       df <- tibble(x = 1:2, y = x)
       df[1] <- lm(y ~ x, df)
     Condition
-      Error in `[<-`:
-      ! `lm(y ~ x, df)` must be a vector, a bare list, a data frame, a matrix, or NULL.
+      Warning in `[<-.data.frame`:
+      replacement element 7 has 5 rows to replace 2 rows
+      Warning in `[<-.data.frame`:
+      replacement element 10 has 3 rows to replace 2 rows
+      Warning in `[<-.data.frame`:
+      replacement element 11 has 3 rows to replace 2 rows
+      Error in `terms.formula()`:
+      ! invalid model formula in ExtractVars
     Code
       df[1:2, 1] <- NULL
     Condition
-      Error in `[<-`:
-      ! `NULL` must be a vector, a bare list, a data frame or a matrix.
+      Error in `x[[jj]][iseq] <- vjj`:
+      ! replacement has length zero
     Code
       # # $<- recycles only values of length one
       df <- tibble(x = 1:3)
       df$x <- 8:9
     Condition
-      Error in `$<-`:
-      ! Assigned data `8:9` must be compatible with existing data.
-      x Existing data has 3 rows.
-      x Assigned data has 2 rows.
-      i Only vectors of size 1 are recycled.
-      Caused by error in `vectbl_recycle_rhs_rows()`:
-      ! Can't recycle input of size 2 to size 3.
+      Error in `$<-.data.frame`:
+      ! replacement has 2 rows, data has 3
     Code
       df$w <- 8:9
     Condition
-      Error in `$<-`:
-      ! Assigned data `8:9` must be compatible with existing data.
-      x Existing data has 3 rows.
-      x Assigned data has 2 rows.
-      i Only vectors of size 1 are recycled.
-      Caused by error in `vectbl_recycle_rhs_rows()`:
-      ! Can't recycle input of size 2 to size 3.
+      Error in `$<-.data.frame`:
+      ! replacement has 2 rows, data has 3
     Code
       df$a <- character()
     Condition
-      Error in `$<-`:
-      ! Assigned data `character()` must be compatible with existing data.
-      x Existing data has 3 rows.
-      x Assigned data has 0 rows.
-      i Only vectors of size 1 are recycled.
-      Caused by error in `vectbl_recycle_rhs_rows()`:
-      ! Can't recycle input of size 0 to size 3.
+      Error in `$<-.data.frame`:
+      ! replacement has 0 rows, data has 3
 
