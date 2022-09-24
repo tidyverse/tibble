@@ -278,94 +278,8 @@ is_tight_sequence_at_end <- function(i_new, n) {
   all(sort(i_new) == seq2(n + 1, n + length(i_new)))
 }
 
-tbl_subassign_col <- function(x, j, value) {
-  nrow <- fast_nrow(x)
-
-  # Grow, assign new names
-  new <- attr(j, "new")
-  if (!is.null(new)) {
-    length(x) <- max(j[new])
-    names(x)[j[new]] <- names2(j)[new]
-  }
-
-  # Update
-  to_remove <- integer()
-  for (jj in seq_along(value)) {
-    ji <- j[[jj]]
-    value_jj <- value[[jj]]
-    if (!is.null(value_jj)) {
-      x[[ji]] <- value_jj
-    } else {
-      to_remove <- c(to_remove, ji)
-    }
-  }
-
-  # Remove
-  if (length(to_remove) > 0) {
-    x <- x[-to_remove]
-  }
-
-  # Can be destroyed by setting length
-  attr(x, "row.names") <- .set_row_names(nrow)
-  x
-}
-
-tbl_expand_to_nrow <- function(x, i) {
-  nrow <- fast_nrow(x)
-
-  new_nrow <- max(i, nrow)
-
-  if (is.na(new_nrow)) {
-    abort_assign_rows_non_na_only()
-  }
-
-  if (new_nrow != nrow) {
-    # FIXME: vec_expand()?
-    i_expand <- c(seq_len(nrow), rep(NA_integer_, new_nrow - nrow))
-    x <- vec_slice(x, i_expand)
-  }
-
-  x
-}
-
-tbl_subassign_row <- function(x, i, value, i_arg, value_arg, call = my_caller_env()) {
-  recycled_value <- vectbl_recycle_rhs_cols(value, length(x))
-
-  withCallingHandlers(
-    for (j in seq_along(x)) {
-      x[[j]] <- vectbl_assign(x[[j]], i, recycled_value[[j]])
-    },
-    vctrs_error = function(cnd) {
-      # Side effect: check if `value` can be recycled
-      vectbl_recycle_rhs_rows(value, length(i), i_arg, value_arg, call = call)
-
-      abort_assign_incompatible_type(x, recycled_value, j, value_arg, cnd, call = call)
-    }
-  )
-
-  x
-}
-
 fast_nrow <- function(x) {
   .row_names_info(x, 2L)
-}
-
-vectbl_assign <- function(x, i, value) {
-  if (is.logical(value)) {
-    if (.Call("tibble_need_coerce", value)) {
-      value <- vec_slice(x, NA_integer_)
-    }
-  } else {
-    if (.Call("tibble_need_coerce", x)) {
-      d <- dim(x)
-      dn <- dimnames(x)
-      x <- vec_slice(value, rep(NA_integer_, length(x)))
-      dim(x) <- d
-      dimnames(x) <- dn
-    }
-  }
-
-  vec_assign(x, i, value)
 }
 
 result_vectbl_wrap_rhs <- function(value) {
@@ -383,35 +297,6 @@ result_vectbl_wrap_rhs <- function(value) {
   } else {
     list(value)
   }
-}
-
-vectbl_recycle_rhs_rows <- function(value, nrow, i_arg, value_arg, call = my_caller_env()) {
-  if (length(value) > 0L) {
-    withCallingHandlers(
-      for (j in seq_along(value)) {
-        if (!is.null(value[[j]])) {
-          value[[j]] <- vec_recycle(value[[j]], nrow)
-        }
-      },
-      vctrs_error_recycle_incompatible_size = function(cnd) {
-        abort_assign_incompatible_size(nrow, value, j, i_arg, value_arg, cnd, call = call)
-      },
-      vctrs_error_scalar_type = function(cnd) {
-        abort_assign_vector(value, j, value_arg, cnd, call = call)
-      }
-    )
-  }
-
-  value
-}
-
-vectbl_recycle_rhs_cols <- function(value, ncol, call = my_caller_env()) {
-  if (length(value) != 1L || ncol != 1L) {
-    # Errors have been caught beforehand in vectbl_as_new_col_index()
-    value <- vec_recycle(value, ncol, call = call)
-  }
-
-  value
 }
 
 # External ----------------------------------------------------------------
