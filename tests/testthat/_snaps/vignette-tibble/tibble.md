@@ -267,7 +267,7 @@ tibble(a = 1:3, b = 1)
 #> 2     2     1
 #> 3     3     1
 tibble(a = 1:3, c = 1:2)
-#> Error:
+#> Error in `tibble()`:
 #> ! Tibble columns must have compatible sizes.
 #> * Size 3: Existing data.
 #> * Size 2: Column `c`.

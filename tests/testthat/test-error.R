@@ -1,10 +1,10 @@
-test_that("tibble_error()", {
-  # Must be called from a function whose name starts with `error_`
-  error_foo <- function() {
-    tibble_error("message", foo = 42, bar = 7)
+test_that("tibble_abort()", {
+  # Must be called from a function whose name starts with `abort_`
+  abort_foo <- function() {
+    tibble_abort("message", foo = 42, bar = 7)
   }
-  expect_identical(
-    error_foo(),
+  expect_cnd_equivalent(
+    tryCatch(abort_foo(), error = identity),
     error_cnd(
       class = c("tibble_error_foo", "tibble_error"),
       message = "message",

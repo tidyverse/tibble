@@ -44,7 +44,7 @@ new_tibble <- function(x, ..., nrow = NULL, class = NULL, subclass = NULL) {
   x <- unclass(x)
 
   if (!is.list(x)) {
-    cnd_signal(error_new_tibble_must_be_list())
+    abort_new_tibble_must_be_list()
   }
 
   #' The `nrow` argument may be omitted as of tibble 3.1.4.
@@ -54,7 +54,7 @@ new_tibble <- function(x, ..., nrow = NULL, class = NULL, subclass = NULL) {
   #' This takes the place of the "row.names" attribute in a data frame.
   if (!is.null(nrow)) {
     if (!is.numeric(nrow) || length(nrow) != 1 || nrow < 0 || !is_integerish(nrow, 1) || nrow >= 2147483648) {
-      cnd_signal(error_new_tibble_nrow_must_be_nonnegative())
+      abort_new_tibble_nrow_must_be_nonnegative()
     }
     nrow <- as.integer(nrow)
   }
@@ -84,7 +84,7 @@ new_tibble <- function(x, ..., nrow = NULL, class = NULL, subclass = NULL) {
     # Leaving this because creating a named list of length zero seems difficult
     args[["names"]] <- character()
   } else if (is.null(args[["names"]])) {
-    cnd_signal(error_names_must_be_non_null())
+    abort_names_must_be_non_null()
   }
 
   if (is.null(class)) {
@@ -126,19 +126,17 @@ validate_tibble <- function(x) {
   x
 }
 
-cnd_signal_if <- function(x) {
-  if (!is.null(x)) {
-    cnd_signal(x)
-  }
-}
-
-check_minimal <- function(name) {
-  cnd_signal_if(cnd_names_non_null(name))
-  cnd_signal_if(cnd_names_non_na(name))
-}
-
 check_minimal_names <- function(x) {
-  check_minimal(names(x))
+  names <- names(x)
+
+  if (is.null(names)) {
+    abort_names_must_be_non_null()
+  }
+
+  if (anyNA(names)) {
+    abort_column_names_cannot_be_empty(which(is.na(names)), repair_hint = FALSE)
+  }
+
   invisible(x)
 }
 
@@ -150,7 +148,7 @@ validate_nrow <- function(names, lengths, nrow) {
   # Validate column lengths, don't recycle
   bad_len <- which(lengths != nrow)
   if (has_length(bad_len)) {
-    cnd_signal(error_incompatible_size(nrow, names, lengths, "Requested with `nrow` argument"))
+    abort_incompatible_size(nrow, names, lengths, "Requested with `nrow` argument")
   }
 }
 
@@ -159,10 +157,10 @@ tibble_class_no_data_frame <- c("tbl_df", "tbl")
 
 # Errors ------------------------------------------------------------------
 
-error_new_tibble_must_be_list <- function() {
-  tibble_error("`x` must be a list.")
+abort_new_tibble_must_be_list <- function() {
+  tibble_abort("`x` must be a list.")
 }
 
-error_new_tibble_nrow_must_be_nonnegative <- function() {
-  tibble_error("`nrow` must be a nonnegative whole number smaller than 2^31.")
+abort_new_tibble_nrow_must_be_nonnegative <- function() {
+  tibble_abort("`nrow` must be a nonnegative whole number smaller than 2^31.")
 }

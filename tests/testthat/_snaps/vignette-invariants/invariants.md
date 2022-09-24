@@ -337,7 +337,7 @@ df[[c("n", "c")]]
 
 ```r
 tbl[[c("n", "c")]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[c("n", "c")]]`:
 #> ! Must extract column with a single valid subscript.
 #> x Subscript `c("n", "c")` has size 2 but must be size 1.
 ```
@@ -353,7 +353,7 @@ df[[TRUE]]
 
 ```r
 tbl[[TRUE]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[TRUE]]`:
 #> ! Must extract column with a single valid subscript.
 #> x Subscript `TRUE` has the wrong type `logical`.
 #> i It must be numeric or character.
@@ -370,7 +370,7 @@ df[[mean]]
 
 ```r
 tbl[[mean]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[mean]]`:
 #> ! Must extract column with a single valid subscript.
 #> x Subscript `mean` has the wrong type `function`.
 #> i It must be numeric or character.
@@ -391,7 +391,7 @@ df[[NA]]
 
 ```r
 tbl[[NA]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[NA]]`:
 #> ! Must extract column with a single valid subscript.
 #> x Subscript `NA` can't be `NA`.
 ```
@@ -407,7 +407,7 @@ df[[NA_character_]]
 
 ```r
 tbl[[NA_character_]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[NA_character_]]`:
 #> ! Must extract column with a single valid subscript.
 #> x Subscript `NA_character_` can't be `NA`.
 ```
@@ -423,7 +423,7 @@ df[[NA_integer_]]
 
 ```r
 tbl[[NA_integer_]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[NA_integer_]]`:
 #> ! Must extract column with a single valid subscript.
 #> x Subscript `NA_integer_` can't be `NA`.
 ```
@@ -439,7 +439,7 @@ df[[-1]]
 
 ```r
 tbl[[-1]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[-1]]`:
 #> ! Must extract column with a single valid subscript.
 #> x Subscript `-1` has value -1 but must be a positive location.
 ```
@@ -455,7 +455,7 @@ df[[4]]
 
 ```r
 tbl[[4]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[4]]`:
 #> ! Can't subset columns past the end.
 #> i Location 4 doesn't exist.
 #> i There are only 3 columns.
@@ -472,7 +472,7 @@ df[[1.5]]
 
 ```r
 tbl[[1.5]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[1.5]]`:
 #> ! Must extract column with a single valid subscript.
 #> x Can't convert from `j` <double> to <integer> due to loss of precision.
 ```
@@ -488,7 +488,7 @@ df[[Inf]]
 
 ```r
 tbl[[Inf]]
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `tbl[[Inf]]`:
 #> ! Must extract column with a single valid subscript.
 #> x Can't convert from `j` <double> to <integer> due to loss of precision.
 ```
@@ -990,7 +990,7 @@ df[mean, ]
 
 ```r
 tbl[mean, ]
-#> Error in `vectbl_as_row_location()`:
+#> Error in `tbl[mean, ]`:
 #> ! Must subset rows with a valid subscript vector.
 #> x Subscript `mean` has the wrong type `function`.
 #> i It must be logical, numeric, or character.
@@ -1007,7 +1007,7 @@ df[list(1), ]
 
 ```r
 tbl[list(1), ]
-#> Error in `vectbl_as_row_location()`:
+#> Error in `tbl[list(1), ]`:
 #> ! Must subset rows with a valid subscript vector.
 #> x Subscript `list(1)` has the wrong type `list`.
 #> i It must be logical, numeric, or character.
@@ -1094,7 +1094,7 @@ df[c(TRUE, FALSE), ]
 
 ```r
 tbl[c(TRUE, FALSE), ]
-#> Error in `vectbl_as_row_location()`:
+#> Error in `tbl[c(TRUE, FALSE), ]`:
 #> ! Must subset rows with a valid subscript vector.
 #> i Logical subscripts must match the size of the indexed input.
 #> x Input has size 4 but subscript `c(TRUE, FALSE)` has size 2.
@@ -1466,7 +1466,7 @@ with_df(df[[TRUE]] <- 0)
 
 ```r
 with_tbl(tbl[[TRUE]] <- 0)
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `[[<-`:
 #> ! Must assign to column with a single valid subscript.
 #> x Subscript `TRUE` has the wrong type `logical`.
 #> i It must be numeric or character.
@@ -1483,7 +1483,7 @@ with_df(df[[1:3]] <- 0)
 
 ```r
 with_tbl(tbl[[1:3]] <- 0)
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `[[<-`:
 #> ! Must assign to column with a single valid subscript.
 #> x Subscript `1:3` has size 3 but must be size 1.
 ```
@@ -1499,7 +1499,7 @@ with_df(df[[c("n", "c")]] <- 0)
 
 ```r
 with_tbl(tbl[[c("n", "c")]] <- 0)
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `[[<-`:
 #> ! Must assign to column with a single valid subscript.
 #> x Subscript `c("n", "c")` has size 2 but must be size 1.
 ```
@@ -1515,7 +1515,7 @@ with_df(df[[FALSE]] <- 0)
 
 ```r
 with_tbl(tbl[[FALSE]] <- 0)
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `[[<-`:
 #> ! Must assign to column with a single valid subscript.
 #> x Subscript `FALSE` has the wrong type `logical`.
 #> i It must be numeric or character.
@@ -1532,7 +1532,7 @@ with_df(df[[1:2]] <- 0)
 
 ```r
 with_tbl(tbl[[1:2]] <- 0)
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `[[<-`:
 #> ! Must assign to column with a single valid subscript.
 #> x Subscript `1:2` has size 2 but must be size 1.
 ```
@@ -1548,7 +1548,7 @@ with_df(df[[NA_integer_]] <- 0)
 
 ```r
 with_tbl(tbl[[NA_integer_]] <- 0)
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `[[<-`:
 #> ! Must assign to column with a single valid subscript.
 #> x Subscript `NA_integer_` can't be `NA`.
 ```
@@ -1564,7 +1564,7 @@ with_df(df[[NA]] <- 0)
 
 ```r
 with_tbl(tbl[[NA]] <- 0)
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `[[<-`:
 #> ! Must assign to column with a single valid subscript.
 #> x Subscript `NA` can't be `NA`.
 ```
@@ -1580,7 +1580,7 @@ with_df(df[[NA_character_]] <- 0)
 
 ```r
 with_tbl(tbl[[NA_character_]] <- 0)
-#> Error in `vectbl_as_col_location2()`:
+#> Error in `[[<-`:
 #> ! Must assign to column with a single valid subscript.
 #> x Subscript `NA_character_` can't be `NA`.
 ```
@@ -1720,11 +1720,13 @@ with_df(df[[1]] <- 3:1)
 
 ```r
 with_tbl(tbl[[1]] <- 3:1)
-#> Error:
+#> Error in `[[<-`:
 #> ! Assigned data `3:1` must be compatible with existing data.
 #> x Existing data has 4 rows.
 #> x Assigned data has 3 rows.
 #> i Only vectors of size 1 are recycled.
+#> Caused by error in `vectbl_recycle_rhs_rows()`:
+#> ! Can't recycle input of size 3 to size 4.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1742,11 +1744,13 @@ with_df(df[[1]] <- 2:1)
 
 ```r
 with_tbl(tbl[[1]] <- 2:1)
-#> Error:
+#> Error in `[[<-`:
 #> ! Assigned data `2:1` must be compatible with existing data.
 #> x Existing data has 4 rows.
 #> x Assigned data has 2 rows.
 #> i Only vectors of size 1 are recycled.
+#> Caused by error in `vectbl_recycle_rhs_rows()`:
+#> ! Can't recycle input of size 2 to size 4.
 ```
 
 </td></tr></tbody></table>
@@ -1822,7 +1826,7 @@ with_df(df[[5]] <- 0)
 
 ```r
 with_tbl(tbl[[5]] <- 0)
-#> Error in `numtbl_as_col_location_assign()`:
+#> Error in `[[<-`:
 #> ! Can't assign to columns beyond the end with non-consecutive locations.
 #> i Input has size 3.
 #> x Subscript `5` contains non-consecutive location 5.
@@ -2281,7 +2285,7 @@ with_df(df[1:2] <- list(0, 0, 0))
 
 ```r
 with_tbl(tbl[1:2] <- list(0, 0, 0))
-#> Error in `vectbl_as_new_col_index()`:
+#> Error in `[<-`:
 #> ! Can't recycle `list(0, 0, 0)` (size 3) to size 2.
 ```
 
@@ -2300,7 +2304,7 @@ with_df(df[1:3] <- list(0, 0))
 
 ```r
 with_tbl(tbl[1:3] <- list(0, 0))
-#> Error in `vectbl_as_new_col_index()`:
+#> Error in `[<-`:
 #> ! Can't recycle `list(0, 0)` (size 2) to size 3.
 ```
 
@@ -2319,7 +2323,7 @@ with_df(df[c(1, 1)] <- list(1, 2))
 
 ```r
 with_tbl(tbl[c(1, 1)] <- list(1, 2))
-#> Error:
+#> Error in `[<-`:
 #> ! Column index 1 is used more than once for assignment.
 ```
 
@@ -2366,7 +2370,7 @@ with_df(df[NA] <- list("x"))
 
 ```r
 with_tbl(tbl[NA] <- list("x"))
-#> Error:
+#> Error in `[<-`:
 #> ! Can't use NA as column index with `[` at positions 1, 2, and 3.
 ```
 
@@ -2381,7 +2385,7 @@ with_df(df[NA_integer_] <- list("x"))
 
 ```r
 with_tbl(tbl[NA_integer_] <- list("x"))
-#> Error:
+#> Error in `[<-`:
 #> ! Can't use NA as column index in a tibble for assignment.
 ```
 
@@ -2396,7 +2400,7 @@ with_df(df[NA_character_] <- list("x"))
 
 ```r
 with_tbl(tbl[NA_character_] <- list("x"))
-#> Error:
+#> Error in `[<-`:
 #> ! Can't use NA as column index in a tibble for assignment.
 ```
 
@@ -2619,7 +2623,7 @@ with_df(df[5] <- list(4:1))
 
 ```r
 with_tbl(tbl[5] <- list(4:1))
-#> Error in `numtbl_as_col_location_assign()`:
+#> Error in `[<-`:
 #> ! Can't assign to columns beyond the end with non-consecutive locations.
 #> i Input has size 3.
 #> x Subscript `5` contains non-consecutive location 5.
@@ -2668,7 +2672,7 @@ with_df(df[is.na(df)] <- 1:2)
 
 ```r
 with_tbl(tbl[is.na(tbl)] <- 1:2)
-#> Error:
+#> Error in `[<-`:
 #> ! Subscript `is.na(tbl)` is a matrix, the data `1:2` must have size 1.
 ```
 
@@ -2687,10 +2691,11 @@ with_df(df[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
 
 ```r
 with_tbl(tbl[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
-#> Error:
+#> Error in `[<-`:
 #> ! Assigned data `4` must be compatible with existing data.
 #> i Error occurred for column `c`.
-#> x Can't convert <double> to <character>.
+#> Caused by error in `vec_assign()`:
+#> ! Can't convert <double> to <character>.
 ```
 
 </td></tr></tbody></table>
@@ -2740,10 +2745,11 @@ with_df(df[1:3, 1:2] <- matrix(6:1, ncol = 2))
 
 ```r
 with_tbl(tbl[1:3, 1:2] <- matrix(6:1, ncol = 2))
-#> Error:
+#> Error in `[<-`:
 #> ! Assigned data `matrix(6:1, ncol = 2)` must be compatible with existing data.
 #> i Error occurred for column `c`.
-#> x Can't convert <integer> to <character>.
+#> Caused by error in `vec_assign()`:
+#> ! Can't convert <integer> to <character>.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -2809,7 +2815,7 @@ with_df(df[1:2] <- array(8:1, dim = c(2, 1, 4)))
 
 ```r
 with_tbl(tbl[1:2] <- array(8:1, dim = c(2, 1, 4)))
-#> Error:
+#> Error in `[<-`:
 #> ! `array(8:1, dim = c(2, 1, 4))` must be a vector, a bare list, a data frame, a matrix, or NULL.
 ```
 
@@ -2828,7 +2834,7 @@ with_df(df[1:2] <- array(8:1, dim = c(4, 1, 2)))
 
 ```r
 with_tbl(tbl[1:2] <- array(8:1, dim = c(4, 1, 2)))
-#> Error:
+#> Error in `[<-`:
 #> ! `array(8:1, dim = c(4, 1, 2))` must be a vector, a bare list, a data frame, a matrix, or NULL.
 ```
 
@@ -3011,7 +3017,7 @@ with_df(df[1, 2:3] <- NULL)
 
 ```r
 with_tbl(tbl[1, 2:3] <- NULL)
-#> Error:
+#> Error in `[<-`:
 #> ! `NULL` must be a vector, a bare list, a data frame or a matrix.
 ```
 
@@ -3034,7 +3040,7 @@ with_df(df[1] <- mean)
 
 ```r
 with_tbl(tbl[1] <- mean)
-#> Error:
+#> Error in `[<-`:
 #> ! `mean` must be a vector, a bare list, a data frame, a matrix, or NULL.
 ```
 
@@ -3073,7 +3079,7 @@ with_df(df[1] <- lm(mpg ~ wt, data = mtcars))
 
 ```r
 with_tbl(tbl[1] <- lm(mpg ~ wt, data = mtcars))
-#> Error:
+#> Error in `[<-`:
 #> ! `lm(mpg ~ wt, data = mtcars)` must be a vector, a bare list, a data frame, a matrix, or NULL.
 ```
 
@@ -3152,7 +3158,7 @@ with_df(df[0:2, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[0:2, ] <- tbl[1, ])
-#> Error in `numtbl_as_row_location_assign()`:
+#> Error in `[<-`:
 #> ! Must assign to rows with a valid subscript vector.
 #> x Subscript `0:2` can't contain `0` values.
 #> i It has a `0` value at location 1.
@@ -3173,7 +3179,7 @@ with_df(df[0, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[0, ] <- tbl[1, ])
-#> Error in `numtbl_as_row_location_assign()`:
+#> Error in `[<-`:
 #> ! Must assign to rows with a valid subscript vector.
 #> x Subscript `0` can't contain `0` values.
 #> i It has a `0` value at location 1.
@@ -3214,7 +3220,7 @@ with_df(df[-1:2, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[-1:2, ] <- tbl[1, ])
-#> Error in `numtbl_as_row_location_assign()`:
+#> Error in `[<-`:
 #> ! Must assign to rows with a valid subscript vector.
 #> x Subscript `-1:2` can't contain `0` values.
 #> i It has a `0` value at location 2.
@@ -3231,7 +3237,7 @@ with_df(df[NA_integer_, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[NA_integer_, ] <- tbl[1, ])
-#> Error in `numtbl_as_row_location_assign()`:
+#> Error in `[<-`:
 #> ! Must assign to rows with a valid subscript vector.
 #> x Subscript `NA_integer_` can't contain missing values.
 #> x It has a missing value at location 1.
@@ -3248,7 +3254,7 @@ with_df2(df2[NA_integer_, ] <- df2[1, ])
 
 ```r
 with_tbl2(tbl2[NA_integer_, ] <- tbl2[1, ])
-#> Error in `numtbl_as_row_location_assign()`:
+#> Error in `[<-`:
 #> ! Must assign to rows with a valid subscript vector.
 #> x Subscript `NA_integer_` can't contain missing values.
 #> x It has a missing value at location 1.
@@ -3313,7 +3319,7 @@ with_df(df[NA, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[NA, ] <- tbl[1, ])
-#> Error:
+#> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
 
@@ -3380,11 +3386,13 @@ with_df(df[2:4, ] <- df[1:2, ])
 
 ```r
 with_tbl(tbl[2:4, ] <- tbl[1:2, ])
-#> Error:
+#> Error in `[<-`:
 #> ! Assigned data `tbl[1:2, ]` must be compatible with row subscript `2:4`.
 #> x 3 rows must be assigned.
 #> x Element 1 of assigned data has 2 rows.
 #> i Only vectors of size 1 are recycled.
+#> Caused by error in `vectbl_recycle_rhs_rows()`:
+#> ! Can't recycle input of size 2 to size 3.
 ```
 
 </td></tr></tbody></table>
@@ -3422,11 +3430,13 @@ with_df2(df2[2:4, ] <- df2[2:3, ])
 
 ```r
 with_tbl2(tbl2[2:4, ] <- tbl2[2:3, ])
-#> Error:
+#> Error in `[<-`:
 #> ! Assigned data `tbl2[2:3, ]` must be compatible with row subscript `2:4`.
 #> x 3 rows must be assigned.
 #> x Element 1 of assigned data has 2 rows.
 #> i Only vectors of size 1 are recycled.
+#> Caused by error in `vectbl_recycle_rhs_rows()`:
+#> ! Can't recycle input of size 2 to size 3.
 ```
 
 </td></tr></tbody></table>
@@ -3507,7 +3517,7 @@ with_df(df[6, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[6, ] <- tbl[1, ])
-#> Error in `numtbl_as_row_location_assign()`:
+#> Error in `[<-`:
 #> ! Can't assign to rows beyond the end with non-consecutive locations.
 #> i Input has size 4.
 #> x Subscript `6` contains non-consecutive location 6.
@@ -3528,7 +3538,7 @@ with_df(df[-5, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[-5, ] <- tbl[1, ])
-#> Error in `numtbl_as_row_location_assign()`:
+#> Error in `[<-`:
 #> ! Can't negate rows past the end.
 #> i Location 5 doesn't exist.
 #> i There are only 4 rows.
@@ -3549,7 +3559,7 @@ with_df(df[-(5:7), ] <- df[1, ])
 
 ```r
 with_tbl(tbl[-(5:7), ] <- tbl[1, ])
-#> Error in `numtbl_as_row_location_assign()`:
+#> Error in `[<-`:
 #> ! Can't negate rows past the end.
 #> i Locations 5, 6, and 7 don't exist.
 #> i There are only 4 rows.
@@ -3570,7 +3580,7 @@ with_df(df[-6, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[-6, ] <- tbl[1, ])
-#> Error in `numtbl_as_row_location_assign()`:
+#> Error in `[<-`:
 #> ! Can't negate rows past the end.
 #> i Location 6 doesn't exist.
 #> i There are only 4 rows.
@@ -3626,7 +3636,7 @@ with_df(df[as.character(-(1:3)), ] <- df[1, ])
 with_tbl(tbl[as.character(-(1:3)), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> Use `NA_integer_` as row index to obtain a row full of `NA` values.
-#> Error:
+#> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
 
@@ -3648,7 +3658,7 @@ with_df(df[as.character(3:5), ] <- df[1, ])
 with_tbl(tbl[as.character(3:5), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> Use `NA_integer_` as row index to obtain a row full of `NA` values.
-#> Error:
+#> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
 
@@ -3672,7 +3682,7 @@ with_df(df[as.character(-(3:5)), ] <- df[1, ])
 with_tbl(tbl[as.character(-(3:5)), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> Use `NA_integer_` as row index to obtain a row full of `NA` values.
-#> Error:
+#> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
 
@@ -3687,7 +3697,7 @@ with_df(df[NA_character_, ] <- df[1, ])
 
 ```r
 with_tbl(tbl[NA_character_, ] <- tbl[1, ])
-#> Error:
+#> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
 
@@ -3720,10 +3730,11 @@ with_df(df[2:3, 1] <- df[1:2, 2])
 
 ```r
 with_tbl(tbl[2:3, 1] <- tbl[1:2, 2])
-#> Error:
+#> Error in `[<-`:
 #> ! Assigned data `tbl[1:2, 2]` must be compatible with existing data.
 #> i Error occurred for column `n`.
-#> x Can't convert <character> to <integer>.
+#> Caused by error in `vec_assign()`:
+#> ! Can't convert <character> to <integer>.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3745,10 +3756,11 @@ with_df(df[2:3, 2] <- df[1:2, 3])
 
 ```r
 with_tbl(tbl[2:3, 2] <- tbl[1:2, 3])
-#> Error:
+#> Error in `[<-`:
 #> ! Assigned data `tbl[1:2, 3]` must be compatible with existing data.
 #> i Error occurred for column `c`.
-#> x Can't convert <list> to <character>.
+#> Caused by error in `vec_assign()`:
+#> ! Can't convert <list> to <character>.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3770,10 +3782,11 @@ with_df(df[2:3, 3] <- df2[1:2, 1])
 
 ```r
 with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
-#> Error:
+#> Error in `[<-`:
 #> ! Assigned data `tbl2[1:2, 1]` must be compatible with existing data.
 #> i Error occurred for column `li`.
-#> x Can't convert <tbl_df> to <list>.
+#> Caused by error in `vec_assign()`:
+#> ! Can't convert <tbl_df> to <list>.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3795,10 +3808,11 @@ with_df2(df2[2:3, 1] <- df2[1:2, 2])
 
 ```r
 with_tbl2(tbl2[2:3, 1] <- tbl2[1:2, 2])
-#> Error:
+#> Error in `[<-`:
 #> ! Assigned data `tbl2[1:2, 2]` must be compatible with existing data.
 #> i Error occurred for column `tb`.
-#> x Can't convert <double[,4]> to <tbl_df>.
+#> Caused by error in `vec_assign()`:
+#> ! Can't convert <double[,4]> to <tbl_df>.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3976,7 +3990,7 @@ with_df(df[2:3, "n"] <- NULL)
 
 ```r
 with_tbl(tbl[2:3, "n"] <- NULL)
-#> Error:
+#> Error in `[<-`:
 #> ! `NULL` must be a vector, a bare list, a data frame or a matrix.
 ```
 
@@ -4235,7 +4249,7 @@ df[[1:2, 1]]
 
 ```r
 tbl[[1:2, 1]]
-#> Error in `vectbl_as_row_location2()`:
+#> Error in `tbl[[1:2, 1]]`:
 #> ! Must extract row with a single valid subscript.
 #> x Subscript `1:2` has size 2 but must be size 1.
 ```
@@ -4251,7 +4265,7 @@ with_df(df[[1:2, 1]] <- 0)
 
 ```r
 with_tbl(tbl[[1:2, 1]] <- 0)
-#> Error in `vectbl_as_row_location2()`:
+#> Error in `[[<-`:
 #> ! Must assign to row with a single valid subscript.
 #> x Subscript `1:2` has size 2 but must be size 1.
 ```

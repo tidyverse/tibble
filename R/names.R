@@ -25,38 +25,33 @@ repaired_names <- function(name,
 
 # Errors ------------------------------------------------------------------
 
-error_column_names_cannot_be_empty <- function(names, repair_hint, parent = NULL) {
-  tibble_error(invalid_df("must be named", names, use_repair(repair_hint)), names = names, parent = parent)
+abort_column_names_cannot_be_empty <- function(names, repair_hint, details = NULL, parent = NULL, call = my_caller_env()) {
+  tibble_abort(invalid_df("must be named", names, use_repair(repair_hint)), names = names, parent = parent, call = call)
 }
 
-error_column_names_cannot_be_dot_dot <- function(names, repair_hint, parent = NULL) {
-  tibble_error(invalid_df("must not have names of the form ... or ..j", names, use_repair(repair_hint)), names = names, parent = parent)
+abort_column_names_cannot_be_dot_dot <- function(names, repair_hint, parent = NULL, call = my_caller_env()) {
+  tibble_abort(invalid_df("must not have names of the form ... or ..j", names, use_repair(repair_hint)), names = names, parent = parent, call = call)
 }
 
-error_column_names_must_be_unique <- function(names, repair_hint, parent = NULL) {
-  tibble_error(invalid_df("must not be duplicated", names, use_repair(repair_hint), message = "Column name(s)"), names = names, parent = parent)
+abort_column_names_must_be_unique <- function(names, repair_hint, parent = NULL, call = my_caller_env()) {
+  tibble_abort(invalid_df("must not be duplicated", names, use_repair(repair_hint), message = "Column name(s)"), names = names, parent = parent, call = call)
 }
 
 # Subclassing errors ------------------------------------------------------
 
-subclass_name_repair_errors <- function(expr, name, details = NULL, repair_hint = FALSE) {
+subclass_name_repair_errors <- function(expr, name, details = NULL, repair_hint = FALSE, call = my_caller_env()) {
   withCallingHandlers(
     expr,
 
     # FIXME: use cnd$names with vctrs >= 0.3.0
     vctrs_error_names_cannot_be_empty = function(cnd) {
-      cnd <- error_column_names_cannot_be_empty(detect_empty_names(name), parent = cnd, repair_hint = repair_hint)
-      cnd$body <- details
-
-      cnd_signal(cnd)
+      abort_column_names_cannot_be_empty(detect_empty_names(name), details = details, parent = cnd, repair_hint = repair_hint, call = call)
     },
     vctrs_error_names_cannot_be_dot_dot = function(cnd) {
-      cnd <- error_column_names_cannot_be_dot_dot(detect_dot_dot(name), parent = cnd, repair_hint = repair_hint)
-      cnd_signal(cnd)
+      abort_column_names_cannot_be_dot_dot(detect_dot_dot(name), parent = cnd, repair_hint = repair_hint, call = call)
     },
     vctrs_error_names_must_be_unique = function(cnd) {
-      cnd <- error_column_names_must_be_unique(detect_duplicates(name), parent = cnd, repair_hint = repair_hint)
-      cnd_signal(cnd)
+      abort_column_names_must_be_unique(detect_duplicates(name), parent = cnd, repair_hint = repair_hint, call = call)
     }
   )
 }

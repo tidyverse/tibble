@@ -41,7 +41,7 @@
 #' @export
 add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   if (inherits(.data, "grouped_df")) {
-    cnd_signal(error_add_rows_to_grouped_df())
+    abort_add_rows_to_grouped_df()
   }
 
   if (!is.data.frame(.data)) {
@@ -57,7 +57,7 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
 
   extra_vars <- setdiff(names(df), names(.data))
   if (has_length(extra_vars)) {
-    cnd_signal(error_incompatible_new_rows(extra_vars))
+    abort_incompatible_new_rows(extra_vars)
   }
 
   pos <- pos_from_before_after(.before, .after, nrow(.data))
@@ -147,7 +147,7 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL,
     if (nrow(df) == 1) {
       df <- df[rep(1L, nrow(.data)), ]
     } else {
-      cnd_signal(error_incompatible_new_cols(nrow(.data), df))
+      abort_incompatible_new_cols(nrow(.data), df)
     }
   }
 
@@ -189,7 +189,7 @@ pos_from_before_after <- function(before, after, len) {
     if (is.null(after)) {
       limit_pos_range(before - 1L, len)
     } else {
-      cnd_signal(error_both_before_after())
+      abort_both_before_after()
     }
   }
 }
@@ -211,7 +211,7 @@ check_names_before_after <- function(j, x) {
 
 check_needs_no_dim <- function(j) {
   if (needs_dim(j)) {
-    cnd_signal(error_dim_column_index(j))
+    abort_dim_column_index(j)
   }
 }
 
@@ -219,37 +219,41 @@ check_names_before_after_character <- function(j, names) {
   pos <- safe_match(j, names)
   if (anyNA(pos)) {
     unknown_names <- j[is.na(pos)]
-    cnd_signal(error_unknown_column_names(unknown_names))
+    abort_unknown_column_names(unknown_names)
   }
   pos
 }
 
 # Errors ------------------------------------------------------------------
 
-error_add_rows_to_grouped_df <- function() {
-  tibble_error("Can't add rows to grouped data frames.")
+msg_unknown_column_names <- function(names) {
+  pluralise_commas("Can't find column(s) ", tick(names), " in `.data`.")
 }
 
-error_incompatible_new_rows <- function(names) {
-  tibble_error(
+abort_add_rows_to_grouped_df <- function() {
+  tibble_abort("Can't add rows to grouped data frames.")
+}
+
+abort_incompatible_new_rows <- function(names) {
+  tibble_abort(
     problems(
       "New rows can't add columns:",
-      cnd_message(error_unknown_column_names(names))
+      msg_unknown_column_names(names)
     ),
     names = names
   )
 }
 
-error_both_before_after <- function() {
-  tibble_error("Can't specify both `.before` and `.after`.")
+abort_both_before_after <- function() {
+  tibble_abort("Can't specify both `.before` and `.after`.")
 }
 
-error_unknown_column_names <- function(j, parent = NULL) {
-  tibble_error(pluralise_commas("Can't find column(s) ", tick(j), " in `.data`."), j = j, parent = parent)
+abort_unknown_column_names <- function(j, parent = NULL) {
+  tibble_abort(pluralise_commas("Can't find column(s) ", tick(j), " in `.data`."), j = j, parent = parent)
 }
 
-error_incompatible_new_cols <- function(n, df) {
-  tibble_error(
+abort_incompatible_new_cols <- function(n, df) {
+  tibble_abort(
     bullets(
       "New columns must be compatible with `.data`:",
       x = paste0(

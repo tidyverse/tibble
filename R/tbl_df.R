@@ -119,32 +119,23 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
   x
 }
 
-cnd_names_non_null <- function(name) {
-  if (is.null(name)) {
-    error_names_must_be_non_null()
-  } else {
-    invisible()
-  }
-}
-
-cnd_names_non_na <- function(name) {
-  bad_name <- which(is.na(name))
-  if (has_length(bad_name)) {
-    error_column_names_cannot_be_empty(bad_name, repair_hint = FALSE)
-  } else {
-    invisible()
-  }
-}
-
 # Errors ------------------------------------------------------------------
 
-error_names_must_be_non_null <- function() {
-  tibble_error("`names` must not be `NULL`.")
+msg_names_must_be_non_null <- function() {
+  "`names` must not be `NULL`."
 }
 
-error_names_must_have_length <- function(length, n) {
-  tibble_error(
-    paste0("`names` must have length ", n, ", not ", length, "."),
+msg_names_must_have_length <- function(length, n) {
+  paste0("`names` must have length ", n, ", not ", length, ".")
+}
+
+abort_names_must_be_non_null <- function() {
+  tibble_abort(msg_names_must_be_non_null())
+}
+
+abort_names_must_have_length <- function(length, n) {
+  tibble_abort(
+    msg_names_must_have_length(length, n),
     expected = n,
     actual = length
   )
