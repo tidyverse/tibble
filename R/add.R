@@ -266,3 +266,8 @@ abort_incompatible_new_cols <- function(n, df) {
     actual = nrow(df)
   )
 }
+
+abort_dim_column_index <- function(j) {
+  # friendly_type_of() doesn't distinguish between matrices and arrays
+  tibble_abort(paste0("Must use a vector in `[`, not an object of class ", class(j)[[1]], "."))
+}

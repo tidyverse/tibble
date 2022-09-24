@@ -367,3 +367,9 @@ fast_nrow <- function(x) {
 vectbl_restore <- function(xo, x) {
   .Call(`tibble_restore_impl`, xo, x)
 }
+
+# Errors ------------------------------------------------------------------
+
+abort_na_column_index <- function(j) {
+  tibble_abort(pluralise_commas("Can't use NA as column index with `[` at position(s) ", j, "."), j = j)
+}

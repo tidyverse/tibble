@@ -8,15 +8,6 @@ abort_need_rhs_vector_or_null <- function(value_arg) {
   tibble_abort(paste0(tick(as_label(value_arg)), " must be a vector, a bare list, a data frame, a matrix, or NULL."))
 }
 
-abort_na_column_index <- function(j) {
-  tibble_abort(pluralise_commas("Can't use NA as column index with `[` at position(s) ", j, "."), j = j)
-}
-
-abort_dim_column_index <- function(j) {
-  # friendly_type_of() doesn't distinguish between matrices and arrays
-  tibble_abort(paste0("Must use a vector in `[`, not an object of class ", class(j)[[1]], "."))
-}
-
 abort_assign_columns_non_na_only <- function() {
   tibble_abort("Can't use NA as column index in a tibble for assignment.")
 }
