@@ -101,8 +101,6 @@
 #' @noRd
 tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
   if (is.null(i)) {
-    xo <- unclass(x)
-
     if (is.null(value)) {
       value <- list(value)
     } else {
@@ -111,6 +109,15 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
         abort_need_rhs_vector_or_null(value_arg)
       }
     }
+  } else {
+    value <- result_vectbl_wrap_rhs(value)
+    if (is.null(value)) {
+      abort_need_rhs_vector(value_arg)
+    }
+  }
+
+  if (is.null(i)) {
+    xo <- unclass(x)
 
     if (is.null(j)) {
       j <- seq_along(xo)
@@ -131,11 +138,6 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
 
     # Fill up rows first if necessary
     x <- tbl_expand_to_nrow(x, i)
-
-    value <- result_vectbl_wrap_rhs(value)
-    if (is.null(value)) {
-      abort_need_rhs_vector(value_arg)
-    }
 
     # Only after tbl_expand_to_nrow() which needs data frame
     xo <- unclass(x)
