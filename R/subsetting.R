@@ -29,7 +29,7 @@ abort_assign_rows_non_na_only <- function() {
   tibble_abort("Can't use NA as row index in a tibble for assignment.")
 }
 
-abort_duplicate_row_subscript_for_assignment <- function(i) {
+abort_assign_duplicate_row_subscript <- function(i) {
   i <- unique(i[duplicated(i)])
   tibble_abort(pluralise_commas("Row index(es) ", i, " [is](are) used more than once for assignment."), i = i)
 }

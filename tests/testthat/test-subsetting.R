@@ -522,7 +522,7 @@ test_that("[<-.tbl_df throws an error with duplicate indexes (#658)", {
     )
     expect_tibble_abort(
       df[c(1, 1), ] <- 3,
-      abort_duplicate_row_subscript_for_assignment(c(1, 1))
+      abort_assign_duplicate_row_subscript(c(1, 1))
     )
   })
 })

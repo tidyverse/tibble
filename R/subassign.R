@@ -131,7 +131,7 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
     i
   } else if (is_bare_numeric(i)) {
     if (anyDuplicated.default(i)) {
-      abort_duplicate_row_subscript_for_assignment(i)
+      abort_assign_duplicate_row_subscript(i)
     }
 
     nr <- fast_nrow(x)
@@ -144,7 +144,7 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
   } else {
     i <- vectbl_as_row_index(i, x, i_arg, assign = TRUE)
     if (anyDuplicated.default(i, incomparables = NA)) {
-      abort_duplicate_row_subscript_for_assignment(i)
+      abort_assign_duplicate_row_subscript(i)
     }
     i
   }
