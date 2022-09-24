@@ -357,3 +357,13 @@ fix_oob_invalid <- function(i, is_na_orig) {
   }
   i
 }
+
+fast_nrow <- function(x) {
+  .row_names_info(x, 2L)
+}
+
+# External ----------------------------------------------------------------
+
+vectbl_restore <- function(xo, x) {
+  .Call(`tibble_restore_impl`, xo, x)
+}
