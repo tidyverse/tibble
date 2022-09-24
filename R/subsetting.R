@@ -1,120 +1,3 @@
-vectbl_as_row_index <- function(i, x, i_arg, assign = FALSE) {
-  stopifnot(!is.null(i))
-
-  nr <- fast_nrow(x)
-
-  if (is.character(i)) {
-    is_na_orig <- is.na(i)
-
-    if (has_rownames(x)) {
-      i <- match(i, rownames(x))
-    } else {
-      i <- string_to_indices(i)
-      i <- fix_oob(i, nr, warn = FALSE)
-    }
-
-    i <- fix_oob_invalid(i, is_na_orig)
-    i
-  } else if (is.numeric(i)) {
-    i <- fix_oob(i, nr)
-    vectbl_as_row_location(i, nr, i_arg, assign)
-  } else {
-    vectbl_as_row_location(i, nr, i_arg, assign)
-  }
-}
-
-fix_oob <- function(i, n, warn = TRUE) {
-  if (any(i > 0, na.rm = TRUE)) {
-    fix_oob_positive(i, n, warn)
-  } else if (any(i < 0, na.rm = TRUE)) {
-    fix_oob_negative(i, n, warn)
-  } else {
-    # Will throw error in vec_as_location()
-    i
-  }
-}
-
-fix_oob_positive <- function(i, n, warn = TRUE) {
-  oob <- which(i > n)
-  if (warn && length(oob) > 0) {
-    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [0, rows] if positive,')",
-      details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
-      env = foreign_caller_env()
-    )
-  }
-
-  i[oob] <- NA_integer_
-  i
-}
-
-fix_oob_negative <- function(i, n, warn = TRUE) {
-  oob <- (i < -n)
-  if (warn && any(oob, na.rm = TRUE)) {
-    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [-rows, 0] if negative,')",
-      details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
-      env = foreign_caller_env()
-    )
-  }
-
-  i <- i[!oob]
-  if (is_empty(i)) i <- seq_len(n)
-  i
-}
-
-fix_oob_invalid <- function(i, is_na_orig) {
-  oob <- which(is.na(i) & !is_na_orig)
-
-  if (length(oob) > 0) {
-    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must use valid row names')",
-      details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
-      env = foreign_caller_env()
-    )
-
-    i[oob] <- NA_integer_
-  }
-  i
-}
-
-vectbl_as_col_location2_extra <- function(x, j, j_arg) {
-  if (is.matrix(j)) {
-    deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a matrix",
-      details = "Recursive subsetting is deprecated for tibbles.",
-      env = foreign_caller_env()
-    )
-
-    return(as.matrix(x)[[j]])
-  }
-
-  if (is.object(j)) {
-    j <- vectbl_as_col_subscript2(j, j_arg)
-  }
-
-  if (is.numeric(j)) {
-    if (length(j) == 1L) {
-      if (is.na(j) || j < 1 || j > length(x) || (is.double(j) && j != trunc(j))) {
-        # Side effect: throw error for invalid j
-        vectbl_as_col_location2(j, length(x), j_arg = j_arg)
-      }
-    } else if (length(j) == 2L) {
-      deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a vector of length 2')",
-        details = "Recursive subsetting is deprecated for tibbles.",
-        env = foreign_caller_env()
-      )
-    } else {
-      # Side effect: throw error for invalid j
-      vectbl_as_col_location2(j, length(x), j_arg = j_arg)
-    }
-  } else if (is.symbol(j)) {
-    # FIXME: Only relevant for R < 3.4
-    j <- as.character(j)
-  } else if (is.logical(j) || length(j) != 1L || !is_bare_atomic(j) || is.na(j)) {
-    # Side effect: throw error for invalid j
-    vectbl_as_col_location2(j, length(x), names(x), j_arg = j_arg)
-  }
-
-  j
-}
-
 vectbl_as_new_row_index <- function(i, x, i_arg) {
   if (is.null(i)) {
     i
@@ -242,36 +125,11 @@ vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE, call = my_caller
   subclass_row_index_errors(vec_as_location(i, n, call = call), i_arg = i_arg, assign = assign)
 }
 
-vectbl_as_row_location2 <- function(i, n, i_arg, assign = FALSE, call = my_caller_env()) {
-  subclass_row_index_errors(vec_as_location2(i, n, call = call), i_arg = i_arg, assign = assign)
-}
-
 numtbl_as_col_location_assign <- function(j, n, j_arg, call = my_caller_env()) {
   subclass_col_index_errors(
     num_as_location(j, n, missing = "error", oob = "extend", zero = "error", call = call),
     j_arg = j_arg, assign = TRUE
   )
-}
-
-vectbl_as_col_location <- function(j,
-                                   n,
-                                   names = NULL,
-                                   j_arg,
-                                   assign = FALSE,
-                                   call = my_caller_env()) {
-  subclass_col_index_errors(
-    vec_as_location(j, n, names, call = call),
-    j_arg = j_arg,
-    assign = assign
-  )
-}
-
-vectbl_as_col_location2 <- function(j, n, names = NULL, j_arg, assign = FALSE, call = my_caller_env()) {
-  subclass_col_index_errors(vec_as_location2(j, n, names, call = call), j_arg = j_arg, assign = assign)
-}
-
-vectbl_as_col_subscript2 <- function(j, j_arg, assign = FALSE, call = my_caller_env()) {
-  subclass_col_index_errors(vec_as_subscript2(j, logical = "error", call = call), j_arg = j_arg, assign = assign)
 }
 
 is_tight_sequence_at_end <- function(i_new, n) {
