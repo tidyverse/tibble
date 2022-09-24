@@ -368,19 +368,6 @@ vectbl_assign <- function(x, i, value) {
   vec_assign(x, i, value)
 }
 
-vectbl_wrap_rhs_col <- function(value, value_arg) {
-  if (is.null(value)) {
-    return(list(value))
-  }
-
-  value <- result_vectbl_wrap_rhs(value)
-  if (is.null(value)) {
-    abort_need_rhs_vector_or_null(value_arg)
-  }
-
-  value
-}
-
 vectbl_wrap_rhs_row <- function(value, value_arg) {
   value <- result_vectbl_wrap_rhs(value)
   if (is.null(value)) {

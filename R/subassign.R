@@ -103,7 +103,14 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
   if (is.null(i)) {
     xo <- unclass(x)
 
-    value <- vectbl_wrap_rhs_col(value, value_arg)
+    if (is.null(value)) {
+      value <- list(value)
+    } else {
+      value <- result_vectbl_wrap_rhs(value)
+      if (is.null(value)) {
+        abort_need_rhs_vector_or_null(value_arg)
+      }
+    }
 
     if (is.null(j)) {
       j <- seq_along(xo)
