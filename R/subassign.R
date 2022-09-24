@@ -1,10 +1,12 @@
 #' @rdname subsetting
 #' @export
 `$<-.tbl_df` <- function(x, name, value) {
+  j <- vectbl_as_new_col_index(as_string(name), x, name, value_arg = substitute(value))
+
   tbl_subassign(
     x,
-    i = NULL, as_string(name), list(value),
-    i_arg = NULL, j_arg = name, value_arg = substitute(value)
+    i = NULL, j, list(value),
+    i_arg = NULL, j_arg = NULL, value_arg = substitute(value)
   )
 }
 
