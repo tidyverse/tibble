@@ -109,14 +109,14 @@ NULL
     if (missing(i)) {
       abort_subset_columns_non_missing_only()
     }
-    j <- vectbl_as_col_location2(i, length(x), names(x), j_arg = substitute(i))
+    j <- vectbl_as_col_location2_extra(x, j = i, j_arg = substitute(i))
     .subset2(x, j)
   } else if (missing(j) || missing(i)) {
     abort_subset_columns_non_missing_only()
   } else {
     i_arg <- substitute(i)
     i <- vectbl_as_row_location2(i, fast_nrow(x), i_arg)
-    j <- vectbl_as_col_location2(i, length(x), names(x), j_arg = substitute(i))
+    j <- vectbl_as_col_location2_extra(x, j = j, j_arg = substitute(j))
     x <- .subset2(x, j)
 
     if (is.null(x)) {

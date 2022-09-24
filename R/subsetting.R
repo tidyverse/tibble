@@ -75,7 +75,7 @@ fix_oob_invalid <- function(i, is_na_orig) {
   i
 }
 
-tbl_subset2 <- function(x, j, j_arg) {
+vectbl_as_col_location2_extra <- function(x, j, j_arg) {
   if (is.matrix(j)) {
     deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a matrix",
       details = "Recursive subsetting is deprecated for tibbles.",
@@ -112,7 +112,7 @@ tbl_subset2 <- function(x, j, j_arg) {
     vectbl_as_col_location2(j, length(x), names(x), j_arg = j_arg)
   }
 
-  .subset2(x, j)
+  j
 }
 
 vectbl_as_new_row_index <- function(i, x, i_arg) {
