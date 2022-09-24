@@ -127,12 +127,6 @@
 #' Powers $<-, [[<- and [<- for tibbles.
 #' @noRd
 tbl_subassign <- function(x, i, j, value, i_arg, value_arg) {
-  # Weird corner case
-  if (!is.null(i) && is.null(i_arg)) {
-    # x[NULL, ...] <- value
-    return(x)
-  }
-
   if (is.null(i)) {
     xo <- unclass(x)
 
