@@ -1,12 +1,13 @@
 #' @rdname subsetting
 #' @export
 `$<-.tbl_df` <- function(x, name, value) {
-  j <- vectbl_as_new_col_index(as_string(name), x, name, value_arg = substitute(value))
+  value_arg <- substitute(value)
+  j <- vectbl_as_new_col_index(as_string(name), x, name, value_arg = value_arg)
 
   tbl_subassign(
     x,
     i = NULL, j, list(value),
-    i_arg = NULL, j_arg = NULL, value_arg = substitute(value)
+    i_arg = NULL, value_arg = value_arg
   )
 }
 
@@ -57,7 +58,7 @@
   value <- list(value)
 
   # j is already pretty
-  tbl_subassign(x, i, j, value, i_arg = i_arg, j_arg = NULL, value_arg = value_arg)
+  tbl_subassign(x, i, j, value, i_arg = i_arg, value_arg = value_arg)
 }
 
 
@@ -112,7 +113,12 @@
     }
   }
 
-  tbl_subassign(x, i, j, value, i_arg, j_arg, value_arg)
+  if (!is.null(j_arg)) {
+    j <- vectbl_as_new_col_index(j, x, j_arg, names2(value), value_arg)
+    j_arg <- NULL
+  }
+
+  tbl_subassign(x, i, j, value, i_arg, value_arg)
 }
 
 
@@ -120,7 +126,7 @@
 #'
 #' Powers $<-, [[<- and [<- for tibbles.
 #' @noRd
-tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
+tbl_subassign <- function(x, i, j, value, i_arg, value_arg) {
   # Weird corner case
   if (!is.null(i) && is.null(i_arg)) {
     # x[NULL, ...] <- value
@@ -133,8 +139,6 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
     if (is.null(j)) {
       j <- seq_along(xo)
       names(j) <- names2(j)
-    } else if (!is.null(j_arg)) {
-      j <- vectbl_as_new_col_index(j, xo, j_arg, names2(value), value_arg)
     }
 
     value <- vectbl_recycle_rhs_rows(value, fast_nrow(xo), i_arg = NULL, value_arg)
@@ -153,13 +157,6 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
     if (is.null(j)) {
       xo <- tbl_subassign_row(xo, i, value, i_arg, value_arg)
     } else {
-      # Optimization: match only once
-      # (Invariant: x[[j]] is equivalent to x[[vec_as_location(j)]],
-      # allowed by corollary that only existing columns can be updated)
-      if (!is.null(j_arg)) {
-        j <- vectbl_as_new_col_index(j, xo, j_arg, names2(value), value_arg)
-      }
-
       # Fill up columns if necessary
       new <- attr(j, "new")
       if (!is.null(new)) {
