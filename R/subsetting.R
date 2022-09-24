@@ -132,10 +132,6 @@ numtbl_as_col_location_assign <- function(j, n, j_arg, call = my_caller_env()) {
   )
 }
 
-is_tight_sequence_at_end <- function(i_new, n) {
-  all(sort(i_new) == seq2(n + 1, n + length(i_new)))
-}
-
 fast_nrow <- function(x) {
   .row_names_info(x, 2L)
 }
