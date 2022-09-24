@@ -130,6 +130,16 @@
 #' Main function for subset assignment
 #'
 #' Powers $<-, [[<- and [<- for tibbles.
+#'
+#' @param x A tibble.
+#' @param i An integer vector, or `NULL` to replace all rows.
+#' @param j A named integer vector, or `NULL` to replace all columns.
+#'   The names are required to define the names for new columns.
+#'   In addition, if new columns are created, their names must be stored
+#'   in the `"new"` attribute, for performance.
+#' @param value A list of length one or of the same length as `j`.
+#'   `NULL` elements indicate column removal.
+#' @param i_arg,value_arg Argument names.
 #' @noRd
 tbl_subassign <- function(x, i, j, value, i_arg, value_arg) {
   if (is.null(i)) {
