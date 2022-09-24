@@ -629,9 +629,17 @@ df$l
 
 ```r
 tbl$l
-#> Warning: Unknown or uninitialised
-#> column: `l`.
-#> NULL
+#> [[1]]
+#> [1] 9
+#> 
+#> [[2]]
+#> [1] 10 11
+#> 
+#> [[3]]
+#> [1] 12 13 14
+#> 
+#> [[4]]
+#> [1] "text"
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -645,8 +653,6 @@ df$not_present
 
 ```r
 tbl$not_present
-#> Warning: Unknown or uninitialised
-#> column: `not_present`.
 #> NULL
 ```
 

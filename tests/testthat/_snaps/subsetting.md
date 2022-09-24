@@ -424,16 +424,10 @@
       # # $.tbl_df and partial matching/invalid columns
       foo <- tibble(data = 1:10)
       foo$d
-    Condition
-      Warning:
-      Unknown or uninitialised column: `d`.
     Output
-      NULL
+       [1]  1  2  3  4  5  6  7  8  9 10
     Code
       foo$e
-    Condition
-      Warning:
-      Unknown or uninitialised column: `e`.
     Output
       NULL
     Code
