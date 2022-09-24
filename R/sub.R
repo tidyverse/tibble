@@ -109,13 +109,15 @@ NULL
     if (missing(i)) {
       abort_subset_columns_non_missing_only()
     }
-    tbl_subset2(x, j = i, j_arg = substitute(i))
+    j <- vectbl_as_col_location2(i, length(x), names(x), j_arg = substitute(i))
+    .subset2(x, j)
   } else if (missing(j) || missing(i)) {
     abort_subset_columns_non_missing_only()
   } else {
     i_arg <- substitute(i)
     i <- vectbl_as_row_location2(i, fast_nrow(x), i_arg)
-    x <- tbl_subset2(x, j = j, j_arg = substitute(j))
+    j <- vectbl_as_col_location2(i, length(x), names(x), j_arg = substitute(i))
+    x <- .subset2(x, j)
 
     if (is.null(x)) {
       x
@@ -187,7 +189,7 @@ NULL
   }
 
   if (drop && length(xo) == 1L) {
-    out <- tbl_subset2(xo, j = 1L)
+    out <- .subset2(xo, 1L)
     if (!is.null(i)) {
       out <- vec_slice(out, i)
     }
