@@ -131,7 +131,11 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
 
     # Fill up rows first if necessary
     x <- tbl_expand_to_nrow(x, i)
-    value <- vectbl_wrap_rhs_row(value, value_arg)
+
+    value <- result_vectbl_wrap_rhs(value)
+    if (is.null(value)) {
+      abort_need_rhs_vector(value_arg)
+    }
 
     # Only after tbl_expand_to_nrow() which needs data frame
     xo <- unclass(x)
