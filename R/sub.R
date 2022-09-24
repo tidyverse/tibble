@@ -186,6 +186,14 @@ NULL
     }
   }
 
+  if (drop && length(xo) == 1L) {
+    out <- tbl_subset2(xo, j = 1L)
+    if (!is.null(i)) {
+      out <- vec_slice(out, i)
+    }
+    return(out)
+  }
+
   if (is.null(i)) {
     nrow <- fast_nrow(x)
   } else {
@@ -194,10 +202,6 @@ NULL
     nrow <- length(i)
   }
 
-  if (drop && length(xo) == 1L) {
-    tbl_subset2(xo, j = 1L)
-  } else {
-    attr(xo, "row.names") <- .set_row_names(nrow)
-    vectbl_restore(xo, x)
-  }
+  attr(xo, "row.names") <- .set_row_names(nrow)
+  vectbl_restore(xo, x)
 }
