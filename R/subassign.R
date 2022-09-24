@@ -95,21 +95,6 @@
     j_arg <- NULL
   }
 
-  tbl_subassign(x, i, j, value, i_arg, j_arg, value_arg)
-}
-
-
-#' Main function for subset assignment
-#'
-#' Powers $<-, [[<- and [<- for tibbles.
-#' @noRd
-tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
-  # Weird corner case
-  if (!is.null(i) && is.null(i_arg)) {
-    # x[NULL, ...] <- value
-    return(x)
-  }
-
   # Wrap value in a list if needed
   if (is.null(i)) {
     if (is.null(value)) {
@@ -125,6 +110,21 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
     if (is.null(value)) {
       abort_need_rhs_vector(value_arg)
     }
+  }
+
+  tbl_subassign(x, i, j, value, i_arg, j_arg, value_arg)
+}
+
+
+#' Main function for subset assignment
+#'
+#' Powers $<-, [[<- and [<- for tibbles.
+#' @noRd
+tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
+  # Weird corner case
+  if (!is.null(i) && is.null(i_arg)) {
+    # x[NULL, ...] <- value
+    return(x)
   }
 
   if (is.null(i)) {
