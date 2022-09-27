@@ -2843,7 +2843,7 @@ with_tbl(tbl[1:2] <- array(8:1, dim = c(4, 1, 2)))
 ### `a` is another type of vector
 
 If `vec_is(a)`, then `x[j] <- a` is equivalent to `x[j] <- list(a)`.
-This is primarily provided for backward compatbility.
+This is primarily provided for backward compatibility.
 
 <table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
