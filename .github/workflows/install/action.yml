@@ -59,6 +59,7 @@ runs:
       env:
         GITHUB_PAT: ${{ inputs.token }}
       with:
+        pak-version: devel
         needs: ${{ inputs.needs }}
         extra-packages: ${{ inputs.extra-packages }} ${{ matrix.config.covr && 'any::covr' }} ${{ steps.get-extra.outputs.packages }}
         cache-version: ${{ inputs.cache-version }}
