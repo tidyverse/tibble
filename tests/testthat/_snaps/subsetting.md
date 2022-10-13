@@ -115,7 +115,7 @@
     Condition
       Warning:
       The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
-      Use `NA_integer_` as row index to obtain a row full of `NA` values.
+      i Use `NA_integer_` as row index to obtain a row full of `NA` values.
     Code
       foo[-1:1, ]
     Condition
@@ -142,7 +142,7 @@
     Condition
       Warning:
       The `i` argument of `[.tbl_df` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
-      Use `NA_integer_` as row index to obtain a row full of `NA` values.
+      i Use `NA_integer_` as row index to obtain a row full of `NA` values.
     Code
       foo[array(1, dim = c(1, 1, 1)), ]
     Condition
@@ -287,7 +287,7 @@
     Code
       foo[!is.na(foo)]
     Condition
-      Error:
+      Error in `vec_c()`:
       ! Can't combine `a` <integer> and `b` <character>.
     Code
       foo[as.matrix("x")]
@@ -307,19 +307,19 @@
     Condition
       Warning:
       The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
-      Use `NA_integer_` as row index to obtain a row full of `NA` values.
+      i Use `NA_integer_` as row index to obtain a row full of `NA` values.
     Code
       invisible(foo[-(3:5), ])
     Condition
       Warning:
       The `i` argument of `[.tbl_df` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
-      Use `NA_integer_` as row index to obtain a row full of `NA` values.
+      i Use `NA_integer_` as row index to obtain a row full of `NA` values.
     Code
       invisible(foo["x", ])
     Condition
       Warning:
       The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
-      Use `NA_integer_` as row index to obtain a row full of `NA` values.
+      i Use `NA_integer_` as row index to obtain a row full of `NA` values.
     Code
       # # [.tbl_df and logical recycling
       foo <- tibble(a = 1:4, b = a)
@@ -472,13 +472,13 @@
     Condition
       Warning:
       The `i` argument of `[` can't be a matrix as of tibble 3.0.0.
-      Convert to a vector.
+      i Convert to a vector.
     Code
       invisible(foo[matrix(rep(TRUE, 10), ncol = 1), ])
     Condition
       Warning:
       The `i` argument of `[` can't be a matrix as of tibble 3.0.0.
-      Convert to a vector.
+      i Convert to a vector.
     Code
       # # [<-.tbl_df rejects unknown row indexes
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)

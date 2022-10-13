@@ -26,10 +26,6 @@ For example, `<int>` in the header of a column indicates an integer column, and 
 
 
 
-```
-#> Warning: `vec_unchop()` was deprecated in vctrs 0.5.0.
-#> Please use `list_unchop()` instead.
-```
 
 
 |Class                       |Data type            |Example                          |Column header |

@@ -322,7 +322,7 @@ df[[1:2]]
 ```r
 tbl[[1:2]]
 #> Warning: The `j` argument of `[[.tbl_df` can't be a vector of length 2 as of tibble 3.0.0.
-#> Recursive subsetting is deprecated for tibbles.
+#> i Recursive subsetting is deprecated for tibbles.
 #> [1] NA
 ```
 
@@ -796,7 +796,7 @@ df[!is.na(df)]
 
 ```r
 tbl[!is.na(tbl)]
-#> Error:
+#> Error in `vec_c()`:
 #> ! Can't combine `n` <integer> and `c` <character>.
 ```
 
@@ -1048,7 +1048,7 @@ df[10, ]
 ```r
 tbl[10, ]
 #> Warning: The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
-#> Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> # A tibble: 1 x 3
 #>       n c     li    
 #>   <int> <chr> <list>
@@ -1068,7 +1068,7 @@ df["x", ]
 ```r
 tbl["x", ]
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
-#> Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> # A tibble: 1 x 3
 #>       n c     li    
 #>   <int> <chr> <list>
@@ -3635,7 +3635,7 @@ with_df(df[as.character(-(1:3)), ] <- df[1, ])
 ```r
 with_tbl(tbl[as.character(-(1:3)), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
-#> Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
@@ -3657,7 +3657,7 @@ with_df(df[as.character(3:5), ] <- df[1, ])
 ```r
 with_tbl(tbl[as.character(3:5), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
-#> Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
@@ -3681,7 +3681,7 @@ with_df(df[as.character(-(3:5)), ] <- df[1, ])
 ```r
 with_tbl(tbl[as.character(-(3:5)), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
-#> Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
