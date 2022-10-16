@@ -798,7 +798,7 @@ df[!is.na(df)]
 
 ```r
 tbl[!is.na(tbl)]
-#> Error:
+#> Error in `vec_c()`:
 #> ! Can't combine `n` <integer> and `c` <character>.
 ```
 

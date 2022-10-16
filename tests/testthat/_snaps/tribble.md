@@ -30,7 +30,7 @@
     Condition
       Error in `tribble()`:
       ! Can't create column `b`
-      Caused by error:
+      Caused by error in `vec_c()`:
       ! Can't combine `..1` <double> and `..2` <character>.
     Code
       frame_matrix(1)

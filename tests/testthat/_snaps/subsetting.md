@@ -287,7 +287,7 @@
     Code
       foo[!is.na(foo)]
     Condition
-      Error:
+      Error in `vec_c()`:
       ! Can't combine `a` <integer> and `b` <character>.
     Code
       foo[as.matrix("x")]
