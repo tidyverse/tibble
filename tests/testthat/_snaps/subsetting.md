@@ -115,7 +115,7 @@
     Condition
       Warning:
       The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
-      Use `NA_integer_` as row index to obtain a row full of `NA` values.
+      i Use `NA_integer_` as row index to obtain a row full of `NA` values.
     Code
       foo[-1:1, ]
     Condition
@@ -142,7 +142,7 @@
     Condition
       Warning:
       The `i` argument of `[.tbl_df` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
-      Use `NA_integer_` as row index to obtain a row full of `NA` values.
+      i Use `NA_integer_` as row index to obtain a row full of `NA` values.
     Code
       foo[array(1, dim = c(1, 1, 1)), ]
     Condition
@@ -307,19 +307,19 @@
     Condition
       Warning:
       The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
-      Use `NA_integer_` as row index to obtain a row full of `NA` values.
+      i Use `NA_integer_` as row index to obtain a row full of `NA` values.
     Code
       invisible(foo[-(3:5), ])
     Condition
       Warning:
       The `i` argument of `[.tbl_df` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
-      Use `NA_integer_` as row index to obtain a row full of `NA` values.
+      i Use `NA_integer_` as row index to obtain a row full of `NA` values.
     Code
       invisible(foo["x", ])
     Condition
       Warning:
       The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
-      Use `NA_integer_` as row index to obtain a row full of `NA` values.
+      i Use `NA_integer_` as row index to obtain a row full of `NA` values.
     Code
       # # [.tbl_df and logical recycling
       foo <- tibble(a = 1:4, b = a)
@@ -381,11 +381,12 @@
     Condition
       Error in `foo[[1.5]]`:
       ! Must extract column with a single valid subscript.
-      x Can't convert from `j` <double> to <integer> due to loss of precision.
+      x Subscript `1.5` has the wrong type `double`.
+      i It must be numeric or character.
     Code
       foo[[3]]
     Condition
-      Error in `foo[[3]]`:
+      Error in `vec_as_location2_result()`:
       ! Can't subset columns past the end.
       i Location 3 doesn't exist.
       i There are only 2 columns.
@@ -394,7 +395,8 @@
     Condition
       Error in `foo[[Inf]]`:
       ! Must extract column with a single valid subscript.
-      x Can't convert from `j` <double> to <integer> due to loss of precision.
+      x Subscript `Inf` has the wrong type `double`.
+      i It must be numeric or character.
     Code
       foo[[mean]]
     Condition
@@ -405,7 +407,7 @@
     Code
       foo[[foo]]
     Condition
-      Error in `foo[[foo]]`:
+      Error:
       ! Must extract column with a single valid subscript.
       x Subscript `foo` has the wrong type `tbl_df<
         x: integer
@@ -472,13 +474,13 @@
     Condition
       Warning:
       The `i` argument of `[` can't be a matrix as of tibble 3.0.0.
-      Convert to a vector.
+      i Convert to a vector.
     Code
       invisible(foo[matrix(rep(TRUE, 10), ncol = 1), ])
     Condition
       Warning:
       The `i` argument of `[` can't be a matrix as of tibble 3.0.0.
-      Convert to a vector.
+      i Convert to a vector.
     Code
       # # [<-.tbl_df rejects unknown row indexes
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
@@ -924,7 +926,7 @@
     Code
       foo[[foo]] <- 1
     Condition
-      Error in `[[<-`:
+      Error:
       ! Must assign to column with a single valid subscript.
       x Subscript `foo` has the wrong type `tbl_df<
         x: integer

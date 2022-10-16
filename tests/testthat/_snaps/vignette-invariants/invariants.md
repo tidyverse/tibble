@@ -322,7 +322,7 @@ df[[1:2]]
 ```r
 tbl[[1:2]]
 #> Warning: The `j` argument of `[[.tbl_df` can't be a vector of length 2 as of tibble 3.0.0.
-#> Recursive subsetting is deprecated for tibbles.
+#> i Recursive subsetting is deprecated for tibbles.
 #> [1] NA
 ```
 
@@ -455,7 +455,7 @@ df[[4]]
 
 ```r
 tbl[[4]]
-#> Error in `tbl[[4]]`:
+#> Error in `vec_as_location2_result()`:
 #> ! Can't subset columns past the end.
 #> i Location 4 doesn't exist.
 #> i There are only 3 columns.
@@ -474,7 +474,8 @@ df[[1.5]]
 tbl[[1.5]]
 #> Error in `tbl[[1.5]]`:
 #> ! Must extract column with a single valid subscript.
-#> x Can't convert from `j` <double> to <integer> due to loss of precision.
+#> x Subscript `1.5` has the wrong type `double`.
+#> i It must be numeric or character.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -490,7 +491,8 @@ df[[Inf]]
 tbl[[Inf]]
 #> Error in `tbl[[Inf]]`:
 #> ! Must extract column with a single valid subscript.
-#> x Can't convert from `j` <double> to <integer> due to loss of precision.
+#> x Subscript `Inf` has the wrong type `double`.
+#> i It must be numeric or character.
 ```
 
 </td></tr></tbody></table>
@@ -1048,7 +1050,7 @@ df[10, ]
 ```r
 tbl[10, ]
 #> Warning: The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
-#> Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> # A tibble: 1 x 3
 #>       n c     li    
 #>   <int> <chr> <list>
@@ -1068,7 +1070,7 @@ df["x", ]
 ```r
 tbl["x", ]
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
-#> Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> # A tibble: 1 x 3
 #>       n c     li    
 #>   <int> <chr> <list>
@@ -3222,8 +3224,8 @@ with_df(df[-1:2, ] <- df[1, ])
 with_tbl(tbl[-1:2, ] <- tbl[1, ])
 #> Error in `[<-`:
 #> ! Must assign to rows with a valid subscript vector.
-#> x Subscript `-1:2` can't contain `0` values.
-#> i It has a `0` value at location 2.
+#> x Negative and positive locations can't be mixed.
+#> i Subscript `-1:2` has 2 positive values at locations 3 and 4.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3635,7 +3637,7 @@ with_df(df[as.character(-(1:3)), ] <- df[1, ])
 ```r
 with_tbl(tbl[as.character(-(1:3)), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
-#> Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
@@ -3657,7 +3659,7 @@ with_df(df[as.character(3:5), ] <- df[1, ])
 ```r
 with_tbl(tbl[as.character(3:5), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
-#> Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
@@ -3681,7 +3683,7 @@ with_df(df[as.character(-(3:5)), ] <- df[1, ])
 ```r
 with_tbl(tbl[as.character(-(3:5)), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
-#> Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
@@ -3782,11 +3784,11 @@ with_df(df[2:3, 3] <- df2[1:2, 1])
 
 ```r
 with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
-#> Error in `[<-`:
-#> ! Assigned data `tbl2[1:2, 1]` must be compatible with existing data.
-#> i Error occurred for column `li`.
-#> Caused by error in `vec_assign()`:
-#> ! Can't convert <tbl_df> to <list>.
+#> Error in `df_cast_opts()`:
+#> ! Data frame must have names.
+#> i In file 'type-data-frame.c' at line 683.
+#> i This is an internal error that was detected in the vctrs package.
+#>   Please report it at <https://github.com/r-lib/vctrs/issues> with a reprex (<https://https://tidyverse.org/help/>) and the full backtrace.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
