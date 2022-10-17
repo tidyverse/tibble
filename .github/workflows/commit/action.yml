@@ -1,4 +1,4 @@
-name: 'Action to commit changes to the repository'
+name: "Action to commit changes to the repository"
 outputs:
   sha:
     description: "SHA of generated commit"

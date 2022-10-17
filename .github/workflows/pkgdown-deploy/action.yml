@@ -1,4 +1,4 @@
-name: 'Action to deploy a pkgdown website'
+name: "Action to deploy a pkgdown website"
 
 runs:
   using: "composite"

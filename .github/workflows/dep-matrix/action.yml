@@ -1,4 +1,4 @@
-name: 'Actions to compute a matrix with all dependent packages'
+name: "Actions to compute a matrix with all dependent packages"
 outputs:
   matrix:
     description: "Generated matrix"

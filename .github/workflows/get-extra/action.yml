@@ -1,4 +1,4 @@
-name: 'Action to determine extra packages to be installed'
+name: "Action to determine extra packages to be installed"
 outputs:
   packages:
     description: "List of extra packages"

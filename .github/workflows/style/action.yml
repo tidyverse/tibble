@@ -1,4 +1,4 @@
-name: 'Action to auto-style a package'
+name: "Action to auto-style a package"
 
 runs:
   using: "composite"

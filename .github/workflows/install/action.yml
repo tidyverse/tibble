@@ -1,4 +1,4 @@
-name: 'Actions to run for installing R packages'
+name: "Actions to run for installing R packages"
 inputs:
   token:
     description: GitHub token, set to secrets.GITHUB_TOKEN
@@ -14,7 +14,7 @@ inputs:
   needs:
     description: Passed on to r-lib/actions/setup-r-dependencies@v2
     required: false
-    default: ''
+    default: ""
   extra-packages:
     description: Passed on to r-lib/actions/setup-r-dependencies@v2
     required: false
