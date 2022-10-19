@@ -61,7 +61,6 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix: ${{fromJson(needs.matrix.outputs.matrix)}}
 
     steps:
       - uses: actions/checkout@v2
