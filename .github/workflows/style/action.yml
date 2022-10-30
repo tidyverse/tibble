@@ -15,7 +15,7 @@ runs:
         echo ::set-output name=rmd::$rmd
       shell: bash
 
-    - uses: actions/cache@v2
+    - uses: actions/cache@v3
       if: ${{ steps.check.outputs.scope }}
       with:
         path: |
