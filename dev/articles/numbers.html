@@ -113,13 +113,20 @@
 
     
     
-<p>Tibbles print numbers with three significant digits by default, switching to scientific notation if the available space is too small. Underlines are used to highlight groups of three digits. The display differs from the default display for data frames, see <code><a href="../articles/digits.html">vignette("digits")</a></code> for an overview over the differences. This display works for many, but not for all use cases.</p>
+<p>Tibbles print numbers with three significant digits by default,
+switching to scientific notation if the available space is too small.
+Underlines are used to highlight groups of three digits. The display
+differs from the default display for data frames, see
+<code><a href="../articles/digits.html">vignette("digits")</a></code> for an overview over the differences.
+This display works for many, but not for all use cases.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="options">Options<a class="anchor" aria-label="anchor" href="#options"></a>
 </h2>
-<p>The easiest way to customize the display of numbers and other data in a tibble is to define options. See <code><a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">?pillar::pillar_options</a></code> for a comprehensive overview.</p>
+<p>The easiest way to customize the display of numbers and other data in
+a tibble is to define options. See <code><a href="https://pillar.r-lib.org/reference/pillar_options.html" class="external-link">?pillar::pillar_options</a></code>
+for a comprehensive overview.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">123.4567</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 1</span></span></span>
@@ -134,12 +141,17 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 123.456<span style="text-decoration: underline;">7</span></span></span>
 <span><span class="co"># Restore old options, see also rlang::local_options() for a more elegant way</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span><span class="va">old</span><span class="op">)</span></span></code></pre></div>
-<p>This changes the display of all columns. Read on to see how too specify display options on a column-by-column basis.</p>
+<p>This changes the display of all columns. Read on to see how too
+specify display options on a column-by-column basis.</p>
 </div>
 <div class="section level2">
 <h2 id="per-column-number-formatting">Per-column number formatting<a class="anchor" aria-label="anchor" href="#per-column-number-formatting"></a>
 </h2>
-<p>The new <code><a href="../reference/num.html">num()</a></code> constructor allows creating vectors that behave like numbers but allow customizing their display. Below a few examples are shown, see <code><a href="../reference/num.html">?num</a></code> for a comprehensive overview. Similarly, <code><a href="../reference/char.html">char()</a></code> allows customizing the display of character columns.</p>
+<p>The new <code><a href="../reference/num.html">num()</a></code> constructor allows creating vectors that
+behave like numbers but allow customizing their display. Below a few
+examples are shown, see <code><a href="../reference/num.html">?num</a></code> for a comprehensive overview.
+Similarly, <code><a href="../reference/char.html">char()</a></code> allows customizing the display of
+character columns.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, notation <span class="op">=</span> <span class="st">"sci"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;pillar_num(sci)[5]&gt;</span></span>
@@ -161,12 +173,19 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> <span style="text-decoration: underline;">1</span>000.500<span style="text-decoration: underline;">0</span>   <span style="text-decoration: underline;">1</span>000.5 <span style="text-decoration: underline;">1</span>000.50   10.0    100  12.3   A B C D E F…U V W X Y Z</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> <span style="text-decoration: underline;">1</span>100.500<span style="text-decoration: underline;">0</span>   <span style="text-decoration: underline;">1</span>100.5 <span style="text-decoration: underline;">1</span>100.50   11.0   <span style="text-decoration: underline;">1</span>000 123     A B C D E F…U V W X Y Z</span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">5</span> <span style="text-decoration: underline;">1</span>200.500<span style="text-decoration: underline;">0</span>   <span style="text-decoration: underline;">1</span>200.5 <span style="text-decoration: underline;">1</span>200.50   12.0  <span style="text-decoration: underline;">10</span>000   1.23k A B C D E F…U V W X Y Z</span></span></code></pre></div>
-<p>The pillar package that is responsible for the display of tibbles tries hard to get the number display right, however it is impossible to accommodate all use cases. Whenever the default formatting does not suit the application, <code><a href="../reference/num.html">num()</a></code> or <code><a href="../reference/char.html">char()</a></code> allow redefining the formatting for individual columns. The formatting survives most data transformations.</p>
+<p>The pillar package that is responsible for the display of tibbles
+tries hard to get the number display right, however it is impossible to
+accommodate all use cases. Whenever the default formatting does not suit
+the application, <code><a href="../reference/num.html">num()</a></code> or <code><a href="../reference/char.html">char()</a></code> allow
+redefining the formatting for individual columns. The formatting
+survives most data transformations.</p>
 </div>
 <div class="section level2">
 <h2 id="rule-based-number-formatting">Rule-based number formatting<a class="anchor" aria-label="anchor" href="#rule-based-number-formatting"></a>
 </h2>
-<p>Currently, formatting must be applied manually for each column. The following pattern may help doing this consistently for all columns in a tibble, or for some columns based on their name.</p>
+<p>Currently, formatting must be applied manually for each column. The
+following pattern may help doing this consistently for all columns in a
+tibble, or for some columns based on their name.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span>, warn.conflicts <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span></span>
@@ -209,11 +228,18 @@
 <div class="section level2">
 <h2 id="computing-on-num">Computing on <code>num</code><a class="anchor" aria-label="anchor" href="#computing-on-num"></a>
 </h2>
-<p>Formatting numbers is useful for presentation of results. If defined early on in the analysis, the formatting options survive most operations. It is worth defining output options that suit your data once early on in the process, to benefit from the formatting throughout the analysis. We are working on seamlessly applying this formatting to the final presentation (plots, tables, …).</p>
+<p>Formatting numbers is useful for presentation of results. If defined
+early on in the analysis, the formatting options survive most
+operations. It is worth defining output options that suit your data once
+early on in the process, to benefit from the formatting throughout the
+analysis. We are working on seamlessly applying this formatting to the
+final presentation (plots, tables, …).</p>
 <div class="section level3">
 <h3 id="arithmetics">Arithmetics<a class="anchor" aria-label="anchor" href="#arithmetics"></a>
 </h3>
-<p>When applying arithmetic operations on numbers created by <code><a href="../reference/num.html">num()</a></code>, the result inherits the formatting of the first <code>num</code> object.</p>
+<p>When applying arithmetic operations on numbers created by
+<code><a href="../reference/num.html">num()</a></code>, the result inherits the formatting of the first
+<code>num</code> object.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span> <span class="op">+</span> <span class="fl">2</span></span>
 <span><span class="co">#&gt; &lt;pillar_num[1]&gt;</span></span>
@@ -240,7 +266,8 @@
 <div class="section level3">
 <h3 id="mathematics">Mathematics<a class="anchor" aria-label="anchor" href="#mathematics"></a>
 </h3>
-<p>Similarly, for mathematical operations, the formatting is inherited.</p>
+<p>Similarly, for mathematical operations, the formatting is
+inherited.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Extremes.html" class="external-link">min</a></span><span class="op">(</span><span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, label <span class="op">=</span> <span class="st">"$"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;pillar_num{$}[1]&gt;</span></span>
@@ -255,7 +282,8 @@
 <div class="section level3">
 <h3 id="override">Override<a class="anchor" aria-label="anchor" href="#override"></a>
 </h3>
-<p>In some cases, the ideal formatting changes after a transformation. <code><a href="../reference/num.html">num()</a></code> can be applied repeatedly, the last setting wins.</p>
+<p>In some cases, the ideal formatting changes after a transformation.
+<code><a href="../reference/num.html">num()</a></code> can be applied repeatedly, the last setting wins.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">+</span> <span class="fl">0.125</span>, digits <span class="op">=</span> <span class="fl">4</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;pillar_num:.4![3]&gt;</span></span>
@@ -271,12 +299,14 @@
 <div class="section level3">
 <h3 id="recovery">Recovery<a class="anchor" aria-label="anchor" href="#recovery"></a>
 </h3>
-<p>The <code><a href="https://rdrr.io/r/stats/cor.html" class="external-link">var()</a></code> function is one of the examples where the formatting is lost:</p>
+<p>The <code><a href="https://rdrr.io/r/stats/cor.html" class="external-link">var()</a></code> function is one of the examples where the
+formatting is lost:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span>, <span class="fl">4</span><span class="op">)</span>, notation <span class="op">=</span> <span class="st">"eng"</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">var</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 2.333333</span></span></code></pre></div>
-<p>The <code><a href="https://rdrr.io/r/stats/median.html" class="external-link">median()</a></code> function is worse, it breaks for <code><a href="../reference/num.html">num()</a></code> objects:</p>
+<p>The <code><a href="https://rdrr.io/r/stats/median.html" class="external-link">median()</a></code> function is worse, it breaks for
+<code><a href="../reference/num.html">num()</a></code> objects:</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `median()`:</span></span></span>
@@ -289,7 +319,9 @@
 <span><span class="fu"><a href="../reference/num.html">num</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/median.html" class="external-link">median</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">as.numeric</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, notation <span class="op">=</span> <span class="st">"eng"</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;pillar_num(eng)[1]&gt;</span></span>
 <span><span class="co">#&gt; [1] 2e0</span></span></code></pre></div>
-<p>For automatic recovery, we can also define our version of <code><a href="https://rdrr.io/r/stats/cor.html" class="external-link">var()</a></code>, or even overwrite the base implementation. Note that this pattern is still experimental and may be subject to change:</p>
+<p>For automatic recovery, we can also define our version of
+<code><a href="https://rdrr.io/r/stats/cor.html" class="external-link">var()</a></code>, or even overwrite the base implementation. Note that
+this pattern is still experimental and may be subject to change:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">var_</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="va">out</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/cor.html" class="external-link">var</a></span><span class="op">(</span><span class="fu">vctrs</span><span class="fu">::</span><span class="fu"><a href="https://vctrs.r-lib.org/reference/vec_proxy.html" class="external-link">vec_proxy</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -298,7 +330,10 @@
 <span><span class="fu">var_</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt; &lt;pillar_num(eng)[1]&gt;</span></span>
 <span><span class="co">#&gt; [1] 2.33e0</span></span></code></pre></div>
-<p>This pattern can be applied to all functions that lose the formatting. The <code>make_restore()</code> function defined below is a function factory that consumes a function and returns a derived function:</p>
+<p>This pattern can be applied to all functions that lose the
+formatting. The <code>make_restore()</code> function defined below is a
+function factory that consumes a function and returns a derived
+function:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">make_restore</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">fun</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/force.html" class="external-link">force</a></span><span class="op">(</span><span class="va">fun</span><span class="op">)</span></span>

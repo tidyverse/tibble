@@ -119,7 +119,10 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>This vignette shows how to decorate columns for custom formatting. We use the formattable package for demonstration because it already contains useful vector classes that apply a custom formatting to numbers.</p>
+<p>This vignette shows how to decorate columns for custom formatting. We
+use the formattable package for demonstration because it already
+contains useful vector classes that apply a custom formatting to
+numbers.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://renkun-ken.github.io/formattable/" class="external-link">formattable</a></span><span class="op">)</span></span>
 <span></span>
@@ -131,7 +134,10 @@
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 9.000     </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 10.000    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 11.000</span></span></code></pre></div>
-<p>The <code>x</code> column in the tibble above is a regular number with a formatting method. It always will be shown with three digits after the decimal point. This also applies to columns derived from <code>x</code>.</p>
+<p>The <code>x</code> column in the tibble above is a regular number
+with a formatting method. It always will be shown with three digits
+after the decimal point. This also applies to columns derived from
+<code>x</code>.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -185,11 +191,12 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 6</span></span></span>
 <span><span class="co">#&gt;   id       `2018`    `2019`    `2020`    `2021`    `2022`</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1     $6,700.64 $7,750.33 $2,734.74 $5,019.49 $1,062.89</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2     $3,556.74 $9,289.26 $4,405.44 $5,168.50 $4,362.05</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 3     $4,616.69 $8,158.00 $2,381.45   $326.00 $1,282.01</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 4     $3,658.28 $6,037.27 $2,253.11 $5,291.57 $2,784.48</span></span></code></pre></div>
-<p>For ggplot2 we need to do <a href="https://github.com/tidyverse/ggplot2/pull/4065" class="external-link">some work</a> to show apply the formatting to the scales.</p>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1     $7,056.56 $3,091.59 $4,563.57 $2,794.48 $9,430.10</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2     $2,801.71 $7,550.04   $163.39 $3,886.14 $7,102.19</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 3     $2,113.19 $9,180.95   $790.41 $7,855.33   $325.98</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 4     $5,673.07 $3,886.33 $8,356.22 $3,841.34   $855.73</span></span></code></pre></div>
+<p>For ggplot2 we need to do <a href="https://github.com/tidyverse/ggplot2/pull/4065" class="external-link">some work</a> to
+show apply the formatting to the scales.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://ggplot2.tidyverse.org" class="external-link">ggplot2</a></span><span class="op">)</span></span>
 <span></span>
@@ -198,28 +205,42 @@
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">stock</span>, color <span class="op">=</span> <span class="va">id</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><img src="formats_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
-<p>It pays off to specify formatting very early in the process. The diagram below shows the principal stages of data analysis and exploration from “R for data science”.</p>
-<div id="htmlwidget-0acc7d98d0af815ce5d8" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-0acc7d98d0af815ce5d8">{"x":{"diagram":["graph TD","  Import --> Tidy","  Tidy --> Transform","  Transform --> Visualize","  Visualize --> Communicate","  Visualize --> Model","  Model -.-> Transform"]},"evals":[],"jsHooks":[]}</script><p>The subsequent diagram adds data formats, communication options, and explicit data formatting. The original r4ds transitions are highlighted in bold. There are two principal options where to apply formatting for results: right before communicating them, or right after importing.</p>
-<div id="htmlwidget-e2160c8ef2ff5016281d" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
-<script type="application/json" data-for="htmlwidget-e2160c8ef2ff5016281d">{"x":{"diagram":["graph TD","  .csv --> Import","  API --> Import","  DBI --> Import","  dbplyr --> Import","  Import -.-> Format[Format for analysis]","  Format -.-> Tidy","","  subgraph r4ds","  Import ==> Tidy","  Tidy ==> Transform","  Transform ==> Visualize","  Visualize ==> Model","  Model -.-> Transform","  Visualize ==> Communicate","  end","","  Visualize -.-> FormatComm[Format for communication]","  FormatComm -.-> Communicate","","  FormatComm -- Apply formatting early --> Format","","  dbplyr -.-> Tidy","  dbplyr -.-> Transform","  dbplyr -.-> Visualize","","  Communicate --> gt","  Communicate --> ggplot2","  Communicate --> DT","  Communicate --> plotly"]},"evals":[],"jsHooks":[]}</script><p>Applying formatting early in the process gives the added benefit of showing the data in a useful format during the “Tidy”, “Transform”, and “Visualize” stages. For this to be useful, we need to ensure that the formatting options applied early:</p>
+<p>It pays off to specify formatting very early in the process. The
+diagram below shows the principal stages of data analysis and
+exploration from “R for data science”.</p>
+<div id="htmlwidget-4491c6044e96dd1b7742" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-4491c6044e96dd1b7742">{"x":{"diagram":["graph TD","  Import --> Tidy","  Tidy --> Transform","  Transform --> Visualize","  Visualize --> Communicate","  Visualize --> Model","  Model -.-> Transform"]},"evals":[],"jsHooks":[]}</script><p>The subsequent diagram adds data formats, communication options, and
+explicit data formatting. The original r4ds transitions are highlighted
+in bold. There are two principal options where to apply formatting for
+results: right before communicating them, or right after importing.</p>
+<div id="htmlwidget-88aa80c55e5f12d676c8" style="width:700px;height:432.632880098888px;" class="DiagrammeR html-widget"></div>
+<script type="application/json" data-for="htmlwidget-88aa80c55e5f12d676c8">{"x":{"diagram":["graph TD","  .csv --> Import","  API --> Import","  DBI --> Import","  dbplyr --> Import","  Import -.-> Format[Format for analysis]","  Format -.-> Tidy","","  subgraph r4ds","  Import ==> Tidy","  Tidy ==> Transform","  Transform ==> Visualize","  Visualize ==> Model","  Model -.-> Transform","  Visualize ==> Communicate","  end","","  Visualize -.-> FormatComm[Format for communication]","  FormatComm -.-> Communicate","","  FormatComm -- Apply formatting early --> Format","","  dbplyr -.-> Tidy","  dbplyr -.-> Transform","  dbplyr -.-> Visualize","","  Communicate --> gt","  Communicate --> ggplot2","  Communicate --> DT","  Communicate --> plotly"]},"evals":[],"jsHooks":[]}</script><p>Applying formatting early in the process gives the added benefit of
+showing the data in a useful format during the “Tidy”, “Transform”, and
+“Visualize” stages. For this to be useful, we need to ensure that the
+formatting options applied early:</p>
 <ul>
 <li>give a good user experience for analysis
 <ul>
 <li>are easy to set up</li>
 <li>keep sticky in the process of data analysis and exploration</li>
-<li>support the analyst in asking the right questions about the data</li>
-<li>convey the critical information at a glance, with support to go into greater detail easier</li>
+<li>support the analyst in asking the right questions about the
+data</li>
+<li>convey the critical information at a glance, with support to go into
+greater detail easier</li>
 </ul>
 </li>
 <li>look good for communication
 <ul>
 <li>are applied in the various communication options</li>
-<li>support everything necessary to present the data in the desired way</li>
+<li>support everything necessary to present the data in the desired
+way</li>
 </ul>
 </li>
 </ul>
-<p>Ensuring stickiness is difficult, and is insufficient for a dbplyr workflow where parts of the “Tidy”, “Transform” or even “Visualize” stages are run on the database. Often it’s possible to derive a rule-based approach for formatting.</p>
+<p>Ensuring stickiness is difficult, and is insufficient for a dbplyr
+workflow where parts of the “Tidy”, “Transform” or even “Visualize”
+stages are run on the database. Often it’s possible to derive a
+rule-based approach for formatting.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl3</span> <span class="op">&lt;-</span></span>
 <span>  <span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>id <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, x <span class="op">=</span> <span class="fl">9</span><span class="op">:</span><span class="fl">11</span><span class="op">)</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -270,7 +291,9 @@
 <p>This poses a few drawbacks:</p>
 <ul>
 <li>The syntax is repetitive and not very intuitive</li>
-<li>Rules that match multiple columns must be given in reverse order due to the way <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> works, and are executed multiple times</li>
+<li>Rules that match multiple columns must be given in reverse order due
+to the way <code><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate()</a></code> works, and are executed multiple
+times</li>
 </ul>
 <p>What would a good API for rule-based formatting look like?</p>
 </div>

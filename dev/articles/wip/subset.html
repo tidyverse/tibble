@@ -131,8 +131,12 @@
 <p>There are many, many ways to subset data frames and tibbles.</p>
 <figure><a href="https://twitter.com/skyetetra/status/1160012260456062977" class="external-link"><img src="alignment.png" title="Alignment chart" style="width:100.0%" alt="Alignment"></a>
 <figcaption>
-Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" class="external-link">Jacqueline Nolis</a>
-</figcaption></figure><p>This vignette is an attempt to provide a comprehensive overview over the behavior of the subsetting operators <code>$</code>, <code>[[</code> and <code>[</code>, highlighting where the tibble implementation differs from the data frame implementation.</p>
+Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" class="external-link">Jacqueline
+Nolis</a>
+</figcaption></figure><p>This vignette is an attempt to provide a comprehensive overview over
+the behavior of the subsetting operators <code>$</code>, <code>[[</code>
+and <code>[</code>, highlighting where the tibble implementation differs
+from the data frame implementation.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></span>
 <span><span class="va">new_df</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
@@ -144,7 +148,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <span><span class="va">new_tbl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="op">)</span> <span class="op">{</span></span>
 <span>  <span class="fu"><a href="../../reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="fu">new_df</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">}</span></span></code></pre></div>
-<p>Results of the same code for data frames and tibbles are presented side by side:</p>
+<p>Results of the same code for data frames and tibbles are presented
+side by side:</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
@@ -167,7 +172,9 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr></tbody></table>
-<p>In the following, if the results are identical (after converting to a data frame if necessary), only the tibble result is shown, as in the example below. This allows to spot differences easier.</p>
+<p>In the following, if the results are identical (after converting to a
+data frame if necessary), only the tibble result is shown, as in the
+example below. This allows to spot differences easier.</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 </td>
@@ -183,14 +190,16 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span>     4 h     <span style="color: #949494;">&lt;chr [1]&gt;</span></span></span></code></pre></div>
 </td>
 </tr></tbody></table>
-<p>Subsetting operations are read-only. The same objects are reused in all examples:</p>
+<p>Subsetting operations are read-only. The same objects are reused in
+all examples:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu">new_df</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="va">tbl</span> <span class="op">&lt;-</span> <span class="fu">new_tbl</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="section level2">
 <h2 id="section">$<a class="anchor" aria-label="anchor" href="#section"></a>
 </h2>
-<p>With <code>$</code> subsetting, accessing a missing column gives a warning. Inexact matching is not supported:</p>
+<p>With <code>$</code> subsetting, accessing a missing column gives a
+warning. Inexact matching is not supported:</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -377,7 +386,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 </tr>
 </tbody></table>
-<p>With two indexes, a single element is returned. List columns are not unpacked by tibbles, the <code>[[</code> only unpacks columns.</p>
+<p>With two indexes, a single element is returned. List columns are not
+unpacked by tibbles, the <code>[[</code> only unpacks columns.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -411,8 +421,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[[1:2, "cd"]]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract row with a single valid subscript.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `1:2` has size 2 but must be size 1.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't extract row with `1:2`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `1:2` must be size 1, not 2.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -434,12 +444,13 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"c"</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[[1:2, "c"]]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must extract row with a single valid subscript.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `1:2` has size 2 but must be size 1.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't extract row with `1:2`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `1:2` must be size 1, not 2.</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
-<p>Exotic variants like recursive indexing are deprecated for tibbles.</p>
+<p>Exotic variants like recursive indexing are deprecated for
+tibbles.</p>
 <table class="table dftbl"><tbody><tr style="vertical-align:top">
 <td>
 </td>
@@ -453,7 +464,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="section level2">
 <h2 id="section-2">[<a class="anchor" aria-label="anchor" href="#section-2"></a>
 </h2>
-<p>With <code>[</code> subsetting, tibbles always return a tibble. The <code>drop</code> argument is supported but has different defaults:</p>
+<p>With <code>[</code> subsetting, tibbles always return a tibble. The
+<code>drop</code> argument is supported but has different defaults:</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -609,7 +621,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 </tr>
 </tbody></table>
-<p>The same examples are repeated for two-dimensional indexing when omitting the row index:</p>
+<p>The same examples are repeated for two-dimensional indexing when
+omitting the row index:</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -739,7 +752,9 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 </tr>
 </tbody></table>
-<p>Multiple columns can be queried by passing a vector of column indexes (names, positions, or even a logical vector). With the latter option, tibbles are a tad stricter:</p>
+<p>Multiple columns can be queried by passing a vector of column indexes
+(names, positions, or even a logical vector). With the latter option,
+tibbles are a tad stricter:</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -835,7 +850,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[-1:2]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset columns with a valid subscript vector.</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns with `-1:2`.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Negative and positive locations can't be mixed.</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Subscript `-1:2` has 2 positive values at locations 3 and 4.</span></span></code></pre></div>
 </td>
@@ -947,9 +962,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb77"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[c(FALSE, TRUE)]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset columns with a valid subscript vector.</span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size of the indexed input.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 3 but subscript `c(FALSE, TRUE)` has size 2.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns with `c(FALSE, TRUE)`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Logical subscript `c(FALSE, TRUE)` must be size 1 or 3, not 2.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -962,13 +976,13 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[c(FALSE, TRUE, FALSE, TRUE)]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset columns with a valid subscript vector.</span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size of the indexed input.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 3 but subscript `c(FALSE, TRUE, FALSE, TRUE)` has size 4.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns with `c(FALSE, TRUE, FALSE, TRUE)`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Logical subscript `c(FALSE, TRUE, FALSE, TRUE)` must be size 1 or 3, not 4.</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
-<p>The same examples are repeated for two-dimensional indexing when omitting the row index:</p>
+<p>The same examples are repeated for two-dimensional indexing when
+omitting the row index:</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1064,7 +1078,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[, -1:2]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset columns with a valid subscript vector.</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns with `-1:2`.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Negative and positive locations can't be mixed.</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Subscript `-1:2` has 2 positive values at locations 3 and 4.</span></span></code></pre></div>
 </td>
@@ -1188,9 +1202,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb99"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[, c(FALSE, TRUE)]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset columns with a valid subscript vector.</span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size of the indexed input.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 3 but subscript `c(FALSE, TRUE)` has size 2.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns with `c(FALSE, TRUE)`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Logical subscript `c(FALSE, TRUE)` must be size 1 or 3, not 2.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1203,13 +1216,16 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[, c(FALSE, TRUE, FALSE, TRUE)]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset columns with a valid subscript vector.</span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size of the indexed input.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 3 but subscript `c(FALSE, TRUE, FALSE, TRUE)` has size 4.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns with `c(FALSE, TRUE, FALSE, TRUE)`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Logical subscript `c(FALSE, TRUE, FALSE, TRUE)` must be size 1 or 3, not 4.</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
-<p>Row subsetting with integer indexes works almost identical. Out-of-bounds subsetting is not recommended and may lead to an error in future versions. Another special case is subsetting with <code>[1, , drop = TRUE]</code> where the data frame implementation returns a list.</p>
+<p>Row subsetting with integer indexes works almost identical.
+Out-of-bounds subsetting is not recommended and may lead to an error in
+future versions. Another special case is subsetting with
+<code>[1, , drop = TRUE]</code> where the data frame implementation
+returns a list.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1330,7 +1346,7 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[-1:2, ]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset rows with a valid subscript vector.</span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset rows with `-1:2`.</span></span>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Negative and positive locations can't be mixed.</span></span>
 <span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Subscript `-1:2` has 2 positive values at locations 3 and 4.</span></span></code></pre></div>
 </td>
@@ -1376,7 +1392,9 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 </td>
 </tr>
 </tbody></table>
-<p>Row subsetting with logical indexes also works almost identical, the index vector must have length one or the number of rows with tibbles.</p>
+<p>Row subsetting with logical indexes also works almost identical, the
+index vector must have length one or the number of rows with
+tibbles.</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
@@ -1416,9 +1434,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span><span class="op">)</span>, <span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[c(TRUE, FALSE), ]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset rows with a valid subscript vector.</span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size of the indexed input.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 4 but subscript `c(TRUE, FALSE)` has size 2.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset rows with `c(TRUE, FALSE)`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Logical subscript `c(TRUE, FALSE)` must be size 1 or 4, not 2.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1434,9 +1451,8 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[c(TRUE, FALSE, TRUE), ]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset rows with a valid subscript vector.</span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size of the indexed input.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 4 but subscript `c(TRUE, FALSE, TRUE)` has size 3.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset rows with `c(TRUE, FALSE, TRUE)`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Logical subscript `c(TRUE, FALSE, TRUE)` must be size 1 or 4, not 3.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -1466,13 +1482,13 @@ Drawing by <a href="https://twitter.com/skyetetra/status/1160012260456062977" cl
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span>, <span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[c(TRUE, FALSE, TRUE, FALSE,</span></span></span>
 <span><span class="co"><span style="font-weight: bold;">#&gt;     TRUE), ]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Must subset rows with a valid subscript vector.</span></span>
-<span><span class="co">#&gt; <span style="color: #0000BB;">ℹ</span> Logical subscripts must match the size of the indexed input.</span></span>
-<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Input has size 4 but subscript `c(TRUE, FALSE, TRUE, FALSE, TRUE)` has size 5.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset rows with `c(TRUE, FALSE, TRUE, FALSE, TRUE)`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Logical subscript `c(TRUE, FALSE, TRUE, FALSE, TRUE)` must be size 1 or 4, not 5.</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
-<p>Indexing both row and column works more or less the same, except for <code>drop</code>:</p>
+<p>Indexing both row and column works more or less the same, except for
+<code>drop</code>:</p>
 <table class="table dftbl"><tbody>
 <tr style="vertical-align:top">
 <td>
