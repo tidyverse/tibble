@@ -79,7 +79,7 @@ markets <-
 
 markets
 markets %>%
-  mutate(across(-time, num, digits = 3))
+  mutate(across(-time, ~ num(.x, digits = 3)))
 ```
 
 ## Computing on `num`

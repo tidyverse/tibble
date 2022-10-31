@@ -108,7 +108,7 @@ markets
 #> 10 1992. 1646. 1716. 1754. 2497.
 #> # ... with 1,850 more rows
 markets %>%
-  mutate(across(-time, num, digits = 3))
+  mutate(across(-time, ~ num(.x, digits = 3)))
 #> # A tibble: 1,860 x 5
 #>     time       DAX       SMI       CAC      FTSE
 #>    <dbl> <num:.3!> <num:.3!> <num:.3!> <num:.3!>
