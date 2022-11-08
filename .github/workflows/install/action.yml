@@ -55,7 +55,7 @@ runs:
     - id: get-extra
       uses: ./.github/workflows/get-extra
 
-    - uses: r-lib/actions/setup-r-dependencies@v2.2.8
+    - uses: r-lib/actions/setup-r-dependencies@v2
       env:
         GITHUB_PAT: ${{ inputs.token }}
       with:
