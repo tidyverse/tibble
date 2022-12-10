@@ -5,8 +5,8 @@
     Output
       # A tibble: 32 × 11
       <body created by pillar>
-      # … with 24 more rows, and 7
-      #   more variables:
+      # • 24 more rows
+      # • 7 more variables:
       #   drat <dbl>, wt <dbl>,
       #   qsec <dbl>, vs <dbl>,
       #   am <dbl>, gear <dbl>,
@@ -16,49 +16,42 @@
     Output
       # A tibble: 150 × 5
       <body created by pillar>
-      # … with 145 more rows, 2
-      #   more variables:
+      # • 145 more rows
+      # • 3 more variables:
+      #   Petal.Length <dbl>,
       #   Petal.Width <dbl>,
-      #   Species <fct>, and
-      #   abbreviated variable
-      #   names ¹​Sepal.Width,
-      #   ²​Petal.Length
+      #   Species <fct>
     Code
       print_without_body(as_tibble(iris), n = -1L, width = 30L)
     Output
       # A tibble: 150 × 5
       <body created by pillar>
-      # … with 140 more rows, 2
-      #   more variables:
+      # • 140 more rows
+      # • 3 more variables:
+      #   Petal.Length <dbl>,
       #   Petal.Width <dbl>,
-      #   Species <fct>, and
-      #   abbreviated variable
-      #   names ¹​Sepal.Length,
-      #   ²​Sepal.Width, …
+      #   Species <fct>
     Code
       print_without_body(as_tibble(iris), n = Inf, width = 30L)
     Output
       # A tibble: 150 × 5
       <body created by pillar>
-      # … with 2 more variables:
+      # • 3 more variables:
+      #   Petal.Length <dbl>,
       #   Petal.Width <dbl>,
-      #   Species <fct>, and
-      #   abbreviated variable
-      #   names ¹​Sepal.Length,
-      #   ²​Sepal.Width,
-      #   ³​Petal.Length
+      #   Species <fct>
     Code
       print_without_body(as_tibble(iris), n = NULL, width = 70L)
     Output
       # A tibble: 150 × 5
       <body created by pillar>
-      # … with 140 more rows
+      # • 140 more rows
     Code
       print_without_body(as_unknown_rows(iris), n = 10, width = 70L)
     Output
       # A tibble: ?? × 5
       <body created by pillar>
-      # … with more rows
+      # • more rows
     Code
       print_without_body(as_unknown_rows(iris[1:9, ]), n = 10, width = 70L)
     Output
@@ -74,13 +67,13 @@
     Output
       # A tibble: ?? × 5
       <body created by pillar>
-      # … with more rows
+      # • more rows
     Code
       print_without_body(df_all, n = NULL, width = 30L)
     Output
       # A tibble: 3 × 9
       <body created by pillar>
-      # … with 5 more variables:
+      # • 5 more variables:
       #   e <fct>, f <date>,
       #   g <dttm>, h <list>,
       #   i <list>
@@ -94,14 +87,14 @@
     Output
       # A tibble: 10,000 × 1
       <body created by pillar>
-      # … with 9,995 more rows
+      # • 9,995 more rows
     Code
       print_without_body(tibble(a = character(), b = logical()), width = 30L)
     Output
       # A tibble: 0 × 2
       <body created by pillar>
-      # … with 2 variables:
-      #   a <chr>, b <lgl>
+      # • 2 variables: a <chr>,
+      #   b <lgl>
     Code
       print_without_body(as_tibble(iris)[character()], n = 5L, width = 30L)
     Output
@@ -112,7 +105,7 @@
     Output
       # A tibble: ?? × 5
       <body created by pillar>
-      # … with 5 variables:
+      # • 5 variables:
       #   Sepal.Length <dbl>,
       #   Sepal.Width <dbl>,
       #   Petal.Length <dbl>,
@@ -123,14 +116,13 @@
     Output
       # A tibble: ?? × 0
       <body created by pillar>
-      # … with at least 5 rows
-      #   total
+      # • at least 5 rows total
     Code
       print_without_body(as_unknown_rows(tibble(a = seq.int(10000))), n = 5L, width = 30L)
     Output
       # A tibble: ?? × 1
       <body created by pillar>
-      # … with more rows
+      # • more rows
     Code
       print_with_mocked_format_body(trunc_mat(df_all, n = 1L, n_extra = 2L, width = 30L))
     Output
@@ -169,7 +161,7 @@
       6 2016-01-01 12:35:02 2016-01-01 12:35:02
       7 2016-01-01 12:35:03 2016-01-01 12:35:03
       8 2016-01-01 12:35:04 2016-01-01 12:35:04
-      # … with 4 more rows
+      # • 4 more rows
 
 # trunc_mat for wide-character columns (#100)
 
