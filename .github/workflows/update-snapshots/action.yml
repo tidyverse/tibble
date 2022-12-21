@@ -26,7 +26,7 @@ runs:
                 print(failures[names(failures) != "result"])
                 print(failures$result)
                 testthat::snapshot_accept()
-                writeLines("changed=true" >> $GITHUB_OUTPUT)
+                writeLines("changed=true", Sys.getenv("GITHUB_OUTPUT"))
               } else {
                 writeLines("Snapshot tests ran successfully.")
               }
