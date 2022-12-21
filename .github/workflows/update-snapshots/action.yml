@@ -65,12 +65,13 @@ runs:
     - name: Create pull request
       if: ${{ steps.check-changed.outputs.changed }}
       id: cpr
-      uses: peter-evans/create-pull-request@v3
+      uses: peter-evans/create-pull-request@v4
       with:
         base: ${{ github.head_ref }}
         branch: snapshot-${{ github.ref_name }}-${{ github.job }}-${{ steps.matrix-desc.outputs.branch }}
         delete-branch: true
         title: Snapshot updates for ${{ github.job }} (${{ steps.matrix-desc.outputs.text }})
+        body: "Automated changes by [create-pull-request](https://github.com/peter-evans/create-pull-request) GitHub action${{ github.event.number && format(' for #{0}', github.event.number) || '' }}."
         add-paths: |
           tests/testthat/_snaps
 
