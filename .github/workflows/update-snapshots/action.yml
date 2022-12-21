@@ -26,7 +26,7 @@ runs:
                 print(failures[names(failures) != "result"])
                 print(failures$result)
                 testthat::snapshot_accept()
-                writeLines("::set-output name=changed::true")
+                writeLines("changed=true" >> $GITHUB_OUTPUT)
               } else {
                 writeLines("Snapshot tests ran successfully.")
               }
@@ -50,7 +50,7 @@ runs:
       if: ${{ steps.run-tests.outputs.changed }}
       id: check-changed
       run: |
-        echo "::set-output name=changed::$(git status --porcelain -- tests/testthat/_snaps)"
+        echo "changed=$(git status --porcelain -- tests/testthat/_snaps)" >> $GITHUB_OUTPUT
       shell: bash
 
     - name: Derive branch name
@@ -58,8 +58,8 @@ runs:
       id: matrix-desc
       run: |
         config=$(echo '${{ toJSON(matrix) }}' | jq -c .)
-        echo "::set-output name=text::$(echo ${config})"
-        echo "::set-output name=branch::$(echo ${config} | sed -r 's/[^0-9a-zA-Z]+/-/g;s/^-//;s/-$//')"
+        echo "text=$(echo ${config})" >> $GITHUB_OUTPUT
+        echo "branch=$(echo ${config} | sed -r 's/[^0-9a-zA-Z]+/-/g;s/^-//;s/-$//')" >> $GITHUB_OUTPUT
       shell: bash
 
     - name: Create pull request

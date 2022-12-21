@@ -10,9 +10,9 @@ runs:
         scope=$( ( grep Config/autostyle/scope DESCRIPTION || true ) | cut -d " " -f 2)
         strict=$( ( grep Config/autostyle/strict DESCRIPTION || true ) | cut -d " " -f 2)
         rmd=$( ( grep Config/autostyle/rmd DESCRIPTION || true ) | cut -d " " -f 2)
-        echo ::set-output name=scope::$scope
-        echo ::set-output name=strict::$strict
-        echo ::set-output name=rmd::$rmd
+        echo scope=$scope >> $GITHUB_OUTPUT
+        echo strict=$strict >> $GITHUB_OUTPUT
+        echo rmd=$rmd >> $GITHUB_OUTPUT
       shell: bash
 
     - uses: actions/cache@v3
