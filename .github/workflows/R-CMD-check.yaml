@@ -184,20 +184,20 @@ jobs:
           - {os: ubuntu-20.04,   r: 'release'}
 
           # Use older ubuntu to maximise backward compatibility
-          - {os: ubuntu-18.04,   r: 'devel',     http-user-agent: 'release'}
-          - {os: ubuntu-18.04,   r: 'release',   covr: true,                  desc: 'with covr'}
-          - {os: ubuntu-18.04,   r: 'oldrel-1'}
+          - {os: ubuntu-22.04,   r: 'devel',     http-user-agent: 'release'}
+          - {os: ubuntu-22.04,   r: 'release',   covr: true,                  desc: 'with covr'}
+          - {os: ubuntu-22.04,   r: 'oldrel-1'}
 
           # Begin custom: R 3.6
-          - {os: ubuntu-18.04,   r: 'oldrel-2'}
+          - {os: ubuntu-22.04,   r: 'oldrel-2'}
           # End custom: R 3.6
 
           # Begin custom: R 3.5
-          - {os: ubuntu-18.04,   r: 'oldrel-3'}
+          - {os: ubuntu-22.04,   r: 'oldrel-3'}
           # End custom: R 3.5
 
           # Begin custom: R 3.4
-          - {os: ubuntu-18.04,   r: 'oldrel-4'}
+          - {os: ubuntu-22.04,   r: 'oldrel-4'}
           # End custom: R 3.4
 
           # Begin custom: matrix elements

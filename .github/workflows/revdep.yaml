@@ -8,7 +8,7 @@ name: revdep
 
 jobs:
   matrix:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
 
@@ -48,7 +48,7 @@ jobs:
         shell: Rscript {0}
 
   check-matrix:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     needs: matrix
     steps:
       - name: Install json2yaml
@@ -65,7 +65,7 @@ jobs:
   R-CMD-check:
     needs: matrix
 
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
 
     name: ${{ matrix.package }}
 
@@ -113,7 +113,7 @@ jobs:
         if: runner.os == 'Linux'
         run: |
           sudo apt-get update -y
-          Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "18.04")); package <- "${{ matrix.package }}"; deps <- tools::package_dependencies(package, which = "Suggests")[[1]]; lapply(c(package, deps), function(x) { writeLines(remotes::system_requirements("ubuntu", "18.04", package = x)) })' | sort | uniq > .github/deps.sh
+          Rscript -e 'writeLines(remotes::system_requirements("ubuntu", "22.04")); package <- "${{ matrix.package }}"; deps <- tools::package_dependencies(package, which = "Suggests")[[1]]; lapply(c(package, deps), function(x) { writeLines(remotes::system_requirements("ubuntu", "22.04", package = x)) })' | sort | uniq > .github/deps.sh
           cat .github/deps.sh
           sudo sh < .github/deps.sh
 
