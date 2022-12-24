@@ -1,0 +1,45 @@
+name: fledge
+
+on:
+  # for manual triggers
+  workflow_dispatch:
+  # for debugging
+  push:
+    paths:
+      - .github/workflows/fledge.yaml
+  # daily run
+  schedule:
+  - cron: "30 0 * * *"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref || '' }}-${{ github.base_ref || '' }}
+  cancel-in-progress: true
+
+jobs:
+  fledge:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      FLEDGE_GHA_CI: true
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/workflows/git-identity
+
+      - uses: ./.github/workflows/install
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          install-r: false
+          cache-version: fledge-1
+          extra-packages: cynkra/fledge
+
+      - name: Bump version
+        run: |
+          if (fledge::bump_version(which = "dev", no_change_behavior = "noop")) {
+            fledge::finalize_version(push = TRUE)
+          }
+        shell: Rscript {0}
