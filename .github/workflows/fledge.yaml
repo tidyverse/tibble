@@ -35,7 +35,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           install-r: false
           cache-version: fledge-1
-          extra-packages: cynkra/fledge
+          packages: cynkra/fledge
 
       - name: Bump version
         run: |
