@@ -9,6 +9,8 @@ runs:
   steps:
     - uses: r-lib/actions/check-r-package@v2
       with:
+        # Fails on R 3.6 on Windows, remove when this job is removed?
+        args: 'c("--no-manual", "--as-cran", "--no-multiarch")'
         error-on: ${{ env.RCMDCHECK_ERROR_ON || '"note"' }}
 
     - name: Run coverage check
