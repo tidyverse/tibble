@@ -636,35 +636,13 @@ is_tight_sequence_at_end <- function(i_new, n) {
 }
 
 tbl_subassign_col <- function(x, j, value) {
-  nrow <- fast_nrow(x)
-
-  # Grow, assign new names
-  new <- attr(j, "new")
-  if (!is.null(new)) {
-    length(x) <- max(j[new])
-    names(x)[j[new]] <- names2(j)[new]
+  if (length(j) > 1) {
+    order_j <- order(j)
+    value <- value[order_j]
+    j <- j[order_j]
   }
 
-  # Update
-  to_remove <- integer()
-  for (jj in seq_along(value)) {
-    ji <- j[[jj]]
-    value_jj <- value[[jj]]
-    if (!is.null(value_jj)) {
-      x[[ji]] <- value_jj
-    } else {
-      to_remove <- c(to_remove, ji)
-    }
-  }
-
-  # Remove
-  if (length(to_remove) > 0) {
-    x <- x[-to_remove]
-  }
-
-  # Can be destroyed by setting length
-  attr(x, "row.names") <- .set_row_names(nrow)
-  x
+  .Call(`tibble_tbl_subassign_col`, x, j, value)
 }
 
 tbl_expand_to_nrow <- function(x, i) {
