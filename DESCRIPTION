@@ -1,6 +1,6 @@
 Package: tibble
 Title: Simple Data Frames
-Version: 3.1.8.9002
+Version: 3.1.8.9006
 Authors@R: 
     c(person(given = "Kirill",
              family = "M\u00fcller",
@@ -73,7 +73,7 @@ Remotes:
     r-lib/vctrs
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Config/testthat/start-first: vignette-formats, subsetting, as_tibble, add, invariants

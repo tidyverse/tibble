@@ -322,7 +322,7 @@ df[[1:2]]
 ```r
 tbl[[1:2]]
 #> Warning: The `j` argument of `[[.tbl_df` can't be a vector of length 2 as of tibble 3.0.0.
-#> Recursive subsetting is deprecated for tibbles.
+#> i Recursive subsetting is deprecated for tibbles.
 #> [1] NA
 ```
 
@@ -338,8 +338,8 @@ df[[c("n", "c")]]
 ```r
 tbl[[c("n", "c")]]
 #> Error in `tbl[[c("n", "c")]]`:
-#> ! Must extract column with a single valid subscript.
-#> x Subscript `c("n", "c")` has size 2 but must be size 1.
+#> ! Can't extract column with `c("n", "c")`.
+#> x Subscript `c("n", "c")` must be size 1, not 2.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -354,9 +354,8 @@ df[[TRUE]]
 ```r
 tbl[[TRUE]]
 #> Error in `tbl[[TRUE]]`:
-#> ! Must extract column with a single valid subscript.
-#> x Subscript `TRUE` has the wrong type `logical`.
-#> i It must be numeric or character.
+#> ! Can't extract column with `TRUE`.
+#> x `TRUE` must be numeric or character, not `TRUE`.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -371,9 +370,8 @@ df[[mean]]
 ```r
 tbl[[mean]]
 #> Error in `tbl[[mean]]`:
-#> ! Must extract column with a single valid subscript.
-#> x Subscript `mean` has the wrong type `function`.
-#> i It must be numeric or character.
+#> ! Can't extract column with `mean`.
+#> x `mean` must be numeric or character, not a function.
 ```
 
 </td></tr></tbody></table>
@@ -392,8 +390,8 @@ df[[NA]]
 ```r
 tbl[[NA]]
 #> Error in `tbl[[NA]]`:
-#> ! Must extract column with a single valid subscript.
-#> x Subscript `NA` can't be `NA`.
+#> ! Can't extract column with `NA`.
+#> x Subscript `NA` must be a location, not an integer `NA`.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -408,8 +406,8 @@ df[[NA_character_]]
 ```r
 tbl[[NA_character_]]
 #> Error in `tbl[[NA_character_]]`:
-#> ! Must extract column with a single valid subscript.
-#> x Subscript `NA_character_` can't be `NA`.
+#> ! Can't extract column with `NA_character_`.
+#> x Subscript `NA_character_` must be a location, not a character `NA`.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -424,8 +422,8 @@ df[[NA_integer_]]
 ```r
 tbl[[NA_integer_]]
 #> Error in `tbl[[NA_integer_]]`:
-#> ! Must extract column with a single valid subscript.
-#> x Subscript `NA_integer_` can't be `NA`.
+#> ! Can't extract column with `NA_integer_`.
+#> x Subscript `NA_integer_` must be a location, not an integer `NA`.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -440,8 +438,8 @@ df[[-1]]
 ```r
 tbl[[-1]]
 #> Error in `tbl[[-1]]`:
-#> ! Must extract column with a single valid subscript.
-#> x Subscript `-1` has value -1 but must be a positive location.
+#> ! Can't extract column with `-1`.
+#> x Subscript `-1` must be a positive location, not -1.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -456,7 +454,7 @@ df[[4]]
 ```r
 tbl[[4]]
 #> Error in `tbl[[4]]`:
-#> ! Can't subset columns past the end.
+#> ! Can't extract columns past the end.
 #> i Location 4 doesn't exist.
 #> i There are only 3 columns.
 ```
@@ -473,7 +471,7 @@ df[[1.5]]
 ```r
 tbl[[1.5]]
 #> Error in `tbl[[1.5]]`:
-#> ! Must extract column with a single valid subscript.
+#> ! Can't extract column with `1.5`.
 #> x Can't convert from `j` <double> to <integer> due to loss of precision.
 ```
 
@@ -489,7 +487,7 @@ df[[Inf]]
 ```r
 tbl[[Inf]]
 #> Error in `tbl[[Inf]]`:
-#> ! Must extract column with a single valid subscript.
+#> ! Can't extract column with `Inf`.
 #> x Can't convert from `j` <double> to <integer> due to loss of precision.
 ```
 
@@ -796,7 +794,7 @@ df[!is.na(df)]
 
 ```r
 tbl[!is.na(tbl)]
-#> Error:
+#> Error in `vec_c()`:
 #> ! Can't combine `n` <integer> and `c` <character>.
 ```
 
@@ -991,9 +989,8 @@ df[mean, ]
 ```r
 tbl[mean, ]
 #> Error in `tbl[mean, ]`:
-#> ! Must subset rows with a valid subscript vector.
-#> x Subscript `mean` has the wrong type `function`.
-#> i It must be logical, numeric, or character.
+#> ! Can't subset rows with `mean`.
+#> x `mean` must be logical, numeric, or character, not a function.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1008,9 +1005,8 @@ df[list(1), ]
 ```r
 tbl[list(1), ]
 #> Error in `tbl[list(1), ]`:
-#> ! Must subset rows with a valid subscript vector.
-#> x Subscript `list(1)` has the wrong type `list`.
-#> i It must be logical, numeric, or character.
+#> ! Can't subset rows with `list(1)`.
+#> x `list(1)` must be logical, numeric, or character, not a list.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1048,7 +1044,7 @@ df[10, ]
 ```r
 tbl[10, ]
 #> Warning: The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
-#> Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> # A tibble: 1 x 3
 #>       n c     li    
 #>   <int> <chr> <list>
@@ -1068,7 +1064,7 @@ df["x", ]
 ```r
 tbl["x", ]
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
-#> Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> # A tibble: 1 x 3
 #>       n c     li    
 #>   <int> <chr> <list>
@@ -1095,9 +1091,8 @@ df[c(TRUE, FALSE), ]
 ```r
 tbl[c(TRUE, FALSE), ]
 #> Error in `tbl[c(TRUE, FALSE), ]`:
-#> ! Must subset rows with a valid subscript vector.
-#> i Logical subscripts must match the size of the indexed input.
-#> x Input has size 4 but subscript `c(TRUE, FALSE)` has size 2.
+#> ! Can't subset rows with `c(TRUE, FALSE)`.
+#> x Logical subscript `c(TRUE, FALSE)` must be size 1 or 4, not 2.
 ```
 
 </td></tr></tbody></table>
@@ -1467,9 +1462,8 @@ with_df(df[[TRUE]] <- 0)
 ```r
 with_tbl(tbl[[TRUE]] <- 0)
 #> Error in `[[<-`:
-#> ! Must assign to column with a single valid subscript.
-#> x Subscript `TRUE` has the wrong type `logical`.
-#> i It must be numeric or character.
+#> ! Can't assign column with `TRUE`.
+#> x `TRUE` must be numeric or character, not `TRUE`.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1484,8 +1478,8 @@ with_df(df[[1:3]] <- 0)
 ```r
 with_tbl(tbl[[1:3]] <- 0)
 #> Error in `[[<-`:
-#> ! Must assign to column with a single valid subscript.
-#> x Subscript `1:3` has size 3 but must be size 1.
+#> ! Can't assign column with `1:3`.
+#> x Subscript `1:3` must be size 1, not 3.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1500,8 +1494,8 @@ with_df(df[[c("n", "c")]] <- 0)
 ```r
 with_tbl(tbl[[c("n", "c")]] <- 0)
 #> Error in `[[<-`:
-#> ! Must assign to column with a single valid subscript.
-#> x Subscript `c("n", "c")` has size 2 but must be size 1.
+#> ! Can't assign column with `c("n", "c")`.
+#> x Subscript `c("n", "c")` must be size 1, not 2.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1516,9 +1510,8 @@ with_df(df[[FALSE]] <- 0)
 ```r
 with_tbl(tbl[[FALSE]] <- 0)
 #> Error in `[[<-`:
-#> ! Must assign to column with a single valid subscript.
-#> x Subscript `FALSE` has the wrong type `logical`.
-#> i It must be numeric or character.
+#> ! Can't assign column with `FALSE`.
+#> x `FALSE` must be numeric or character, not `FALSE`.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1533,8 +1526,8 @@ with_df(df[[1:2]] <- 0)
 ```r
 with_tbl(tbl[[1:2]] <- 0)
 #> Error in `[[<-`:
-#> ! Must assign to column with a single valid subscript.
-#> x Subscript `1:2` has size 2 but must be size 1.
+#> ! Can't assign column with `1:2`.
+#> x Subscript `1:2` must be size 1, not 2.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1549,8 +1542,8 @@ with_df(df[[NA_integer_]] <- 0)
 ```r
 with_tbl(tbl[[NA_integer_]] <- 0)
 #> Error in `[[<-`:
-#> ! Must assign to column with a single valid subscript.
-#> x Subscript `NA_integer_` can't be `NA`.
+#> ! Can't assign column with `NA_integer_`.
+#> x Subscript `NA_integer_` must be a location, not an integer `NA`.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1565,8 +1558,8 @@ with_df(df[[NA]] <- 0)
 ```r
 with_tbl(tbl[[NA]] <- 0)
 #> Error in `[[<-`:
-#> ! Must assign to column with a single valid subscript.
-#> x Subscript `NA` can't be `NA`.
+#> ! Can't assign column with `NA`.
+#> x Subscript `NA` must be a location, not an integer `NA`.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -1581,8 +1574,8 @@ with_df(df[[NA_character_]] <- 0)
 ```r
 with_tbl(tbl[[NA_character_]] <- 0)
 #> Error in `[[<-`:
-#> ! Must assign to column with a single valid subscript.
-#> x Subscript `NA_character_` can't be `NA`.
+#> ! Can't assign column with `NA_character_`.
+#> x Subscript `NA_character_` must be a location, not a character `NA`.
 ```
 
 </td></tr></tbody></table>
@@ -1812,9 +1805,9 @@ with_tbl(tbl[[4]] <- 0)
 with_df(df[[5]] <- 0)
 #> Warning in format.data.frame(if
 #> (omit) x[seq_len(n0), , drop =
-#> FALSE] else x, : corrupt data frame:
-#> columns will be truncated or padded
-#> with NAs
+#> FALSE] else x, : corrupt data
+#> frame: columns will be truncated or
+#> padded with NAs
 #>    n c         li      V5
 #> 1  1 e          9 NULL  0
 #> 2 NA f     10, 11 <NA>  0
@@ -2270,10 +2263,10 @@ with_tbl(tbl[1:2] <- list(1))
 
 ```r
 with_df(df[1:2] <- list(0, 0, 0))
-#> Warning in `[<-.data.frame`(`*tmp*`,
-#> 1:2, value = list(0, 0, 0)):
-#> provided 3 variables to replace 2
-#> variables
+#> Warning in
+#> `[<-.data.frame`(`*tmp*`, 1:2,
+#> value = list(0, 0, 0)): provided 3
+#> variables to replace 2 variables
 #>   n c         li
 #> 1 0 0          9
 #> 2 0 0     10, 11
@@ -2843,7 +2836,7 @@ with_tbl(tbl[1:2] <- array(8:1, dim = c(4, 1, 2)))
 ### `a` is another type of vector
 
 If `vec_is(a)`, then `x[j] <- a` is equivalent to `x[j] <- list(a)`.
-This is primarily provided for backward compatbility.
+This is primarily provided for backward compatibility.
 
 <table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
@@ -3051,27 +3044,27 @@ with_df(df[1] <- lm(mpg ~ wt, data = mtcars))
 #> Warning in
 #> `[<-.data.frame`(`*tmp*`, 1, value
 #> = structure(list(coefficients =
-#> c(`(Intercept)` = 37.285126167342, :
-#> replacement element 2 has 32 rows to
-#> replace 4 rows
+#> c(`(Intercept)` = 37.285126167342,
+#> : replacement element 2 has 32 rows
+#> to replace 4 rows
 #> Warning in
 #> `[<-.data.frame`(`*tmp*`, 1, value
 #> = structure(list(coefficients =
-#> c(`(Intercept)` = 37.285126167342, :
-#> replacement element 3 has 32 rows to
-#> replace 4 rows
+#> c(`(Intercept)` = 37.285126167342,
+#> : replacement element 3 has 32 rows
+#> to replace 4 rows
 #> Warning in
 #> `[<-.data.frame`(`*tmp*`, 1, value
 #> = structure(list(coefficients =
-#> c(`(Intercept)` = 37.285126167342, :
-#> replacement element 5 has 32 rows to
-#> replace 4 rows
+#> c(`(Intercept)` = 37.285126167342,
+#> : replacement element 5 has 32 rows
+#> to replace 4 rows
 #> Warning in
 #> `[<-.data.frame`(`*tmp*`, 1, value
 #> = structure(list(coefficients =
-#> c(`(Intercept)` = 37.285126167342, :
-#> replacement element 7 has 5 rows to
-#> replace 4 rows
+#> c(`(Intercept)` = 37.285126167342,
+#> : replacement element 7 has 5 rows
+#> to replace 4 rows
 #> Error in `[<-.data.frame`(`*tmp*`, 1, value = structure(list(coefficients = c(`(Intercept)` = 37.285126167342, : replacement element 10 has 3 rows, need 4
 ```
 
@@ -3159,7 +3152,7 @@ with_df(df[0:2, ] <- df[1, ])
 ```r
 with_tbl(tbl[0:2, ] <- tbl[1, ])
 #> Error in `[<-`:
-#> ! Must assign to rows with a valid subscript vector.
+#> ! Can't assign rows with `0:2`.
 #> x Subscript `0:2` can't contain `0` values.
 #> i It has a `0` value at location 1.
 ```
@@ -3180,7 +3173,7 @@ with_df(df[0, ] <- df[1, ])
 ```r
 with_tbl(tbl[0, ] <- tbl[1, ])
 #> Error in `[<-`:
-#> ! Must assign to rows with a valid subscript vector.
+#> ! Can't assign rows with `0`.
 #> x Subscript `0` can't contain `0` values.
 #> i It has a `0` value at location 1.
 ```
@@ -3221,7 +3214,7 @@ with_df(df[-1:2, ] <- df[1, ])
 ```r
 with_tbl(tbl[-1:2, ] <- tbl[1, ])
 #> Error in `[<-`:
-#> ! Must assign to rows with a valid subscript vector.
+#> ! Can't assign rows with `-1:2`.
 #> x Subscript `-1:2` can't contain `0` values.
 #> i It has a `0` value at location 2.
 ```
@@ -3238,7 +3231,7 @@ with_df(df[NA_integer_, ] <- df[1, ])
 ```r
 with_tbl(tbl[NA_integer_, ] <- tbl[1, ])
 #> Error in `[<-`:
-#> ! Must assign to rows with a valid subscript vector.
+#> ! Can't assign rows with `NA_integer_`.
 #> x Subscript `NA_integer_` can't contain missing values.
 #> x It has a missing value at location 1.
 ```
@@ -3255,7 +3248,7 @@ with_df2(df2[NA_integer_, ] <- df2[1, ])
 ```r
 with_tbl2(tbl2[NA_integer_, ] <- tbl2[1, ])
 #> Error in `[<-`:
-#> ! Must assign to rows with a valid subscript vector.
+#> ! Can't assign rows with `NA_integer_`.
 #> x Subscript `NA_integer_` can't contain missing values.
 #> x It has a missing value at location 1.
 ```
@@ -3635,7 +3628,7 @@ with_df(df[as.character(-(1:3)), ] <- df[1, ])
 ```r
 with_tbl(tbl[as.character(-(1:3)), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
-#> Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
@@ -3657,7 +3650,7 @@ with_df(df[as.character(3:5), ] <- df[1, ])
 ```r
 with_tbl(tbl[as.character(3:5), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
-#> Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
@@ -3681,7 +3674,7 @@ with_df(df[as.character(-(3:5)), ] <- df[1, ])
 ```r
 with_tbl(tbl[as.character(-(3:5)), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
-#> Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
@@ -3741,10 +3734,10 @@ with_tbl(tbl[2:3, 1] <- tbl[1:2, 2])
 
 ```r
 with_df(df[2:3, 2] <- df[1:2, 3])
-#> Warning in `[<-.data.frame`(`*tmp*`,
-#> 2:3, 2, value = list(9, 10:11)):
-#> provided 2 variables to replace 1
-#> variables
+#> Warning in
+#> `[<-.data.frame`(`*tmp*`, 2:3, 2,
+#> value = list(9, 10:11)): provided 2
+#> variables to replace 1 variables
 #>    n c         li
 #> 1  1 e          9
 #> 2 NA 9     10, 11
@@ -3767,10 +3760,11 @@ with_tbl(tbl[2:3, 2] <- tbl[1:2, 3])
 
 ```r
 with_df(df[2:3, 3] <- df2[1:2, 1])
-#> Warning in `[<-.data.frame`(`*tmp*`,
-#> 2:3, 3, value = structure(list(n
-#> = c(1L, : provided 3 variables to
-#> replace 1 variables
+#> Warning in
+#> `[<-.data.frame`(`*tmp*`, 2:3, 3,
+#> value = structure(list(n = c(1L, :
+#> provided 3 variables to replace 1
+#> variables
 #>    n c   li
 #> 1  1 e    9
 #> 2 NA f    1
@@ -3793,10 +3787,10 @@ with_tbl(tbl[2:3, 3] <- tbl2[1:2, 1])
 
 ```r
 with_df2(df2[2:3, 1] <- df2[1:2, 2])
-#> Warning in matrix(value, n, p): data
-#> length [8] is not a sub-multiple or
-#> multiple of the number of columns
-#> [3]
+#> Warning in matrix(value, n, p):
+#> data length [8] is not a
+#> sub-multiple or multiple of the
+#> number of columns [3]
 #>   tb.n tb.c tb.li m.1 m.2 m.3 m.4
 #> 1    1    e     9   1   0   0   0
 #> 2    1    0     0   0   1   0   0
@@ -4250,8 +4244,8 @@ df[[1:2, 1]]
 ```r
 tbl[[1:2, 1]]
 #> Error in `tbl[[1:2, 1]]`:
-#> ! Must extract row with a single valid subscript.
-#> x Subscript `1:2` has size 2 but must be size 1.
+#> ! Can't extract row with `1:2`.
+#> x Subscript `1:2` must be size 1, not 2.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -4266,8 +4260,8 @@ with_df(df[[1:2, 1]] <- 0)
 ```r
 with_tbl(tbl[[1:2, 1]] <- 0)
 #> Error in `[[<-`:
-#> ! Must assign to row with a single valid subscript.
-#> x Subscript `1:2` has size 2 but must be size 1.
+#> ! Can't assign row with `1:2`.
+#> x Subscript `1:2` must be size 1, not 2.
 ```
 
 </td></tr></tbody></table>

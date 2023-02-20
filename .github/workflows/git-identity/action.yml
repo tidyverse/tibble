@@ -1,4 +1,4 @@
-name: 'Actions to set up a Git identity'
+name: "Actions to set up a Git identity"
 
 runs:
   using: "composite"

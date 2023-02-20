@@ -14,7 +14,7 @@ Provides a 'tbl_df' class (the 'tibble') with stricter checking and better forma
 
 The tibble package provides utilities for handling \strong{tibbles}, where
 "tibble" is a colloquial term for the S3 \code{\link{tbl_df}} class. The \code{\link{tbl_df}}
-class is a special case of the base \code{\link[base:data.frame]{data.frame}}.
+class is a special case of the base \code{\link[base:data.frame]{data.frame}}
 class, developed in response to lessons learned over many years of data
 analysis with data frames.
 

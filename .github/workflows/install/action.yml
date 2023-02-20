@@ -1,4 +1,4 @@
-name: 'Actions to run for installing R packages'
+name: "Actions to run for installing R packages"
 inputs:
   token:
     description: GitHub token, set to secrets.GITHUB_TOKEN
@@ -14,7 +14,11 @@ inputs:
   needs:
     description: Passed on to r-lib/actions/setup-r-dependencies@v2
     required: false
-    default: ''
+    default: ""
+  packages:
+    description: Passed on to r-lib/actions/setup-r-dependencies@v2
+    required: false
+    default: deps::., any::sessioninfo
   extra-packages:
     description: Passed on to r-lib/actions/setup-r-dependencies@v2
     required: false
@@ -59,8 +63,10 @@ runs:
       env:
         GITHUB_PAT: ${{ inputs.token }}
       with:
+        pak-version: devel
         needs: ${{ inputs.needs }}
-        extra-packages: ${{ inputs.extra-packages }} ${{ matrix.config.covr && 'any::covr' }} ${{ steps.get-extra.outputs.packages }}
+        packages: ${{ inputs.packages }}
+        extra-packages: ${{ inputs.extra-packages }} ${{ ( matrix.config.covr && 'any::covr' ) || '' }} ${{ steps.get-extra.outputs.packages }}
         cache-version: ${{ inputs.cache-version }}
 
     - name: Add pkg.lock to .gitignore
@@ -77,12 +83,3 @@ runs:
         sudo ln -s $(which true) /usr/local/bin/qpdf
         sudo ln -s $(which true) /usr/local/bin/checkbashisms
       shell: bash
-
-    - name: "Band aid: install rmarkdown from GitHub in older R"
-      run: |
-        try(
-          if (getRversion() < "3.5" && packageVersion("rmarkdown") < "2.13") {
-            pak::pak("rstudio/rmarkdown")
-          }
-        )
-      shell: Rscript {0}

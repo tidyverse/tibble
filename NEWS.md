@@ -1,4 +1,48 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
+
+# tibble 3.1.8.9006
+
+- Internal changes only.
+
+
+# tibble 3.1.8.9005
+
+- Internal changes only.
+
+
+# tibble 3.1.8.9004
+
+- Internal changes only.
+
+
+# tibble 3.1.8.9003
+
+## Chore
+
+- Remove legacy expectation (#1468).
+
+## Documentation
+
+- Use lambda in `across()` in vignette for compatibility with dplyr 1.1.0 (#1485).
+
+## Uncategorized
+
+- Merge pull request #1481 from tidyverse/snapshot-main-rcc-smoke-null.
+
+
+
+- Harmonize yaml formatting.
+
+- Revert changes to matrix section.
+
+- Merge pull request #1475 from tidyverse/snapshot-main-rcc-smoke-null.
+
+
+
+- Merge pull request #1474 from IndrajeetPatil/doc_edits.
+
+
+
 
 # tibble 3.1.8.9002
 

@@ -1,4 +1,4 @@
-name: 'Action to determine extra packages to be installed'
+name: "Action to determine extra packages to be installed"
 outputs:
   packages:
     description: "List of extra packages"
@@ -12,5 +12,5 @@ runs:
       run: |
         set -x
         packages=$( ( grep Config/gha/extra-packages DESCRIPTION || true ) | cut -d " " -f 2)
-        echo ::set-output name=packages::$packages
+        echo packages=$packages >> $GITHUB_OUTPUT
       shell: bash

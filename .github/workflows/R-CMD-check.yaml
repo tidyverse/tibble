@@ -14,7 +14,7 @@ on:
       - main
       - master
   schedule:
-    - cron:  '10 0 * * *'
+    - cron: "10 0 * * *"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref || '' }}-${{ github.base_ref || '' }}
@@ -34,7 +34,7 @@ jobs:
     # End custom: services
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: ./.github/workflows/rate-limit
         with:
@@ -86,7 +86,7 @@ jobs:
     # End custom: services
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: ${{ needs.rcc-smoke.outputs.sha }}
 
@@ -141,7 +141,7 @@ jobs:
           - {os: windows-latest, r: '3.6'}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: ${{ needs.rcc-smoke.outputs.sha }}
 
@@ -179,32 +179,32 @@ jobs:
       fail-fast: false
       matrix:
         config:
-          - {os: macOS-latest,   r: 'release'}
+          - {os: macos-latest,   r: 'release'}
 
           - {os: ubuntu-20.04,   r: 'release'}
 
           # Use older ubuntu to maximise backward compatibility
-          - {os: ubuntu-18.04,   r: 'devel',     http-user-agent: 'release'}
-          - {os: ubuntu-18.04,   r: 'release',   covr: true,                  desc: 'with covr'}
-          - {os: ubuntu-18.04,   r: 'oldrel-1'}
+          - {os: ubuntu-22.04,   r: 'devel',     http-user-agent: 'release'}
+          - {os: ubuntu-22.04,   r: 'release',   covr: true,                  desc: 'with covr'}
+          - {os: ubuntu-22.04,   r: 'oldrel-1'}
 
           # Begin custom: R 3.6
-          - {os: ubuntu-18.04,   r: 'oldrel-2'}
+          - {os: ubuntu-22.04,   r: 'oldrel-2'}
           # End custom: R 3.6
 
           # Begin custom: R 3.5
-          - {os: ubuntu-18.04,   r: 'oldrel-3'}
+          - {os: ubuntu-22.04,   r: 'oldrel-3'}
           # End custom: R 3.5
 
           # Begin custom: R 3.4
-          - {os: ubuntu-18.04,   r: 'oldrel-4'}
+          - {os: ubuntu-22.04,   r: 'oldrel-4'}
           # End custom: R 3.4
 
           # Begin custom: matrix elements
           # End custom: matrix elements
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
         with:
           ref: ${{ needs.rcc-smoke.outputs.sha }}
 

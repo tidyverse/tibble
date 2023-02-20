@@ -2,12 +2,12 @@
 # Can't be run as part of commits
 on:
   schedule:
-    - cron:  '5 0 * * *' # 05:00 UTC every day only run on main branch
+    - cron: "5 0 * * *" # 05:00 UTC every day only run on main branch
   push:
     branches:
-    - "cran-*"
+      - "cran-*"
     tags:
-    - "v*"
+      - "v*"
 
 name: rcc dev
 
@@ -20,7 +20,7 @@ jobs:
     name: Collect deps
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: ./.github/workflows/rate-limit
         with:
@@ -34,7 +34,7 @@ jobs:
         uses: ./.github/workflows/dep-matrix
 
   check-matrix:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     needs: matrix
 
     name: Check deps
@@ -52,7 +52,7 @@ jobs:
           echo $matrix | json2yaml
 
   R-CMD-check-base:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
 
     name: base
 
@@ -61,10 +61,9 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix: ${{fromJson(needs.matrix.outputs.matrix)}}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: ./.github/workflows/custom/before-install
         if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
@@ -97,10 +96,10 @@ jobs:
 
   R-CMD-check-dev:
     needs:
-    - matrix
-    - R-CMD-check-base
+      - matrix
+      - R-CMD-check-base
 
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
 
     name: ${{ matrix.package }}
 
@@ -112,7 +111,7 @@ jobs:
       matrix: ${{fromJson(needs.matrix.outputs.matrix)}}
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: ./.github/workflows/custom/before-install
         if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''

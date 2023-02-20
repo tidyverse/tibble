@@ -1,6 +1,6 @@
-name: 'Check GitHub rate limits'
+name: "Check GitHub rate limits"
 inputs:
-  token:  # id of input
+  token: # id of input
     description: GitHub token, pass secrets.GITHUB_TOKEN
     required: true
 
