@@ -137,13 +137,13 @@ stocks %>%
 It pays off to specify formatting very early in the process.
 The diagram below shows the principal stages of data analysis and exploration from "R for data science".
 
-![](${TEMP}/formats_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+
 
 The subsequent diagram adds data formats, communication options, and explicit data formatting.
 The original r4ds transitions are highlighted in bold.
 There are two principal options where to apply formatting for results: right before communicating them, or right after importing.
 
-![](${TEMP}/formats_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+
 
 Applying formatting early in the process gives the added benefit of showing the data in a useful format during the "Tidy", "Transform", and "Visualize" stages.
 For this to be useful, we need to ensure that the formatting options applied early:
