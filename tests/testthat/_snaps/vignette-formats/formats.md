@@ -137,13 +137,21 @@ stocks %>%
 It pays off to specify formatting very early in the process.
 The diagram below shows the principal stages of data analysis and exploration from "R for data science".
 
-![](${TEMP}/formats_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+
+```{=html}
+<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-dbf0c8daf9db0415fdf5" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-dbf0c8daf9db0415fdf5">{"x":{"diagram":"graph TD\n  Import --> Tidy\n  Tidy --> Transform\n  Transform --> Visualize\n  Visualize --> Communicate\n  Visualize --> Model\n  Model -.-> Transform"},"evals":[],"jsHooks":[]}</script>
+```
 
 The subsequent diagram adds data formats, communication options, and explicit data formatting.
 The original r4ds transitions are highlighted in bold.
 There are two principal options where to apply formatting for results: right before communicating them, or right after importing.
 
-![](${TEMP}/formats_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+
+```{=html}
+<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-ec529900dc9c9fda496e" style="width:672px;height:480px;"></div>
+<script type="application/json" data-for="htmlwidget-ec529900dc9c9fda496e">{"x":{"diagram":"graph TD\n  .csv --> Import\n  API --> Import\n  DBI --> Import\n  dbplyr --> Import\n  Import -.-> Format[Format for analysis]\n  Format -.-> Tidy\n\n  subgraph r4ds\n  Import ==> Tidy\n  Tidy ==> Transform\n  Transform ==> Visualize\n  Visualize ==> Model\n  Model -.-> Transform\n  Visualize ==> Communicate\n  end\n\n  Visualize -.-> FormatComm[Format for communication]\n  FormatComm -.-> Communicate\n\n  FormatComm -- Apply formatting early --> Format\n\n  dbplyr -.-> Tidy\n  dbplyr -.-> Transform\n  dbplyr -.-> Visualize\n\n  Communicate --> gt\n  Communicate --> ggplot2\n  Communicate --> DT\n  Communicate --> plotly"},"evals":[],"jsHooks":[]}</script>
+```
 
 Applying formatting early in the process gives the added benefit of showing the data in a useful format during the "Tidy", "Transform", and "Visualize" stages.
 For this to be useful, we need to ensure that the formatting options applied early:
