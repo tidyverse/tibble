@@ -15,8 +15,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.4/font.css" rel="stylesheet">
-<link href="../deps/Source_Code_Pro-0.4.4/font.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.5/font.css" rel="stylesheet">
+<link href="../deps/Source_Code_Pro-0.4.5/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Invariants: Comparing behavior with data frames">
@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.1.8.9003</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.1.8.9006</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -1060,9 +1060,9 @@ right hand side, with name repair if needed.</p>
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[[</span><span class="fl">5</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Warning in format.data.frame(if</span></span>
 <span><span class="co">#&gt; (omit) x[seq_len(n0), , drop =</span></span>
-<span><span class="co">#&gt; FALSE] else x, : corrupt data frame:</span></span>
-<span><span class="co">#&gt; columns will be truncated or padded</span></span>
-<span><span class="co">#&gt; with NAs</span></span>
+<span><span class="co">#&gt; FALSE] else x, : corrupt data</span></span>
+<span><span class="co">#&gt; frame: columns will be truncated or</span></span>
+<span><span class="co">#&gt; padded with NAs</span></span>
 <span><span class="co">#&gt;    n c         li      V5</span></span>
 <span><span class="co">#&gt; 1  1 e          9 NULL  0</span></span>
 <span><span class="co">#&gt; 2 NA f     10, 11 &lt;NA&gt;  0</span></span>
@@ -1231,10 +1231,10 @@ length as <code>j</code>.</p>
 <td>
 <div class="sourceCode" id="cb84"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
-<span><span class="co">#&gt; 1:2, value = list(0, 0, 0)):</span></span>
-<span><span class="co">#&gt; provided 3 variables to replace 2</span></span>
-<span><span class="co">#&gt; variables</span></span>
+<span><span class="co">#&gt; Warning in</span></span>
+<span><span class="co">#&gt; `[&lt;-.data.frame`(`*tmp*`, 1:2,</span></span>
+<span><span class="co">#&gt; value = list(0, 0, 0)): provided 3</span></span>
+<span><span class="co">#&gt; variables to replace 2 variables</span></span>
 <span><span class="co">#&gt;   n c         li</span></span>
 <span><span class="co">#&gt; 1 0 0          9</span></span>
 <span><span class="co">#&gt; 2 0 0     10, 11</span></span>
@@ -1727,27 +1727,27 @@ and <code><a href="https://vctrs.r-lib.org/reference/vec_proxy.html" class="exte
 <span><span class="co">#&gt; Warning in</span></span>
 <span><span class="co">#&gt; `[&lt;-.data.frame`(`*tmp*`, 1, value</span></span>
 <span><span class="co">#&gt; = structure(list(coefficients =</span></span>
-<span><span class="co">#&gt; c(`(Intercept)` = 37.285126167342, :</span></span>
-<span><span class="co">#&gt; replacement element 2 has 32 rows to</span></span>
-<span><span class="co">#&gt; replace 4 rows</span></span>
+<span><span class="co">#&gt; c(`(Intercept)` = 37.285126167342,</span></span>
+<span><span class="co">#&gt; : replacement element 2 has 32 rows</span></span>
+<span><span class="co">#&gt; to replace 4 rows</span></span>
 <span><span class="co">#&gt; Warning in</span></span>
 <span><span class="co">#&gt; `[&lt;-.data.frame`(`*tmp*`, 1, value</span></span>
 <span><span class="co">#&gt; = structure(list(coefficients =</span></span>
-<span><span class="co">#&gt; c(`(Intercept)` = 37.285126167342, :</span></span>
-<span><span class="co">#&gt; replacement element 3 has 32 rows to</span></span>
-<span><span class="co">#&gt; replace 4 rows</span></span>
+<span><span class="co">#&gt; c(`(Intercept)` = 37.285126167342,</span></span>
+<span><span class="co">#&gt; : replacement element 3 has 32 rows</span></span>
+<span><span class="co">#&gt; to replace 4 rows</span></span>
 <span><span class="co">#&gt; Warning in</span></span>
 <span><span class="co">#&gt; `[&lt;-.data.frame`(`*tmp*`, 1, value</span></span>
 <span><span class="co">#&gt; = structure(list(coefficients =</span></span>
-<span><span class="co">#&gt; c(`(Intercept)` = 37.285126167342, :</span></span>
-<span><span class="co">#&gt; replacement element 5 has 32 rows to</span></span>
-<span><span class="co">#&gt; replace 4 rows</span></span>
+<span><span class="co">#&gt; c(`(Intercept)` = 37.285126167342,</span></span>
+<span><span class="co">#&gt; : replacement element 5 has 32 rows</span></span>
+<span><span class="co">#&gt; to replace 4 rows</span></span>
 <span><span class="co">#&gt; Warning in</span></span>
 <span><span class="co">#&gt; `[&lt;-.data.frame`(`*tmp*`, 1, value</span></span>
 <span><span class="co">#&gt; = structure(list(coefficients =</span></span>
-<span><span class="co">#&gt; c(`(Intercept)` = 37.285126167342, :</span></span>
-<span><span class="co">#&gt; replacement element 7 has 5 rows to</span></span>
-<span><span class="co">#&gt; replace 4 rows</span></span>
+<span><span class="co">#&gt; c(`(Intercept)` = 37.285126167342,</span></span>
+<span><span class="co">#&gt; : replacement element 7 has 5 rows</span></span>
+<span><span class="co">#&gt; to replace 4 rows</span></span>
 <span><span class="co">#&gt; Error in `[&lt;-.data.frame`(`*tmp*`, 1, value = structure(list(coefficients = c(`(Intercept)` = 37.285126167342, : replacement element 10 has 3 rows, need 4</span></span></code></pre></div>
 </td>
 <td>
@@ -2035,10 +2035,10 @@ of existing columns.</p>
 <td>
 <div class="sourceCode" id="cb143"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">3</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
-<span><span class="co">#&gt; 2:3, 2, value = list(9, 10:11)):</span></span>
-<span><span class="co">#&gt; provided 2 variables to replace 1</span></span>
-<span><span class="co">#&gt; variables</span></span>
+<span><span class="co">#&gt; Warning in</span></span>
+<span><span class="co">#&gt; `[&lt;-.data.frame`(`*tmp*`, 2:3, 2,</span></span>
+<span><span class="co">#&gt; value = list(9, 10:11)): provided 2</span></span>
+<span><span class="co">#&gt; variables to replace 1 variables</span></span>
 <span><span class="co">#&gt;    n c         li</span></span>
 <span><span class="co">#&gt; 1  1 e          9</span></span>
 <span><span class="co">#&gt; 2 NA 9     10, 11</span></span>
@@ -2061,10 +2061,11 @@ of existing columns.</p>
 <td>
 <div class="sourceCode" id="cb145"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">df2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">1</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in `[&lt;-.data.frame`(`*tmp*`,</span></span>
-<span><span class="co">#&gt; 2:3, 3, value = structure(list(n</span></span>
-<span><span class="co">#&gt; = c(1L, : provided 3 variables to</span></span>
-<span><span class="co">#&gt; replace 1 variables</span></span>
+<span><span class="co">#&gt; Warning in</span></span>
+<span><span class="co">#&gt; `[&lt;-.data.frame`(`*tmp*`, 2:3, 3,</span></span>
+<span><span class="co">#&gt; value = structure(list(n = c(1L, :</span></span>
+<span><span class="co">#&gt; provided 3 variables to replace 1</span></span>
+<span><span class="co">#&gt; variables</span></span>
 <span><span class="co">#&gt;    n c   li</span></span>
 <span><span class="co">#&gt; 1  1 e    9</span></span>
 <span><span class="co">#&gt; 2 NA f    1</span></span>
@@ -2087,10 +2088,10 @@ of existing columns.</p>
 <td>
 <div class="sourceCode" id="cb147"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df2</span><span class="op">(</span><span class="va">df2</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">df2</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="fl">2</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Warning in matrix(value, n, p): data</span></span>
-<span><span class="co">#&gt; length [8] is not a sub-multiple or</span></span>
-<span><span class="co">#&gt; multiple of the number of columns</span></span>
-<span><span class="co">#&gt; [3]</span></span>
+<span><span class="co">#&gt; Warning in matrix(value, n, p):</span></span>
+<span><span class="co">#&gt; data length [8] is not a</span></span>
+<span><span class="co">#&gt; sub-multiple or multiple of the</span></span>
+<span><span class="co">#&gt; number of columns [3]</span></span>
 <span><span class="co">#&gt;   tb.n tb.c tb.li m.1 m.2 m.3 m.4</span></span>
 <span><span class="co">#&gt; 1    1    e     9   1   0   0   0</span></span>
 <span><span class="co">#&gt; 2    1    0     0   0   1   0   0</span></span>
