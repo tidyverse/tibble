@@ -3,10 +3,6 @@ name: fledge
 on:
   # for manual triggers
   workflow_dispatch:
-  # for debugging
-  push:
-    paths:
-      - .github/workflows/fledge.yaml
   # daily run
   schedule:
   - cron: "30 0 * * *"
@@ -16,8 +12,20 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  check_fork:
+    runs-on: ubuntu-latest
+    outputs:
+      is_forked: ${{ steps.check.outputs.is_forked }}
+    steps:
+      - name: Check if the repo is forked
+        id: check
+        run: |
+          echo "is_forked=$(curl -s -H "Accept: application/vnd.github+json" -H 'Authorization: Bearer ${{ github.token }}' -H "X-GitHub-Api-Version: 2022-11-28" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY} | jq .fork)" >> $GITHUB_OUTPUT
+
   fledge:
     runs-on: ubuntu-latest
+    needs: check_fork
+    if: needs.check_fork.outputs.is_forked == 'false'
     permissions:
       contents: write
     env:
