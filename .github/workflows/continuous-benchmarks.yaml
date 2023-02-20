@@ -9,10 +9,10 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout repo
-        uses: actions/checkout@master
+        uses: actions/checkout@main
 
       - name: Setup R
-        uses: r-lib/actions/setup-r@master
+        uses: r-lib/actions/setup-r@main
         with:
           r-version: 'release'
 
