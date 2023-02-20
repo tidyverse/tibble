@@ -110,7 +110,7 @@ stocks <-
   mutate(stock = currency(runif(20) * 10000))
 
 stocks %>%
-  pivot_wider(id, names_from = year, values_from = stock)
+  pivot_wider(id_cols = id, names_from = year, values_from = stock)
 #> # A tibble: 4 x 6
 #>   id    `2018`     `2019`     `2020`     `2021`     `2022`    
 #>   <fct> <formttbl> <formttbl> <formttbl> <formttbl> <formttbl>
@@ -184,8 +184,8 @@ tbl3
 
 tbl3 %>%
   mutate(
-    across(where(is.numeric), digits, 3),
-    across(where(~ is.numeric(.x) && mean(.x) > 50), digits, 1)
+    across(where(is.numeric), ~ digits(.x, 3)),
+    across(where(~ is.numeric(.x) && mean(.x) > 50), ~ digits(.x, 1))
   )
 #> # A tibble: 3 x 9
 #>   id    x          y          z          v          lag       sin    mean  var  
@@ -200,8 +200,8 @@ These rules can be stored in `quos()`:
 
 ```r
 rules <- quos(
-  across(where(is.numeric), digits, 3),
-  across(where(~ is.numeric(.x) && mean(.x) > 50), digits, 1)
+  across(where(is.numeric), ~ digits(.x, 3)),
+  across(where(~ is.numeric(.x) && mean(.x) > 50), ~ digits(.x, 1))
 )
 
 tbl3 %>%
