@@ -6,6 +6,7 @@ on:
     branches:
       - "docs*"
       - "cran-*"
+  workflow_dispatch:
 
 name: pkgdown
 

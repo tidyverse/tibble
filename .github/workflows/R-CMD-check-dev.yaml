@@ -34,7 +34,7 @@ jobs:
         uses: ./.github/workflows/dep-matrix
 
   check-matrix:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
     needs: matrix
 
     name: Check deps
@@ -52,7 +52,7 @@ jobs:
           echo $matrix | json2yaml
 
   R-CMD-check-base:
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
 
     name: base
 
@@ -99,7 +99,7 @@ jobs:
       - matrix
       - R-CMD-check-base
 
-    runs-on: ubuntu-18.04
+    runs-on: ubuntu-22.04
 
     name: ${{ matrix.package }}
 

@@ -10,9 +10,9 @@ runs:
         scope=$( ( grep Config/autostyle/scope DESCRIPTION || true ) | cut -d " " -f 2)
         strict=$( ( grep Config/autostyle/strict DESCRIPTION || true ) | cut -d " " -f 2)
         rmd=$( ( grep Config/autostyle/rmd DESCRIPTION || true ) | cut -d " " -f 2)
-        echo ::set-output name=scope::$scope
-        echo ::set-output name=strict::$strict
-        echo ::set-output name=rmd::$rmd
+        echo scope=$scope >> $GITHUB_OUTPUT
+        echo strict=$strict >> $GITHUB_OUTPUT
+        echo rmd=$rmd >> $GITHUB_OUTPUT
       shell: bash
 
     - uses: actions/cache@v3
@@ -24,18 +24,18 @@ runs:
         restore-keys: |
           ${{ runner.os }}-2-
 
+    - name: Imprint run ID
+      if: ${{ steps.check.outputs.scope }}
+      run: |
+        mkdir -p ~/.cache/R/R.cache/styler
+        touch ~/.cache/R/R.cache/${{ github.run_id }}
+      shell: bash
+
     - name: Show cache
       if: ${{ steps.check.outputs.scope }}
       run: |
         ls -l ~/.cache/R/R.cache
         ls -l ~/.cache/R/R.cache/styler
-        gdu -s --inodes ~/.cache/R/R.cache/styler/* || du -s --inodes ~/.cache/R/R.cache/styler/*
-      shell: bash
-
-    - name: Imprint run ID
-      if: ${{ steps.check.outputs.scope }}
-      run: |
-        touch ~/.cache/R/R.cache/${{ github.run_id }}
       shell: bash
 
     - name: Enable styler cache

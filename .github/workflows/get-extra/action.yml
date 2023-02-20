@@ -12,5 +12,5 @@ runs:
       run: |
         set -x
         packages=$( ( grep Config/gha/extra-packages DESCRIPTION || true ) | cut -d " " -f 2)
-        echo ::set-output name=packages::$packages
+        echo packages=$packages >> $GITHUB_OUTPUT
       shell: bash

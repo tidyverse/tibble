@@ -130,5 +130,5 @@ runs:
           ']}'
         )
         writeLines(json)
-        writeLines(paste0("::set-output name=matrix::", json))
+        writeLines(paste0("matrix=", json), Sys.getenv("GITHUB_OUTPUT"))
       shell: Rscript {0}
