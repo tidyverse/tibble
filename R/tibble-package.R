@@ -1,14 +1,34 @@
-#' @useDynLib tibble, .registration = TRUE
-#' @importFrom utils head tail
+## usethis namespace: start
+#' @importFrom lifecycle deprecate_soft
+#' @importFrom lifecycle deprecate_warn
+#' @importFrom lifecycle expect_deprecated
 #' @importFrom pkgconfig set_config
-#' @import rlang
-#' @importFrom lifecycle deprecate_soft deprecate_warn expect_deprecated
-#' @importFrom vctrs vec_as_location vec_as_location2 vec_as_names vec_as_names_legacy vec_c
-#' @importFrom vctrs vec_is vec_rbind vec_recycle vec_size vec_slice vec_assign
-#' @importFrom vctrs unspecified vec_as_subscript2 num_as_location vec_ptype_abbr
-#' @importFrom vctrs vec_names vec_names2 vec_set_names
-#' @importFrom vctrs new_rcrd
+#' @importFrom utils head tail
 #' @importFrom vctrs new_data_frame
+#' @importFrom vctrs new_rcrd
+#' @importFrom vctrs num_as_location
+#' @importFrom vctrs unspecified
+#' @importFrom vctrs vec_as_location
+#' @importFrom vctrs vec_as_location2
+#' @importFrom vctrs vec_as_names
+#' @importFrom vctrs vec_as_names_legacy
+#' @importFrom vctrs vec_as_subscript2
+#' @importFrom vctrs vec_assign
+#' @importFrom vctrs vec_c
+#' @importFrom vctrs vec_is
+#' @importFrom vctrs vec_names
+#' @importFrom vctrs vec_names2
+#' @importFrom vctrs vec_ptype_abbr
+#' @importFrom vctrs vec_rbind
+#' @importFrom vctrs vec_recycle
+#' @importFrom vctrs vec_set_names
+#' @importFrom vctrs vec_size
+#' @importFrom vctrs vec_slice
+## usethis namespace: end
+NULL
+
+#' @useDynLib tibble, .registration = TRUE
+#' @import rlang
 #' @aliases NULL tibble-package
 #' @details
 #' `r lifecycle::badge("stable")`
