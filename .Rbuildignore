@@ -37,3 +37,4 @@
 ^\.Rprofile$
 ^src/Makevars\.debug$
 ^\.vscode$
+^\.gitpod\.yml$
