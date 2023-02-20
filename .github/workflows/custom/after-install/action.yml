@@ -1,0 +1,9 @@
+name: 'Custom steps to run after R packages are installed'
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install PhantomJS
+      run: |
+        webshot::install_phantomjs()
+      shell: Rscript {0}

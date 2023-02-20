@@ -67,6 +67,7 @@ Suggests:
     stringi,
     testthat (>= 3.0.2),
     tidyr,
+    webshot,
     withr
 VignetteBuilder: 
     knitr
