@@ -84,49 +84,49 @@ test_that("tribble() creates lists for non-atomic inputs (#7)", {
 
 test_that("tribble() errs appropriately on bad calls", {
   # no colname
-  expect_tibble_error(
+  expect_tibble_abort(
     tribble(1, 2, 3),
-    error_tribble_needs_columns()
+    abort_tribble_needs_columns()
   )
 
   # invalid colname syntax
-  expect_tibble_error(
+  expect_tibble_abort(
     tribble(a ~ b),
-    error_tribble_lhs_column_syntax(quote(a))
+    abort_tribble_lhs_column_syntax(quote(a))
   )
 
   # invalid colname syntax
-  expect_tibble_error(
+  expect_tibble_abort(
     tribble(~ a + b),
-    error_tribble_rhs_column_syntax(quote(a + b))
+    abort_tribble_rhs_column_syntax(quote(a + b))
   )
 
   # tribble() must be passed colnames
-  expect_tibble_error(
+  expect_tibble_abort(
     tribble(
       "a", "b",
       1, 2
     ),
-    error_tribble_needs_columns()
+    abort_tribble_needs_columns()
   )
 
   # tribble() must produce rectangular structure (no filling)
-  expect_tibble_error(
+  expect_tibble_abort(
     tribble(
       ~a, ~b, ~c,
       1, 2,
       3, 4, 5
     ),
-    error_tribble_non_rectangular(3, 5)
+    abort_tribble_non_rectangular(3, 5)
   )
 
-  expect_tibble_error(
+  expect_tibble_abort(
     tribble(
       ~a, ~b, ~c, ~d,
       1, 2, 3, 4, 5,
       6, 7, 8, 9,
     ),
-    error_tribble_non_rectangular(4, 9)
+    abort_tribble_non_rectangular(4, 9)
   )
 })
 
@@ -205,29 +205,29 @@ test_that("frame_matrix constructs empty matrix as expected", {
 })
 
 test_that("frame_matrix cannot have list columns", {
-  expect_tibble_error(
+  expect_tibble_abort(
     frame_matrix(
       ~x,   ~y,
       "a", 1:3,
       "b", 4:6
     ),
-    error_frame_matrix_list(c(2, 4))
+    abort_frame_matrix_list(c(2, 4))
   )
 })
 
 test_that("tribble and frame_matrix cannot have named arguments", {
-  expect_tibble_error(
+  expect_tibble_abort(
     extract_frame_data_from_dots(
       ~x, ~y,
       "a" = 1:3,
       "b" = 4:6
     ),
-    error_tribble_named_after_tilde()
+    abort_tribble_named_after_tilde()
   )
 })
 
 test_that("output test", {
-  expect_snapshot_with_error({
+  expect_snapshot(error = TRUE, {
     tribble(1)
     tribble(~a, ~b, 1)
     tribble(a ~ b, 1)

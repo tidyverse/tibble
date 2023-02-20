@@ -1,0 +1,53 @@
+name: fledge
+
+on:
+  # for manual triggers
+  workflow_dispatch:
+  # daily run
+  schedule:
+  - cron: "30 0 * * *"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref || '' }}-${{ github.base_ref || '' }}
+  cancel-in-progress: true
+
+jobs:
+  check_fork:
+    runs-on: ubuntu-latest
+    outputs:
+      is_forked: ${{ steps.check.outputs.is_forked }}
+    steps:
+      - name: Check if the repo is forked
+        id: check
+        run: |
+          echo "is_forked=$(curl -s -H "Accept: application/vnd.github+json" -H 'Authorization: Bearer ${{ github.token }}' -H "X-GitHub-Api-Version: 2022-11-28" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY} | jq .fork)" >> $GITHUB_OUTPUT
+
+  fledge:
+    runs-on: ubuntu-latest
+    needs: check_fork
+    if: needs.check_fork.outputs.is_forked == 'false'
+    permissions:
+      contents: write
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      FLEDGE_GHA_CI: true
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/workflows/git-identity
+
+      - uses: ./.github/workflows/install
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          install-r: false
+          cache-version: fledge-1
+          packages: cynkra/fledge
+
+      - name: Bump version
+        run: |
+          if (fledge::bump_version(which = "dev", no_change_behavior = "noop")) {
+            fledge::finalize_version(push = TRUE)
+          }
+        shell: Rscript {0}

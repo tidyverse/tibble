@@ -101,7 +101,11 @@ It pays off to specify formatting very early in the process.
 The diagram below shows the principal stages of data analysis and exploration from "R for data science".
 
 ```{r echo = FALSE}
-DiagrammeR::mermaid("r4ds.mmd")
+text <- paste(
+  readLines("r4ds.mmd"),
+  collapse = "\n"
+)
+DiagrammeR::mermaid(text)
 ```
 
 The subsequent diagram adds data formats, communication options, and explicit data formatting.
@@ -109,7 +113,11 @@ The original r4ds transitions are highlighted in bold.
 There are two principal options where to apply formatting for results: right before communicating them, or right after importing.
 
 ```{r echo = FALSE}
-DiagrammeR::mermaid("formats.mmd")
+text <- paste(
+  readLines("formats.mmd"),
+  collapse = "\n"
+)
+DiagrammeR::mermaid(text)
 ```
 
 Applying formatting early in the process gives the added benefit of showing the data in a useful format during the "Tidy", "Transform", and "Visualize" stages.

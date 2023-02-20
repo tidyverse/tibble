@@ -1,4 +1,4 @@
-name: 'Action to create documentation with roxygen2'
+name: "Action to create documentation with roxygen2"
 
 runs:
   using: "composite"

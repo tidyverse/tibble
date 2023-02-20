@@ -92,11 +92,11 @@ column_to_rownames <- function(.data, var = "rowname") {
   stopifnot(is.data.frame(.data))
 
   if (has_rownames(.data)) {
-    cnd_signal(error_already_has_rownames())
+    abort_already_has_rownames()
   }
 
   if (!has_name(.data, var)) {
-    cnd_signal(error_unknown_column_names(var))
+    abort_unknown_column_names(var)
   }
 
   .data <- as.data.frame(.data)
@@ -119,6 +119,6 @@ raw_rownames <- function(x) {
 
 # Errors ------------------------------------------------------------------
 
-error_already_has_rownames <- function() {
-  tibble_error("`.data` must be a data frame without row names.")
+abort_already_has_rownames <- function() {
+  tibble_abort("`.data` must be a data frame without row names.")
 }

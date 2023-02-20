@@ -16,40 +16,40 @@ test_that("columns are recycled to common length", {
 })
 
 test_that("columns must be same length", {
-  expect_tibble_error(
+  expect_tibble_abort(
     as_tibble(list(x = 1:2, y = 1:3)),
-    error_incompatible_size(NULL, c("x", "y"), 2:3, NA)
+    abort_incompatible_size(NULL, c("x", "y"), 2:3, NA)
   )
-  expect_tibble_error(
+  expect_tibble_abort(
     as_tibble(list(x = 1:2, y = 1:3, z = 1:4)),
-    error_incompatible_size(
+    abort_incompatible_size(
       NULL,
       c("x", "y", "z"),
       2:4,
       NA
     )
   )
-  expect_tibble_error(
+  expect_tibble_abort(
     as_tibble(list(x = 1:4, y = 1:2, z = 1:2)),
-    error_incompatible_size(
+    abort_incompatible_size(
       NULL,
       c("x", "y", "z"),
       c(4, 2, 2),
       NA
     )
   )
-  expect_tibble_error(
+  expect_tibble_abort(
     as_tibble(list(x = 1, y = 1:4, z = 1:2)),
-    error_incompatible_size(
+    abort_incompatible_size(
       NULL,
       c("y", "z"),
       c(4, 2),
       NA
     )
   )
-  expect_tibble_error(
+  expect_tibble_abort(
     as_tibble(list(x = 1:2, y = 1:4, z = 1)),
-    error_incompatible_size(
+    abort_incompatible_size(
       NULL,
       c("x", "y"),
       c(2, 4),
@@ -120,35 +120,35 @@ test_that("Superseded: Can convert unnamed atomic vectors to tibble by default",
 
 test_that("as_tibble() checks for `unique` names by default (#278)", {
   l1 <- list(1:10)
-  expect_tibble_error(
+  expect_tibble_abort(
     as_tibble(l1),
-    error_column_names_cannot_be_empty(1, repair_hint = TRUE)
+    abort_column_names_cannot_be_empty(1, repair_hint = TRUE)
   )
 
   l2 <- list(x = 1, 2)
-  expect_tibble_error(
+  expect_tibble_abort(
     as_tibble(l2),
-    error_column_names_cannot_be_empty(2, repair_hint = TRUE)
+    abort_column_names_cannot_be_empty(2, repair_hint = TRUE)
   )
 
   l3 <- list(x = 1, ... = 2)
-  expect_tibble_error(
+  expect_tibble_abort(
     as_tibble(l3),
-    error_column_names_cannot_be_dot_dot(2, repair_hint = TRUE)
+    abort_column_names_cannot_be_dot_dot(2, repair_hint = TRUE)
   )
 
   l4 <- list(x = 1, ..1 = 2)
-  expect_tibble_error(
+  expect_tibble_abort(
     as_tibble(l4),
-    error_column_names_cannot_be_dot_dot(2, repair_hint = TRUE)
+    abort_column_names_cannot_be_dot_dot(2, repair_hint = TRUE)
   )
 
   df <- list(a = 1, b = 2)
   names(df) <- c("", NA)
   df <- new_tibble(df, nrow = 1)
-  expect_tibble_error(
+  expect_tibble_abort(
     as_tibble(df),
-    error_column_names_cannot_be_empty(1:2, repair_hint = TRUE)
+    abort_column_names_cannot_be_empty(1:2, repair_hint = TRUE)
   )
 })
 
@@ -418,20 +418,20 @@ test_that("as_tibble_row() can convert named bare vectors to data frame", {
     tibble(a = 1, b = list(2:3))
   )
 
-  expect_tibble_error(
+  expect_tibble_abort(
     as_tibble_row(list(a = 1, b = 2:3)),
-    error_as_tibble_row_size_one(2, "b", 2)
+    abort_as_tibble_row_size_one(2, "b", 2)
   )
-  expect_tibble_error(
+  expect_tibble_abort(
     as_tibble_row(setNames(nm = c(TRUE, FALSE, NA))),
-    error_column_names_cannot_be_empty(3, repair_hint = TRUE)
+    abort_column_names_cannot_be_empty(3, repair_hint = TRUE)
   )
 })
 
 test_that("as_tibble_row() works with non-bare vectors (#797)", {
-  expect_tibble_error(
+  expect_tibble_abort(
     as_tibble_row(new_environment()),
-    error_as_tibble_row_vector(new_environment())
+    abort_as_tibble_row_vector(new_environment())
   )
 
   time <- vec_slice(Sys.time(), 1)
@@ -473,9 +473,9 @@ test_that("as_tibble_col() can convert atomic vectors to data frame", {
   expect_identical(as_tibble_col(1:3), tibble(value = 1:3))
   expect_identical(as_tibble_col(list(4, 5:6), column_name = "data"), tibble(data = list(4, 5:6)))
 
-  expect_tibble_error(
+  expect_tibble_abort(
     as_tibble_col(lm(y ~ x, data.frame(x = 1:3, y = 2:4))),
-    error_column_scalar_type("value", 1, "a `lm` object")
+    abort_column_scalar_type("value", 1, "a `lm` object")
   )
 })
 
@@ -484,13 +484,13 @@ test_that("as_tibble_col() can convert atomic vectors to data frame", {
 test_that("`validate` triggers deprecation message, but then works", {
   scoped_lifecycle_warnings()
 
-  expect_tibble_error(
+  expect_tibble_abort(
     expect_warning(
       as_tibble(list(a = 1, "hi"), validate = TRUE),
       "deprecated",
       fixed = TRUE
     ),
-    error_column_names_cannot_be_empty(2, repair_hint = TRUE)
+    abort_column_names_cannot_be_empty(2, repair_hint = TRUE)
   )
 
   expect_warning(
@@ -511,21 +511,21 @@ test_that("`validate` triggers deprecation message, but then works", {
 
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
-  expect_tibble_error(
+  expect_tibble_abort(
     expect_warning(
       as_tibble(df, validate = TRUE),
       "deprecated",
       fixed = TRUE
     ),
-    error_column_names_cannot_be_empty(2, repair_hint = TRUE)
+    abort_column_names_cannot_be_empty(2, repair_hint = TRUE)
   )
 })
 
 test_that("`validate` always raises lifecycle warning.", {
   expect_deprecated(
-    expect_tibble_error(
+    expect_tibble_abort(
       as_tibble(list(a = 1, "hi"), validate = TRUE, .name_repair = "check_unique"),
-      error_column_names_cannot_be_empty(2, repair_hint = TRUE)
+      abort_column_names_cannot_be_empty(2, repair_hint = TRUE)
     )
   )
 
@@ -543,20 +543,20 @@ test_that("`validate` always raises lifecycle warning.", {
 
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
-  expect_tibble_error(
+  expect_tibble_abort(
     expect_warning(
       as_tibble(df, validate = TRUE, .name_repair = "check_unique"),
       NA
     ),
-    error_column_names_cannot_be_empty(2, repair_hint = TRUE)
+    abort_column_names_cannot_be_empty(2, repair_hint = TRUE)
   )
 })
 
 test_that("Inconsistent `validate` and `.name_repair` used together raise a warning.", {
   expect_deprecated(
-    expect_tibble_error(
+    expect_tibble_abort(
       as_tibble(list(a = 1, "hi"), validate = FALSE, .name_repair = "check_unique"),
-      error_column_names_cannot_be_empty(2, repair_hint = TRUE)
+      abort_column_names_cannot_be_empty(2, repair_hint = TRUE)
     )
   )
 
@@ -575,9 +575,9 @@ test_that("Inconsistent `validate` and `.name_repair` used together raise a warn
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
   expect_deprecated(
-    expect_tibble_error(
+    expect_tibble_abort(
       as_tibble(df, validate = FALSE, .name_repair = "check_unique"),
-      error_column_names_cannot_be_empty(2, repair_hint = TRUE)
+      abort_column_names_cannot_be_empty(2, repair_hint = TRUE)
     )
   )
 })
@@ -741,13 +741,13 @@ test_that("converting from matrix uses implicit row names when `rownames =` is p
 })
 
 test_that("output test", {
-  expect_snapshot_with_error({
+  expect_snapshot(error = TRUE, {
     as_tibble(list(1))
     as_tibble(list(1, 2))
     as_tibble(list(a = 1, 2))
     as_tibble(as.list(1:26))
     as_tibble(set_names(list(1), "..1"))
-    as_tibble(set_names(list(1:26), paste0("..", 1:26)))
+    as_tibble(set_names(as.list(1:26), paste0("..", 1:26)))
     as_tibble(list(a = 1, a = 1))
     as_tibble(list(a = 1, a = 1, b = 1, b = 1))
     as_tibble(list(a = new_environment()))
@@ -757,7 +757,7 @@ test_that("output test", {
     as_tibble_row(list(a = 1, 2))
     as_tibble_row(as.list(1:26))
     as_tibble_row(set_names(list(1), "..1"))
-    as_tibble_row(set_names(list(1:26), paste0("..", 1:26)))
+    as_tibble_row(set_names(as.list(1:26), paste0("..", 1:26)))
     as_tibble_row(list(a = 1, a = 1))
     as_tibble_row(list(a = 1, a = 1, b = 1, b = 1))
     as_tibble_row(list(a = new_environment()))

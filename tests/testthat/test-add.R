@@ -41,14 +41,14 @@ test_that("adds empty row if no arguments", {
 })
 
 test_that("error if adding row with unknown variables", {
-  expect_tibble_error(
+  expect_tibble_abort(
     add_row(tibble(a = 3), xxyzy = "err"),
-    error_incompatible_new_rows("xxyzy")
+    abort_incompatible_new_rows("xxyzy")
   )
 
-  expect_tibble_error(
+  expect_tibble_abort(
     add_row(tibble(a = 3), b = "err", c = "oops"),
-    error_incompatible_new_rows(c("b", "c"))
+    abort_incompatible_new_rows(c("b", "c"))
   )
 })
 
@@ -104,9 +104,9 @@ test_that("can safely add to factor columns everywhere (#296)", {
 
 test_that("error if both .before and .after are given", {
   df <- tibble(a = 1:3)
-  expect_tibble_error(
+  expect_tibble_abort(
     add_row(df, a = 4:5, .after = 2, .before = 3),
-    error_both_before_after()
+    abort_both_before_after()
   )
 })
 
@@ -131,9 +131,9 @@ test_that("add_row() keeps the class of empty columns", {
 
 test_that("add_row() fails nicely for grouped data frames (#179)", {
   skip_if_not_installed("dplyr")
-  expect_tibble_error(
+  expect_tibble_abort(
     add_row(dplyr::group_by(trees, Volume), Height = 3),
-    error_add_rows_to_grouped_df()
+    abort_add_rows_to_grouped_df()
   )
 })
 
@@ -206,16 +206,16 @@ test_that("add_column() can add to empty tibble or data frame", {
 })
 
 test_that("error if adding existing columns", {
-  expect_tibble_error(
+  expect_tibble_abort(
     add_column(tibble(a = 3), a = 5),
-    error_column_names_must_be_unique("a", repair_hint = TRUE)
+    abort_column_names_must_be_unique("a", repair_hint = TRUE)
   )
 })
 
 test_that("error if adding wrong number of rows with add_column()", {
-  expect_tibble_error(
+  expect_tibble_abort(
     add_column(tibble(a = 3), b = 4:5),
-    error_incompatible_new_cols(1, data.frame(b = 4:5))
+    abort_incompatible_new_cols(1, data.frame(b = 4:5))
   )
 })
 
@@ -275,21 +275,21 @@ test_that("can add column relative to named column", {
 
 test_that("error if both .before and .after are given", {
   df <- tibble(a = 1:3)
-  expect_tibble_error(
+  expect_tibble_abort(
     add_column(df, b = 4:6, .after = 2, .before = 3),
-    error_both_before_after()
+    abort_both_before_after()
   )
 })
 
 test_that("error if column named by .before or .after not found", {
   df <- tibble(a = 1:3)
-  expect_tibble_error(
+  expect_tibble_abort(
     add_column(df, b = 4:6, .after = "x"),
-    error_unknown_column_names("x")
+    abort_unknown_column_names("x")
   )
-  expect_tibble_error(
+  expect_tibble_abort(
     add_column(df, b = 4:6, .before = "x"),
-    error_unknown_column_names("x")
+    abort_unknown_column_names("x")
   )
 })
 
@@ -310,7 +310,7 @@ test_that("missing row names stay missing when adding column", {
 })
 
 test_that("output test", {
-  expect_snapshot_with_error({
+  expect_snapshot(error = TRUE, {
     add_row(tibble(), a = 1)
     add_row(tibble(), a = 1, b = 2)
     add_row(tibble(), !!!set_names(letters))

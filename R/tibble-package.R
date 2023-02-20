@@ -15,7 +15,7 @@
 #'
 #' The tibble package provides utilities for handling __tibbles__, where
 #' "tibble" is a colloquial term for the S3 [`tbl_df`] class. The [`tbl_df`]
-#' class is a special case of the base [`data.frame`][base::data.frame()].
+#' class is a special case of the base [`data.frame`][base::data.frame()]
 #' class, developed in response to lessons learned over many years of data
 #' analysis with data frames.
 #'

@@ -3,7 +3,7 @@
     Code
       enframe(1:3, value = NULL)
     Condition
-      Error:
+      Error in `enframe()`:
       ! `value` can't be NULL.
     Code
       nrow(enframe(Titanic))

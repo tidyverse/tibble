@@ -83,11 +83,11 @@ extract_frame_data_from_dots <- function(...) {
 
   # Extract the data
   if (length(frame_names) == 0 && length(dots) != 0) {
-    cnd_signal(error_tribble_needs_columns())
+    abort_tribble_needs_columns()
   }
   frame_rest <- dots[-seq_along(frame_names)]
   if (!is.null(names(frame_rest))) {
-    cnd_signal(error_tribble_named_after_tilde())
+    abort_tribble_named_after_tilde()
   }
   if (length(frame_rest) == 0L) {
     # Can't decide on type in absence of data -- use logical which is
@@ -114,12 +114,12 @@ extract_frame_names_from_dots <- function(dots) {
     }
 
     if (length(el) != 2) {
-      cnd_signal(error_tribble_lhs_column_syntax(el[[2]]))
+      abort_tribble_lhs_column_syntax(el[[2]])
     }
 
     candidate <- el[[2]]
     if (!(is.symbol(candidate) || is.character(candidate))) {
-      cnd_signal(error_tribble_rhs_column_syntax(candidate))
+      abort_tribble_rhs_column_syntax(candidate)
     }
 
     frame_names <- c(frame_names, as.character(candidate))
@@ -135,10 +135,7 @@ validate_rectangular_shape <- function(frame_names, frame_rest) {
   # and validate that the supplied formula produces a rectangular
   # structure.
   if (length(frame_rest) %% length(frame_names) != 0) {
-    cnd_signal(error_tribble_non_rectangular(
-      length(frame_names),
-      length(frame_rest)
-    ))
+    abort_tribble_non_rectangular(length(frame_names), length(frame_rest))
   }
 }
 
@@ -178,7 +175,7 @@ turn_matrix_into_column_list <- function(frame_mat) {
 turn_frame_data_into_frame_matrix <- function(names, rest) {
   list_cols <- which(map_lgl(rest, needs_list_col))
   if (has_length(list_cols)) {
-    cnd_signal(error_frame_matrix_list(list_cols))
+    abort_frame_matrix_list(list_cols)
   }
 
   frame_ncol <- length(names)
@@ -188,41 +185,41 @@ turn_frame_data_into_frame_matrix <- function(names, rest) {
   frame_mat
 }
 
-subclass_tribble_c_errors <- function(name, code) {
+subclass_tribble_c_errors <- function(name, code, call = my_caller_env()) {
   withCallingHandlers(
     code,
     vctrs_error = function(cnd) {
-      cnd_signal(error_tribble_c(name, cnd))
+      abort_tribble_c(name, cnd, call)
     }
   )
 }
 
 # Errors ------------------------------------------------------------------
 
-error_tribble_needs_columns <- function() {
-  tibble_error("Must specify at least one column using the `~name` syntax.")
+abort_tribble_needs_columns <- function() {
+  tibble_abort("Must specify at least one column using the `~name` syntax.")
 }
 
-error_tribble_named_after_tilde <- function() {
-  tibble_error("When using the `~name` syntax, subsequent values must not have names.")
+abort_tribble_named_after_tilde <- function() {
+  tibble_abort("When using the `~name` syntax, subsequent values must not have names.")
 }
 
-error_tribble_lhs_column_syntax <- function(lhs) {
-  tibble_error(problems(
+abort_tribble_lhs_column_syntax <- function(lhs) {
+  tibble_abort(problems(
     "All column specifications must use the `~name` syntax.",
     paste0("Found ", expr_label(lhs), " on the left-hand side of `~`.")
   ))
 }
 
-error_tribble_rhs_column_syntax <- function(rhs) {
-  tibble_error(problems(
+abort_tribble_rhs_column_syntax <- function(rhs) {
+  tibble_abort(problems(
     'All column specifications must use the `~name` or `~"name"` syntax.',
     paste0("Found ", expr_label(rhs), " on the right-hand side of `~`.")
   ))
 }
 
-error_tribble_non_rectangular <- function(cols, cells) {
-  tibble_error(bullets(
+abort_tribble_non_rectangular <- function(cols, cells) {
+  tibble_abort(bullets(
     "Data must be rectangular:",
     paste0("Found ", cols, " columns."),
     paste0("Found ", cells, " cells."),
@@ -230,15 +227,17 @@ error_tribble_non_rectangular <- function(cols, cells) {
   ))
 }
 
-error_frame_matrix_list <- function(pos) {
-  tibble_error(problems(
+abort_frame_matrix_list <- function(pos) {
+  tibble_abort(problems(
     "All values must be atomic:",
     pluralise_commas("Found list-valued element(s) at position(s) ", pos, ".")
   ))
 }
 
-error_tribble_c <- function(name, cnd) {
-  cnd$message <- paste0("Can't create column ", tick(name), ": ", cnd_header(cnd))
-  cnd$class <- c(tibble_error_class("tribble_c"), class(cnd))
-  cnd
+abort_tribble_c <- function(name, cnd, call = my_caller_env()) {
+  tibble_abort(
+    paste0("Can't create column ", tick(name)),
+    parent = cnd,
+    call = call
+  )
 }

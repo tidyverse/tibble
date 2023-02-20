@@ -264,7 +264,7 @@ test_that("non-universal names", {
 test_that("check_syntactic() imposes check_minimal()", {
   expect_legacy_error(
     check_syntactic(NULL),
-    error_names_must_be_non_null(repair_hint = FALSE),
+    abort_names_must_be_non_null(repair_hint = FALSE),
     fixed = TRUE
   )
 })
@@ -272,7 +272,7 @@ test_that("check_syntactic() imposes check_minimal()", {
 test_that("check_syntactic() imposes check_unique()", {
   expect_legacy_error(
     check_syntactic(c("x", "x", "y")),
-    error_column_names_must_be_unique("x"),
+    abort_column_names_must_be_unique("x"),
     fixed = TRUE
   )
 })
@@ -280,7 +280,7 @@ test_that("check_syntactic() imposes check_unique()", {
 test_that("check_syntactic() errors for non-syntactic names", {
   expect_legacy_error(
     check_syntactic(c("x", "a:b", "break")),
-    error_column_names_must_be_syntactic(c("a:b", "break"), repair_hint = FALSE),
+    abort_column_names_must_be_syntactic(c("a:b", "break"), repair_hint = FALSE),
     fixed = TRUE
   )
 })

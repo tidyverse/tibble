@@ -102,29 +102,29 @@ test_that("new_tibble checks", {
   expect_identical(new_tibble(list(), nrow = 0), tibble())
   expect_identical(new_tibble(list(), nrow = 5), tibble(.rows = 5))
   expect_identical(new_tibble(list(a = 1:3, b = 4:6), nrow = 3), tibble(a = 1:3, b = 4:6))
-  expect_tibble_error(
+  expect_tibble_abort(
     new_tibble(1:3, nrow = 1),
-    error_new_tibble_must_be_list()
+    abort_new_tibble_must_be_list()
   )
-  expect_tibble_error(
+  expect_tibble_abort(
     new_tibble(list(a = 1), nrow = -1),
-    error_new_tibble_nrow_must_be_nonnegative()
+    abort_new_tibble_nrow_must_be_nonnegative()
   )
-  expect_tibble_error(
+  expect_tibble_abort(
     new_tibble(list(a = 1), nrow = "a"),
-    error_new_tibble_nrow_must_be_nonnegative()
+    abort_new_tibble_nrow_must_be_nonnegative()
   )
-  expect_tibble_error(
+  expect_tibble_abort(
     new_tibble(list(a = 1), nrow = 1:2),
-    error_new_tibble_nrow_must_be_nonnegative()
+    abort_new_tibble_nrow_must_be_nonnegative()
   )
-  expect_tibble_error(
+  expect_tibble_abort(
     new_tibble(list(a = 1), nrow = 2147483648),
-    error_new_tibble_nrow_must_be_nonnegative()
+    abort_new_tibble_nrow_must_be_nonnegative()
   )
-  expect_tibble_error(
+  expect_tibble_abort(
     new_tibble(list(1), nrow = 1),
-    error_names_must_be_non_null()
+    abort_names_must_be_non_null()
   )
   expect_error(
     new_tibble(set_names(list(1), NA_character_), nrow = 1),
@@ -148,14 +148,14 @@ test_that("new_tibble checks", {
 })
 
 test_that("validate_tibble() checks", {
-  expect_tibble_error(
+  expect_tibble_abort(
     validate_tibble(new_tibble(list(a = 1, b = 2:3), nrow = 1)),
-    error_incompatible_size(1, c("a", "b"), 1:2, "Requested with `nrow` argument")
+    abort_incompatible_size(1, c("a", "b"), 1:2, "Requested with `nrow` argument")
   )
 })
 
 test_that("output test", {
-  expect_snapshot_with_error({
+  expect_snapshot(error = TRUE, {
     new_tibble(1:3, nrow = 1)
     new_tibble(as.list(1:3))
   })

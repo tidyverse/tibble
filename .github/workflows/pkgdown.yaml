@@ -6,6 +6,7 @@ on:
     branches:
       - "docs*"
       - "cran-*"
+  workflow_dispatch:
 
 name: pkgdown
 
@@ -19,7 +20,7 @@ jobs:
     # End custom: services
 
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
 
       - uses: ./.github/workflows/rate-limit
         with:

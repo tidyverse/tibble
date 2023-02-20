@@ -2,13 +2,13 @@
 
     Code
       # # Problems
-      writeLines(problems("header", c("item 1", "item 2")))
+      writeLines(format_error_bullets(problems("header", c("item 1", "item 2"))))
     Output
       header.
       x item 1.
       x item 2.
     Code
-      writeLines(problems("header", LETTERS))
+      writeLines(format_error_bullets(problems("header", LETTERS)))
     Output
       header.
       x A.
@@ -18,7 +18,7 @@
       x E.
       x ... and 21 more problems.
     Code
-      writeLines(problems("header", 1:6))
+      writeLines(format_error_bullets(problems("header", as.character(1:6))))
     Output
       header.
       x 1.
@@ -29,13 +29,13 @@
       x ... and 1 more problem.
     Code
       # # Bullets
-      writeLines(bullets("header", c("item 1", "item 2")))
+      writeLines(format_error_bullets(bullets("header", c("item 1", "item 2"))))
     Output
       header.
       * item 1.
       * item 2.
     Code
-      writeLines(bullets("header", LETTERS))
+      writeLines(format_error_bullets(bullets("header", LETTERS)))
     Output
       header.
       * A.
@@ -65,7 +65,7 @@
       * Y.
       * Z.
     Code
-      writeLines(bullets("header", 1:6))
+      writeLines(format_error_bullets(bullets("header", as.character(1:6))))
     Output
       header.
       * 1.

@@ -1,9 +1,12 @@
-name: 'Action to deploy a pkgdown website'
+name: "Action to deploy a pkgdown website"
 
 runs:
   using: "composite"
   steps:
     - name: Deploy site
-      run: |
-        pkgdown::deploy_to_branch(new_process = FALSE)
-      shell: Rscript {0}
+      uses: nick-fields/retry@v2
+      with:
+        timeout_minutes: 15
+        max_attempts: 10
+        command: |
+          R -q -e 'pkgdown::deploy_to_branch(new_process = FALSE)'
