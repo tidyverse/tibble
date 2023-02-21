@@ -16,10 +16,12 @@ repaired_names <- function(name,
                            repair_hint,
                            .name_repair = c("check_unique", "unique", "universal", "minimal"),
                            quiet = FALSE,
-                           details = NULL) {
+                           details = NULL,
+                           call = my_caller_env()) {
   subclass_name_repair_errors(
     name = name, details = details, repair_hint = repair_hint,
-    vec_as_names(name, repair = .name_repair, quiet = quiet || !is_character(.name_repair))
+    vec_as_names(name, repair = .name_repair, quiet = quiet || !is_character(.name_repair)),
+    call = call
   )
 }
 
@@ -39,7 +41,7 @@ abort_column_names_must_be_unique <- function(names, repair_hint, parent = NULL,
 
 # Subclassing errors ------------------------------------------------------
 
-subclass_name_repair_errors <- function(expr, name, details = NULL, repair_hint = FALSE, call = my_caller_env()) {
+subclass_name_repair_errors <- function(expr, name, details = NULL, repair_hint = FALSE, call) {
   withCallingHandlers(
     expr,
 
