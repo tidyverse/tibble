@@ -211,7 +211,7 @@ is.tibble <- function(x) {
   is_tibble(x)
 }
 
-tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
+tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE, call = my_caller_env()) {
   # Evaluate each column in turn
   col_names <- given_col_names <- names2(xs)
   empty_col_names <- which(col_names == "")
@@ -271,7 +271,7 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
   output <- output[!is_null]
 
   output <- splice_dfs(output)
-  output <- set_repaired_names(output, repair_hint = TRUE, .name_repair = .name_repair)
+  output <- set_repaired_names(output, repair_hint = TRUE, .name_repair = .name_repair, call = call)
 
   new_tibble(output, nrow = first_size %||% 0L)
 }

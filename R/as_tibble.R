@@ -99,9 +99,9 @@ as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
   lst_to_tibble(x, .rows, .name_repair, col_lengths(x))
 }
 
-lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL) {
+lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL, call = my_caller_env()) {
   x <- unclass(x)
-  x <- set_repaired_names(x, repair_hint = TRUE, .name_repair)
+  x <- set_repaired_names(x, repair_hint = TRUE, .name_repair, call = call)
   x <- check_valid_cols(x)
   recycle_columns(x, .rows, lengths)
 }

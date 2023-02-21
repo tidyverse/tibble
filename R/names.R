@@ -10,7 +10,7 @@ set_repaired_names <- function(x,
                                repair_hint,
                                .name_repair = c("check_unique", "unique", "universal", "minimal"),
                                quiet = FALSE,
-                               call = my_caller_env()) {
+                               call = caller_env()) {
   names <- repaired_names(names2(x), repair_hint, .name_repair = .name_repair, quiet = quiet, call = call)
   set_names(x, names)
 }
