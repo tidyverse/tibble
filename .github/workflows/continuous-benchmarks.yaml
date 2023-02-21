@@ -8,35 +8,42 @@ jobs:
     env:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
-      - name: Checkout repo
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
 
-      - name: Setup R
-        uses: r-lib/actions/setup-r@v2
+      - uses: ./.github/workflows/git-identity
+
+      - uses: ./.github/workflows/custom/before-install
+        if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
+
+      - uses: ./.github/workflows/install
         with:
-          r-version: 'release'
+          r-version: ${{ matrix.config.r }}
+          cache-version: cb-1
+          token: ${{ secrets.GITHUB_TOKEN }}
+          extra-packages: r-lib/bench
+          needs: check
 
-      - name: Install dependencies
-        run: |
-          install.packages("remotes")
-          remotes::install_deps(dependencies = TRUE)
-          remotes::install_github("r-lib/bench")
-          if (!requireNamespace("here", quietly = TRUE)) install.packages("here")
-        shell: Rscript {0}
-
-      - name: Install package
-        run: R CMD INSTALL .
-
-      - name: Fetch existing benchmarks
-        run: Rscript -e 'bench::cb_fetch()'
+      - uses: ./.github/workflows/custom/after-install
+        if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
       - name: Run benchmarks
         run: |
-          git config --local user.email "actions@github.com"
-          git config --local user.name "GitHub Actions"
-          Rscript -e 'bench::cb_run()'
+          success <- FALSE
+          for (i in 1:100) {
+            bench::cb_fetch()
+            bench::cb_run()
+            tryCatch(
+              {
+                bench::cb_push()
+                success <- TRUE
+                break
+              },
+              error = identity
+            )
+            system("git push . :refs/notes/benchmarks")
+          }
+          stopifnot(success)
+        shell: Rscript {0}
+
       - name: Show benchmarks
         run: git notes --ref benchmarks show
-
-      - name: Push benchmarks
-        run: Rscript -e "bench::cb_push()"
