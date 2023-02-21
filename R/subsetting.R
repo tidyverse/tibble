@@ -376,7 +376,7 @@ fix_oob_invalid <- function(i, is_na_orig) {
   i
 }
 
-tbl_subset2 <- function(x, j, j_arg) {
+tbl_subset2 <- function(x, j, j_arg, call = caller_env()) {
   if (is.matrix(j)) {
     deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a matrix",
       details = "Recursive subsetting is deprecated for tibbles.",
@@ -394,7 +394,7 @@ tbl_subset2 <- function(x, j, j_arg) {
     if (length(j) == 1L) {
       if (is.na(j) || j < 1 || j > length(x) || (is.double(j) && j != trunc(j))) {
         # Side effect: throw error for invalid j
-        vectbl_as_col_location2(j, length(x), j_arg = j_arg)
+        vectbl_as_col_location2(j, length(x), j_arg = j_arg, call = call)
       }
     } else if (length(j) == 2L) {
       deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a vector of length 2')",
@@ -403,14 +403,14 @@ tbl_subset2 <- function(x, j, j_arg) {
       )
     } else {
       # Side effect: throw error for invalid j
-      vectbl_as_col_location2(j, length(x), j_arg = j_arg)
+      vectbl_as_col_location2(j, length(x), j_arg = j_arg, call = call)
     }
   } else if (is.symbol(j)) {
     # FIXME: Only relevant for R < 3.4
     j <- as.character(j)
   } else if (is.logical(j) || length(j) != 1L || !is_bare_atomic(j) || is.na(j)) {
     # Side effect: throw error for invalid j
-    vectbl_as_col_location2(j, length(x), names(x), j_arg = j_arg)
+    vectbl_as_col_location2(j, length(x), names(x), j_arg = j_arg, call = call)
   }
 
   .subset2(x, j)
@@ -627,7 +627,7 @@ vectbl_as_col_location <- function(j,
   )
 }
 
-vectbl_as_col_location2 <- function(j, n, names = NULL, j_arg, assign = FALSE, call = my_caller_env()) {
+vectbl_as_col_location2 <- function(j, n, names = NULL, j_arg, assign = FALSE, call = caller_env()) {
   subclass_col_index_errors(vec_as_location2(j, n, names, call = call), j_arg = j_arg, assign = assign)
 }
 
