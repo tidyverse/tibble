@@ -148,67 +148,67 @@
       print_error(abort_column_names_cannot_be_empty(1, repair_hint = TRUE))
     Output
       <error/tibble_error_column_names_cannot_be_empty>
-      Error in `abort_column_names_cannot_be_empty()`:
+      Error:
       ! Column 1 must be named.
       Use `.name_repair` to specify repair.
     Code
       print_error(abort_column_names_cannot_be_empty(2:3, repair_hint = TRUE))
     Output
       <error/tibble_error_column_names_cannot_be_empty>
-      Error in `abort_column_names_cannot_be_empty()`:
+      Error:
       ! Columns 2 and 3 must be named.
       Use `.name_repair` to specify repair.
     Code
       print_error(abort_column_names_cannot_be_empty(seq_along(letters), repair_hint = TRUE))
     Output
       <error/tibble_error_column_names_cannot_be_empty>
-      Error in `abort_column_names_cannot_be_empty()`:
+      Error:
       ! Columns 1, 2, 3, 4, 5, and 21 more must be named.
       Use `.name_repair` to specify repair.
     Code
       print_error(abort_column_names_cannot_be_empty(4:6, repair_hint = FALSE))
     Output
       <error/tibble_error_column_names_cannot_be_empty>
-      Error in `abort_column_names_cannot_be_empty()`:
+      Error:
       ! Columns 4, 5, and 6 must be named.
     Code
       print_error(abort_column_names_cannot_be_dot_dot(1, repair_hint = FALSE))
     Output
       <error/tibble_error_column_names_cannot_be_dot_dot>
-      Error in `abort_column_names_cannot_be_dot_dot()`:
+      Error:
       ! Column 1 must not have names of the form ... or ..j.
     Code
       print_error(abort_column_names_cannot_be_dot_dot(2:3, repair_hint = TRUE))
     Output
       <error/tibble_error_column_names_cannot_be_dot_dot>
-      Error in `abort_column_names_cannot_be_dot_dot()`:
+      Error:
       ! Columns 2 and 3 must not have names of the form ... or ..j.
       Use `.name_repair` to specify repair.
     Code
       print_error(abort_column_names_cannot_be_dot_dot(1:26, repair_hint = TRUE))
     Output
       <error/tibble_error_column_names_cannot_be_dot_dot>
-      Error in `abort_column_names_cannot_be_dot_dot()`:
+      Error:
       ! Columns 1, 2, 3, 4, 5, and 21 more must not have names of the form ... or ..j.
       Use `.name_repair` to specify repair.
     Code
       print_error(abort_column_names_must_be_unique("a", repair_hint = FALSE))
     Output
       <error/tibble_error_column_names_must_be_unique>
-      Error in `abort_column_names_must_be_unique()`:
+      Error:
       ! Column name `a` must not be duplicated.
     Code
       print_error(abort_column_names_must_be_unique(letters[2:3], repair_hint = TRUE))
     Output
       <error/tibble_error_column_names_must_be_unique>
-      Error in `abort_column_names_must_be_unique()`:
+      Error:
       ! Column names `b` and `c` must not be duplicated.
       Use `.name_repair` to specify repair.
     Code
       print_error(abort_column_names_must_be_unique(LETTERS, repair_hint = TRUE))
     Output
       <error/tibble_error_column_names_must_be_unique>
-      Error in `abort_column_names_must_be_unique()`:
+      Error:
       ! Column names `A`, `B`, `C`, `D`, `E`, and 21 more must not be duplicated.
       Use `.name_repair` to specify repair.
     Code
