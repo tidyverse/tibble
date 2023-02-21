@@ -423,11 +423,6 @@
       x `as.list(1:3)` must be logical, numeric, or character, not a list.
     Code
       foo[factor(1:3)] <- 1
-    Condition
-      Error in `[<-`:
-      ! Can't assign to columns that don't exist.
-      x Columns `1`, `2`, and `3` don't exist.
-    Code
       foo[Sys.Date()] <- 1
     Condition
       Error in `[<-`:
