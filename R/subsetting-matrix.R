@@ -12,7 +12,7 @@ tbl_subset_matrix <- function(x, j, j_arg) {
   unname(vec_c(!!!values, .name_spec = ~.x))
 }
 
-tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg, call = my_caller_env()) {
+tbl_subassign_matrix <- function(x, j, value, j_arg, value_arg, call = caller_env()) {
   # FIXME: use size argument in vctrs >= 0.3.0
 
   if (!vec_is(value)) {
