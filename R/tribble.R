@@ -139,7 +139,7 @@ validate_rectangular_shape <- function(frame_names, frame_rest) {
   }
 }
 
-turn_frame_data_into_tibble <- function(names, rest) {
+turn_frame_data_into_tibble <- function(names, rest, call = caller_env()) {
   if (is_empty(names)) return(new_tibble(list(), nrow = 0))
 
   nrow <- length(rest) / length(names)
@@ -147,12 +147,12 @@ turn_frame_data_into_tibble <- function(names, rest) {
   dimnames(rest) <- list(names, NULL)
 
   frame_mat <- t(rest)
-  frame_col <- turn_matrix_into_column_list(frame_mat)
+  frame_col <- turn_matrix_into_column_list(frame_mat, call)
 
   new_tibble(frame_col, nrow = nrow)
 }
 
-turn_matrix_into_column_list <- function(frame_mat) {
+turn_matrix_into_column_list <- function(frame_mat, call) {
   frame_col <- vector("list", length = ncol(frame_mat))
   names(frame_col) <- colnames(frame_mat)
 
@@ -163,7 +163,8 @@ turn_matrix_into_column_list <- function(frame_mat) {
     if (inherits(col, "list") && !some(col, needs_list_col)) {
       subclass_tribble_c_errors(
         names(frame_col)[[i]],
-        col <- vec_c(!!!unname(col))
+        col <- vec_c(!!!unname(col)),
+        call
       )
     }
 
@@ -185,7 +186,7 @@ turn_frame_data_into_frame_matrix <- function(names, rest) {
   frame_mat
 }
 
-subclass_tribble_c_errors <- function(name, code, call = my_caller_env()) {
+subclass_tribble_c_errors <- function(name, code, call) {
   withCallingHandlers(
     code,
     vctrs_error = function(cnd) {
