@@ -429,7 +429,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg, call = caller
       j <- vectbl_as_new_col_index(j, xo, j_arg, names2(value), value_arg, call = call)
     }
 
-    value <- vectbl_recycle_rhs_rows(value, fast_nrow(xo), i_arg = NULL, value_arg)
+    value <- vectbl_recycle_rhs_rows(value, fast_nrow(xo), i_arg = NULL, value_arg, call)
     value <- vectbl_recycle_rhs_cols(value, length(j))
 
     xo <- tbl_subassign_col(xo, j, value)
@@ -710,7 +710,7 @@ tbl_subassign_row <- function(x, i, value, i_arg, value_arg, call) {
     },
     vctrs_error = function(cnd) {
       # Side effect: check if `value` can be recycled
-      vectbl_recycle_rhs_rows(value, length(i), i_arg, value_arg, call = call)
+      vectbl_recycle_rhs_rows(value, length(i), i_arg, value_arg, call)
 
       abort_assign_incompatible_type(x, recycled_value, j, value_arg, cnd, call = call)
     }
@@ -780,7 +780,7 @@ result_vectbl_wrap_rhs <- function(value) {
   }
 }
 
-vectbl_recycle_rhs_rows <- function(value, nrow, i_arg, value_arg, call = my_caller_env()) {
+vectbl_recycle_rhs_rows <- function(value, nrow, i_arg, value_arg, call) {
   if (length(value) > 0L) {
     withCallingHandlers(
       for (j in seq_along(value)) {
