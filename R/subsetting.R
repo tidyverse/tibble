@@ -550,7 +550,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL, c
 
     names[old] <- names(x)[j[old]]
   } else {
-    j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = TRUE)
+    j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = TRUE, call = call)
 
     if (anyNA(j)) {
       abort_na_column_index(which(is.na(j)))
@@ -619,7 +619,7 @@ vectbl_as_col_location <- function(j,
                                    names = NULL,
                                    j_arg,
                                    assign = FALSE,
-                                   call = my_caller_env()) {
+                                   call = caller_env()) {
   subclass_col_index_errors(
     vec_as_location(j, n, names, call = call),
     j_arg = j_arg,
