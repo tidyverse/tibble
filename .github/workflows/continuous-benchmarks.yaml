@@ -30,6 +30,7 @@ jobs:
         run: |
           success <- FALSE
           for (i in 1:100) {
+            message("Attempt ", i)
             bench::cb_fetch()
             bench::cb_run()
             tryCatch(
