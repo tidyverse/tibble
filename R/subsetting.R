@@ -430,7 +430,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg, call = caller
     }
 
     value <- vectbl_recycle_rhs_rows(value, fast_nrow(xo), i_arg = NULL, value_arg, call)
-    value <- vectbl_recycle_rhs_cols(value, length(j))
+    value <- vectbl_recycle_rhs_cols(value, length(j), call)
 
     xo <- tbl_subassign_col(xo, j, value)
   } else if (is.null(i_arg)) {
@@ -702,7 +702,7 @@ tbl_expand_to_nrow <- function(x, i) {
 }
 
 tbl_subassign_row <- function(x, i, value, i_arg, value_arg, call) {
-  recycled_value <- vectbl_recycle_rhs_cols(value, length(x))
+  recycled_value <- vectbl_recycle_rhs_cols(value, length(x), call)
 
   withCallingHandlers(
     for (j in seq_along(x)) {
@@ -800,7 +800,7 @@ vectbl_recycle_rhs_rows <- function(value, nrow, i_arg, value_arg, call) {
   value
 }
 
-vectbl_recycle_rhs_cols <- function(value, ncol, call = my_caller_env()) {
+vectbl_recycle_rhs_cols <- function(value, ncol, call) {
   if (length(value) != 1L || ncol != 1L) {
     # Errors have been caught beforehand in vectbl_as_new_col_index()
     value <- vec_recycle(value, ncol, call = call)
