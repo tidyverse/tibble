@@ -12,6 +12,7 @@
 #' @importFrom vctrs vec_as_location2
 #' @importFrom vctrs vec_as_names
 #' @importFrom vctrs vec_as_names_legacy
+#' @importFrom vctrs vec_as_subscript
 #' @importFrom vctrs vec_as_subscript2
 #' @importFrom vctrs vec_assign
 #' @importFrom vctrs vec_c

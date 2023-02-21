@@ -416,7 +416,7 @@ tbl_subset2 <- function(x, j, j_arg) {
   .subset2(x, j)
 }
 
-tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
+tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg, call = caller_env()) {
   if (is.null(i)) {
     xo <- unclass(x)
 
@@ -426,7 +426,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
       j <- seq_along(xo)
       names(j) <- names2(j)
     } else if (!is.null(j_arg)) {
-      j <- vectbl_as_new_col_index(j, xo, j_arg, names2(value), value_arg)
+      j <- vectbl_as_new_col_index(j, xo, j_arg, names2(value), value_arg, call = call)
     }
 
     value <- vectbl_recycle_rhs_rows(value, fast_nrow(xo), i_arg = NULL, value_arg)
@@ -453,7 +453,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg) {
       # (Invariant: x[[j]] is equivalent to x[[vec_as_location(j)]],
       # allowed by corollary that only existing columns can be updated)
       if (!is.null(j_arg)) {
-        j <- vectbl_as_new_col_index(j, xo, j_arg, names2(value), value_arg)
+        j <- vectbl_as_new_col_index(j, xo, j_arg, names2(value), value_arg, call = call)
       }
 
       # Fill up columns if necessary
@@ -496,10 +496,14 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
   }
 }
 
-vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL) {
+vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL, call = caller_env()) {
   # Creates a named index vector
   # Values: index
   # Name: column name (for all columns)
+
+  if (is.object(j)) {
+    j <- vectbl_as_col_subscript(j, j_arg = j_arg, assign = TRUE, call = call)
+  }
 
   if (is_bare_character(j)) {
     if (anyNA(j)) {
@@ -627,8 +631,20 @@ vectbl_as_col_location2 <- function(j, n, names = NULL, j_arg, assign = FALSE, c
   subclass_col_index_errors(vec_as_location2(j, n, names, call = call), j_arg = j_arg, assign = assign)
 }
 
+vectbl_as_col_subscript <- function(j, j_arg, assign = FALSE, call = caller_env()) {
+  subclass_col_index_errors(
+    vec_as_subscript(j, call = call),
+    j_arg = j_arg,
+    assign = assign
+  )
+}
+
 vectbl_as_col_subscript2 <- function(j, j_arg, assign = FALSE, call = my_caller_env()) {
-  subclass_col_index_errors(vec_as_subscript2(j, logical = "error", call = call), j_arg = j_arg, assign = assign)
+  subclass_col_index_errors(
+    vec_as_subscript2(j, logical = "error", call = call),
+    j_arg = j_arg,
+    assign = assign
+  )
 }
 
 is_tight_sequence_at_end <- function(i_new, n) {
