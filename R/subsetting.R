@@ -909,7 +909,7 @@ abort_assign_incompatible_type <- function(x, value, j, value_arg, parent = NULL
   )
 }
 
-abort_assign_vector <- function(value, j, value_arg, parent = NULL, call = my_caller_env()) {
+abort_assign_vector <- function(value, j, value_arg, parent = NULL, call = caller_env()) {
   tibble_abort(
     paste0("Assigned data ", tick(as_label(value_arg)), " must be a vector."),
     actual = value[[j]],

@@ -335,7 +335,7 @@
       print_error(abort_assign_vector(list("c"), 1, quote(rhs)))
     Output
       <error/tibble_error_assign_vector>
-      Error in `abort_assign_vector()`:
+      Error:
       ! Assigned data `rhs` must be a vector.
     Code
       # # subsetting-matrix
