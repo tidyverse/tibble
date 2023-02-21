@@ -860,7 +860,7 @@ abort_duplicate_row_subscript_for_assignment <- function(i) {
   tibble_abort(pluralise_commas("Row index(es) ", i, " [is](are) used more than once for assignment."), i = i)
 }
 
-abort_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg, parent = NULL, call = my_caller_env()) {
+abort_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg, parent = NULL, call = caller_env()) {
   if (is.null(i_arg)) {
     target <- "existing data"
     existing <- pluralise_count("Existing data has ", nrow, " row(s)")

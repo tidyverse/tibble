@@ -308,7 +308,7 @@
       print_error(abort_assign_incompatible_size(3, list(1:2), 1, NULL, quote(rhs)))
     Output
       <error/tibble_error_assign_incompatible_size>
-      Error in `abort_assign_incompatible_size()`:
+      Error:
       ! Assigned data `rhs` must be compatible with existing data.
       x Existing data has 3 rows.
       x Assigned data has 2 rows.
@@ -318,7 +318,7 @@
       quote(rhs)))
     Output
       <error/tibble_error_assign_incompatible_size>
-      Error in `abort_assign_incompatible_size()`:
+      Error:
       ! Assigned data `rhs` must be compatible with row subscript `4:1`.
       x 4 rows must be assigned.
       x Element 2 of assigned data has 2 rows.
