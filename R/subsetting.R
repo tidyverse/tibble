@@ -387,7 +387,7 @@ tbl_subset2 <- function(x, j, j_arg, call = caller_env()) {
   }
 
   if (is.object(j)) {
-    j <- vectbl_as_col_subscript2(j, j_arg)
+    j <- vectbl_as_col_subscript2(j, j_arg, call = call)
   }
 
   if (is.numeric(j)) {
@@ -639,7 +639,7 @@ vectbl_as_col_subscript <- function(j, j_arg, assign = FALSE, call = caller_env(
   )
 }
 
-vectbl_as_col_subscript2 <- function(j, j_arg, assign = FALSE, call = my_caller_env()) {
+vectbl_as_col_subscript2 <- function(j, j_arg, assign = FALSE, call = caller_env()) {
   subclass_col_index_errors(
     vec_as_subscript2(j, logical = "error", call = call),
     j_arg = j_arg,
