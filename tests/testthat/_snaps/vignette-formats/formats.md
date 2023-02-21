@@ -43,20 +43,6 @@ This also applies to columns derived from `x`.
 
 ```r
 library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:tibble':
-#> 
-#>     collapse, dim_desc
-#> The following object is masked from 'package:testthat':
-#> 
-#>     matches
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 tbl2 <-
   tbl %>%
   mutate(
@@ -99,18 +85,13 @@ Same for pivoting operations.
 
 ```r
 library(tidyr)
-#> 
-#> Attaching package: 'tidyr'
-#> The following object is masked from 'package:testthat':
-#> 
-#>     matches
 
 stocks <-
   expand_grid(id = factor(1:4), year = 2018:2022) %>%
   mutate(stock = currency(runif(20) * 10000))
 
 stocks %>%
-  pivot_wider(id, names_from = year, values_from = stock)
+  pivot_wider(id_cols = id, names_from = year, values_from = stock)
 #> # A tibble: 4 x 6
 #>   id    `2018`     `2019`     `2020`     `2021`     `2022`    
 #>   <fct> <formttbl> <formttbl> <formttbl> <formttbl> <formttbl>
@@ -132,18 +113,16 @@ stocks %>%
   geom_line()
 ```
 
-![](${TEMP}/formats_files/figure-markdown_strict/unnamed-chunk-7-1.png)
-
 It pays off to specify formatting very early in the process.
 The diagram below shows the principal stages of data analysis and exploration from "R for data science".
 
-![](${TEMP}/formats_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+
 
 The subsequent diagram adds data formats, communication options, and explicit data formatting.
 The original r4ds transitions are highlighted in bold.
 There are two principal options where to apply formatting for results: right before communicating them, or right after importing.
 
-![](${TEMP}/formats_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+
 
 Applying formatting early in the process gives the added benefit of showing the data in a useful format during the "Tidy", "Transform", and "Visualize" stages.
 For this to be useful, we need to ensure that the formatting options applied early:
@@ -184,8 +163,8 @@ tbl3
 
 tbl3 %>%
   mutate(
-    across(where(is.numeric), digits, 3),
-    across(where(~ is.numeric(.x) && mean(.x) > 50), digits, 1)
+    across(where(is.numeric), ~ digits(.x, 3)),
+    across(where(~ is.numeric(.x) && mean(.x) > 50), ~ digits(.x, 1))
   )
 #> # A tibble: 3 x 9
 #>   id    x          y          z          v          lag       sin    mean  var  
@@ -200,8 +179,8 @@ These rules can be stored in `quos()`:
 
 ```r
 rules <- quos(
-  across(where(is.numeric), digits, 3),
-  across(where(~ is.numeric(.x) && mean(.x) > 50), digits, 1)
+  across(where(is.numeric), ~ digits(.x, 3)),
+  across(where(~ is.numeric(.x) && mean(.x) > 50), ~ digits(.x, 1))
 )
 
 tbl3 %>%

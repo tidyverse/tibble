@@ -14,6 +14,12 @@ knitr::opts_chunk$set(
   comment = "#>",
   error = (Sys.getenv("IN_PKGDOWN") == "")
 )
+
+library(tibble)
+library(formattable)
+library(dplyr)
+library(tidyr)
+library(ggplot2)
 ```
 
 ```{r setup}
@@ -83,12 +89,12 @@ stocks <-
   mutate(stock = currency(runif(20) * 10000))
 
 stocks %>%
-  pivot_wider(id, names_from = year, values_from = stock)
+  pivot_wider(id_cols = id, names_from = year, values_from = stock)
 ```
 
 For ggplot2 we need to do [some work](https://github.com/tidyverse/ggplot2/pull/4065) to show apply the formatting to the scales.
 
-```{r}
+```{r, eval = (Sys.getenv("IN_GALLEY") == "")}
 library(ggplot2)
 
 # Needs https://github.com/tidyverse/ggplot2/pull/4065 or similar
@@ -100,9 +106,9 @@ stocks %>%
 It pays off to specify formatting very early in the process.
 The diagram below shows the principal stages of data analysis and exploration from "R for data science".
 
-```{r echo = FALSE}
+```{r echo = FALSE, eval = (Sys.getenv("IN_GALLEY") == "")}
 text <- paste(
-  readLines("r4ds.mmd"),
+  readLines(here::here("vignettes/r4ds.mmd")),
   collapse = "\n"
 )
 DiagrammeR::mermaid(text)
@@ -112,9 +118,9 @@ The subsequent diagram adds data formats, communication options, and explicit da
 The original r4ds transitions are highlighted in bold.
 There are two principal options where to apply formatting for results: right before communicating them, or right after importing.
 
-```{r echo = FALSE}
+```{r echo = FALSE, eval = (Sys.getenv("IN_GALLEY") == "")}
 text <- paste(
-  readLines("formats.mmd"),
+  readLines(here::here("vignettes/formats.mmd")),
   collapse = "\n"
 )
 DiagrammeR::mermaid(text)
@@ -152,8 +158,8 @@ tbl3
 
 tbl3 %>%
   mutate(
-    across(where(is.numeric), digits, 3),
-    across(where(~ is.numeric(.x) && mean(.x) > 50), digits, 1)
+    across(where(is.numeric), ~ digits(.x, 3)),
+    across(where(~ is.numeric(.x) && mean(.x) > 50), ~ digits(.x, 1))
   )
 ```
 
@@ -161,8 +167,8 @@ These rules can be stored in `quos()`:
 
 ```{r}
 rules <- quos(
-  across(where(is.numeric), digits, 3),
-  across(where(~ is.numeric(.x) && mean(.x) > 50), digits, 1)
+  across(where(is.numeric), ~ digits(.x, 3)),
+  across(where(~ is.numeric(.x) && mean(.x) > 50), ~ digits(.x, 1))
 )
 
 tbl3 %>%
