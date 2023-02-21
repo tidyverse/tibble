@@ -1,5 +1,28 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.1.8.9007
+
+## Chore
+
+- Use usethis namespace.
+
+- Add GitPod infrastructure.
+
+- Require R \>= 3.4.0, dependency hygiene (#1490, #1071).
+
+Closes #1071. Closes #1490.
+
+## Documentation
+
+- Fix display of mermaid diagrams in `vignette("formats")` (@maelle, #1497, #1498).
+
+## Uncategorized
+
+- Snapshot updates for rcc-smoke (null) (#1495).
+
+Snapshot updates for rcc-smoke (null)
+
+
 # tibble 3.1.8.9006
 
 - Internal changes only.
