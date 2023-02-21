@@ -211,7 +211,7 @@ is.tibble <- function(x) {
   is_tibble(x)
 }
 
-tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE, call = my_caller_env()) {
+tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE, call = caller_env()) {
   # Evaluate each column in turn
   col_names <- given_col_names <- names2(xs)
   empty_col_names <- which(col_names == "")
