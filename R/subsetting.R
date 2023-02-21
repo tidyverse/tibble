@@ -505,7 +505,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL, c
     j <- vectbl_as_col_subscript(j, j_arg = j_arg, assign = TRUE, call = call)
   }
 
-  if (is_bare_character(j)) {
+  if (is.character(j)) {
     if (anyNA(j)) {
       abort_assign_columns_non_na_only()
     }
@@ -520,7 +520,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL, c
     } else {
       new <- NULL
     }
-  } else if (is_bare_numeric(j)) {
+  } else if (is.numeric(j)) {
     if (anyNA(j)) {
       abort_assign_columns_non_na_only()
     }
