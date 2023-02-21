@@ -235,7 +235,7 @@ abort_frame_matrix_list <- function(pos) {
   ))
 }
 
-abort_tribble_c <- function(name, cnd, call = my_caller_env()) {
+abort_tribble_c <- function(name, cnd, call) {
   tibble_abort(
     paste0("Can't create column ", tick(name)),
     parent = cnd,
