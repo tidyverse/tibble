@@ -114,16 +114,6 @@ timing
 ```
 
 
-```
-#> # A tibble: 2 x 14
-#>   expre~1 min         mean         median      max         itr/s~2 mem_a~3  n_gc
-#>   <chr>   <bench_tm>  <bench_tm>   <bench_tm>  <bench_tm>    <dbl> <bnch_> <dbl>
-#> 1 as_tib~ 0.000287696 0.0006251376 0.000327178 0.004508219   1600.  1840       5
-#> 2 as.dat~ 0.000791522 0.0016640039 0.001098172 0.007652914    601. 34584       5
-#> # ... with 6 more variables: n_itr <int>, total_time <bench_tm>, result <list>,
-#> #   memory <list>, time <list>, gc <list>, and abbreviated variable names
-#> #   1: expression, 2: `itr/sec`, 3: mem_alloc
-```
 
 The speed of `as.data.frame()` is not usually a bottleneck when used interactively, but can be a problem when combining thousands of messy inputs into one tidy data frame.
 

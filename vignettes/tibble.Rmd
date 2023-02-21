@@ -84,7 +84,7 @@ timing <- bench::mark(
 timing
 ```
 
-```{r echo = FALSE}
+```{r echo = FALSE, eval = (Sys.getenv("IN_GALLEY") == "")}
 readRDS("timing.rds")
 ```
 
