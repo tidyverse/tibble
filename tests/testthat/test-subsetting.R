@@ -403,6 +403,7 @@ test_that("can use classed character indexes (#778)", {
   expect_null(df[[mychr("c")]])
 
   expect_silent(df[mychr(letters[1:2])] <- df)
+  expect_silent(df[mychr(letters[3:4])] <- df)
   expect_silent(df[[mychr("c")]] <- 1)
   expect_silent(df[[mychr("a")]] <- df[["a"]])
 })
@@ -413,7 +414,8 @@ test_that("can use classed integer indexes (#778)", {
   expect_identical(df[myint(1:3), myint(1:2)], df)
   expect_identical(df[[myint(2)]], df[[2]])
 
-  expect_silent(df[mylgl(TRUE), ] <- df)
+  expect_silent(df[myint(1:2)] <- df)
+  expect_silent(df[myint(3:4)] <- list(c = 4, d = 5))
   expect_silent(df[[myint(2)]] <- df[[2]])
   expect_silent(df[[myint(3)]] <- 1)
 })
@@ -422,6 +424,8 @@ test_that("can use classed logical indexes (#778)", {
   df <- tibble::tibble(a = 1:3, b = LETTERS[1:3])
 
   expect_identical(df[mylgl(TRUE), mylgl(TRUE)], df)
+
+  expect_silent(df[mylgl(TRUE), ] <- df)
   expect_silent(df[mylgl(TRUE), mylgl(TRUE)] <- df)
 })
 
