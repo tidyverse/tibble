@@ -43,20 +43,6 @@ This also applies to columns derived from `x`.
 
 ```r
 library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:tibble':
-#> 
-#>     collapse, dim_desc
-#> The following object is masked from 'package:testthat':
-#> 
-#>     matches
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
 tbl2 <-
   tbl %>%
   mutate(
@@ -99,11 +85,6 @@ Same for pivoting operations.
 
 ```r
 library(tidyr)
-#> 
-#> Attaching package: 'tidyr'
-#> The following object is masked from 'package:testthat':
-#> 
-#>     matches
 
 stocks <-
   expand_grid(id = factor(1:4), year = 2018:2022) %>%
