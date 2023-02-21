@@ -447,7 +447,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg, call = caller
     xo <- unclass(x)
 
     if (is.null(j)) {
-      xo <- tbl_subassign_row(xo, i, value, i_arg, value_arg)
+      xo <- tbl_subassign_row(xo, i, value, i_arg, value_arg, call)
     } else {
       # Optimization: match only once
       # (Invariant: x[[j]] is equivalent to x[[vec_as_location(j)]],
@@ -464,7 +464,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg, call = caller
       }
 
       xj <- .subset(xo, j)
-      xj <- tbl_subassign_row(xj, i, value, i_arg, value_arg)
+      xj <- tbl_subassign_row(xj, i, value, i_arg, value_arg, call)
       xo <- tbl_subassign_col(xo, j, xj)
     }
   }
@@ -701,7 +701,7 @@ tbl_expand_to_nrow <- function(x, i) {
   x
 }
 
-tbl_subassign_row <- function(x, i, value, i_arg, value_arg, call = my_caller_env()) {
+tbl_subassign_row <- function(x, i, value, i_arg, value_arg, call) {
   recycled_value <- vectbl_recycle_rhs_cols(value, length(x))
 
   withCallingHandlers(
