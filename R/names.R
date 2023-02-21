@@ -1,7 +1,7 @@
 vectbl_names2 <- function(x,
                           .name_repair = c("check_unique", "unique", "universal", "minimal"),
                           quiet = FALSE,
-                          call = my_caller_env()) {
+                          call = caller_env()) {
   name <- vec_names2(x, repair = "minimal", quiet = quiet)
   repaired_names(name, repair_hint = TRUE, .name_repair = .name_repair, quiet = quiet, call = call)
 }
