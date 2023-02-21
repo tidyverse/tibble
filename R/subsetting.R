@@ -299,7 +299,7 @@ NULL
   tbl_subassign(x, i, j, value, i_arg, j_arg, substitute(value))
 }
 
-vectbl_as_row_index <- function(i, x, i_arg, assign = FALSE) {
+vectbl_as_row_index <- function(i, x, i_arg, assign = FALSE, call = caller_env()) {
   stopifnot(!is.null(i))
 
   nr <- fast_nrow(x)
@@ -318,9 +318,9 @@ vectbl_as_row_index <- function(i, x, i_arg, assign = FALSE) {
     i
   } else if (is.numeric(i)) {
     i <- fix_oob(i, nr)
-    vectbl_as_row_location(i, nr, i_arg, assign)
+    vectbl_as_row_location(i, nr, i_arg, assign, call)
   } else {
-    vectbl_as_row_location(i, nr, i_arg, assign)
+    vectbl_as_row_location(i, nr, i_arg, assign, call)
   }
 }
 
@@ -486,9 +486,9 @@ vectbl_as_new_row_index <- function(i, x, i_arg, call) {
     numtbl_as_row_location_assign(i, nr, i_arg, call)
   } else if (is_logical(i)) {
     # Don't allow OOB logical
-    vectbl_as_row_location(i, fast_nrow(x), i_arg, assign = TRUE)
+    vectbl_as_row_location(i, fast_nrow(x), i_arg, assign = TRUE, call = call)
   } else {
-    i <- vectbl_as_row_index(i, x, i_arg, assign = TRUE)
+    i <- vectbl_as_row_index(i, x, i_arg, assign = TRUE, call = call)
     if (anyDuplicated.default(i, incomparables = NA)) {
       abort_duplicate_row_subscript_for_assignment(i)
     }
@@ -586,7 +586,7 @@ numtbl_as_row_location_assign <- function(i, n, i_arg, call) {
   )
 }
 
-vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE, call = my_caller_env()) {
+vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE, call) {
   if (is_bare_atomic(i) && is.matrix(i) && ncol(i) == 1) {
     what <- paste0(
       "tibble::", if (assign) "`[<-`" else "`[`",
