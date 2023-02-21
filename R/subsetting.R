@@ -437,7 +437,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg, call = caller
     # x[NULL, ...] <- value
     return(x)
   } else {
-    i <- vectbl_as_new_row_index(i, x, i_arg)
+    i <- vectbl_as_new_row_index(i, x, i_arg, call = call)
 
     # Fill up rows first if necessary
     x <- tbl_expand_to_nrow(x, i)
@@ -472,7 +472,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg, call = caller
   vectbl_restore(xo, x)
 }
 
-vectbl_as_new_row_index <- function(i, x, i_arg) {
+vectbl_as_new_row_index <- function(i, x, i_arg, call) {
   if (is.null(i)) {
     i
   } else if (is_bare_numeric(i)) {
@@ -483,7 +483,7 @@ vectbl_as_new_row_index <- function(i, x, i_arg) {
     nr <- fast_nrow(x)
 
     # Only update existing, caller knows how to deal with OOB
-    numtbl_as_row_location_assign(i, nr, i_arg)
+    numtbl_as_row_location_assign(i, nr, i_arg, call)
   } else if (is_logical(i)) {
     # Don't allow OOB logical
     vectbl_as_row_location(i, fast_nrow(x), i_arg, assign = TRUE)
@@ -579,7 +579,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL, c
   j
 }
 
-numtbl_as_row_location_assign <- function(i, n, i_arg, call = my_caller_env()) {
+numtbl_as_row_location_assign <- function(i, n, i_arg, call) {
   subclass_row_index_errors(
     num_as_location(i, n, missing = "error", oob = "extend", zero = "error", call = call),
     i_arg = i_arg, assign = TRUE
