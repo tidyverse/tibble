@@ -59,8 +59,8 @@ lst_ <- function(xs) {
 #' @export
 #' @rdname deprecated
 as_data_frame <- function(x, ...) {
-  deprecate_warn("2.0.0", "as_data_frame()", "as_tibble()",
-    details = "The signature and semantics have changed, see `?as_tibble`."
+  deprecate_warn("2.0.0", "as_data_frame()",
+    details = "Please use `as_tibble()` (with slightly different semantics) to convert to a tibble, or `as.data.frame()` to convert to a data frame."
   )
 
   as_tibble(x, ...)
