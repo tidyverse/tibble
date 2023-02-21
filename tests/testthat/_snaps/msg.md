@@ -328,7 +328,7 @@
         rhs)))
     Output
       <error/tibble_error_assign_incompatible_type>
-      Error in `abort_assign_incompatible_type()`:
+      Error:
       ! Assigned data `rhs` must be compatible with existing data.
       i Error occurred for column `a`.
     Code
