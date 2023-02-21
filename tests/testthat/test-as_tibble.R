@@ -544,9 +544,8 @@ test_that("`validate` always raises lifecycle warning.", {
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
   expect_tibble_abort(
-    expect_warning(
-      as_tibble(df, validate = TRUE, .name_repair = "check_unique"),
-      NA
+    expect_deprecated(
+      as_tibble(df, validate = TRUE, .name_repair = "check_unique")
     ),
     abort_column_names_cannot_be_empty(2, repair_hint = TRUE)
   )

@@ -53,6 +53,7 @@ Suggests:
     evaluate,
     formattable,
     ggplot2,
+    here,
     hms,
     htmltools,
     knitr,

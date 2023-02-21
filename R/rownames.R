@@ -122,3 +122,13 @@ raw_rownames <- function(x) {
 abort_already_has_rownames <- function() {
   tibble_abort("`.data` must be a data frame without row names.")
 }
+
+abort_character_rownames <- function() {
+  tibble_abort("`row.names` must be a character vector.")
+}
+
+abort_inconsistent_rownames <- function(bad, nrow) {
+  tibble_abort(paste0(
+    "`row.names` must have length ", nrow, ", not ", bad, "."
+  ))
+}
