@@ -165,7 +165,7 @@ default: after last row.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span>     3     1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span>     4     0</span>
 <span class="r-in"><span><span class="kw"><a href="https://rdrr.io/r/base/try.html" class="external-link">try</a></span><span class="op">(</span><span class="va">df</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span> <span class="fu">add_row</span><span class="op">(</span><span class="fu"><a href="tibble.html">tibble_row</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">4</span><span class="op">:</span><span class="fl">5</span>, y <span class="op">=</span> <span class="fl">0</span><span class="op">:</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Error in tibble_row(x = 4:5, y = 0:-1) : </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Error in tibble_quos(xs, .rows = 1, .name_repair = .name_repair, single_row = TRUE) : </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   All vectors must be size one, use `list()` to wrap.</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BB0000;">✖</span> Column `x` is of size 2.</span>
 <span class="r-in"><span></span></span>
