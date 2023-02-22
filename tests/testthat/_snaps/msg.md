@@ -229,7 +229,7 @@
       print_error(abort_already_has_rownames())
     Output
       <error/tibble_error_already_has_rownames>
-      Error in `abort_already_has_rownames()`:
+      Error:
       ! `.data` must be a data frame without row names.
     Code
       # # subsetting
