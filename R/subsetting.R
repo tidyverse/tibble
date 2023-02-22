@@ -525,7 +525,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL, c
       abort_assign_columns_non_na_only()
     }
 
-    j <- numtbl_as_col_location_assign(j, length(x), j_arg = j_arg)
+    j <- numtbl_as_col_location_assign(j, length(x), j_arg, call)
 
     old <- (j <= length(x))
     new <- which(!old)
@@ -607,7 +607,7 @@ vectbl_as_row_location2 <- function(i, n, i_arg, assign = FALSE, call = caller_e
   subclass_row_index_errors(vec_as_location2(i, n, call = call), i_arg = i_arg, assign = assign)
 }
 
-numtbl_as_col_location_assign <- function(j, n, j_arg, call = my_caller_env()) {
+numtbl_as_col_location_assign <- function(j, n, j_arg, call) {
   subclass_col_index_errors(
     num_as_location(j, n, missing = "error", oob = "extend", zero = "error", call = call),
     j_arg = j_arg, assign = TRUE
