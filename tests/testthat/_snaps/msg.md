@@ -122,13 +122,13 @@
       print_error(abort_names_must_be_non_null())
     Output
       <error/tibble_error_names_must_be_non_null>
-      Error in `abort_names_must_be_non_null()`:
+      Error:
       ! `names` must not be `NULL`.
     Code
       print_error(abort_names_must_have_length(length = 5, n = 3))
     Output
       <error/tibble_error_names_must_have_length>
-      Error in `abort_names_must_have_length()`:
+      Error:
       ! `names` must have length 3, not 5.
     Code
       # #enframe

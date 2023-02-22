@@ -129,11 +129,11 @@ msg_names_must_have_length <- function(length, n) {
   paste0("`names` must have length ", n, ", not ", length, ".")
 }
 
-abort_names_must_be_non_null <- function(call = my_caller_env()) {
+abort_names_must_be_non_null <- function(call = caller_env()) {
   tibble_abort(call = call, msg_names_must_be_non_null())
 }
 
-abort_names_must_have_length <- function(length, n, call = my_caller_env()) {
+abort_names_must_have_length <- function(length, n, call = caller_env()) {
   tibble_abort(call = call,
     msg_names_must_have_length(length, n),
     expected = n,
