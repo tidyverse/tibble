@@ -26,22 +26,6 @@ test_that("as.data.frame() keeps zero-column data frames and matrices (#970)", {
   expect_identical(as.data.frame(mat)$y, mat$y)
 })
 
-test_that("as.data.frame() allows row names", {
-  df <- tibble(a = 1:3)
-  expect_identical(
-    as.data.frame(df, row.names = letters[1:3]),
-    vctrs::new_data_frame(list(a = 1:3), row.names = letters[1:3])
-  )
-  expect_tibble_abort(
-    as.data.frame(df, row.names = 1:3),
-    abort_character_rownames()
-  )
-  expect_tibble_abort(
-    as.data.frame(df, row.names = letters[1:2]),
-    abort_inconsistent_rownames(2, 3)
-  )
-})
-
 test_that("names<-()", {
   new_tbl <- function(...) {
     data <- list(1, "b")

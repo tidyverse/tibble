@@ -10,8 +10,6 @@
 
 - `as_data_frame()` now also refers to `as.data.frame()` in its deprecation message (#1149, #1506).
 
-- `as.data.frame.tbl_df()` supports a character vector in the `row.names` argument (#1202, #1504).
-
 ## Chore
 
 - Retry continuous benchmarks until success (#1505).

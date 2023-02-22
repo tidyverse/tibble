@@ -74,15 +74,6 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
   unname <- which(!map_lgl(x, is_bare_list))
   x[unname] <- map(.subset(x, unname), vectbl_set_names, NULL)
   class(x) <- "data.frame"
-  if (!is.null(row.names)) {
-    if (!is_bare_character(row.names)) {
-      abort_character_rownames()
-    }
-    if (length(row.names) != nrow(x)) {
-      abort_inconsistent_rownames(length(row.names), nrow(x))
-    }
-    attr(x, "row.names") <- row.names
-  }
   x
 }
 
