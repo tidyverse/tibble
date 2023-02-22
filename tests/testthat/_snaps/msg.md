@@ -216,13 +216,13 @@
       print_error(abort_new_tibble_must_be_list())
     Output
       <error/tibble_error_new_tibble_must_be_list>
-      Error in `abort_new_tibble_must_be_list()`:
+      Error:
       ! `x` must be a list.
     Code
       print_error(abort_new_tibble_nrow_must_be_nonnegative())
     Output
       <error/tibble_error_new_tibble_nrow_must_be_nonnegative>
-      Error in `abort_new_tibble_nrow_must_be_nonnegative()`:
+      Error:
       ! `nrow` must be a nonnegative whole number smaller than 2^31.
     Code
       # # rownames
