@@ -157,10 +157,10 @@ tibble_class_no_data_frame <- c("tbl_df", "tbl")
 
 # Errors ------------------------------------------------------------------
 
-abort_new_tibble_must_be_list <- function() {
-  tibble_abort("`x` must be a list.")
+abort_new_tibble_must_be_list <- function(call = caller_env()) {
+  tibble_abort(call = call, "`x` must be a list.")
 }
 
-abort_new_tibble_nrow_must_be_nonnegative <- function() {
-  tibble_abort("`nrow` must be a nonnegative whole number smaller than 2^31.")
+abort_new_tibble_nrow_must_be_nonnegative <- function(call = caller_env()) {
+  tibble_abort(call = call, "`nrow` must be a nonnegative whole number smaller than 2^31.")
 }
