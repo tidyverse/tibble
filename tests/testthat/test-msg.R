@@ -69,7 +69,6 @@ test_that("output test", {
     print_error(abort_need_rhs_vector(quote(RHS)))
     print_error(abort_need_rhs_vector_or_null(quote(RHS)))
 
-    print_error(abort_na_column_index(1:3))
     print_error(abort_dim_column_index(as.matrix("x")))
 
     print_error(abort_assign_columns_non_na_only())

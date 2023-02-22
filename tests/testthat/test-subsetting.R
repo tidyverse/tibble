@@ -129,9 +129,9 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
       foo[-4],
       class = "vctrs_error_subscript_oob"
     )
-    expect_tibble_abort(
+    expect_error(
       foo[c(1:3, NA)],
-      abort_na_column_index(4)
+      class = "vctrs_error_subscript_type"
     )
 
     expect_error(foo[as.matrix(1)])
@@ -156,9 +156,9 @@ test_that("[.tbl_df is careful about column flags (#83)", {
       foo[c(TRUE, TRUE, FALSE, FALSE)],
       class = "vctrs_error_subscript_size"
     )
-    expect_tibble_abort(
+    expect_error(
       foo[c(TRUE, TRUE, NA)],
-      abort_na_column_index(3)
+      class = "vctrs_error_subscript_type"
     )
 
     expect_tibble_abort(

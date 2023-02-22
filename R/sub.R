@@ -175,10 +175,6 @@ NULL
   } else {
     j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = FALSE)
 
-    if (anyNA(j)) {
-      abort_na_column_index(which(is.na(j)))
-    }
-
     xo <- .subset(x, j)
 
     if (anyDuplicated.default(j)) {
@@ -251,11 +247,19 @@ vectbl_as_col_subscript2 <- function(j, j_arg, assign = FALSE, call = caller_env
 }
 
 vectbl_as_col_location2 <- function(j, n, names = NULL, j_arg, assign = FALSE, call = caller_env()) {
-  subclass_col_index_errors(vec_as_location2(j, n, names, call = call), j_arg = j_arg, assign = assign)
+  subclass_col_index_errors(
+    vec_as_location2(j, n, names, call = call),
+    j_arg = j_arg,
+    assign = assign
+  )
 }
 
 vectbl_as_row_location2 <- function(i, n, i_arg, assign = FALSE, call = caller_env()) {
-  subclass_row_index_errors(vec_as_location2(i, n, call = call), i_arg = i_arg, assign = assign)
+  subclass_row_index_errors(
+    vec_as_location2(i, n, call = call),
+    i_arg = i_arg,
+    assign = assign
+  )
 }
 
 vectbl_set_names <- function(x, names = NULL) {
@@ -274,7 +278,7 @@ vectbl_as_col_location <- function(j,
                                    assign = FALSE,
                                    call = caller_env()) {
   subclass_col_index_errors(
-    vec_as_location(j, n, names, call = call),
+    vec_as_location(j, n, names, missing = "error", call = call),
     j_arg = j_arg,
     assign = assign
   )
@@ -368,10 +372,6 @@ vectbl_restore <- function(xo, x) {
 }
 
 # Errors ------------------------------------------------------------------
-
-abort_na_column_index <- function(j, call = caller_env()) {
-  tibble_abort(call = call, pluralise_commas("Can't use NA as column index with `[` at position(s) ", j, "."), j = j)
-}
 
 abort_subset_columns_non_missing_only <- function(call = caller_env()) {
   tibble_abort(call = call, "Subscript can't be missing for tibbles in `[[`.")
