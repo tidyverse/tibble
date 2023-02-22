@@ -440,7 +440,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg, call = caller
     i <- vectbl_as_new_row_index(i, x, i_arg, call = call)
 
     # Fill up rows first if necessary
-    x <- tbl_expand_to_nrow(x, i)
+    x <- tbl_expand_to_nrow(x, i, call)
     value <- vectbl_wrap_rhs_row(value, value_arg)
 
     # Only after tbl_expand_to_nrow() which needs data frame
@@ -683,7 +683,7 @@ tbl_subassign_col <- function(x, j, value) {
   x
 }
 
-tbl_expand_to_nrow <- function(x, i, call = my_caller_env()) {
+tbl_expand_to_nrow <- function(x, i, call = caller_env()) {
   nrow <- fast_nrow(x)
 
   new_nrow <- max(i, nrow)
