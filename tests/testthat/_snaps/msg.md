@@ -135,13 +135,13 @@
       print_error(abort_enframe_value_null())
     Output
       <error/tibble_error_enframe_value_null>
-      Error in `abort_enframe_value_null()`:
+      Error:
       ! `value` can't be NULL.
     Code
       print_error(abort_enframe_must_be_vector(lm(speed ~ ., cars)))
     Output
       <error/tibble_error_enframe_must_be_vector>
-      Error in `abort_enframe_must_be_vector()`:
+      Error:
       ! The `x` argument to `enframe()` must be a vector, not lm.
     Code
       # # names

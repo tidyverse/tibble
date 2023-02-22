@@ -77,11 +77,11 @@ deframe <- function(x) {
   vectbl_set_names(value, as.character(name))
 }
 
-abort_enframe_value_null <- function(call = my_caller_env()) {
+abort_enframe_value_null <- function(call = caller_env()) {
   tibble_abort(call = call, "`value` can't be NULL.")
 }
 
-abort_enframe_must_be_vector <- function(x, call = my_caller_env()) {
+abort_enframe_must_be_vector <- function(x, call = caller_env()) {
   tibble_abort(call = call, paste0(
     "The `x` argument to `enframe()` must be a vector, not ", class(x)[[1]], "."
   ))
