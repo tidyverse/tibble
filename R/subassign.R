@@ -99,7 +99,7 @@ vectbl_as_new_row_index <- function(i, x, i_arg, call) {
     i
   } else if (is_bare_numeric(i)) {
     if (anyDuplicated.default(i)) {
-      abort_duplicate_row_subscript_for_assignment(i, call)
+      abort_assign_duplicate_row_subscript(i, call)
     }
 
     nr <- fast_nrow(x)
@@ -112,7 +112,7 @@ vectbl_as_new_row_index <- function(i, x, i_arg, call) {
   } else {
     i <- vectbl_as_row_index(i, x, i_arg, assign = TRUE, call = call)
     if (anyDuplicated.default(i, incomparables = NA)) {
-      abort_duplicate_row_subscript_for_assignment(i, call)
+      abort_assign_duplicate_row_subscript(i, call)
     }
     i
   }
@@ -193,7 +193,7 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL, c
   }
 
   if (anyDuplicated.default(j)) {
-    abort_duplicate_column_subscript_for_assignment(j, call)
+    abort_assign_duplicate_column_subscript(j, call)
   }
 
   names(j) <- names
@@ -275,7 +275,7 @@ abort_assign_columns_non_missing_only <- function(call = caller_env()) {
   tibble_abort(call = call, "Subscript can't be missing for tibbles in `[[<-`.")
 }
 
-abort_duplicate_column_subscript_for_assignment <- function(j, call = caller_env()) {
+abort_assign_duplicate_column_subscript <- function(j, call = caller_env()) {
   j <- unique(j[duplicated(j)])
   tibble_abort(call = call, pluralise_commas("Column index(es) ", j, " [is](are) used more than once for assignment."), j = j)
 }
@@ -284,7 +284,7 @@ abort_assign_rows_non_na_only <- function(call = caller_env()) {
   tibble_abort(call = call, "Can't use NA as row index in a tibble for assignment.")
 }
 
-abort_duplicate_row_subscript_for_assignment <- function(i, call = caller_env()) {
+abort_assign_duplicate_row_subscript <- function(i, call = caller_env()) {
   i <- unique(i[duplicated(i)])
   tibble_abort(call = call, pluralise_commas("Row index(es) ", i, " [is](are) used more than once for assignment."), i = i)
 }
