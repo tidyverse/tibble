@@ -275,15 +275,15 @@
       Error:
       ! Subscript can't be missing for tibbles in `[[<-`.
     Code
-      print_error(abort_duplicate_column_subscript_for_assignment(c(1, 1)))
+      print_error(abort_assign_duplicate_column_subscript(c(1, 1)))
     Output
-      <error/tibble_error_duplicate_column_subscript_for_assignment>
+      <error/tibble_error_assign_duplicate_column_subscript>
       Error:
       ! Column index 1 is used more than once for assignment.
     Code
-      print_error(abort_duplicate_column_subscript_for_assignment(c(1, 1, 2, 2)))
+      print_error(abort_assign_duplicate_column_subscript(c(1, 1, 2, 2)))
     Output
-      <error/tibble_error_duplicate_column_subscript_for_assignment>
+      <error/tibble_error_assign_duplicate_column_subscript>
       Error:
       ! Column indexes 1 and 2 are used more than once for assignment.
     Code
@@ -293,15 +293,15 @@
       Error:
       ! Can't use NA as row index in a tibble for assignment.
     Code
-      print_error(abort_duplicate_row_subscript_for_assignment(c(1, 1)))
+      print_error(abort_assign_duplicate_row_subscript(c(1, 1)))
     Output
-      <error/tibble_error_duplicate_row_subscript_for_assignment>
+      <error/tibble_error_assign_duplicate_row_subscript>
       Error:
       ! Row index 1 is used more than once for assignment.
     Code
-      print_error(abort_duplicate_row_subscript_for_assignment(c(1, 1, 2, 2)))
+      print_error(abort_assign_duplicate_row_subscript(c(1, 1, 2, 2)))
     Output
-      <error/tibble_error_duplicate_row_subscript_for_assignment>
+      <error/tibble_error_assign_duplicate_row_subscript>
       Error:
       ! Row indexes 1 and 2 are used more than once for assignment.
     Code
