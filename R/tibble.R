@@ -332,7 +332,7 @@ vectbl_recycle_rows <- function(x, n, j, name) {
 
 # Errors ------------------------------------------------------------------
 
-abort_tibble_row_size_one <- function(j, name, size, call = my_caller_env()) {
+abort_tibble_row_size_one <- function(j, name, size, call = caller_env()) {
   if (name != "") {
     desc <- tick(name)
   } else {

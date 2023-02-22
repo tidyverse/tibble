@@ -368,7 +368,7 @@
       print_error(abort_tibble_row_size_one(3, "foo", 7))
     Output
       <error/tibble_error_tibble_row_size_one>
-      Error in `abort_tibble_row_size_one()`:
+      Error:
       ! All vectors must be size one, use `list()` to wrap.
       x Column `foo` is of size 7.
     Code
