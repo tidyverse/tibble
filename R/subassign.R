@@ -201,6 +201,14 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL, c
   j
 }
 
+vectbl_as_col_subscript <- function(j, j_arg, assign = FALSE, call = caller_env()) {
+  subclass_col_index_errors(
+    vec_as_subscript(j, call = call),
+    j_arg = j_arg,
+    assign = assign
+  )
+}
+
 numtbl_as_row_location_assign <- function(i, n, i_arg, call) {
   subclass_row_index_errors(
     num_as_location(i, n, missing = "error", oob = "extend", zero = "error", call = call),
