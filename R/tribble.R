@@ -75,7 +75,7 @@ frame_matrix <- function(...) {
   turn_frame_data_into_frame_matrix(data$frame_names, data$frame_rest)
 }
 
-extract_frame_data_from_dots <- function(..., .call = my_caller_env()) {
+extract_frame_data_from_dots <- function(..., .call = caller_env()) {
   dots <- list2(...)
 
   # Extract the names.
