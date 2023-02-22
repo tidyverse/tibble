@@ -173,7 +173,7 @@ turn_matrix_into_column_list <- function(frame_mat, call) {
   return(frame_col)
 }
 
-turn_frame_data_into_frame_matrix <- function(names, rest, call = my_caller_env()) {
+turn_frame_data_into_frame_matrix <- function(names, rest, call = caller_env()) {
   list_cols <- which(map_lgl(rest, needs_list_col))
   if (has_length(list_cols)) {
     abort_frame_matrix_list(list_cols, call)
