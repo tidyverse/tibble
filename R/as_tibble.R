@@ -348,8 +348,8 @@ matrixToDataFrame <- function(x) {
 
 # Errors ------------------------------------------------------------------
 
-abort_column_scalar_type <- function(names, positions, classes) {
-  tibble_abort(
+abort_column_scalar_type <- function(names, positions, classes, call = my_caller_env()) {
+  tibble_abort(call = call,
     problems(
       "All columns in a tibble must be vectors:",
       x = paste0("Column ", name_or_pos(names, positions), " is ", classes)
@@ -358,17 +358,17 @@ abort_column_scalar_type <- function(names, positions, classes) {
   )
 }
 
-abort_as_tibble_row_vector <- function(x) {
-  tibble_abort(paste0(
+abort_as_tibble_row_vector <- function(x, call = my_caller_env()) {
+  tibble_abort(call = call, paste0(
     "`x` must be a vector in `as_tibble_row()`, not ", class(x)[[1]], "."
   ))
 }
 
-abort_as_tibble_row_size_one <- function(j, name, size) {
+abort_as_tibble_row_size_one <- function(j, name, size, call = my_caller_env()) {
   desc <- tick(name)
   desc[name == ""] <- paste0("at position ", j[name == ""])
 
-  tibble_abort(problems(
+  tibble_abort(call = call, problems(
     "All elements must be size one, use `list()` to wrap.",
     paste0("Element ", desc, " is of size ", size, ".")
   ))

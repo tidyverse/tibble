@@ -230,12 +230,12 @@ msg_unknown_column_names <- function(names) {
   pluralise_commas("Can't find column(s) ", tick(names), " in `.data`.")
 }
 
-abort_add_rows_to_grouped_df <- function() {
-  tibble_abort("Can't add rows to grouped data frames.")
+abort_add_rows_to_grouped_df <- function(call = my_caller_env()) {
+  tibble_abort(call = call, "Can't add rows to grouped data frames.")
 }
 
-abort_incompatible_new_rows <- function(names) {
-  tibble_abort(
+abort_incompatible_new_rows <- function(names, call = my_caller_env()) {
+  tibble_abort(call = call,
     problems(
       "New rows can't add columns:",
       msg_unknown_column_names(names)
@@ -244,16 +244,16 @@ abort_incompatible_new_rows <- function(names) {
   )
 }
 
-abort_both_before_after <- function() {
-  tibble_abort("Can't specify both `.before` and `.after`.")
+abort_both_before_after <- function(call = my_caller_env()) {
+  tibble_abort(call = call, "Can't specify both `.before` and `.after`.")
 }
 
-abort_unknown_column_names <- function(j, parent = NULL) {
-  tibble_abort(pluralise_commas("Can't find column(s) ", tick(j), " in `.data`."), j = j, parent = parent)
+abort_unknown_column_names <- function(j, parent = NULL, call = my_caller_env()) {
+  tibble_abort(call = call, pluralise_commas("Can't find column(s) ", tick(j), " in `.data`."), j = j, parent = parent)
 }
 
-abort_incompatible_new_cols <- function(n, df) {
-  tibble_abort(
+abort_incompatible_new_cols <- function(n, df, call = my_caller_env()) {
+  tibble_abort(call = call,
     bullets(
       "New columns must be compatible with `.data`:",
       x = paste0(

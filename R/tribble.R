@@ -197,30 +197,30 @@ subclass_tribble_c_errors <- function(name, code, call) {
 
 # Errors ------------------------------------------------------------------
 
-abort_tribble_needs_columns <- function() {
-  tibble_abort("Must specify at least one column using the `~name` syntax.")
+abort_tribble_needs_columns <- function(call = my_caller_env()) {
+  tibble_abort(call = call, "Must specify at least one column using the `~name` syntax.")
 }
 
-abort_tribble_named_after_tilde <- function() {
-  tibble_abort("When using the `~name` syntax, subsequent values must not have names.")
+abort_tribble_named_after_tilde <- function(call = my_caller_env()) {
+  tibble_abort(call = call, "When using the `~name` syntax, subsequent values must not have names.")
 }
 
-abort_tribble_lhs_column_syntax <- function(lhs) {
-  tibble_abort(problems(
+abort_tribble_lhs_column_syntax <- function(lhs, call = my_caller_env()) {
+  tibble_abort(call = call, problems(
     "All column specifications must use the `~name` syntax.",
     paste0("Found ", expr_label(lhs), " on the left-hand side of `~`.")
   ))
 }
 
-abort_tribble_rhs_column_syntax <- function(rhs) {
-  tibble_abort(problems(
+abort_tribble_rhs_column_syntax <- function(rhs, call = my_caller_env()) {
+  tibble_abort(call = call, problems(
     'All column specifications must use the `~name` or `~"name"` syntax.',
     paste0("Found ", expr_label(rhs), " on the right-hand side of `~`.")
   ))
 }
 
-abort_tribble_non_rectangular <- function(cols, cells) {
-  tibble_abort(bullets(
+abort_tribble_non_rectangular <- function(cols, cells, call = my_caller_env()) {
+  tibble_abort(call = call, bullets(
     "Data must be rectangular:",
     paste0("Found ", cols, " columns."),
     paste0("Found ", cells, " cells."),
@@ -228,8 +228,8 @@ abort_tribble_non_rectangular <- function(cols, cells) {
   ))
 }
 
-abort_frame_matrix_list <- function(pos) {
-  tibble_abort(problems(
+abort_frame_matrix_list <- function(pos, call = my_caller_env()) {
+  tibble_abort(call = call, problems(
     "All values must be atomic:",
     pluralise_commas("Found list-valued element(s) at position(s) ", pos, ".")
   ))

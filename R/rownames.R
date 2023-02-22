@@ -119,6 +119,6 @@ raw_rownames <- function(x) {
 
 # Errors ------------------------------------------------------------------
 
-abort_already_has_rownames <- function() {
-  tibble_abort("`.data` must be a data frame without row names.")
+abort_already_has_rownames <- function(call = my_caller_env()) {
+  tibble_abort(call = call, "`.data` must be a data frame without row names.")
 }

@@ -62,30 +62,30 @@ cells_to_col_idx <- function(cells) {
 
 # Errors ------------------------------------------------------------------
 
-abort_subset_matrix_must_be_logical <- function(j_arg) {
-  tibble_abort(paste0(
+abort_subset_matrix_must_be_logical <- function(j_arg, call = my_caller_env()) {
+  tibble_abort(call = call, paste0(
     "Subscript ", tick(as_label(j_arg)),
     " is a matrix, it must be of type logical."
   ))
 }
 
-abort_subset_matrix_must_have_same_dimensions <- function(j_arg) {
-  tibble_abort(paste0(
+abort_subset_matrix_must_have_same_dimensions <- function(j_arg, call = my_caller_env()) {
+  tibble_abort(call = call, paste0(
     "Subscript ", tick(as_label(j_arg)),
     " is a matrix, it must have the same dimensions as the input."
   ))
 }
 
-abort_subset_matrix_scalar_type <- function(j_arg, value_arg) {
-  tibble_abort(paste0(
+abort_subset_matrix_scalar_type <- function(j_arg, value_arg, call = my_caller_env()) {
+  tibble_abort(call = call, paste0(
     "Subscript ", tick(as_label(j_arg)),
     " is a matrix, the data ", tick(as_label(value_arg)),
     " must be a vector of size 1."
   ))
 }
 
-abort_subset_matrix_must_be_scalar <- function(j_arg, value_arg) {
-  tibble_abort(paste0(
+abort_subset_matrix_must_be_scalar <- function(j_arg, value_arg, call = my_caller_env()) {
+  tibble_abort(call = call, paste0(
     "Subscript ", tick(as_label(j_arg)),
     " is a matrix, the data ", tick(as_label(value_arg)),
     " must have size 1."

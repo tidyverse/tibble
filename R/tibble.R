@@ -332,20 +332,20 @@ vectbl_recycle_rows <- function(x, n, j, name) {
 
 # Errors ------------------------------------------------------------------
 
-abort_tibble_row_size_one <- function(j, name, size) {
+abort_tibble_row_size_one <- function(j, name, size, call = my_caller_env()) {
   if (name != "") {
     desc <- tick(name)
   } else {
     desc <- paste0("at position ", j)
   }
 
-  tibble_abort(problems(
+  tibble_abort(call = call, problems(
     "All vectors must be size one, use `list()` to wrap.",
     paste0("Column ", desc, " is of size ", size, ".")
   ))
 }
 
-abort_incompatible_size <- function(.rows, vars, vars_len, rows_source) {
+abort_incompatible_size <- function(.rows, vars, vars_len, rows_source, call = my_caller_env()) {
   vars_split <- split(vars, vars_len)
 
   vars_split[["1"]] <- NULL
@@ -364,7 +364,7 @@ abort_incompatible_size <- function(.rows, vars, vars_len, rows_source) {
     paste0("Size ", x, ": ", pluralise_commas(text, y))
   })
 
-  tibble_abort(bullets(
+  tibble_abort(call = call, bullets(
     "Tibble columns must have compatible sizes:",
     if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
     problems,

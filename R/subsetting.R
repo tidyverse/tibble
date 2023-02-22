@@ -817,47 +817,47 @@ vectbl_restore <- function(xo, x) {
 
 # Errors ------------------------------------------------------------------
 
-abort_need_rhs_vector <- function(value_arg) {
-  tibble_abort(paste0(tick(as_label(value_arg)), " must be a vector, a bare list, a data frame or a matrix."))
+abort_need_rhs_vector <- function(value_arg, call = my_caller_env()) {
+  tibble_abort(call = call, paste0(tick(as_label(value_arg)), " must be a vector, a bare list, a data frame or a matrix."))
 }
 
-abort_need_rhs_vector_or_null <- function(value_arg) {
-  tibble_abort(paste0(tick(as_label(value_arg)), " must be a vector, a bare list, a data frame, a matrix, or NULL."))
+abort_need_rhs_vector_or_null <- function(value_arg, call = my_caller_env()) {
+  tibble_abort(call = call, paste0(tick(as_label(value_arg)), " must be a vector, a bare list, a data frame, a matrix, or NULL."))
 }
 
-abort_na_column_index <- function(j) {
-  tibble_abort(pluralise_commas("Can't use NA as column index with `[` at position(s) ", j, "."), j = j)
+abort_na_column_index <- function(j, call = my_caller_env()) {
+  tibble_abort(call = call, pluralise_commas("Can't use NA as column index with `[` at position(s) ", j, "."), j = j)
 }
 
-abort_dim_column_index <- function(j) {
+abort_dim_column_index <- function(j, call = my_caller_env()) {
   # friendly_type_of() doesn't distinguish between matrices and arrays
-  tibble_abort(paste0("Must use a vector in `[`, not an object of class ", class(j)[[1]], "."))
+  tibble_abort(call = call, paste0("Must use a vector in `[`, not an object of class ", class(j)[[1]], "."))
 }
 
-abort_assign_columns_non_na_only <- function() {
-  tibble_abort("Can't use NA as column index in a tibble for assignment.")
+abort_assign_columns_non_na_only <- function(call = my_caller_env()) {
+  tibble_abort(call = call, "Can't use NA as column index in a tibble for assignment.")
 }
 
-abort_subset_columns_non_missing_only <- function() {
-  tibble_abort("Subscript can't be missing for tibbles in `[[`.")
+abort_subset_columns_non_missing_only <- function(call = my_caller_env()) {
+  tibble_abort(call = call, "Subscript can't be missing for tibbles in `[[`.")
 }
 
-abort_assign_columns_non_missing_only <- function() {
-  tibble_abort("Subscript can't be missing for tibbles in `[[<-`.")
+abort_assign_columns_non_missing_only <- function(call = my_caller_env()) {
+  tibble_abort(call = call, "Subscript can't be missing for tibbles in `[[<-`.")
 }
 
-abort_duplicate_column_subscript_for_assignment <- function(j) {
+abort_duplicate_column_subscript_for_assignment <- function(j, call = my_caller_env()) {
   j <- unique(j[duplicated(j)])
-  tibble_abort(pluralise_commas("Column index(es) ", j, " [is](are) used more than once for assignment."), j = j)
+  tibble_abort(call = call, pluralise_commas("Column index(es) ", j, " [is](are) used more than once for assignment."), j = j)
 }
 
-abort_assign_rows_non_na_only <- function() {
-  tibble_abort("Can't use NA as row index in a tibble for assignment.")
+abort_assign_rows_non_na_only <- function(call = my_caller_env()) {
+  tibble_abort(call = call, "Can't use NA as row index in a tibble for assignment.")
 }
 
-abort_duplicate_row_subscript_for_assignment <- function(i) {
+abort_duplicate_row_subscript_for_assignment <- function(i, call = my_caller_env()) {
   i <- unique(i[duplicated(i)])
-  tibble_abort(pluralise_commas("Row index(es) ", i, " [is](are) used more than once for assignment."), i = i)
+  tibble_abort(call = call, pluralise_commas("Row index(es) ", i, " [is](are) used more than once for assignment."), i = i)
 }
 
 abort_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg, parent = NULL, call = caller_env()) {
