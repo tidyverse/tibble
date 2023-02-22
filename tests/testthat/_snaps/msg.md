@@ -32,31 +32,31 @@
       print_error(abort_both_before_after())
     Output
       <error/tibble_error_both_before_after>
-      Error in `abort_both_before_after()`:
+      Error:
       ! Can't specify both `.before` and `.after`.
     Code
       print_error(abort_unknown_column_names("a"))
     Output
       <error/tibble_error_unknown_column_names>
-      Error in `abort_unknown_column_names()`:
+      Error:
       ! Can't find column `a` in `.data`.
     Code
       print_error(abort_unknown_column_names(c("b", "c")))
     Output
       <error/tibble_error_unknown_column_names>
-      Error in `abort_unknown_column_names()`:
+      Error:
       ! Can't find columns `b` and `c` in `.data`.
     Code
       print_error(abort_unknown_column_names(LETTERS))
     Output
       <error/tibble_error_unknown_column_names>
-      Error in `abort_unknown_column_names()`:
+      Error:
       ! Can't find columns `A`, `B`, `C`, `D`, `E`, and 21 more in `.data`.
     Code
       print_error(abort_incompatible_new_cols(10, data.frame(a = 1:2)))
     Output
       <error/tibble_error_incompatible_new_cols>
-      Error in `abort_incompatible_new_cols()`:
+      Error:
       ! New columns must be compatible with `.data`.
       x New column has 2 rows.
       i `.data` has 10 rows.
@@ -64,7 +64,7 @@
       print_error(abort_incompatible_new_cols(1, data.frame(a = 1:3, b = 2:4)))
     Output
       <error/tibble_error_incompatible_new_cols>
-      Error in `abort_incompatible_new_cols()`:
+      Error:
       ! New columns must be compatible with `.data`.
       x New columns have 3 rows.
       i `.data` has 1 row.

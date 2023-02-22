@@ -171,14 +171,14 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL,
 
 # helpers -----------------------------------------------------------------
 
-pos_from_before_after_names <- function(before, after, names) {
+pos_from_before_after_names <- function(before, after, names, call = caller_env()) {
   before <- check_names_before_after(before, names)
   after <- check_names_before_after(after, names)
 
-  pos_from_before_after(before, after, length(names))
+  pos_from_before_after(before, after, length(names), call)
 }
 
-pos_from_before_after <- function(before, after, len) {
+pos_from_before_after <- function(before, after, len, call = caller_env()) {
   if (is.null(before)) {
     if (is.null(after)) {
       len
@@ -189,7 +189,7 @@ pos_from_before_after <- function(before, after, len) {
     if (is.null(after)) {
       limit_pos_range(before - 1L, len)
     } else {
-      abort_both_before_after()
+      abort_both_before_after(call)
     }
   }
 }
@@ -244,15 +244,15 @@ abort_incompatible_new_rows <- function(names, call = caller_env()) {
   )
 }
 
-abort_both_before_after <- function(call = my_caller_env()) {
+abort_both_before_after <- function(call = caller_env()) {
   tibble_abort(call = call, "Can't specify both `.before` and `.after`.")
 }
 
-abort_unknown_column_names <- function(j, parent = NULL, call = my_caller_env()) {
+abort_unknown_column_names <- function(j, parent = NULL, call = caller_env()) {
   tibble_abort(call = call, pluralise_commas("Can't find column(s) ", tick(j), " in `.data`."), j = j, parent = parent)
 }
 
-abort_incompatible_new_cols <- function(n, df, call = my_caller_env()) {
+abort_incompatible_new_cols <- function(n, df, call = caller_env()) {
   tibble_abort(call = call,
     bullets(
       "New columns must be compatible with `.data`:",
