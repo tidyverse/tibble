@@ -241,7 +241,7 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE, call = call
         }
       } else {
         # 657
-        res <- check_valid_col(res, col_names[[j]], j)
+        res <- check_valid_col(res, col_names[[j]], j, call)
 
         lengths[[j]] <- current_size <- vec_size(res)
         if (is.null(first_size)) {
@@ -276,11 +276,11 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE, call = call
   new_tibble(output, nrow = first_size %||% 0L)
 }
 
-check_valid_col <- function(x, name, pos) {
+check_valid_col <- function(x, name, pos, call) {
   if (name == "") {
-    ret <- check_valid_cols(list(x), pos = pos)
+    ret <- check_valid_cols(list(x), pos = pos, call = call)
   } else {
-    ret <- check_valid_cols(set_names(list(x), name))
+    ret <- check_valid_cols(set_names(list(x), name), call = call)
   }
   invisible(ret[[1]])
 }

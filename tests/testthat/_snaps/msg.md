@@ -73,21 +73,21 @@
       print_error(abort_column_scalar_type("a", 3, "environment"))
     Output
       <error/tibble_error_column_scalar_type>
-      Error in `abort_column_scalar_type()`:
+      Error:
       ! All columns in a tibble must be vectors.
       x Column `a` is environment.
     Code
       print_error(abort_column_scalar_type("", 3, "environment"))
     Output
       <error/tibble_error_column_scalar_type>
-      Error in `abort_column_scalar_type()`:
+      Error:
       ! All columns in a tibble must be vectors.
       x Column 3 is environment.
     Code
       print_error(abort_column_scalar_type(letters[2:3], 3:4, c("name", "NULL")))
     Output
       <error/tibble_error_column_scalar_type>
-      Error in `abort_column_scalar_type()`:
+      Error:
       ! All columns in a tibble must be vectors.
       x Column `b` is name.
       x Column `c` is NULL.
@@ -96,7 +96,7 @@
         letters)))
     Output
       <error/tibble_error_column_scalar_type>
-      Error in `abort_column_scalar_type()`:
+      Error:
       ! All columns in a tibble must be vectors.
       x Column 1 is QQ.
       x Column 2 is VV.

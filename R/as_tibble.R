@@ -102,7 +102,7 @@ as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
 lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL, call = caller_env()) {
   x <- unclass(x)
   x <- set_repaired_names(x, repair_hint = TRUE, .name_repair, call = call)
-  x <- check_valid_cols(x)
+  x <- check_valid_cols(x, call = call)
   recycle_columns(x, .rows, lengths)
 }
 
@@ -125,13 +125,13 @@ compat_name_repair <- function(.name_repair, validate, .missing_name_repair) {
   name_repair
 }
 
-check_valid_cols <- function(x, pos = NULL) {
+check_valid_cols <- function(x, pos = NULL, call = caller_env()) {
   names_x <- names2(x)
 
   is_xd <- which(!map_lgl(x, is_valid_col))
   if (has_length(is_xd)) {
     classes <- map_chr(x[is_xd], friendly_type_of)
-    abort_column_scalar_type(names_x[is_xd], pos[is_xd], classes)
+    abort_column_scalar_type(names_x[is_xd], pos[is_xd], classes, call)
   }
 
   # 657
@@ -348,7 +348,7 @@ matrixToDataFrame <- function(x) {
 
 # Errors ------------------------------------------------------------------
 
-abort_column_scalar_type <- function(names, positions, classes, call = my_caller_env()) {
+abort_column_scalar_type <- function(names, positions, classes, call = caller_env()) {
   tibble_abort(call = call,
     problems(
       "All columns in a tibble must be vectors:",
