@@ -42,6 +42,10 @@
 #'   * `NA`: keep row names.
 #'   * A string: the name of a new column. Existing rownames are transferred
 #'     into this column and the `row.names` attribute is deleted.
+#'     No name repair is applied to the new column name, even if `x` already contains
+#'     a column of that name.
+#'     Use `as_tibble(rownames_to_column(...))` to safeguard against this case.
+#'
 #'  Read more in [rownames].
 
 #' @param _n,validate
