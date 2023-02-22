@@ -75,19 +75,19 @@ frame_matrix <- function(...) {
   turn_frame_data_into_frame_matrix(data$frame_names, data$frame_rest)
 }
 
-extract_frame_data_from_dots <- function(...) {
+extract_frame_data_from_dots <- function(..., .call = my_caller_env()) {
   dots <- list2(...)
 
   # Extract the names.
-  frame_names <- extract_frame_names_from_dots(dots)
+  frame_names <- extract_frame_names_from_dots(dots, .call)
 
   # Extract the data
   if (length(frame_names) == 0 && length(dots) != 0) {
-    abort_tribble_needs_columns()
+    abort_tribble_needs_columns(.call)
   }
   frame_rest <- dots[-seq_along(frame_names)]
   if (!is.null(names(frame_rest))) {
-    abort_tribble_named_after_tilde()
+    abort_tribble_named_after_tilde(.call)
   }
   if (length(frame_rest) == 0L) {
     # Can't decide on type in absence of data -- use logical which is
@@ -100,7 +100,7 @@ extract_frame_data_from_dots <- function(...) {
   list(frame_names = frame_names, frame_rest = frame_rest)
 }
 
-extract_frame_names_from_dots <- function(dots) {
+extract_frame_names_from_dots <- function(dots, call = my_caller_env()) {
   frame_names <- character()
 
   for (i in seq_along(dots)) {
@@ -114,7 +114,7 @@ extract_frame_names_from_dots <- function(dots) {
     }
 
     if (length(el) != 2) {
-      abort_tribble_lhs_column_syntax(el[[2]])
+      abort_tribble_lhs_column_syntax(el[[2]], call)
     }
 
     candidate <- el[[2]]
@@ -128,14 +128,14 @@ extract_frame_names_from_dots <- function(dots) {
   frame_names
 }
 
-validate_rectangular_shape <- function(frame_names, frame_rest) {
+validate_rectangular_shape <- function(frame_names, frame_rest, call = my_caller_env()) {
   if (length(frame_names) == 0 && length(frame_rest) == 0) return()
 
   # Figure out the associated number of rows and number of columns,
   # and validate that the supplied formula produces a rectangular
   # structure.
   if (length(frame_rest) %% length(frame_names) != 0) {
-    abort_tribble_non_rectangular(length(frame_names), length(frame_rest))
+    abort_tribble_non_rectangular(length(frame_names), length(frame_rest), call)
   }
 }
 
@@ -197,29 +197,29 @@ subclass_tribble_c_errors <- function(name, code, call) {
 
 # Errors ------------------------------------------------------------------
 
-abort_tribble_needs_columns <- function(call = my_caller_env()) {
+abort_tribble_needs_columns <- function(call = caller_env()) {
   tibble_abort(call = call, "Must specify at least one column using the `~name` syntax.")
 }
 
-abort_tribble_named_after_tilde <- function(call = my_caller_env()) {
+abort_tribble_named_after_tilde <- function(call = caller_env()) {
   tibble_abort(call = call, "When using the `~name` syntax, subsequent values must not have names.")
 }
 
-abort_tribble_lhs_column_syntax <- function(lhs, call = my_caller_env()) {
+abort_tribble_lhs_column_syntax <- function(lhs, call = caller_env()) {
   tibble_abort(call = call, problems(
     "All column specifications must use the `~name` syntax.",
     paste0("Found ", expr_label(lhs), " on the left-hand side of `~`.")
   ))
 }
 
-abort_tribble_rhs_column_syntax <- function(rhs, call = my_caller_env()) {
+abort_tribble_rhs_column_syntax <- function(rhs, call = caller_env()) {
   tibble_abort(call = call, problems(
     'All column specifications must use the `~name` or `~"name"` syntax.',
     paste0("Found ", expr_label(rhs), " on the right-hand side of `~`.")
   ))
 }
 
-abort_tribble_non_rectangular <- function(cols, cells, call = my_caller_env()) {
+abort_tribble_non_rectangular <- function(cols, cells, call = caller_env()) {
   tibble_abort(call = call, bullets(
     "Data must be rectangular:",
     paste0("Found ", cols, " columns."),

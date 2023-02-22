@@ -440,27 +440,27 @@
       print_error(abort_tribble_needs_columns())
     Output
       <error/tibble_error_tribble_needs_columns>
-      Error in `abort_tribble_needs_columns()`:
+      Error:
       ! Must specify at least one column using the `~name` syntax.
     Code
       print_error(abort_tribble_lhs_column_syntax(quote(lhs)))
     Output
       <error/tibble_error_tribble_lhs_column_syntax>
-      Error in `abort_tribble_lhs_column_syntax()`:
+      Error:
       ! All column specifications must use the `~name` syntax.
       x Found `lhs` on the left-hand side of `~`.
     Code
       print_error(abort_tribble_rhs_column_syntax(quote(a + b)))
     Output
       <error/tibble_error_tribble_rhs_column_syntax>
-      Error in `abort_tribble_rhs_column_syntax()`:
+      Error:
       ! All column specifications must use the `~name` or `~"name"` syntax.
       x Found `a + b` on the right-hand side of `~`.
     Code
       print_error(abort_tribble_non_rectangular(5, 17))
     Output
       <error/tibble_error_tribble_non_rectangular>
-      Error in `abort_tribble_non_rectangular()`:
+      Error:
       ! Data must be rectangular.
       * Found 5 columns.
       * Found 17 cells.
