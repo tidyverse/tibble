@@ -342,20 +342,20 @@
       print_error(abort_subset_matrix_must_be_logical(quote(is.na(x) + 1)))
     Output
       <error/tibble_error_subset_matrix_must_be_logical>
-      Error in `abort_subset_matrix_must_be_logical()`:
+      Error:
       ! Subscript `is.na(x) + 1` is a matrix, it must be of type logical.
     Code
       print_error(abort_subset_matrix_must_have_same_dimensions(quote(t(is.na(x)))))
     Output
       <error/tibble_error_subset_matrix_must_have_same_dimensions>
-      Error in `abort_subset_matrix_must_have_same_dimensions()`:
+      Error:
       ! Subscript `t(is.na(x))` is a matrix, it must have the same dimensions as the input.
     Code
       print_error(abort_subset_matrix_scalar_type(quote(is.na(x)), quote(
         new_environment())))
     Output
       <error/tibble_error_subset_matrix_scalar_type>
-      Error in `abort_subset_matrix_scalar_type()`:
+      Error:
       ! Subscript `is.na(x)` is a matrix, the data `new_environment()` must be a vector of size 1.
     Code
       print_error(abort_subset_matrix_must_be_scalar(quote(is.na(x)), quote(1:3)))
