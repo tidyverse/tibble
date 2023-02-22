@@ -95,7 +95,7 @@ extract_frame_data_from_dots <- function(..., .call = caller_env()) {
     frame_rest <- unspecified()
   }
 
-  validate_rectangular_shape(frame_names, frame_rest)
+  validate_rectangular_shape(frame_names, frame_rest, .call)
 
   list(frame_names = frame_names, frame_rest = frame_rest)
 }
@@ -128,7 +128,7 @@ extract_frame_names_from_dots <- function(dots, call = caller_env()) {
   frame_names
 }
 
-validate_rectangular_shape <- function(frame_names, frame_rest, call = my_caller_env()) {
+validate_rectangular_shape <- function(frame_names, frame_rest, call = caller_env()) {
   if (length(frame_names) == 0 && length(frame_rest) == 0) return()
 
   # Figure out the associated number of rows and number of columns,
