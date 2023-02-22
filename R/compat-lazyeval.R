@@ -59,7 +59,7 @@ compat_lazy <- function(lazy, env = caller_env(), warn = TRUE) {
   }
 }
 
-abort_compat_lazy <- function(lazy, call = my_caller_env()) {
+abort_compat_lazy <- function(lazy, call = caller_env()) {
   tibble_abort(call = call, sprintf("Can't convert a %s to a quosure", typeof(lazy)))
 }
 
