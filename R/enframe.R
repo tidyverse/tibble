@@ -45,15 +45,6 @@ enframe <- function(x, name = "name", value = "value") {
   new_tibble(df, nrow = vec_size(x))
 }
 
-vectbl_set_names <- function(x, names = NULL) {
-  # Work around https://github.com/r-lib/vctrs/issues/1419
-  if (inherits(x, "vctrs_rcrd")) {
-    # A rcrd can't have names?
-    return(x)
-  }
-  vec_set_names(x, names)
-}
-
 #' @rdname enframe
 #' @description
 #' `deframe()` converts two-column data frames to a named vector or list,
