@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.1.8.9008
+
+## Bug fixes
+
+- Allow `glue()` and other classed characters for subassignment (#1150, #1503).
+
+## Features
+
+- `as_data_frame()` now also refers to `as.data.frame()` in its deprecation message (#1149, #1506).
+
+- `as.data.frame.tbl_df()` supports a character vector in the `row.names` argument (#1202, #1504).
+
+## Chore
+
+- Retry continuous benchmarks until success (#1505).
+
+- Fix tests (#1500).
+
+
 # tibble 3.1.8.9007
 
 ## Chore
