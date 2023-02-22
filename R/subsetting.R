@@ -1,4 +1,3 @@
-
 vectbl_as_col_subscript <- function(j, j_arg, assign = FALSE, call = caller_env()) {
   subclass_col_index_errors(
     vec_as_subscript(j, call = call),

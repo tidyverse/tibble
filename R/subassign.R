@@ -216,8 +216,8 @@ vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE, call) {
     )
 
     lifecycle::deprecate_soft("3.0.0", what,
-                              details = "Convert to a vector.",
-                              env = foreign_caller_env()
+      details = "Convert to a vector.",
+      env = foreign_caller_env()
     )
     i <- i[, 1]
   }
