@@ -84,7 +84,7 @@ abort_subset_matrix_scalar_type <- function(j_arg, value_arg, call = caller_env(
   ))
 }
 
-abort_subset_matrix_must_be_scalar <- function(j_arg, value_arg, call = my_caller_env()) {
+abort_subset_matrix_must_be_scalar <- function(j_arg, value_arg, call = caller_env()) {
   tibble_abort(call = call, paste0(
     "Subscript ", tick(as_label(j_arg)),
     " is a matrix, the data ", tick(as_label(value_arg)),

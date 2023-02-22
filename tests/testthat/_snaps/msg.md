@@ -361,7 +361,7 @@
       print_error(abort_subset_matrix_must_be_scalar(quote(is.na(x)), quote(1:3)))
     Output
       <error/tibble_error_subset_matrix_must_be_scalar>
-      Error in `abort_subset_matrix_must_be_scalar()`:
+      Error:
       ! Subscript `is.na(x)` is a matrix, the data `1:3` must have size 1.
     Code
       # # tibble
