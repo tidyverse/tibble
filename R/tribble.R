@@ -173,10 +173,10 @@ turn_matrix_into_column_list <- function(frame_mat, call) {
   return(frame_col)
 }
 
-turn_frame_data_into_frame_matrix <- function(names, rest) {
+turn_frame_data_into_frame_matrix <- function(names, rest, call = my_caller_env()) {
   list_cols <- which(map_lgl(rest, needs_list_col))
   if (has_length(list_cols)) {
-    abort_frame_matrix_list(list_cols)
+    abort_frame_matrix_list(list_cols, call)
   }
 
   frame_ncol <- length(names)
@@ -228,7 +228,7 @@ abort_tribble_non_rectangular <- function(cols, cells, call = caller_env()) {
   ))
 }
 
-abort_frame_matrix_list <- function(pos, call = my_caller_env()) {
+abort_frame_matrix_list <- function(pos, call = caller_env()) {
   tibble_abort(call = call, problems(
     "All values must be atomic:",
     pluralise_commas("Found list-valued element(s) at position(s) ", pos, ".")

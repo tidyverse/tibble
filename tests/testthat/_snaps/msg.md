@@ -469,7 +469,7 @@
       print_error(abort_frame_matrix_list(2:4))
     Output
       <error/tibble_error_frame_matrix_list>
-      Error in `abort_frame_matrix_list()`:
+      Error:
       ! All values must be atomic.
       x Found list-valued elements at positions 2, 3, and 4.
 
