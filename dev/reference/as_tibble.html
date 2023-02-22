@@ -204,8 +204,10 @@ to enforce them.</p></dd>
 <li><p><code>NA</code>: keep row names.</p></li>
 <li><p>A string: the name of a new column. Existing rownames are transferred
 into this column and the <code>row.names</code> attribute is deleted.
-Read more in <a href="rownames.html">rownames</a>.</p></li>
-</ul></dd>
+No name repair is applied to the new column name, even if <code>x</code> already contains
+a column of that name.
+Use <code>as_tibble(rownames_to_column(...))</code> to safeguard against this case.</p></li>
+</ul><p>Read more in <a href="rownames.html">rownames</a>.</p></dd>
 
 
 <dt>_n, validate</dt>
