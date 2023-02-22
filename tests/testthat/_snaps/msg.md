@@ -236,73 +236,73 @@
       print_error(abort_need_rhs_vector(quote(RHS)))
     Output
       <error/tibble_error_need_rhs_vector>
-      Error in `abort_need_rhs_vector()`:
+      Error:
       ! `RHS` must be a vector, a bare list, a data frame or a matrix.
     Code
       print_error(abort_need_rhs_vector_or_null(quote(RHS)))
     Output
       <error/tibble_error_need_rhs_vector_or_null>
-      Error in `abort_need_rhs_vector_or_null()`:
+      Error:
       ! `RHS` must be a vector, a bare list, a data frame, a matrix, or NULL.
     Code
       print_error(abort_na_column_index(1:3))
     Output
       <error/tibble_error_na_column_index>
-      Error in `abort_na_column_index()`:
+      Error:
       ! Can't use NA as column index with `[` at positions 1, 2, and 3.
     Code
       print_error(abort_dim_column_index(as.matrix("x")))
     Output
       <error/tibble_error_dim_column_index>
-      Error in `abort_dim_column_index()`:
+      Error:
       ! Must use a vector in `[`, not an object of class matrix.
     Code
       print_error(abort_assign_columns_non_na_only())
     Output
       <error/tibble_error_assign_columns_non_na_only>
-      Error in `abort_assign_columns_non_na_only()`:
+      Error:
       ! Can't use NA as column index in a tibble for assignment.
     Code
       print_error(abort_subset_columns_non_missing_only())
     Output
       <error/tibble_error_subset_columns_non_missing_only>
-      Error in `abort_subset_columns_non_missing_only()`:
+      Error:
       ! Subscript can't be missing for tibbles in `[[`.
     Code
       print_error(abort_assign_columns_non_missing_only())
     Output
       <error/tibble_error_assign_columns_non_missing_only>
-      Error in `abort_assign_columns_non_missing_only()`:
+      Error:
       ! Subscript can't be missing for tibbles in `[[<-`.
     Code
       print_error(abort_duplicate_column_subscript_for_assignment(c(1, 1)))
     Output
       <error/tibble_error_duplicate_column_subscript_for_assignment>
-      Error in `abort_duplicate_column_subscript_for_assignment()`:
+      Error:
       ! Column index 1 is used more than once for assignment.
     Code
       print_error(abort_duplicate_column_subscript_for_assignment(c(1, 1, 2, 2)))
     Output
       <error/tibble_error_duplicate_column_subscript_for_assignment>
-      Error in `abort_duplicate_column_subscript_for_assignment()`:
+      Error:
       ! Column indexes 1 and 2 are used more than once for assignment.
     Code
       print_error(abort_assign_rows_non_na_only())
     Output
       <error/tibble_error_assign_rows_non_na_only>
-      Error in `abort_assign_rows_non_na_only()`:
+      Error:
       ! Can't use NA as row index in a tibble for assignment.
     Code
       print_error(abort_duplicate_row_subscript_for_assignment(c(1, 1)))
     Output
       <error/tibble_error_duplicate_row_subscript_for_assignment>
-      Error in `abort_duplicate_row_subscript_for_assignment()`:
+      Error:
       ! Row index 1 is used more than once for assignment.
     Code
       print_error(abort_duplicate_row_subscript_for_assignment(c(1, 1, 2, 2)))
     Output
       <error/tibble_error_duplicate_row_subscript_for_assignment>
-      Error in `abort_duplicate_row_subscript_for_assignment()`:
+      Error:
       ! Row indexes 1 and 2 are used more than once for assignment.
     Code
       print_error(abort_assign_incompatible_size(3, list(1:2), 1, NULL, quote(rhs)))
