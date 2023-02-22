@@ -394,7 +394,7 @@ length as the data.</p>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Assigned data has 2 rows.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Only vectors of size 1 are</span></span>
 <span><span class="co">#&gt;   recycled.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subsetting.R:432:4:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subassign-backend.R:35:4:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 2 to size 4.</span></span></code></pre></div>
 </td>
 </tr>
@@ -414,7 +414,7 @@ length as the data.</p>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Assigned data has 3 rows.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Only vectors of size 1 are</span></span>
 <span><span class="co">#&gt;   recycled.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subsetting.R:432:4:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subassign-backend.R:35:4:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 3 to size 4.</span></span></code></pre></div>
 </td>
 </tr>
@@ -434,7 +434,7 @@ length as the data.</p>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Assigned data has 5 rows.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Only vectors of size 1 are</span></span>
 <span><span class="co">#&gt;   recycled.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subsetting.R:432:4:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subassign-backend.R:35:4:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 5 to size 4.</span></span></code></pre></div>
 </td>
 </tr>
@@ -458,7 +458,7 @@ length as the data.</p>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Assigned data has 2 rows.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Only vectors of size 1 are</span></span>
 <span><span class="co">#&gt;   recycled.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subsetting.R:432:4:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subassign-backend.R:35:4:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 2 to size 4.</span></span></code></pre></div>
 </td>
 </tr>
@@ -523,7 +523,7 @@ after <code>$</code> has returned.</p>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Assigned data has 2 rows.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Only vectors of size 1 are</span></span>
 <span><span class="co">#&gt;   recycled.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subsetting.R:432:4:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subassign-backend.R:35:4:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 2 to size 4.</span></span></code></pre></div>
 </td>
 </tr>
@@ -890,7 +890,7 @@ accessed:</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `1.5` must</span></span>
 <span><span class="co">#&gt;   be compatible with existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `a`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subsetting.R:741:2:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:2:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert from &lt;double&gt; to &lt;integer&gt; due to loss of precision.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> Locations: 1</span></span></code></pre></div>
 </td>
@@ -912,7 +912,7 @@ accessed:</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `"x"` must</span></span>
 <span><span class="co">#&gt;   be compatible with existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `a`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subsetting.R:741:2:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:2:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;character&gt; to &lt;integer&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -948,7 +948,7 @@ accessed:</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `"x"` must</span></span>
 <span><span class="co">#&gt;   be compatible with existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `a`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subsetting.R:741:2:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:2:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;character&gt; to &lt;integer&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -984,7 +984,7 @@ accessed:</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `"x"` must</span></span>
 <span><span class="co">#&gt;   be compatible with existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `cd`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subsetting.R:741:2:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:2:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;character&gt; to &lt;list&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -1119,7 +1119,7 @@ accessed:</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `1.5` must</span></span>
 <span><span class="co">#&gt;   be compatible with existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `a`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subsetting.R:741:2:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:2:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert from &lt;double&gt; to &lt;integer&gt; due to loss of precision.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">•</span> Locations: 1</span></span></code></pre></div>
 </td>
@@ -1141,7 +1141,7 @@ accessed:</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `"x"` must</span></span>
 <span><span class="co">#&gt;   be compatible with existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `a`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subsetting.R:741:2:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:2:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;character&gt; to &lt;integer&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -1177,7 +1177,7 @@ accessed:</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `"x"` must</span></span>
 <span><span class="co">#&gt;   be compatible with existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `cd`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subsetting.R:741:2:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:2:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;character&gt; to &lt;list&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -1199,7 +1199,7 @@ accessed:</p>
 <span><span class="co">#&gt;   must be compatible with existing</span></span>
 <span><span class="co">#&gt;   data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `cd`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subsetting.R:741:2:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:2:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;character&gt; to &lt;list&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -1235,7 +1235,7 @@ accessed:</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `"x"` must</span></span>
 <span><span class="co">#&gt;   be compatible with existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `a`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subsetting.R:741:2:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:2:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;character&gt; to &lt;integer&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -1271,7 +1271,7 @@ accessed:</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `"x"` must</span></span>
 <span><span class="co">#&gt;   be compatible with existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `cd`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subsetting.R:741:2:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:2:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;character&gt; to &lt;list&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -1747,7 +1747,7 @@ accessed:</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `1` must be</span></span>
 <span><span class="co">#&gt;   compatible with existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `b`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subsetting.R:741:2:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:2:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;double&gt; to &lt;character&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -1768,7 +1768,7 @@ accessed:</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `"x"` must</span></span>
 <span><span class="co">#&gt;   be compatible with existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `a`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subsetting.R:741:2:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:2:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;character&gt; to &lt;integer&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -1899,7 +1899,7 @@ accessed:</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `1` must be</span></span>
 <span><span class="co">#&gt;   compatible with existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `b`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subsetting.R:741:2:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:2:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;double&gt; to &lt;character&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -1920,7 +1920,7 @@ accessed:</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `1:2` must</span></span>
 <span><span class="co">#&gt;   be compatible with existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `b`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subsetting.R:741:2:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:2:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;integer&gt; to &lt;character&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -1942,7 +1942,7 @@ accessed:</p>
 <span><span class="co">#&gt;   "y")` must be compatible with</span></span>
 <span><span class="co">#&gt;   existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `a`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subsetting.R:741:2:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:2:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;character&gt; to &lt;integer&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -2143,7 +2143,7 @@ accessed:</p>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Assigned data has 3 rows.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Only vectors of size 1 are</span></span>
 <span><span class="co">#&gt;   recycled.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subsetting.R:432:4:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subassign-backend.R:35:4:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 3 to size 4.</span></span></code></pre></div>
 </td>
 </tr>
@@ -2163,7 +2163,7 @@ accessed:</p>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Assigned data has 5 rows.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Only vectors of size 1 are</span></span>
 <span><span class="co">#&gt;   recycled.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subsetting.R:432:4:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subassign-backend.R:35:4:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 5 to size 4.</span></span></code></pre></div>
 </td>
 </tr>
@@ -2301,7 +2301,7 @@ accessed:</p>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Assigned data has 3 rows.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Only vectors of size 1 are</span></span>
 <span><span class="co">#&gt;   recycled.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subsetting.R:432:4:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subassign-backend.R:35:4:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 3 to size 4.</span></span></code></pre></div>
 </td>
 </tr>
@@ -2321,7 +2321,7 @@ accessed:</p>
 <span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Assigned data has 5 rows.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Only vectors of size 1 are</span></span>
 <span><span class="co">#&gt;   recycled.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subsetting.R:432:4:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subassign-backend.R:35:4:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 5 to size 4.</span></span></code></pre></div>
 </td>
 </tr>
@@ -2433,7 +2433,7 @@ still in control. Only one example is given here.</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `"b"` must</span></span>
 <span><span class="co">#&gt;   be compatible with existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `a`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subsetting.R:741:2:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:2:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;character&gt; to &lt;integer&gt;.</span></span></code></pre></div>
 </td>
 </tr></tbody></table>

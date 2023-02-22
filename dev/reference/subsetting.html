@@ -108,7 +108,7 @@ data frame behavior, coerce to a data frame via as.data.frame()."><meta property
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Subsetting tibbles</h1>
-      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/R/subsetting.R" class="external-link"><code>R/subsetting.R</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/HEAD/R/sub.R" class="external-link"><code>R/sub.R</code></a>, <a href="https://github.com/tidyverse/tibble/blob/HEAD/R/subassign.R" class="external-link"><code>R/subassign.R</code></a></small>
       <div class="d-none name"><code>subsetting.Rd</code></div>
     </div>
 
@@ -138,16 +138,16 @@ data frame behavior, coerce to a data frame via <code><a href="https://rdrr.io/r
 $(x, name)
 
 # S3 method for tbl_df
-$(x, name) &lt;- value
-
-# S3 method for tbl_df
 [[(x, i, j, ..., exact = TRUE)
 
 # S3 method for tbl_df
-[[(x, i, j, ...) &lt;- value
+[(x, i, j, drop = FALSE, ...)
 
 # S3 method for tbl_df
-[(x, i, j, drop = FALSE, ...)
+$(x, name) &lt;- value
+
+# S3 method for tbl_df
+[[(x, i, j, ...) &lt;- value
 
 # S3 method for tbl_df
 [(x, i, j, ...) &lt;- value</code></pre></div>
@@ -161,11 +161,6 @@ $(x, name) &lt;- value
 
 <dt>name</dt>
 <dd><p>A <a href="https://rdrr.io/r/base/name.html" class="external-link">name</a> or a string.</p></dd>
-
-
-<dt>value</dt>
-<dd><p>A value to store in a row, column, range or cell.
-Tibbles are stricter than data frames in what is accepted here.</p></dd>
 
 
 <dt>i, j</dt>
@@ -183,6 +178,11 @@ Tibbles are stricter than data frames in what is accepted here.</p></dd>
 <dt>drop</dt>
 <dd><p>Coerce to a vector if fetching one column via <code>tbl[, j]</code> .
 Default <code>FALSE</code>, ignored when accessing a column via <code>tbl[j]</code> .</p></dd>
+
+
+<dt>value</dt>
+<dd><p>A value to store in a row, column, range or cell.
+Tibbles are stricter than data frames in what is accepted here.</p></dd>
 
 </dl></div>
     <div class="section level2">
