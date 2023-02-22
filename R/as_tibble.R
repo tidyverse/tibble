@@ -307,7 +307,7 @@ as_tibble_row <- function(x,
   new_tibble(slices, nrow = 1)
 }
 
-check_all_lengths_one <- function(x) {
+check_all_lengths_one <- function(x, call = caller_env()) {
   sizes <- col_lengths(x)
 
   bad_lengths <- which(sizes != 1)
@@ -315,7 +315,8 @@ check_all_lengths_one <- function(x) {
     abort_as_tibble_row_size_one(
       seq_along(x)[bad_lengths],
       names2(x)[bad_lengths],
-      sizes[bad_lengths]
+      sizes[bad_lengths],
+      call
     )
   }
 }
@@ -358,13 +359,13 @@ abort_column_scalar_type <- function(names, positions, classes, call = caller_en
   )
 }
 
-abort_as_tibble_row_vector <- function(x, call = my_caller_env()) {
+abort_as_tibble_row_vector <- function(x, call = caller_env()) {
   tibble_abort(call = call, paste0(
     "`x` must be a vector in `as_tibble_row()`, not ", class(x)[[1]], "."
   ))
 }
 
-abort_as_tibble_row_size_one <- function(j, name, size, call = my_caller_env()) {
+abort_as_tibble_row_size_one <- function(j, name, size, call = caller_env()) {
   desc <- tick(name)
   desc[name == ""] <- paste0("at position ", j[name == ""])
 

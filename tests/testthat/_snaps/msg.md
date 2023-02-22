@@ -108,13 +108,13 @@
       print_error(abort_as_tibble_row_vector(new_environment()))
     Output
       <error/tibble_error_as_tibble_row_vector>
-      Error in `abort_as_tibble_row_vector()`:
+      Error:
       ! `x` must be a vector in `as_tibble_row()`, not environment.
     Code
       print_error(abort_as_tibble_row_size_one(3, "foo", 7))
     Output
       <error/tibble_error_as_tibble_row_size_one>
-      Error in `abort_as_tibble_row_size_one()`:
+      Error:
       ! All elements must be size one, use `list()` to wrap.
       x Element `foo` is of size 7.
     Code
