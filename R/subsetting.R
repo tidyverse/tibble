@@ -420,7 +420,7 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg, call = caller
   if (is.null(i)) {
     xo <- unclass(x)
 
-    value <- vectbl_wrap_rhs_col(value, value_arg)
+    value <- vectbl_wrap_rhs_col(value, value_arg, call)
 
     if (is.null(j)) {
       j <- seq_along(xo)
@@ -741,7 +741,7 @@ vectbl_assign <- function(x, i, value) {
   vec_assign(x, i, value)
 }
 
-vectbl_wrap_rhs_col <- function(value, value_arg, call = my_caller_env()) {
+vectbl_wrap_rhs_col <- function(value, value_arg, call = caller_env()) {
   if (is.null(value)) {
     return(list(value))
   }
