@@ -1,4 +1,4 @@
-tbl_subset_matrix <- function(x, j, j_arg, call = my_caller_env()) {
+tbl_subset_matrix <- function(x, j, j_arg, call = caller_env()) {
   cells <- matrix_to_cells(j, x, j_arg, call)
   col_idx <- cells_to_col_idx(cells)
 
