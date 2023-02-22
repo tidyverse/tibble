@@ -134,7 +134,8 @@ abort_names_must_be_non_null <- function(call = caller_env()) {
 }
 
 abort_names_must_have_length <- function(length, n, call = caller_env()) {
-  tibble_abort(call = call,
+  tibble_abort(
+    call = call,
     msg_names_must_have_length(length, n),
     expected = n,
     actual = length

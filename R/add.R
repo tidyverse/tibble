@@ -235,7 +235,8 @@ abort_add_rows_to_grouped_df <- function(call = caller_env()) {
 }
 
 abort_incompatible_new_rows <- function(names, call = caller_env()) {
-  tibble_abort(call = call,
+  tibble_abort(
+    call = call,
     problems(
       "New rows can't add columns:",
       msg_unknown_column_names(names)
@@ -253,7 +254,8 @@ abort_unknown_column_names <- function(j, parent = NULL, call = caller_env()) {
 }
 
 abort_incompatible_new_cols <- function(n, df, call = caller_env()) {
-  tibble_abort(call = call,
+  tibble_abort(
+    call = call,
     bullets(
       "New columns must be compatible with `.data`:",
       x = paste0(

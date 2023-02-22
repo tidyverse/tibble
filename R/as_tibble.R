@@ -350,7 +350,8 @@ matrixToDataFrame <- function(x) {
 # Errors ------------------------------------------------------------------
 
 abort_column_scalar_type <- function(names, positions, classes, call = caller_env()) {
-  tibble_abort(call = call,
+  tibble_abort(
+    call = call,
     problems(
       "All columns in a tibble must be vectors:",
       x = paste0("Column ", name_or_pos(names, positions), " is ", classes)
