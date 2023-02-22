@@ -376,7 +376,7 @@
       "Requested with `uvw` argument"))
     Output
       <error/tibble_error_incompatible_size>
-      Error in `abort_incompatible_size()`:
+      Error:
       ! Tibble columns must have compatible sizes.
       * Size 10: Requested with `uvw` argument.
       * Size 3: Column `c`.
@@ -387,7 +387,7 @@
       "Requested with `xyz` argument"))
     Output
       <error/tibble_error_incompatible_size>
-      Error in `abort_incompatible_size()`:
+      Error:
       ! Tibble columns must have compatible sizes.
       * Size 10: Requested with `xyz` argument.
       * Size 2: Columns `a` and `b`.
@@ -398,7 +398,7 @@
       "Requested with `xyz` argument"))
     Output
       <error/tibble_error_incompatible_size>
-      Error in `abort_incompatible_size()`:
+      Error:
       ! Tibble columns must have compatible sizes.
       * Size 2: Columns `a` and `b`.
       * Size 3: Column `c`.
@@ -408,7 +408,7 @@
       "Requested with `uvw` argument"))
     Output
       <error/tibble_error_incompatible_size>
-      Error in `abort_incompatible_size()`:
+      Error:
       ! Tibble columns must have compatible sizes.
       * Size 10: Requested with `uvw` argument.
       * Size 3: Column at position 3.
@@ -419,7 +419,7 @@
       "Requested with `xyz` argument"))
     Output
       <error/tibble_error_incompatible_size>
-      Error in `abort_incompatible_size()`:
+      Error:
       ! Tibble columns must have compatible sizes.
       * Size 10: Requested with `xyz` argument.
       * Size 2: Columns at positions 1 and 2.
@@ -430,7 +430,7 @@
       "Requested with `xyz` argument"))
     Output
       <error/tibble_error_incompatible_size>
-      Error in `abort_incompatible_size()`:
+      Error:
       ! Tibble columns must have compatible sizes.
       * Size 2: Columns at positions 1 and 2.
       * Size 3: Column at position 3.

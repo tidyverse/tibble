@@ -318,7 +318,7 @@ splice_dfs <- function(x) {
   vec_c(!!!x, .name_spec = "{inner}")
 }
 
-vectbl_recycle_rows <- function(x, n, j, name) {
+vectbl_recycle_rows <- function(x, n, j, name, call = my_caller_env()) {
   size <- vec_size(x)
   if (size == n) return(x)
   if (size == 1) return(vec_recycle(x, n))
@@ -327,7 +327,7 @@ vectbl_recycle_rows <- function(x, n, j, name) {
     name <- j
   }
 
-  abort_incompatible_size(n, name, size, "Existing data")
+  abort_incompatible_size(n, name, size, "Existing data", call)
 }
 
 # Errors ------------------------------------------------------------------
@@ -345,7 +345,7 @@ abort_tibble_row_size_one <- function(j, name, size, call = caller_env()) {
   ))
 }
 
-abort_incompatible_size <- function(.rows, vars, vars_len, rows_source, call = my_caller_env()) {
+abort_incompatible_size <- function(.rows, vars, vars_len, rows_source, call = caller_env()) {
   vars_split <- split(vars, vars_len)
 
   vars_split[["1"]] <- NULL
