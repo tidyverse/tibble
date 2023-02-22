@@ -230,11 +230,11 @@ msg_unknown_column_names <- function(names) {
   pluralise_commas("Can't find column(s) ", tick(names), " in `.data`.")
 }
 
-abort_add_rows_to_grouped_df <- function(call = my_caller_env()) {
+abort_add_rows_to_grouped_df <- function(call = caller_env()) {
   tibble_abort(call = call, "Can't add rows to grouped data frames.")
 }
 
-abort_incompatible_new_rows <- function(names, call = my_caller_env()) {
+abort_incompatible_new_rows <- function(names, call = caller_env()) {
   tibble_abort(call = call,
     problems(
       "New rows can't add columns:",
