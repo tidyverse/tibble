@@ -256,7 +256,7 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE, call = call
 
           first_size <- current_size
         } else {
-          res <- vectbl_recycle_rows(res, first_size, j, given_col_names[[j]])
+          res <- vectbl_recycle_rows(res, first_size, j, given_col_names[[j]], call)
         }
       }
 
@@ -318,7 +318,7 @@ splice_dfs <- function(x) {
   vec_c(!!!x, .name_spec = "{inner}")
 }
 
-vectbl_recycle_rows <- function(x, n, j, name, call = my_caller_env()) {
+vectbl_recycle_rows <- function(x, n, j, name, call = caller_env()) {
   size <- vec_size(x)
   if (size == n) return(x)
   if (size == 1) return(vec_recycle(x, n))
