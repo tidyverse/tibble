@@ -100,7 +100,7 @@ extract_frame_data_from_dots <- function(..., .call = caller_env()) {
   list(frame_names = frame_names, frame_rest = frame_rest)
 }
 
-extract_frame_names_from_dots <- function(dots, call = my_caller_env()) {
+extract_frame_names_from_dots <- function(dots, call = caller_env()) {
   frame_names <- character()
 
   for (i in seq_along(dots)) {
