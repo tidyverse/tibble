@@ -49,8 +49,9 @@ NULL
 #'
 #' General resources:
 #'   * Website for the tibble package: <https://tibble.tidyverse.org>
-#'   * [Tibbles chapter](https://r4ds.had.co.nz/tibbles.html) in *R for Data
-#'     Science*
+#'   * [Vectors chapter](https://adv-r.hadley.nz/vectors-chap.html) in *Advanced R*
+#'     (2nd edition), specifically the
+#'     [Data frames and tibbles section](https://adv-r.hadley.nz/vectors-chap.html#tibble)
 #'
 #' Resources on specific topics:
 #'   * Create a tibble: [tibble()], [as_tibble()], [tribble()], [enframe()]
