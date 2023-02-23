@@ -2364,7 +2364,9 @@ with_df(df[NA] <- list("x"))
 ```r
 with_tbl(tbl[NA] <- list("x"))
 #> Error in `[<-`:
-#> ! Can't use NA as column index with `[` at positions 1, 2, and 3.
+#> ! Can't assign columns with `NA`.
+#> x Subscript `NA` can't contain missing values.
+#> x It has a missing value at location 1.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3313,7 +3315,9 @@ with_df(df[NA, ] <- df[1, ])
 ```r
 with_tbl(tbl[NA, ] <- tbl[1, ])
 #> Error in `[<-`:
-#> ! Can't use NA as row index in a tibble for assignment.
+#> ! Can't assign rows with `NA`.
+#> x Subscript `NA` can't contain missing values.
+#> x It has a missing value at location 1.
 ```
 
 </td></tr></tbody></table>

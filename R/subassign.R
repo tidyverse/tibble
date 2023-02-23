@@ -174,10 +174,6 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL, c
   } else {
     j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = TRUE, call = call)
 
-    if (anyNA(j)) {
-      abort_na_column_index(which(is.na(j)), call)
-    }
-
     if (length(names) != 1L) {
       # Side effect: check compatibility
       vec_recycle(names, length(j), x_arg = as_label(value_arg), call = call)
@@ -230,7 +226,11 @@ vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE, call) {
     i <- i[, 1]
   }
 
-  subclass_row_index_errors(vec_as_location(i, n, call = call), i_arg = i_arg, assign = assign)
+  subclass_row_index_errors(
+    vec_as_location(i, n, missing = if (assign) "error" else "propagate", call = call),
+    i_arg = i_arg,
+    assign = assign
+  )
 }
 
 numtbl_as_col_location_assign <- function(j, n, j_arg, call) {
