@@ -102,7 +102,7 @@ format.tbl_df <- function(x, width = NULL, ..., n = NULL, max_extra_cols = NULL,
 #' @export
 #' @keywords internal
 trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
-  deprecate_stop("3.1.0", "tibble::trunc_mat()",
+  deprecate_warn("3.1.0", "tibble::trunc_mat()",
     details = "Printing has moved to the pillar package."
   )
 

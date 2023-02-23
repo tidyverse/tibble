@@ -1043,9 +1043,12 @@ df[10, ]
 
 ```r
 tbl[10, ]
-#> Error:
-#> ! The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
+#> Warning: The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
 #> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> # A tibble: 1 x 3
+#>       n c     li    
+#>   <int> <chr> <list>
+#> 1    NA <NA>  <NULL>
 ```
 
 </td></tr><tr style="vertical-align:top"><td>

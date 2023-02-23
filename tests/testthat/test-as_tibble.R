@@ -208,7 +208,7 @@ test_that("as_tibble() implements custom name repair", {
 })
 
 test_that("as_tibble.matrix() supports validate (with warning) (#558)", {
-  expect_error(as_tibble(diag(3), validate = TRUE))
+  expect_warning(as_tibble(diag(3), validate = TRUE))
 })
 
 test_that("as_tibble.matrix() supports .name_repair", {
@@ -218,7 +218,7 @@ test_that("as_tibble.matrix() supports .name_repair", {
 
   x <- matrix(1:6, nrow = 3)
 
-  expect_error(as_tibble(x))
+  expect_warning(as_tibble(x))
 
   minimal <- as_tibble(x, .name_repair = "minimal")
   expect_identical(names(minimal), rep("", 2))

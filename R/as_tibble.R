@@ -184,7 +184,7 @@ as_tibble.matrix <- function(x, ..., validate = NULL, .name_repair = NULL) {
   names <- colnames(x)
   if (is.null(.name_repair)) {
     if ((is.null(names) || any(bad_names <- duplicated(names) | names == "")) && has_length(x)) {
-      deprecate_stop("2.0.0", "as_tibble.matrix(x = 'must have unique column names if `.name_repair` is omitted')",
+      deprecate_warn("2.0.0", "as_tibble.matrix(x = 'must have unique column names if `.name_repair` is omitted')",
         details = "Using compatibility `.name_repair`."
       )
       compat_names <- paste0("V", seq_along(m))

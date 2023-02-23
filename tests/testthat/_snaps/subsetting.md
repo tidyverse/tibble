@@ -109,8 +109,8 @@
     Code
       invisible(foo[1:5, ])
     Condition
-      Error:
-      ! The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
+      Warning:
+      The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
       i Use `NA_integer_` as row index to obtain a row full of `NA` values.
     Code
       foo[-1:1, ]
@@ -287,8 +287,8 @@
       foo <- tibble(a = 1:3, b = letters[1:3])
       invisible(foo[3:5, ])
     Condition
-      Error:
-      ! The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
+      Warning:
+      The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
       i Use `NA_integer_` as row index to obtain a row full of `NA` values.
     Code
       invisible(foo[-(3:5), ])
@@ -437,14 +437,14 @@
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
       invisible(foo[matrix(1:2, ncol = 1), ])
     Condition
-      Error:
-      ! The `i` argument of `[` can't be a matrix as of tibble 3.0.0.
+      Warning:
+      The `i` argument of `[` can't be a matrix as of tibble 3.0.0.
       i Convert to a vector.
     Code
       invisible(foo[matrix(rep(TRUE, 10), ncol = 1), ])
     Condition
-      Error:
-      ! The `i` argument of `[` can't be a matrix as of tibble 3.0.0.
+      Warning:
+      The `i` argument of `[` can't be a matrix as of tibble 3.0.0.
       i Convert to a vector.
     Code
       # # [<-.tbl_df rejects unknown row indexes

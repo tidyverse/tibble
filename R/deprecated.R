@@ -9,7 +9,7 @@
 #' @keywords internal
 #' @name deprecated
 data_frame <- function(...) {
-  deprecate_stop("1.1.0", "data_frame()", "tibble()")
+  deprecate_warn("1.1.0", "data_frame()", "tibble()")
 
   # Unquote-splice to avoid argument matching
   tibble(!!!quos(...))
@@ -53,7 +53,7 @@ lst_ <- function(xs) {
 #' @export
 #' @rdname deprecated
 as_data_frame <- function(x, ...) {
-  deprecate_stop("2.0.0", "as_data_frame()",
+  deprecate_warn("2.0.0", "as_data_frame()",
     details = "Please use `as_tibble()` (with slightly different semantics) to convert to a tibble, or `as.data.frame()` to convert to a data frame."
   )
 

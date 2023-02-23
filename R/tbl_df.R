@@ -87,7 +87,7 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
   }
 
   if (is.null(value)) {
-    deprecate_stop("3.0.0", "tibble::`names<-`(value = 'can\\'t be NULL')")
+    deprecate_warn("3.0.0", "tibble::`names<-`(value = 'can\\'t be NULL')")
 
     # FIXME: value <- rep("", length(x))
   }
