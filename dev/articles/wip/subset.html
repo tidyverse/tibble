@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="../../index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.1.8.9008</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.1.8.9009</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -589,9 +589,9 @@ tibbles.</p>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">NA</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[NA]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column</span></span>
-<span><span class="co">#&gt;   index with `[` at positions 1, 2,</span></span>
-<span><span class="co">#&gt;   and 3.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns with `NA`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `NA` can't contain missing values.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> It has a missing value at location 1.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -604,8 +604,9 @@ tibbles.</p>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">NA_character_</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[NA_character_]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column</span></span>
-<span><span class="co">#&gt;   index with `[` at position 1.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns with `NA_character_`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `NA_character_` can't contain missing values.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> It has a missing value at location 1.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -618,8 +619,9 @@ tibbles.</p>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="cn">NA_integer_</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[NA_integer_]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column</span></span>
-<span><span class="co">#&gt;   index with `[` at position 1.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns with `NA_integer_`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `NA_integer_` can't contain missing values.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> It has a missing value at location 1.</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
@@ -720,9 +722,9 @@ omitting the row index:</p>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="cn">NA</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[, NA]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column</span></span>
-<span><span class="co">#&gt;   index with `[` at positions 1, 2,</span></span>
-<span><span class="co">#&gt;   and 3.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns with `NA`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `NA` can't contain missing values.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> It has a missing value at location 1.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -735,8 +737,9 @@ omitting the row index:</p>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="cn">NA_character_</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[, NA_character_]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column</span></span>
-<span><span class="co">#&gt;   index with `[` at position 1.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns with `NA_character_`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `NA_character_` can't contain missing values.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> It has a missing value at location 1.</span></span></code></pre></div>
 </td>
 </tr>
 <tr style="vertical-align:top">
@@ -749,8 +752,9 @@ omitting the row index:</p>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span>, <span class="cn">NA_integer_</span><span class="op">]</span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `tbl[, NA_integer_]`:</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't use NA as column</span></span>
-<span><span class="co">#&gt;   index with `[` at position 1.</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't subset columns with `NA_integer_`.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> Subscript `NA_integer_` can't contain missing values.</span></span>
+<span><span class="co">#&gt; <span style="color: #BB0000;">✖</span> It has a missing value at location 1.</span></span></code></pre></div>
 </td>
 </tr>
 </tbody></table>
