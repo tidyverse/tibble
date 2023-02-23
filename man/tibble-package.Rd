@@ -28,8 +28,9 @@ Tibble is the central data structure for the set of packages known as the
 General resources:
 \itemize{
 \item Website for the tibble package: \url{https://tibble.tidyverse.org}
-\item \href{https://r4ds.had.co.nz/tibbles.html}{Tibbles chapter} in \emph{R for Data
-Science}
+\item \href{https://adv-r.hadley.nz/vectors-chap.html}{Vectors chapter} in \emph{Advanced R}
+(2nd edition), specifically the
+\href{https://adv-r.hadley.nz/vectors-chap.html#tibble}{Data frames and tibbles section}
 }
 
 Resources on specific topics:
