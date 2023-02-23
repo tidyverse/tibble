@@ -1,5 +1,27 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.1.8.9009
+
+## Features
+
+- Revert `as_data_frame()` now also refers to `as.data.frame()` in its deprecation message.
+
+Revert "Merge pull request #1504 from tidyverse/f-1202-as-row-names"
+
+This reverts commit 83e617811b837423ffc2fbd4533946cf05ae2563, reversing
+changes made to 21729a3c850accd490f6837094bde319094d9b9e.
+
+## Chore
+
+- Remove compatibility code for RSDA package which is broken anyway due to other changes (#923, #1509).
+
+- Accurate location of error source in error messages (#1065, #1508).
+
+## Uncategorized
+
+- Merge pull request #1510 from tidyverse/f-split-frontend-2.
+
+
 # tibble 3.1.8.9008
 
 ## Bug fixes
