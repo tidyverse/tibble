@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.1.8.9008</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.1.8.9009</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,122 +115,8 @@ Hadley Wickham</h4>
 
     
     
-<p>Tibbles are S3 objects of class
-<code>c("tbl_df", "tbl", "data.frame")</code>. This means that they
-inherit their behavior from the <code>"data.frame"</code> class and add
-two subclasses <code>"tbl"</code> and <code>"tbl_df"</code>. The pillar
-and tibble packages provide methods for <code>"tbl"</code> and
-<code>"tbl_df"</code>, respectively. Package authors and programmers can
-implement subclasses that extend either <code>"tbl_df"</code> (and its
-subclasses) or only <code>"tbl"</code> to provide custom behavior for
-tibble-like objects. In addition, vectors classes can be implemented
-from scratch or on top of existing classes, to be used as columns. This
-article provides links to the various customization points that help you
-avoiding reimplement existing behavior, and describes the difference
-between <code>"tbl"</code> and <code>"tbl_df"</code>.</p>
-<p>Read more in <a href="https://adv-r.hadley.nz/index.html" class="external-link">the second
-edition of Advanced R</a>:</p>
-<ul>
-<li>about the internal representation of data frames and tibbles in the
-<a href="https://adv-r.hadley.nz/vectors-chap.html#lists" class="external-link">Lists</a> and
-<a href="https://adv-r.hadley.nz/vectors-chap.html#tibble" class="external-link">Data frames
-and tibbles</a> sections of the <a href="https://adv-r.hadley.nz/vectors-chap.html" class="external-link">Vectors
-chapter</a>,</li>
-<li>about R’s S3 object-oriented system in the <a href="https://adv-r.hadley.nz/s3.html" class="external-link">S3 chapter</a>.</li>
-</ul>
-<div class="section level2">
-<h2 id="topics-documented-elsewhere">Topics documented elsewhere<a class="anchor" aria-label="anchor" href="#topics-documented-elsewhere"></a>
-</h2>
-<ul>
-<li><p>Change or tweak the way a tibble prints:
-<code><a href="https://pillar.r-lib.org/articles/extending.html" class="external-link">vignette("extending", package = "pillar")</a></code></p></li>
-<li><p>Change or tweak the way a column type is printed in a tibble:
-<code><a href="https://vctrs.r-lib.org/articles/pillar.html" class="external-link">vignette("pillar", package = "vctrs")</a></code></p></li>
-<li><p>Implement a new column data type:
-<code><a href="https://vctrs.r-lib.org/articles/s3-vector.html" class="external-link">vignette("s3-vector", package = "vctrs")</a></code></p></li>
-<li><p>Making your tibble subclass work well with dplyr:
-<code><a href="https://dplyr.tidyverse.org/reference/dplyr_extending.html" class="external-link">?dplyr::dplyr_extending</a></code></p></li>
-</ul>
-</div>
-<div class="section level2">
-<h2 id="data-frame-subclasses">Data frame subclasses<a class="anchor" aria-label="anchor" href="#data-frame-subclasses"></a>
-</h2>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tibble.tidyverse.org/">tibble</a></span><span class="op">)</span></span></code></pre></div>
-<p>For tibble &gt;= 3.0.0, the <code>"tbl"</code> class is responsible
-for printing, while the <code>"tbl_df"</code> class adds tibble’s sturdy
-subsetting and subset assignment behavior (see
-<code><a href="../articles/invariants.html">vignette("invariants")</a></code> for details). This means that a data
-frame class that would like to (mostly) print like a tibble but keep the
-behavior from base R’s data frames can inherit from
-<code>c("tbl", "data.frame")</code> or just from <code>"tbl"</code>. An
-example is the <code>"tbl_sql"</code> class in the dbplyr package that
-is used to implement lazy database tables.</p>
-<div class="section level3">
-<h3 id="tibble-example">Tibble example<a class="anchor" aria-label="anchor" href="#tibble-example"></a>
-</h3>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">my_tbl_df</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/new_tibble.html">new_tibble</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, b <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>,</span>
-<span>  class <span class="op">=</span> <span class="st">"my_tbl_df"</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">tbl_sum.my_tbl_df</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>    <span class="st">"My custom tibble"</span> <span class="op">=</span> <span class="st">"Some info about it"</span>,</span>
-<span>    <span class="kw"><a href="https://rdrr.io/r/base/UseMethod.html" class="external-link">NextMethod</a></span><span class="op">(</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="va">my_tbl_df</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># My custom tibble: Some info about it</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># A tibble:         3 × 2</span></span></span>
-<span><span class="co">##       a     b</span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>     1     2</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>     2     3</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span>     3     4</span></span></code></pre>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">my_tbl_df</span><span class="op">[</span>, <span class="st">"a"</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># My custom tibble: Some info about it</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># A tibble:         3 × 1</span></span></span>
-<span><span class="co">##       a</span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>     1</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>     2</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span>     3</span></span></code></pre>
-</div>
-<div class="section level3">
-<h3 id="data-frame-example">Data frame example<a class="anchor" aria-label="anchor" href="#data-frame-example"></a>
-</h3>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">my_tbl</span> <span class="op">&lt;-</span> <span class="fu">vctrs</span><span class="fu">::</span><span class="fu"><a href="https://vctrs.r-lib.org/reference/new_data_frame.html" class="external-link">new_data_frame</a></span><span class="op">(</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, b <span class="op">=</span> <span class="fl">2</span><span class="op">:</span><span class="fl">4</span><span class="op">)</span>,</span>
-<span>  class <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"my_tbl"</span>, <span class="st">"tbl"</span><span class="op">)</span></span>
-<span><span class="op">)</span></span>
-<span></span>
-<span><span class="va">tbl_sum.my_tbl</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span></span>
-<span>    <span class="st">"My custom data frame"</span> <span class="op">=</span> <span class="st">"Some info about it"</span>,</span>
-<span>    <span class="kw"><a href="https://rdrr.io/r/base/UseMethod.html" class="external-link">NextMethod</a></span><span class="op">(</span><span class="op">)</span></span>
-<span>  <span class="op">)</span></span>
-<span><span class="op">}</span></span>
-<span></span>
-<span><span class="va">my_tbl</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># My custom data frame: Some info about it</span></span></span>
-<span><span class="co">## <span style="color: #949494;"># A data frame:         3 × 2</span></span></span>
-<span><span class="co">##       a     b</span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;int&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span>     1     2</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span>     2     3</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span>     3     4</span></span></code></pre>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">my_tbl</span><span class="op">[</span>, <span class="st">"a"</span><span class="op">]</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] 1 2 3</span></span></code></pre>
-</div>
-</div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
-    </nav></aside>
+<p>This material has moved to <a href="https://vctrs.r-lib.org/articles/pillar.html" class="external-link uri">https://vctrs.r-lib.org/articles/pillar.html</a>.</p>
+  </main>
 </div>
 
 
