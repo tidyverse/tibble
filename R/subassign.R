@@ -219,7 +219,7 @@ vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE, call) {
       "(i = 'can\\'t be a matrix')"
     )
 
-    lifecycle::deprecate_soft("3.0.0", what,
+    lifecycle::deprecate_stop("3.0.0", what,
       details = "Convert to a vector.",
       env = foreign_caller_env()
     )

@@ -200,7 +200,7 @@ NULL
 
 tbl_subset2 <- function(x, j, j_arg, call = caller_env()) {
   if (is.matrix(j)) {
-    deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a matrix",
+    deprecate_stop("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a matrix",
       details = "Recursive subsetting is deprecated for tibbles.",
       env = foreign_caller_env()
     )
@@ -219,7 +219,7 @@ tbl_subset2 <- function(x, j, j_arg, call = caller_env()) {
         vectbl_as_col_location2(j, length(x), j_arg = j_arg, call = call)
       }
     } else if (length(j) == 2L) {
-      deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a vector of length 2')",
+      deprecate_stop("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a vector of length 2')",
         details = "Recursive subsetting is deprecated for tibbles.",
         env = foreign_caller_env()
       )
@@ -323,7 +323,7 @@ fix_oob <- function(i, n, warn = TRUE) {
 fix_oob_positive <- function(i, n, warn = TRUE) {
   oob <- which(i > n)
   if (warn && length(oob) > 0) {
-    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [0, rows] if positive,')",
+    deprecate_stop("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [0, rows] if positive,')",
       details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
       env = foreign_caller_env()
     )
@@ -336,7 +336,7 @@ fix_oob_positive <- function(i, n, warn = TRUE) {
 fix_oob_negative <- function(i, n, warn = TRUE) {
   oob <- (i < -n)
   if (warn && any(oob, na.rm = TRUE)) {
-    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [-rows, 0] if negative,')",
+    deprecate_stop("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [-rows, 0] if negative,')",
       details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
       env = foreign_caller_env()
     )
@@ -351,7 +351,7 @@ fix_oob_invalid <- function(i, is_na_orig) {
   oob <- which(is.na(i) & !is_na_orig)
 
   if (length(oob) > 0) {
-    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must use valid row names')",
+    deprecate_stop("3.0.0", "tibble::`[.tbl_df`(i = 'must use valid row names')",
       details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
       env = foreign_caller_env()
     )

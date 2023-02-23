@@ -70,11 +70,6 @@ test_that("empty input makes 0 x 0 tbl_df", {
   expect_identical(attr(zero, "names"), character(0L))
 })
 
-test_that("SE version", {
-  scoped_lifecycle_silence()
-  expect_identical(tibble_(list(a = ~ 1:10)), tibble(a = 1:10))
-})
-
 test_that("names are maintained vectors (#630)", {
   foo <- tibble(x = c(y = 1, z = 2))
   expect_equal(names(foo), "x")

@@ -122,7 +122,7 @@ compat_name_repair <- function(.name_repair, validate, .missing_name_repair) {
     name_repair <- "minimal"
   }
 
-  deprecate_soft("2.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)",
+  deprecate_stop("2.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)",
     env = foreign_caller_env()
   )
 
@@ -259,7 +259,7 @@ as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`, .name_repair = "check_
 #' @usage \method{as_tibble}{NULL}(x, ...)
 as_tibble.NULL <- function(x, ...) {
   if (missing(x)) {
-    deprecate_soft("3.0.0", "as_tibble(x = 'can\\'t be missing')")
+    deprecate_stop("3.0.0", "as_tibble(x = 'can\\'t be missing')")
   }
 
   new_tibble(list(), nrow = 0)

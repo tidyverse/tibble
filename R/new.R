@@ -34,7 +34,7 @@
 new_tibble <- function(x, ..., nrow = NULL, class = NULL, subclass = NULL) {
   # For compatibility with tibble < 2.0.0
   if (is.null(class) && !is.null(subclass)) {
-    deprecate_soft("2.0.0", "tibble::new_tibble(subclass = )", "new_tibble(class = )")
+    deprecate_stop("2.0.0", "tibble::new_tibble(subclass = )", "new_tibble(class = )")
     class <- subclass
   }
 

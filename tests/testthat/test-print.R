@@ -48,13 +48,6 @@ test_that("output test", {
       n = 5L,
       width = 30L
     )
-
-    print_with_mocked_format_body(trunc_mat(df_all, n = 1L, n_extra = 2L, width = 30L))
-
-    print_with_mocked_format_body(trunc_mat(df_all, n = 1L, n_extra = 0L, width = 30L))
-
-    df <- tibble(!!!set_names(c(5, 3), c("mean(x)", "var(x)")))
-    print_with_mocked_format_body(trunc_mat(df, width = 28))
   })
 })
 

@@ -201,12 +201,6 @@ test_that("[.tbl_df rejects unknown column indexes (#83)", {
 test_that("[.tbl_df supports character subsetting (#312)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[as.character(2:4), ], foo[2:4, ])
-
-  scoped_lifecycle_silence()
-
-  expect_identical(foo[as.character(9:12), ], foo[c(9:10, NA, NA), ])
-  expect_identical(foo[letters, ], foo[rlang::rep_along(letters, NA_integer_), ])
-  expect_identical(foo["9a", ], foo[NA_integer_, ])
 })
 
 test_that("[.tbl_df emits lifecycle warnings with invalid character subsetting", {
@@ -222,11 +216,6 @@ test_that("[.tbl_df supports integer subsetting (#312)", {
   foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
   expect_identical(foo[2:4, ], as_tibble(as.data.frame(foo)[2:4, ]))
   expect_identical(foo[-3:-5, ], foo[c(1:2, 6:10), ])
-
-  scoped_lifecycle_silence()
-
-  expect_identical(foo[9:12, ], foo[c(9:10, NA, NA), ])
-  expect_identical(foo[-(9:12), ], foo[1:8, ])
 })
 
 test_that("[.tbl_df emits lifecycle warnings with invalid integer subsetting", {
@@ -244,11 +233,6 @@ test_that("[.tbl_df supports character subsetting if row names are present (#312
   expect_identical(foo[idx(2:4), ], foo[2:4, ])
   expect_identical(foo[idx(-3:-5), ], foo[-3:-5, ])
   expect_identical(foo[idx(29:34), ], foo[c(29:32, NA, NA), ])
-
-  scoped_lifecycle_silence()
-
-  expect_identical(foo[letters, ], foo[rlang::rep_along(letters, NA_integer_), ])
-  expect_identical(foo["9a", ], foo[NA_integer_, ])
 })
 
 test_that("[.tbl_df emits lifecycle warnings with invalid character subsetting", {
@@ -342,15 +326,6 @@ test_that("[[.tbl_df throws error with NA index", {
     expect_error(foo[[NA_real_]])
     expect_error(foo[[NA_character_]])
   })
-})
-
-test_that("can use recursive indexing with [[", {
-  scoped_lifecycle_silence()
-
-  foo <- tibble(x = list(y = 1:3, z = 4:5))
-  expect_equal(foo[[c(1, 1)]], 1:3)
-
-  # [[ with a matrix seems broken, despite an implementation in [[.data.frame
 })
 
 test_that("[[ returns NULL if name doesn't exist", {

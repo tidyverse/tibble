@@ -87,13 +87,13 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
   }
 
   if (is.null(value)) {
-    deprecate_soft("3.0.0", "tibble::`names<-`(value = 'can\\'t be NULL')")
+    deprecate_stop("3.0.0", "tibble::`names<-`(value = 'can\\'t be NULL')")
 
     # FIXME: value <- rep("", length(x))
   }
 
   if (!has_length(value, length(x))) {
-    deprecate_soft("3.0.0", "tibble::`names<-`(value = 'must have the same length as `x`')")
+    deprecate_stop("3.0.0", "tibble::`names<-`(value = 'must have the same length as `x`')")
 
     # FIXME: Reset NA to "" in names
 
@@ -105,13 +105,13 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
   }
 
   if (anyNA(value)) {
-    deprecate_soft("3.0.0", "tibble::`names<-`(value = 'can\\'t be empty')")
+    deprecate_stop("3.0.0", "tibble::`names<-`(value = 'can\\'t be empty')")
 
     # FIXME: Reset NA to "" in names
   }
 
   if (!is_character(value)) {
-    deprecate_soft("3.0.0", "tibble::`names<-`(value = 'must be a character vector')")
+    deprecate_stop("3.0.0", "tibble::`names<-`(value = 'must be a character vector')")
     value <- as.character(value)
   }
 
