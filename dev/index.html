@@ -38,7 +38,7 @@
     
     <a class="navbar-brand me-2" href="index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.1.8.9009</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.1.8.9008</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -162,7 +162,7 @@
 <span><span class="c">#&gt; <span style="color: #555555;">3</span>     3     1    10</span></span>
 <span><span class="c">#&gt; <span style="color: #555555;">4</span>     4     1    17</span></span>
 <span><span class="c">#&gt; <span style="color: #555555;">5</span>     5     1    26</span></span></pre>
-<p><a href="https://tibble.tidyverse.org/reference/tibble.html"><code>tibble()</code></a> does much less than <a href="https://rdrr.io/r/base/data.frame.html" class="external-link"><code>data.frame()</code></a>: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates <a href="https://rdrr.io/r/base/row.names.html" class="external-link"><code>row.names()</code></a>. You can read more about these features in <a href="https://tibble.tidyverse.org/articles/tibble.html"><code>vignette("tibble")</code></a>.</p>
+<p><a href="https://tibble.tidyverse.org/reference/tibble.html"><code>tibble()</code></a> does much less than <a href="https://rdrr.io/r/base/data.frame.html" class="external-link"><code>data.frame()</code></a>: it never changes the type of the inputs (e.g. it keeps list columns unchanged, and never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates <a href="https://rdrr.io/r/base/row.names.html" class="external-link"><code>row.names()</code></a>. You can read more about these features in <code><a href="articles/tibble.html">vignette("tibble")</a></code>.</p>
 <p>You can define a tibble row-by-row with <a href="https://tibble.tidyverse.org/reference/tribble.html"><code>tribble()</code></a>:</p>
 <pre class="chroma">
 <span><span class="nf"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="o">(</span></span>
@@ -179,7 +179,7 @@
 <div class="section level2">
 <h2 id="related-work">Related work<a class="anchor" aria-label="anchor" href="#related-work"></a>
 </h2>
-<p>The tibble print method draws inspiration from <a href="https://rdatatable.gitlab.io/data.table" class="external-link">data.table</a>, and <a href="https://github.com/patperry/r-frame" class="external-link">frame</a>. Like <a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link"><code>data.table::data.table()</code></a>, <a href="https://tibble.tidyverse.org/reference/tibble.html"><code>tibble()</code></a> doesn’t coerce strings to factors by default, doesn’t change column names, and doesn’t use rownames.</p>
+<p>The tibble print method draws inspiration from <a href="https://rdatatable.gitlab.io/data.table" class="external-link">data.table</a>, and <a href="https://github.com/patperry/r-frame" class="external-link">frame</a>. Like <a href="https://Rdatatable.gitlab.io/data.table/reference/data.table.html" class="external-link"><code>data.table::data.table()</code></a>, <a href="https://tibble.tidyverse.org/reference/tibble.html"><code>tibble()</code></a> doesn’t change column names and doesn’t use rownames.</p>
 <hr>
 </div>
 <div class="section level2">
