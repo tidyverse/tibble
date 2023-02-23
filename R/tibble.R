@@ -206,7 +206,7 @@ is_tibble <- function(x) {
 #' @export
 #' @keywords internal
 is.tibble <- function(x) {
-  deprecate_warn("2.0.0", "is.tibble()", "is_tibble()")
+  deprecate_stop("2.0.0", "is.tibble()", "is_tibble()")
 
   is_tibble(x)
 }

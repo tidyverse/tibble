@@ -208,16 +208,7 @@ test_that("as_tibble() implements custom name repair", {
 })
 
 test_that("as_tibble.matrix() supports validate (with warning) (#558)", {
-  expect_warning(
-    expect_identical(
-      as_tibble(diag(3), validate = TRUE),
-      tibble(
-        V1 = c(1, 0, 0),
-        V2 = c(0, 1, 0),
-        V3 = c(0, 0, 1)
-      )
-    )
-  )
+  expect_error(as_tibble(diag(3), validate = TRUE))
 })
 
 test_that("as_tibble.matrix() supports .name_repair", {
@@ -227,7 +218,7 @@ test_that("as_tibble.matrix() supports .name_repair", {
 
   x <- matrix(1:6, nrow = 3)
 
-  expect_warning(as_tibble(x))
+  expect_error(as_tibble(x))
 
   minimal <- as_tibble(x, .name_repair = "minimal")
   expect_identical(names(minimal), rep("", 2))
@@ -393,16 +384,6 @@ test_that("as_tibble() converts implicit row names when `rownames =` is passed",
     as_tibble(df[0, ], rownames = "id"),
     tibble(id = character(0), a = integer(0), b = integer(0))
   )
-})
-
-test_that("as_data_frame() is an alias of as_tibble()", {
-  scoped_lifecycle_silence()
-  expect_identical(as_data_frame(NULL), as_tibble(NULL))
-})
-
-test_that("as.tibble() is an alias of as_tibble()", {
-  scoped_lifecycle_silence()
-  expect_identical(as.tibble(NULL), as_tibble(NULL))
 })
 
 
@@ -617,15 +598,6 @@ test_that("preserves col names", {
 
   out <- as_tibble(x)
   expect_equal(names(out), c("a", "b"))
-})
-
-test_that("supports compat col names", {
-  scoped_lifecycle_warnings()
-
-  x <- matrix(1:4, nrow = 2)
-
-  expect_warning(out <- as_tibble(x))
-  expect_equal(names(out), c("V1", "V2"))
 })
 
 test_that("creates col names with name repair", {
