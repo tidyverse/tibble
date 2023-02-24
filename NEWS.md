@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.1.8.9010
+
+## Chore
+
+- Remove obsolete tests (#1513).
+
+- Use `vec_as_location(missing = "error")` for better error messages (#741, #1511).
+
+## Uncategorized
+
+- Merge pull request #1512 from tidyverse/docs-1151-1070-275-tweaks.
+
+
 # tibble 3.1.8.9009
 
 ## Features
