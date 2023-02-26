@@ -111,7 +111,7 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
   }
 
   if (!is_character(value)) {
-    deprecate_stop("3.0.0", "tibble::`names<-`(value = 'must be a character vector')")
+    deprecate_warn("3.0.0", "tibble::`names<-`(value = 'must be a character vector')")
     value <- as.character(value)
   }
 

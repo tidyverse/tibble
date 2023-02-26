@@ -334,7 +334,7 @@ fix_oob_positive <- function(i, n, warn = TRUE) {
 fix_oob_negative <- function(i, n, warn = TRUE) {
   oob <- (i < -n)
   if (warn && any(oob, na.rm = TRUE)) {
-    deprecate_stop("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [-rows, 0] if negative,')",
+    deprecate_warn("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [-rows, 0] if negative,')",
       details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
       env = foreign_caller_env()
     )

@@ -136,8 +136,8 @@
     Code
       invisible(foo[-4, ])
     Condition
-      Error:
-      ! The `i` argument of `[.tbl_df` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
+      Warning:
+      The `i` argument of `[.tbl_df` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
       i Use `NA_integer_` as row index to obtain a row full of `NA` values.
     Code
       foo[array(1, dim = c(1, 1, 1)), ]
@@ -293,8 +293,8 @@
     Code
       invisible(foo[-(3:5), ])
     Condition
-      Error:
-      ! The `i` argument of `[.tbl_df` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
+      Warning:
+      The `i` argument of `[.tbl_df` must lie in [-rows, 0] if negative, as of tibble 3.0.0.
       i Use `NA_integer_` as row index to obtain a row full of `NA` values.
     Code
       invisible(foo["x", ])
