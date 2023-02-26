@@ -93,7 +93,7 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
   }
 
   if (!has_length(value, length(x))) {
-    deprecate_stop("3.0.0", "tibble::`names<-`(value = 'must have the same length as `x`')")
+    deprecate_warn("3.0.0", "tibble::`names<-`(value = 'must have the same length as `x`')")
 
     # FIXME: Reset NA to "" in names
 
@@ -105,7 +105,7 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
   }
 
   if (anyNA(value)) {
-    deprecate_stop("3.0.0", "tibble::`names<-`(value = 'can\\'t be empty')")
+    deprecate_warn("3.0.0", "tibble::`names<-`(value = 'can\\'t be empty')")
 
     # FIXME: Reset NA to "" in names
   }
