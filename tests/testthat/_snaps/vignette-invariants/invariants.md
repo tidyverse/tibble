@@ -1063,9 +1063,12 @@ df["x", ]
 
 ```r
 tbl["x", ]
-#> Error:
-#> ! The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
+#> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> # A tibble: 1 x 3
+#>       n c     li    
+#>   <int> <chr> <list>
+#> 1    NA <NA>  <NULL>
 ```
 
 </td></tr></tbody></table>
@@ -3628,9 +3631,10 @@ with_df(df[as.character(-(1:3)), ] <- df[1, ])
 
 ```r
 with_tbl(tbl[as.character(-(1:3)), ] <- tbl[1, ])
-#> Error:
-#> ! The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
+#> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> Error in `[<-`:
+#> ! Can't use NA as row index in a tibble for assignment.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3649,9 +3653,10 @@ with_df(df[as.character(3:5), ] <- df[1, ])
 
 ```r
 with_tbl(tbl[as.character(3:5), ] <- tbl[1, ])
-#> Error:
-#> ! The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
+#> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> Error in `[<-`:
+#> ! Can't use NA as row index in a tibble for assignment.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>
@@ -3672,9 +3677,10 @@ with_df(df[as.character(-(3:5)), ] <- df[1, ])
 
 ```r
 with_tbl(tbl[as.character(-(3:5)), ] <- tbl[1, ])
-#> Error:
-#> ! The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
+#> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> Error in `[<-`:
+#> ! Can't use NA as row index in a tibble for assignment.
 ```
 
 </td></tr><tr style="vertical-align:top"><td>

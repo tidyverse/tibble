@@ -22,7 +22,7 @@ data_frame <- function(...) {
 #' @keywords internal
 #' @rdname deprecated
 tibble_ <- function(xs) {
-  deprecate_stop("2.0.0", "tibble_()", "tibble()",
+  deprecate_warn("2.0.0", "tibble_()", "tibble()",
     details = '`tibble()` supports dynamic dots, see `?"dyn-dots"`.'
   )
 
@@ -63,7 +63,7 @@ as_data_frame <- function(x, ...) {
 #' @export
 #' @rdname deprecated
 as.tibble <- function(x, ...) {
-  deprecate_stop("2.0.0", "as.tibble()", "as_tibble()",
+  deprecate_warn("2.0.0", "as.tibble()", "as_tibble()",
     details = "The signature and semantics have changed, see `?as_tibble`."
   )
 

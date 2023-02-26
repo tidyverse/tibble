@@ -349,7 +349,7 @@ fix_oob_invalid <- function(i, is_na_orig) {
   oob <- which(is.na(i) & !is_na_orig)
 
   if (length(oob) > 0) {
-    deprecate_stop("3.0.0", "tibble::`[.tbl_df`(i = 'must use valid row names')",
+    deprecate_warn("3.0.0", "tibble::`[.tbl_df`(i = 'must use valid row names')",
       details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
       env = foreign_caller_env()
     )

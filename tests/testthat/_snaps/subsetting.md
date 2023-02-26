@@ -299,8 +299,8 @@
     Code
       invisible(foo["x", ])
     Condition
-      Error:
-      ! The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
+      Warning:
+      The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
       i Use `NA_integer_` as row index to obtain a row full of `NA` values.
     Code
       # # [.tbl_df and logical recycling
