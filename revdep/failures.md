@@ -1,78 +1,14 @@
-# anglr
+# accept
 
 <details>
 
-* Version: 0.5.0
-* Source code: https://github.com/cran/anglr
-* Date/Publication: 2020-04-28 10:50:05 UTC
-* Number of recursive dependencies: 118
+* Version: 1.0.0
+* GitHub: NA
+* Source code: https://github.com/cran/accept
+* Date/Publication: 2023-02-06 20:52:31 UTC
+* Number of recursive dependencies: 97
 
-Run `revdep_details(,"anglr")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘anglr’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/anglr/new/anglr.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘anglr’ ...
-** package ‘anglr’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/proj4/libs/proj4.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘anglr’
-* removing ‘/tmp/workdir/anglr/new/anglr.Rcheck/anglr’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘anglr’ ...
-** package ‘anglr’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/proj4/libs/proj4.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘anglr’
-* removing ‘/tmp/workdir/anglr/old/anglr.Rcheck/anglr’
-
-```
-# batchtools
-
-<details>
-
-* Version: 0.9.13
-* Source code: https://github.com/cran/batchtools
-* URL: https://github.com/mllg/batchtools
-* BugReports: https://github.com/mllg/batchtools/issues
-* Date/Publication: 2020-03-19 23:00:02 UTC
-* Number of recursive dependencies: 74
-
-Run `revdep_details(,"batchtools")` for more info
+Run `revdepcheck::cloud_details(, "accept")` for more info
 
 </details>
 
@@ -81,27 +17,27 @@ Run `revdep_details(,"batchtools")` for more info
 ### Devel
 
 ```
-* using log directory ‘/tmp/workdir/batchtools/new/batchtools.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+* using log directory ‘/tmp/workdir/accept/new/accept.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘batchtools/DESCRIPTION’ ... OK
-* this is package ‘batchtools’ version ‘0.9.13’
+* using option ‘--no-manual’
+* checking for file ‘accept/DESCRIPTION’ ... OK
+* this is package ‘accept’ version ‘1.0.0’
 * package encoding: UTF-8
 * checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package suggested but not available: ‘doMPI’
-
-The suggested packages are required for a complete check.
-Checking can be attempted without them by setting the environment
-variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
+* checking package dependencies ... OK
+...
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘accept’ can be installed ... ERROR
+Installation failed.
+See ‘/tmp/workdir/accept/new/accept.Rcheck/00install.out’ for details.
 * DONE
 Status: 1 ERROR
-
 
 
 
@@ -111,24 +47,25 @@ Status: 1 ERROR
 ### CRAN
 
 ```
-* using log directory ‘/tmp/workdir/batchtools/old/batchtools.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+* using log directory ‘/tmp/workdir/accept/old/accept.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘batchtools/DESCRIPTION’ ... OK
-* this is package ‘batchtools’ version ‘0.9.13’
+* using option ‘--no-manual’
+* checking for file ‘accept/DESCRIPTION’ ... OK
+* this is package ‘accept’ version ‘1.0.0’
 * package encoding: UTF-8
 * checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package suggested but not available: ‘doMPI’
-
-The suggested packages are required for a complete check.
-Checking can be attempted without them by setting the environment
-variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
+* checking package dependencies ... OK
+...
+* checking if there is a namespace ... OK
+* checking for executable files ... OK
+* checking for hidden files and directories ... OK
+* checking for portable file names ... OK
+* checking for sufficient/correct file permissions ... OK
+* checking whether package ‘accept’ can be installed ... ERROR
+Installation failed.
+See ‘/tmp/workdir/accept/old/accept.Rcheck/00install.out’ for details.
 * DONE
 Status: 1 ERROR
 
@@ -136,20 +73,17 @@ Status: 1 ERROR
 
 
 
-
 ```
-# butcher
+# NA
 
 <details>
 
-* Version: 0.1.2
-* Source code: https://github.com/cran/butcher
-* URL: https://tidymodels.github.io/butcher, https://github.com/tidymodels/butcher
-* BugReports: https://github.com/tidymodels/butcher/issues
-* Date/Publication: 2020-01-23 22:40:02 UTC
-* Number of recursive dependencies: 180
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
 
-Run `revdep_details(,"butcher")` for more info
+Run `revdepcheck::cloud_details(, "NA")` for more info
 
 </details>
 
@@ -158,26 +92,6 @@ Run `revdep_details(,"butcher")` for more info
 ### Devel
 
 ```
-* using log directory ‘/tmp/workdir/butcher/new/butcher.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘butcher/DESCRIPTION’ ... OK
-* this is package ‘butcher’ version ‘0.1.2’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package suggested but not available: ‘NMF’
-
-The suggested packages are required for a complete check.
-Checking can be attempted without them by setting the environment
-variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
 
 
 
@@ -188,26 +102,6 @@ Status: 1 ERROR
 ### CRAN
 
 ```
-* using log directory ‘/tmp/workdir/butcher/old/butcher.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘butcher/DESCRIPTION’ ... OK
-* this is package ‘butcher’ version ‘0.1.2’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package suggested but not available: ‘NMF’
-
-The suggested packages are required for a complete check.
-Checking can be attempted without them by setting the environment
-variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
 
 
 
@@ -215,87 +109,17 @@ Status: 1 ERROR
 
 
 ```
-# ConR
+# autoTS
 
 <details>
 
-* Version: 1.2.4
-* Source code: https://github.com/cran/ConR
-* URL: https://github.com/gdauby/ConR
-* BugReports: https://github.com/gdauby/ConR/issues
-* Date/Publication: 2019-10-14 07:00:02 UTC
-* Number of recursive dependencies: 91
+* Version: 0.9.11
+* GitHub: https://github.com/vivienroussez/autots
+* Source code: https://github.com/cran/autoTS
+* Date/Publication: 2020-06-05 12:20:06 UTC
+* Number of recursive dependencies: 116
 
-Run `revdep_details(,"ConR")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘ConR’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/ConR/new/ConR.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘ConR’ ...
-** package ‘ConR’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Warning in fun(libname, pkgname) :
-  rgeos: versions of GEOS runtime 3.7.1-CAPI-1.11.1
-and GEOS at installation 3.6.2-CAPI-1.10.2differ
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘ConR’
-* removing ‘/tmp/workdir/ConR/new/ConR.Rcheck/ConR’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘ConR’ ...
-** package ‘ConR’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Warning in fun(libname, pkgname) :
-  rgeos: versions of GEOS runtime 3.7.1-CAPI-1.11.1
-and GEOS at installation 3.6.2-CAPI-1.10.2differ
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘ConR’
-* removing ‘/tmp/workdir/ConR/old/ConR.Rcheck/ConR’
-
-```
-# crawl
-
-<details>
-
-* Version: 2.2.1
-* Source code: https://github.com/cran/crawl
-* Date/Publication: 2018-09-14 19:20:10 UTC
-* Number of recursive dependencies: 110
-
-Run `revdep_details(,"crawl")` for more info
+Run `revdepcheck::cloud_details(, "autoTS")` for more info
 
 </details>
 
@@ -304,23 +128,23 @@ Run `revdep_details(,"crawl")` for more info
 ### Devel
 
 ```
-* using log directory ‘/tmp/workdir/crawl/new/crawl.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+* using log directory ‘/tmp/workdir/autoTS/new/autoTS.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘crawl/DESCRIPTION’ ... OK
+* using option ‘--no-manual’
+* checking for file ‘autoTS/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘crawl’ version ‘2.2.1’
+* this is package ‘autoTS’ version ‘0.9.11’
+* package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
-Package required but not available: ‘rmapshaper’
+Package required but not available: ‘prophet’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
 * DONE
 Status: 1 ERROR
-
 
 
 
@@ -330,17 +154,18 @@ Status: 1 ERROR
 ### CRAN
 
 ```
-* using log directory ‘/tmp/workdir/crawl/old/crawl.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+* using log directory ‘/tmp/workdir/autoTS/old/autoTS.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘crawl/DESCRIPTION’ ... OK
+* using option ‘--no-manual’
+* checking for file ‘autoTS/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘crawl’ version ‘2.2.1’
+* this is package ‘autoTS’ version ‘0.9.11’
+* package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
-Package required but not available: ‘rmapshaper’
+Package required but not available: ‘prophet’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
@@ -351,20 +176,164 @@ Status: 1 ERROR
 
 
 
-
 ```
-# diceR
+# bayesian
 
 <details>
 
-* Version: 0.6.0
-* Source code: https://github.com/cran/diceR
-* URL: https://github.com/AlineTalhouk/diceR, https://alinetalhouk.github.io/diceR
-* BugReports: https://github.com/AlineTalhouk/diceR/issues
-* Date/Publication: 2019-07-25 20:30:02 UTC
-* Number of recursive dependencies: 167
+* Version: 0.0.9
+* GitHub: https://github.com/hsbadr/bayesian
+* Source code: https://github.com/cran/bayesian
+* Date/Publication: 2022-06-16 23:00:02 UTC
+* Number of recursive dependencies: 187
 
-Run `revdep_details(,"diceR")` for more info
+Run `revdepcheck::cloud_details(, "bayesian")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘bayesian’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/bayesian/new/bayesian.Rcheck/00install.out’ for details.
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘rstan’
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘bayesian’ ...
+** package ‘bayesian’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error: package or namespace load failed for ‘brms’ in loadNamespace(j <- imp[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+ there is no package called ‘rstan’
+Execution halted
+ERROR: lazy loading failed for package ‘bayesian’
+* removing ‘/tmp/workdir/bayesian/new/bayesian.Rcheck/bayesian’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘bayesian’ ...
+** package ‘bayesian’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** inst
+** byte-compile and prepare package for lazy loading
+Error: package or namespace load failed for ‘brms’ in loadNamespace(j <- imp[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+ there is no package called ‘rstan’
+Execution halted
+ERROR: lazy loading failed for package ‘bayesian’
+* removing ‘/tmp/workdir/bayesian/old/bayesian.Rcheck/bayesian’
+
+
+```
+# bayesnec
+
+<details>
+
+* Version: 2.1.0.2
+* GitHub: https://github.com/open-aims/bayesnec
+* Source code: https://github.com/cran/bayesnec
+* Date/Publication: 2023-02-21 00:30:03 UTC
+* Number of recursive dependencies: 133
+
+Run `revdepcheck::cloud_details(, "bayesnec")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘bayesnec’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/bayesnec/new/bayesnec.Rcheck/00install.out’ for details.
+    ```
+
+*   checking package dependencies ... NOTE
+    ```
+    Package suggested but not available for checking: ‘rstan’
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘bayesnec’ ...
+** package ‘bayesnec’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+Warning: namespace ‘rstan’ is not available and has been replaced
+by .GlobalEnv when processing object ‘manec_example’
+Warning: namespace ‘brms’ is not available and has been replaced
+by .GlobalEnv when processing object ‘manec_example’
+...
+by .GlobalEnv when processing object ‘manec_example’
+Warning: namespace ‘rstan’ is not available and has been replaced
+by .GlobalEnv when processing object ‘manec_example’
+** inst
+** byte-compile and prepare package for lazy loading
+Error: package or namespace load failed for ‘brms’ in loadNamespace(j <- imp[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+ there is no package called ‘rstan’
+Execution halted
+ERROR: lazy loading failed for package ‘bayesnec’
+* removing ‘/tmp/workdir/bayesnec/new/bayesnec.Rcheck/bayesnec’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘bayesnec’ ...
+** package ‘bayesnec’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+Warning: namespace ‘rstan’ is not available and has been replaced
+by .GlobalEnv when processing object ‘manec_example’
+Warning: namespace ‘brms’ is not available and has been replaced
+by .GlobalEnv when processing object ‘manec_example’
+...
+by .GlobalEnv when processing object ‘manec_example’
+Warning: namespace ‘rstan’ is not available and has been replaced
+by .GlobalEnv when processing object ‘manec_example’
+** inst
+** byte-compile and prepare package for lazy loading
+Error: package or namespace load failed for ‘brms’ in loadNamespace(j <- imp[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+ there is no package called ‘rstan’
+Execution halted
+ERROR: lazy loading failed for package ‘bayesnec’
+* removing ‘/tmp/workdir/bayesnec/old/bayesnec.Rcheck/bayesnec’
+
+
+```
+# bayesplot
+
+<details>
+
+* Version: 1.10.0
+* GitHub: https://github.com/stan-dev/bayesplot
+* Source code: https://github.com/cran/bayesplot
+* Date/Publication: 2022-11-16 22:00:08 UTC
+* Number of recursive dependencies: 127
+
+Run `revdepcheck::cloud_details(, "bayesplot")` for more info
 
 </details>
 
@@ -373,24 +342,27 @@ Run `revdep_details(,"diceR")` for more info
 ### Devel
 
 ```
-* using log directory ‘/tmp/workdir/diceR/new/diceR.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+* using log directory ‘/tmp/workdir/bayesplot/new/bayesplot.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘diceR/DESCRIPTION’ ... OK
+* using option ‘--no-manual’
+* checking for file ‘bayesplot/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘diceR’ version ‘0.6.0’
+* this is package ‘bayesplot’ version ‘1.10.0’
 * package encoding: UTF-8
 * checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘NMF’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
+...
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘graphical-ppcs.Rmd’ using ‘UTF-8’... OK
+  ‘plotting-mcmc-draws.Rmd’ using ‘UTF-8’... OK
+  ‘visual-mcmc-diagnostics.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
 * DONE
-Status: 1 ERROR
-
+Status: 2 NOTEs
 
 
 
@@ -400,106 +372,44 @@ Status: 1 ERROR
 ### CRAN
 
 ```
-* using log directory ‘/tmp/workdir/diceR/old/diceR.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+* using log directory ‘/tmp/workdir/bayesplot/old/bayesplot.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘diceR/DESCRIPTION’ ... OK
+* using option ‘--no-manual’
+* checking for file ‘bayesplot/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘diceR’ version ‘0.6.0’
+* this is package ‘bayesplot’ version ‘1.10.0’
 * package encoding: UTF-8
 * checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘NMF’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
+...
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘graphical-ppcs.Rmd’ using ‘UTF-8’... OK
+  ‘plotting-mcmc-draws.Rmd’ using ‘UTF-8’... OK
+  ‘visual-mcmc-diagnostics.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
 * DONE
-Status: 1 ERROR
-
+Status: 2 NOTEs
 
 
 
 
 
 ```
-# eechidna
+# BayesPostEst
 
 <details>
 
-* Version: 1.4.0
-* Source code: https://github.com/cran/eechidna
-* URL: https://github.com/ropenscilabs/eechidna
-* BugReports: https://github.com/ropenscilabs/eechidna/issues
-* Date/Publication: 2019-11-08 12:10:02 UTC
-* Number of recursive dependencies: 124
+* Version: 0.3.2
+* GitHub: https://github.com/ShanaScogin/BayesPostEst
+* Source code: https://github.com/cran/BayesPostEst
+* Date/Publication: 2021-11-11 08:10:05 UTC
+* Number of recursive dependencies: 159
 
-Run `revdep_details(,"eechidna")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘eechidna’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/eechidna/new/eechidna.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘eechidna’ ...
-** package ‘eechidna’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘eechidna’
-* removing ‘/tmp/workdir/eechidna/new/eechidna.Rcheck/eechidna’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘eechidna’ ...
-** package ‘eechidna’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘eechidna’
-* removing ‘/tmp/workdir/eechidna/old/eechidna.Rcheck/eechidna’
-
-```
-# fingertipscharts
-
-<details>
-
-* Version: 0.0.10
-* Source code: https://github.com/cran/fingertipscharts
-* BugReports: https://github.com/PublicHealthEngland/fingertipscharts/issues
-* Date/Publication: 2019-10-07 15:00:03 UTC
-* Number of recursive dependencies: 142
-
-Run `revdep_details(,"fingertipscharts")` for more info
+Run `revdepcheck::cloud_details(, "BayesPostEst")` for more info
 
 </details>
 
@@ -508,18 +418,20 @@ Run `revdep_details(,"fingertipscharts")` for more info
 ### Devel
 
 ```
-* using log directory ‘/tmp/workdir/fingertipscharts/new/fingertipscharts.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+* using log directory ‘/tmp/workdir/BayesPostEst/new/BayesPostEst.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘fingertipscharts/DESCRIPTION’ ... OK
+* using option ‘--no-manual’
+* checking for file ‘BayesPostEst/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘fingertipscharts’ version ‘0.0.10’
+* this is package ‘BayesPostEst’ version ‘0.3.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
-Package required but not available: ‘geojsonio’
+Package required but not available: ‘rstanarm’
+
+Package suggested but not available for checking: ‘rstan’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
@@ -530,23 +442,24 @@ Status: 1 ERROR
 
 
 
-
 ```
 ### CRAN
 
 ```
-* using log directory ‘/tmp/workdir/fingertipscharts/old/fingertipscharts.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+* using log directory ‘/tmp/workdir/BayesPostEst/old/BayesPostEst.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘fingertipscharts/DESCRIPTION’ ... OK
+* using option ‘--no-manual’
+* checking for file ‘BayesPostEst/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘fingertipscharts’ version ‘0.0.10’
+* this is package ‘BayesPostEst’ version ‘0.3.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
-Package required but not available: ‘geojsonio’
+Package required but not available: ‘rstanarm’
+
+Package suggested but not available for checking: ‘rstan’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
@@ -557,392 +470,18 @@ Status: 1 ERROR
 
 
 
-
 ```
-# forestChange
+# bayesrules
 
 <details>
 
-* Version: 1.0
-* Source code: https://github.com/cran/forestChange
-* Date/Publication: 2020-02-15 22:40:02 UTC
-* Number of recursive dependencies: 75
-
-Run `revdep_details(,"forestChange")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘forestChange’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/forestChange/new/forestChange.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘forestChange’ ...
-** package ‘forestChange’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘forestChange’
-* removing ‘/tmp/workdir/forestChange/new/forestChange.Rcheck/forestChange’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘forestChange’ ...
-** package ‘forestChange’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘forestChange’
-* removing ‘/tmp/workdir/forestChange/old/forestChange.Rcheck/forestChange’
-
-```
-# gastempt
-
-<details>
-
-* Version: 0.5.0
-* Source code: https://github.com/cran/gastempt
-* URL: http://github.com/dmenne/gastempt
-* BugReports: http://github.com/dmenne/gastempt/issues
-* Date/Publication: 2020-05-01 10:10:02 UTC
-* Number of recursive dependencies: 87
-
-Run `revdep_details(,"gastempt")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘gastempt’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/gastempt/new/gastempt.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘gastempt’ ...
-** package ‘gastempt’ successfully unpacked and MD5 sums checked
-** using staged installation
-Error in loadNamespace(name) : there is no package called ‘rstantools’
-Calls: :: ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: configuration failed for package ‘gastempt’
-* removing ‘/tmp/workdir/gastempt/new/gastempt.Rcheck/gastempt’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘gastempt’ ...
-** package ‘gastempt’ successfully unpacked and MD5 sums checked
-** using staged installation
-Error in loadNamespace(name) : there is no package called ‘rstantools’
-Calls: :: ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
-Execution halted
-ERROR: configuration failed for package ‘gastempt’
-* removing ‘/tmp/workdir/gastempt/old/gastempt.Rcheck/gastempt’
-
-```
-# geometr
-
-<details>
-
-* Version: 0.2.4
-* Source code: https://github.com/cran/geometr
-* URL: https://github.com/EhrmannS/geometr
-* BugReports: https://github.com/EhrmannS/geometr/issues
-* Date/Publication: 2020-03-30 10:20:02 UTC
-* Number of recursive dependencies: 86
-
-Run `revdep_details(,"geometr")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘geometr’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/geometr/new/geometr.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘geometr’ ...
-** package ‘geometr’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-g++ -std=gnu++11 -I"/opt/R/3.6.3/lib/R/include" -DNDEBUG  -I"/opt/R/3.6.3/lib/R/library/Rcpp/include" -I/usr/local/include  -fpic  -g -O2  -c RcppExports.cpp -o RcppExports.o
-g++ -std=gnu++11 -I"/opt/R/3.6.3/lib/R/include" -DNDEBUG  -I"/opt/R/3.6.3/lib/R/library/Rcpp/include" -I/usr/local/include  -fpic  -g -O2  -c pointInGeom.cpp -o pointInGeom.o
-g++ -std=gnu++11 -I"/opt/R/3.6.3/lib/R/include" -DNDEBUG  -I"/opt/R/3.6.3/lib/R/library/Rcpp/include" -I/usr/local/include  -fpic  -g -O2  -c subXY.cpp -o subXY.o
-g++ -std=gnu++11 -I"/opt/R/3.6.3/lib/R/include" -DNDEBUG  -I"/opt/R/3.6.3/lib/R/library/Rcpp/include" -I/usr/local/include  -fpic  -g -O2  -c unique.cpp -o unique.o
-g++ -std=gnu++11 -shared -L/opt/R/3.6.3/lib/R/lib -L/usr/local/lib -o geometr.so RcppExports.o pointInGeom.o subXY.o unique.o -L/opt/R/3.6.3/lib/R/lib -lR
-installing to /tmp/workdir/geometr/new/geometr.Rcheck/00LOCK-geometr/00new/geometr/libs
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘geometr’
-* removing ‘/tmp/workdir/geometr/new/geometr.Rcheck/geometr’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘geometr’ ...
-** package ‘geometr’ successfully unpacked and MD5 sums checked
-** using staged installation
-** libs
-g++ -std=gnu++11 -I"/opt/R/3.6.3/lib/R/include" -DNDEBUG  -I"/opt/R/3.6.3/lib/R/library/Rcpp/include" -I/usr/local/include  -fpic  -g -O2  -c RcppExports.cpp -o RcppExports.o
-g++ -std=gnu++11 -I"/opt/R/3.6.3/lib/R/include" -DNDEBUG  -I"/opt/R/3.6.3/lib/R/library/Rcpp/include" -I/usr/local/include  -fpic  -g -O2  -c pointInGeom.cpp -o pointInGeom.o
-g++ -std=gnu++11 -I"/opt/R/3.6.3/lib/R/include" -DNDEBUG  -I"/opt/R/3.6.3/lib/R/library/Rcpp/include" -I/usr/local/include  -fpic  -g -O2  -c subXY.cpp -o subXY.o
-g++ -std=gnu++11 -I"/opt/R/3.6.3/lib/R/include" -DNDEBUG  -I"/opt/R/3.6.3/lib/R/library/Rcpp/include" -I/usr/local/include  -fpic  -g -O2  -c unique.cpp -o unique.o
-g++ -std=gnu++11 -shared -L/opt/R/3.6.3/lib/R/lib -L/usr/local/lib -o geometr.so RcppExports.o pointInGeom.o subXY.o unique.o -L/opt/R/3.6.3/lib/R/lib -lR
-installing to /tmp/workdir/geometr/old/geometr.Rcheck/00LOCK-geometr/00new/geometr/libs
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... asNamespace -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘geometr’
-* removing ‘/tmp/workdir/geometr/old/geometr.Rcheck/geometr’
-
-```
-# ggalt
-
-<details>
-
-* Version: 0.4.0
-* Source code: https://github.com/cran/ggalt
-* URL: https://github.com/hrbrmstr/ggalt
-* BugReports: https://github.com/hrbrmstr/ggalt/issues
-* Date/Publication: 2017-02-15 18:16:00
-* Number of recursive dependencies: 89
-
-Run `revdep_details(,"ggalt")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘ggalt’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/ggalt/new/ggalt.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘ggalt’ ...
-** package ‘ggalt’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/proj4/libs/proj4.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘ggalt’
-* removing ‘/tmp/workdir/ggalt/new/ggalt.Rcheck/ggalt’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘ggalt’ ...
-** package ‘ggalt’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/proj4/libs/proj4.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘ggalt’
-* removing ‘/tmp/workdir/ggalt/old/ggalt.Rcheck/ggalt’
-
-```
-# hddtools
-
-<details>
-
-* Version: 0.8.2
-* Source code: https://github.com/cran/hddtools
-* URL: http://ropensci.github.io/hddtools, https://github.com/ropensci/hddtools
-* BugReports: https://github.com/ropensci/hddtools/issues
-* Date/Publication: 2018-08-09 21:40:03 UTC
-* Number of recursive dependencies: 114
-
-Run `revdep_details(,"hddtools")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘hddtools’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/hddtools/new/hddtools.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘hddtools’ ...
-** package ‘hddtools’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error: package or namespace load failed for ‘rgdal’ in dyn.load(file, DLLpath = DLLpath, ...):
- unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Error: package ‘rgdal’ could not be loaded
-Execution halted
-ERROR: lazy loading failed for package ‘hddtools’
-* removing ‘/tmp/workdir/hddtools/new/hddtools.Rcheck/hddtools’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘hddtools’ ...
-** package ‘hddtools’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-** inst
-** byte-compile and prepare package for lazy loading
-Error: package or namespace load failed for ‘rgdal’ in dyn.load(file, DLLpath = DLLpath, ...):
- unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Error: package ‘rgdal’ could not be loaded
-Execution halted
-ERROR: lazy loading failed for package ‘hddtools’
-* removing ‘/tmp/workdir/hddtools/old/hddtools.Rcheck/hddtools’
-
-```
-# MEDITS
-
-<details>
-
-* Version: 0.1.7
-* Source code: https://github.com/cran/MEDITS
-* Date/Publication: 2019-12-22 17:10:03 UTC
-* Number of recursive dependencies: 54
-
-Run `revdep_details(,"MEDITS")` for more info
-
-</details>
-
-## In both
-
-*   checking whether package ‘MEDITS’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/MEDITS/new/MEDITS.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘MEDITS’ ...
-** package ‘MEDITS’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘MEDITS’
-* removing ‘/tmp/workdir/MEDITS/new/MEDITS.Rcheck/MEDITS’
-
-```
-### CRAN
-
-```
-* installing *source* package ‘MEDITS’ ...
-** package ‘MEDITS’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘MEDITS’
-* removing ‘/tmp/workdir/MEDITS/old/MEDITS.Rcheck/MEDITS’
-
-```
-# mregions
-
-<details>
-
-* Version: 0.1.6
-* Source code: https://github.com/cran/mregions
-* URL: https://github.com/ropenscilabs/mregions
-* BugReports: https://github.com/ropenscilabs/mregions/issues
-* Date/Publication: 2017-10-17 21:09:26 UTC
-* Number of recursive dependencies: 84
-
-Run `revdep_details(,"mregions")` for more info
+* Version: 0.0.2
+* GitHub: https://github.com/bayes-rules/bayesrules
+* Source code: https://github.com/cran/bayesrules
+* Date/Publication: 2021-09-25 04:30:07 UTC
+* Number of recursive dependencies: 135
+
+Run `revdepcheck::cloud_details(, "bayesrules")` for more info
 
 </details>
 
@@ -951,28 +490,23 @@ Run `revdep_details(,"mregions")` for more info
 ### Devel
 
 ```
-* using log directory ‘/tmp/workdir/mregions/new/mregions.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+* using log directory ‘/tmp/workdir/bayesrules/new/bayesrules.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘mregions/DESCRIPTION’ ... OK
-* this is package ‘mregions’ version ‘0.1.6’
+* using option ‘--no-manual’
+* checking for file ‘bayesrules/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘bayesrules’ version ‘0.0.2’
+* package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
-Packages suggested but not available: 'geojsonio', 'rmapshaper'
-
-Package which this enhances but not available for checking: ‘leaflet’
-
-The suggested packages are required for a complete check.
-Checking can be attempted without them by setting the environment
-variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+Package required but not available: ‘rstanarm’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
 * DONE
 Status: 1 ERROR
-
 
 
 
@@ -982,22 +516,18 @@ Status: 1 ERROR
 ### CRAN
 
 ```
-* using log directory ‘/tmp/workdir/mregions/old/mregions.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+* using log directory ‘/tmp/workdir/bayesrules/old/bayesrules.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘mregions/DESCRIPTION’ ... OK
-* this is package ‘mregions’ version ‘0.1.6’
+* using option ‘--no-manual’
+* checking for file ‘bayesrules/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘bayesrules’ version ‘0.0.2’
+* package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
-Packages suggested but not available: 'geojsonio', 'rmapshaper'
-
-Package which this enhances but not available for checking: ‘leaflet’
-
-The suggested packages are required for a complete check.
-Checking can be attempted without them by setting the environment
-variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+Package required but not available: ‘rstanarm’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
@@ -1008,20 +538,18 @@ Status: 1 ERROR
 
 
 
-
 ```
-# phylopath
+# beadplexr
 
 <details>
 
-* Version: 1.1.2
-* Source code: https://github.com/cran/phylopath
-* URL: http://Ax3man.github.io/phylopath/
-* BugReports: https://github.com/Ax3man/phylopath/issues
-* Date/Publication: 2019-12-07 01:10:07 UTC
-* Number of recursive dependencies: 89
+* Version: 0.4.1
+* GitHub: NA
+* Source code: https://github.com/cran/beadplexr
+* Date/Publication: 2022-03-05 13:50:02 UTC
+* Number of recursive dependencies: 127
 
-Run `revdep_details(,"phylopath")` for more info
+Run `revdepcheck::cloud_details(, "beadplexr")` for more info
 
 </details>
 
@@ -1030,23 +558,27 @@ Run `revdep_details(,"phylopath")` for more info
 ### Devel
 
 ```
-* using log directory ‘/tmp/workdir/phylopath/new/phylopath.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+* using log directory ‘/tmp/workdir/beadplexr/new/beadplexr.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘phylopath/DESCRIPTION’ ... OK
+* using option ‘--no-manual’
+* checking for file ‘beadplexr/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘phylopath’ version ‘1.1.2’
+* this is package ‘beadplexr’ version ‘0.4.1’
+* package encoding: UTF-8
 * checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘ggm’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
+...
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘cba_macsplex_example.Rmd’ using ‘UTF-8’... OK
+  ‘legendplex_analysis.Rmd’ using ‘UTF-8’... OK
+  ‘preparing_flow_data.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
 * DONE
-Status: 1 ERROR
-
+Status: 1 NOTE
 
 
 
@@ -1056,41 +588,44 @@ Status: 1 ERROR
 ### CRAN
 
 ```
-* using log directory ‘/tmp/workdir/phylopath/old/phylopath.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+* using log directory ‘/tmp/workdir/beadplexr/old/beadplexr.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘phylopath/DESCRIPTION’ ... OK
+* using option ‘--no-manual’
+* checking for file ‘beadplexr/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘phylopath’ version ‘1.1.2’
+* this is package ‘beadplexr’ version ‘0.4.1’
+* package encoding: UTF-8
 * checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘ggm’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
+...
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘cba_macsplex_example.Rmd’ using ‘UTF-8’... OK
+  ‘legendplex_analysis.Rmd’ using ‘UTF-8’... OK
+  ‘preparing_flow_data.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
 * DONE
-Status: 1 ERROR
-
+Status: 1 NOTE
 
 
 
 
 
 ```
-# PWFSLSmoke
+# blocs
 
 <details>
 
-* Version: 1.2.100
-* Source code: https://github.com/cran/PWFSLSmoke
-* URL: https://github.com/MazamaScience/PWFSLSmoke
-* BugReports: https://github.com/MazamaScience/PWFSLSmoke/issues
-* Date/Publication: 2019-07-18 23:10:02 UTC
-* Number of recursive dependencies: 167
+* Version: 0.1.0
+* GitHub: NA
+* Source code: https://github.com/cran/blocs
+* Date/Publication: 2022-11-23 11:20:06 UTC
+* Number of recursive dependencies: 161
 
-Run `revdep_details(,"PWFSLSmoke")` for more info
+Run `revdepcheck::cloud_details(, "blocs")` for more info
 
 </details>
 
@@ -1099,23 +634,369 @@ Run `revdep_details(,"PWFSLSmoke")` for more info
 ### Devel
 
 ```
-* using log directory ‘/tmp/workdir/PWFSLSmoke/new/PWFSLSmoke.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+* using log directory ‘/tmp/workdir/blocs/new/blocs.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘PWFSLSmoke/DESCRIPTION’ ... OK
+* using option ‘--no-manual’
+* checking for file ‘blocs/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘PWFSLSmoke’ version ‘1.2.100’
+* this is package ‘blocs’ version ‘0.1.0’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
-Package required but not available: ‘MazamaSpatialUtils’
+Package required and available but unsuitable version: ‘mgcv’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
 * DONE
 Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/blocs/old/blocs.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘blocs/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘blocs’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required and available but unsuitable version: ‘mgcv’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# breathtestcore
+
+<details>
+
+* Version: 0.8.6
+* GitHub: https://github.com/dmenne/breathtestcore
+* Source code: https://github.com/cran/breathtestcore
+* Date/Publication: 2023-02-13 14:00:07 UTC
+* Number of recursive dependencies: 119
+
+Run `revdepcheck::cloud_details(, "breathtestcore")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/breathtestcore/new/breathtestcore.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘breathtestcore/DESCRIPTION’ ... OK
+* this is package ‘breathtestcore’ version ‘0.8.6’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+...
+* checking tests ... OK
+  Running ‘test-all.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘data_formats.Rmd’ using ‘UTF-8’... OK
+  ‘methods_and_concepts.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 2 NOTEs
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/breathtestcore/old/breathtestcore.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘breathtestcore/DESCRIPTION’ ... OK
+* this is package ‘breathtestcore’ version ‘0.8.6’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+...
+* checking tests ... OK
+  Running ‘test-all.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘data_formats.Rmd’ using ‘UTF-8’... OK
+  ‘methods_and_concepts.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 2 NOTEs
+
+
+
+
+
+```
+# broom.helpers
+
+<details>
+
+* Version: 1.12.0
+* GitHub: https://github.com/larmarange/broom.helpers
+* Source code: https://github.com/cran/broom.helpers
+* Date/Publication: 2023-02-09 17:00:02 UTC
+* Number of recursive dependencies: 226
+
+Run `revdepcheck::cloud_details(, "broom.helpers")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/broom.helpers/new/broom.helpers.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘broom.helpers/DESCRIPTION’ ... OK
+* this is package ‘broom.helpers’ version ‘1.12.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+...
+  [ FAIL 29 | WARN 0 | SKIP 89 | PASS 381 ]
+  Error: Test failures
+  Execution halted
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘tidy.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 ERROR, 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/broom.helpers/old/broom.helpers.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘broom.helpers/DESCRIPTION’ ... OK
+* this is package ‘broom.helpers’ version ‘1.12.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+...
+* checking tests ... OK
+  Running ‘spelling.R’
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘tidy.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+# broom.mixed
+
+<details>
+
+* Version: 0.2.9.4
+* GitHub: https://github.com/bbolker/broom.mixed
+* Source code: https://github.com/cran/broom.mixed
+* Date/Publication: 2022-04-17 17:42:29 UTC
+* Number of recursive dependencies: 164
+
+Run `revdepcheck::cloud_details(, "broom.mixed")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/broom.mixed/new/broom.mixed.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘broom.mixed/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘broom.mixed’ version ‘0.2.9.4’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘test-all.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘broom_mixed_intro.rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 2 NOTEs
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/broom.mixed/old/broom.mixed.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘broom.mixed/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘broom.mixed’ version ‘0.2.9.4’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘test-all.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘broom_mixed_intro.rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 2 NOTEs
+
+
+
+
+
+```
+# cinaR
+
+<details>
+
+* Version: 0.2.3
+* GitHub: https://github.com/eonurk/cinaR
+* Source code: https://github.com/cran/cinaR
+* Date/Publication: 2022-05-18 14:00:09 UTC
+* Number of recursive dependencies: 178
+
+Run `revdepcheck::cloud_details(, "cinaR")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/cinaR/new/cinaR.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘cinaR/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘cinaR’ version ‘0.2.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘ChIPseeker’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/cinaR/old/cinaR.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘cinaR/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘cinaR’ version ‘0.2.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘ChIPseeker’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
 
 
 
@@ -1126,23 +1007,6 @@ Status: 1 ERROR
 ### CRAN
 
 ```
-* using log directory ‘/tmp/workdir/PWFSLSmoke/old/PWFSLSmoke.Rcheck’
-* using R version 3.6.3 (2020-02-29)
-* using platform: x86_64-pc-linux-gnu (64-bit)
-* using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘PWFSLSmoke/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘PWFSLSmoke’ version ‘1.2.100’
-* package encoding: UTF-8
-* checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘MazamaSpatialUtils’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
-* DONE
-Status: 1 ERROR
 
 
 
@@ -1150,27 +1014,137 @@ Status: 1 ERROR
 
 
 ```
-# rdefra
+# CRE
 
 <details>
 
-* Version: 0.3.8
-* Source code: https://github.com/cran/rdefra
-* URL: https://docs.ropensci.org/rdefra, https://github.com/ropensci/rdefra
-* BugReports: https://github.com/ropensci/rdefra/issues
-* Date/Publication: 2020-04-06 09:50:02 UTC
-* Number of recursive dependencies: 75
+* Version: 0.2.0
+* GitHub: https://github.com/NSAPH-Software/CRE
+* Source code: https://github.com/cran/CRE
+* Date/Publication: 2023-01-19 20:20:02 UTC
+* Number of recursive dependencies: 141
 
-Run `revdep_details(,"rdefra")` for more info
+Run `revdepcheck::cloud_details(, "CRE")` for more info
 
 </details>
 
-## In both
+## Error before installation
 
-*   checking whether package ‘rdefra’ can be installed ... ERROR
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/CRE/new/CRE.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘CRE/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘CRE’ version ‘0.2.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘CRE.Rmd’ using ‘UTF-8’... OK
+  ‘Contribution.Rmd’ using ‘UTF-8’... OK
+  ‘Testing-the-Package.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/CRE/old/CRE.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘CRE/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘CRE’ version ‘0.2.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘CRE.Rmd’ using ‘UTF-8’... OK
+  ‘Contribution.Rmd’ using ‘UTF-8’... OK
+  ‘Testing-the-Package.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# eflm
+
+<details>
+
+* Version: 0.3.0
+* GitHub: https://github.com/pachadotdev/eflm
+* Source code: https://github.com/cran/eflm
+* Date/Publication: 2021-05-31 21:20:02 UTC
+* Number of recursive dependencies: 55
+
+Run `revdepcheck::cloud_details(, "eflm")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking whether package ‘eflm’ can be installed ... ERROR
     ```
     Installation failed.
-    See ‘/tmp/workdir/rdefra/new/rdefra.Rcheck/00install.out’ for details.
+    See ‘/tmp/workdir/eflm/new/eflm.Rcheck/00install.out’ for details.
     ```
 
 ## Installation
@@ -1178,55 +1152,51 @@ Run `revdep_details(,"rdefra")` for more info
 ### Devel
 
 ```
-* installing *source* package ‘rdefra’ ...
-** package ‘rdefra’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘eflm’ ...
+** package ‘eflm’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** R
-** data
-*** moving datasets to lazyload DB
 ** inst
 ** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
+Error : The `x` argument of `as_tibble()` can't be missing as of tibble 3.0.0.
+Error: unable to load R code in package ‘eflm’
 Execution halted
-ERROR: lazy loading failed for package ‘rdefra’
-* removing ‘/tmp/workdir/rdefra/new/rdefra.Rcheck/rdefra’
+ERROR: lazy loading failed for package ‘eflm’
+* removing ‘/tmp/workdir/eflm/new/eflm.Rcheck/eflm’
+
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘rdefra’ ...
-** package ‘rdefra’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘eflm’ ...
+** package ‘eflm’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** R
-** data
-*** moving datasets to lazyload DB
 ** inst
 ** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘rdefra’
-* removing ‘/tmp/workdir/rdefra/old/rdefra.Rcheck/rdefra’
+** help
+*** installing help indices
+*** copying figures
+** building package indices
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (eflm)
+
 
 ```
-# rmapzen
+# embed
 
 <details>
 
-* Version: 0.4.2
-* Source code: https://github.com/cran/rmapzen
-* URL: https://tarakc02.github.io/rmapzen/
-* BugReports: https://github.com/tarakc02/rmapzen/issues
-* Date/Publication: 2019-08-19 21:10:06 UTC
-* Number of recursive dependencies: 85
+* Version: 1.0.0
+* GitHub: https://github.com/tidymodels/embed
+* Source code: https://github.com/cran/embed
+* Date/Publication: 2022-07-02 16:50:02 UTC
+* Number of recursive dependencies: 183
 
-Run `revdep_details(,"rmapzen")` for more info
+Run `revdepcheck::cloud_details(, "embed")` for more info
 
 </details>
 
@@ -1235,22 +1205,81 @@ Run `revdep_details(,"rmapzen")` for more info
 ### Devel
 
 ```
-* using log directory ‘/tmp/workdir/rmapzen/new/rmapzen.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+* using log directory ‘/tmp/workdir/embed/new/embed.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘rmapzen/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘rmapzen’ version ‘0.4.2’
+* using option ‘--no-manual’
+* checking for file ‘embed/DESCRIPTION’ ... OK
+* this is package ‘embed’ version ‘1.0.0’
+* package encoding: UTF-8
 * checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘geojsonio’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
+* checking package dependencies ... NOTE
+...
+  i In index: 1.
+  i With name: x3.
+  Caused by error in `.f()`:
+  ! The package `rstanarm` is required.
+  
+  [ FAIL 1 | WARN 2 | SKIP 56 | PASS 162 ]
+  Error: Test failures
+  Execution halted
 * DONE
-Status: 1 ERROR
+Status: 1 ERROR, 2 NOTEs
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/embed/old/embed.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘embed/DESCRIPTION’ ... OK
+* this is package ‘embed’ version ‘1.0.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+...
+  i In index: 1.
+  i With name: x3.
+  Caused by error in `.f()`:
+  ! The package `rstanarm` is required.
+  
+  [ FAIL 1 | WARN 2 | SKIP 56 | PASS 162 ]
+  Error: Test failures
+  Execution halted
+* DONE
+Status: 1 ERROR, 2 NOTEs
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
 
 
 
@@ -1261,17 +1290,79 @@ Status: 1 ERROR
 ### CRAN
 
 ```
-* using log directory ‘/tmp/workdir/rmapzen/old/rmapzen.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# escalation
+
+<details>
+
+* Version: 0.1.4
+* GitHub: NA
+* Source code: https://github.com/cran/escalation
+* Date/Publication: 2020-10-18 21:40:06 UTC
+* Number of recursive dependencies: 127
+
+Run `revdepcheck::cloud_details(, "escalation")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/escalation/new/escalation.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘rmapzen/DESCRIPTION’ ... OK
+* using option ‘--no-manual’
+* checking for file ‘escalation/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘rmapzen’ version ‘0.4.2’
+* this is package ‘escalation’ version ‘0.1.4’
+* package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
-Package required but not available: ‘geojsonio’
+Package required but not available: ‘trialr’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
@@ -1282,29 +1373,88 @@ Status: 1 ERROR
 
 
 
+```
+### CRAN
 
 ```
-# rnrfa
+* using log directory ‘/tmp/workdir/escalation/old/escalation.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘escalation/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘escalation’ version ‘0.1.4’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘trialr’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# NA
 
 <details>
 
-* Version: 2.0.2
-* Source code: https://github.com/cran/rnrfa
-* URL: http://cvitolo.github.io/rnrfa/
-* BugReports: https://github.com/cvitolo/rnrfa/issues
-* Date/Publication: 2020-02-01 15:20:02 UTC
-* Number of recursive dependencies: 91
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
 
-Run `revdep_details(,"rnrfa")` for more info
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# ESTER
+
+<details>
+
+* Version: 0.2.0
+* GitHub: https://github.com/lnalborczyk/ESTER
+* Source code: https://github.com/cran/ESTER
+* Date/Publication: 2017-12-10 14:21:14 UTC
+* Number of recursive dependencies: 137
+
+Run `revdepcheck::cloud_details(, "ESTER")` for more info
 
 </details>
 
 ## In both
 
-*   checking whether package ‘rnrfa’ can be installed ... ERROR
+*   checking whether package ‘ESTER’ can be installed ... ERROR
     ```
     Installation failed.
-    See ‘/tmp/workdir/rnrfa/new/rnrfa.Rcheck/00install.out’ for details.
+    See ‘/tmp/workdir/ESTER/new/ESTER.Rcheck/00install.out’ for details.
     ```
 
 ## Installation
@@ -1312,211 +1462,989 @@ Run `revdep_details(,"rnrfa")` for more info
 ### Devel
 
 ```
-* installing *source* package ‘rnrfa’ ...
-** package ‘rnrfa’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘ESTER’ ...
+** package ‘ESTER’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** R
 ** inst
 ** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
+Error in loadNamespace(j <- imp[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘rstan’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
 Execution halted
-ERROR: lazy loading failed for package ‘rnrfa’
-* removing ‘/tmp/workdir/rnrfa/new/rnrfa.Rcheck/rnrfa’
+ERROR: lazy loading failed for package ‘ESTER’
+* removing ‘/tmp/workdir/ESTER/new/ESTER.Rcheck/ESTER’
+
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘rnrfa’ ...
-** package ‘rnrfa’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘ESTER’ ...
+** package ‘ESTER’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** R
 ** inst
 ** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
+Error in loadNamespace(j <- imp[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘rstan’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
 Execution halted
-ERROR: lazy loading failed for package ‘rnrfa’
-* removing ‘/tmp/workdir/rnrfa/old/rnrfa.Rcheck/rnrfa’
+ERROR: lazy loading failed for package ‘ESTER’
+* removing ‘/tmp/workdir/ESTER/old/ESTER.Rcheck/ESTER’
+
 
 ```
-# rrd
+# fable.prophet
+
+<details>
+
+* Version: 0.1.0
+* GitHub: https://github.com/mitchelloharawild/fable.prophet
+* Source code: https://github.com/cran/fable.prophet
+* Date/Publication: 2020-08-20 09:30:03 UTC
+* Number of recursive dependencies: 108
+
+Run `revdepcheck::cloud_details(, "fable.prophet")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/fable.prophet/new/fable.prophet.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘fable.prophet/DESCRIPTION’ ... OK
+* this is package ‘fable.prophet’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘prophet’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/fable.prophet/old/fable.prophet.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘fable.prophet/DESCRIPTION’ ... OK
+* this is package ‘fable.prophet’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘prophet’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# FAMetA
+
+<details>
+
+* Version: 0.1.5
+* GitHub: NA
+* Source code: https://github.com/cran/FAMetA
+* Date/Publication: 2023-01-11 09:33:11 UTC
+* Number of recursive dependencies: 90
+
+Run `revdepcheck::cloud_details(, "FAMetA")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘FAMetA’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/FAMetA/new/FAMetA.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘FAMetA’ ...
+** package ‘FAMetA’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+Error: package or namespace load failed for ‘LipidMS’ in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+ there is no package called ‘readMzXmlData’
+Execution halted
+ERROR: lazy loading failed for package ‘FAMetA’
+* removing ‘/tmp/workdir/FAMetA/new/FAMetA.Rcheck/FAMetA’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘FAMetA’ ...
+** package ‘FAMetA’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+Error: package or namespace load failed for ‘LipidMS’ in loadNamespace(j <- i[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+ there is no package called ‘readMzXmlData’
+Execution halted
+ERROR: lazy loading failed for package ‘FAMetA’
+* removing ‘/tmp/workdir/FAMetA/old/FAMetA.Rcheck/FAMetA’
+
+
+```
+# finnts
 
 <details>
 
 * Version: 0.2.2
-* Source code: https://github.com/cran/rrd
-* URL: https://github.com/andrie/rrd/, https://andrie.github.io/rrd/
-* BugReports: https://github.com/andrie/rrd/issues
-* Date/Publication: 2019-07-05 17:10:05 UTC
-* Number of recursive dependencies: 57
+* GitHub: https://github.com/microsoft/finnts
+* Source code: https://github.com/cran/finnts
+* Date/Publication: 2023-02-12 00:40:02 UTC
+* Number of recursive dependencies: 210
 
-Run `revdep_details(,"rrd")` for more info
+Run `revdepcheck::cloud_details(, "finnts")` for more info
 
 </details>
 
-## In both
-
-*   checking whether package ‘rrd’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/rrd/new/rrd.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
+## Error before installation
 
 ### Devel
 
 ```
-* installing *source* package ‘rrd’ ...
-** package ‘rrd’ successfully unpacked and MD5 sums checked
-** using staged installation
-Package librrd was not found in the pkg-config search path.
-Perhaps you should add the directory containing `librrd.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'librrd' found
-Package librrd was not found in the pkg-config search path.
-Perhaps you should add the directory containing `librrd.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'librrd' found
-Using PKG_CFLAGS=
-Using PKG_LIBS=-lrrd
-------------------------- ANTICONF ERROR ---------------------------
-Configuration failed because librrd was not found. Try installing:
- * deb: librrd-dev (Debian, Ubuntu)
- * rpm: rrdtool-devel (Fedora, CentOS, RHEL)
- * csw: rrdtool (Solaris)
- * brew: rrdtool (OSX)
-If librrd is already installed, check that 'pkg-config' is in your
-PATH and PKG_CONFIG_PATH contains a librrd.pc file. If pkg-config
-is unavailable you can set INCLUDE_DIR and LIB_DIR manually via:
-R CMD INSTALL --configure-vars='INCLUDE_DIR=... LIB_DIR=...'
---------------------------------------------------------------------
-ERROR: configuration failed for package ‘rrd’
-* removing ‘/tmp/workdir/rrd/new/rrd.Rcheck/rrd’
+* using log directory ‘/tmp/workdir/finnts/new/finnts.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘finnts/DESCRIPTION’ ... OK
+* this is package ‘finnts’ version ‘0.2.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+...
+  ‘best-model-selection.Rmd’ using ‘UTF-8’... OK
+  ‘external-regressors.Rmd’ using ‘UTF-8’... OK
+  ‘feature-engineering.Rmd’ using ‘UTF-8’... OK
+  ‘finnts.Rmd’ using ‘UTF-8’... OK
+  ‘hierarchical-forecasting.Rmd’ using ‘UTF-8’... OK
+  ‘models-used-in-finnts.Rmd’ using ‘UTF-8’... OK
+  ‘parallel-processing.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: OK
+
+
+
+
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘rrd’ ...
-** package ‘rrd’ successfully unpacked and MD5 sums checked
-** using staged installation
-Package librrd was not found in the pkg-config search path.
-Perhaps you should add the directory containing `librrd.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'librrd' found
-Package librrd was not found in the pkg-config search path.
-Perhaps you should add the directory containing `librrd.pc'
-to the PKG_CONFIG_PATH environment variable
-No package 'librrd' found
-Using PKG_CFLAGS=
-Using PKG_LIBS=-lrrd
-------------------------- ANTICONF ERROR ---------------------------
-Configuration failed because librrd was not found. Try installing:
- * deb: librrd-dev (Debian, Ubuntu)
- * rpm: rrdtool-devel (Fedora, CentOS, RHEL)
- * csw: rrdtool (Solaris)
- * brew: rrdtool (OSX)
-If librrd is already installed, check that 'pkg-config' is in your
-PATH and PKG_CONFIG_PATH contains a librrd.pc file. If pkg-config
-is unavailable you can set INCLUDE_DIR and LIB_DIR manually via:
-R CMD INSTALL --configure-vars='INCLUDE_DIR=... LIB_DIR=...'
---------------------------------------------------------------------
-ERROR: configuration failed for package ‘rrd’
-* removing ‘/tmp/workdir/rrd/old/rrd.Rcheck/rrd’
+* using log directory ‘/tmp/workdir/finnts/old/finnts.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘finnts/DESCRIPTION’ ... OK
+* this is package ‘finnts’ version ‘0.2.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+...
+  ‘best-model-selection.Rmd’ using ‘UTF-8’... OK
+  ‘external-regressors.Rmd’ using ‘UTF-8’... OK
+  ‘feature-engineering.Rmd’ using ‘UTF-8’... OK
+  ‘finnts.Rmd’ using ‘UTF-8’... OK
+  ‘hierarchical-forecasting.Rmd’ using ‘UTF-8’... OK
+  ‘models-used-in-finnts.Rmd’ using ‘UTF-8’... OK
+  ‘parallel-processing.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: OK
+
+
+
+
 
 ```
-# simplevis
+# NA
 
 <details>
 
-* Version: 1.1.2
-* Source code: https://github.com/cran/simplevis
-* URL: https://statisticsnz.github.io/simplevis, https://github.com/statisticsnz/simplevis
-* BugReports: https://github.com/statisticsNZ/simplevis/issues
-* Date/Publication: 2020-05-06 06:30:02 UTC
-* Number of recursive dependencies: 118
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
 
-Run `revdep_details(,"simplevis")` for more info
+Run `revdepcheck::cloud_details(, "NA")` for more info
 
 </details>
 
-## In both
-
-*   checking whether package ‘simplevis’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/simplevis/new/simplevis.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
+## Error before installation
 
 ### Devel
 
 ```
-* installing *source* package ‘simplevis’ ...
-** package ‘simplevis’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘simplevis’
-* removing ‘/tmp/workdir/simplevis/new/simplevis.Rcheck/simplevis’
+
+
+
+
+
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘simplevis’ ...
-** package ‘simplevis’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘simplevis’
-* removing ‘/tmp/workdir/simplevis/old/simplevis.Rcheck/simplevis’
+
+
+
+
+
 
 ```
-# sociome
+# NA
 
 <details>
 
-* Version: 1.4.0
-* Source code: https://github.com/cran/sociome
-* BugReports: https://github.com/NikKrieger/sociome/issues
-* Date/Publication: 2020-03-19 12:10:05 UTC
-* Number of recursive dependencies: 90
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
 
-Run `revdep_details(,"sociome")` for more info
+Run `revdepcheck::cloud_details(, "NA")` for more info
 
 </details>
 
-## In both
+## Error before installation
 
-*   checking whether package ‘sociome’ can be installed ... ERROR
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# genekitr
+
+<details>
+
+* Version: 1.1.3
+* GitHub: https://github.com/GangLiLab/genekitr
+* Source code: https://github.com/cran/genekitr
+* Date/Publication: 2023-03-01 09:00:02 UTC
+* Number of recursive dependencies: 206
+
+Run `revdepcheck::cloud_details(, "genekitr")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/genekitr/new/genekitr.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘genekitr/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘genekitr’ version ‘1.1.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘clusterProfiler’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/genekitr/old/genekitr.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘genekitr/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘genekitr’ version ‘1.1.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘clusterProfiler’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# geocmeans
+
+<details>
+
+* Version: 0.3.3
+* GitHub: https://github.com/JeremyGelb/geocmeans
+* Source code: https://github.com/cran/geocmeans
+* Date/Publication: 2023-02-07 01:02:31 UTC
+* Number of recursive dependencies: 197
+
+Run `revdepcheck::cloud_details(, "geocmeans")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/geocmeans/new/geocmeans.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘geocmeans/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘geocmeans’ version ‘0.3.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+--- finished re-building ‘rasters.Rmd’
+
+SUMMARY: processing the following file failed:
+  ‘introduction.Rmd’
+
+Error: Vignette re-building failed.
+Execution halted
+
+* DONE
+Status: 2 ERRORs, 1 WARNING, 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/geocmeans/old/geocmeans.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘geocmeans/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘geocmeans’ version ‘0.3.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+--- finished re-building ‘rasters.Rmd’
+
+SUMMARY: processing the following file failed:
+  ‘introduction.Rmd’
+
+Error: Vignette re-building failed.
+Execution halted
+
+* DONE
+Status: 2 ERRORs, 1 WARNING, 1 NOTE
+
+
+
+
+
+```
+# ggPMX
+
+<details>
+
+* Version: 1.2.8
+* GitHub: https://github.com/ggPMXdevelopment/ggPMX
+* Source code: https://github.com/cran/ggPMX
+* Date/Publication: 2022-06-17 23:10:02 UTC
+* Number of recursive dependencies: 177
+
+Run `revdepcheck::cloud_details(, "ggPMX")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/ggPMX/new/ggPMX.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘ggPMX/DESCRIPTION’ ... OK
+* this is package ‘ggPMX’ version ‘1.2.8’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+...
+  [ FAIL 1 | WARN 14 | SKIP 8 | PASS 327 ]
+  Error: Test failures
+  Execution halted
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘ggPMX-guide.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 ERROR, 2 NOTEs
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/ggPMX/old/ggPMX.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘ggPMX/DESCRIPTION’ ... OK
+* this is package ‘ggPMX’ version ‘1.2.8’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+...
+  [ FAIL 1 | WARN 14 | SKIP 8 | PASS 327 ]
+  Error: Test failures
+  Execution halted
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘ggPMX-guide.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 ERROR, 2 NOTEs
+
+
+
+
+
+```
+# ggstatsplot
+
+<details>
+
+* Version: 0.11.0
+* GitHub: https://github.com/IndrajeetPatil/ggstatsplot
+* Source code: https://github.com/cran/ggstatsplot
+* Date/Publication: 2023-02-15 15:30:02 UTC
+* Number of recursive dependencies: 169
+
+Run `revdepcheck::cloud_details(, "ggstatsplot")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/ggstatsplot/new/ggstatsplot.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘ggstatsplot/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘ggstatsplot’ version ‘0.11.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘additional.Rmd’ using ‘UTF-8’... OK
+  ‘ggstatsplot.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/ggstatsplot/old/ggstatsplot.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘ggstatsplot/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘ggstatsplot’ version ‘0.11.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘additional.Rmd’ using ‘UTF-8’... OK
+  ‘ggstatsplot.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+# healthyR.ai
+
+<details>
+
+* Version: 0.0.12
+* GitHub: https://github.com/spsanderson/healthyR.ai
+* Source code: https://github.com/cran/healthyR.ai
+* Date/Publication: 2023-02-01 18:40:06 UTC
+* Number of recursive dependencies: 189
+
+Run `revdepcheck::cloud_details(, "healthyR.ai")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/healthyR.ai/new/healthyR.ai.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘healthyR.ai/DESCRIPTION’ ... OK
+* this is package ‘healthyR.ai’ version ‘0.0.12’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+...
+* checking examples ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘auto-kmeans.Rmd’ using ‘UTF-8’... OK
+  ‘getting-started.Rmd’ using ‘UTF-8’... OK
+  ‘kmeans-umap.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: OK
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/healthyR.ai/old/healthyR.ai.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘healthyR.ai/DESCRIPTION’ ... OK
+* this is package ‘healthyR.ai’ version ‘0.0.12’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+...
+* checking examples ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘auto-kmeans.Rmd’ using ‘UTF-8’... OK
+  ‘getting-started.Rmd’ using ‘UTF-8’... OK
+  ‘kmeans-umap.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: OK
+
+
+
+
+
+```
+# healthyR.ts
+
+<details>
+
+* Version: 0.2.7
+* GitHub: https://github.com/spsanderson/healthyR.ts
+* Source code: https://github.com/cran/healthyR.ts
+* Date/Publication: 2023-01-28 14:50:02 UTC
+* Number of recursive dependencies: 191
+
+Run `revdepcheck::cloud_details(, "healthyR.ts")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/healthyR.ts/new/healthyR.ts.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘healthyR.ts/DESCRIPTION’ ... OK
+* this is package ‘healthyR.ts’ version ‘0.2.7’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+...
+Calls: %>% -> ts_event_analysis_plot
+Execution halted
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘getting-started.Rmd’ using ‘UTF-8’... OK
+  ‘using-tidy-fft.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 ERROR, 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/healthyR.ts/old/healthyR.ts.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘healthyR.ts/DESCRIPTION’ ... OK
+* this is package ‘healthyR.ts’ version ‘0.2.7’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+...
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘getting-started.Rmd’ using ‘UTF-8’... OK
+  ‘using-tidy-fft.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+# healthyverse
+
+<details>
+
+* Version: 1.0.3
+* GitHub: https://github.com/spsanderson/healthyverse
+* Source code: https://github.com/cran/healthyverse
+* Date/Publication: 2023-02-21 20:40:02 UTC
+* Number of recursive dependencies: 207
+
+Run `revdepcheck::cloud_details(, "healthyverse")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/healthyverse/new/healthyverse.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘healthyverse/DESCRIPTION’ ... OK
+* this is package ‘healthyverse’ version ‘1.0.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+...
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘getting-started.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/healthyverse/old/healthyverse.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘healthyverse/DESCRIPTION’ ... OK
+* this is package ‘healthyverse’ version ‘1.0.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+...
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘getting-started.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+# historicalborrowlong
+
+<details>
+
+* Version: 0.0.5
+* GitHub: https://github.com/wlandau/historicalborrowlong
+* Source code: https://github.com/cran/historicalborrowlong
+* Date/Publication: 2022-09-13 10:20:06 UTC
+* Number of recursive dependencies: 107
+
+Run `revdepcheck::cloud_details(, "historicalborrowlong")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/historicalborrowlong/new/historicalborrowlong.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘historicalborrowlong/DESCRIPTION’ ... OK
+* this is package ‘historicalborrowlong’ version ‘0.0.5’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'rstan', 'trialr'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/historicalborrowlong/old/historicalborrowlong.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘historicalborrowlong/DESCRIPTION’ ... OK
+* this is package ‘historicalborrowlong’ version ‘0.0.5’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'rstan', 'trialr'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# immcp
+
+<details>
+
+* Version: 1.0.3
+* GitHub: https://github.com/YuanlongHu/immcp
+* Source code: https://github.com/cran/immcp
+* Date/Publication: 2022-05-12 05:50:02 UTC
+* Number of recursive dependencies: 194
+
+Run `revdepcheck::cloud_details(, "immcp")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/immcp/new/immcp.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘immcp/DESCRIPTION’ ... OK
+* this is package ‘immcp’ version ‘1.0.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘clusterProfiler’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/immcp/old/immcp.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘immcp/DESCRIPTION’ ... OK
+* this is package ‘immcp’ version ‘1.0.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘clusterProfiler’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# incidence2
+
+<details>
+
+* Version: 1.2.3
+* GitHub: https://github.com/reconverse/incidence2
+* Source code: https://github.com/cran/incidence2
+* Date/Publication: 2021-11-07 22:00:02 UTC
+* Number of recursive dependencies: 87
+
+Run `revdepcheck::cloud_details(, "incidence2")` for more info
+
+</details>
+
+## Newly broken
+
+*   checking whether package ‘incidence2’ can be installed ... ERROR
     ```
     Installation failed.
-    See ‘/tmp/workdir/sociome/new/sociome.Rcheck/00install.out’ for details.
+    See ‘/tmp/workdir/incidence2/new/incidence2.Rcheck/00install.out’ for details.
     ```
 
 ## Installation
@@ -1524,54 +2452,2499 @@ Run `revdep_details(,"sociome")` for more info
 ### Devel
 
 ```
-* installing *source* package ‘sociome’ ...
-** package ‘sociome’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘incidence2’ ...
+** package ‘incidence2’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** R
 ** data
 *** moving datasets to lazyload DB
 ** inst
 ** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
+Error : The `x` argument of `as_tibble()` can't be missing as of tibble 3.0.0.
+Error: unable to load R code in package ‘incidence2’
 Execution halted
-ERROR: lazy loading failed for package ‘sociome’
-* removing ‘/tmp/workdir/sociome/new/sociome.Rcheck/sociome’
+ERROR: lazy loading failed for package ‘incidence2’
+* removing ‘/tmp/workdir/incidence2/new/incidence2.Rcheck/incidence2’
+
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘sociome’ ...
-** package ‘sociome’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘incidence2’ ...
+** package ‘incidence2’ successfully unpacked and MD5 sums checked
 ** using staged installation
 ** R
 ** data
 *** moving datasets to lazyload DB
 ** inst
 ** byte-compile and prepare package for lazy loading
-Error in dyn.load(file, DLLpath = DLLpath, ...) : 
-  unable to load shared object '/opt/R/3.6.3/lib/R/library/rgdal/libs/rgdal.so':
-  libproj.so.12: cannot open shared object file: No such file or directory
-Calls: <Anonymous> ... namespaceImport -> loadNamespace -> library.dynam -> dyn.load
-Execution halted
-ERROR: lazy loading failed for package ‘sociome’
-* removing ‘/tmp/workdir/sociome/old/sociome.Rcheck/sociome’
+** help
+*** installing help indices
+** building package indices
+** installing vignettes
+** testing if installed package can be loaded from temporary location
+** testing if installed package can be loaded from final location
+** testing if installed package keeps a record of temporary installation path
+* DONE (incidence2)
+
 
 ```
-# sugarbag
+# INSPECTumours
+
+<details>
+
+* Version: 0.1.0
+* GitHub: NA
+* Source code: https://github.com/cran/INSPECTumours
+* Date/Publication: 2022-05-06 12:10:02 UTC
+* Number of recursive dependencies: 175
+
+Run `revdepcheck::cloud_details(, "INSPECTumours")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘INSPECTumours’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/INSPECTumours/new/INSPECTumours.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘INSPECTumours’ ...
+** package ‘INSPECTumours’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(j <- imp[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘rstan’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Execution halted
+ERROR: lazy loading failed for package ‘INSPECTumours’
+* removing ‘/tmp/workdir/INSPECTumours/new/INSPECTumours.Rcheck/INSPECTumours’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘INSPECTumours’ ...
+** package ‘INSPECTumours’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+** inst
+** byte-compile and prepare package for lazy loading
+Error in loadNamespace(j <- imp[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]) : 
+  there is no package called ‘rstan’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
+Execution halted
+ERROR: lazy loading failed for package ‘INSPECTumours’
+* removing ‘/tmp/workdir/INSPECTumours/old/INSPECTumours.Rcheck/INSPECTumours’
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# IRexamples
+
+<details>
+
+* Version: 0.0.2
+* GitHub: https://github.com/vinhdizzo/IRexamples
+* Source code: https://github.com/cran/IRexamples
+* Date/Publication: 2022-08-15 07:10:19 UTC
+* Number of recursive dependencies: 184
+
+Run `revdepcheck::cloud_details(, "IRexamples")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/IRexamples/new/IRexamples.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘IRexamples/DESCRIPTION’ ... OK
+* this is package ‘IRexamples’ version ‘0.0.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘rstanarm’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/IRexamples/old/IRexamples.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘IRexamples/DESCRIPTION’ ... OK
+* this is package ‘IRexamples’ version ‘0.0.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘rstanarm’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# loon.tourr
+
+<details>
+
+* Version: 0.1.3
+* GitHub: https://github.com/z267xu/loon.tourr
+* Source code: https://github.com/cran/loon.tourr
+* Date/Publication: 2021-10-27 14:10:05 UTC
+* Number of recursive dependencies: 126
+
+Run `revdepcheck::cloud_details(, "loon.tourr")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/loon.tourr/new/loon.tourr.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘loon.tourr/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘loon.tourr’ version ‘0.1.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'loon', 'loon.ggplot'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/loon.tourr/old/loon.tourr.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘loon.tourr/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘loon.tourr’ version ‘0.1.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'loon', 'loon.ggplot'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# MACP
+
+<details>
+
+* Version: 0.1.0
+* GitHub: https://github.com/mrbakhsh/MACP
+* Source code: https://github.com/cran/MACP
+* Date/Publication: 2023-02-28 17:32:30 UTC
+* Number of recursive dependencies: 235
+
+Run `revdepcheck::cloud_details(, "MACP")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/MACP/new/MACP.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘MACP/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘MACP’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘MACP_tutorial.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 3 NOTEs
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/MACP/old/MACP.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘MACP/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘MACP’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+* checking installed files from ‘inst/doc’ ... OK
+* checking files in ‘vignettes’ ... OK
+* checking examples ... OK
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘MACP_tutorial.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 3 NOTEs
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# MarketMatching
+
+<details>
+
+* Version: 1.2.0
+* GitHub: NA
+* Source code: https://github.com/cran/MarketMatching
+* Date/Publication: 2021-01-08 20:10:02 UTC
+* Number of recursive dependencies: 73
+
+Run `revdepcheck::cloud_details(, "MarketMatching")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/MarketMatching/new/MarketMatching.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘MarketMatching/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘MarketMatching’ version ‘1.2.0’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'CausalImpact', 'bsts', 'Boom'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/MarketMatching/old/MarketMatching.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘MarketMatching/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘MarketMatching’ version ‘1.2.0’
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'CausalImpact', 'bsts', 'Boom'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# merTools
+
+<details>
+
+* Version: 0.5.2
+* GitHub: NA
+* Source code: https://github.com/cran/merTools
+* Date/Publication: 2020-06-23 10:30:12 UTC
+* Number of recursive dependencies: 143
+
+Run `revdepcheck::cloud_details(, "merTools")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/merTools/new/merTools.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘merTools/DESCRIPTION’ ... OK
+* this is package ‘merTools’ version ‘0.5.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+...
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘Using_predictInterval.Rmd’ using ‘UTF-8’... OK
+  ‘imputation.Rmd’ using ‘UTF-8’... OK
+  ‘marginal_effects.Rmd’ using ‘UTF-8’... OK
+  ‘merToolsIntro.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/merTools/old/merTools.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘merTools/DESCRIPTION’ ... OK
+* this is package ‘merTools’ version ‘0.5.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+...
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘Using_predictInterval.Rmd’ using ‘UTF-8’... OK
+  ‘imputation.Rmd’ using ‘UTF-8’... OK
+  ‘marginal_effects.Rmd’ using ‘UTF-8’... OK
+  ‘merToolsIntro.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# modeltime
+
+<details>
+
+* Version: 1.2.5
+* GitHub: https://github.com/business-science/modeltime
+* Source code: https://github.com/cran/modeltime
+* Date/Publication: 2023-02-07 19:32:30 UTC
+* Number of recursive dependencies: 253
+
+Run `revdepcheck::cloud_details(, "modeltime")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/modeltime/new/modeltime.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘modeltime/DESCRIPTION’ ... OK
+* this is package ‘modeltime’ version ‘1.2.5’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘prophet’
+
+Package suggested but not available for checking: ‘rstan’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/modeltime/old/modeltime.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘modeltime/DESCRIPTION’ ... OK
+* this is package ‘modeltime’ version ‘1.2.5’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘prophet’
+
+Package suggested but not available for checking: ‘rstan’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# modeltime.ensemble
+
+<details>
+
+* Version: 1.0.2
+* GitHub: https://github.com/business-science/modeltime.ensemble
+* Source code: https://github.com/cran/modeltime.ensemble
+* Date/Publication: 2022-10-18 23:02:40 UTC
+* Number of recursive dependencies: 223
+
+Run `revdepcheck::cloud_details(, "modeltime.ensemble")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/modeltime.ensemble/new/modeltime.ensemble.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘modeltime.ensemble/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘modeltime.ensemble’ version ‘1.0.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+--- finished re-building ‘recursive-ensembles.Rmd’
+
+SUMMARY: processing the following file failed:
+  ‘getting-started-with-modeltime-ensemble.Rmd’
+
+Error: Vignette re-building failed.
+Execution halted
+
+* DONE
+Status: 1 ERROR, 1 WARNING, 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/modeltime.ensemble/old/modeltime.ensemble.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘modeltime.ensemble/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘modeltime.ensemble’ version ‘1.0.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+--- finished re-building ‘recursive-ensembles.Rmd’
+
+SUMMARY: processing the following file failed:
+  ‘getting-started-with-modeltime-ensemble.Rmd’
+
+Error: Vignette re-building failed.
+Execution halted
+
+* DONE
+Status: 1 ERROR, 1 WARNING, 1 NOTE
+
+
+
+
+
+```
+# modeltime.gluonts
+
+<details>
+
+* Version: 0.1.0
+* GitHub: https://github.com/business-science/modeltime.gluonts
+* Source code: https://github.com/cran/modeltime.gluonts
+* Date/Publication: 2020-11-30 09:40:02 UTC
+* Number of recursive dependencies: 214
+
+Run `revdepcheck::cloud_details(, "modeltime.gluonts")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/modeltime.gluonts/new/modeltime.gluonts.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘modeltime.gluonts/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘modeltime.gluonts’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘getting-started.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/modeltime.gluonts/old/modeltime.gluonts.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘modeltime.gluonts/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘modeltime.gluonts’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘getting-started.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+# modeltime.h2o
+
+<details>
+
+* Version: 0.1.1
+* GitHub: https://github.com/business-science/modeltime.h2o
+* Source code: https://github.com/cran/modeltime.h2o
+* Date/Publication: 2021-04-05 14:40:03 UTC
+* Number of recursive dependencies: 214
+
+Run `revdepcheck::cloud_details(, "modeltime.h2o")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/modeltime.h2o/new/modeltime.h2o.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘modeltime.h2o/DESCRIPTION’ ... OK
+* this is package ‘modeltime.h2o’ version ‘0.1.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+...
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* DONE
+Status: OK
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/modeltime.h2o/old/modeltime.h2o.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘modeltime.h2o/DESCRIPTION’ ... OK
+* this is package ‘modeltime.h2o’ version ‘0.1.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+...
+* checking for code/documentation mismatches ... OK
+* checking Rd \usage sections ... OK
+* checking Rd contents ... OK
+* checking for unstated dependencies in examples ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* DONE
+Status: OK
+
+
+
+
+
+```
+# modeltime.resample
+
+<details>
+
+* Version: 0.2.2
+* GitHub: https://github.com/business-science/modeltime.resample
+* Source code: https://github.com/cran/modeltime.resample
+* Date/Publication: 2022-10-18 03:00:06 UTC
+* Number of recursive dependencies: 221
+
+Run `revdepcheck::cloud_details(, "modeltime.resample")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/modeltime.resample/new/modeltime.resample.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘modeltime.resample/DESCRIPTION’ ... OK
+* this is package ‘modeltime.resample’ version ‘0.2.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+...
+--- failed re-building ‘panel-data.Rmd’
+
+SUMMARY: processing the following file failed:
+  ‘panel-data.Rmd’
+
+Error: Vignette re-building failed.
+Execution halted
+
+* DONE
+Status: 1 ERROR, 1 WARNING, 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/modeltime.resample/old/modeltime.resample.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘modeltime.resample/DESCRIPTION’ ... OK
+* this is package ‘modeltime.resample’ version ‘0.2.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+...
+--- failed re-building ‘panel-data.Rmd’
+
+SUMMARY: processing the following file failed:
+  ‘panel-data.Rmd’
+
+Error: Vignette re-building failed.
+Execution halted
+
+* DONE
+Status: 1 ERROR, 1 WARNING, 1 NOTE
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# mpower
+
+<details>
+
+* Version: 0.1.0
+* GitHub: NA
+* Source code: https://github.com/cran/mpower
+* Date/Publication: 2022-09-21 08:50:05 UTC
+* Number of recursive dependencies: 132
+
+Run `revdepcheck::cloud_details(, "mpower")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/mpower/new/mpower.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘mpower/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘mpower’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/mpower/old/mpower.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘mpower/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘mpower’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+# multibiasmeta
+
+<details>
+
+* Version: 0.1.0
+* GitHub: https://github.com/mathurlabstanford/multibiasmeta
+* Source code: https://github.com/cran/multibiasmeta
+* Date/Publication: 2023-02-08 09:40:02 UTC
+* Number of recursive dependencies: 99
+
+Run `revdepcheck::cloud_details(, "multibiasmeta")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/multibiasmeta/new/multibiasmeta.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘multibiasmeta/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘multibiasmeta’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+--- failed re-building ‘tutorial.Rmd’
+
+SUMMARY: processing the following file failed:
+  ‘tutorial.Rmd’
+
+Error: Vignette re-building failed.
+Execution halted
+
+* DONE
+Status: 1 WARNING, 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/multibiasmeta/old/multibiasmeta.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘multibiasmeta/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘multibiasmeta’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+--- failed re-building ‘tutorial.Rmd’
+
+SUMMARY: processing the following file failed:
+  ‘tutorial.Rmd’
+
+Error: Vignette re-building failed.
+Execution halted
+
+* DONE
+Status: 1 WARNING, 1 NOTE
+
+
+
+
+
+```
+# nlmixr2rpt
+
+<details>
+
+* Version: 0.1.0
+* GitHub: https://github.com/nlmixr2/nlmixr2rpt
+* Source code: https://github.com/cran/nlmixr2rpt
+* Date/Publication: 2022-12-05 10:40:02 UTC
+* Number of recursive dependencies: 221
+
+Run `revdepcheck::cloud_details(, "nlmixr2rpt")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/nlmixr2rpt/new/nlmixr2rpt.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘nlmixr2rpt/DESCRIPTION’ ... OK
+* this is package ‘nlmixr2rpt’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'nlmixr2extra', 'xpose.nlmixr2'
+
+Package suggested but not available for checking: ‘nlmixr2’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/nlmixr2rpt/old/nlmixr2rpt.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘nlmixr2rpt/DESCRIPTION’ ... OK
+* this is package ‘nlmixr2rpt’ version ‘0.1.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'nlmixr2extra', 'xpose.nlmixr2'
+
+Package suggested but not available for checking: ‘nlmixr2’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# numbat
+
+<details>
+
+* Version: 1.2.2
+* GitHub: https://github.com/kharchenkolab/numbat
+* Source code: https://github.com/cran/numbat
+* Date/Publication: 2023-02-14 18:20:02 UTC
+* Number of recursive dependencies: 132
+
+Run `revdepcheck::cloud_details(, "numbat")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/numbat/new/numbat.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘numbat/DESCRIPTION’ ... OK
+* this is package ‘numbat’ version ‘1.2.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'ggtree', 'scistreer'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/numbat/old/numbat.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘numbat/DESCRIPTION’ ... OK
+* this is package ‘numbat’ version ‘1.2.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Packages required but not available: 'ggtree', 'scistreer'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# OlinkAnalyze
+
+<details>
+
+* Version: 3.3.1
+* GitHub: NA
+* Source code: https://github.com/cran/OlinkAnalyze
+* Date/Publication: 2023-02-27 20:22:30 UTC
+* Number of recursive dependencies: 202
+
+Run `revdepcheck::cloud_details(, "OlinkAnalyze")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/OlinkAnalyze/new/OlinkAnalyze.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘OlinkAnalyze/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘OlinkAnalyze’ version ‘3.3.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘Vignett.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/OlinkAnalyze/old/OlinkAnalyze.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘OlinkAnalyze/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘OlinkAnalyze’ version ‘3.3.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘Vignett.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+# OncoBayes2
+
+<details>
+
+* Version: 0.8-8
+* GitHub: NA
+* Source code: https://github.com/cran/OncoBayes2
+* Date/Publication: 2023-03-03 22:50:15 UTC
+* Number of recursive dependencies: 100
+
+Run `revdepcheck::cloud_details(, "OncoBayes2")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘OncoBayes2’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/OncoBayes2/new/OncoBayes2.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘OncoBayes2’ ...
+** package ‘OncoBayes2’ successfully unpacked and MD5 sums checked
+** using staged installation
+Info: Found int division at 'string', line 82, column 14 to column 21:
+  current / base
+Values will be rounded towards zero. If rounding is not desired you can write
+the division as
+  current * 1.0 / base
+If rounding is intended please use the integer division operator %/%.
+Info: Found int division at 'string', line 175, column 14 to column 36:
+...
+/opt/R/4.1.1/lib/R/site-library/RcppEigen/include/Eigen/src/Core/ProductEvaluators.h:251:23:   required from ‘static void Eigen::internal::generic_product_impl<Lhs, Rhs, Eigen::DenseShape, Eigen::DenseShape, 6>::evalTo(Dst&, const Lhs&, const Rhs&) [with Dst = Eigen::Matrix<double, 1, 1, 0, 1, 1>; Lhs = Eigen::Product<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, const Eigen::Matrix<double, 1, -1> >, const Eigen::Transpose<Eigen::Matrix<double, -1, 1> > >, Eigen::Matrix<double, -1, -1>, 0>; Rhs = Eigen::Matrix<double, -1, 1>]’
+/opt/R/4.1.1/lib/R/site-library/RcppEigen/include/Eigen/src/Core/ProductEvaluators.h:124:75:   required from ‘Eigen::internal::product_evaluator<Eigen::Product<Lhs, Rhs, Option>, ProductTag, LhsShape, RhsShape>::product_evaluator(const XprType&) [with Lhs = Eigen::Product<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, const Eigen::Matrix<double, 1, -1> >, const Eigen::Transpose<Eigen::Matrix<double, -1, 1> > >, Eigen::Matrix<double, -1, -1>, 0>; Rhs = Eigen::Matrix<double, -1, 1>; int Options = 0; int ProductTag = 6; LhsShape = Eigen::DenseShape; RhsShape = Eigen::DenseShape; typename Eigen::internal::traits<typename Eigen::Product<Lhs, Rhs, Option>::Rhs>::Scalar = double; typename Eigen::internal::traits<typename Eigen::Product<Lhs, Rhs, Option>::Lhs>::Scalar = double; Eigen::internal::product_evaluator<Eigen::Product<Lhs, Rhs, Option>, ProductTag, LhsShape, RhsShape>::XprType = Eigen::Product<Eigen::Product<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, const Eigen::Matrix<double, 1, -1> >, const Eigen::Transpose<Eigen::Matrix<double, -1, 1> > >, Eigen::Matrix<double, -1, -1>, 0>, Eigen::Matrix<double, -1, 1>, 0>]’
+/opt/R/4.1.1/lib/R/site-library/RcppEigen/include/Eigen/src/Core/ProductEvaluators.h:35:90:   required from ‘Eigen::internal::evaluator<Eigen::Product<Lhs, Rhs, Option> >::evaluator(const XprType&) [with Lhs = Eigen::Product<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, const Eigen::Matrix<double, 1, -1> >, const Eigen::Transpose<Eigen::Matrix<double, -1, 1> > >, Eigen::Matrix<double, -1, -1>, 0>; Rhs = Eigen::Matrix<double, -1, 1>; int Options = 0; Eigen::internal::evaluator<Eigen::Product<Lhs, Rhs, Option> >::XprType = Eigen::Product<Eigen::Product<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, const Eigen::Matrix<double, 1, -1> >, const Eigen::Transpose<Eigen::Matrix<double, -1, 1> > >, Eigen::Matrix<double, -1, -1>, 0>, Eigen::Matrix<double, -1, 1>, 0>]’
+/opt/R/4.1.1/lib/R/site-library/RcppEigen/include/Eigen/src/Core/Product.h:132:22:   required from ‘Eigen::internal::dense_product_base<Lhs, Rhs, Option, 6>::operator const Scalar() const [with Lhs = Eigen::Product<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, const Eigen::Matrix<double, 1, -1> >, const Eigen::Transpose<Eigen::Matrix<double, -1, 1> > >, Eigen::Matrix<double, -1, -1>, 0>; Rhs = Eigen::Matrix<double, -1, 1>; int Option = 0; Eigen::internal::dense_product_base<Lhs, Rhs, Option, 6>::Scalar = double]’
+/opt/R/4.1.1/lib/R/site-library/StanHeaders/include/src/stan/mcmc/hmc/hamiltonians/dense_e_metric.hpp:22:56:   required from ‘double stan::mcmc::dense_e_metric<Model, BaseRNG>::T(stan::mcmc::dense_e_point&) [with Model = model_blrm_exnex_namespace::model_blrm_exnex; BaseRNG = boost::random::additive_combine_engine<boost::random::linear_congruential_engine<unsigned int, 40014, 0, 2147483563>, boost::random::linear_congruential_engine<unsigned int, 40692, 0, 2147483399> >]’
+/opt/R/4.1.1/lib/R/site-library/StanHeaders/include/src/stan/mcmc/hmc/hamiltonians/dense_e_metric.hpp:21:10:   required from here
+/opt/R/4.1.1/lib/R/site-library/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:55:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__vector(2) double’} [-Wignored-attributes]
+make: *** [/opt/R/4.1.1/lib/R/etc/Makeconf:175: stanExports_blrm_exnex.o] Error 1
+ERROR: compilation failed for package ‘OncoBayes2’
+* removing ‘/tmp/workdir/OncoBayes2/new/OncoBayes2.Rcheck/OncoBayes2’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘OncoBayes2’ ...
+** package ‘OncoBayes2’ successfully unpacked and MD5 sums checked
+** using staged installation
+Info: Found int division at 'string', line 82, column 14 to column 21:
+  current / base
+Values will be rounded towards zero. If rounding is not desired you can write
+the division as
+  current * 1.0 / base
+If rounding is intended please use the integer division operator %/%.
+Info: Found int division at 'string', line 175, column 14 to column 36:
+...
+/opt/R/4.1.1/lib/R/site-library/RcppEigen/include/Eigen/src/Core/ProductEvaluators.h:251:23:   required from ‘static void Eigen::internal::generic_product_impl<Lhs, Rhs, Eigen::DenseShape, Eigen::DenseShape, 6>::evalTo(Dst&, const Lhs&, const Rhs&) [with Dst = Eigen::Matrix<double, 1, 1, 0, 1, 1>; Lhs = Eigen::Product<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, const Eigen::Matrix<double, 1, -1> >, const Eigen::Transpose<Eigen::Matrix<double, -1, 1> > >, Eigen::Matrix<double, -1, -1>, 0>; Rhs = Eigen::Matrix<double, -1, 1>]’
+/opt/R/4.1.1/lib/R/site-library/RcppEigen/include/Eigen/src/Core/ProductEvaluators.h:124:75:   required from ‘Eigen::internal::product_evaluator<Eigen::Product<Lhs, Rhs, Option>, ProductTag, LhsShape, RhsShape>::product_evaluator(const XprType&) [with Lhs = Eigen::Product<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, const Eigen::Matrix<double, 1, -1> >, const Eigen::Transpose<Eigen::Matrix<double, -1, 1> > >, Eigen::Matrix<double, -1, -1>, 0>; Rhs = Eigen::Matrix<double, -1, 1>; int Options = 0; int ProductTag = 6; LhsShape = Eigen::DenseShape; RhsShape = Eigen::DenseShape; typename Eigen::internal::traits<typename Eigen::Product<Lhs, Rhs, Option>::Rhs>::Scalar = double; typename Eigen::internal::traits<typename Eigen::Product<Lhs, Rhs, Option>::Lhs>::Scalar = double; Eigen::internal::product_evaluator<Eigen::Product<Lhs, Rhs, Option>, ProductTag, LhsShape, RhsShape>::XprType = Eigen::Product<Eigen::Product<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, const Eigen::Matrix<double, 1, -1> >, const Eigen::Transpose<Eigen::Matrix<double, -1, 1> > >, Eigen::Matrix<double, -1, -1>, 0>, Eigen::Matrix<double, -1, 1>, 0>]’
+/opt/R/4.1.1/lib/R/site-library/RcppEigen/include/Eigen/src/Core/ProductEvaluators.h:35:90:   required from ‘Eigen::internal::evaluator<Eigen::Product<Lhs, Rhs, Option> >::evaluator(const XprType&) [with Lhs = Eigen::Product<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, const Eigen::Matrix<double, 1, -1> >, const Eigen::Transpose<Eigen::Matrix<double, -1, 1> > >, Eigen::Matrix<double, -1, -1>, 0>; Rhs = Eigen::Matrix<double, -1, 1>; int Options = 0; Eigen::internal::evaluator<Eigen::Product<Lhs, Rhs, Option> >::XprType = Eigen::Product<Eigen::Product<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, const Eigen::Matrix<double, 1, -1> >, const Eigen::Transpose<Eigen::Matrix<double, -1, 1> > >, Eigen::Matrix<double, -1, -1>, 0>, Eigen::Matrix<double, -1, 1>, 0>]’
+/opt/R/4.1.1/lib/R/site-library/RcppEigen/include/Eigen/src/Core/Product.h:132:22:   required from ‘Eigen::internal::dense_product_base<Lhs, Rhs, Option, 6>::operator const Scalar() const [with Lhs = Eigen::Product<Eigen::CwiseBinaryOp<Eigen::internal::scalar_product_op<double, double>, const Eigen::CwiseNullaryOp<Eigen::internal::scalar_constant_op<double>, const Eigen::Matrix<double, 1, -1> >, const Eigen::Transpose<Eigen::Matrix<double, -1, 1> > >, Eigen::Matrix<double, -1, -1>, 0>; Rhs = Eigen::Matrix<double, -1, 1>; int Option = 0; Eigen::internal::dense_product_base<Lhs, Rhs, Option, 6>::Scalar = double]’
+/opt/R/4.1.1/lib/R/site-library/StanHeaders/include/src/stan/mcmc/hmc/hamiltonians/dense_e_metric.hpp:22:56:   required from ‘double stan::mcmc::dense_e_metric<Model, BaseRNG>::T(stan::mcmc::dense_e_point&) [with Model = model_blrm_exnex_namespace::model_blrm_exnex; BaseRNG = boost::random::additive_combine_engine<boost::random::linear_congruential_engine<unsigned int, 40014, 0, 2147483563>, boost::random::linear_congruential_engine<unsigned int, 40692, 0, 2147483399> >]’
+/opt/R/4.1.1/lib/R/site-library/StanHeaders/include/src/stan/mcmc/hmc/hamiltonians/dense_e_metric.hpp:21:10:   required from here
+/opt/R/4.1.1/lib/R/site-library/RcppEigen/include/Eigen/src/Core/DenseCoeffsBase.h:55:30: warning: ignoring attributes on template argument ‘Eigen::internal::packet_traits<double>::type’ {aka ‘__vector(2) double’} [-Wignored-attributes]
+make: *** [/opt/R/4.1.1/lib/R/etc/Makeconf:175: stanExports_blrm_exnex.o] Error 1
+ERROR: compilation failed for package ‘OncoBayes2’
+* removing ‘/tmp/workdir/OncoBayes2/old/OncoBayes2.Rcheck/OncoBayes2’
+
+
+```
+# ordbetareg
+
+<details>
+
+* Version: 0.7.0
+* GitHub: https://github.com/saudiwin/ordbetareg_pack
+* Source code: https://github.com/cran/ordbetareg
+* Date/Publication: 2023-02-12 11:30:02 UTC
+* Number of recursive dependencies: 201
+
+Run `revdepcheck::cloud_details(, "ordbetareg")` for more info
+
+</details>
+
+## In both
+
+*   checking whether package ‘ordbetareg’ can be installed ... ERROR
+    ```
+    Installation failed.
+    See ‘/tmp/workdir/ordbetareg/new/ordbetareg.Rcheck/00install.out’ for details.
+    ```
+
+## Installation
+
+### Devel
+
+```
+* installing *source* package ‘ordbetareg’ ...
+** package ‘ordbetareg’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+Warning: namespace ‘rstan’ is not available and has been replaced
+by .GlobalEnv when processing object ‘fit_imputed’
+Warning: namespace ‘ordbetareg’ is not available and has been replaced
+by .GlobalEnv when processing object ‘fit_imputed’
+...
+by .GlobalEnv when processing object ‘ord_fit_phi’
+Warning: namespace ‘rstan’ is not available and has been replaced
+by .GlobalEnv when processing object ‘ord_fit_phi’
+** inst
+** byte-compile and prepare package for lazy loading
+Error: package or namespace load failed for ‘brms’ in loadNamespace(j <- imp[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+ there is no package called ‘rstan’
+Execution halted
+ERROR: lazy loading failed for package ‘ordbetareg’
+* removing ‘/tmp/workdir/ordbetareg/new/ordbetareg.Rcheck/ordbetareg’
+
+
+```
+### CRAN
+
+```
+* installing *source* package ‘ordbetareg’ ...
+** package ‘ordbetareg’ successfully unpacked and MD5 sums checked
+** using staged installation
+** R
+** data
+*** moving datasets to lazyload DB
+Warning: namespace ‘rstan’ is not available and has been replaced
+by .GlobalEnv when processing object ‘fit_imputed’
+Warning: namespace ‘ordbetareg’ is not available and has been replaced
+by .GlobalEnv when processing object ‘fit_imputed’
+...
+by .GlobalEnv when processing object ‘ord_fit_phi’
+Warning: namespace ‘rstan’ is not available and has been replaced
+by .GlobalEnv when processing object ‘ord_fit_phi’
+** inst
+** byte-compile and prepare package for lazy loading
+Error: package or namespace load failed for ‘brms’ in loadNamespace(j <- imp[[1L]], c(lib.loc, .libPaths()), versionCheck = vI[[j]]):
+ there is no package called ‘rstan’
+Execution halted
+ERROR: lazy loading failed for package ‘ordbetareg’
+* removing ‘/tmp/workdir/ordbetareg/old/ordbetareg.Rcheck/ordbetareg’
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# Platypus
+
+<details>
+
+* Version: 3.4.1
+* GitHub: NA
+* Source code: https://github.com/cran/Platypus
+* Date/Publication: 2022-08-15 07:20:20 UTC
+* Number of recursive dependencies: 356
+
+Run `revdepcheck::cloud_details(, "Platypus")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/Platypus/new/Platypus.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘Platypus/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘Platypus’ version ‘3.4.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+* checking package dependencies ... ERROR
+Package required but not available: ‘ggtree’
+
+Packages suggested but not available for checking:
+  'Matrix.utils', 'monocle3', 'ProjecTILs', 'SeuratWrappers'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/Platypus/old/Platypus.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘Platypus/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘Platypus’ version ‘3.4.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+* checking package dependencies ... ERROR
+Package required but not available: ‘ggtree’
+
+Packages suggested but not available for checking:
+  'Matrix.utils', 'monocle3', 'ProjecTILs', 'SeuratWrappers'
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# promotionImpact
+
+<details>
+
+* Version: 0.1.5
+* GitHub: https://github.com/ncsoft/promotionImpact
+* Source code: https://github.com/cran/promotionImpact
+* Date/Publication: 2021-04-13 15:00:05 UTC
+* Number of recursive dependencies: 122
+
+Run `revdepcheck::cloud_details(, "promotionImpact")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/promotionImpact/new/promotionImpact.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘promotionImpact/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘promotionImpact’ version ‘0.1.5’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘prophet’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/promotionImpact/old/promotionImpact.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘promotionImpact/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘promotionImpact’ version ‘0.1.5’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘prophet’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# PsychWordVec
+
+<details>
+
+* Version: 0.3.1
+* GitHub: https://github.com/psychbruce/PsychWordVec
+* Source code: https://github.com/cran/PsychWordVec
+* Date/Publication: 2023-03-03 20:20:11 UTC
+* Number of recursive dependencies: 231
+
+Run `revdepcheck::cloud_details(, "PsychWordVec")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/PsychWordVec/new/PsychWordVec.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘PsychWordVec/DESCRIPTION’ ... OK
+* this is package ‘PsychWordVec’ version ‘0.3.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘bruceR’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/PsychWordVec/old/PsychWordVec.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘PsychWordVec/DESCRIPTION’ ... OK
+* this is package ‘PsychWordVec’ version ‘0.3.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘bruceR’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# RBesT
+
+<details>
+
+* Version: 1.6-6
+* GitHub: https://github.com/Novartis/RBesT
+* Source code: https://github.com/cran/RBesT
+* Date/Publication: 2023-03-03 18:20:02 UTC
+* Number of recursive dependencies: 131
+
+Run `revdepcheck::cloud_details(, "RBesT")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/RBesT/new/RBesT.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘RBesT/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘RBesT’ version ‘1.6-6’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘rstan’
+
+Package suggested but not available for checking: ‘rstanarm’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/RBesT/old/RBesT.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘RBesT/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘RBesT’ version ‘1.6-6’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘rstan’
+
+Package suggested but not available for checking: ‘rstanarm’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# rdss
+
+<details>
+
+* Version: 1.0.0
+* GitHub: NA
+* Source code: https://github.com/cran/rdss
+* Date/Publication: 2023-01-17 17:40:02 UTC
+* Number of recursive dependencies: 207
+
+Run `revdepcheck::cloud_details(, "rdss")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/rdss/new/rdss.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘rdss/DESCRIPTION’ ... OK
+* this is package ‘rdss’ version ‘1.0.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+...
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/rdss/old/rdss.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘rdss/DESCRIPTION’ ... OK
+* this is package ‘rdss’ version ‘1.0.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+...
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘testthat.R’
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# Robyn
+
+<details>
+
+* Version: 3.9.0
+* GitHub: https://github.com/facebookexperimental/Robyn
+* Source code: https://github.com/cran/Robyn
+* Date/Publication: 2023-02-08 08:12:37 UTC
+* Number of recursive dependencies: 139
+
+Run `revdepcheck::cloud_details(, "Robyn")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/Robyn/new/Robyn.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘Robyn/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘Robyn’ version ‘3.9.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘prophet’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/Robyn/old/Robyn.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘Robyn/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘Robyn’ version ‘3.9.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘prophet’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# RVA
+
+<details>
+
+* Version: 0.0.5
+* GitHub: https://github.com/THERMOSTATS/RVA
+* Source code: https://github.com/cran/RVA
+* Date/Publication: 2021-11-01 21:40:02 UTC
+* Number of recursive dependencies: 208
+
+Run `revdepcheck::cloud_details(, "RVA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/RVA/new/RVA.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘RVA/DESCRIPTION’ ... OK
+* this is package ‘RVA’ version ‘0.0.5’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘clusterProfiler’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/RVA/old/RVA.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘RVA/DESCRIPTION’ ... OK
+* this is package ‘RVA’ version ‘0.0.5’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘clusterProfiler’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# SAMtool
+
+<details>
+
+* Version: 1.5.1
+* GitHub: https://github.com/Blue-Matter/SAMtool
+* Source code: https://github.com/cran/SAMtool
+* Date/Publication: 2023-02-08 23:20:02 UTC
+* Number of recursive dependencies: 183
+
+Run `revdepcheck::cloud_details(, "SAMtool")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/SAMtool/new/SAMtool.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘SAMtool/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘SAMtool’ version ‘1.5.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking compiled code ... OK
+* checking examples ... OK
+* DONE
+Status: 2 NOTEs
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/SAMtool/old/SAMtool.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘SAMtool/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘SAMtool’ version ‘1.5.1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+* checking line endings in C/C++/Fortran sources/headers ... OK
+* checking line endings in Makefiles ... OK
+* checking compilation flags in Makevars ... OK
+* checking for GNU extensions in Makefiles ... OK
+* checking for portable use of $(BLAS_LIBS) and $(LAPACK_LIBS) ... OK
+* checking use of PKG_*FLAGS in Makefiles ... OK
+* checking compiled code ... OK
+* checking examples ... OK
+* DONE
+Status: 2 NOTEs
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# sjPlot
+
+<details>
+
+* Version: 2.8.12
+* GitHub: https://github.com/strengejacke/sjPlot
+* Source code: https://github.com/cran/sjPlot
+* Date/Publication: 2022-11-19 22:20:02 UTC
+* Number of recursive dependencies: 186
+
+Run `revdepcheck::cloud_details(, "sjPlot")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/sjPlot/new/sjPlot.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘sjPlot/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘sjPlot’ version ‘2.8.12’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+  ‘plot_model_estimates.Rmd’ using ‘UTF-8’... OK
+  ‘sjtitemanalysis.Rmd’ using ‘UTF-8’... OK
+  ‘tab_bayes.Rmd’ using ‘UTF-8’... OK
+  ‘tab_mixed.Rmd’ using ‘UTF-8’... OK
+  ‘tab_model_estimates.Rmd’ using ‘UTF-8’... OK
+  ‘tab_model_robust.Rmd’ using ‘UTF-8’... OK
+  ‘table_css.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/sjPlot/old/sjPlot.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘sjPlot/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘sjPlot’ version ‘2.8.12’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+  ‘plot_model_estimates.Rmd’ using ‘UTF-8’... OK
+  ‘sjtitemanalysis.Rmd’ using ‘UTF-8’... OK
+  ‘tab_bayes.Rmd’ using ‘UTF-8’... OK
+  ‘tab_mixed.Rmd’ using ‘UTF-8’... OK
+  ‘tab_model_estimates.Rmd’ using ‘UTF-8’... OK
+  ‘tab_model_robust.Rmd’ using ‘UTF-8’... OK
+  ‘table_css.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+# sknifedatar
 
 <details>
 
 * Version: 0.1.2
-* Source code: https://github.com/cran/sugarbag
-* URL: https://srkobakian.github.io/sugarbag/, https://github.com/srkobakian/sugarbag
-* Date/Publication: 2020-01-08 20:40:02 UTC
-* Number of recursive dependencies: 108
+* GitHub: https://github.com/rafzamb/sknifedatar
+* Source code: https://github.com/cran/sknifedatar
+* Date/Publication: 2021-06-01 08:00:02 UTC
+* Number of recursive dependencies: 180
 
-Run `revdep_details(,"sugarbag")` for more info
+Run `revdepcheck::cloud_details(, "sknifedatar")` for more info
 
 </details>
 
@@ -1580,22 +4953,157 @@ Run `revdep_details(,"sugarbag")` for more info
 ### Devel
 
 ```
-* using log directory ‘/tmp/workdir/sugarbag/new/sugarbag.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+* using log directory ‘/tmp/workdir/sknifedatar/new/sknifedatar.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘sugarbag/DESCRIPTION’ ... OK
-* this is package ‘sugarbag’ version ‘0.1.2’
+* using option ‘--no-manual’
+* checking for file ‘sknifedatar/DESCRIPTION’ ... OK
+* this is package ‘sknifedatar’ version ‘0.1.2’
 * package encoding: UTF-8
 * checking package namespace information ... OK
-* checking package dependencies ... ERROR
-Package required but not available: ‘rmapshaper’
-
-See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
-manual.
+* checking package dependencies ... OK
+...
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘spelling.R’
 * DONE
-Status: 1 ERROR
+Status: OK
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/sknifedatar/old/sknifedatar.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘sknifedatar/DESCRIPTION’ ... OK
+* this is package ‘sknifedatar’ version ‘0.1.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... OK
+...
+* checking contents of ‘data’ directory ... OK
+* checking data for non-ASCII characters ... OK
+* checking LazyData ... OK
+* checking data for ASCII and uncompressed saves ... OK
+* checking examples ... OK
+* checking for unstated dependencies in ‘tests’ ... OK
+* checking tests ... OK
+  Running ‘spelling.R’
+* DONE
+Status: OK
+
+
+
+
+
+```
+# statsExpressions
+
+<details>
+
+* Version: 1.5.0
+* GitHub: https://github.com/IndrajeetPatil/statsExpressions
+* Source code: https://github.com/cran/statsExpressions
+* Date/Publication: 2023-02-19 14:30:02 UTC
+* Number of recursive dependencies: 152
+
+Run `revdepcheck::cloud_details(, "statsExpressions")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/statsExpressions/new/statsExpressions.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘statsExpressions/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘statsExpressions’ version ‘1.5.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+  Error: Test failures
+  Execution halted
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘statsExpressions.Rmd’ using ‘UTF-8’... OK
+  ‘stats_details.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 ERROR, 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/statsExpressions/old/statsExpressions.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘statsExpressions/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘statsExpressions’ version ‘1.5.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+  Error: Test failures
+  Execution halted
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘statsExpressions.Rmd’ using ‘UTF-8’... OK
+  ‘stats_details.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 ERROR, 1 NOTE
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
 
 
 
@@ -1606,17 +5114,189 @@ Status: 1 ERROR
 ### CRAN
 
 ```
-* using log directory ‘/tmp/workdir/sugarbag/old/sugarbag.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# tidybayes
+
+<details>
+
+* Version: 3.0.3
+* GitHub: https://github.com/mjskay/tidybayes
+* Source code: https://github.com/cran/tidybayes
+* Date/Publication: 2023-02-04 09:10:02 UTC
+* Number of recursive dependencies: 200
+
+Run `revdepcheck::cloud_details(, "tidybayes")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/tidybayes/new/tidybayes.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘sugarbag/DESCRIPTION’ ... OK
-* this is package ‘sugarbag’ version ‘0.1.2’
+* using option ‘--no-manual’
+* checking for file ‘tidybayes/DESCRIPTION’ ... OK
+* this is package ‘tidybayes’ version ‘3.0.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+...
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘tidy-brms.Rmd’ using ‘UTF-8’... OK
+  ‘tidy-posterior.Rmd’ using ‘UTF-8’... OK
+  ‘tidy-rstanarm.Rmd’ using ‘UTF-8’... OK
+  ‘tidybayes-residuals.Rmd’ using ‘UTF-8’... OK
+  ‘tidybayes.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 2 NOTEs
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/tidybayes/old/tidybayes.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘tidybayes/DESCRIPTION’ ... OK
+* this is package ‘tidybayes’ version ‘3.0.3’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+...
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘tidy-brms.Rmd’ using ‘UTF-8’... OK
+  ‘tidy-posterior.Rmd’ using ‘UTF-8’... OK
+  ‘tidy-rstanarm.Rmd’ using ‘UTF-8’... OK
+  ‘tidybayes-residuals.Rmd’ using ‘UTF-8’... OK
+  ‘tidybayes.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 2 NOTEs
+
+
+
+
+
+```
+# tidyposterior
+
+<details>
+
+* Version: 1.0.0
+* GitHub: https://github.com/tidymodels/tidyposterior
+* Source code: https://github.com/cran/tidyposterior
+* Date/Publication: 2022-06-23 20:20:02 UTC
+* Number of recursive dependencies: 170
+
+Run `revdepcheck::cloud_details(, "tidyposterior")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/tidyposterior/new/tidyposterior.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘tidyposterior/DESCRIPTION’ ... OK
+* this is package ‘tidyposterior’ version ‘1.0.0’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
-Package required but not available: ‘rmapshaper’
+Package required but not available: ‘rstanarm’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
@@ -1627,29 +5307,375 @@ Status: 1 ERROR
 
 
 
+```
+### CRAN
 
 ```
-# tesseract
+* using log directory ‘/tmp/workdir/tidyposterior/old/tidyposterior.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘tidyposterior/DESCRIPTION’ ... OK
+* this is package ‘tidyposterior’ version ‘1.0.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘rstanarm’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# NA
 
 <details>
 
-* Version: 4.1
-* Source code: https://github.com/cran/tesseract
-* URL: https://github.com/ropensci/tesseract
-* BugReports: https://github.com/ropensci/tesseract/issues
-* Date/Publication: 2019-07-25 20:50:02 UTC
-* Number of recursive dependencies: 41
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
 
-Run `revdep_details(,"tesseract")` for more info
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+
+
+
+
+
+
+```
+### CRAN
+
+```
+
+
+
+
+
+
+```
+# timetk
+
+<details>
+
+* Version: 2.8.2
+* GitHub: https://github.com/business-science/timetk
+* Source code: https://github.com/cran/timetk
+* Date/Publication: 2022-11-17 19:30:02 UTC
+* Number of recursive dependencies: 226
+
+Run `revdepcheck::cloud_details(, "timetk")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/timetk/new/timetk.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘timetk/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘timetk’ version ‘2.8.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+  Error in library(robets) : there is no package called 'robets'
+  Execution halted
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘TK04_Plotting_Time_Series.Rmd’ using ‘UTF-8’... OK
+  ‘TK07_Time_Series_Data_Wrangling.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 ERROR, 2 NOTEs
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/timetk/old/timetk.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘timetk/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘timetk’ version ‘2.8.2’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+...
+  Error in library(robets) : there is no package called 'robets'
+  Execution halted
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘TK04_Plotting_Time_Series.Rmd’ using ‘UTF-8’... OK
+  ‘TK07_Time_Series_Data_Wrangling.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 ERROR, 2 NOTEs
+
+
+
+
+
+```
+# tinyarray
+
+<details>
+
+* Version: 2.2.7
+* GitHub: https://github.com/xjsun1221/tinyarray
+* Source code: https://github.com/cran/tinyarray
+* Date/Publication: 2021-11-08 10:00:02 UTC
+* Number of recursive dependencies: 228
+
+Run `revdepcheck::cloud_details(, "tinyarray")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/tinyarray/new/tinyarray.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘tinyarray/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘tinyarray’ version ‘2.2.7’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘clusterProfiler’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/tinyarray/old/tinyarray.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘tinyarray/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘tinyarray’ version ‘2.2.7’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘clusterProfiler’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# tipmap
+
+<details>
+
+* Version: 0.3.9
+* GitHub: NA
+* Source code: https://github.com/cran/tipmap
+* Date/Publication: 2022-12-07 21:50:02 UTC
+* Number of recursive dependencies: 96
+
+Run `revdepcheck::cloud_details(, "tipmap")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/tipmap/new/tipmap.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘tipmap/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘tipmap’ version ‘0.3.9’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘RBesT’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/tipmap/old/tipmap.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘tipmap/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘tipmap’ version ‘0.3.9’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘RBesT’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# vivid
+
+<details>
+
+* Version: 0.2.5
+* GitHub: NA
+* Source code: https://github.com/cran/vivid
+* Date/Publication: 2023-02-13 16:40:02 UTC
+* Number of recursive dependencies: 206
+
+Run `revdepcheck::cloud_details(, "vivid")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/vivid/new/vivid.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘vivid/DESCRIPTION’ ... OK
+* this is package ‘vivid’ version ‘0.2.5’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+...
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘vivid.Rmd’ using ‘UTF-8’... OK
+  ‘vividQStart.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/vivid/old/vivid.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘vivid/DESCRIPTION’ ... OK
+* this is package ‘vivid’ version ‘0.2.5’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... NOTE
+...
+* checking tests ... OK
+  Running ‘testthat.R’
+* checking for unstated dependencies in vignettes ... OK
+* checking package vignettes in ‘inst/doc’ ... OK
+* checking running R code from vignettes ... NONE
+  ‘vivid.Rmd’ using ‘UTF-8’... OK
+  ‘vividQStart.Rmd’ using ‘UTF-8’... OK
+* checking re-building of vignette outputs ... OK
+* DONE
+Status: 1 NOTE
+
+
+
+
+
+```
+# wearables
+
+<details>
+
+* Version: 0.8.1
+* GitHub: NA
+* Source code: https://github.com/cran/wearables
+* Date/Publication: 2021-12-20 15:20:02 UTC
+* Number of recursive dependencies: 122
+
+Run `revdepcheck::cloud_details(, "wearables")` for more info
 
 </details>
 
 ## In both
 
-*   checking whether package ‘tesseract’ can be installed ... ERROR
+*   checking whether package ‘wearables’ can be installed ... ERROR
     ```
     Installation failed.
-    See ‘/tmp/workdir/tesseract/new/tesseract.Rcheck/00install.out’ for details.
+    See ‘/tmp/workdir/wearables/new/wearables.Rcheck/00install.out’ for details.
     ```
 
 ## Installation
@@ -1657,93 +5683,52 @@ Run `revdep_details(,"tesseract")` for more info
 ### Devel
 
 ```
-* installing *source* package ‘tesseract’ ...
-** package ‘tesseract’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘wearables’ ...
+** package ‘wearables’ successfully unpacked and MD5 sums checked
 ** using staged installation
-Found pkg-config cflags and libs!
-Using PKG_CFLAGS=-I/usr/include/tesseract -I/usr/include/leptonica
-Using PKG_LIBS=-ltesseract
-Using CXX11CPP: g++ -E -std=gnu++11
-** libs
-rm -f tesseract.so RcppExports.o tesseract.o
-g++ -std=gnu++11 -I"/opt/R/3.6.3/lib/R/include" -DNDEBUG -I/usr/include/tesseract -I/usr/include/leptonica -I"/opt/R/3.6.3/lib/R/library/Rcpp/include" -I/usr/local/include -fvisibility=hidden -fpic  -g -O2  -c RcppExports.cpp -o RcppExports.o
-g++ -std=gnu++11 -I"/opt/R/3.6.3/lib/R/include" -DNDEBUG -I/usr/include/tesseract -I/usr/include/leptonica -I"/opt/R/3.6.3/lib/R/library/Rcpp/include" -I/usr/local/include -fvisibility=hidden -fpic  -g -O2  -c tesseract.cpp -o tesseract.o
-g++ -std=gnu++11 -shared -L/opt/R/3.6.3/lib/R/lib -L/usr/local/lib -o tesseract.so RcppExports.o tesseract.o -ltesseract -L/opt/R/3.6.3/lib/R/lib -lR
-installing to /tmp/workdir/tesseract/new/tesseract.Rcheck/00LOCK-tesseract/00new/tesseract/libs
 ** R
-** inst
+** data
+*** moving datasets to lazyload DB
 ** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-Error opening data file /usr/share/tesseract-ocr/4.00/tessdata/eng.traineddata
-Please make sure the TESSDATA_PREFIX environment variable is set to your "tessdata" directory.
-Failed loading language 'eng'
-Tesseract couldn't load any languages!
-Warning: Unable to find English training data
-Error: package or namespace load failed for ‘tesseract’:
- .onAttach failed in attachNamespace() for 'tesseract', details:
-  call: value[[3L]](cond)
-  error: DEBIAN / UBUNTU: Please run: apt-get install tesseract-ocr-eng
-Error: loading failed
+Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) : 
+  there is no package called ‘rstan’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
 Execution halted
-ERROR: loading failed
-* removing ‘/tmp/workdir/tesseract/new/tesseract.Rcheck/tesseract’
+ERROR: lazy loading failed for package ‘wearables’
+* removing ‘/tmp/workdir/wearables/new/wearables.Rcheck/wearables’
+
 
 ```
 ### CRAN
 
 ```
-* installing *source* package ‘tesseract’ ...
-** package ‘tesseract’ successfully unpacked and MD5 sums checked
+* installing *source* package ‘wearables’ ...
+** package ‘wearables’ successfully unpacked and MD5 sums checked
 ** using staged installation
-Found pkg-config cflags and libs!
-Using PKG_CFLAGS=-I/usr/include/tesseract -I/usr/include/leptonica
-Using PKG_LIBS=-ltesseract
-Using CXX11CPP: g++ -E -std=gnu++11
-** libs
-rm -f tesseract.so RcppExports.o tesseract.o
-g++ -std=gnu++11 -I"/opt/R/3.6.3/lib/R/include" -DNDEBUG -I/usr/include/tesseract -I/usr/include/leptonica -I"/opt/R/3.6.3/lib/R/library/Rcpp/include" -I/usr/local/include -fvisibility=hidden -fpic  -g -O2  -c RcppExports.cpp -o RcppExports.o
-g++ -std=gnu++11 -I"/opt/R/3.6.3/lib/R/include" -DNDEBUG -I/usr/include/tesseract -I/usr/include/leptonica -I"/opt/R/3.6.3/lib/R/library/Rcpp/include" -I/usr/local/include -fvisibility=hidden -fpic  -g -O2  -c tesseract.cpp -o tesseract.o
-g++ -std=gnu++11 -shared -L/opt/R/3.6.3/lib/R/lib -L/usr/local/lib -o tesseract.so RcppExports.o tesseract.o -ltesseract -L/opt/R/3.6.3/lib/R/lib -lR
-installing to /tmp/workdir/tesseract/old/tesseract.Rcheck/00LOCK-tesseract/00new/tesseract/libs
 ** R
-** inst
+** data
+*** moving datasets to lazyload DB
 ** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-Error opening data file /usr/share/tesseract-ocr/4.00/tessdata/eng.traineddata
-Please make sure the TESSDATA_PREFIX environment variable is set to your "tessdata" directory.
-Failed loading language 'eng'
-Tesseract couldn't load any languages!
-Warning: Unable to find English training data
-Error: package or namespace load failed for ‘tesseract’:
- .onAttach failed in attachNamespace() for 'tesseract', details:
-  call: value[[3L]](cond)
-  error: DEBIAN / UBUNTU: Please run: apt-get install tesseract-ocr-eng
-Error: loading failed
+Error in loadNamespace(i, c(lib.loc, .libPaths()), versionCheck = vI[[i]]) : 
+  there is no package called ‘rstan’
+Calls: <Anonymous> ... loadNamespace -> withRestarts -> withOneRestart -> doWithOneRestart
 Execution halted
-ERROR: loading failed
-* removing ‘/tmp/workdir/tesseract/old/tesseract.Rcheck/tesseract’
+ERROR: lazy loading failed for package ‘wearables’
+* removing ‘/tmp/workdir/wearables/old/wearables.Rcheck/wearables’
+
 
 ```
-# trackdf
+# webSDM
 
 <details>
 
-* Version: 0.2.1
-* Source code: https://github.com/cran/trackdf
-* URL: https://swarm-lab.github.io/trackdf/, https://github.com/swarm-lab/trackdf
-* BugReports: https://github.com/swarm-lab/trackdf/issues
-* Date/Publication: 2019-08-04 14:20:02 UTC
-* Number of recursive dependencies: 130
+* Version: 1.1-1
+* GitHub: https://github.com/giopogg/webSDM
+* Source code: https://github.com/cran/webSDM
+* Date/Publication: 2022-11-25 12:40:02 UTC
+* Number of recursive dependencies: 190
 
-Run `revdep_details(,"trackdf")` for more info
+Run `revdepcheck::cloud_details(, "webSDM")` for more info
 
 </details>
 
@@ -1752,27 +5737,71 @@ Run `revdep_details(,"trackdf")` for more info
 ### Devel
 
 ```
-* using log directory ‘/tmp/workdir/trackdf/new/trackdf.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+* using log directory ‘/tmp/workdir/webSDM/new/webSDM.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘trackdf/DESCRIPTION’ ... OK
-* checking extension type ... Package
-* this is package ‘trackdf’ version ‘0.2.1’
+* using option ‘--no-manual’
+* checking for file ‘webSDM/DESCRIPTION’ ... OK
+* this is package ‘webSDM’ version ‘1.1-1’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
-Package suggested but not available: ‘moveVis’
-
-The suggested packages are required for a complete check.
-Checking can be attempted without them by setting the environment
-variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+Package required but not available: ‘rstanarm’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
 * DONE
 Status: 1 ERROR
+
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/webSDM/old/webSDM.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘webSDM/DESCRIPTION’ ... OK
+* this is package ‘webSDM’ version ‘1.1-1’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘rstanarm’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
+
+
+
+
+
+```
+# NA
+
+<details>
+
+* Version: NA
+* GitHub: NA
+* Source code: https://github.com/cran/NA
+* Number of recursive dependencies: 0
+
+Run `revdepcheck::cloud_details(, "NA")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
 
 
 
@@ -1783,28 +5812,79 @@ Status: 1 ERROR
 ### CRAN
 
 ```
-* using log directory ‘/tmp/workdir/trackdf/old/trackdf.Rcheck’
-* using R version 3.6.3 (2020-02-29)
+
+
+
+
+
+
+```
+# xpose.nlmixr2
+
+<details>
+
+* Version: 0.4.0
+* GitHub: NA
+* Source code: https://github.com/cran/xpose.nlmixr2
+* Date/Publication: 2022-06-08 09:10:02 UTC
+* Number of recursive dependencies: 161
+
+Run `revdepcheck::cloud_details(, "xpose.nlmixr2")` for more info
+
+</details>
+
+## Error before installation
+
+### Devel
+
+```
+* using log directory ‘/tmp/workdir/xpose.nlmixr2/new/xpose.nlmixr2.Rcheck’
+* using R version 4.1.1 (2021-08-10)
 * using platform: x86_64-pc-linux-gnu (64-bit)
 * using session charset: UTF-8
-* using options ‘--no-manual --no-build-vignettes’
-* checking for file ‘trackdf/DESCRIPTION’ ... OK
+* using option ‘--no-manual’
+* checking for file ‘xpose.nlmixr2/DESCRIPTION’ ... OK
 * checking extension type ... Package
-* this is package ‘trackdf’ version ‘0.2.1’
+* this is package ‘xpose.nlmixr2’ version ‘0.4.0’
 * package encoding: UTF-8
 * checking package namespace information ... OK
 * checking package dependencies ... ERROR
-Package suggested but not available: ‘moveVis’
+Package required but not available: ‘nlmixr2est’
 
-The suggested packages are required for a complete check.
-Checking can be attempted without them by setting the environment
-variable _R_CHECK_FORCE_SUGGESTS_ to a false value.
+Package suggested but not available for checking: ‘nlmixr2’
 
 See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
 manual.
 * DONE
 Status: 1 ERROR
 
+
+
+
+
+```
+### CRAN
+
+```
+* using log directory ‘/tmp/workdir/xpose.nlmixr2/old/xpose.nlmixr2.Rcheck’
+* using R version 4.1.1 (2021-08-10)
+* using platform: x86_64-pc-linux-gnu (64-bit)
+* using session charset: UTF-8
+* using option ‘--no-manual’
+* checking for file ‘xpose.nlmixr2/DESCRIPTION’ ... OK
+* checking extension type ... Package
+* this is package ‘xpose.nlmixr2’ version ‘0.4.0’
+* package encoding: UTF-8
+* checking package namespace information ... OK
+* checking package dependencies ... ERROR
+Package required but not available: ‘nlmixr2est’
+
+Package suggested but not available for checking: ‘nlmixr2’
+
+See section ‘The DESCRIPTION file’ in the ‘Writing R Extensions’
+manual.
+* DONE
+Status: 1 ERROR
 
 
 
