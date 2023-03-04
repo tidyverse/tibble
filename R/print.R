@@ -159,7 +159,10 @@ shrink_mat <- function(df, rows, n, star) {
     has_row_id = if (star) "*" else TRUE
   )
 
-  list(.do_not_rely_on_this_mcf = mcf, .do_not_rely_on_this_rows_missing = rows_missing)
+  list(
+    .do_not_rely_on_this_mcf = mcf,
+    .do_not_rely_on_this_rows_missing = rows_missing
+  )
 }
 
 #' @importFrom pillar style_subtle
@@ -308,37 +311,6 @@ split_lines <- function(x) {
   unlist(strsplit(x, "\n", fixed = TRUE))
 }
 
-
-#' knit_print method for trunc mat
-#' @keywords internal
-#' @export
-knit_print.trunc_mat <- function(x, options) {
-  header <- format_header(x)
-  if (length(header) > 0L) {
-    header[names2(header) != ""] <- paste0(names2(header), ": ", header)
-    summary <- header
-  } else {
-    summary <- character()
-  }
-
-  squeezed <- pillar::squeeze(x$.do_not_rely_on_this_mcf, x$width)
-
-  kable <- format_knitr_body(squeezed)
-  extra <- format_footer(x, squeezed)
-
-  if (length(extra) > 0) {
-    extra <- wrap("(", collapse(extra), ")", width = x$width)
-  } else {
-    extra <- "\n"
-  }
-
-  res <- paste(c("", "", summary, "", kable, "", extra), collapse = "\n")
-  knitr::asis_output(fansi::strip_sgr(res), cacheable = TRUE)
-}
-
-format_knitr_body <- function(x) {
-  knitr::knit_print(x)
-}
 
 big_mark <- function(x, ...) {
   # The thousand separator,
