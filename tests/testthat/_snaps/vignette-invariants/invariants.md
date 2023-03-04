@@ -321,9 +321,9 @@ df[[1:2]]
 
 ```r
 tbl[[1:2]]
-#> Warning: The `j` argument of `[[.tbl_df` can't be a vector of length 2 as of tibble 3.0.0.
+#> Error:
+#> ! The `j` argument of `[[.tbl_df` can't be a vector of length 2 as of tibble 3.0.0.
 #> i Recursive subsetting is deprecated for tibbles.
-#> [1] NA
 ```
 
 </td></tr><tr style="vertical-align:top"><td>

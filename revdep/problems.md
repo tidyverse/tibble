@@ -6,7 +6,7 @@
 * GitHub: https://github.com/kiangkiangkiang/ggESDA
 * Source code: https://github.com/cran/ggESDA
 * Date/Publication: 2022-08-19 08:40:10 UTC
-* Number of recursive dependencies: 206
+* Number of recursive dependencies: 208
 
 Run `revdepcheck::cloud_details(, "ggESDA")` for more info
 
@@ -29,7 +29,7 @@ Run `revdepcheck::cloud_details(, "ggESDA")` for more info
     > data(Cardiological)
     > ggInterval_index(Cardiological, aes(x = Syst))
     Error in get(x, envir = ns, inherits = FALSE) : 
-      object 'tbl_subset_row' not found
+      object 'tbl_subset_col' not found
     Calls: ggInterval_index ... as.data.frame -> [ -> [.symbolic_tbl -> getFromNamespace -> get
     Execution halted
     ```
@@ -41,7 +41,7 @@ Run `revdepcheck::cloud_details(, "ggESDA")` for more info
     --- re-building ‘ggESDA.Rmd’ using rmarkdown
     Quitting from lines 47-57 (ggESDA.Rmd) 
     Error: processing vignette 'ggESDA.Rmd' failed with diagnostics:
-    object 'tbl_subset_row' not found
+    object 'tbl_subset_col' not found
     --- failed re-building ‘ggESDA.Rmd’
     
     SUMMARY: processing the following file failed:
@@ -82,7 +82,7 @@ Run `revdepcheck::cloud_details(, "RSDA")` for more info
     > data(abalone)
     > res <- sym.pca(abalone, 'centers')
     Error in get(x, envir = ns, inherits = FALSE) : 
-      object 'tbl_subset_row' not found
+      object 'tbl_subset_col' not found
     Calls: sym.pca ... %in% -> [ -> [.symbolic_tbl -> getFromNamespace -> get
     Execution halted
     ```
@@ -94,7 +94,7 @@ Run `revdepcheck::cloud_details(, "RSDA")` for more info
     --- re-building ‘introduction.Rmd’ using rmarkdown
     Quitting from lines 60-64 (introduction.Rmd) 
     Error: processing vignette 'introduction.Rmd' failed with diagnostics:
-    object 'tbl_subset_row' not found
+    object 'tbl_subset_col' not found
     --- failed re-building ‘introduction.Rmd’
     
     SUMMARY: processing the following file failed:
