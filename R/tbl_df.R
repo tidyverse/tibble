@@ -70,15 +70,15 @@ NULL
 
 #' @export
 as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
-  class(x) <- "data.frame"
+  class(x) <- tibble_class
   unname <- which(!map_lgl(x, is_bare_list))
-  x[unname] <- map(x[unname], vectbl_set_names, NULL)
+  x[unname] <- map(.subset(x, unname), vectbl_set_names, NULL)
+  class(x) <- "data.frame"
   x
 }
 
 #' @export
 `names<-.tbl_df` <- function(x, value) {
-
   # workaround for RStudio v1.1, which relies on the ability to set
   # data.frame names to NULL
   if (is.null(value) && is_rstudio()) {
@@ -86,17 +86,14 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
     return(x)
   }
 
-  cnd <- cnd_names_non_null(value)
-  if (!is.null(cnd)) {
-    deprecate_soft("3.0.0", "tibble::`names<-`(value = 'can\\'t be NULL')",
-      details = cnd$message)
+  if (is.null(value)) {
+    deprecate_soft("3.0.0", "tibble::`names<-`(value = 'can\\'t be NULL')")
 
     # FIXME: value <- rep("", length(x))
   }
 
   if (!has_length(value, length(x))) {
-    deprecate_soft("3.0.0", "tibble::`names<-`(value = 'must have the same length as `x`')",
-      details = error_names_must_have_length(length(value), length(x))$message)
+    deprecate_soft("3.0.0", "tibble::`names<-`(value = 'must have the same length as `x`')")
 
     # FIXME: Reset NA to "" in names
 
@@ -107,10 +104,8 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
     }
   }
 
-  cnd <- cnd_names_non_na(value)
-  if (!is.null(cnd)) {
-    deprecate_soft("3.0.0", "tibble::`names<-`(value = 'can\\'t be empty')",
-      details = cnd$message)
+  if (anyNA(value)) {
+    deprecate_soft("3.0.0", "tibble::`names<-`(value = 'can\\'t be empty')")
 
     # FIXME: Reset NA to "" in names
   }
@@ -124,32 +119,24 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
   x
 }
 
-cnd_names_non_null <- function(name) {
-  if (is.null(name)) {
-    error_names_must_be_non_null()
-  } else {
-    invisible()
-  }
-}
-
-cnd_names_non_na <- function(name) {
-  bad_name <- which(is.na(name))
-  if (has_length(bad_name)) {
-    error_column_names_cannot_be_empty(bad_name, repair_hint = FALSE)
-  } else {
-    invisible()
-  }
-}
-
 # Errors ------------------------------------------------------------------
 
-error_names_must_be_non_null <- function() {
-  tibble_error("`names` must not be `NULL`.")
+msg_names_must_be_non_null <- function() {
+  "`names` must not be `NULL`."
 }
 
-error_names_must_have_length <- function(length, n) {
-  tibble_error(
-    paste0("`names` must have length ", n, ", not ", length, "."),
+msg_names_must_have_length <- function(length, n) {
+  paste0("`names` must have length ", n, ", not ", length, ".")
+}
+
+abort_names_must_be_non_null <- function(call = caller_env()) {
+  tibble_abort(call = call, msg_names_must_be_non_null())
+}
+
+abort_names_must_have_length <- function(length, n, call = caller_env()) {
+  tibble_abort(
+    call = call,
+    msg_names_must_have_length(length, n),
     expected = n,
     actual = length
   )

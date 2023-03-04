@@ -41,7 +41,7 @@ as_tibble(
 
 \method{as_tibble}{table}(x, `_n` = "n", ..., n = `_n`, .name_repair = "check_unique")
 
-\method{as_tibble}{`NULL`}(x, ...)
+\method{as_tibble}{NULL}(x, ...)
 
 \method{as_tibble}{default}(x, ...)
 
@@ -83,8 +83,12 @@ to enforce them.}
 \item \code{NA}: keep row names.
 \item A string: the name of a new column. Existing rownames are transferred
 into this column and the \code{row.names} attribute is deleted.
-Read more in \link{rownames}.
-}}
+No name repair is applied to the new column name, even if \code{x} already contains
+a column of that name.
+Use \code{as_tibble(rownames_to_column(...))} to safeguard against this case.
+}
+
+Read more in \link{rownames}.}
 
 \item{_n, validate}{\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#soft-deprecated}{\figure{lifecycle-soft-deprecated.svg}{options: alt='[Soft-deprecated]'}}}{\strong{[Soft-deprecated]}}
 
@@ -105,7 +109,7 @@ in contrast with \code{\link[=tibble]{tibble()}}, which builds a tibble from ind
 \itemize{
 \item \code{\link[base:data.frame]{data.frame}}: Thin wrapper around the \code{list} method
 that implements tibble's treatment of \link{rownames}.
-\item \code{\link[methods:StructureClasses]{matrix}}, \code{\link[stats:poly]{poly}},
+\item \code{\link[base:matrix]{matrix}}, \code{\link[stats:poly]{poly}},
 \code{\link[stats:ts]{ts}}, \code{\link[base:table]{table}}
 \item Default: Other inputs are first coerced with \code{\link[base:as.data.frame]{base::as.data.frame()}}.
 }

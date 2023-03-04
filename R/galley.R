@@ -95,7 +95,7 @@ scrub_file <- function(path, in_path = path) {
   brio::write_file(scrub(text), path)
 }
 
-test_galley <- function(name) {
+test_galley <- function(name, variant = NULL) {
   testthat::skip_on_cran()
   testthat::skip_if("covr" %in% loadedNamespaces())
 
@@ -104,9 +104,19 @@ test_galley <- function(name) {
 
   path <- render_galley(rmd_name, md_name)
 
-  testthat::expect_snapshot_file(
-    path, name = md_name, compare = testthat::compare_file_text
-  )
+  if (!is.null(variant)) {
+    testthat::skip_if_not_installed("testthat", "3.1.1")
+    testthat::expect_snapshot_file(
+      path,
+      name = md_name, compare = testthat::compare_file_text,
+      variant = variant
+    )
+  } else {
+    testthat::expect_snapshot_file(
+      path,
+      name = md_name, compare = testthat::compare_file_text
+    )
+  }
 
   # FIXME: Test generated files
 }

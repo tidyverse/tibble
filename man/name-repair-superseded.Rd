@@ -48,7 +48,9 @@ See \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}} for the implementati
 
 
 These functions are superseded. The \code{repair_names()} logic
-will also remain available in \code{\link[vctrs:vec_as_names_legacy]{vctrs::vec_as_names_legacy()}}.\preformatted{tibble(..., `.name_repair = "unique"`)
+will also remain available in \code{\link[vctrs:vec_as_names_legacy]{vctrs::vec_as_names_legacy()}}.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{tibble(..., `.name_repair = "unique"`)
 ## is preferred to
 df <- tibble(...)
 set_tidy_names(df, syntactic = FALSE)
@@ -57,7 +59,7 @@ tibble(..., `.name_repair = "universal"`)
 ## is preferred to
 df <- tibble(...)
 set_tidy_names(df, syntactic = TRUE)
-}
+}\if{html}{\out{</div>}}
 }
 
 \keyword{internal}

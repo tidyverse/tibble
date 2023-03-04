@@ -16,7 +16,7 @@
 #' the most notable exceptions are [var()] and [sd()].
 #'
 #' @family vector classes
-#' @inheritParams ellipsis::dots_empty
+#' @inheritParams rlang::args_dots_empty
 #' @param x A numeric vector.
 #' @param sigfig Define the number of significant digits to show. Must be one or greater.
 #'   The `"pillar.sigfig"` [option][pillar::pillar_options] is not consulted.
@@ -61,7 +61,7 @@
 #'
 #' # Maximum digits after the decimal points
 #' tibble(
-#'   x0 = num(9:11 * 100 + 0.5, digits =  0),
+#'   x0 = num(9:11 * 100 + 0.5, digits = 0),
 #'   x1 = num(9:11 * 100 + 0.5, digits = -1),
 #'   x2 = num(9:11 * 100 + 0.5, digits = -2),
 #' )
@@ -76,8 +76,8 @@
 #' # Scale
 #' tibble(
 #'   small  = num(9:11 / 1000 + 0.00005, label = "%", scale = 100),
-#'   medium = num(9:11 /  100 + 0.0005 , label = "%", scale = 100),
-#'   large  = num(9:11 /   10 + 0.005  , label = "%", scale = 100)
+#'   medium = num(9:11 / 100 + 0.0005, label = "%", scale = 100),
+#'   large  = num(9:11 / 10 + 0.005, label = "%", scale = 100)
 #' )
 #'
 #' # Notation
@@ -92,7 +92,7 @@
 #' tibble(
 #'   scimin = num(10^(-7:6) * 123, notation = "sci", fixed_exponent = -Inf),
 #'   engmin = num(10^(-7:6) * 123, notation = "eng", fixed_exponent = -Inf),
-#'   simin  = num(10^(-7:6) * 123, notation = "si",  fixed_exponent = -Inf)
+#'   simin  = num(10^(-7:6) * 123, notation = "si", fixed_exponent = -Inf)
 #' )
 #'
 #' tibble(
@@ -133,7 +133,7 @@ set_num_opts <- NULL
 #' and also in a tibble column.
 #'
 #' @family vector classes
-#' @inheritParams ellipsis::dots_empty
+#' @inheritParams rlang::args_dots_empty
 #' @param x A character vector.
 #' @param min_chars The minimum width to allocate to this column, defaults to 15.
 #'   The `"pillar.min_chars"` [option][pillar::pillar_options] is not consulted.
@@ -171,7 +171,7 @@ set_num_opts <- NULL
 #' tibble(
 #'   back = char(lipsum, shorten = "back"),
 #'   front = char(lipsum, shorten = "front"),
-#'   mid   = char(lipsum, shorten = "mid")
+#'   mid = char(lipsum, shorten = "mid")
 #' )
 #' tibble(abbr = char(lipsum, shorten = "abbreviate"))
 # Assigned in .onLoad()

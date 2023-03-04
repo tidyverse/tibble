@@ -10,13 +10,14 @@ vignette: >
 ```{r setup, include = FALSE}
 library(tibble)
 set.seed(1014)
-
-tibble:::set_fansi_hooks()
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
 ```
 
 Tibbles are a modern take on data frames.
-They keep the features that have stood the test of time, and drop the features that used to be convenient but are now frustrating (i.e.
-converting character vectors to factors).
+They keep the features that have stood the test of time, and drop the features that used to be convenient but are now frustrating.
 
 ```{r}
 library(tibble)
@@ -82,7 +83,7 @@ timing <- bench::mark(
 timing
 ```
 
-```{r echo = FALSE}
+```{r echo = FALSE, eval = (Sys.getenv("IN_GALLEY") == "")}
 readRDS("timing.rds")
 ```
 
@@ -98,7 +99,7 @@ When you print a tibble, it only shows the first ten rows and all the columns th
 It also prints an abbreviated description of the column type, and uses font styles and color for highlighting:
 
 ```{r}
-tibble(x = -5:100, y = 123.456 * (3 ^ x))
+tibble(x = -5:100, y = 123.456 * (3^x))
 ```
 
 Numbers are displayed with three significant figures by default, and a trailing dot that indicates the existence of a fractional component.

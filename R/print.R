@@ -95,11 +95,16 @@ format.tbl_df <- function(x, width = NULL, ..., n = NULL, max_extra_cols = NULL,
 #' @param n_extra Number of extra columns to print abbreviated information for,
 #'   if the width is too small for the entire tibble. If `NULL`, the default,
 #'   will print information about at most `tibble.max_extra_cols` extra columns.
+#'
+#' @return An object with a `print()` method that will print the input
+#'   similarly to a tibble.
+#'   The internal data format is an implementation detail, do not rely on it.
 #' @export
 #' @keywords internal
 trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   deprecate_soft("3.1.0", "tibble::trunc_mat()",
-    details = "Printing has moved to the pillar package.")
+    details = "Printing has moved to the pillar package."
+  )
 
   rows <- nrow(x)
 
@@ -154,7 +159,7 @@ shrink_mat <- function(df, rows, n, star) {
     has_row_id = if (star) "*" else TRUE
   )
 
-  list(mcf = mcf, rows_missing = rows_missing)
+  list(.do_not_rely_on_this_mcf = mcf, .do_not_rely_on_this_rows_missing = rows_missing)
 }
 
 #' @importFrom pillar style_subtle
@@ -183,7 +188,7 @@ format.trunc_mat <- function(x, width = NULL, ...) {
   }
 
   comment <- format_comment(header, width = width)
-  squeezed <- pillar::squeeze(x$mcf, width = width)
+  squeezed <- pillar::squeeze(x$.do_not_rely_on_this_mcf, width = width)
   mcf <- format_body(squeezed)
 
   # Splitting lines is important, otherwise subtle style may be lost
@@ -237,11 +242,11 @@ format_footer <- function(x, squeezed_colonnade) {
 }
 
 format_footer_rows <- function(x) {
-  if (length(x$mcf) != 0) {
-    if (is.na(x$rows_missing)) {
+  if (length(x$.do_not_rely_on_this_mcf) != 0) {
+    if (is.na(x$.do_not_rely_on_this_rows_missing)) {
       "more rows"
-    } else if (x$rows_missing > 0) {
-      paste0(big_mark(x$rows_missing), pluralise_n(" more row(s)", x$rows_missing))
+    } else if (x$.do_not_rely_on_this_rows_missing > 0) {
+      paste0(big_mark(x$.do_not_rely_on_this_rows_missing), pluralise_n(" more row(s)", x$.do_not_rely_on_this_rows_missing))
     }
   } else if (is.na(x$rows_total) && x$rows_min > 0) {
     paste0("at least ", big_mark(x$rows_min), pluralise_n(" row(s) total", x$rows_min))
@@ -316,7 +321,7 @@ knit_print.trunc_mat <- function(x, options) {
     summary <- character()
   }
 
-  squeezed <- pillar::squeeze(x$mcf, x$width)
+  squeezed <- pillar::squeeze(x$.do_not_rely_on_this_mcf, x$width)
 
   kable <- format_knitr_body(squeezed)
   extra <- format_footer(x, squeezed)

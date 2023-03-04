@@ -21,6 +21,8 @@
 #'     refer to columns created earlier in the call. Only columns of length one
 #'     are recycled.
 #'   * If a column evaluates to a data frame or tibble, it is nested or spliced.
+#'     If it evaluates to a matrix or a array, it remains a matrix or array,
+#'     respectively.
 #'     See examples.
 #'
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
@@ -124,17 +126,18 @@
 #' tibble(
 #'   a = 1:3,
 #'   b = diag(3),
-#'   c = cor(trees)
+#'   c = cor(trees),
+#'   d = Titanic[1:3, , , ]
 #' )
 #'
-#' # data can not contain POSIXlt columns, or tibbles or matrices
-#' # with incompatible number of rows:
-#' try(tibble(y = strptime("2000/01/01", "%x")))
+#' # Data can not contain tibbles or matrices with incompatible number of rows:
 #' try(tibble(a = 1:3, b = tibble(c = 4:7)))
 #'
 #' # Use := to create columns with names that start with a dot:
-#' tibble(.dotted = 3)
 #' tibble(.dotted := 3)
+#'
+#' # This also works, but might break in the future:
+#' tibble(.dotted = 3)
 #'
 #' # You can unquote an expression:
 #' x <- 3
@@ -142,7 +145,7 @@
 #' tibble(x = 1, y = !!x)
 #'
 #' # You can splice-unquote a list of quosures and expressions:
-#' tibble(!!! list(x = rlang::quo(1:10), y = quote(x * 2)))
+#' tibble(!!!list(x = rlang::quo(1:10), y = quote(x * 2)))
 #'
 #' # Use .data, .env and !! to refer explicitly to columns or outside objects
 #' a <- 1
@@ -208,7 +211,7 @@ is.tibble <- function(x) {
   is_tibble(x)
 }
 
-tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
+tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE, call = caller_env()) {
   # Evaluate each column in turn
   col_names <- given_col_names <- names2(xs)
   empty_col_names <- which(col_names == "")
@@ -231,14 +234,14 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
       if (single_row) {
         if (vec_is(res)) {
           if (vec_size(res) != 1) {
-            cnd_signal(error_tibble_row_size_one(j, given_col_names[[j]], vec_size(res)))
+            abort_tibble_row_size_one(j, given_col_names[[j]], vec_size(res))
           }
         } else {
           res <- list(res)
         }
       } else {
         # 657
-        res <- check_valid_col(res, col_names[[j]], j)
+        res <- check_valid_col(res, col_names[[j]], j, call)
 
         lengths[[j]] <- current_size <- vec_size(res)
         if (is.null(first_size)) {
@@ -253,7 +256,7 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
 
           first_size <- current_size
         } else {
-          res <- vectbl_recycle_rows(res, first_size, j, given_col_names[[j]])
+          res <- vectbl_recycle_rows(res, first_size, j, given_col_names[[j]], call)
         }
       }
 
@@ -268,16 +271,16 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE) {
   output <- output[!is_null]
 
   output <- splice_dfs(output)
-  output <- set_repaired_names(output, repair_hint = TRUE, .name_repair = .name_repair)
+  output <- set_repaired_names(output, repair_hint = TRUE, .name_repair = .name_repair, call = call)
 
   new_tibble(output, nrow = first_size %||% 0L)
 }
 
-check_valid_col <- function(x, name, pos) {
+check_valid_col <- function(x, name, pos, call) {
   if (name == "") {
-    ret <- check_valid_cols(list(x), pos = pos)
+    ret <- check_valid_cols(list(x), pos = pos, call = call)
   } else {
-    ret <- check_valid_cols(set_names(list(x), name))
+    ret <- check_valid_cols(set_names(list(x), name), call = call)
   }
   invisible(ret[[1]])
 }
@@ -309,11 +312,13 @@ splice_dfs <- function(x) {
     return(list())
   }
 
-  x <- imap(x, function(.x, .y) { if (.y == "") unclass(.x) else list2(!!.y := .x) })
+  x <- imap(x, function(.x, .y) {
+    if (.y == "") unclass(.x) else list2(!!.y := .x)
+  })
   vec_c(!!!x, .name_spec = "{inner}")
 }
 
-vectbl_recycle_rows <- function(x, n, j, name) {
+vectbl_recycle_rows <- function(x, n, j, name, call = caller_env()) {
   size <- vec_size(x)
   if (size == n) return(x)
   if (size == 1) return(vec_recycle(x, n))
@@ -322,25 +327,25 @@ vectbl_recycle_rows <- function(x, n, j, name) {
     name <- j
   }
 
-  cnd_signal(error_incompatible_size(n, name, size, "Existing data"))
+  abort_incompatible_size(n, name, size, "Existing data", call)
 }
 
 # Errors ------------------------------------------------------------------
 
-error_tibble_row_size_one <- function(j, name, size) {
+abort_tibble_row_size_one <- function(j, name, size, call = caller_env()) {
   if (name != "") {
     desc <- tick(name)
   } else {
     desc <- paste0("at position ", j)
   }
 
-  tibble_error(problems(
+  tibble_abort(call = call, problems(
     "All vectors must be size one, use `list()` to wrap.",
     paste0("Column ", desc, " is of size ", size, ".")
   ))
 }
 
-error_incompatible_size <- function(.rows, vars, vars_len, rows_source) {
+abort_incompatible_size <- function(.rows, vars, vars_len, rows_source, call = caller_env()) {
   vars_split <- split(vars, vars_len)
 
   vars_split[["1"]] <- NULL
@@ -359,7 +364,7 @@ error_incompatible_size <- function(.rows, vars, vars_len, rows_source) {
     paste0("Size ", x, ": ", pluralise_commas(text, y))
   })
 
-  tibble_error(bullets(
+  tibble_abort(call = call, bullets(
     "Tibble columns must have compatible sizes:",
     if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
     problems,

@@ -1,4 +1,0 @@
-# A tibble: 0 × 2
-<body created by pillar>
-# … with 2 variables:
-#   a <chr>, b <lgl>

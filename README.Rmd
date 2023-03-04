@@ -16,7 +16,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/tidyverse/tibble/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/tibble/actions)
-[![codecov](https://codecov.io/gh/tidyverse/tibble/branch/master/graph/badge.svg)](https://codecov.io/gh/tidyverse/tibble)
+[![Codecov test coverage](https://codecov.io/gh/tidyverse/tibble/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/tibble?branch=main)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/tibble)](https://cran.r-project.org/package=tibble)
 [![Life cycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 <!-- badges: end -->
@@ -61,10 +61,10 @@ This will work for reasonable inputs that are already data.frames, lists, matric
 You can also create a new tibble from column vectors with `tibble()`:
 
 ```{r}
-tibble(x = 1:5, y = 1, z = x ^ 2 + y)
+tibble(x = 1:5, y = 1, z = x^2 + y)
 ```
 
-`tibble()` does much less than `data.frame()`: it never changes the type of the inputs (e.g. it never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates `row.names()`. You can read more about these features in `vignette("tibble")`.
+`tibble()` does much less than `data.frame()`: it never changes the type of the inputs (e.g. it keeps list columns as is), it never changes the names of variables, it only recycles inputs of length 1, and it never creates `row.names()`. You can read more about these features in `vignette("tibble")`.
 
 You can define a tibble row-by-row with `tribble()`:
 
@@ -78,7 +78,7 @@ tribble(
 
 ## Related work
 
-The tibble print method draws inspiration from [data.table](https://rdatatable.gitlab.io/data.table), and [frame](https://github.com/patperry/r-frame). Like `data.table::data.table()`, `tibble()` doesn't coerce strings to factors by default, doesn't change column names, and doesn't use rownames.
+The tibble print method draws inspiration from [data.table](https://rdatatable.gitlab.io/data.table), and [frame](https://github.com/patperry/r-frame). Like `data.table::data.table()`, `tibble()` doesn't change column names and doesn't use rownames.
 
 ---
 ## Code of Conduct

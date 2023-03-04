@@ -1,3 +1,3 @@
 test_that("types vignette", {
-  test_galley("types")
+  test_galley("types", variant = rlang_variant())
 })

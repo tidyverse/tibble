@@ -30,7 +30,7 @@
        Named list()
     Code
       # Non-syntactic names
-      df <- tibble(`mean(x)` = 5, `var(x)` = 3)
+      df <- tibble(!!!set_names(c(5, 3), c("mean(x)", "var(x)")))
       str(df, width = 28)
     Output
       tibble [1 x 2] (S3: tbl_df/tbl/data.frame)
@@ -112,14 +112,6 @@
       str(5)
     Output
        num 5
-    Code
-      trees2 <- as_unknown_rows(trees)
-      str(trees2, width = 70L)
-    Output
-      unknown_rows [?? x 3] (S3: unknown_rows/tbl_df/tbl/data.frame)
-       $ Girth : num [1:31] 8.3 8.6 8.8 10.5 10.7 10.8 11 11 11.1 11.2 ...
-       $ Height: num [1:31] 70 65 63 72 81 83 66 75 80 75 ...
-       $ Volume: num [1:31] 10.3 10.3 10.2 16.4 18.8 19.7 15.6 18.2 22.6 19.9 ...
     Code
       Volume <- unique(trees$Volume)
       data <- unname(split(trees, trees$Volume))
@@ -377,4 +369,15 @@
         .. ..$ Girth : num 20.6
         .. ..$ Height: num 87
         .. ..$ Volume: num 77
+
+---
+
+    Code
+      trees2 <- as_unknown_rows(trees)
+      str(trees2, width = 70L)
+    Output
+      unknwn_r [?? x 3] (S3: unknown_rows/tbl_df/tbl/data.frame)
+       $ Girth : num [1:31] 8.3 8.6 8.8 10.5 10.7 10.8 11 11 11.1 11.2 ...
+       $ Height: num [1:31] 70 65 63 72 81 83 66 75 80 75 ...
+       $ Volume: num [1:31] 10.3 10.3 10.2 16.4 18.8 19.7 15.6 18.2 22.6 19.9 ...
 

@@ -66,19 +66,64 @@ tibble(
   char = char(paste(LETTERS, collapse = " "), shorten = "mid")
 )
 #> # A tibble: 5 x 7
-#>          x4       x1     usd percent      eng      si char                      
-#>   <num:.4!> <num:.1>     USD       %    <eng>    <si> <char>                    
-#> 1  800.5000    800.5  800.50    8.05     1e-3 123   m A B C D E F ~T U V W X Y Z
-#> 2  900.5000    900.5  900.50    9.05    10e-3   1.23  A B C D E F ~T U V W X Y Z
-#> 3 1000.5000   1000.5 1000.50   10.0    100e-3  12.3   A B C D E F ~T U V W X Y Z
-#> 4 1100.5000   1100.5 1100.50   11.0   1000e-3 123     A B C D E F ~T U V W X Y Z
-#> 5 1200.5000   1200.5 1200.50   12.0  10000e-3   1.23k A B C D E F ~T U V W X Y Z
+#>          x4       x1     usd percent   eng      si char                         
+#>   <num:.4!> <num:.1>     USD       % [e-3]    <si> <char>                       
+#> 1  800.5000    800.5  800.50    8.05     1 123   m A B C D E F G ~ T U V W X Y Z
+#> 2  900.5000    900.5  900.50    9.05    10   1.23  A B C D E F G ~ T U V W X Y Z
+#> 3 1000.5000   1000.5 1000.50   10.0    100  12.3   A B C D E F G ~ T U V W X Y Z
+#> 4 1100.5000   1100.5 1100.50   11.0   1000 123     A B C D E F G ~ T U V W X Y Z
+#> 5 1200.5000   1200.5 1200.50   12.0  10000   1.23k A B C D E F G ~ T U V W X Y Z
 ```
 
 The pillar package that is responsible for the display of tibbles tries hard to get the number display right, however it is impossible to accommodate all use cases.
 Whenever the default formatting does not suit the application, `num()` or `char()` allow redefining the formatting for individual columns.
 The formatting survives most data transformations.
 
+## Rule-based number formatting
+
+Currently, formatting must be applied manually for each column.
+The following pattern may help doing this consistently for all columns in a tibble, or for some columns based on their name.
+
+
+```r
+library(dplyr, warn.conflicts = FALSE)
+
+markets <-
+  as_tibble(EuStockMarkets) %>%
+  mutate(time = time(EuStockMarkets), .before = 1)
+
+markets
+#> # A tibble: 1,860 x 5
+#>     time   DAX   SMI   CAC  FTSE
+#>    <dbl> <dbl> <dbl> <dbl> <dbl>
+#>  1 1991. 1629. 1678. 1773. 2444.
+#>  2 1992. 1614. 1688. 1750. 2460.
+#>  3 1992. 1607. 1679. 1718  2448.
+#>  4 1992. 1621. 1684. 1708. 2470.
+#>  5 1992. 1618. 1687. 1723. 2485.
+#>  6 1992. 1611. 1672. 1714. 2467.
+#>  7 1992. 1631. 1683. 1734. 2488.
+#>  8 1992. 1640. 1704. 1757. 2508.
+#>  9 1992. 1635. 1698. 1754  2510.
+#> 10 1992. 1646. 1716. 1754. 2497.
+#> # ... with 1,850 more rows
+markets %>%
+  mutate(across(-time, ~ num(.x, digits = 3)))
+#> # A tibble: 1,860 x 5
+#>     time       DAX       SMI       CAC      FTSE
+#>    <dbl> <num:.3!> <num:.3!> <num:.3!> <num:.3!>
+#>  1 1991.  1628.750  1678.100  1772.800  2443.600
+#>  2 1992.  1613.630  1688.500  1750.500  2460.200
+#>  3 1992.  1606.510  1678.600  1718.000  2448.200
+#>  4 1992.  1621.040  1684.100  1708.100  2470.400
+#>  5 1992.  1618.160  1686.600  1723.100  2484.700
+#>  6 1992.  1610.610  1671.600  1714.300  2466.800
+#>  7 1992.  1630.750  1682.900  1734.500  2487.900
+#>  8 1992.  1640.170  1703.600  1757.400  2508.400
+#>  9 1992.  1635.470  1697.500  1754.000  2510.500
+#> 10 1992.  1645.890  1716.300  1754.300  2497.400
+#> # ... with 1,850 more rows
+```
 
 ## Computing on `num`
 
@@ -145,7 +190,7 @@ In some cases, the ideal formatting changes after a transformation.
 num(1:3 + 0.125, digits = 4)
 #> <pillar_num:.4![3]>
 #> [1] 1.1250 2.1250 3.1250
-transf <- 10 ^ num(1:3 + 0.125, digits = 4)
+transf <- 10^num(1:3 + 0.125, digits = 4)
 transf
 #> <pillar_num:.4![3]>
 #> [1]   13.3352  133.3521 1333.5214
@@ -165,6 +210,15 @@ var(x)
 #> [1] 2.333333
 ```
 
+The `median()` function is worse, it breaks for `num()` objects:
+
+
+```r
+median(x)
+#> Error in `median()`:
+#> ! `median.pillar_num()` not implemented.
+```
+
 One way to recover is to apply `num()` to the result:
 
 
@@ -172,6 +226,9 @@ One way to recover is to apply `num()` to the result:
 num(var(x), notation = "eng")
 #> <pillar_num(eng)[1]>
 #> [1] 2.33e0
+num(median(as.numeric(x)), notation = "eng")
+#> <pillar_num(eng)[1]>
+#> [1] 2e0
 ```
 
 For automatic recovery, we can also define our version of `var()`, or even overwrite the base implementation.

@@ -10,8 +10,7 @@ vignette: >
 
 
 Tibbles are a modern take on data frames.
-They keep the features that have stood the test of time, and drop the features that used to be convenient but are now frustrating (i.e.
-converting character vectors to factors).
+They keep the features that have stood the test of time, and drop the features that used to be convenient but are now frustrating.
 
 
 ```r
@@ -114,15 +113,6 @@ timing
 ```
 
 
-```
-#> # A tibble: 2 x 14
-#>   expression       min         mean         median      max         `itr/sec`
-#>   <chr>            <bench_tm>  <bench_tm>   <bench_tm>  <bench_tm>      <dbl>
-#> 1 as_tibble(l)     0.000287696 0.0006251376 0.000327178 0.004508219     1600.
-#> 2 as.data.frame(l) 0.000791522 0.0016640039 0.001098172 0.007652914      601.
-#> # ... with 8 more variables: mem_alloc <bnch_byt>, n_gc <dbl>, n_itr <int>,
-#> #   total_time <bench_tm>, result <list>, memory <list>, time <list>, gc <list>
-```
 
 The speed of `as.data.frame()` is not usually a bottleneck when used interactively, but can be a problem when combining thousands of messy inputs into one tidy data frame.
 
@@ -137,7 +127,7 @@ It also prints an abbreviated description of the column type, and uses font styl
 
 
 ```r
-tibble(x = -5:100, y = 123.456 * (3 ^ x))
+tibble(x = -5:100, y = 123.456 * (3^x))
 #> # A tibble: 106 x 2
 #>        x         y
 #>    <int>     <dbl>
@@ -266,7 +256,8 @@ tibble(a = 1:3, b = 1)
 #> 2     2     1
 #> 3     3     1
 tibble(a = 1:3, c = 1:2)
-#> Error: Tibble columns must have compatible sizes.
+#> Error in `tibble()`:
+#> ! Tibble columns must have compatible sizes.
 #> * Size 3: Existing data.
 #> * Size 2: Column `c`.
 #> i Only values of size one are recycled.

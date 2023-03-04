@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Clean old object files if compiling with a different R version
+${R_HOME}/bin/R --slave -f R/aaa-r-version.R
+

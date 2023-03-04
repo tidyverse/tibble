@@ -19,22 +19,22 @@ test_that("NULL is ignored when passed by value (#895, #900)", {
 })
 
 test_that("bogus columns raise an error", {
-  expect_tibble_error(
+  expect_tibble_abort(
     tibble(a = new.env()),
-    error_column_scalar_type("a", 1, "an environment")
+    abort_column_scalar_type("a", 1, "an environment")
   )
-  expect_tibble_error(
+  expect_tibble_abort(
     tibble(a = quote(a)),
-    error_column_scalar_type("a", 1, "a symbol")
+    abort_column_scalar_type("a", 1, "a symbol")
   )
 })
 
 test_that("length 1 vectors are recycled", {
   expect_equal(nrow(tibble(x = 1:10)), 10)
   expect_equal(nrow(tibble(x = 1:10, y = 1)), 10)
-  expect_tibble_error(
+  expect_tibble_abort(
     tibble(x = 1:10, y = 1:2),
-    error_incompatible_size(10, "y", 2, "Existing data")
+    abort_incompatible_size(10, "y", 2, "Existing data")
   )
 })
 
@@ -72,7 +72,7 @@ test_that("empty input makes 0 x 0 tbl_df", {
 
 test_that("SE version", {
   scoped_lifecycle_silence()
-  expect_identical(tibble_(list(a = ~1:10)), tibble(a = 1:10))
+  expect_identical(tibble_(list(a = ~ 1:10)), tibble(a = 1:10))
 })
 
 test_that("names are maintained vectors (#630)", {
@@ -115,9 +115,9 @@ test_that("tibble aliases", {
 # Validation --------------------------------------------------------------
 
 test_that("NULL isn't a valid column", {
-  expect_tibble_error(
+  expect_tibble_abort(
     check_valid_cols(list(a = NULL)),
-    error_column_scalar_type("a", 1, "NULL")
+    abort_column_scalar_type("a", 1, "NULL")
   )
 })
 
@@ -223,13 +223,13 @@ test_that("returns a single row (#416)", {
     tibble_row(trees[1, ]),
     tibble(trees[1, ])
   )
-  expect_tibble_error(
+  expect_tibble_abort(
     tibble_row(a = 1, b = 2:3),
-    error_tibble_row_size_one(2, "b", 2)
+    abort_tibble_row_size_one(2, "b", 2)
   )
-  expect_tibble_error(
+  expect_tibble_abort(
     tibble_row(trees[2:3, ]),
-    error_tibble_row_size_one(1, "", 2)
+    abort_tibble_row_size_one(1, "", 2)
   )
 })
 
@@ -248,7 +248,7 @@ test_that("is_tibble", {
 })
 
 test_that("output test", {
-  expect_snapshot_with_error({
+  expect_snapshot(error = TRUE, {
     tibble(a = 1, a = 1)
     tibble(a = new_environment())
     tibble(a = 1, b = 2:3, c = 4:6, d = 7:10)

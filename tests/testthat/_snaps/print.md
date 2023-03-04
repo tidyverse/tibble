@@ -132,7 +132,7 @@
       # ... with 2 more rows, and 5
       #   more variables
     Code
-      df <- tibble(`mean(x)` = 5, `var(x)` = 3)
+      df <- tibble(!!!set_names(c(5, 3), c("mean(x)", "var(x)")))
       print_with_mocked_format_body(trunc_mat(df, width = 28))
     Output
       # A tibble: 1 x 2
