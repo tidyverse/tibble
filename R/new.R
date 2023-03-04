@@ -39,13 +39,14 @@ new_tibble <- function(x, ..., nrow = NULL, class = NULL, subclass = NULL) {
 
   #' @section Construction:
   #'
-  #' For `new_tibble()`, `x` must be a list.
-  x <- unclass(x)
-
-  if (!is.list(x)) {
+  #' For `new_tibble()`, `x` must be a list. The only attributes of `x` that
+  #' are retained are the names.
+  if (!is_list(x)) {
     abort_new_tibble_must_be_list()
   }
 
+  #' The `...` argument allows adding more attributes to the subclass.
+  #'
   #' The `nrow` argument may be omitted as of tibble 3.1.4.
   #' If present, every element of the list `x` should have [vctrs::vec_size()]
   #' equal to this value.
@@ -58,11 +59,7 @@ new_tibble <- function(x, ..., nrow = NULL, class = NULL, subclass = NULL) {
     nrow <- as.integer(nrow)
   }
 
-  args <- attributes(x)
-
-  if (is.null(args)) {
-    args <- list()
-  }
+  args <- list(names = names(x))
 
   new_attrs <- pairlist2(...)
   nms <- names(new_attrs)

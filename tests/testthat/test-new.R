@@ -63,6 +63,16 @@ test_that("new_tibble() supports missing `nrow` (#781)", {
   expect_identical(new_tibble(list(a = 1:3)), tibble(a = 1:3))
 })
 
+test_that("new_tibble() doesn't retain any `x` attributes besides names", {
+  x <- new_tibble(list(a = 1), foo = "bar", nrow = 1L, class = "subtbl")
+
+  result <- new_tibble(x, nrow = 1L)
+
+  expect_named(result, "a")
+  expect_null(attr(result, "foo"))
+  expect_s3_class(result, class(tibble()), exact = TRUE)
+})
+
 test_that("new_tibble() supports language objects", {
   expect_identical(
     new_tibble(list(), foo = quote(bar())),

@@ -36,7 +36,10 @@ runs without raising an error.
 \section{Construction}{
 
 
-For \code{new_tibble()}, \code{x} must be a list.
+For \code{new_tibble()}, \code{x} must be a list. The only attributes of \code{x} that
+are retained are the names.
+The \code{...} argument allows adding more attributes to the subclass.
+
 The \code{nrow} argument may be omitted as of tibble 3.1.4.
 If present, every element of the list \code{x} should have \code{\link[vctrs:vec_size]{vctrs::vec_size()}}
 equal to this value.
