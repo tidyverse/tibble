@@ -134,7 +134,6 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL,
     deprecate_stop("3.0.0", "add_column(.data = 'must have unique names')",
       details = 'Use `.name_repair = "minimal"`.'
     )
-    .name_repair <- "minimal"
   }
 
   df <- tibble(..., .name_repair = .name_repair)

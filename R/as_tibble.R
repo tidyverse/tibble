@@ -70,7 +70,9 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
                                  .rows = NULL,
                                  .name_repair = c("check_unique", "unique", "universal", "minimal"),
                                  rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
-  .name_repair <- compat_name_repair(.name_repair, validate, missing(.name_repair))
+  if (!is.null(validate)) {
+    deprecate_stop("2.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)")
+  }
 
   old_rownames <- raw_rownames(x)
   if (is.null(.rows)) {
@@ -98,7 +100,9 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
 #' @rdname as_tibble
 as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
                            .name_repair = c("check_unique", "unique", "universal", "minimal")) {
-  .name_repair <- compat_name_repair(.name_repair, validate, missing(.name_repair))
+  if (!is.null(validate)) {
+    deprecate_stop("2.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)")
+  }
 
   lst_to_tibble(x, .rows, .name_repair, col_lengths(x))
 }
@@ -108,25 +112,6 @@ lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL, call = caller_
   x <- set_repaired_names(x, repair_hint = TRUE, .name_repair, call = call)
   x <- check_valid_cols(x, call = call)
   recycle_columns(x, .rows, lengths)
-}
-
-compat_name_repair <- function(.name_repair, validate, .missing_name_repair) {
-  if (is.null(validate)) return(.name_repair)
-
-
-  if (!.missing_name_repair) {
-    name_repair <- .name_repair
-  } else if (isTRUE(validate)) {
-    name_repair <- "check_unique"
-  } else {
-    name_repair <- "minimal"
-  }
-
-  deprecate_stop("2.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)",
-    env = foreign_caller_env()
-  )
-
-  name_repair
 }
 
 check_valid_cols <- function(x, pos = NULL, call = caller_env()) {
