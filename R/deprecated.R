@@ -36,9 +36,6 @@ data_frame_ <- function(xs) {
   deprecate_stop("2.0.0", "data_frame_()", "tibble()",
     details = '`tibble()` supports dynamic dots, see `?"dyn-dots"`.'
   )
-
-  xs <- compat_lazy_dots(xs, caller_env())
-  tibble(!!!xs)
 }
 
 #' @export
@@ -47,9 +44,6 @@ lst_ <- function(xs) {
   deprecate_stop("2.0.0", "lst_()", "lst()",
     details = '`lst()` supports dynamic dots, see `?"dyn-dots"`.'
   )
-
-  xs <- compat_lazy_dots(xs, caller_env())
-  lst(!!!xs)
 }
 
 #' @description
@@ -82,8 +76,6 @@ as.tibble <- function(x, ...) {
 #' @rdname deprecated
 frame_data <- function(...) {
   deprecate_stop("2.0.0", "frame_data()", "tribble()")
-
-  tribble(...)
 }
 
 #' Name repair
