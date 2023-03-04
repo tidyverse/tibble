@@ -10,8 +10,7 @@ vignette: >
 
 
 Tibbles are a modern take on data frames.
-They keep the features that have stood the test of time, and drop the features that used to be convenient but are now frustrating (i.e.
-converting character vectors to factors).
+They keep the features that have stood the test of time, and drop the features that used to be convenient but are now frustrating.
 
 
 ```r

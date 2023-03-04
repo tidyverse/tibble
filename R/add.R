@@ -45,7 +45,7 @@ add_row <- function(.data, ..., .before = NULL, .after = NULL) {
   }
 
   if (!is.data.frame(.data)) {
-    deprecate_warn("2.1.1", "add_row(.data = 'must be a data frame')")
+    deprecate_stop("2.1.1", "add_row(.data = 'must be a data frame')")
   }
 
   if (dots_n(...) == 0L) {
@@ -127,14 +127,13 @@ rbind_at <- function(old, new, pos) {
 add_column <- function(.data, ..., .before = NULL, .after = NULL,
                        .name_repair = c("check_unique", "unique", "universal", "minimal")) {
   if (!is.data.frame(.data)) {
-    deprecate_warn("2.1.1", "add_column(.data = 'must be a data frame')")
+    deprecate_stop("2.1.1", "add_column(.data = 'must be a data frame')")
   }
 
   if (has_length(.data) && (!is_named(.data) || anyDuplicated(names2(.data))) && missing(.name_repair)) {
-    deprecate_warn("3.0.0", "add_column(.data = 'must have unique names')",
+    deprecate_stop("3.0.0", "add_column(.data = 'must have unique names')",
       details = 'Use `.name_repair = "minimal"`.'
     )
-    .name_repair <- "minimal"
   }
 
   df <- tibble(..., .name_repair = .name_repair)
@@ -171,14 +170,14 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL,
 
 # helpers -----------------------------------------------------------------
 
-pos_from_before_after_names <- function(before, after, names) {
+pos_from_before_after_names <- function(before, after, names, call = caller_env()) {
   before <- check_names_before_after(before, names)
   after <- check_names_before_after(after, names)
 
-  pos_from_before_after(before, after, length(names))
+  pos_from_before_after(before, after, length(names), call)
 }
 
-pos_from_before_after <- function(before, after, len) {
+pos_from_before_after <- function(before, after, len, call = caller_env()) {
   if (is.null(before)) {
     if (is.null(after)) {
       len
@@ -189,7 +188,7 @@ pos_from_before_after <- function(before, after, len) {
     if (is.null(after)) {
       limit_pos_range(before - 1L, len)
     } else {
-      abort_both_before_after()
+      abort_both_before_after(call)
     }
   }
 }
@@ -230,12 +229,13 @@ msg_unknown_column_names <- function(names) {
   pluralise_commas("Can't find column(s) ", tick(names), " in `.data`.")
 }
 
-abort_add_rows_to_grouped_df <- function() {
-  tibble_abort("Can't add rows to grouped data frames.")
+abort_add_rows_to_grouped_df <- function(call = caller_env()) {
+  tibble_abort(call = call, "Can't add rows to grouped data frames.")
 }
 
-abort_incompatible_new_rows <- function(names) {
+abort_incompatible_new_rows <- function(names, call = caller_env()) {
   tibble_abort(
+    call = call,
     problems(
       "New rows can't add columns:",
       msg_unknown_column_names(names)
@@ -244,16 +244,17 @@ abort_incompatible_new_rows <- function(names) {
   )
 }
 
-abort_both_before_after <- function() {
-  tibble_abort("Can't specify both `.before` and `.after`.")
+abort_both_before_after <- function(call = caller_env()) {
+  tibble_abort(call = call, "Can't specify both `.before` and `.after`.")
 }
 
-abort_unknown_column_names <- function(j, parent = NULL) {
-  tibble_abort(pluralise_commas("Can't find column(s) ", tick(j), " in `.data`."), j = j, parent = parent)
+abort_unknown_column_names <- function(j, parent = NULL, call = caller_env()) {
+  tibble_abort(call = call, pluralise_commas("Can't find column(s) ", tick(j), " in `.data`."), j = j, parent = parent)
 }
 
-abort_incompatible_new_cols <- function(n, df) {
+abort_incompatible_new_cols <- function(n, df, call = caller_env()) {
   tibble_abort(
+    call = call,
     bullets(
       "New columns must be compatible with `.data`:",
       x = paste0(
@@ -265,4 +266,9 @@ abort_incompatible_new_cols <- function(n, df) {
     expected = n,
     actual = nrow(df)
   )
+}
+
+abort_dim_column_index <- function(j, call = caller_env()) {
+  # friendly_type_of() doesn't distinguish between matrices and arrays
+  tibble_abort(call = call, paste0("Must use a vector in `[`, not an object of class ", class(j)[[1]], "."))
 }

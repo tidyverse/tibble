@@ -484,100 +484,70 @@ test_that("as_tibble_col() can convert atomic vectors to data frame", {
 test_that("`validate` triggers deprecation message, but then works", {
   scoped_lifecycle_warnings()
 
-  expect_tibble_abort(
-    expect_warning(
-      as_tibble(list(a = 1, "hi"), validate = TRUE),
-      "deprecated",
-      fixed = TRUE
-    ),
-    abort_column_names_cannot_be_empty(2, repair_hint = TRUE)
+  expect_error(
+    as_tibble(list(a = 1, "hi"), validate = TRUE)
   )
 
-  expect_warning(
-    df <- as_tibble(list(a = 1, "hi", a = 2), validate = FALSE),
+  expect_error(
+    as_tibble(list(a = 1, "hi", a = 2), validate = FALSE),
     "deprecated",
     fixed = TRUE
   )
-  expect_identical(names(df), c("a", "", "a"))
 
   df <- data.frame(a = 1, "hi", a = 2)
   names(df) <- c("a", "", "a")
-  expect_warning(
-    df <- as_tibble(df, validate = FALSE),
-    "deprecated",
-    fixed = TRUE
+  expect_error(
+    as_tibble(df, validate = FALSE)
   )
-  expect_identical(names(df), c("a", "", "a"))
 
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
-  expect_tibble_abort(
-    expect_warning(
-      as_tibble(df, validate = TRUE),
-      "deprecated",
-      fixed = TRUE
-    ),
-    abort_column_names_cannot_be_empty(2, repair_hint = TRUE)
+  expect_error(
+    as_tibble(df, validate = TRUE)
   )
 })
 
 test_that("`validate` always raises lifecycle warning.", {
-  expect_deprecated(
-    expect_tibble_abort(
-      as_tibble(list(a = 1, "hi"), validate = TRUE, .name_repair = "check_unique"),
-      abort_column_names_cannot_be_empty(2, repair_hint = TRUE)
-    )
+  expect_error(
+    as_tibble(list(a = 1, "hi"), validate = TRUE, .name_repair = "check_unique")
   )
 
-  expect_deprecated(
-    df <- as_tibble(list(a = 1, "hi", a = 2), validate = FALSE, .name_repair = "minimal")
+  expect_error(
+    as_tibble(list(a = 1, "hi", a = 2), validate = FALSE, .name_repair = "minimal")
   )
-  expect_identical(names(df), c("a", "", "a"))
 
   df <- data.frame(a = 1, "hi", a = 2)
   names(df) <- c("a", "", "a")
-  expect_deprecated(
-    df <- as_tibble(df, validate = FALSE, .name_repair = "minimal")
+  expect_error(
+    as_tibble(df, validate = FALSE, .name_repair = "minimal")
   )
-  expect_identical(names(df), c("a", "", "a"))
 
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
-  expect_tibble_abort(
-    expect_deprecated(
-      as_tibble(df, validate = TRUE, .name_repair = "check_unique")
-    ),
-    abort_column_names_cannot_be_empty(2, repair_hint = TRUE)
+  expect_error(
+    as_tibble(df, validate = TRUE, .name_repair = "check_unique")
   )
 })
 
 test_that("Inconsistent `validate` and `.name_repair` used together raise a warning.", {
-  expect_deprecated(
-    expect_tibble_abort(
-      as_tibble(list(a = 1, "hi"), validate = FALSE, .name_repair = "check_unique"),
-      abort_column_names_cannot_be_empty(2, repair_hint = TRUE)
-    )
+  expect_error(
+    as_tibble(list(a = 1, "hi"), validate = FALSE, .name_repair = "check_unique")
   )
 
-  expect_deprecated(
-    df <- as_tibble(list(a = 1, "hi", a = 2), validate = TRUE, .name_repair = "minimal")
+  expect_error(
+    as_tibble(list(a = 1, "hi", a = 2), validate = TRUE, .name_repair = "minimal")
   )
-  expect_identical(names(df), c("a", "", "a"))
 
   df <- data.frame(a = 1, "hi", a = 2)
   names(df) <- c("a", "", "a")
-  expect_deprecated(
-    df <- as_tibble(df, validate = TRUE, .name_repair = "minimal")
+  expect_error(
+    as_tibble(df, validate = TRUE, .name_repair = "minimal")
   )
-  expect_identical(names(df), c("a", "", "a"))
 
   df <- data.frame(a = 1, "hi")
   names(df) <- c("a", "")
-  expect_deprecated(
-    expect_tibble_abort(
-      as_tibble(df, validate = FALSE, .name_repair = "check_unique"),
-      abort_column_names_cannot_be_empty(2, repair_hint = TRUE)
-    )
+  expect_error(
+    as_tibble(df, validate = FALSE, .name_repair = "check_unique")
   )
 })
 

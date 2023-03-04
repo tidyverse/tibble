@@ -129,9 +129,9 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
       foo[-4],
       class = "vctrs_error_subscript_oob"
     )
-    expect_tibble_abort(
+    expect_error(
       foo[c(1:3, NA)],
-      abort_na_column_index(4)
+      class = "vctrs_error_subscript_type"
     )
 
     expect_error(foo[as.matrix(1)])
@@ -156,9 +156,9 @@ test_that("[.tbl_df is careful about column flags (#83)", {
       foo[c(TRUE, TRUE, FALSE, FALSE)],
       class = "vctrs_error_subscript_size"
     )
-    expect_tibble_abort(
+    expect_error(
       foo[c(TRUE, TRUE, NA)],
-      abort_na_column_index(3)
+      class = "vctrs_error_subscript_type"
     )
 
     expect_tibble_abort(
@@ -344,15 +344,6 @@ test_that("[[.tbl_df throws error with NA index", {
   })
 })
 
-test_that("can use recursive indexing with [[", {
-  scoped_lifecycle_silence()
-
-  foo <- tibble(x = list(y = 1:3, z = 4:5))
-  expect_equal(foo[[c(1, 1)]], 1:3)
-
-  # [[ with a matrix seems broken, despite an implementation in [[.data.frame
-})
-
 test_that("[[ returns NULL if name doesn't exist", {
   scoped_lifecycle_silence()
 
@@ -518,15 +509,15 @@ test_that("[<-.tbl_df throws an error with duplicate indexes (#658)", {
     df <- tibble(x = 1:2, y = x)
     expect_tibble_abort(
       df[c(1, 1)] <- 3,
-      abort_duplicate_column_subscript_for_assignment(c(1, 1))
+      abort_assign_duplicate_column_subscript(c(1, 1))
     )
     expect_tibble_abort(
       df[, c(1, 1)] <- 3,
-      abort_duplicate_column_subscript_for_assignment(c(1, 1))
+      abort_assign_duplicate_column_subscript(c(1, 1))
     )
     expect_tibble_abort(
       df[c(1, 1), ] <- 3,
-      abort_duplicate_row_subscript_for_assignment(c(1, 1))
+      abort_assign_duplicate_row_subscript(c(1, 1))
     )
   })
 })

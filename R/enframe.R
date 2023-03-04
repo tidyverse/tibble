@@ -45,15 +45,6 @@ enframe <- function(x, name = "name", value = "value") {
   new_tibble(df, nrow = vec_size(x))
 }
 
-vectbl_set_names <- function(x, names = NULL) {
-  # Work around https://github.com/r-lib/vctrs/issues/1419
-  if (inherits(x, "vctrs_rcrd")) {
-    # A rcrd can't have names?
-    return(x)
-  }
-  vec_set_names(x, names)
-}
-
 #' @rdname enframe
 #' @description
 #' `deframe()` converts two-column data frames to a named vector or list,
@@ -77,12 +68,12 @@ deframe <- function(x) {
   vectbl_set_names(value, as.character(name))
 }
 
-abort_enframe_value_null <- function() {
-  tibble_abort("`value` can't be NULL.")
+abort_enframe_value_null <- function(call = caller_env()) {
+  tibble_abort(call = call, "`value` can't be NULL.")
 }
 
-abort_enframe_must_be_vector <- function(x) {
-  tibble_abort(paste0(
+abort_enframe_must_be_vector <- function(x, call = caller_env()) {
+  tibble_abort(call = call, paste0(
     "The `x` argument to `enframe()` must be a vector, not ", class(x)[[1]], "."
   ))
 }

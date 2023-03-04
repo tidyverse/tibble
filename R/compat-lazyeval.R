@@ -59,8 +59,8 @@ compat_lazy <- function(lazy, env = caller_env(), warn = TRUE) {
   }
 }
 
-abort_compat_lazy <- function(lazy) {
-  tibble_abort(sprintf("Can't convert a %s to a quosure", typeof(lazy)))
+abort_compat_lazy <- function(lazy, call = caller_env()) {
+  tibble_abort(call = call, sprintf("Can't convert a %s to a quosure", typeof(lazy)))
 }
 
 compat_lazy_dots <- function(dots, env, ..., .named = FALSE) {

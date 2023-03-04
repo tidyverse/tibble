@@ -48,34 +48,4 @@ foreign_caller_env <- function(my_env = ns_env()) {
   caller
 }
 
-# DO NOT DO THIS!
-# This avoids having to pass the environment of the top-level functions
-# to error helpers.
-# This is bad practice and should be changed to pass caller envs directly.
-# See https://github.com/tidyverse/tibble/pull/1379#issuecomment-1236671090
-# for context.
-my_caller_env <- function(my_env = ns_env()) {
-  for (n in 2:10) {
-    caller <- caller_env(n)
-    if (!is_reference(env_parent(caller), my_env)) {
-      return(caller_env(n - 1))
-    }
-  }
-
-  # Safety net
-  caller
-}
-
-my_caller_call <- function(my_env = ns_env()) {
-  for (n in 2:10) {
-    caller <- caller_env(n)
-    if (!is_reference(env_parent(caller), my_env)) {
-      return(caller_call(n - 1))
-    }
-  }
-
-  # Safety net
-  caller
-}
-
 # nocov end

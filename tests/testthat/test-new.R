@@ -1,29 +1,3 @@
-test_that("new_tibble() with deprecated subclass argument", {
-  scoped_lifecycle_silence()
-
-  tbl <- new_tibble(
-    data.frame(a = 1:3),
-    names = "b",
-    attr1 = "value1",
-    attr2 = 2,
-    nrow = 3,
-    subclass = "nt"
-  )
-
-  # Can't compare directly due to dplyr:::all.equal.tbl_df()
-  expect_identical(class(tbl), c("nt", "tbl_df", "tbl", "data.frame"))
-  expect_equal(
-    unclass(tbl),
-    structure(
-      list(b = 1:3),
-      attr1 = "value1",
-      attr2 = 2,
-      .Names = "b",
-      row.names = .set_row_names(3L)
-    )
-  )
-})
-
 test_that("new_tibble() with new class argument", {
   tbl <- new_tibble(
     data.frame(a = 1:3),

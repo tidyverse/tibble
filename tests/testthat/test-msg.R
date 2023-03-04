@@ -69,20 +69,19 @@ test_that("output test", {
     print_error(abort_need_rhs_vector(quote(RHS)))
     print_error(abort_need_rhs_vector_or_null(quote(RHS)))
 
-    print_error(abort_na_column_index(1:3))
     print_error(abort_dim_column_index(as.matrix("x")))
 
     print_error(abort_assign_columns_non_na_only())
     print_error(abort_subset_columns_non_missing_only())
     print_error(abort_assign_columns_non_missing_only())
 
-    print_error(abort_duplicate_column_subscript_for_assignment(c(1, 1)))
-    print_error(abort_duplicate_column_subscript_for_assignment(c(1, 1, 2, 2)))
+    print_error(abort_assign_duplicate_column_subscript(c(1, 1)))
+    print_error(abort_assign_duplicate_column_subscript(c(1, 1, 2, 2)))
 
     print_error(abort_assign_rows_non_na_only())
 
-    print_error(abort_duplicate_row_subscript_for_assignment(c(1, 1)))
-    print_error(abort_duplicate_row_subscript_for_assignment(c(1, 1, 2, 2)))
+    print_error(abort_assign_duplicate_row_subscript(c(1, 1)))
+    print_error(abort_assign_duplicate_row_subscript(c(1, 1, 2, 2)))
 
     print_error(abort_assign_incompatible_size(3, list(1:2), 1, NULL, quote(rhs)))
     print_error(abort_assign_incompatible_size(4, list(1:4, 3:4), 2, quote(4:1), quote(rhs)))
