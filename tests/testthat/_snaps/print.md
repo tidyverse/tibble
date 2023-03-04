@@ -116,27 +116,6 @@
       # A tibble: ?? x 1
       <body created by pillar>
       # ... with more rows
-    Code
-      print_with_mocked_format_body(trunc_mat(df_all, n = 1L, n_extra = 2L, width = 30L))
-    Output
-      # A tibble: 3 x 9
-      <body created by pillar>
-      # ... with 2 more rows, and 5
-      #   more variables: e <fct>,
-      #   f <date>, ...
-    Code
-      print_with_mocked_format_body(trunc_mat(df_all, n = 1L, n_extra = 0L, width = 30L))
-    Output
-      # A tibble: 3 x 9
-      <body created by pillar>
-      # ... with 2 more rows, and 5
-      #   more variables
-    Code
-      df <- tibble(!!!set_names(c(5, 3), c("mean(x)", "var(x)")))
-      print_with_mocked_format_body(trunc_mat(df, width = 28))
-    Output
-      # A tibble: 1 x 2
-      <body created by pillar>
 
 # full output test
 
