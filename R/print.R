@@ -112,9 +112,9 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
 
   setup <- pillar::tbl_format_setup(x, width = width, n = n, n_extra = max_extra_cols)
 
-  header <- tbl_format_header(x, setup)
-  body <- tbl_format_body(x, setup)
-  footer <- tbl_format_footer(x, setup)
+  header <- pillar::tbl_format_header(x, setup)
+  body <- pillar::tbl_format_body(x, setup)
+  footer <- pillar::tbl_format_footer(x, setup)
 
   text <- c(header, body, footer)
   structure(text, class = "trunc_mat")
