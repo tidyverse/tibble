@@ -1,6 +1,7 @@
 ## usethis namespace: start
 #' @importFrom lifecycle deprecate_soft
 #' @importFrom lifecycle deprecate_warn
+#' @importFrom lifecycle deprecate_stop
 #' @importFrom lifecycle expect_deprecated
 #' @importFrom pkgconfig set_config
 #' @importFrom utils head tail

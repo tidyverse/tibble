@@ -200,12 +200,10 @@ NULL
 
 tbl_subset2 <- function(x, j, j_arg, call = caller_env()) {
   if (is.matrix(j)) {
-    deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a matrix",
+    deprecate_stop("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a matrix')",
       details = "Recursive subsetting is deprecated for tibbles.",
       env = foreign_caller_env()
     )
-
-    return(as.matrix(x)[[j]])
   }
 
   if (is.object(j)) {
@@ -219,7 +217,7 @@ tbl_subset2 <- function(x, j, j_arg, call = caller_env()) {
         vectbl_as_col_location2(j, length(x), j_arg = j_arg, call = call)
       }
     } else if (length(j) == 2L) {
-      deprecate_soft("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a vector of length 2')",
+      deprecate_stop("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a vector of length 2')",
         details = "Recursive subsetting is deprecated for tibbles.",
         env = foreign_caller_env()
       )

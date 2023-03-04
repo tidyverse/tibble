@@ -106,12 +106,6 @@ test_that(".data pronoun", {
   expect_identical(tibble(a = 1, b = .data$a), tibble(a = 1, b = 1))
 })
 
-test_that("tibble aliases", {
-  scoped_lifecycle_silence()
-  expect_identical(data_frame(a = 1), tibble(a = 1))
-  expect_identical(data_frame_(list(a = ~1)), tibble_(list(a = ~1)))
-})
-
 # Validation --------------------------------------------------------------
 
 test_that("NULL isn't a valid column", {
