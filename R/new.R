@@ -59,11 +59,7 @@ new_tibble <- function(x, ..., nrow = NULL, class = NULL, subclass = NULL) {
     nrow <- as.integer(nrow)
   }
 
-  args <- attributes(x)
-
-  if (is.null(args)) {
-    args <- list()
-  }
+  args <- list(names = names(x))
 
   new_attrs <- pairlist2(...)
   nms <- names(new_attrs)
