@@ -1,18 +1,15 @@
 test_that("tibble_abort()", {
   # Must be called from a function whose name starts with `abort_`
-  abort_foo <- function() {
-    tibble_abort("message", foo = 42, bar = 7)
+  abort_foo <- function(call = caller_env()) {
+    tibble_abort("message", call = call, foo = 42, bar = 7)
   }
-  expect_cnd_equivalent(
-    tryCatch(abort_foo(), error = identity),
-    error_cnd(
-      class = c("tibble_error_foo", "tibble_error"),
-      message = "message",
-      foo = 42,
-      bar = 7,
-      use_cli_format = TRUE
-    )
-  )
+  cnd <- tryCatch(abort_foo(), error = identity)
+
+  expect_s3_class(cnd, c("tibble_error_foo", "tibble_error", "rlang_error", "error", "condition"), exact = TRUE)
+  expect_equal(cnd$message, "message")
+  expect_equal(cnd$foo, 42)
+  expect_equal(cnd$bar, 7)
+  expect_true(cnd$use_cli_format)
 })
 
 test_that("output test", {
