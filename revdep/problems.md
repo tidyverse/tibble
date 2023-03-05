@@ -31,9 +31,7 @@ Run `revdepcheck::cloud_details(, "akc")` for more info
     +    doc_group(id = "id",keyword = "keyword") -> grouped_doc
     > 
     >  grouped_doc
-    Error in tbl_format_header(x, setup) : 
-      could not find function "tbl_format_header"
-    Calls: <Anonymous> -> print.tbl_graph -> do.call -> <Anonymous>
+    Error: $ operator is invalid for atomic vectors
     Execution halted
     ```
 
@@ -47,7 +45,7 @@ Run `revdepcheck::cloud_details(, "akc")` for more info
     --- re-building ‘akc_vignette.Rmd’ using rmarkdown
     Quitting from lines 75-79 (akc_vignette.Rmd) 
     Error: processing vignette 'akc_vignette.Rmd' failed with diagnostics:
-    could not find function "tbl_format_header"
+    $ operator is invalid for atomic vectors
     --- failed re-building ‘akc_vignette.Rmd’
     ...
       Some words could not fit on page. They have been placed at their original positions.
@@ -92,14 +90,14 @@ Run `revdepcheck::cloud_details(, "arulesViz")` for more info
     > 
     ...
     
+        groups
+    
     The following object is masked from ‘package:stats’:
     
         filter
     
     > as_tbl_graph(g)
-    Error in tbl_format_header(x, setup) : 
-      could not find function "tbl_format_header"
-    Calls: <Anonymous> -> print.tbl_graph -> do.call -> <Anonymous>
+    Error: $ operator is invalid for atomic vectors
     Execution halted
     ```
 
@@ -128,54 +126,6 @@ Run `revdepcheck::cloud_details(, "arulesViz")` for more info
     
     Error: Vignette re-building failed.
     Execution halted
-    ```
-
-# cellranger
-
-<details>
-
-* Version: 1.1.0
-* GitHub: https://github.com/rsheets/cellranger
-* Source code: https://github.com/cran/cellranger
-* Date/Publication: 2016-07-27 03:17:48
-* Number of recursive dependencies: 58
-
-Run `revdepcheck::cloud_details(, "cellranger")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘cellranger-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: as.cell_addr
-    > ### Title: Convert to a cell_addr object
-    > ### Aliases: as.cell_addr as.cell_addr.character as.cell_addr.ra_ref
-    > ###   as.cell_addr_v as.cell_addr_v.character as.cell_addr_v.list
-    > 
-    > ### ** Examples
-    > 
-    ...
-    <cell_addr: 1 cells>
-    Warning: `as_data_frame()` was deprecated in tibble 2.0.0.
-    ℹ Please use `as_tibble()` (with slightly different semantics) to convert to a
-      tibble, or `as.data.frame()` to convert to a data frame.
-    ℹ The deprecated feature was likely used in the cellranger package.
-      Please report the issue at <https://github.com/rsheets/cellranger/issues>.
-    Error in tbl_format_header(x, setup) : 
-      could not find function "tbl_format_header"
-    Calls: <Anonymous> -> print.cell_addr -> print -> <Anonymous>
-    Execution halted
-    ```
-
-## In both
-
-*   checking LazyData ... NOTE
-    ```
-      'LazyData' is specified without a 'data' directory
     ```
 
 # chemodiv
@@ -210,73 +160,10 @@ Run `revdepcheck::cloud_details(, "chemodiv")` for more info
     > molNet(minimalCompDis, minimalNPCTable, cutOff = 0)
     Using cut-off value = 0
     $networkObject
-    Error in tbl_format_header(x, setup) : 
-      could not find function "tbl_format_header"
-    Calls: <Anonymous> -> print.tbl_graph -> do.call -> <Anonymous>
+    Error: $ operator is invalid for atomic vectors
     Execution halted
     ```
 
-# eflm
-
-<details>
-
-* Version: 0.3.0
-* GitHub: https://github.com/pachadotdev/eflm
-* Source code: https://github.com/cran/eflm
-* Date/Publication: 2021-05-31 21:20:02 UTC
-* Number of recursive dependencies: 55
-
-Run `revdepcheck::cloud_details(, "eflm")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking whether package ‘eflm’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/eflm/new/eflm.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘eflm’ ...
-** package ‘eflm’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-Error : The `x` argument of `as_tibble()` can't be missing as of tibble 3.0.0.
-Error: unable to load R code in package ‘eflm’
-Execution halted
-ERROR: lazy loading failed for package ‘eflm’
-* removing ‘/tmp/workdir/eflm/new/eflm.Rcheck/eflm’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘eflm’ ...
-** package ‘eflm’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-*** copying figures
-** building package indices
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (eflm)
-
-
-```
 # fastRG
 
 <details>
@@ -306,15 +193,15 @@ Run `revdepcheck::cloud_details(, "fastRG")` for more info
     > ### ** Examples
     > 
     ...
+    [46] 55--17  59--98  47--15  37--62  85--49  65--98  37--98  22--33  56--77 
+    [55] 25--51  20--80  16--57  25--71  52--64  12--47  8 --80  79--18  22--62 
     [64] 14--31  37--69  54--16  26--90  38--94  79--20  70--97  19--90  11--71 
     + ... omitted several edges
     > 
     > ### sampling graphs as tidygraph graphs ---------------
     > 
     > sample_tidygraph(ufm)
-    Error in tbl_format_header(x, setup) : 
-      could not find function "tbl_format_header"
-    Calls: <Anonymous> -> print.tbl_graph -> do.call -> <Anonymous>
+    Error: $ operator is invalid for atomic vectors
     Execution halted
     ```
 
@@ -397,12 +284,12 @@ Run `revdepcheck::cloud_details(, "ggraph")` for more info
     --- re-building ‘Layouts.Rmd’ using rmarkdown
     Quitting from lines 93-94 (Layouts.Rmd) 
     Error: processing vignette 'Layouts.Rmd' failed with diagnostics:
-    could not find function "tbl_format_header"
+    $ operator is invalid for atomic vectors
     --- failed re-building ‘Layouts.Rmd’
     ...
     Quitting from lines 67-77 (tidygraph.Rmd) 
     Error: processing vignette 'tidygraph.Rmd' failed with diagnostics:
-    could not find function "tbl_format_header"
+    $ operator is invalid for atomic vectors
     --- failed re-building ‘tidygraph.Rmd’
     
     SUMMARY: processing the following files failed:
@@ -451,15 +338,15 @@ Run `revdepcheck::cloud_details(, "GISSB")` for more info
     > ### ** Examples
     > 
     ...
+    > 
+    > graph <- vegnett_list[[1]]
     > nodes <- vegnett_list[[2]]
     > edges <- vegnett_list[[3]]
     > graph_cppRouting_minutes <- vegnett_list[[4]]
     > graph_cppRouting_meters <- vegnett_list[[5]]
     > 
     > graph
-    Error in tbl_format_header(x, setup) : 
-      could not find function "tbl_format_header"
-    Calls: <Anonymous> -> print.tbl_graph -> do.call -> <Anonymous>
+    Error: $ operator is invalid for atomic vectors
     Execution halted
     ```
 
@@ -470,139 +357,6 @@ Run `revdepcheck::cloud_details(, "GISSB")` for more info
       Note: found 866 marked UTF-8 strings
     ```
 
-# hyperSpec
-
-<details>
-
-* Version: 0.100.0
-* GitHub: https://github.com/r-hyperspec/hyperSpec
-* Source code: https://github.com/cran/hyperSpec
-* Date/Publication: 2021-09-13 13:00:02 UTC
-* Number of recursive dependencies: 142
-
-Run `revdepcheck::cloud_details(, "hyperSpec")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘plotting.Rnw’
-      ...
-      'x' values are not equispaced; output may be wrong
-    Warning in (function (x, y, z, subscripts, at = pretty(z), ..., col.regions = regions$col,  :
-      'y' values are not equispaced; output may be wrong
-    
-    > plotvoronoi(uneven)
-    Warning in (function (x, y, z, subscripts = TRUE, at = pretty(z), points = TRUE,  :
-      The 'use.tripack' argument is deprecated and ignored. See ?panel.voronoi
-    ...
-    
-    ... incomplete output.  Crash?
-    
-      ‘chondro.pdf.asis’ using ‘UTF-8’... OK
-      ‘fileio.pdf.asis’ using ‘UTF-8’... OK
-      ‘baseline.Rnw’ using ‘UTF-8’... OK
-      ‘flu.Rnw’ using ‘UTF-8’... OK
-      ‘hyperspec.Rnw’ using ‘UTF-8’... OK
-      ‘laser.Rnw’ using ‘UTF-8’... OK
-      ‘plotting.Rnw’ using ‘UTF-8’... failed to complete the test
-    ```
-
-## In both
-
-*   checking re-building of vignette outputs ... NOTE
-    ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘chondro.pdf.asis’ using asis
-    --- finished re-building ‘chondro.pdf.asis’
-    
-    --- re-building ‘fileio.pdf.asis’ using asis
-    --- finished re-building ‘fileio.pdf.asis’
-    
-    --- re-building ‘baseline.Rnw’ using Sweave
-    Loading required package: lattice
-    Loading required package: grid
-    ...
-    Warning in (function (x, y, z, subscripts, at = pretty(z), ..., col.regions = regions$col,  :
-      'y' values are not equispaced; output may be wrong
-    Warning in (function (x, y, z, subscripts = TRUE, at = pretty(z), points = TRUE,  :
-      The 'use.tripack' argument is deprecated and ignored. See ?panel.voronoi
-    Killed
-    SUMMARY: processing the following files failed:
-      ‘baseline.Rnw’ ‘flu.Rnw’ ‘hyperspec.Rnw’ ‘laser.Rnw’ ‘plotting.Rnw’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-# incidence2
-
-<details>
-
-* Version: 1.2.3
-* GitHub: https://github.com/reconverse/incidence2
-* Source code: https://github.com/cran/incidence2
-* Date/Publication: 2021-11-07 22:00:02 UTC
-* Number of recursive dependencies: 87
-
-Run `revdepcheck::cloud_details(, "incidence2")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking whether package ‘incidence2’ can be installed ... ERROR
-    ```
-    Installation failed.
-    See ‘/tmp/workdir/incidence2/new/incidence2.Rcheck/00install.out’ for details.
-    ```
-
-## Installation
-
-### Devel
-
-```
-* installing *source* package ‘incidence2’ ...
-** package ‘incidence2’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-Error : The `x` argument of `as_tibble()` can't be missing as of tibble 3.0.0.
-Error: unable to load R code in package ‘incidence2’
-Execution halted
-ERROR: lazy loading failed for package ‘incidence2’
-* removing ‘/tmp/workdir/incidence2/new/incidence2.Rcheck/incidence2’
-
-
-```
-### CRAN
-
-```
-* installing *source* package ‘incidence2’ ...
-** package ‘incidence2’ successfully unpacked and MD5 sums checked
-** using staged installation
-** R
-** data
-*** moving datasets to lazyload DB
-** inst
-** byte-compile and prepare package for lazy loading
-** help
-*** installing help indices
-** building package indices
-** installing vignettes
-** testing if installed package can be loaded from temporary location
-** testing if installed package can be loaded from final location
-** testing if installed package keeps a record of temporary installation path
-* DONE (incidence2)
-
-
-```
 # malan
 
 <details>
@@ -626,7 +380,7 @@ Run `revdepcheck::cloud_details(, "malan")` for more info
     --- re-building ‘case-study-partial.Rmd’ using rmarkdown
     Quitting from lines 76-78 (case-study-partial.Rmd) 
     Error: processing vignette 'case-study-partial.Rmd' failed with diagnostics:
-    could not find function "tbl_format_header"
+    $ operator is invalid for atomic vectors
     --- failed re-building ‘case-study-partial.Rmd’
     
     --- re-building ‘introduction.Rmd’ using rmarkdown
@@ -677,95 +431,15 @@ Run `revdepcheck::cloud_details(, "migraph")` for more info
     > ### ** Examples
     > 
     ...
+    B 1 0 1
+    C 1 1 0
     > as_igraph(test)
-    IGRAPH 6b8d0d7 DN-B 6 5 -- 
+    IGRAPH 90af426 DN-B 6 5 -- 
     + attr: name (v/c), type (v/l)
-    + edges from 6b8d0d7 (vertex names):
+    + edges from 90af426 (vertex names):
     [1] A->I B->G B->I C->G C->H
     > as_tidygraph(test)
-    Error in tbl_format_header(x, setup) : 
-      could not find function "tbl_format_header"
-    Calls: <Anonymous> -> print.tbl_graph -> do.call -> <Anonymous>
-    Execution halted
-    ```
-
-# multidplyr
-
-<details>
-
-* Version: 0.1.2
-* GitHub: https://github.com/tidyverse/multidplyr
-* Source code: https://github.com/cran/multidplyr
-* Date/Publication: 2022-09-26 19:40:02 UTC
-* Number of recursive dependencies: 80
-
-Run `revdepcheck::cloud_details(, "multidplyr")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘multidplyr-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: partition
-    > ### Title: Partition data across workers in a cluster
-    > ### Aliases: partition
-    > 
-    > ### ** Examples
-    > 
-    > library(dplyr)
-    ...
-    > 
-    > mtcars2 <- partition(mtcars, cl)
-    > mtcars2 %>% mutate(cyl2 = 2 * cyl)
-    Source: party_df [32 x 12]
-    Shards: 2 [16--16 rows]
-    
-    Error in tbl_format_header(x, setup) : 
-      could not find function "tbl_format_header"
-    Calls: <Anonymous> -> print.multidplyr_party_df -> print -> <Anonymous>
-    Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-      • On CRAN (6)
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Error ('test-partydf.R:14'): can construct and print partydf ────────────────
-      `df` threw an unexpected error.
-      Message: could not find function "tbl_format_header"
-      Class:   simpleError/error/condition
-      ── Error ('test-partydf.R:15'): can construct and print partydf ────────────────
-      `group_by(df, y)` threw an unexpected error.
-      Message: could not find function "tbl_format_header"
-      Class:   simpleError/error/condition
-      
-      [ FAIL 2 | WARN 0 | SKIP 6 | PASS 49 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘multidplyr.Rmd’ using rmarkdown
-    Quitting from lines 50-52 (multidplyr.Rmd) 
-    Error: processing vignette 'multidplyr.Rmd' failed with diagnostics:
-    could not find function "tbl_format_header"
-    --- failed re-building ‘multidplyr.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘multidplyr.Rmd’
-    
-    Error: Vignette re-building failed.
+    Error: $ operator is invalid for atomic vectors
     Execution halted
     ```
 
@@ -798,15 +472,15 @@ Run `revdepcheck::cloud_details(, "NetFACS")` for more info
     > ### ** Examples
     > 
     ...
+    > network_conditional(
+    +   netfacs.data = conditional.probs,
     +   min.prob = 0.01,
     +   min.count = 3,
     +   ignore.element = "25",
     +   plot.bubbles = FALSE
     + )
     $network
-    Error in tbl_format_header(x, setup) : 
-      could not find function "tbl_format_header"
-    Calls: <Anonymous> -> print.tbl_graph -> do.call -> <Anonymous>
+    Error: $ operator is invalid for atomic vectors
     Execution halted
     ```
 
@@ -841,9 +515,7 @@ Run `revdepcheck::cloud_details(, "panelr")` for more info
     > data("WageData")
     > wages <- panel_data(WageData, id = id, wave = t)
     > complete_data(wages, wks, lwage, min.waves = 3)
-    Error in tbl_format_header(x, setup) : 
-      could not find function "tbl_format_header"
-    Calls: <Anonymous> -> print.panel_data -> <Anonymous>
+    Error: $ operator is invalid for atomic vectors
     Execution halted
     ```
 
@@ -857,7 +529,7 @@ Run `revdepcheck::cloud_details(, "panelr")` for more info
     --- re-building ‘wbm.Rmd’ using rmarkdown
     Quitting from lines 59-61 (wbm.Rmd) 
     Error: processing vignette 'wbm.Rmd' failed with diagnostics:
-    could not find function "tbl_format_header"
+    $ operator is invalid for atomic vectors
     --- failed re-building ‘wbm.Rmd’
     
     SUMMARY: processing the following file failed:
@@ -894,70 +566,6 @@ Run `revdepcheck::cloud_details(, "panelr")` for more info
 *   checking Rd cross-references ... NOTE
     ```
     Package unavailable to check Rd xrefs: ‘AER’
-    ```
-
-# readtext
-
-<details>
-
-* Version: 0.81
-* GitHub: https://github.com/quanteda/readtext
-* Source code: https://github.com/cran/readtext
-* Date/Publication: 2021-07-14 14:40:02 UTC
-* Number of recursive dependencies: 91
-
-Run `revdepcheck::cloud_details(, "readtext")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
-    ```
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Last 13 lines of output:
-        5. │       ├─testthat (local) .capture(...)
-        6. │       │ └─testthat::capture_output_lines(code, print, width = width)
-        7. │       │   └─testthat:::eval_with_output(code, print = print, width = width)
-        8. │       │     ├─withr::with_output_sink(path, withVisible(code))
-        9. │       │     │ └─base::force(code)
-       10. │       │     └─base::withVisible(code)
-       11. │       └─rlang::eval_bare(quo_get_expr(.quo), quo_get_env(.quo))
-       12. ├─base::print(readtext("../data/fox/fox.txt"))
-       13. └─readtext:::print.readtext(readtext("../data/fox/fox.txt"))
-       14.   ├─base::print(tibble::trunc_mat(x, n = n))
-       15.   └─tibble::trunc_mat(x, n = n)
-      
-      [ FAIL 1 | WARN 1 | SKIP 10 | PASS 156 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-## In both
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘readtext_vignette.Rmd’ using rmarkdown
-    Quitting from lines 47-49 (readtext_vignette.Rmd) 
-    Error: processing vignette 'readtext_vignette.Rmd' failed with diagnostics:
-    could not find function "tbl_format_header"
-    --- failed re-building ‘readtext_vignette.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘readtext_vignette.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 1 marked Latin-1 string
-      Note: found 1 marked UTF-8 string
-      Note: found 7 strings marked as "bytes"
     ```
 
 # RSDA
@@ -1013,86 +621,6 @@ Run `revdepcheck::cloud_details(, "RSDA")` for more info
     Execution halted
     ```
 
-# saeSim
-
-<details>
-
-* Version: 0.11.0
-* GitHub: https://github.com/wahani/saeSim
-* Source code: https://github.com/cran/saeSim
-* Date/Publication: 2022-02-07 16:40:02 UTC
-* Number of recursive dependencies: 97
-
-Run `revdepcheck::cloud_details(, "saeSim")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘saeSim-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: agg_all
-    > ### Title: Aggregation function
-    > ### Aliases: agg_all
-    > 
-    > ### ** Examples
-    > 
-    > sim_base() %>% sim_gen_x() %>% sim_gen_e() %>% sim_agg(agg_all())
-    ...
-      Please report the issue at <https://github.com/wahani/saeSim/issues>.
-    Warning: `group_by_()` was deprecated in dplyr 0.7.0.
-    ℹ Please use `group_by()` instead.
-    ℹ See vignette('programming') for more help
-    ℹ The deprecated feature was likely used in the saeSim package.
-      Please report the issue at <https://github.com/wahani/saeSim/issues>.
-    Error in tbl_format_header(x, setup) : 
-      could not find function "tbl_format_header"
-    Calls: <Anonymous> -> <Anonymous> -> print -> trunc_mat
-    Execution halted
-    ```
-
-*   checking tests ... ERROR
-    ```
-      Running ‘test-all.R’
-    Running the tests in ‘tests/test-all.R’ failed.
-    Last 13 lines of output:
-      [ FAIL 1 | WARN 254 | SKIP 0 | PASS 133 ]
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Error ('test-sim_setup.R:14'): methods equal ────────────────────────────────
-      Error in `tbl_format_header(x, setup)`: could not find function "tbl_format_header"
-      Backtrace:
-          ▆
-       1. ├─methods::show(setup) at test-sim_setup.R:14:2
-       2. └─saeSim::show(setup)
-       3.   ├─base::print(trunc_mat(dat, n = 6, width = NULL))
-       4.   └─tibble::trunc_mat(dat, n = 6, width = NULL)
-      
-      [ FAIL 1 | WARN 254 | SKIP 0 | PASS 133 ]
-      Error: Test failures
-      Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error(s) in re-building vignettes:
-      ...
-    --- re-building ‘Introduction.Rmd’ using rmarkdown
-    Quitting from lines 31-39 (Introduction.Rmd) 
-    Error: processing vignette 'Introduction.Rmd' failed with diagnostics:
-    could not find function "tbl_format_header"
-    --- failed re-building ‘Introduction.Rmd’
-    
-    SUMMARY: processing the following file failed:
-      ‘Introduction.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
 # sfnetworks
 
 <details>
@@ -1122,15 +650,15 @@ Run `revdepcheck::cloud_details(, "sfnetworks")` for more info
     > 
     > ### ** Examples
     ...
+    > # With LINESTRING geometries.
+    > as_sfnetwork(roxel)
     # A sfnetwork with 701 nodes and 851 edges
     #
     # CRS:  EPSG:4326 
     #
     # A directed multigraph with 14 components with spatially explicit edges
     #
-    Error in tbl_format_header(x, setup) : 
-      could not find function "tbl_format_header"
-    Calls: <Anonymous> ... summarise_network_element -> do.call -> <Anonymous>
+    Error: $ operator is invalid for atomic vectors
     Execution halted
     ```
 
@@ -1140,7 +668,7 @@ Run `revdepcheck::cloud_details(, "sfnetworks")` for more info
     --- re-building ‘sfn01_structure.Rmd’ using rmarkdown
     Quitting from lines 64-82 (sfn01_structure.Rmd) 
     Error: processing vignette 'sfn01_structure.Rmd' failed with diagnostics:
-    could not find function "tbl_format_header"
+    $ operator is invalid for atomic vectors
     --- failed re-building ‘sfn01_structure.Rmd’
     
     --- re-building ‘sfn02_preprocess_clean.Rmd’ using rmarkdown
@@ -1148,7 +676,7 @@ Run `revdepcheck::cloud_details(, "sfnetworks")` for more info
     Error: processing vignette 'sfn02_preprocess_clean.Rmd' failed with diagnostics:
     ...
     Error: processing vignette 'sfn05_morphers.Rmd' failed with diagnostics:
-    could not find function "tbl_format_header"
+    $ operator is invalid for atomic vectors
     --- failed re-building ‘sfn05_morphers.Rmd’
     
     SUMMARY: processing the following files failed:
@@ -1191,9 +719,7 @@ Run `revdepcheck::cloud_details(, "tidygraph")` for more info
     > 
     > # Add nodes
     > graph %>% bind_nodes(data.frame(new = 1:4))
-    Error in tbl_format_header(x, setup) : 
-      could not find function "tbl_format_header"
-    Calls: <Anonymous> -> print.tbl_graph -> do.call -> <Anonymous>
+    Error: $ operator is invalid for atomic vectors
     Execution halted
     ```
 
@@ -1226,15 +752,15 @@ Run `revdepcheck::cloud_details(, "wordgraph")` for more info
     > 
     > # It is a time consuming function...
     ...
+    > # small random subset of the original data...
+    > 
     > freeassociationdata_part = dplyr::sample_n(freeassociationdata, 10)
     > 
     > df.word.combinations.as.tbl_graph = get.word.combinations.as.tbl_graph(
     + c("diet1stword", "diet2ndword", "diet3rdword"), freeassociationdata_part)
     > 
     > print(df.word.combinations.as.tbl_graph)
-    Error in tbl_format_header(x, setup) : 
-      could not find function "tbl_format_header"
-    Calls: print -> print.tbl_graph -> do.call -> <Anonymous>
+    Error: $ operator is invalid for atomic vectors
     Execution halted
     ```
 
