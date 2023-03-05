@@ -65,3 +65,8 @@ vivid
 wearables
 webSDM
 xpose.nlmixr2
+# take too long
+spatialsample
+em
+SVMMaj
+riot
