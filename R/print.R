@@ -106,252 +106,28 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
     details = "Printing has moved to the pillar package."
   )
 
-  rows <- nrow(x)
-
-  if (is.null(n) || n < 0) {
-    if (is.na(rows) || rows > tibble_opt("print_max")) {
-      n <- tibble_opt("print_min")
-    } else {
-      n <- rows
-    }
-  }
-  n_extra <- n_extra %||% tibble_opt("max_extra_cols")
-
-  if (is.na(rows)) {
-    df <- as.data.frame(head(x, n + 1))
-    if (nrow(df) <= n) {
-      rows <- nrow(df)
-    } else {
-      df <- df[seq_len(n), , drop = FALSE]
-    }
-  } else {
-    df <- as.data.frame(head(x, n))
+  if (!inherits(x, "tbl")) {
+    class(x) <- c("tbl", class(x))
   }
 
-  shrunk <- shrink_mat(df, rows, n, star = has_rownames(x))
-  trunc_info <- list(
-    width = width, rows_total = rows, rows_min = nrow(df),
-    n_extra = n_extra, summary = tbl_sum(x)
-  )
+  setup <- pillar::tbl_format_setup(x, width = width, n = n, max_extra_cols = n_extra)
 
-  structure(
-    c(shrunk, trunc_info),
-    class = c(paste0("trunc_mat_", class(x)), "trunc_mat")
-  )
-}
+  header <- pillar::tbl_format_header(x, setup)
+  body <- pillar::tbl_format_body(x, setup)
+  footer <- pillar::tbl_format_footer(x, setup)
 
-shrink_mat <- function(df, rows, n, star) {
-  df <- remove_rownames(df)
-  if (is.na(rows)) {
-    needs_dots <- (nrow(df) >= n)
-  } else {
-    needs_dots <- (rows > n)
-  }
-
-  if (needs_dots) {
-    rows_missing <- rows - n
-  } else {
-    rows_missing <- 0L
-  }
-
-  mcf <- pillar::colonnade(
-    df,
-    has_row_id = if (star) "*" else TRUE
-  )
-
-  list(
-    .do_not_rely_on_this_mcf = mcf,
-    .do_not_rely_on_this_rows_missing = rows_missing
-  )
+  text <- c(header, body, footer)
+  structure(list(text = text, summary = list(NULL)), class = "trunc_mat")
 }
 
 #' @importFrom pillar style_subtle
 #' @export
 format.trunc_mat <- function(x, width = NULL, ...) {
-  if (is.null(width)) {
-    width <- x$width
-  }
-
-  width <- tibble_width(width)
-
-  named_header <- format_header(x)
-  if (all(names2(named_header) == "")) {
-    header <- named_header
-  } else {
-    header <- paste0(
-      justify(
-        paste0(names2(named_header), ":"),
-        right = FALSE, space = NBSP
-      ),
-      # We add a space after the NBSP inserted by justify()
-      # so that wrapping occurs at the right location for very narrow outputs
-      " ",
-      named_header
-    )
-  }
-
-  comment <- format_comment(header, width = width)
-  squeezed <- pillar::squeeze(x$.do_not_rely_on_this_mcf, width = width)
-  mcf <- format_body(squeezed)
-
-  # Splitting lines is important, otherwise subtle style may be lost
-  # if column names contain spaces.
-  footer <- pre_dots(format_footer(x, squeezed))
-  footer_comment <- split_lines(format_comment(footer, width = width))
-
-  c(style_subtle(comment), mcf, style_subtle(footer_comment))
-}
-
-# Needs to be defined in package code: r-lib/pkgload#85
-print_with_mocked_format_body <- function(x, ...) {
-  scoped_lifecycle_silence()
-
-  mockr::with_mock(
-    format_body = function(x, ...) {
-      paste0("<body created by pillar>")
-    },
-    {
-      print(x, ...)
-    }
-  )
+  unclass(x)[[1]]
 }
 
 #' @export
 print.trunc_mat <- function(x, ...) {
-  cli::cat_line(format(x, ...))
+  writeLines(format(x, ...))
   invisible(x)
-}
-
-format_header <- function(x) {
-  x$summary
-}
-
-format_body <- function(x) {
-  format(x)
-}
-
-format_footer <- function(x, squeezed_colonnade) {
-  extra_rows <- format_footer_rows(x)
-  extra_cols <- format_footer_cols(x, pillar::extra_cols(squeezed_colonnade, n = x$n_extra))
-
-  extra <- c(extra_rows, extra_cols)
-  if (length(extra) >= 1) {
-    extra[[1]] <- paste0("with ", extra[[1]])
-    extra[-1] <- map_chr(extra[-1], function(ex) paste0("and ", ex))
-    collapse(extra)
-  } else {
-    character()
-  }
-}
-
-format_footer_rows <- function(x) {
-  if (length(x$.do_not_rely_on_this_mcf) != 0) {
-    if (is.na(x$.do_not_rely_on_this_rows_missing)) {
-      "more rows"
-    } else if (x$.do_not_rely_on_this_rows_missing > 0) {
-      paste0(big_mark(x$.do_not_rely_on_this_rows_missing), pluralise_n(" more row(s)", x$.do_not_rely_on_this_rows_missing))
-    }
-  } else if (is.na(x$rows_total) && x$rows_min > 0) {
-    paste0("at least ", big_mark(x$rows_min), pluralise_n(" row(s) total", x$rows_min))
-  }
-}
-
-format_footer_cols <- function(x, extra_cols) {
-  if (length(extra_cols) == 0) return(NULL)
-
-  vars <- format_extra_vars(extra_cols)
-  paste0(
-    big_mark(length(extra_cols)), " ",
-    if (!identical(x$rows_total, 0L) && x$rows_min > 0) "more ",
-    pluralise("variable(s)", extra_cols), vars
-  )
-}
-
-format_extra_vars <- function(extra_cols) {
-  # Also covers empty extra_cols vector!
-  if (is.na(extra_cols[1])) return("")
-
-  if (anyNA(extra_cols)) {
-    extra_cols <- c(extra_cols[!is.na(extra_cols)], cli::symbol$ellipsis)
-  }
-
-  paste0(": ", collapse(extra_cols))
-}
-
-format_comment <- function(x, width) {
-  if (length(x) == 0L) return(character())
-  map_chr(x, wrap, prefix = "# ", width = min(width, getOption("width")))
-}
-
-pre_dots <- function(x) {
-  if (length(x) > 0) {
-    paste0(cli::symbol$ellipsis, " ", x)
-  } else {
-    character()
-  }
-}
-
-justify <- function(x, right = TRUE, space = " ") {
-  if (length(x) == 0L) return(character())
-  width <- nchar_width(x)
-  max_width <- max(width)
-  spaces_template <- paste(rep(space, max_width), collapse = "")
-  spaces <- map_chr(max_width - width, substr, x = spaces_template, start = 1L)
-  if (right) {
-    paste0(spaces, x)
-  } else {
-    paste0(x, spaces)
-  }
-}
-
-split_lines <- function(x) {
-  # Avoid .ptype argument to vec_c()
-  if (is_empty(x)) return(character())
-
-  unlist(strsplit(x, "\n", fixed = TRUE))
-}
-
-
-big_mark <- function(x, ...) {
-  # The thousand separator,
-  # "," unless it's used for the decimal point, in which case "."
-  mark <- if (identical(getOption("OutDec"), ",")) "." else ","
-  ret <- formatC(x, big.mark = mark, format = "d", ...)
-  ret[is.na(x)] <- "??"
-  ret
-}
-
-mult_sign <- function() {
-  "x"
-}
-
-spaces_around <- function(x) {
-  paste0(" ", x, " ")
-}
-
-format_n <- function(x) collapse(quote_n(x))
-
-quote_n <- function(x) UseMethod("quote_n")
-#' @export
-quote_n.default <- function(x) as.character(x)
-#' @export
-quote_n.character <- function(x) tick(x)
-
-collapse <- function(x) paste(x, collapse = ", ")
-
-# wrap --------------------------------------------------------------------
-
-NBSP <- "\U00A0"
-
-wrap <- function(..., indent = 0, prefix = "", width) {
-  x <- paste0(..., collapse = "")
-  wrapped <- strwrap2(x, width - nchar_width(prefix), indent)
-  wrapped <- paste0(prefix, wrapped)
-  wrapped <- gsub(NBSP, " ", wrapped)
-
-  paste0(wrapped, collapse = "\n")
-}
-
-strwrap2 <- function(x, width, indent) {
-  fansi::strwrap_ctl(x, width = max(width, 0), indent = indent, exdent = indent + 2)
 }

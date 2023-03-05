@@ -5,6 +5,16 @@ pluralise_msg <- function(message, objects) {
   )
 }
 
+format_n <- function(x) collapse(quote_n(x))
+
+quote_n <- function(x) UseMethod("quote_n")
+#' @export
+quote_n.default <- function(x) as.character(x)
+#' @export
+quote_n.character <- function(x) tick(x)
+
+collapse <- function(x) paste(x, collapse = ", ")
+
 pluralise_commas <- function(message, objects, ...) {
   paste0(
     pluralise_n(message, length(objects)),
@@ -71,6 +81,14 @@ problems <- function(header, ..., .problem = " problem(s)") {
 
   problems <- set_default_name(problems, "x")
   bullets(header, problems)
+}
+
+pre_dots <- function(x) {
+  if (length(x) > 0) {
+    paste0(cli::symbol$ellipsis, " ", x)
+  } else {
+    character()
+  }
 }
 
 commas <- function(problems) {
