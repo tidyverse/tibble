@@ -110,7 +110,7 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
     class(x) <- c("tbl", class(x))
   }
 
-  setup <- pillar::tbl_format_setup(x, width = width, n = n, n_extra = max_extra_cols)
+  setup <- pillar::tbl_format_setup(x, width = width, n = n, max_extra_cols = n_extra)
 
   header <- pillar::tbl_format_header(x, setup)
   body <- pillar::tbl_format_body(x, setup)
