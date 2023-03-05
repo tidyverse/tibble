@@ -117,7 +117,7 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   footer <- pillar::tbl_format_footer(x, setup)
 
   text <- c(header, body, footer)
-  structure(list(text), class = "trunc_mat")
+  structure(list(text = text, summary = list(NULL)), class = "trunc_mat")
 }
 
 #' @importFrom pillar style_subtle
