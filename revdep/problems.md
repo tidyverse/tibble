@@ -31,7 +31,9 @@ Run `revdepcheck::cloud_details(, "akc")` for more info
     +    doc_group(id = "id",keyword = "keyword") -> grouped_doc
     > 
     >  grouped_doc
-    Error: $ operator is invalid for atomic vectors
+    Error in names(bottom$summary) <- `*vtmp*` : 
+      attempt to set an attribute on NULL
+    Calls: <Anonymous> -> print.tbl_graph
     Execution halted
     ```
 
@@ -45,7 +47,7 @@ Run `revdepcheck::cloud_details(, "akc")` for more info
     --- re-building ‘akc_vignette.Rmd’ using rmarkdown
     Quitting from lines 75-79 (akc_vignette.Rmd) 
     Error: processing vignette 'akc_vignette.Rmd' failed with diagnostics:
-    $ operator is invalid for atomic vectors
+    attempt to set an attribute on NULL
     --- failed re-building ‘akc_vignette.Rmd’
     ...
       Some words could not fit on page. They have been placed at their original positions.
@@ -90,14 +92,14 @@ Run `revdepcheck::cloud_details(, "arulesViz")` for more info
     > 
     ...
     
-        groups
-    
     The following object is masked from ‘package:stats’:
     
         filter
     
     > as_tbl_graph(g)
-    Error: $ operator is invalid for atomic vectors
+    Error in names(bottom$summary) <- `*vtmp*` : 
+      attempt to set an attribute on NULL
+    Calls: <Anonymous> -> print.tbl_graph
     Execution halted
     ```
 
@@ -160,7 +162,9 @@ Run `revdepcheck::cloud_details(, "chemodiv")` for more info
     > molNet(minimalCompDis, minimalNPCTable, cutOff = 0)
     Using cut-off value = 0
     $networkObject
-    Error: $ operator is invalid for atomic vectors
+    Error in names(bottom$summary) <- `*vtmp*` : 
+      attempt to set an attribute on NULL
+    Calls: <Anonymous> -> print.tbl_graph
     Execution halted
     ```
 
@@ -193,15 +197,15 @@ Run `revdepcheck::cloud_details(, "fastRG")` for more info
     > ### ** Examples
     > 
     ...
-    [46] 55--17  59--98  47--15  37--62  85--49  65--98  37--98  22--33  56--77 
-    [55] 25--51  20--80  16--57  25--71  52--64  12--47  8 --80  79--18  22--62 
     [64] 14--31  37--69  54--16  26--90  38--94  79--20  70--97  19--90  11--71 
     + ... omitted several edges
     > 
     > ### sampling graphs as tidygraph graphs ---------------
     > 
     > sample_tidygraph(ufm)
-    Error: $ operator is invalid for atomic vectors
+    Error in names(bottom$summary) <- `*vtmp*` : 
+      attempt to set an attribute on NULL
+    Calls: <Anonymous> -> print.tbl_graph
     Execution halted
     ```
 
@@ -284,12 +288,12 @@ Run `revdepcheck::cloud_details(, "ggraph")` for more info
     --- re-building ‘Layouts.Rmd’ using rmarkdown
     Quitting from lines 93-94 (Layouts.Rmd) 
     Error: processing vignette 'Layouts.Rmd' failed with diagnostics:
-    $ operator is invalid for atomic vectors
+    attempt to set an attribute on NULL
     --- failed re-building ‘Layouts.Rmd’
     ...
     Quitting from lines 67-77 (tidygraph.Rmd) 
     Error: processing vignette 'tidygraph.Rmd' failed with diagnostics:
-    $ operator is invalid for atomic vectors
+    attempt to set an attribute on NULL
     --- failed re-building ‘tidygraph.Rmd’
     
     SUMMARY: processing the following files failed:
@@ -338,15 +342,15 @@ Run `revdepcheck::cloud_details(, "GISSB")` for more info
     > ### ** Examples
     > 
     ...
-    > 
-    > graph <- vegnett_list[[1]]
     > nodes <- vegnett_list[[2]]
     > edges <- vegnett_list[[3]]
     > graph_cppRouting_minutes <- vegnett_list[[4]]
     > graph_cppRouting_meters <- vegnett_list[[5]]
     > 
     > graph
-    Error: $ operator is invalid for atomic vectors
+    Error in names(bottom$summary) <- `*vtmp*` : 
+      attempt to set an attribute on NULL
+    Calls: <Anonymous> -> print.tbl_graph
     Execution halted
     ```
 
@@ -380,7 +384,7 @@ Run `revdepcheck::cloud_details(, "malan")` for more info
     --- re-building ‘case-study-partial.Rmd’ using rmarkdown
     Quitting from lines 76-78 (case-study-partial.Rmd) 
     Error: processing vignette 'case-study-partial.Rmd' failed with diagnostics:
-    $ operator is invalid for atomic vectors
+    attempt to set an attribute on NULL
     --- failed re-building ‘case-study-partial.Rmd’
     
     --- re-building ‘introduction.Rmd’ using rmarkdown
@@ -431,15 +435,15 @@ Run `revdepcheck::cloud_details(, "migraph")` for more info
     > ### ** Examples
     > 
     ...
-    B 1 0 1
-    C 1 1 0
     > as_igraph(test)
-    IGRAPH 90af426 DN-B 6 5 -- 
+    IGRAPH 3fd5ee9 DN-B 6 5 -- 
     + attr: name (v/c), type (v/l)
-    + edges from 90af426 (vertex names):
+    + edges from 3fd5ee9 (vertex names):
     [1] A->I B->G B->I C->G C->H
     > as_tidygraph(test)
-    Error: $ operator is invalid for atomic vectors
+    Error in names(bottom$summary) <- `*vtmp*` : 
+      attempt to set an attribute on NULL
+    Calls: <Anonymous> -> print.tbl_graph
     Execution halted
     ```
 
@@ -472,15 +476,15 @@ Run `revdepcheck::cloud_details(, "NetFACS")` for more info
     > ### ** Examples
     > 
     ...
-    > network_conditional(
-    +   netfacs.data = conditional.probs,
     +   min.prob = 0.01,
     +   min.count = 3,
     +   ignore.element = "25",
     +   plot.bubbles = FALSE
     + )
     $network
-    Error: $ operator is invalid for atomic vectors
+    Error in names(bottom$summary) <- `*vtmp*` : 
+      attempt to set an attribute on NULL
+    Calls: <Anonymous> -> print.tbl_graph
     Execution halted
     ```
 
@@ -515,7 +519,9 @@ Run `revdepcheck::cloud_details(, "panelr")` for more info
     > data("WageData")
     > wages <- panel_data(WageData, id = id, wave = t)
     > complete_data(wages, wks, lwage, min.waves = 3)
-    Error: $ operator is invalid for atomic vectors
+    Error in names(print_tbl$summary) <- `*vtmp*` : 
+      attempt to set an attribute on NULL
+    Calls: <Anonymous> -> print.panel_data
     Execution halted
     ```
 
@@ -529,7 +535,7 @@ Run `revdepcheck::cloud_details(, "panelr")` for more info
     --- re-building ‘wbm.Rmd’ using rmarkdown
     Quitting from lines 59-61 (wbm.Rmd) 
     Error: processing vignette 'wbm.Rmd' failed with diagnostics:
-    $ operator is invalid for atomic vectors
+    attempt to set an attribute on NULL
     --- failed re-building ‘wbm.Rmd’
     
     SUMMARY: processing the following file failed:
@@ -621,72 +627,6 @@ Run `revdepcheck::cloud_details(, "RSDA")` for more info
     Execution halted
     ```
 
-# sfnetworks
-
-<details>
-
-* Version: 0.6.2
-* GitHub: https://github.com/luukvdmeer/sfnetworks
-* Source code: https://github.com/cran/sfnetworks
-* Date/Publication: 2023-02-26 19:00:02 UTC
-* Number of recursive dependencies: 105
-
-Run `revdepcheck::cloud_details(, "sfnetworks")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking examples ... ERROR
-    ```
-    Running examples in ‘sfnetworks-Ex.R’ failed
-    The error most likely occurred in:
-    
-    > ### Name: as_sfnetwork
-    > ### Title: Convert a foreign object to a sfnetwork
-    > ### Aliases: as_sfnetwork as_sfnetwork.default as_sfnetwork.sf
-    > ###   as_sfnetwork.linnet as_sfnetwork.psp as_sfnetwork.sfc
-    > ###   as_sfnetwork.sfNetwork as_sfnetwork.sfnetwork as_sfnetwork.tbl_graph
-    > 
-    > ### ** Examples
-    ...
-    > # With LINESTRING geometries.
-    > as_sfnetwork(roxel)
-    # A sfnetwork with 701 nodes and 851 edges
-    #
-    # CRS:  EPSG:4326 
-    #
-    # A directed multigraph with 14 components with spatially explicit edges
-    #
-    Error: $ operator is invalid for atomic vectors
-    Execution halted
-    ```
-
-*   checking re-building of vignette outputs ... WARNING
-    ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘sfn01_structure.Rmd’ using rmarkdown
-    Quitting from lines 64-82 (sfn01_structure.Rmd) 
-    Error: processing vignette 'sfn01_structure.Rmd' failed with diagnostics:
-    $ operator is invalid for atomic vectors
-    --- failed re-building ‘sfn01_structure.Rmd’
-    
-    --- re-building ‘sfn02_preprocess_clean.Rmd’ using rmarkdown
-    Quitting from lines 55-67 (sfn02_preprocess_clean.Rmd) 
-    Error: processing vignette 'sfn02_preprocess_clean.Rmd' failed with diagnostics:
-    ...
-    Error: processing vignette 'sfn05_morphers.Rmd' failed with diagnostics:
-    $ operator is invalid for atomic vectors
-    --- failed re-building ‘sfn05_morphers.Rmd’
-    
-    SUMMARY: processing the following files failed:
-      ‘sfn01_structure.Rmd’ ‘sfn02_preprocess_clean.Rmd’
-      ‘sfn03_join_filter.Rmd’ ‘sfn04_routing.Rmd’ ‘sfn05_morphers.Rmd’
-    
-    Error: Vignette re-building failed.
-    Execution halted
-    ```
-
 # tidygraph
 
 <details>
@@ -719,7 +659,9 @@ Run `revdepcheck::cloud_details(, "tidygraph")` for more info
     > 
     > # Add nodes
     > graph %>% bind_nodes(data.frame(new = 1:4))
-    Error: $ operator is invalid for atomic vectors
+    Error in names(bottom$summary) <- `*vtmp*` : 
+      attempt to set an attribute on NULL
+    Calls: <Anonymous> -> print.tbl_graph
     Execution halted
     ```
 
@@ -752,15 +694,15 @@ Run `revdepcheck::cloud_details(, "wordgraph")` for more info
     > 
     > # It is a time consuming function...
     ...
-    > # small random subset of the original data...
-    > 
     > freeassociationdata_part = dplyr::sample_n(freeassociationdata, 10)
     > 
     > df.word.combinations.as.tbl_graph = get.word.combinations.as.tbl_graph(
     + c("diet1stword", "diet2ndword", "diet3rdword"), freeassociationdata_part)
     > 
     > print(df.word.combinations.as.tbl_graph)
-    Error: $ operator is invalid for atomic vectors
+    Error in names(bottom$summary) <- `*vtmp*` : 
+      attempt to set an attribute on NULL
+    Calls: print -> print.tbl_graph
     Execution halted
     ```
 

@@ -1,9 +1,9 @@
 # Revdeps
 
-## New problems (15)
+## New problems (14)
 
-|package    |version |error    |warning |note |
-|:----------|:-------|:--------|:-------|:----|
+|package   |version |error    |warning |note |
+|:---------|:-------|:--------|:-------|:----|
 |[akc](problems.md#akc)|0.9.9   |__+1__   |__+1__  |     |
 |[arulesViz](problems.md#arulesviz)|1.5-1   |__+1__   |        |1    |
 |[chemodiv](problems.md#chemodiv)|0.2.0   |__+1__   |        |     |
@@ -16,7 +16,6 @@
 |[NetFACS](problems.md#netfacs)|0.5.0   |__+1__   |        |     |
 |[panelr](problems.md#panelr)|0.7.7   |1 __+1__ |__+1__  |1    |
 |[RSDA](problems.md#rsda)|3.0.13  |__+1__   |__+1__  |     |
-|[sfnetworks](problems.md#sfnetworks)|0.6.2   |__+1__   |__+1__  |     |
 |[tidygraph](problems.md#tidygraph)|1.2.3   |__+1__   |        |     |
 |[wordgraph](problems.md#wordgraph)|0.1.0   |__+1__   |        |1    |
 

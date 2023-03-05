@@ -1,8 +1,8 @@
 ## revdepcheck results
 
-We checked 20 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 15 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 15 new problems
+ * We saw 14 new problems
  * We failed to check 0 packages
 
 Issues with CRAN packages are summarised below.
@@ -47,10 +47,6 @@ Issues with CRAN packages are summarised below.
   checking re-building of vignette outputs ... WARNING
 
 * RSDA
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... WARNING
-
-* sfnetworks
   checking examples ... ERROR
   checking re-building of vignette outputs ... WARNING
 
