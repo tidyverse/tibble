@@ -1,5 +1,28 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.1.8.9011
+
+## Chore
+
+- Fix r-oldrel-4 checks.
+
+- Breaking change: Remove `knit_print.trunc_mat()` method (#1516).
+
+- Adapt to dev rlang.
+
+- List notoriously failing revdep packages.
+
+- Warn with partial matching in tests.
+
+- Fix partial argument matching.
+
+- Deprecate `data_frame_()`, `lst_()`, `frame_data()`, `as_tibble(validate = )`, `as_tibble(NULL)`, `new_tibble(subclass = )`, `add_row()` and `add_column()` for non-data-frame input, `add_column()` for input with non-unique names, and corner cases for `tbl[[x]]` (#1515).
+
+## Breaking changes
+
+- Breaking change: Remove `knit_print.trunc_mat()` method (#1516).
+
+
 # tibble 3.1.8.9010
 
 ## Chore
