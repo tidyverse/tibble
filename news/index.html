@@ -76,165 +76,49 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="3.2.0" id="tibble-320">tibble 3.2.0<a class="anchor" aria-label="anchor" href="#tibble-320"></a></h2>
 <div class="section level3">
-<h3 id="chore-3-2-0">Chore<a class="anchor" aria-label="anchor" href="#chore-3-2-0"></a></h3>
-<ul><li>Ignore revdep packages that take too long.</li>
+<h3 id="features-3-2-0">Features<a class="anchor" aria-label="anchor" href="#features-3-2-0"></a></h3>
+<ul><li><p>Accurate location of the source of an error in error messages (<a href="https://github.com/tidyverse/tibble/issues/1379" class="external-link">#1379</a>, <a href="https://github.com/tidyverse/tibble/issues/1065" class="external-link">#1065</a>, <a href="https://github.com/tidyverse/tibble/issues/1508" class="external-link">#1508</a>).</p></li>
+<li><p><code><a href="../reference/deprecated.html">as_data_frame()</a></code> now also refers to <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> in its deprecation message (<a href="https://github.com/tidyverse/tibble/issues/1149" class="external-link">#1149</a>, <a href="https://github.com/tidyverse/tibble/issues/1506" class="external-link">#1506</a>).</p></li>
 </ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.1.8.9012" id="tibble-3189012">tibble 3.1.8.9012<a class="anchor" aria-label="anchor" href="#tibble-3189012"></a></h2>
 <div class="section level3">
-<h3 id="chore-3-1-8-9012">Chore<a class="anchor" aria-label="anchor" href="#chore-3-1-8-9012"></a></h3>
-<ul><li>Forward <code><a href="../reference/trunc_mat.html">trunc_mat()</a></code> to new-style pillar methods (<a href="https://github.com/tidyverse/tibble/issues/1517" class="external-link">#1517</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.1.8.9011" id="tibble-3189011">tibble 3.1.8.9011<a class="anchor" aria-label="anchor" href="#tibble-3189011"></a></h2>
-<div class="section level3">
-<h3 id="chore-3-1-8-9011">Chore<a class="anchor" aria-label="anchor" href="#chore-3-1-8-9011"></a></h3>
-<ul><li><p>Fix r-oldrel-4 checks.</p></li>
+<h3 id="breaking-changes-3-2-0">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-3-2-0"></a></h3>
+<ul><li>
+<p>Deprecated functions and arguments where we could not detect usage by other CRAN packages (<a href="https://github.com/tidyverse/tibble/issues/1515" class="external-link">#1515</a>):</p>
+<ul><li><p><code><a href="../reference/deprecated.html">data_frame_()</a></code>, <code><a href="../reference/deprecated.html">lst_()</a></code>, <code><a href="../reference/deprecated.html">frame_data()</a></code></p></li>
+<li><p><code>as_tibble(validate = )</code>, <code>as_tibble(NULL)</code>, <code>new_tibble(subclass = )</code></p></li>
+<li><p><code><a href="../reference/add_row.html">add_row()</a></code> and <code><a href="../reference/add_column.html">add_column()</a></code> for non-data-frame input</p></li>
+<li><p><code><a href="../reference/add_column.html">add_column()</a></code> for input with non-unique names</p></li>
+<li><p>corner cases for <code>tbl[[x]]</code></p></li>
+</ul></li>
 <li><p>Breaking change: Remove <code>knit_print.trunc_mat()</code> method (<a href="https://github.com/tidyverse/tibble/issues/1516" class="external-link">#1516</a>).</p></li>
-<li><p>Adapt to dev rlang.</p></li>
-<li><p>List notoriously failing revdep packages.</p></li>
-<li><p>Warn with partial matching in tests.</p></li>
-<li><p>Fix partial argument matching.</p></li>
-<li><p>Deprecate <code><a href="../reference/deprecated.html">data_frame_()</a></code>, <code><a href="../reference/deprecated.html">lst_()</a></code>, <code><a href="../reference/deprecated.html">frame_data()</a></code>, <code>as_tibble(validate = )</code>, <code>as_tibble(NULL)</code>, <code>new_tibble(subclass = )</code>, <code><a href="../reference/add_row.html">add_row()</a></code> and <code><a href="../reference/add_column.html">add_column()</a></code> for non-data-frame input, <code><a href="../reference/add_column.html">add_column()</a></code> for input with non-unique names, and corner cases for <code>tbl[[x]]</code> (<a href="https://github.com/tidyverse/tibble/issues/1515" class="external-link">#1515</a>).</p></li>
+<li><p>Forward <code><a href="../reference/trunc_mat.html">trunc_mat()</a></code> to new-style pillar methods (<a href="https://github.com/tidyverse/tibble/issues/1517" class="external-link">#1517</a>).</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="breaking-changes-3-1-8-9011">Breaking changes<a class="anchor" aria-label="anchor" href="#breaking-changes-3-1-8-9011"></a></h3>
-<ul><li>Breaking change: Remove <code>knit_print.trunc_mat()</code> method (<a href="https://github.com/tidyverse/tibble/issues/1516" class="external-link">#1516</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.1.8.9010" id="tibble-3189010">tibble 3.1.8.9010<a class="anchor" aria-label="anchor" href="#tibble-3189010"></a></h2>
-<div class="section level3">
-<h3 id="chore-3-1-8-9010">Chore<a class="anchor" aria-label="anchor" href="#chore-3-1-8-9010"></a></h3>
-<ul><li><p>Remove obsolete tests (<a href="https://github.com/tidyverse/tibble/issues/1513" class="external-link">#1513</a>).</p></li>
-<li><p>Use <code>vec_as_location(missing = "error")</code> for better error messages (<a href="https://github.com/tidyverse/tibble/issues/741" class="external-link">#741</a>, <a href="https://github.com/tidyverse/tibble/issues/1511" class="external-link">#1511</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-3-1-8-9010">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-3-1-8-9010"></a></h3>
-<ul><li>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1512" class="external-link">#1512</a> from tidyverse/docs-1151-1070-275-tweaks.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.1.8.9009" id="tibble-3189009">tibble 3.1.8.9009<a class="anchor" aria-label="anchor" href="#tibble-3189009"></a></h2>
-<div class="section level3">
-<h3 id="features-3-1-8-9009">Features<a class="anchor" aria-label="anchor" href="#features-3-1-8-9009"></a></h3>
-<ul><li>Revert <code><a href="../reference/deprecated.html">as_data_frame()</a></code> now also refers to <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> in its deprecation message.</li>
-</ul><p>Revert “Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1504" class="external-link">#1504</a> from tidyverse/f-1202-as-row-names”</p>
-<p>This reverts commit 83e617811b837423ffc2fbd4533946cf05ae2563, reversing changes made to 21729a3c850accd490f6837094bde319094d9b9e.</p>
-</div>
-<div class="section level3">
-<h3 id="chore-3-1-8-9009">Chore<a class="anchor" aria-label="anchor" href="#chore-3-1-8-9009"></a></h3>
-<ul><li><p>Remove compatibility code for RSDA package which is broken anyway due to other changes (<a href="https://github.com/tidyverse/tibble/issues/923" class="external-link">#923</a>, <a href="https://github.com/tidyverse/tibble/issues/1509" class="external-link">#1509</a>).</p></li>
-<li><p>Accurate location of error source in error messages (<a href="https://github.com/tidyverse/tibble/issues/1065" class="external-link">#1065</a>, <a href="https://github.com/tidyverse/tibble/issues/1508" class="external-link">#1508</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-3-1-8-9009">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-3-1-8-9009"></a></h3>
-<ul><li>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1510" class="external-link">#1510</a> from tidyverse/f-split-frontend-2.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.1.8.9008" id="tibble-3189008">tibble 3.1.8.9008<a class="anchor" aria-label="anchor" href="#tibble-3189008"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-3-1-8-9008">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-3-1-8-9008"></a></h3>
+<h3 id="bug-fixes-3-2-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-3-2-0"></a></h3>
 <ul><li>Allow <code>glue()</code> and other classed characters for subassignment (<a href="https://github.com/tidyverse/tibble/issues/1150" class="external-link">#1150</a>, <a href="https://github.com/tidyverse/tibble/issues/1503" class="external-link">#1503</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="features-3-1-8-9008">Features<a class="anchor" aria-label="anchor" href="#features-3-1-8-9008"></a></h3>
-<ul><li>
-<code><a href="../reference/deprecated.html">as_data_frame()</a></code> now also refers to <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> in its deprecation message (<a href="https://github.com/tidyverse/tibble/issues/1149" class="external-link">#1149</a>, <a href="https://github.com/tidyverse/tibble/issues/1506" class="external-link">#1506</a>).</li>
+<h3 id="performance-3-2-0">Performance<a class="anchor" aria-label="anchor" href="#performance-3-2-0"></a></h3>
+<ul><li>Reduce overhead of single-column subset assignment (<a href="https://github.com/tidyverse/tibble/issues/1363" class="external-link">#1363</a>).</li>
 </ul></div>
 <div class="section level3">
-<h3 id="chore-3-1-8-9008">Chore<a class="anchor" aria-label="anchor" href="#chore-3-1-8-9008"></a></h3>
-<ul><li><p>Retry continuous benchmarks until success (<a href="https://github.com/tidyverse/tibble/issues/1505" class="external-link">#1505</a>).</p></li>
-<li><p>Fix tests (<a href="https://github.com/tidyverse/tibble/issues/1500" class="external-link">#1500</a>).</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.1.8.9007" id="tibble-3189007">tibble 3.1.8.9007<a class="anchor" aria-label="anchor" href="#tibble-3189007"></a></h2>
-<div class="section level3">
-<h3 id="chore-3-1-8-9007">Chore<a class="anchor" aria-label="anchor" href="#chore-3-1-8-9007"></a></h3>
-<ul><li><p>Use usethis namespace.</p></li>
-<li><p>Add GitPod infrastructure.</p></li>
-<li><p>Require R &gt;= 3.4.0, dependency hygiene (<a href="https://github.com/tidyverse/tibble/issues/1490" class="external-link">#1490</a>, <a href="https://github.com/tidyverse/tibble/issues/1071" class="external-link">#1071</a>).</p></li>
-</ul><p>Closes <a href="https://github.com/tidyverse/tibble/issues/1071" class="external-link">#1071</a>. Closes <a href="https://github.com/tidyverse/tibble/issues/1490" class="external-link">#1490</a>.</p>
-</div>
-<div class="section level3">
-<h3 id="documentation-3-1-8-9007">Documentation<a class="anchor" aria-label="anchor" href="#documentation-3-1-8-9007"></a></h3>
-<ul><li>Fix display of mermaid diagrams in <code><a href="../articles/formats.html">vignette("formats")</a></code> (<a href="https://github.com/maelle" class="external-link">@maelle</a>, <a href="https://github.com/tidyverse/tibble/issues/1497" class="external-link">#1497</a>, <a href="https://github.com/tidyverse/tibble/issues/1498" class="external-link">#1498</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-3-1-8-9007">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-3-1-8-9007"></a></h3>
-<ul><li>Snapshot updates for rcc-smoke (null) (<a href="https://github.com/tidyverse/tibble/issues/1495" class="external-link">#1495</a>).</li>
-</ul><p>Snapshot updates for rcc-smoke (null)</p>
-</div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.1.8.9006" id="tibble-3189006">tibble 3.1.8.9006<a class="anchor" aria-label="anchor" href="#tibble-3189006"></a></h2>
-<ul><li>Internal changes only.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.1.8.9005" id="tibble-3189005">tibble 3.1.8.9005<a class="anchor" aria-label="anchor" href="#tibble-3189005"></a></h2>
-<ul><li>Internal changes only.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.1.8.9004" id="tibble-3189004">tibble 3.1.8.9004<a class="anchor" aria-label="anchor" href="#tibble-3189004"></a></h2>
-<ul><li>Internal changes only.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.1.8.9003" id="tibble-3189003">tibble 3.1.8.9003<a class="anchor" aria-label="anchor" href="#tibble-3189003"></a></h2>
-<div class="section level3">
-<h3 id="chore-3-1-8-9003">Chore<a class="anchor" aria-label="anchor" href="#chore-3-1-8-9003"></a></h3>
-<ul><li>Remove legacy expectation (<a href="https://github.com/tidyverse/tibble/issues/1468" class="external-link">#1468</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-3-1-8-9003">Documentation<a class="anchor" aria-label="anchor" href="#documentation-3-1-8-9003"></a></h3>
-<ul><li>Use lambda in <code><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across()</a></code> in vignette for compatibility with dplyr 1.1.0 (<a href="https://github.com/tidyverse/tibble/issues/1485" class="external-link">#1485</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-3-1-8-9003">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-3-1-8-9003"></a></h3>
-<ul><li><p>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1481" class="external-link">#1481</a> from tidyverse/snapshot-main-rcc-smoke-null.</p></li>
-<li><p>Harmonize yaml formatting.</p></li>
-<li><p>Revert changes to matrix section.</p></li>
-<li><p>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1475" class="external-link">#1475</a> from tidyverse/snapshot-main-rcc-smoke-null.</p></li>
-<li><p>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1474" class="external-link">#1474</a> from IndrajeetPatil/doc_edits.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.1.8.9002" id="tibble-3189002">tibble 3.1.8.9002<a class="anchor" aria-label="anchor" href="#tibble-3189002"></a></h2>
-<div class="section level3">
-<h3 id="features-3-1-8-9002">Features<a class="anchor" aria-label="anchor" href="#features-3-1-8-9002"></a></h3>
-<ul><li><p>Correct top-level calls are shown for the vast majority of errors (<a href="https://github.com/tidyverse/tibble/issues/1379" class="external-link">#1379</a>).</p></li>
-<li><p>Using cli for formatting conditions (<a href="https://github.com/tidyverse/tibble/issues/1387" class="external-link">#1387</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="chore-3-1-8-9002">Chore<a class="anchor" aria-label="anchor" href="#chore-3-1-8-9002"></a></h3>
-<ul><li><p>Check if R version changed (<a href="https://github.com/tidyverse/tibble/issues/1365" class="external-link">#1365</a>).</p></li>
-<li><p>Define responsibility for setting row names and class (<a href="https://github.com/tidyverse/tibble/issues/1364" class="external-link">#1364</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-3-1-8-9002">Documentation<a class="anchor" aria-label="anchor" href="#documentation-3-1-8-9002"></a></h3>
-<ul><li><p>Update example for <code>nrow</code> argument to <code><a href="../reference/new_tibble.html">new_tibble()</a></code> (<a href="https://github.com/heavywatal" class="external-link">@heavywatal</a>, <a href="https://github.com/tidyverse/tibble/issues/1394" class="external-link">#1394</a>).</p></li>
+<h3 id="documentation-3-2-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-3-2-0"></a></h3>
+<ul><li><p>New <code><a href="../articles/extending.html">vignette("extending")</a></code> (<a href="https://github.com/tidyverse/tibble/issues/275" class="external-link">#275</a>, <a href="https://github.com/tidyverse/tibble/issues/1512" class="external-link">#1512</a>).</p></li>
+<li><p>Minor updates (<a href="https://github.com/tidyverse/tibble/issues/1151" class="external-link">#1151</a>, <a href="https://github.com/tidyverse/tibble/issues/1070" class="external-link">#1070</a>, <a href="https://github.com/tidyverse/tibble/issues/1512" class="external-link">#1512</a>, <a href="https://github.com/tidyverse/tibble/issues/1485" class="external-link">#1485</a>).</p></li>
+<li><p>Update example for <code>nrow</code> argument to <code><a href="../reference/new_tibble.html">new_tibble()</a></code> (<a href="https://github.com/heavywatal" class="external-link">@heavywatal</a>, <a href="https://github.com/tidyverse/tibble/issues/1394" class="external-link">#1394</a>).</p></li>
+<li><p>Fix display of mermaid diagrams in <code><a href="../articles/formats.html">vignette("formats")</a></code> (<a href="https://github.com/maelle" class="external-link">@maelle</a>, <a href="https://github.com/tidyverse/tibble/issues/1497" class="external-link">#1497</a>, <a href="https://github.com/tidyverse/tibble/issues/1498" class="external-link">#1498</a>).</p></li>
 <li><p>Remove ANSI escapes from invariants article on pkgdown (<a href="https://github.com/tidyverse/tibble/issues/1374" class="external-link">#1374</a>).</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="performance-3-1-8-9002">Performance<a class="anchor" aria-label="anchor" href="#performance-3-1-8-9002"></a></h3>
-<ul><li>Reduce overhead of single-column subset assignment (<a href="https://github.com/tidyverse/tibble/issues/1363" class="external-link">#1363</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.1.8.9001" id="tibble-3189001">tibble 3.1.8.9001<a class="anchor" aria-label="anchor" href="#tibble-3189001"></a></h2>
-<div class="section level3">
-<h3 id="chore-3-1-8-9001">Chore<a class="anchor" aria-label="anchor" href="#chore-3-1-8-9001"></a></h3>
+<h3 id="internal-3-2-0">Internal<a class="anchor" aria-label="anchor" href="#internal-3-2-0"></a></h3>
 <ul><li><p>Require vctrs &gt;= 0.4.1 and pillar &gt;= 1.8.1</p></li>
+<li><p>Use cli for formatting conditions (<a href="https://github.com/tidyverse/tibble/issues/1387" class="external-link">#1387</a>).</p></li>
+<li><p>Use <code>vec_as_location(missing = "error")</code> for better error messages (<a href="https://github.com/tidyverse/tibble/issues/741" class="external-link">#741</a>, <a href="https://github.com/tidyverse/tibble/issues/1511" class="external-link">#1511</a>).</p></li>
+<li><p>Remove compatibility code for RSDA package which is broken anyway due to other changes (<a href="https://github.com/tidyverse/tibble/issues/923" class="external-link">#923</a>, <a href="https://github.com/tidyverse/tibble/issues/1509" class="external-link">#1509</a>).</p></li>
 <li><p>Skip tests if suggested packages not available (<a href="https://github.com/tidyverse/tibble/issues/1246" class="external-link">#1246</a>, <a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>).</p></li>
+<li><p>Remove obsolete tests (<a href="https://github.com/tidyverse/tibble/issues/1513" class="external-link">#1513</a>).</p></li>
 </ul></div>
 </div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.1.8.9000" id="tibble-3189000">tibble 3.1.8.9000<a class="anchor" aria-label="anchor" href="#tibble-3189000"></a></h2>
-<ul><li>Internal changes only.</li>
-</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="3.1.8" id="tibble-318">tibble 3.1.8<a class="anchor" aria-label="anchor" href="#tibble-318"></a></h2><p class="text-muted">CRAN release: 2022-07-22</p>
 <div class="section level3">
