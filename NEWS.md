@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.0.9000
+
+## Chore
+
+- Ignore revdep packages that take too long.
+
+
 # tibble 3.2.0
 
 ## Chore
