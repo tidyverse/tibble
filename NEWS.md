@@ -2,197 +2,63 @@
 
 # tibble 3.2.0
 
-## Chore
+## Features
 
-- Ignore revdep packages that take too long.
+- Accurate location of the source of an error in error messages (#1379, #1065, #1508).
 
-
-# tibble 3.1.8.9012
-
-## Chore
-
-- Forward `trunc_mat()` to new-style pillar methods (#1517).
-
-
-# tibble 3.1.8.9011
-
-## Chore
-
-- Fix r-oldrel-4 checks.
-
-- Breaking change: Remove `knit_print.trunc_mat()` method (#1516).
-
-- Adapt to dev rlang.
-
-- List notoriously failing revdep packages.
-
-- Warn with partial matching in tests.
-
-- Fix partial argument matching.
-
-- Deprecate `data_frame_()`, `lst_()`, `frame_data()`, `as_tibble(validate = )`, `as_tibble(NULL)`, `new_tibble(subclass = )`, `add_row()` and `add_column()` for non-data-frame input, `add_column()` for input with non-unique names, and corner cases for `tbl[[x]]` (#1515).
+- `as_data_frame()` now also refers to `as.data.frame()` in its deprecation message (#1149, #1506).
 
 ## Breaking changes
 
+- Deprecated functions and arguments where we could not detect usage by other CRAN packages (#1515):
+
+    - `data_frame_()`, `lst_()`, `frame_data()`
+    
+    - `as_tibble(validate = )`, `as_tibble(NULL)`, `new_tibble(subclass = )`
+    
+    - `add_row()` and `add_column()` for non-data-frame input
+    
+    - `add_column()` for input with non-unique names
+    
+    - corner cases for `tbl[[x]]`
+
 - Breaking change: Remove `knit_print.trunc_mat()` method (#1516).
 
-
-# tibble 3.1.8.9010
-
-## Chore
-
-- Remove obsolete tests (#1513).
-
-- Use `vec_as_location(missing = "error")` for better error messages (#741, #1511).
-
-## Uncategorized
-
-- Merge pull request #1512 from tidyverse/docs-1151-1070-275-tweaks.
-
-
-# tibble 3.1.8.9009
-
-## Features
-
-- Revert `as_data_frame()` now also refers to `as.data.frame()` in its deprecation message.
-
-Revert "Merge pull request #1504 from tidyverse/f-1202-as-row-names"
-
-This reverts commit 83e617811b837423ffc2fbd4533946cf05ae2563, reversing
-changes made to 21729a3c850accd490f6837094bde319094d9b9e.
-
-## Chore
-
-- Remove compatibility code for RSDA package which is broken anyway due to other changes (#923, #1509).
-
-- Accurate location of error source in error messages (#1065, #1508).
-
-## Uncategorized
-
-- Merge pull request #1510 from tidyverse/f-split-frontend-2.
-
-
-# tibble 3.1.8.9008
+- Forward `trunc_mat()` to new-style pillar methods (#1517).
 
 ## Bug fixes
 
 - Allow `glue()` and other classed characters for subassignment (#1150, #1503).
 
-## Features
-
-- `as_data_frame()` now also refers to `as.data.frame()` in its deprecation message (#1149, #1506).
-
-## Chore
-
-- Retry continuous benchmarks until success (#1505).
-
-- Fix tests (#1500).
-
-
-# tibble 3.1.8.9007
-
-## Chore
-
-- Use usethis namespace.
-
-- Add GitPod infrastructure.
-
-- Require R \>= 3.4.0, dependency hygiene (#1490, #1071).
-
-Closes #1071. Closes #1490.
-
-## Documentation
-
-- Fix display of mermaid diagrams in `vignette("formats")` (@maelle, #1497, #1498).
-
-## Uncategorized
-
-- Snapshot updates for rcc-smoke (null) (#1495).
-
-Snapshot updates for rcc-smoke (null)
-
-
-# tibble 3.1.8.9006
-
-- Internal changes only.
-
-
-# tibble 3.1.8.9005
-
-- Internal changes only.
-
-
-# tibble 3.1.8.9004
-
-- Internal changes only.
-
-
-# tibble 3.1.8.9003
-
-## Chore
-
-- Remove legacy expectation (#1468).
-
-## Documentation
-
-- Use lambda in `across()` in vignette for compatibility with dplyr 1.1.0 (#1485).
-
-## Uncategorized
-
-- Merge pull request #1481 from tidyverse/snapshot-main-rcc-smoke-null.
-
-
-
-- Harmonize yaml formatting.
-
-- Revert changes to matrix section.
-
-- Merge pull request #1475 from tidyverse/snapshot-main-rcc-smoke-null.
-
-
-
-- Merge pull request #1474 from IndrajeetPatil/doc_edits.
-
-
-
-
-# tibble 3.1.8.9002
-
-## Features
-
-- Correct top-level calls are shown for the vast majority of errors (#1379).
-
-- Using cli for formatting conditions (#1387).
-
-## Chore
-
-- Check if R version changed (#1365).
-
-- Define responsibility for setting row names and class (#1364).
-
-## Documentation
-
-- Update example for `nrow` argument to `new_tibble()` (@heavywatal, #1394).
-
-- Remove ANSI escapes from invariants article on pkgdown (#1374).
-
 ## Performance
 
 - Reduce overhead of single-column subset assignment (#1363).
 
+## Documentation
 
-# tibble 3.1.8.9001
+- New `vignette("extending")` (#275, #1512).
 
-## Chore
+- Minor updates (#1151, #1070, #1512, #1485).
+
+- Update example for `nrow` argument to `new_tibble()` (@heavywatal, #1394).
+
+- Fix display of mermaid diagrams in `vignette("formats")` (@maelle, #1497, #1498).
+
+- Remove ANSI escapes from invariants article on pkgdown (#1374).
+
+## Internal
 
 - Require vctrs >= 0.4.1 and pillar >= 1.8.1
 
+- Use cli for formatting conditions (#1387).
+
+- Use `vec_as_location(missing = "error")` for better error messages (#741, #1511).
+
+- Remove compatibility code for RSDA package which is broken anyway due to other changes (#923, #1509).
+
 - Skip tests if suggested packages not available (#1246, @MichaelChirico).
 
-
-# tibble 3.1.8.9000
-
-- Internal changes only.
+- Remove obsolete tests (#1513).
 
 
 # tibble 3.1.8
