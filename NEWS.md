@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.1.8.9012
+
+## Chore
+
+- Forward `trunc_mat()` to new-style pillar methods (#1517).
+
+
 # tibble 3.1.8.9011
 
 ## Chore
