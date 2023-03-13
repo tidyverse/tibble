@@ -28,6 +28,7 @@ For example, `<int>` in the header of a column indicates an integer column, and 
 
 
 
+
 |Class                       |Data type            |Example                          |Column header |
 |:---------------------------|:--------------------|:--------------------------------|:-------------|
 |Atomic                      |logical              |`TRUE`                           |lgl           |
@@ -58,6 +59,8 @@ For example, `<int>` in the header of a column indicates an integer column, and 
 |                            |symbol               |`quote(a)`                       |sym           |
 |                            |expression           |`parse(text = "a <- 1\nb<- 2")`  |expression    |
 |                            |quosures             |`rlang::quos(a = 1)`             |quos          |
+
+
 
 ## Example values
 
