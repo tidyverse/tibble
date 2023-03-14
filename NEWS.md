@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.0.9001
+
+- Merged cran-3.2.0 into main.
+
+
 # tibble 3.2.0.9000
 
 ## Chore
