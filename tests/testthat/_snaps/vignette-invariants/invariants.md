@@ -1045,6 +1045,7 @@ df[10, ]
 tbl[10, ]
 #> Warning: The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
 #> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 #> # A tibble: 1 x 3
 #>       n c     li    
 #>   <int> <chr> <list>
@@ -1065,6 +1066,7 @@ df["x", ]
 tbl["x", ]
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 #> # A tibble: 1 x 3
 #>       n c     li    
 #>   <int> <chr> <list>
@@ -3633,6 +3635,7 @@ with_df(df[as.character(-(1:3)), ] <- df[1, ])
 with_tbl(tbl[as.character(-(1:3)), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 #> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
@@ -3655,6 +3658,7 @@ with_df(df[as.character(3:5), ] <- df[1, ])
 with_tbl(tbl[as.character(3:5), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 #> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
@@ -3679,6 +3683,7 @@ with_df(df[as.character(-(3:5)), ] <- df[1, ])
 with_tbl(tbl[as.character(-(3:5)), ] <- tbl[1, ])
 #> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
+#> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 #> Error in `[<-`:
 #> ! Can't use NA as row index in a tibble for assignment.
 ```
