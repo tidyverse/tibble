@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1
+
+- Same as previous version.
+
+
 # tibble 3.2.0.9002
 
 ## Bug fixes
