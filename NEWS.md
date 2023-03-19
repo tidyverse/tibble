@@ -2,26 +2,9 @@
 
 # tibble 3.2.1
 
-- Same as previous version.
-
-
-# tibble 3.2.0.9002
-
-## Bug fixes
+## Internal
 
 - Use symbol instead of string in `.Call()`.
-
-
-# tibble 3.2.0.9001
-
-- Merged cran-3.2.0 into main.
-
-
-# tibble 3.2.0.9000
-
-## Chore
-
-- Ignore revdep packages that take too long.
 
 
 # tibble 3.2.0
