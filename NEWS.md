@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1
+
+## Bug fixes
+
+- Use symbol instead of string in `.Call()`.
+
+
 # tibble 3.2.0.9001
 
 - Merged cran-3.2.0 into main.
