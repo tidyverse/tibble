@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9001
+
+- Merge pull request #1527 from tidyverse/snapshot-main-rcc-smoke-null.
+
+
 # tibble 3.2.1.9000
 
 - Internal changes only.
