@@ -41,7 +41,7 @@ It encapsulates best practices for data frames:
     #>  8 h    
     #>  9 i    
     #> 10 j    
-    #> # ... with 16 more rows
+    #> # i 16 more rows
     ```
 
     This makes it easier to use with list-columns:
@@ -141,7 +141,7 @@ tibble(x = -5:100, y = 123.456 * (3^x))
 #>  8     2  1111.   
 #>  9     3  3333.   
 #> 10     4 10000.   
-#> # ... with 96 more rows
+#> # i 96 more rows
 ```
 
 Numbers are displayed with three significant figures by default, and a trailing dot that indicates the existence of a fractional component.
@@ -269,10 +269,10 @@ This also extends to tibbles with *zero* rows, which is sometimes important for 
 ```r
 tibble(a = 1, b = integer())
 #> # A tibble: 0 x 2
-#> # ... with 2 variables: a <dbl>, b <int>
+#> # i 2 variables: a <dbl>, b <int>
 tibble(a = integer(), b = 1)
 #> # A tibble: 0 x 2
-#> # ... with 2 variables: a <int>, b <dbl>
+#> # i 2 variables: a <int>, b <dbl>
 ```
 
 
