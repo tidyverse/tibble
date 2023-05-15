@@ -15,8 +15,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.5/font.css" rel="stylesheet">
-<link href="../deps/Source_Code_Pro-0.4.5/font.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.6/font.css" rel="stylesheet">
+<link href="../deps/Source_Code_Pro-0.4.6/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Column formats">
@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9003</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -183,10 +183,10 @@ after the decimal point. This also applies to columns derived from
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 6</span></span></span>
 <span><span class="co">#&gt;   id       `2018`    `2019`    `2020`    `2021`    `2022`</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1     $2,928.77 $2,524.58    $14.85 $7,717.56 $8,005.71</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2       $214.84 $6,517.51 $4,492.85 $8,768.01 $2,605.70</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 3     $5,167.93 $2,448.65 $7,207.52 $6,964.41 $4,464.60</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 4     $8,520.97 $7,043.99 $7,313.80 $3,728.14 $5,533.92</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1     $8,159.57 $6,491.37 $1,060.96 $7,287.89 $6,276.03</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2     $1,975.06 $8,396.73 $7,229.79 $8,212.80 $6,335.89</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 3       $558.60 $8,367.86 $7,793.77 $5,845.62 $5,722.01</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 4     $2,732.05 $7,744.91    $79.95   $866.30 $5,171.88</span></span></code></pre></div>
 <p>For ggplot2 we need to do <a href="https://github.com/tidyverse/ggplot2/pull/4065" class="external-link">some work</a> to
 show apply the formatting to the scales.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -196,17 +196,17 @@ show apply the formatting to the scales.</p>
 <span><span class="va">stocks</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggplot.html" class="external-link">ggplot</a></span><span class="op">(</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/aes.html" class="external-link">aes</a></span><span class="op">(</span>x <span class="op">=</span> <span class="va">year</span>, y <span class="op">=</span> <span class="va">stock</span>, color <span class="op">=</span> <span class="va">id</span><span class="op">)</span><span class="op">)</span> <span class="op">+</span></span>
 <span>  <span class="fu"><a href="https://ggplot2.tidyverse.org/reference/geom_path.html" class="external-link">geom_line</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><img src="formats_files/figure-html/unnamed-chunk-7-1.png" width="700"></p>
+<p><img src="formats_files/figure-html/unnamed-chunk-7-1.png" alt="Example plot showing stock over time, separated by id" width="700"></p>
 <p>It pays off to specify formatting very early in the process. The
 diagram below shows the principal stages of data analysis and
 exploration from “R for data science”.</p>
-<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-afa80f0985e0c96a0f65" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-afa80f0985e0c96a0f65">{"x":{"diagram":"graph TD\n  Import --> Tidy\n  Tidy --> Transform\n  Transform --> Visualize\n  Visualize --> Communicate\n  Visualize --> Model\n  Model -.-> Transform"},"evals":[],"jsHooks":[]}</script><p>The subsequent diagram adds data formats, communication options, and
+<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-b6748bf725be2a9a4765" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-b6748bf725be2a9a4765">{"x":{"diagram":"graph TD\n  Import --> Tidy\n  Tidy --> Transform\n  Transform --> Visualize\n  Visualize --> Communicate\n  Visualize --> Model\n  Model -.-> Transform"},"evals":[],"jsHooks":[]}</script><p>The subsequent diagram adds data formats, communication options, and
 explicit data formatting. The original r4ds transitions are highlighted
 in bold. There are two principal options where to apply formatting for
 results: right before communicating them, or right after importing.</p>
-<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-45fce714315007b9eb6b" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-45fce714315007b9eb6b">{"x":{"diagram":"graph TD\n  .csv --> Import\n  API --> Import\n  DBI --> Import\n  dbplyr --> Import\n  Import -.-> Format[Format for analysis]\n  Format -.-> Tidy\n\n  subgraph r4ds\n  Import ==> Tidy\n  Tidy ==> Transform\n  Transform ==> Visualize\n  Visualize ==> Model\n  Model -.-> Transform\n  Visualize ==> Communicate\n  end\n\n  Visualize -.-> FormatComm[Format for communication]\n  FormatComm -.-> Communicate\n\n  FormatComm -- Apply formatting early --> Format\n\n  dbplyr -.-> Tidy\n  dbplyr -.-> Transform\n  dbplyr -.-> Visualize\n\n  Communicate --> gt\n  Communicate --> ggplot2\n  Communicate --> DT\n  Communicate --> plotly"},"evals":[],"jsHooks":[]}</script><p>Applying formatting early in the process gives the added benefit of
+<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-bb3f16a9847f8cf20e5b" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-bb3f16a9847f8cf20e5b">{"x":{"diagram":"graph TD\n  .csv --> Import\n  API --> Import\n  DBI --> Import\n  dbplyr --> Import\n  Import -.-> Format[Format for analysis]\n  Format -.-> Tidy\n\n  subgraph r4ds\n  Import ==> Tidy\n  Tidy ==> Transform\n  Transform ==> Visualize\n  Visualize ==> Model\n  Model -.-> Transform\n  Visualize ==> Communicate\n  end\n\n  Visualize -.-> FormatComm[Format for communication]\n  FormatComm -.-> Communicate\n\n  FormatComm -- Apply formatting early --> Format\n\n  dbplyr -.-> Tidy\n  dbplyr -.-> Transform\n  dbplyr -.-> Visualize\n\n  Communicate --> gt\n  Communicate --> ggplot2\n  Communicate --> DT\n  Communicate --> plotly"},"evals":[],"jsHooks":[]}</script><p>Applying formatting early in the process gives the added benefit of
 showing the data in a useful format during the “Tidy”, “Transform”, and
 “Visualize” stages. For this to be useful, we need to ensure that the
 formatting options applied early:</p>

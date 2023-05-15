@@ -15,8 +15,8 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="../apple-touch-icon-60x60.png">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.5/font.css" rel="stylesheet">
-<link href="../deps/Source_Code_Pro-0.4.5/font.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.6/font.css" rel="stylesheet">
+<link href="../deps/Source_Code_Pro-0.4.6/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Tibbles">
@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9003</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -142,7 +142,7 @@ encapsulates best practices for data frames:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span> h    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span> i    </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span> j    </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 16 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 16 more rows</span></span></span></code></pre></div>
 <p>This makes it easier to use with list-columns:</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, y <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span><span class="op">)</span></span>
@@ -203,14 +203,13 @@ written with an eye for performance:</p>
 <span></span>
 <span><span class="va">timing</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 14</span></span></span>
-<span><span class="co">#&gt;   expre…¹ min         mean         median      max         itr/s…² mem_a…³</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;bnch_&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> as_tib… 0.000287696 0.0006251376 0.000327178 0.004508219   <span style="text-decoration: underline;">1</span>600.  1840  </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> as.dat… 0.000791522 0.0016640039 0.001098172 0.007652914    601. 34584  </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 7 more variables: n_gc &lt;dbl&gt;, n_itr &lt;int&gt;,</span></span></span>
+<span><span class="co">#&gt;   expression    min         mean         median      max         `itr/sec`</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> as_tibble(l)  0.000287696 0.0006251376 0.000327178 0.004508219     <span style="text-decoration: underline;">1</span>600.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> as.data.fram… 0.000791522 0.0016640039 0.001098172 0.007652914      601.</span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: mem_alloc &lt;bnch_byt&gt;, n_gc &lt;dbl&gt;, n_itr &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   total_time &lt;bench_tm&gt;, result &lt;list&gt;, memory &lt;list&gt;, time &lt;list&gt;,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   gc &lt;list&gt;, and abbreviated variable names ¹​expression, ²​`itr/sec`,</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;">#   ³​mem_alloc</span></span></span></code></pre>
+<span><span class="co">#&gt; <span style="color: #949494;">#   gc &lt;list&gt;</span></span></span></code></pre>
 <p>The speed of <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> is not usually a bottleneck
 when used interactively, but can be a problem when combining thousands
 of messy inputs into one tidy data frame.</p>
@@ -242,7 +241,7 @@ highlighting:</p>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 8</span>     2  <span style="text-decoration: underline;">1</span>111.   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;"> 9</span>     3  <span style="text-decoration: underline;">3</span>333.   </span></span>
 <span><span class="co">#&gt; <span style="color: #BCBCBC;">10</span>     4 <span style="text-decoration: underline;">10</span>000.   </span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 96 more rows</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 96 more rows</span></span></span></code></pre></div>
 <p>Numbers are displayed with three significant figures by default, and
 a trailing dot that indicates the existence of a fractional
 component.</p>
@@ -360,10 +359,10 @@ sometimes important for programming:</p>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span>, b <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 2 variables: a &lt;dbl&gt;, b &lt;int&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 variables: a &lt;dbl&gt;, b &lt;int&gt;</span></span></span>
 <span><span class="fu"><a href="../reference/tibble.html">tibble</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">integer</a></span><span class="op">(</span><span class="op">)</span>, b <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 0 × 2</span></span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># … with 2 variables: a &lt;int&gt;, b &lt;dbl&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 2 variables: a &lt;int&gt;, b &lt;dbl&gt;</span></span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="arithmetic-operations">Arithmetic operations<a class="anchor" aria-label="anchor" href="#arithmetic-operations"></a>

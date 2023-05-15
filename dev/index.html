@@ -5,8 +5,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="Provides a tbl_df class (the tibble) with stricter checking and better formatting than the traditional
-    data frame.">
+<meta name="description" content="Provides a tbl_df class (the tibble) with stricter checking and better formatting than the traditional data frame.">
 <title>Simple Data Frames • tibble</title>
 <!-- favicons --><link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -16,13 +15,12 @@
 <link rel="apple-touch-icon" type="image/png" sizes="60x60" href="apple-touch-icon-60x60.png">
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.2.2/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="deps/Source_Sans_Pro-0.4.5/font.css" rel="stylesheet">
-<link href="deps/Source_Code_Pro-0.4.5/font.css" rel="stylesheet">
+<script src="deps/bootstrap-5.2.2/bootstrap.bundle.min.js"></script><link href="deps/Source_Sans_Pro-0.4.6/font.css" rel="stylesheet">
+<link href="deps/Source_Code_Pro-0.4.6/font.css" rel="stylesheet">
 <!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
 <!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.6/clipboard.min.js" integrity="sha256-inc5kl9MA1hkeYUt+EC3BhlIgyp/2jDIyBLS6k3UxPI=" crossorigin="anonymous"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="Simple Data Frames">
-<meta property="og:description" content="Provides a tbl_df class (the tibble) with stricter checking and better formatting than the traditional
-    data frame.">
+<meta property="og:description" content="Provides a tbl_df class (the tibble) with stricter checking and better formatting than the traditional data frame.">
 <meta property="og:image" content="https://tibble.tidyverse.org/logo.svg">
 <meta name="robots" content="noindex">
 <!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
@@ -38,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9001</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9003</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -139,17 +137,17 @@
 <span><span class="nv">data</span> <span class="o">&lt;-</span> <span class="nf"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="o">(</span>a <span class="o">=</span> <span class="m">1</span><span class="o">:</span><span class="m">3</span>, b <span class="o">=</span> <span class="nv">letters</span><span class="o">[</span><span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="o">]</span>, c <span class="o">=</span> <span class="nf"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="o">(</span><span class="o">)</span> <span class="o">-</span> <span class="m">1</span><span class="o">:</span><span class="m">3</span><span class="o">)</span></span>
 <span><span class="nv">data</span></span>
 <span><span class="c">#&gt;   a b          c</span></span>
-<span><span class="c">#&gt; 1 1 a 2023-02-21</span></span>
-<span><span class="c">#&gt; 2 2 b 2023-02-20</span></span>
-<span><span class="c">#&gt; 3 3 c 2023-02-19</span></span>
+<span><span class="c">#&gt; 1 1 a 2023-04-19</span></span>
+<span><span class="c">#&gt; 2 2 b 2023-04-18</span></span>
+<span><span class="c">#&gt; 3 3 c 2023-04-17</span></span>
 <span></span>
 <span><span class="nf"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="o">(</span><span class="nv">data</span><span class="o">)</span></span>
 <span><span class="c">#&gt; <span style="color: #555555;"># A tibble: 3 × 3</span></span></span>
 <span><span class="c">#&gt;       <span style="font-weight: bold;">a</span> <span style="font-weight: bold;">b</span>     <span style="font-weight: bold;">c</span>         </span></span>
 <span><span class="c">#&gt;   <span style="color: #555555; font-style: italic;">&lt;int&gt;</span> <span style="color: #555555; font-style: italic;">&lt;chr&gt;</span> <span style="color: #555555; font-style: italic;">&lt;date&gt;</span>    </span></span>
-<span><span class="c">#&gt; <span style="color: #555555;">1</span>     1 a     2023-02-21</span></span>
-<span><span class="c">#&gt; <span style="color: #555555;">2</span>     2 b     2023-02-20</span></span>
-<span><span class="c">#&gt; <span style="color: #555555;">3</span>     3 c     2023-02-19</span></span></pre>
+<span><span class="c">#&gt; <span style="color: #555555;">1</span>     1 a     2023-04-19</span></span>
+<span><span class="c">#&gt; <span style="color: #555555;">2</span>     2 b     2023-04-18</span></span>
+<span><span class="c">#&gt; <span style="color: #555555;">3</span>     3 c     2023-04-17</span></span></pre>
 <p>This will work for reasonable inputs that are already data.frames, lists, matrices, or tables.</p>
 <p>You can also create a new tibble from column vectors with <a href="https://tibble.tidyverse.org/reference/tibble.html"><code>tibble()</code></a>:</p>
 <pre class="chroma">
@@ -162,7 +160,7 @@
 <span><span class="c">#&gt; <span style="color: #555555;">3</span>     3     1    10</span></span>
 <span><span class="c">#&gt; <span style="color: #555555;">4</span>     4     1    17</span></span>
 <span><span class="c">#&gt; <span style="color: #555555;">5</span>     5     1    26</span></span></pre>
-<p><a href="https://tibble.tidyverse.org/reference/tibble.html"><code>tibble()</code></a> does much less than <a href="https://rdrr.io/r/base/data.frame.html" class="external-link"><code>data.frame()</code></a>: it never changes the type of the inputs (e.g. it keeps list columns unchanged, and never converts strings to factors!), it never changes the names of variables, it only recycles inputs of length 1, and it never creates <a href="https://rdrr.io/r/base/row.names.html" class="external-link"><code>row.names()</code></a>. You can read more about these features in <code><a href="articles/tibble.html">vignette("tibble")</a></code>.</p>
+<p><a href="https://tibble.tidyverse.org/reference/tibble.html"><code>tibble()</code></a> does much less than <a href="https://rdrr.io/r/base/data.frame.html" class="external-link"><code>data.frame()</code></a>: it never changes the type of the inputs (e.g. it keeps list columns as is), it never changes the names of variables, it only recycles inputs of length 1, and it never creates <a href="https://rdrr.io/r/base/row.names.html" class="external-link"><code>row.names()</code></a>. You can read more about these features in <code><a href="articles/tibble.html">vignette("tibble")</a></code>.</p>
 <p>You can define a tibble row-by-row with <a href="https://tibble.tidyverse.org/reference/tribble.html"><code>tribble()</code></a>:</p>
 <pre class="chroma">
 <span><span class="nf"><a href="https://tibble.tidyverse.org/reference/tribble.html">tribble</a></span><span class="o">(</span></span>
