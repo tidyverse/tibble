@@ -94,7 +94,7 @@ stocks %>%
 
 For ggplot2 we need to do [some work](https://github.com/tidyverse/ggplot2/pull/4065) to show apply the formatting to the scales.
 
-```{r, eval = (Sys.getenv("IN_GALLEY") == ""), fig.alt="Plot showing stock over time, separated by id"}
+```{r, eval = (Sys.getenv("IN_GALLEY") == ""), fig.alt="Example plot showing stock over time, separated by id"}
 library(ggplot2)
 
 # Needs https://github.com/tidyverse/ggplot2/pull/4065 or similar
