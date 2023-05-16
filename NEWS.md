@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9004
+
+## Documentation
+
+- Alt text (@maelle, #1528, #1539).
+
+
 # tibble 3.2.1.9003
 
 - Merged cran-3.2.1 into main.
