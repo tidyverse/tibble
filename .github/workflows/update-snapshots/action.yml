@@ -50,7 +50,7 @@ runs:
       if: ${{ steps.run-tests.outputs.changed }}
       id: check-changed
       run: |
-        echo "changed=$(git status --porcelain -- tests/testthat/_snaps)" >> $GITHUB_OUTPUT
+        echo "changed=$(git status --porcelain -- tests/testthat/_snaps | head -n 1)" >> $GITHUB_OUTPUT
       shell: bash
 
     - name: Derive branch name
@@ -65,7 +65,7 @@ runs:
     - name: Create pull request
       if: ${{ steps.check-changed.outputs.changed }}
       id: cpr
-      uses: peter-evans/create-pull-request@v4
+      uses: peter-evans/create-pull-request@v5
       with:
         base: ${{ github.head_ref }}
         branch: snapshot-${{ github.ref_name }}-${{ github.job }}-${{ steps.matrix-desc.outputs.branch }}

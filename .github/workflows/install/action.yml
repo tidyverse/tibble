@@ -83,3 +83,31 @@ runs:
         sudo ln -s $(which true) /usr/local/bin/qpdf
         sudo ln -s $(which true) /usr/local/bin/checkbashisms
       shell: bash
+
+    - name: Install ccache
+      uses: hendrikmuhs/ccache-action@v1.2.10
+      with:
+        max-size: 10G
+        verbose: 1
+        save: false
+        restore: false
+
+    - name: Use ccache for compiling R code, and parallelize
+      run: |
+        mkdir -p ~/.R
+        echo 'CC      :=  ccache $(CC)' >> ~/.R/Makevars
+        echo 'CXX     :=  ccache $(CXX)' >> ~/.R/Makevars
+        echo 'CXX11   :=  ccache $(CXX11)' >> ~/.R/Makevars
+        echo 'CXX14   :=  ccache $(CXX14)' >> ~/.R/Makevars
+        echo 'CXX17   :=  ccache $(CXX17)' >> ~/.R/Makevars
+        echo 'MAKEFLAGS = -j2' >> ~/.R/Makevars
+        cat ~/.R/Makevars
+
+        echo 'CCACHE_SLOPPINESS=locale,time_macros' | tee -a $GITHUB_ENV
+
+        # echo 'CCACHE_DEBUG=true' | tee -a $GITHUB_ENV
+        # echo "CCACHE_DEBUGDIR=$(dirname $(pwd))/ccache-debug" | tee -a $GITHUB_ENV
+        # mkdir -p $(dirname $(pwd))/.ccache-debug
+
+        echo 'PKG_BUILD_EXTRA_FLAGS=false' | tee -a $GITHUB_ENV
+      shell: bash

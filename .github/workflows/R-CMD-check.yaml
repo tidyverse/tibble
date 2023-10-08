@@ -34,7 +34,7 @@ jobs:
     # End custom: services
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: ./.github/workflows/rate-limit
         with:
@@ -49,7 +49,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           install-r: false
-          cache-version: rcc-smoke-1
+          cache-version: rcc-smoke-2
           needs: check
           extra-packages: any::rcmdcheck any::roxygen2 r-lib/styler
 
@@ -86,7 +86,7 @@ jobs:
     # End custom: services
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ needs.rcc-smoke.outputs.sha }}
 
@@ -141,7 +141,7 @@ jobs:
           - {os: windows-latest, r: '3.6'}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ needs.rcc-smoke.outputs.sha }}
 
@@ -204,7 +204,7 @@ jobs:
           # End custom: matrix elements
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ needs.rcc-smoke.outputs.sha }}
 
@@ -227,3 +227,191 @@ jobs:
       - uses: ./.github/workflows/check
         with:
           results: ${{ runner.os }}-r${{ matrix.config.r }}
+
+  suggests-matrix:
+    runs-on: ubuntu-22.04
+    outputs:
+      matrix: ${{ steps.set-matrix.outputs.matrix }}
+
+    name: Collect suggests deps
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: ./.github/workflows/rate-limit
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - uses: r-lib/actions/setup-r@v2
+        with:
+          install-r: false
+          use-public-rspm: true
+
+      - id: set-matrix
+        uses: ./.github/workflows/dep-matrix-suggests
+
+  check-matrix:
+    runs-on: ubuntu-22.04
+    needs: suggests-matrix
+
+    name: Check deps
+
+    if: ${{ needs.matrix.outputs.matrix != '' }}
+
+    steps:
+      - name: Install json2yaml
+        run: |
+          sudo npm install -g json2yaml
+
+      - name: Check matrix definition
+        run: |
+          matrix='${{ needs.matrix.outputs.matrix }}'
+          echo $matrix
+          echo $matrix | jq .
+          echo $matrix | json2yaml
+
+  rcc-suggests:
+    needs:
+      - suggests-matrix
+      - rcc-smoke
+
+    runs-on: ubuntu-22.04
+
+    name: Without ${{ matrix.package }}
+
+    if: ${{ needs.suggests-matrix.outputs.matrix != '' }}
+
+    # Begin custom: services
+    # End custom: services
+
+    strategy:
+      fail-fast: false
+      matrix: ${{fromJson(needs.suggests-matrix.outputs.matrix)}}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/workflows/custom/before-install
+        if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
+
+      - uses: ./.github/workflows/install
+        with:
+          install-r: false
+          cache-version: rcc-dev-${{ matrix.package }}-1
+          needs: check
+          extra-packages: "any::rcmdcheck any::remotes ."
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Remove ${{ matrix.package }} and all strong dependencies
+        run: |
+          pkg <- "${{ matrix.package }}"
+          pkgs <- tools::package_dependencies(pkg, reverse = TRUE)[[1]]
+          installed <- rownames(utils::installed.packages())
+          to_remove <- c(pkg, intersect(pkgs, installed))
+          print(to_remove)
+          remove.packages(to_remove)
+        shell: Rscript {0}
+
+      - name: Session info
+        run: |
+          options(width = 100)
+          if (!requireNamespace("sessioninfo", quietly = TRUE)) install.packages("sessioninfo")
+          pkgs <- installed.packages()[, "Package"]
+          sessioninfo::session_info(pkgs, include_base = TRUE)
+        shell: Rscript {0}
+
+      - uses: ./.github/workflows/custom/after-install
+        if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
+
+      - name: Define _R_CHECK_FORCE_SUGGESTS_
+        run: |
+          cat('_R_CHECK_FORCE_SUGGESTS_=false\n', file = Sys.getenv("GITHUB_ENV"), append = TRUE)
+        shell: Rscript {0}
+
+      - name: Must allow NOTEs, even with _R_CHECK_FORCE_SUGGESTS_
+        run: |
+          if (Sys.getenv("RCMDCHECK_ERROR_ON") %in% c("", "note")) {
+            cat('RCMDCHECK_ERROR_ON="warning"\n', file = Sys.getenv("GITHUB_ENV"), append = TRUE)
+          }
+        shell: Rscript {0}
+
+      - name: Check env vars
+        run: |
+          print(Sys.getenv('_R_CHECK_FORCE_SUGGESTS_'))
+          print(Sys.getenv('RCMDCHECK_ERROR_ON'))
+        shell: Rscript {0}
+
+      - uses: ./.github/workflows/check
+        with:
+          results: ${{ matrix.package }}
+
+  # FIXME: integrate with dynamic matrix creation
+  validate:
+    needs:
+      - rcc-smoke
+
+    runs-on: ${{ matrix.config.os }}${{ matrix.config.os-version }}
+
+    name: ${{ matrix.config.os }}${{ matrix.config.os-version }} (${{ matrix.config.r }}) ${{ matrix.config.desc }}
+
+    # Begin custom: services
+    # End custom: services
+
+    strategy:
+      fail-fast: false
+      matrix:
+        config:
+          - { os: ubuntu-, os-version: 22.04,   r: 'release', rspm: "https://packagemanager.rstudio.com/cran/__linux__/jammy/latest" }
+
+    env:
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      RSPM: ${{ matrix.config.rspm }}
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      # prevent rgl issues because no X11 display is available
+      RGL_USE_NULL: true
+      # Begin custom: env vars
+      # End custom: env vars
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/workflows/custom/before-install
+        if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
+
+      - uses: ./.github/workflows/install
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          install-r: false
+          cache-version: rcc-smoke-1
+          needs: check
+          extra-packages: any::rcmdcheck any::roxygen2 r-lib/styler
+
+      - uses: ./.github/workflows/custom/after-install
+        if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
+
+      - name: Instrument R code for validation
+        run: |
+          if [ $(git status --porcelain | wc -l) -gt 0 ]; then
+            echo "Fatal: git working copy not clean"
+          fi
+          sed -i -r '/INSTRUMENT: validate/ s/^( +)# /\1/g' R/*
+          if [ $(git status --porcelain | wc -l) -eq 0 ]; then
+            echo "Fatal: substitution did not change anything"
+          fi
+
+      - name: Run tests
+        run: |
+          testthat::test_local(reporter = testthat::ProgressReporter$new(max_failures = Inf, update_interval = Inf))
+        shell: Rscript {0}
+
+      - name: Show test output
+        if: always()
+        run: |
+          find check -name '*.Rout*' -exec head -n 1000000 '{}' \; || true
+        shell: bash
+
+      - name: Test coverage
+        run: covr::codecov()
+        shell: Rscript {0}

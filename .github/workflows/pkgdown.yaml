@@ -24,7 +24,7 @@ jobs:
     # End custom: services
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - uses: ./.github/workflows/rate-limit
         with:
@@ -40,7 +40,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           install-r: false
-          cache-version: pkgdown-1
+          cache-version: pkgdown-2
           needs: website
           extra-packages: r-lib/pkgdown local::.
 
