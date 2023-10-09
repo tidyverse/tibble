@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9006
+
+- Merge branch 'docs'.
+
+
 # tibble 3.2.1.9005
 
 ## Chore
