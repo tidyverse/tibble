@@ -740,7 +740,9 @@ test_that("output test", {
 test_that("as_tibble.data.frame coerces extended data.frames first", {
   x <- structure(mtcars, extra = "extra", class = c("ext_df_", "data.frame"))
   y <- as_tibble(head(mtcars))
-  fun <- function(x, row.names = NULL, optional = FALSE, ...) y
-  .S3method("as.data.frame", "ext_df_", fun)
-  expect_identical(as_tibble(x), y)
+  with_mocked_bindings(
+    as.data.frame = function(x, row.names = NULL, optional = FALSE, ...) y,
+    code = expect_identical(as_tibble(x), y),
+    .package = "base"
+  )
 })
