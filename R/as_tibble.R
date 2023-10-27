@@ -70,6 +70,10 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
                                  .rows = NULL,
                                  .name_repair = c("check_unique", "unique", "universal", "minimal"),
                                  rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
+  if (!identical(class(x), "data.frame")) {
+    x <- as.data.frame(x)
+  }
+
   if (!is.null(validate)) {
     deprecate_stop("2.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)")
   }

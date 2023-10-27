@@ -735,3 +735,12 @@ test_that("output test", {
     as_tibble_row(list(a = 1:3, b = 1:3))
   })
 })
+
+# utilise as.data.frame for extended data.frames
+test_that("as_tibble.data.frame coerces extended data.frames first", {
+  x <- structure(mtcars, extra = "extra", class = c("ext_df_", "data.frame"))
+  y <- as_tibble(head(mtcars))
+  fun <- function(x, row.names = NULL, optional = FALSE, ...) y
+  .S3method("as.data.frame", "ext_df_", fun)
+  expect_identical(as_tibble(x), y)
+})
