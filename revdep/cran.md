@@ -1,20 +1,62 @@
 ## revdepcheck results
 
-We checked 14 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
+We checked 1926 reverse dependencies (1922 from CRAN + 4 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 2 new problems
- * We failed to check 0 packages
+ * We saw 14 new problems
+ * We failed to check 5 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
 
-* ggESDA
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... WARNING
+* bulkreadr
+  checking tests ... ERROR
 
-* RSDA
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... WARNING
+* dplyr
+  checking tests ... ERROR
 
+* historicalborrow
+  checking tests ... ERROR
+
+* LexisNexisTools
+  checking tests ... ERROR
+
+* matrixset
+  checking tests ... ERROR
+
+* NMdata
+  checking tests ... ERROR
+
+* NMsim
+  checking tests ... ERROR
+
+* psychmeta
+  checking tests ... ERROR
+
+* RevGadgets
+  checking tests ... ERROR
+
+* simaerep
+  checking tests ... ERROR
+
+* simTool
+  checking tests ... ERROR
+
+* tidyposterior
+  checking tests ... ERROR
+
+* tidyr
+  checking tests ... ERROR
+
+* workflowsets
+  checking examples ... ERROR
+  checking tests ... ERROR
+
+### Failed to check
+
+* ctsem       (NA)
+* loon.ggplot (NA)
+* loon.tourr  (NA)
+* tidyfit     (NA)
+* triptych    (NA)
