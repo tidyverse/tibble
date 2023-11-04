@@ -1,6 +1,6 @@
 pandoc: 2.19.2
 pkgdown: 2.0.7.9000
-pkgdown_sha: 170015984ae234da3028b2b083df757227fdd241
+pkgdown_sha: ab96d2fa60be7a6e54eb8132b572688eadc41be3
 articles:
   digits: digits.html
   extending: extending.html
@@ -11,7 +11,7 @@ articles:
   subset: wip/subset.html
   tibble: tibble.html
   types: types.html
-last_built: 2023-10-08T14:12Z
+last_built: 2023-11-04T08:42Z
 urls:
   reference: https://tibble.tidyverse.org/reference
   article: https://tibble.tidyverse.org/articles
