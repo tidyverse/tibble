@@ -12,9 +12,12 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
+  eval = rlang::is_installed(c("dplyr", "formattable", "ggplot2", "tidyr")),
   error = (Sys.getenv("IN_PKGDOWN") == "")
 )
+```
 
+```{r, include = FALSE}
 library(tibble)
 library(formattable)
 library(dplyr)
