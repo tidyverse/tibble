@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9007
+
+## Testing
+
+- Override :: to avoid failures in tests without suggested packages.
+
+
 # tibble 3.2.1.9006
 
 - Merge branch 'docs'.
