@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9008
+
+## Documentation
+
+- Fix rendering if suggested packages are missing.
+
+
 # tibble 3.2.1.9007
 
 ## Testing
