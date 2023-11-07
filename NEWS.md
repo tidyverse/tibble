@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9009
+
+- Merge pull request #1560 from tidyverse/snapshot-main-R-CMD-check-base-null.
+
+
 # tibble 3.2.1.9008
 
 ## Documentation
