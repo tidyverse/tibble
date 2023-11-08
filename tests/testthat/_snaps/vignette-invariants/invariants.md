@@ -322,7 +322,7 @@ df[[1:2]]
 ```r
 tbl[[1:2]]
 #> Error:
-#> ! The `j` argument of `[[.tbl_df()` can't be a vector of length 2 as of tibble 3.0.0.
+#> ! The `j` argument of `[[.tbl_df` can't be a vector of length 2 as of tibble 3.0.0.
 #> i Recursive subsetting is deprecated for tibbles.
 ```
 
@@ -1043,7 +1043,7 @@ df[10, ]
 
 ```r
 tbl[10, ]
-#> Warning: The `i` argument of `[.tbl_df()` must lie in [0, rows] if positive, as of tibble 3.0.0.
+#> Warning: The `i` argument of `[.tbl_df` must lie in [0, rows] if positive, as of tibble 3.0.0.
 #> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 #> # A tibble: 1 x 3
@@ -1064,7 +1064,7 @@ df["x", ]
 
 ```r
 tbl["x", ]
-#> Warning: The `i` argument of `[.tbl_df()` must use valid row names as of tibble 3.0.0.
+#> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 #> # A tibble: 1 x 3
@@ -3628,7 +3628,7 @@ with_df(df[as.character(-(1:3)), ] <- df[1, ])
 
 ```r
 with_tbl(tbl[as.character(-(1:3)), ] <- tbl[1, ])
-#> Warning: The `i` argument of `[.tbl_df()` must use valid row names as of tibble 3.0.0.
+#> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 #> Error in `[<-`:
@@ -3651,7 +3651,7 @@ with_df(df[as.character(3:5), ] <- df[1, ])
 
 ```r
 with_tbl(tbl[as.character(3:5), ] <- tbl[1, ])
-#> Warning: The `i` argument of `[.tbl_df()` must use valid row names as of tibble 3.0.0.
+#> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 #> Error in `[<-`:
@@ -3676,7 +3676,7 @@ with_df(df[as.character(-(3:5)), ] <- df[1, ])
 
 ```r
 with_tbl(tbl[as.character(-(3:5)), ] <- tbl[1, ])
-#> Warning: The `i` argument of `[.tbl_df()` must use valid row names as of tibble 3.0.0.
+#> Warning: The `i` argument of `[.tbl_df` must use valid row names as of tibble 3.0.0.
 #> i Use `NA_integer_` as row index to obtain a row full of `NA` values.
 #> Call `lifecycle::last_lifecycle_warnings()` to see where this warning was generated.
 #> Error in `[<-`:
