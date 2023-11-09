@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9010
+
+- Merge pull request #1562 from tidyverse/snapshot-main-rcc-smoke-null.
+
+- Merge pull request #1561 from tidyverse/snapshot-main-rcc-full-config-os-macos-latest-r-release.
+
+
 # tibble 3.2.1.9009
 
 - Merge pull request #1560 from tidyverse/snapshot-main-R-CMD-check-base-null.
