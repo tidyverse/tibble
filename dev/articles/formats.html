@@ -36,7 +36,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9009</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9010</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -183,10 +183,10 @@ after the decimal point. This also applies to columns derived from
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 4 × 6</span></span></span>
 <span><span class="co">#&gt;   id       `2018`    `2019`    `2020`    `2021`    `2022`</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1     $8,626.33 $1,187.87 $7,598.69 $1,893.30 $6,642.83</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2       $264.42 $2,322.64 $9,385.52 $8,200.85 $6,218.45</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 3     $2,565.50   $118.46 $7,643.89 $1,203.26 $6,819.33</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 4     $4,641.43 $7,458.10 $8,418.64 $5,794.71 $5,618.74</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> 1     $8,992.26 $1,022.57 $2,763.78 $7,047.74 $4,526.53</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> 2     $7,709.18 $6,121.77 $4,866.86 $5,137.97 $8,560.85</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> 3     $2,454.06 $9,425.33 $1,111.15 $6,122.34   $468.23</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">4</span> 4     $4,330.71 $9,346.04 $5,876.59 $9,610.55 $3,989.30</span></span></code></pre></div>
 <p>For ggplot2 we need to do <a href="https://github.com/tidyverse/ggplot2/pull/4065" class="external-link">some work</a> to
 show apply the formatting to the scales.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
@@ -200,13 +200,13 @@ show apply the formatting to the scales.</p>
 <p>It pays off to specify formatting very early in the process. The
 diagram below shows the principal stages of data analysis and
 exploration from “R for data science”.</p>
-<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-c74268d40ae52ddcdcc7" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-c74268d40ae52ddcdcc7">{"x":{"diagram":"graph TD\n  Import --> Tidy\n  Tidy --> Transform\n  Transform --> Visualize\n  Visualize --> Communicate\n  Visualize --> Model\n  Model -.-> Transform"},"evals":[],"jsHooks":[]}</script><p>The subsequent diagram adds data formats, communication options, and
+<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-db801da426c8c3d49212" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-db801da426c8c3d49212">{"x":{"diagram":"graph TD\n  Import --> Tidy\n  Tidy --> Transform\n  Transform --> Visualize\n  Visualize --> Communicate\n  Visualize --> Model\n  Model -.-> Transform"},"evals":[],"jsHooks":[]}</script><p>The subsequent diagram adds data formats, communication options, and
 explicit data formatting. The original r4ds transitions are highlighted
 in bold. There are two principal options where to apply formatting for
 results: right before communicating them, or right after importing.</p>
-<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-ea5a2113e6212579a6e4" style="width:700px;height:432.632880098888px;"></div>
-<script type="application/json" data-for="htmlwidget-ea5a2113e6212579a6e4">{"x":{"diagram":"graph TD\n  .csv --> Import\n  API --> Import\n  DBI --> Import\n  dbplyr --> Import\n  Import -.-> Format[Format for analysis]\n  Format -.-> Tidy\n\n  subgraph r4ds\n  Import ==> Tidy\n  Tidy ==> Transform\n  Transform ==> Visualize\n  Visualize ==> Model\n  Model -.-> Transform\n  Visualize ==> Communicate\n  end\n\n  Visualize -.-> FormatComm[Format for communication]\n  FormatComm -.-> Communicate\n\n  FormatComm -- Apply formatting early --> Format\n\n  dbplyr -.-> Tidy\n  dbplyr -.-> Transform\n  dbplyr -.-> Visualize\n\n  Communicate --> gt\n  Communicate --> ggplot2\n  Communicate --> DT\n  Communicate --> plotly"},"evals":[],"jsHooks":[]}</script><p>Applying formatting early in the process gives the added benefit of
+<div class="DiagrammeR html-widget html-fill-item-overflow-hidden html-fill-item" id="htmlwidget-0bcdca56df124998ae65" style="width:700px;height:432.632880098888px;"></div>
+<script type="application/json" data-for="htmlwidget-0bcdca56df124998ae65">{"x":{"diagram":"graph TD\n  .csv --> Import\n  API --> Import\n  DBI --> Import\n  dbplyr --> Import\n  Import -.-> Format[Format for analysis]\n  Format -.-> Tidy\n\n  subgraph r4ds\n  Import ==> Tidy\n  Tidy ==> Transform\n  Transform ==> Visualize\n  Visualize ==> Model\n  Model -.-> Transform\n  Visualize ==> Communicate\n  end\n\n  Visualize -.-> FormatComm[Format for communication]\n  FormatComm -.-> Communicate\n\n  FormatComm -- Apply formatting early --> Format\n\n  dbplyr -.-> Tidy\n  dbplyr -.-> Transform\n  dbplyr -.-> Visualize\n\n  Communicate --> gt\n  Communicate --> ggplot2\n  Communicate --> DT\n  Communicate --> plotly"},"evals":[],"jsHooks":[]}</script><p>Applying formatting early in the process gives the added benefit of
 showing the data in a useful format during the “Tidy”, “Transform”, and
 “Visualize” stages. For this to be useful, we need to ensure that the
 formatting options applied early:</p>
