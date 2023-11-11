@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9012
+
+## Chore
+
+- Skip tests if packages are missing.
+
+## Testing
+
+- Skip tests if packages are missing.
+
+
 # tibble 3.2.1.9011
 
 - Merge pull request #1565 from tidyverse/snapshot-main-rcc-smoke-null.
