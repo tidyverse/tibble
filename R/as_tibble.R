@@ -74,7 +74,7 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
     deprecate_stop("2.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)")
   }
 
-  if (!inherits(x, "tbl_df") && !identical(class(x), "data.frame")) {
+  if (!identical(class(x), "data.frame") && !inherits(x, "tbl_df")) {
     x <- as.data.frame(x)
   }
 
