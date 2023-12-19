@@ -1,9 +1,24 @@
 # Revdeps
 
-## New problems (2)
+## Failed to check (11)
+
+|package          |version |error |warning |note |
+|:----------------|:-------|:-----|:-------|:----|
+|bulkreadr        |?       |      |        |     |
+|dplyr            |?       |      |        |     |
+|historicalborrow |?       |      |        |     |
+|LexisNexisTools  |?       |      |        |     |
+|matrixset        |?       |      |        |     |
+|NMsim            |?       |      |        |     |
+|RevGadgets       |?       |      |        |     |
+|simaerep         |?       |      |        |     |
+|simTool          |?       |      |        |     |
+|tidyposterior    |?       |      |        |     |
+|workflowsets     |?       |      |        |     |
+
+## New problems (1)
 
 |package |version |error  |warning |note |
 |:-------|:-------|:------|:-------|:----|
-|[ggESDA](problems.md#ggesda)|0.2.0   |__+1__ |__+1__  |     |
-|[RSDA](problems.md#rsda)|3.0.13  |__+1__ |__+1__  |     |
+|[NMdata](problems.md#nmdata)|0.1.2   |__+1__ |        |     |
 
