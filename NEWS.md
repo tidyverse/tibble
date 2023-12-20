@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9013
+
+## Features
+
+- `as_tibble()` calls `as.data.frame()` for objects that are not subclasses of `"tbl_df"` (@TimTaylor, #1556, #1557).
+
+## Chore
+
+- Check fast path first.
+
+
 # tibble 3.2.1.9012
 
 ## Chore
