@@ -245,7 +245,6 @@ as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`, .name_repair = "check_
 
 #' @export
 #' @rdname as_tibble
-#' @usage \method{as_tibble}{NULL}(x, ...)
 as_tibble.NULL <- function(x, ...) {
   if (missing(x)) {
     deprecate_stop("3.0.0", "as_tibble(x = 'can\\'t be missing')")
