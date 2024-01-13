@@ -12,7 +12,6 @@
 #'   * `tibble()` is much lazier than [base::data.frame()] in terms of
 #'     transforming the user's input.
 #'
-#'       - Character vectors are not coerced to factor.
 #'       - List-columns are expressly anticipated and do not require special tricks.
 #'       - Column names are not modified.
 #'       - Inner names in columns are left unchanged.
