@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9015
+
+## Chore
+
+- Revert "Fix as_tibble() usage".
+
+  This reverts commit 49d0b63504c4e3f77beaf2889ace12cad7d3f293.
+
+
 # tibble 3.2.1.9014
 
 - Internal changes only.
