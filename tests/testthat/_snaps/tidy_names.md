@@ -50,12 +50,19 @@
 
     Code
       expect_equal(tidy_names(c("a..2", "a")), c("a..2", "a"))
+    Condition
+      Warning in `withr::local_language()`:
+      Changing language has no effect when envvar LANG='C.UTF-8'
+    Code
       expect_equal(tidy_names(c("a..3", "a", "a")), c("a..1", "a..2", "a..3"))
     Message
       New names:
       a..3 -> a..1
       a -> a..2
       a -> a..3
+    Condition
+      Warning in `withr::local_language()`:
+      Changing language has no effect when envvar LANG='C.UTF-8'
     Code
       expect_equal(tidy_names(c("a..2", "a", "a")), c("a..1", "a..2", "a..3"))
     Message
@@ -63,12 +70,18 @@
       a..2 -> a..1
       a -> a..2
       a -> a..3
+    Condition
+      Warning in `withr::local_language()`:
+      Changing language has no effect when envvar LANG='C.UTF-8'
     Code
       expect_equal(tidy_names(c("a..2", "a..2", "a..2")), c("a..1", "a..2", "a..3"))
     Message
       New names:
       a..2 -> a..1
       a..2 -> a..3
+    Condition
+      Warning in `withr::local_language()`:
+      Changing language has no effect when envvar LANG='C.UTF-8'
 
 # syntactic
 
