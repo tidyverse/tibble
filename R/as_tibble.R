@@ -115,7 +115,8 @@ lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL, call = caller_
   x <- unclass(x)
   x <- set_repaired_names(x, repair_hint = TRUE, .name_repair, call = call)
   x <- check_valid_cols(x, call = call)
-  recycle_columns(x, .rows, lengths)
+  x <- recycle_columns(x, .rows, lengths)
+  x
 }
 
 check_valid_cols <- function(x, pos = NULL, call = caller_env()) {

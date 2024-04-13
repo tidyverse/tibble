@@ -63,6 +63,23 @@ test_that("new_tibble() supports missing `nrow` (#781)", {
   expect_identical(new_tibble(list(a = 1:3)), tibble(a = 1:3))
 })
 
+test_that("new_tibble() keeps x and n attributes", {
+  expect_identical(
+    attr(new_tibble(list(x = 1), n = 2, nrow = 1), "n"),
+    2
+  )
+
+  expect_identical(
+    attr(new_tibble(structure(list(x = 1), n = 2), nrow = 1), "n"),
+    2
+  )
+
+  expect_identical(
+    attr(new_tibble(structure(list(x = 1), x = "value"), nrow = 1), "x"),
+    "value"
+  )
+})
+
 test_that("new_tibble() supports language objects", {
   expect_identical(
     new_tibble(list(), foo = quote(bar())),
