@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9017
+
+## Bug fixes
+
+- `new_tibble()` and `as_tibble()` support attributes named `"n"` and `"x"` (#1573, #1574).
+
+
 # tibble 3.2.1.9016
 
 - Internal changes only.
