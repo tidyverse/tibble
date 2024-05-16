@@ -15,7 +15,7 @@ The display differs from the default display for data frames, see `vignette("dig
 This display works for many, but not for all use cases.
 
 
-```r
+``` r
 library(tibble)
 ```
 
@@ -25,18 +25,24 @@ The easiest way to customize the display of numbers and other data in a tibble i
 See `?pillar::pillar_options` for a comprehensive overview.
 
 
-```r
+``` r
 tibble(x = 123.4567)
 #> # A tibble: 1 x 1
 #>       x
 #>   <dbl>
 #> 1  123.
+```
+
+``` r
 old <- options(pillar.sigfig = 7)
 tibble(x = 123.4567)
 #> # A tibble: 1 x 1
 #>          x
 #>      <dbl>
 #> 1 123.4567
+```
+
+``` r
 # Restore old options, see also rlang::local_options() for a more elegant way
 options(old)
 ```
@@ -52,10 +58,13 @@ Below a few examples are shown, see `?num` for a comprehensive overview.
 Similarly, `char()` allows customizing the display of character columns.
 
 
-```r
+``` r
 num(-1:3, notation = "sci")
 #> <pillar_num(sci)[5]>
 #> [1] -1e0  0    1e0  2e0  3e0
+```
+
+``` r
 tibble(
   x4 = num(8:12 * 100 + 0.5, digits = 4),
   x1 = num(8:12 * 100 + 0.5, digits = -1),
@@ -85,7 +94,7 @@ Currently, formatting must be applied manually for each column.
 The following pattern may help doing this consistently for all columns in a tibble, or for some columns based on their name.
 
 
-```r
+``` r
 library(dplyr, warn.conflicts = FALSE)
 
 markets <-
@@ -107,6 +116,9 @@ markets
 #>  9 1992. 1635. 1698. 1754  2510.
 #> 10 1992. 1646. 1716. 1754. 2497.
 #> # i 1,850 more rows
+```
+
+``` r
 markets %>%
   mutate(across(-time, ~ num(.x, digits = 3)))
 #> # A tibble: 1,860 x 5
@@ -138,25 +150,43 @@ We are working on seamlessly applying this formatting to the final presentation 
 When applying arithmetic operations on numbers created by `num()`, the result inherits the formatting of the first `num` object.
 
 
-```r
+``` r
 num(1) + 2
 #> <pillar_num[1]>
 #> [1] 3
+```
+
+``` r
 1 + num(2)
 #> <pillar_num[1]>
 #> [1] 3
+```
+
+``` r
 1L + num(2)
 #> <pillar_num[1]>
 #> [1] 3
+```
+
+``` r
 num(3.23456, sigfig = 4) - num(2)
 #> <pillar_num:4[1]>
 #> [1] 1.235
+```
+
+``` r
 num(4, sigfig = 2) * num(3, digits = 2)
 #> <pillar_num:2[1]>
 #> [1] 12
+```
+
+``` r
 num(3, digits = 2) * num(4, sigfig = 2)
 #> <pillar_num:.2![1]>
 #> [1] 12.00
+```
+
+``` r
 -num(2)
 #> <pillar_num[1]>
 #> [1] -2
@@ -167,13 +197,19 @@ num(3, digits = 2) * num(4, sigfig = 2)
 Similarly, for mathematical operations, the formatting is inherited.
 
 
-```r
+``` r
 min(num(1:3, label = "$"))
 #> <pillar_num{$}[1]>
 #> [1] 1
+```
+
+``` r
 mean(num(1:3, notation = "eng"))
 #> <pillar_num(eng)[1]>
 #> [1] 2e0
+```
+
+``` r
 sin(num(1:3, label = "%", scale = 100))
 #> <pillar_num{%}*100[3]>
 #> [1] 84.1 90.9 14.1
@@ -186,14 +222,20 @@ In some cases, the ideal formatting changes after a transformation.
 `num()` can be applied repeatedly, the last setting wins.
 
 
-```r
+``` r
 num(1:3 + 0.125, digits = 4)
 #> <pillar_num:.4![3]>
 #> [1] 1.1250 2.1250 3.1250
+```
+
+``` r
 transf <- 10^num(1:3 + 0.125, digits = 4)
 transf
 #> <pillar_num:.4![3]>
 #> [1]   13.3352  133.3521 1333.5214
+```
+
+``` r
 num(transf, sigfig = 3)
 #> <pillar_num:3[3]>
 #> [1]   13.3  133.  1334.
@@ -204,7 +246,7 @@ num(transf, sigfig = 3)
 The `var()` function is one of the examples where the formatting is lost:
 
 
-```r
+``` r
 x <- num(c(1, 2, 4), notation = "eng")
 var(x)
 #> [1] 2.333333
@@ -213,7 +255,7 @@ var(x)
 The `median()` function is worse, it breaks for `num()` objects:
 
 
-```r
+``` r
 median(x)
 #> Error in `median()`:
 #> ! `median.pillar_num()` not implemented.
@@ -222,10 +264,13 @@ median(x)
 One way to recover is to apply `num()` to the result:
 
 
-```r
+``` r
 num(var(x), notation = "eng")
 #> <pillar_num(eng)[1]>
 #> [1] 2.33e0
+```
+
+``` r
 num(median(as.numeric(x)), notation = "eng")
 #> <pillar_num(eng)[1]>
 #> [1] 2e0
@@ -235,7 +280,7 @@ For automatic recovery, we can also define our version of `var()`, or even overw
 Note that this pattern is still experimental and may be subject to change:
 
 
-```r
+``` r
 var_ <- function(x, ...) {
   out <- var(vctrs::vec_proxy(x), ...)
   vctrs::vec_restore(out, x)
@@ -249,7 +294,7 @@ This pattern can be applied to all functions that lose the formatting.
 The `make_restore()` function defined below is a function factory that consumes a function and returns a derived function:
 
 
-```r
+``` r
 make_restore <- function(fun) {
   force(fun)
   function(x, ...) {
@@ -264,6 +309,9 @@ sd_ <- make_restore(sd)
 var_(x)
 #> <pillar_num(eng)[1]>
 #> [1] 2.33e0
+```
+
+``` r
 sd_(x)
 #> <pillar_num(eng)[1]>
 #> [1] 1.53e0
