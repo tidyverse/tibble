@@ -13,7 +13,7 @@ Tibbles are a modern take on data frames.
 They keep the features that have stood the test of time, and drop the features that used to be convenient but are now frustrating.
 
 
-```r
+``` r
 library(tibble)
 ```
 
@@ -26,7 +26,7 @@ It encapsulates best practices for data frames:
   * It never changes an input's type (i.e., no more `stringsAsFactors = FALSE`!).
 
     
-    ```r
+    ``` r
     tibble(x = letters)
     #> # A tibble: 26 x 1
     #>    x    
@@ -47,7 +47,7 @@ It encapsulates best practices for data frames:
     This makes it easier to use with list-columns:
 
     
-    ```r
+    ``` r
     tibble(x = 1:3, y = list(1:5, 1:10, 1:20))
     #> # A tibble: 3 x 2
     #>       x y         
@@ -63,9 +63,12 @@ It encapsulates best practices for data frames:
   * It never adjusts the names of variables:
 
     
-    ```r
+    ``` r
     names(data.frame(`crazy name` = 1))
     #> [1] "crazy.name"
+    ```
+    
+    ``` r
     names(tibble(`crazy name` = 1))
     #> [1] "crazy name"
     ```
@@ -73,7 +76,7 @@ It encapsulates best practices for data frames:
   * It evaluates its arguments lazily and sequentially:
 
     
-    ```r
+    ``` r
     tibble(x = 1:5, y = x ^ 2)
     #> # A tibble: 5 x 2
     #>       x     y
@@ -99,7 +102,7 @@ Generally, `as_tibble()` methods are much simpler than `as.data.frame()` methods
 The method for lists has been written with an eye for performance:
 
 
-```r
+``` r
 l <- replicate(26, sample(100), simplify = FALSE)
 names(l) <- letters
 
@@ -126,7 +129,7 @@ When you print a tibble, it only shows the first ten rows and all the columns th
 It also prints an abbreviated description of the column type, and uses font styles and color for highlighting:
 
 
-```r
+``` r
 tibble(x = -5:100, y = 123.456 * (3^x))
 #> # A tibble: 106 x 2
 #>        x         y
@@ -162,16 +165,25 @@ Tibbles are quite strict about subsetting.
 Contrast this with a data frame: sometimes `[` returns a data frame and sometimes it just returns a vector:
 
 
-```r
+``` r
 df1 <- data.frame(x = 1:3, y = 3:1)
 class(df1[, 1:2])
 #> [1] "data.frame"
+```
+
+``` r
 class(df1[, 1])
 #> [1] "integer"
+```
+
+``` r
 
 df2 <- tibble(x = 1:3, y = 3:1)
 class(df2[, 1:2])
 #> [1] "tbl_df"     "tbl"        "data.frame"
+```
+
+``` r
 class(df2[, 1])
 #> [1] "tbl_df"     "tbl"        "data.frame"
 ```
@@ -179,9 +191,12 @@ class(df2[, 1])
 To extract a single column use `[[` or `$`:
 
 
-```r
+``` r
 class(df2[[1]])
 #> [1] "integer"
+```
+
+``` r
 class(df2$x)
 #> [1] "integer"
 ```
@@ -190,10 +205,13 @@ Tibbles are also stricter with `$`.
 Tibbles never do partial matching, and will throw a warning and return `NULL` if the column does not exist:
 
 
-```r
+``` r
 df <- data.frame(abc = 1)
 df$a
 #> [1] 1
+```
+
+``` r
 
 df2 <- tibble(abc = 1)
 df2$a
@@ -204,9 +222,12 @@ df2$a
 However, tibbles respect the `drop` argument if it is provided:
 
 
-```r
+``` r
 data.frame(a = 1:3)[, "a", drop = TRUE]
 #> [1] 1 2 3
+```
+
+``` r
 tibble(a = 1:3)[, "a", drop = TRUE]
 #> [1] 1 2 3
 ```
@@ -215,18 +236,30 @@ Tibbles do not support row names.
 They are removed when converting to a tibble or when subsetting:
 
 
-```r
+``` r
 df <- data.frame(a = 1:3, row.names = letters[1:3])
 rownames(df)
 #> [1] "a" "b" "c"
+```
+
+``` r
 rownames(as_tibble(df))
 #> [1] "1" "2" "3"
+```
+
+``` r
 
 tbl <- tibble(a = 1:3)
 rownames(tbl) <- letters[1:3]
 #> Warning: Setting row names on a tibble is deprecated.
+```
+
+``` r
 rownames(tbl)
 #> [1] "a" "b" "c"
+```
+
+``` r
 rownames(tbl[1, ])
 #> [1] "1"
 ```
@@ -240,7 +273,7 @@ When constructing a tibble, only values of length 1 are recycled.
 The first column with length different to one determines the number of rows in the tibble, conflicts lead to an error:
 
 
-```r
+``` r
 tibble(a = 1, b = 1:3)
 #> # A tibble: 3 x 2
 #>       a     b
@@ -248,6 +281,9 @@ tibble(a = 1, b = 1:3)
 #> 1     1     1
 #> 2     1     2
 #> 3     1     3
+```
+
+``` r
 tibble(a = 1:3, b = 1)
 #> # A tibble: 3 x 2
 #>       a     b
@@ -255,6 +291,9 @@ tibble(a = 1:3, b = 1)
 #> 1     1     1
 #> 2     2     1
 #> 3     3     1
+```
+
+``` r
 tibble(a = 1:3, c = 1:2)
 #> Error in `tibble()`:
 #> ! Tibble columns must have compatible sizes.
@@ -266,10 +305,13 @@ tibble(a = 1:3, c = 1:2)
 This also extends to tibbles with *zero* rows, which is sometimes important for programming:
 
 
-```r
+``` r
 tibble(a = 1, b = integer())
 #> # A tibble: 0 x 2
 #> # i 2 variables: a <dbl>, b <int>
+```
+
+``` r
 tibble(a = integer(), b = 1)
 #> # A tibble: 0 x 2
 #> # i 2 variables: a <int>, b <dbl>
@@ -283,7 +325,7 @@ The result is silently coerced to a data frame.
 Do not rely on this behavior, it may become an error in a forthcoming version.
 
 
-```r
+``` r
 tbl <- tibble(a = 1:3, b = 4:6)
 tbl * 2
 #>   a  b
