@@ -12,7 +12,7 @@ vignette: >
 
 
 
-```r
+``` r
 library(tibble)
 ```
 
@@ -105,6 +105,6 @@ This is an S3 method that can be overridden,
 but most of the time it is more useful to override `vctrs::vec_ptype_abbr()`:
 
 
-```r
+``` r
 pillar:::type_sum.default
 ```
