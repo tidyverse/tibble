@@ -13,7 +13,7 @@ vignette: >
 
 
 
-```r
+``` r
 library(tibble)
 ```
 
@@ -23,7 +23,7 @@ This vignette shows how to decorate columns for custom formatting.
 We use the formattable package for demonstration because it already contains useful vector classes that apply a custom formatting to numbers.
 
 
-```r
+``` r
 library(formattable)
 
 tbl <- tibble(x = digits(9:11, 3))
@@ -43,7 +43,7 @@ It always will be shown with three digits after the decimal point.
 This also applies to columns derived from `x`.
 
 
-```r
+``` r
 library(dplyr)
 tbl2 <-
   tbl %>%
@@ -69,7 +69,7 @@ tbl2
 Summaries also maintain the formatting.
 
 
-```r
+``` r
 tbl2 %>%
   group_by(lag) %>%
   summarize(z = mean(z)) %>%
@@ -85,7 +85,7 @@ Same for pivoting operations.
 
 
 
-```r
+``` r
 library(tidyr)
 
 stocks <-
@@ -106,7 +106,7 @@ stocks %>%
 For ggplot2 we need to do [some work](https://github.com/tidyverse/ggplot2/pull/4065) to show apply the formatting to the scales.
 
 
-```r
+``` r
 library(ggplot2)
 
 # Needs https://github.com/tidyverse/ggplot2/pull/4065 or similar
@@ -142,7 +142,7 @@ Ensuring stickiness is difficult, and is insufficient for a dbplyr workflow wher
 Often it's possible to derive a rule-based approach for formatting.
 
 
-```r
+``` r
 tbl3 <-
   tibble(id = letters[1:3], x = 9:11) %>%
   mutate(
@@ -162,6 +162,9 @@ tbl3
 #> 1 a         9    10    81    91     9  0.412  112.     1
 #> 2 b        10    11   100   111     9 -0.544  112.     1
 #> 3 c        11    12   121   133    10 -1.00   112.     1
+```
+
+``` r
 
 tbl3 %>%
   mutate(
@@ -179,7 +182,7 @@ tbl3 %>%
 These rules can be stored in `quos()`:
 
 
-```r
+``` r
 rules <- quos(
   across(where(is.numeric), ~ digits(.x, 3)),
   across(where(~ is.numeric(.x) && mean(.x) > 50), ~ digits(.x, 1))
