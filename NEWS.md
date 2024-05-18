@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9018
+
+## Chore
+
+- Snapshot updates (#1580).
+
+
 # tibble 3.2.1.9017
 
 ## Bug fixes
