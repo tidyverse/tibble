@@ -32,14 +32,14 @@ galley_use_installed <- function() {
 
 render_galley <- function(name, md_name) {
   pkg <- utils::packageName()
-  # FIXME: Hack!
   installed <- galley_use_installed()
-  # stopifnot(!installed)
 
-  if (installed) {
-    input_path <- system.file("doc", name, package = pkg)
-  } else {
+  if (!installed) {
     input_path <- system.file("vignettes", name, package = pkg)
+  }
+
+  if (installed || !file.exists(input_path)) {
+    input_path <- system.file("doc", name, package = pkg)
   }
 
   # Need fixed file name for stability
