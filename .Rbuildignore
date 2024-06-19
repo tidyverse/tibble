@@ -38,3 +38,4 @@
 ^src/Makevars\.debug$
 ^\.vscode$
 ^\.gitpod\.yml$
+^tests/testthat/helper-sync\.R$
