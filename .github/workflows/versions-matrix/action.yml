@@ -1,0 +1,9 @@
+name: "Actions to compute a matrix with all R and OS versions"
+
+runs:
+  using: "composite"
+  steps:
+    - id: set-matrix
+      run: |
+        Rscript ./.github/workflows/versions-matrix/action.R
+      shell: bash
