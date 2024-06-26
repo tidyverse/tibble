@@ -47,7 +47,6 @@ Suggests:
     callr,
     cli,
     covr,
-    crayon (>= 1.3.4),
     DiagrammeR,
     dplyr,
     evaluate,

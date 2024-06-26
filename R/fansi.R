@@ -34,7 +34,7 @@ colourise_chunk <- function(type) {
     # lines <- strsplit(x, "\\n")[[1]]
     lines <- x
     if (type != "output") {
-      lines <- crayon::red(lines)
+      lines <- cli::col_red(lines)
     }
     paste0(
       '<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode">',
