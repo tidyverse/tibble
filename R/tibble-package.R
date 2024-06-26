@@ -26,12 +26,11 @@
 #' @importFrom vctrs vec_set_names
 #' @importFrom vctrs vec_size
 #' @importFrom vctrs vec_slice
+#' @import rlang
 ## usethis namespace: end
 NULL
 
 #' @useDynLib tibble, .registration = TRUE
-#' @import rlang
-#' @aliases NULL tibble-package
 #' @details
 #' `r lifecycle::badge("stable")`
 #'
