@@ -16,7 +16,7 @@ runs:
     # The duckdbneo repository contains several failed attempts.
     - run: |
         set -x
-        if [ -n ${{ inputs.sha }} ]; then
+        if [ -n '${{ inputs.sha }}' ]; then
           export GH_TOKEN=${{ github.token }}
 
           html_url=$(gh api \
