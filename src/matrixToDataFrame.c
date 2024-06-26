@@ -34,7 +34,7 @@ static void copy_attributes(SEXP out, SEXP data)
   }
   SET_OBJECT(out, OBJECT(data));
   if (IS_S4_OBJECT(data)) {
-    SET_S4_OBJECT(out);
+    Rf_asS4(out, TRUE, FALSE);
   }
 }
 
