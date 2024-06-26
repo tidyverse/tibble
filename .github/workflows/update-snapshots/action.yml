@@ -65,7 +65,7 @@ runs:
     - name: Create pull request
       if: ${{ steps.check-changed.outputs.changed }}
       id: cpr
-      uses: peter-evans/create-pull-request@v5
+      uses: peter-evans/create-pull-request@v6
       with:
         base: ${{ github.head_ref }}
         branch: snapshot-${{ github.ref_name }}-${{ github.job }}-${{ steps.matrix-desc.outputs.branch }}

@@ -7,6 +7,12 @@ linux <- data.frame(os = "ubuntu-22.04", r = r_versions[-1])
 covr <- data.frame(os = "ubuntu-22.04", r = r_versions[2], covr = "true", desc = "with covr")
 
 include_list <- list(macos, windows, linux_devel, linux, covr)
+
+if (file.exists(".github/versions-matrix.R")) {
+  custom <- source(".github/versions-matrix.R")$value
+  include_list <- c(include_list, list(custom))
+}
+
 print(include_list)
 
 filter <- read.dcf("DESCRIPTION")[1,]["Config/gha/filter"]
