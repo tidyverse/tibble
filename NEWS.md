@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9019
+
+## Chore
+
+- Upkeep drop crayon + mockr (@olivroy, #1587).
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/9687521438
+
+- Replace non-API `SET_S4_OBJECT()` with `Rf_asS4()` (@olivroy, #1588).
+
+## Continuous integration
+
+- Fix.
+
+- Remove dead workflow.
+
+- Recent updates.
+
+
 # tibble 3.2.1.9018
 
 ## Chore
