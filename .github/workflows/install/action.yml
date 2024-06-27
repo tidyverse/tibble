@@ -43,7 +43,6 @@ runs:
         echo "_R_CHECK_CRAN_INCOMING_CHECK_FILE_URIS_=true" | tee -a $GITHUB_ENV
         echo "_R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_=true" | tee -a $GITHUB_ENV
         echo "_R_CHECK_PACKAGE_DEPENDS_IGNORE_MISSING_ENHANCES_=true" | tee -a $GITHUB_ENV
-        echo "_R_CHECK_BASHISMS_=true" | tee -a $GITHUB_ENV
         echo "_R_CHECK_CODE_CLASS_IS_STRING_=true" | tee -a $GITHUB_ENV
         echo "_R_CHECK_CODOC_VARIABLES_IN_USAGES_=true" | tee -a $GITHUB_ENV
         echo "_R_CHECK_CONNECTIONS_LEFT_OPEN_=true" | tee -a $GITHUB_ENV
@@ -57,6 +56,12 @@ runs:
         echo "_R_CHECK_UNDOC_USE_ALL_NAMES_=true" | tee -a $GITHUB_ENV
         echo "_R_CHECK_URLS_SHOW_301_STATUS_=true" | tee -a $GITHUB_ENV
         echo "_R_CXX_USE_NO_REMAP_=true" | tee -a $GITHUB_ENV
+      shell: bash
+
+    - name: Set environment variables (non-Windows only)
+      if: runner.os != 'Windows'
+      run: |
+        echo "_R_CHECK_BASHISMS_=true" | tee -a $GITHUB_ENV
       shell: bash
 
     - name: Update apt
