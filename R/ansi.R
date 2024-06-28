@@ -1,5 +1,5 @@
-# nocov start - https://github.com/tidyverse/tibble/blob/main/R/fansi.R
-set_fansi_hooks <- function() {
+# nocov start - https://github.com/tidyverse/tibble/blob/main/R/ansi.R
+set_ansi_hooks <- function() {
   knitr::opts_chunk$set(collapse = TRUE)
 
   if (Sys.getenv("IN_GALLEY") != "") {
@@ -23,13 +23,6 @@ set_fansi_hooks <- function() {
 }
 
 colourise_chunk <- function(type) {
-  # Fallback if fansi is missing
-  if (is_installed("fansi")) {
-    sgr_to_html <- fansi::sgr_to_html
-  } else {
-    sgr_to_html <- identity
-  }
-
   function(x, options) {
     # lines <- strsplit(x, "\\n")[[1]]
     lines <- x
@@ -39,7 +32,7 @@ colourise_chunk <- function(type) {
     paste0(
       '<div class="sourceCode"><pre class="sourceCode"><code class="sourceCode">',
       paste0(
-        sgr_to_html(htmltools::htmlEscape(lines)),
+        cli::ansi_html(htmltools::htmlEscape(lines)),
         collapse = "\n"
       ),
       "</code></pre></div>"
