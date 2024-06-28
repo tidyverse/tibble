@@ -1,5 +1,5 @@
 # nocov start - https://github.com/tidyverse/tibble/blob/main/R/ansi.R
-set_ansi_hooks <- function() {
+set_fansi_hooks <- function() {
   knitr::opts_chunk$set(collapse = TRUE)
 
   if (Sys.getenv("IN_GALLEY") != "") {
