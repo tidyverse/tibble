@@ -2,7 +2,7 @@ name: "Lock threads"
 
 on:
   schedule:
-    - cron: "0 0 * * *"
+    - cron: "37 2 * * *"
 
 jobs:
   lock:
@@ -11,9 +11,9 @@ jobs:
       - uses: dessant/lock-threads@v5
         with:
           github-token: ${{ github.token }}
-          issue-lock-inactive-days: "365"
+          issue-inactive-days: "365"
           issue-lock-reason: ""
-          issue-lock-comment: >
+          issue-comment: >
             This old thread has been automatically locked. If you think you have
             found something related to this, please open a new issue and link to this
             old issue if necessary.

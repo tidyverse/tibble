@@ -22,13 +22,13 @@ runs:
           html_url=$(gh api \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq -r .html_url)
+            repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq -r .html_url)
 
           gh api \
             --method POST \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/${{ github.repository }}/statuses/${{ inputs.sha }} \
+            repos/${{ github.repository }}/statuses/${{ inputs.sha }} \
             -f "state=${{ job.status }}" -f "target_url=$html_url" -f "description=${{ github.workflow }} / ${{ github.job }}" -f "context=actions-sync"
         fi
       shell: bash
