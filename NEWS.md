@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9022
+
+## Chore
+
+- Drop fansi and import cli (@olivroy, #1589).
+
+## Continuous integration
+
+- Fix on Windows, tweak lock workflow.
+
+
 # tibble 3.2.1.9021
 
 ## Chore
