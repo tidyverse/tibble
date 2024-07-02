@@ -33,9 +33,6 @@ The rationale is to allow a quick glance over the most significant digits of a n
 options(digits = 3)
 c(1.2345, 12.345, 123.45, 1234.5, 12345)
 #> [1]     1.23    12.35   123.45  1234.50 12345.00
-```
-
-``` r
 tibble(x = c(1.2345, 12.345, 123.45, 1234.5, 12345))
 #> # A tibble: 5 x 1
 #>          x
@@ -56,9 +53,6 @@ This is in contrast to base R where terminal zeros are always shown if there is 
 ``` r
 c(1, 1.00001)
 #> [1] 1 1
-```
-
-``` r
 tibble(x = c(1, 1.00001))
 #> # A tibble: 2 x 1
 #>       x
@@ -76,9 +70,6 @@ The presence of the decimal separator does **not** indicate that the number is l
 ``` r
 c(123, 123.45, 567.89)
 #> [1] 123 123 568
-```
-
-``` r
 tibble(x = c(123, 123.45, 567.89))
 #> # A tibble: 3 x 1
 #>       x
@@ -98,9 +89,6 @@ options(digits = 7)
 options(pillar.sigfig = 7)
 c(1.2345, 12.345, 123.45, 1234.5, 12345)
 #> [1]     1.2345    12.3450   123.4500  1234.5000 12345.0000
-```
-
-``` r
 tibble(x = c(1.2345, 12.345, 123.45, 1234.5, 12345))
 #> # A tibble: 5 x 1
 #>            x
@@ -120,9 +108,6 @@ options(digits = 7)
 options(pillar.sigfig = 7)
 c(1.2345, 12.3456, 123.4567, 1234.5678, 12345.6789)
 #> [1]     1.2345    12.3456   123.4567  1234.5678 12345.6789
-```
-
-``` r
 tibble(x = c(1.2345, 12.3456, 123.4567, 1234.5678, 12345.6789))
 #> # A tibble: 5 x 1
 #>            x
@@ -159,35 +144,17 @@ The default `0` seems to be anchored at 13 digits for the integer part.
 ``` r
 123456789012
 #> [1] 123456789012
-```
-
-``` r
 123456789012.3
 #> [1] 123456789012
-```
-
-``` r
 1234567890123
 #> [1] 1.234568e+12
-```
-
-``` r
 1234567890123.4
 #> [1] 1.234568e+12
-```
-
-``` r
 options(scipen = 1)
 1234567890123
 #> [1] 1234567890123
-```
-
-``` r
 12345678901234
 #> [1] 1.234568e+13
-```
-
-``` r
 12345678901234.5
 #> [1] 1.234568e+13
 ```
@@ -202,50 +169,32 @@ tibble(x = 123456789012)
 #>              x
 #>          <dbl>
 #> 1 123456789012
-```
-
-``` r
 tibble(x = 123456789012.3)
 #> # A tibble: 1 x 1
 #>               x
 #>           <dbl>
 #> 1 123456789012.
-```
-
-``` r
 tibble(x = 1234567890123)
 #> # A tibble: 1 x 1
 #>               x
 #>           <dbl>
 #> 1 1234567890123
-```
-
-``` r
 tibble(x = 1234567890123.4)
 #> # A tibble: 1 x 1
 #>             x
 #>         <dbl>
 #> 1 1.234568e12
-```
-
-``` r
 options(pillar.max_dec_width = 14)
 tibble(x = 1234567890123)
 #> # A tibble: 1 x 1
 #>               x
 #>           <dbl>
 #> 1 1234567890123
-```
-
-``` r
 tibble(x = 12345678901234)
 #> # A tibble: 1 x 1
 #>                x
 #>            <dbl>
 #> 1 12345678901234
-```
-
-``` r
 tibble(x = 12345678901234.5)
 #> # A tibble: 1 x 1
 #>             x
@@ -264,21 +213,12 @@ The `notation` argument to `num()` offers more options:
 num(12345678901234567, notation = "dec")
 #> <pillar_num(dec)[1]>
 #> [1] 12345678901234568
-```
-
-``` r
 num(12345678901234567, notation = "sci")
 #> <pillar_num(sci)[1]>
 #> [1] 1.234568e16
-```
-
-``` r
 num(12345678901234567, notation = "eng")
 #> <pillar_num(eng)[1]>
 #> [1] 12.34568e15
-```
-
-``` r
 num(12345678901234567, notation = "si")
 #> <pillar_num(si)[1]>
 #> [1] 12.34568P

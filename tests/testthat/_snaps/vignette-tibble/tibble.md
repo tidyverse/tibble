@@ -66,9 +66,6 @@ It encapsulates best practices for data frames:
     ``` r
     names(data.frame(`crazy name` = 1))
     #> [1] "crazy.name"
-    ```
-    
-    ``` r
     names(tibble(`crazy name` = 1))
     #> [1] "crazy name"
     ```
@@ -169,21 +166,12 @@ Contrast this with a data frame: sometimes `[` returns a data frame and sometime
 df1 <- data.frame(x = 1:3, y = 3:1)
 class(df1[, 1:2])
 #> [1] "data.frame"
-```
-
-``` r
 class(df1[, 1])
 #> [1] "integer"
-```
-
-``` r
 
 df2 <- tibble(x = 1:3, y = 3:1)
 class(df2[, 1:2])
 #> [1] "tbl_df"     "tbl"        "data.frame"
-```
-
-``` r
 class(df2[, 1])
 #> [1] "tbl_df"     "tbl"        "data.frame"
 ```
@@ -194,9 +182,6 @@ To extract a single column use `[[` or `$`:
 ``` r
 class(df2[[1]])
 #> [1] "integer"
-```
-
-``` r
 class(df2$x)
 #> [1] "integer"
 ```
@@ -209,9 +194,6 @@ Tibbles never do partial matching, and will throw a warning and return `NULL` if
 df <- data.frame(abc = 1)
 df$a
 #> [1] 1
-```
-
-``` r
 
 df2 <- tibble(abc = 1)
 df2$a
@@ -225,9 +207,6 @@ However, tibbles respect the `drop` argument if it is provided:
 ``` r
 data.frame(a = 1:3)[, "a", drop = TRUE]
 #> [1] 1 2 3
-```
-
-``` r
 tibble(a = 1:3)[, "a", drop = TRUE]
 #> [1] 1 2 3
 ```
@@ -240,26 +219,14 @@ They are removed when converting to a tibble or when subsetting:
 df <- data.frame(a = 1:3, row.names = letters[1:3])
 rownames(df)
 #> [1] "a" "b" "c"
-```
-
-``` r
 rownames(as_tibble(df))
 #> [1] "1" "2" "3"
-```
-
-``` r
 
 tbl <- tibble(a = 1:3)
 rownames(tbl) <- letters[1:3]
 #> Warning: Setting row names on a tibble is deprecated.
-```
-
-``` r
 rownames(tbl)
 #> [1] "a" "b" "c"
-```
-
-``` r
 rownames(tbl[1, ])
 #> [1] "1"
 ```
@@ -281,9 +248,6 @@ tibble(a = 1, b = 1:3)
 #> 1     1     1
 #> 2     1     2
 #> 3     1     3
-```
-
-``` r
 tibble(a = 1:3, b = 1)
 #> # A tibble: 3 x 2
 #>       a     b
@@ -291,9 +255,6 @@ tibble(a = 1:3, b = 1)
 #> 1     1     1
 #> 2     2     1
 #> 3     3     1
-```
-
-``` r
 tibble(a = 1:3, c = 1:2)
 #> Error in `tibble()`:
 #> ! Tibble columns must have compatible sizes.
@@ -309,9 +270,6 @@ This also extends to tibbles with *zero* rows, which is sometimes important for 
 tibble(a = 1, b = integer())
 #> # A tibble: 0 x 2
 #> # i 2 variables: a <dbl>, b <int>
-```
-
-``` r
 tibble(a = integer(), b = 1)
 #> # A tibble: 0 x 2
 #> # i 2 variables: a <int>, b <dbl>
