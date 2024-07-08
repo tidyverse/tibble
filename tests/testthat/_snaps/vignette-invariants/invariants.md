@@ -41,22 +41,13 @@ In this article, all behaviors are demonstrated using one example data frame and
 
 ``` r
 library(tibble)
-```
-
-``` r
 library(vctrs)
-```
-
-``` r
 new_df <- function() {
   df <- data.frame(n = c(1L, NA, 3L, NA))
   df$c <- letters[5:8]
   df$li <- list(9, 10:11, 12:14, "text")
   df
 }
-```
-
-``` r
 new_tbl <- function() {
   as_tibble(new_df())
 }
@@ -98,9 +89,6 @@ The same objects are reused in all examples:
 
 ``` r
 df <- new_df()
-```
-
-``` r
 tbl <- new_tbl()
 ```
 
@@ -114,22 +102,13 @@ new_tbl2 <- function() {
     m = diag(4)
   )
 }
-```
-
-``` r
 new_df2 <- function() {
   df2 <- new_tbl2()
   class(df2) <- "data.frame"
   class(df2$tb) <- "data.frame"
   df2
 }
-```
-
-``` r
 df2 <- new_df2()
-```
-
-``` r
 tbl2 <- new_tbl2()
 ```
 
@@ -1306,9 +1285,6 @@ A more efficient implementation of `x[[i, j]]` would check that `j` is a scalar 
 ``` r
 df[[1, 1]]
 #> [1] 1
-```
-
-``` r
 df[[1, 3]]
 #> [1] 9
 ```
