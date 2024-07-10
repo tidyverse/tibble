@@ -17,7 +17,7 @@ evaluation and auto-name semantics."><meta property="og:image" content="https://
 
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9021</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9022</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,13 +88,13 @@ evaluation and auto-name semantics.</p>
 <dl><dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>&lt;<code><a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic-dots</a></code>&gt;
 A set of name-value pairs. These arguments are
-processed with <code><a href="https://rlang.r-lib.org/reference/defusing-advanced.html" class="external-link">rlang::quos()</a></code> and support unquote via <code>!!</code> and
-unquote-splice via <code>!!!</code>. Use <code>:=</code> to create columns that start with a dot.</p>
+processed with <code><a href="https://rlang.r-lib.org/reference/defusing-advanced.html" class="external-link">rlang::quos()</a></code> and support unquote via <code><a href="https://rlang.r-lib.org/reference/injection-operator.html" class="external-link">rlang::!!</a></code> and
+unquote-splice via <code><a href="https://rlang.r-lib.org/reference/splice-operator.html" class="external-link">rlang::!!!</a></code>. Use <code>:=</code> to create columns that start with a dot.</p>
 <p>Arguments are evaluated sequentially.
-You can refer to previously created elements directly or using the .data
+You can refer to previously created elements directly or using the <a href="https://rlang.r-lib.org/reference/dot-data.html" class="external-link">rlang::.data</a>
 pronoun.
-To refer explicitly to objects in the calling environment, use <code>!!</code> or
-.env, e.g. <code>!!.data</code> or <code>.env$.data</code> for the special case of an object
+To refer explicitly to objects in the calling environment, use <code><a href="https://rlang.r-lib.org/reference/injection-operator.html" class="external-link">rlang::!!</a></code> or
+<a href="https://rlang.r-lib.org/reference/dot-data.html" class="external-link">rlang::.env</a>, e.g. <code>!!.data</code> or <code>.env$.data</code> for the special case of an object
 named <code>.data</code>.</p></dd>
 
 </dl></div>
@@ -183,7 +183,7 @@ named <code>.data</code>.</p></dd>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.9000.</p>
 </div>
 
   </div></footer></body></html>
