@@ -51,7 +51,7 @@ jobs:
           install-r: false
           cache-version: rcc-smoke-2
           needs: check
-          extra-packages: any::rcmdcheck any::roxygen2 r-lib/styler
+          extra-packages: any::rcmdcheck r-lib/roxygen2#1633 r-lib/styler
 
       - uses: ./.github/workflows/custom/after-install
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
