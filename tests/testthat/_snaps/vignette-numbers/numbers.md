@@ -31,18 +31,12 @@ tibble(x = 123.4567)
 #>       x
 #>   <dbl>
 #> 1  123.
-```
-
-``` r
 old <- options(pillar.sigfig = 7)
 tibble(x = 123.4567)
 #> # A tibble: 1 x 1
 #>          x
 #>      <dbl>
 #> 1 123.4567
-```
-
-``` r
 # Restore old options, see also rlang::local_options() for a more elegant way
 options(old)
 ```
@@ -62,9 +56,6 @@ Similarly, `char()` allows customizing the display of character columns.
 num(-1:3, notation = "sci")
 #> <pillar_num(sci)[5]>
 #> [1] -1e0  0    1e0  2e0  3e0
-```
-
-``` r
 tibble(
   x4 = num(8:12 * 100 + 0.5, digits = 4),
   x1 = num(8:12 * 100 + 0.5, digits = -1),
@@ -116,9 +107,6 @@ markets
 #>  9 1992. 1635. 1698. 1754  2510.
 #> 10 1992. 1646. 1716. 1754. 2497.
 #> # i 1,850 more rows
-```
-
-``` r
 markets %>%
   mutate(across(-time, ~ num(.x, digits = 3)))
 #> # A tibble: 1,860 x 5
@@ -154,39 +142,21 @@ When applying arithmetic operations on numbers created by `num()`, the result in
 num(1) + 2
 #> <pillar_num[1]>
 #> [1] 3
-```
-
-``` r
 1 + num(2)
 #> <pillar_num[1]>
 #> [1] 3
-```
-
-``` r
 1L + num(2)
 #> <pillar_num[1]>
 #> [1] 3
-```
-
-``` r
 num(3.23456, sigfig = 4) - num(2)
 #> <pillar_num:4[1]>
 #> [1] 1.235
-```
-
-``` r
 num(4, sigfig = 2) * num(3, digits = 2)
 #> <pillar_num:2[1]>
 #> [1] 12
-```
-
-``` r
 num(3, digits = 2) * num(4, sigfig = 2)
 #> <pillar_num:.2![1]>
 #> [1] 12.00
-```
-
-``` r
 -num(2)
 #> <pillar_num[1]>
 #> [1] -2
@@ -201,15 +171,9 @@ Similarly, for mathematical operations, the formatting is inherited.
 min(num(1:3, label = "$"))
 #> <pillar_num{$}[1]>
 #> [1] 1
-```
-
-``` r
 mean(num(1:3, notation = "eng"))
 #> <pillar_num(eng)[1]>
 #> [1] 2e0
-```
-
-``` r
 sin(num(1:3, label = "%", scale = 100))
 #> <pillar_num{%}*100[3]>
 #> [1] 84.1 90.9 14.1
@@ -226,16 +190,10 @@ In some cases, the ideal formatting changes after a transformation.
 num(1:3 + 0.125, digits = 4)
 #> <pillar_num:.4![3]>
 #> [1] 1.1250 2.1250 3.1250
-```
-
-``` r
 transf <- 10^num(1:3 + 0.125, digits = 4)
 transf
 #> <pillar_num:.4![3]>
 #> [1]   13.3352  133.3521 1333.5214
-```
-
-``` r
 num(transf, sigfig = 3)
 #> <pillar_num:3[3]>
 #> [1]   13.3  133.  1334.
@@ -268,9 +226,6 @@ One way to recover is to apply `num()` to the result:
 num(var(x), notation = "eng")
 #> <pillar_num(eng)[1]>
 #> [1] 2.33e0
-```
-
-``` r
 num(median(as.numeric(x)), notation = "eng")
 #> <pillar_num(eng)[1]>
 #> [1] 2e0
@@ -309,9 +264,6 @@ sd_ <- make_restore(sd)
 var_(x)
 #> <pillar_num(eng)[1]>
 #> [1] 2.33e0
-```
-
-``` r
 sd_(x)
 #> <pillar_num(eng)[1]>
 #> [1] 1.53e0
