@@ -11,7 +11,7 @@ tribble(...)
 Arguments specifying the structure of a \code{tibble}.
 Variable names should be formulas, and may only appear before the data.
 These arguments are processed with \code{\link[rlang:list2]{rlang::list2()}}
-and support unquote via \code{\link{!!}} and unquote-splice via \code{\link{!!!}}.}
+and support unquote via \code{\link[rlang:injection-operator]{rlang::!!}} and unquote-splice via \code{\link[rlang:splice-operator]{rlang::!!!}}.}
 }
 \value{
 A \link{tibble}.
@@ -50,6 +50,6 @@ tribble(
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-See \link{quasiquotation} for more details on tidy dots semantics,
+See \link[rlang:topic-inject]{rlang::quasiquotation} for more details on tidy dots semantics,
 i.e. exactly how  the \code{...} argument is processed.
 }

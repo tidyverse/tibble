@@ -55,7 +55,7 @@ same length as the number of rows can be used for assignment.
 \item When updating with \verb{[[<-} and \verb{[<-}, type changes of entire columns are
 supported, but updating a part of a column requires that the new value is
 coercible to the existing type.
-See \code{\link[=vec_slice]{vec_slice()}} for the underlying implementation.
+See \code{\link[vctrs:vec_slice]{vctrs::vec_slice()}} for the underlying implementation.
 }
 
 Unstable return type and implicit partial matching can lead to surprises and
