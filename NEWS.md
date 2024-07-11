@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9023
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/9884064046
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/9871752503
+
+## Continuous integration
+
+- Use roxygen2 PR to fix documentation.
+
+## Testing
+
+- Snapshot updates for rcc-smoke (null) (#1597).
+
+
 # tibble 3.2.1.9022
 
 ## Chore
