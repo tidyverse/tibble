@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9025
+
+## Continuous integration
+
+- Use dev roxygen2 and decor.
+
+
 # tibble 3.2.1.9024
 
 ## Documentation
