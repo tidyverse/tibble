@@ -82,7 +82,11 @@ runs:
         use-public-rspm: true
 
     - id: get-extra
-      uses: ./.github/workflows/get-extra
+      run: |
+        set -x
+        packages=$( ( grep Config/gha/extra-packages DESCRIPTION || true ) | cut -d " " -f 2)
+        echo packages=$packages >> $GITHUB_OUTPUT
+      shell: bash
 
     - uses: r-lib/actions/setup-r-dependencies@v2
       env:
