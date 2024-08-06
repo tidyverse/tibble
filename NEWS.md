@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9027
+
+## Continuous integration
+
+- Inline action.
+
+
 # tibble 3.2.1.9026
 
 ## Chore
