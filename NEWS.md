@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9028
+
+## Continuous integration
+
+- Use v2 instead of master.
+
+
 # tibble 3.2.1.9027
 
 ## Continuous integration
