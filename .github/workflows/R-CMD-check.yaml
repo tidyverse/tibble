@@ -13,11 +13,20 @@ on:
     branches:
       - main
       - master
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Branch or tag to check out"
+        required: false
+        default: "main"
+  merge_group:
+    types:
+      - checks_requested
   schedule:
     - cron: "10 0 * * *"
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref || github.sha }}-${{ github.base_ref || '' }}
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.ref || github.head_ref || github.sha }}-${{ github.base_ref || '' }}
   cancel-in-progress: true
 
 name: rcc
@@ -35,6 +44,8 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
 
       - uses: ./.github/workflows/rate-limit
         with:
@@ -59,6 +70,9 @@ jobs:
       - uses: ./.github/workflows/versions-matrix
         if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
 
+      - uses: ./.github/workflows/dep-suggests-matrix
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+
       - uses: ./.github/workflows/update-snapshots
         if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
 
@@ -71,6 +85,8 @@ jobs:
       - id: commit
         if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         uses: ./.github/workflows/commit
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: ./.github/workflows/check
         with:
@@ -151,7 +167,7 @@ jobs:
 
     runs-on: ${{ matrix.os }}
 
-    name: ${{ matrix.os }} (${{ matrix.r }}) ${{ matrix.desc }}
+    name: 'rcc: ${{ matrix.os }} (${{ matrix.r }}) ${{ matrix.desc }}'
 
     # Begin custom: services
     # End custom: services
@@ -212,7 +228,7 @@ jobs:
           use-public-rspm: true
 
       - id: set-matrix
-        uses: ./.github/workflows/dep-matrix-suggests
+        uses: ./.github/workflows/dep-suggests-matrix-read
 
   check-suggests-matrix:
     runs-on: ubuntu-22.04

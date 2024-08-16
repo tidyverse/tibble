@@ -101,7 +101,7 @@ jobs:
 
     runs-on: ubuntu-22.04
 
-    name: ${{ matrix.package }}
+    name: 'rcc-dev: ${{ matrix.package }}'
 
     # Begin custom: services
     # End custom: services
