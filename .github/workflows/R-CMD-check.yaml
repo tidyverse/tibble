@@ -9,6 +9,8 @@ on:
     branches:
       - main
       - master
+      - release
+      - cran-*
   pull_request:
     branches:
       - main
@@ -36,6 +38,8 @@ jobs:
     runs-on: ubuntu-latest
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
+      versions-matrix: ${{ steps.versions-matrix.outputs.matrix }}
+      dep-suggests-matrix: ${{ steps.dep-suggests-matrix.outputs.matrix }}
 
     name: "Smoke test: stock R"
 
@@ -59,31 +63,34 @@ jobs:
       - uses: ./.github/workflows/install
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          install-r: false
           cache-version: rcc-smoke-2
-          needs: check
-          extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/styler
+          needs: check, website
+          # Beware of using dev pkgdown here, has brought in dev dependencies in the past
+          extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/styler pkgdown
 
       - uses: ./.github/workflows/custom/after-install
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
-      - uses: ./.github/workflows/versions-matrix
-        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+      - id: versions-matrix
+        # Only run for pull requests if the base repo is different from the head repo, always run for other events
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
+        uses: ./.github/workflows/versions-matrix
 
-      - uses: ./.github/workflows/dep-suggests-matrix
-        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+      - id: dep-suggests-matrix
+        uses: ./.github/workflows/dep-suggests-matrix
 
       - uses: ./.github/workflows/update-snapshots
-        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
 
       - uses: ./.github/workflows/style
-        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
 
       - uses: ./.github/workflows/roxygenize
-        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+
+      - name: Remove config files from previous iteration
+        run: |
+          rm -f .github/dep-suggests-matrix.json .github/versions-matrix.json
+        shell: bash
 
       - id: commit
-        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         uses: ./.github/workflows/commit
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -92,80 +99,50 @@ jobs:
         with:
           results: ${{ runner.os }}-smoke-test
 
-  # Runs in a separate workflow, because it's using dev pkgdown
-  # which might bring in other dev dependencies
-  pkgdown:
-    needs: rcc-smoke
-
-    runs-on: ubuntu-latest
-
-    name: "pkgdown"
-
-    # Begin custom: services
-    # End custom: services
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          ref: ${{ needs.rcc-smoke.outputs.sha }}
-
-      - uses: ./.github/workflows/rate-limit
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - uses: ./.github/workflows/git-identity
-        if: github.event_name == 'push'
-
-      - uses: ./.github/workflows/custom/before-install
-        if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
-
-      - uses: ./.github/workflows/install
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          install-r: false
-          cache-version: pkgdown-1
-          needs: website
-          extra-packages: r-lib/pkgdown local::.
-
-      - uses: ./.github/workflows/custom/after-install
-        if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
-
       - uses: ./.github/workflows/pkgdown-build
         if: github.event_name != 'push'
 
       - uses: ./.github/workflows/pkgdown-deploy
         if: github.event_name == 'push'
 
-  versions-matrix:
-    runs-on: ubuntu-22.04
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
+      # Upload sha as artifact
+      - run: |
+          echo -n "${{ steps.commit.outputs.sha }}" > rcc-smoke-sha.txt
+        shell: bash
 
-    name: Collect versions
+      - uses: actions/upload-artifact@v2
+        with:
+          name: rcc-smoke-sha
+          path: rcc-smoke-sha.txt
+
+  rcc-smoke-check-matrix:
+    runs-on: ubuntu-latest
+
+    name: "Check matrix"
+
+    needs:
+      - rcc-smoke
 
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0
+          ref: ${{ needs.rcc-smoke.outputs.sha }}
 
-      - uses: ./.github/workflows/rate-limit
+      - uses: ./.github/workflows/matrix-check
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
+          matrix: ${{ needs.rcc-smoke.outputs.versions-matrix }}
 
-      - uses: r-lib/actions/setup-r@v2
+      - uses: ./.github/workflows/matrix-check
         with:
-          install-r: false
-          use-public-rspm: true
-
-      - id: set-matrix
-        uses: ./.github/workflows/versions-matrix-read
+          matrix: ${{ needs.rcc-smoke.outputs.dep-suggests-matrix }}
 
   rcc-full:
     needs:
       - rcc-smoke
-      - versions-matrix
 
     runs-on: ${{ matrix.os }}
+
+    if: ${{ needs.rcc-smoke.outputs.versions-matrix != '' }}
 
     name: 'rcc: ${{ matrix.os }} (${{ matrix.r }}) ${{ matrix.desc }}'
 
@@ -174,7 +151,7 @@ jobs:
 
     strategy:
       fail-fast: false
-      matrix: ${{fromJson(needs.versions-matrix.outputs.matrix)}}
+      matrix: ${{fromJson(needs.rcc-smoke.outputs.versions-matrix)}}
 
     steps:
       - uses: actions/checkout@v4
@@ -201,72 +178,22 @@ jobs:
         with:
           results: ${{ runner.os }}-r${{ matrix.r }}
 
-      - uses: ./.github/workflows/update-status
-        if: always()
-        with:
-          sha: ${{ needs.rcc-smoke.outputs.sha }}
-
-  suggests-matrix:
-    runs-on: ubuntu-22.04
-    outputs:
-      matrix: ${{ steps.set-matrix.outputs.matrix }}
-
-    name: Collect suggests deps
-
-    steps:
-      - uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
-
-      - uses: ./.github/workflows/rate-limit
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - uses: r-lib/actions/setup-r@v2
-        with:
-          install-r: false
-          use-public-rspm: true
-
-      - id: set-matrix
-        uses: ./.github/workflows/dep-suggests-matrix-read
-
-  check-suggests-matrix:
-    runs-on: ubuntu-22.04
-    needs: suggests-matrix
-
-    name: Check suggests deps
-
-    if: ${{ needs.suggests-matrix.outputs.matrix != '' }}
-
-    steps:
-      - name: Install json2yaml
-        run: |
-          sudo npm install -g json2yaml
-
-      - name: Check matrix definition
-        run: |
-          matrix='${{ needs.suggests-matrix.outputs.matrix }}'
-          echo $matrix
-          echo $matrix | jq .
-          echo $matrix | json2yaml
-
   rcc-suggests:
     needs:
       - rcc-smoke
-      - suggests-matrix
 
     runs-on: ubuntu-22.04
 
-    name: Without ${{ matrix.package }}
+    if: ${{ needs.rcc-smoke.outputs.dep-suggests-matrix != '' }}
 
-    if: ${{ needs.suggests-matrix.outputs.matrix != '' }}
+    name: Without ${{ matrix.package }}
 
     # Begin custom: services
     # End custom: services
 
     strategy:
       fail-fast: false
-      matrix: ${{fromJson(needs.suggests-matrix.outputs.matrix)}}
+      matrix: ${{fromJson(needs.rcc-smoke.outputs.dep-suggests-matrix)}}
 
     steps:
       - uses: actions/checkout@v4

@@ -21,9 +21,12 @@ get_deps <- function() {
 
 if (Sys.getenv("GITHUB_BASE_REF") != "") {
   print(Sys.getenv("GITHUB_BASE_REF"))
-  has_diff <- (system("git diff ${{ github.event.pull_request.base.sha }}... | egrep '^[+][^+]' | grep -q ::") == 0)
+  system("git fetch origin ${GITHUB_BASE_REF}")
+  # Use .. to avoid having to fetch the entire history
+  # https://github.com/krlmlr/actions-sync/issues/45
+  has_diff <- (system("git diff origin/${GITHUB_BASE_REF}.. | egrep '^[+][^+]' | grep -q ::") == 0)
   if (has_diff) {
-    system("git diff ${{ github.event.pull_request.base.sha }}... | egrep '^[+][^+]' | grep -q ::")
+    system("git diff origin/${GITHUB_BASE_REF}.. | egrep '^[+][^+]' | grep -q ::")
     packages <- get_deps()
   } else {
     writeLines("No changes using :: found, not checking without suggested packages")
@@ -39,9 +42,8 @@ if (length(packages) > 0) {
     paste0('"', packages, '"', collapse = ","),
     ']}'
   )
+  writeLines(paste0("matrix=", json), Sys.getenv("GITHUB_OUTPUT"))
+  writeLines(json)
 } else {
-  json <- character()
+  writeLines("No suggested packages found.")
 }
-
-writeLines(json, ".github/dep-suggests-matrix.json")
-writeLines(json)

@@ -1,0 +1,23 @@
+name: "Actions to check a matrix with all R and OS versions, computed with the versions-matrix action"
+inputs:
+  matrix:
+    description: "Generated matrix"
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install json2yaml
+      run: |
+        sudo npm install -g json2yaml
+      shell: bash
+
+    - run: |
+        matrix='${{ inputs.matrix }}'
+        if [ -n "${matrix}" ]; then
+          echo $matrix | jq .
+          echo $matrix | json2yaml
+        else
+          echo "No matrix found"
+        fi
+      shell: bash
