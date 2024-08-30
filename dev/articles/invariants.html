@@ -30,7 +30,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9028</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9029</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -655,7 +655,7 @@ in the returned vector are compatible.</p>
 <td>
 <div class="sourceCode" id="cb48"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl</span><span class="op">[</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/NA.html" class="external-link">is.na</a></span><span class="op">(</span><span class="va">tbl</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `vec_c()` at tibble/R/subsetting-matrix.R:12:3:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `vec_c()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't combine `n` &lt;integer&gt; and `c` &lt;character&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -1426,7 +1426,7 @@ assigned.</p>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Assigned data `4` must be</span></span>
 <span><span class="co">#&gt;   compatible with existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `c`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:3:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;double&gt; to &lt;character&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -1475,7 +1475,7 @@ error is thrown.</p>
 <span><span class="co">#&gt;   ncol = 2)` must be compatible</span></span>
 <span><span class="co">#&gt;   with existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `c`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:3:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;integer&gt; to &lt;character&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -1843,7 +1843,7 @@ subassignment.&lt;/p&gt;"><sup>7</sup></a></p>
 <span><span class="co">#&gt;   rows.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Only vectors of size 1 are</span></span>
 <span><span class="co">#&gt;   recycled.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()` at tibble/R/subassign-backend.R:169:7:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vectbl_recycle_rhs_rows()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't recycle input of size 2 to size 3.</span></span></code></pre></div>
 </td>
 </tr>
@@ -2017,7 +2017,7 @@ of existing columns.</p>
 <span><span class="co">#&gt;   2]` must be compatible with</span></span>
 <span><span class="co">#&gt;   existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `n`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:3:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;character&gt; to &lt;integer&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -2043,7 +2043,7 @@ of existing columns.</p>
 <span><span class="co">#&gt;   3]` must be compatible with</span></span>
 <span><span class="co">#&gt;   existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `c`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:3:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;list&gt; to &lt;character&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -2070,7 +2070,7 @@ of existing columns.</p>
 <span><span class="co">#&gt;   1]` must be compatible with</span></span>
 <span><span class="co">#&gt;   existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `li`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:3:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;tbl_df&gt; to &lt;list&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -2096,7 +2096,7 @@ of existing columns.</p>
 <span><span class="co">#&gt;   2]` must be compatible with</span></span>
 <span><span class="co">#&gt;   existing data.</span></span>
 <span><span class="co">#&gt; <span style="color: #00BBBB;">ℹ</span> Error occurred for column `tb`.</span></span>
-<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()` at tibble/R/subassign-backend.R:193:3:</span></span></span>
+<span><span class="co">#&gt; <span style="font-weight: bold;">Caused by error in `vec_assign()`:</span></span></span>
 <span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> Can't convert &lt;double[,4]&gt; to &lt;tbl_df&gt;.</span></span></code></pre></div>
 </td>
 </tr>
@@ -2278,7 +2278,7 @@ subassignment. An efficient implementation would check that
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
   </div></footer>
