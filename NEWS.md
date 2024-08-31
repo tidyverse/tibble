@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9030
+
+## Continuous integration
+
+  - Install local package for pkgdown builds.
+
+  - Improve support for protected branches with fledge.
+
+  - Improve support for protected branches, without fledge.
+
+
 # tibble 3.2.1.9029
 
 ## Chore
