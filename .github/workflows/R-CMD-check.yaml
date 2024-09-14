@@ -66,7 +66,12 @@ jobs:
           cache-version: rcc-smoke-2
           needs: check, website
           # Beware of using dev pkgdown here, has brought in dev dependencies in the past
-          extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/styler pkgdown local::.
+          extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/styler pkgdown deps::.
+
+      - name: Install package
+        run: |
+          R CMD INSTALL .
+        shell: bash
 
       - uses: ./.github/workflows/custom/after-install
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
@@ -110,7 +115,7 @@ jobs:
           echo -n "${{ steps.commit.outputs.sha }}" > rcc-smoke-sha.txt
         shell: bash
 
-      - uses: actions/upload-artifact@v2
+      - uses: actions/upload-artifact@v4
         with:
           name: rcc-smoke-sha
           path: rcc-smoke-sha.txt
