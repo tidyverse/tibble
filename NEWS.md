@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9031
+
+## Continuous integration
+
+  - Install via R CMD INSTALL ., not pak (#1601).
+    
+      - ci: Install via R CMD INSTALL ., not pak
+    
+      - ci: Bump version of upload-artifact action
+
+
 # tibble 3.2.1.9030
 
 ## Continuous integration
