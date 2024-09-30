@@ -24,28 +24,55 @@
 view <- function(x, title = NULL, ..., n = NULL) {
   check_dots_empty()
 
-  if (!interactive()) return(invisible(x))
+  if (!rlang::is_interactive()) {
+    return(invisible(x))
+  }
+
+  # The user's expression and the environment to re-evaluate it in
+  quo <- enquo0(x)
+  expr <- quo_get_expr(quo)
+  env <- quo_get_env(quo)
 
   if (is.null(title)) {
-    title <- expr_deparse(substitute(x), width = Inf)
+    title <- as_label(expr)
   }
+
+  # Retrieve the `View()` function, which includes the special
+  # hooks created by RStudio or Positron
+  fn <- get("View", envir = as.environment("package:utils"))
 
   if (!is.data.frame(x)) {
-    if (is.null(n)) {
-      n <- get_tibble_option_view_max()
-    }
-    x <- head(x, n + 1)
-    x <- as.data.frame(x)
-    if (nrow(x) > n) {
-      message("Showing the first ", n, " rows.")
-      x <- head(x, n)
-    }
+    return(view_with_coercion(x, n, title, fn))
   }
 
-  view_fun <- get("View", envir = as.environment("package:utils"))
-  # Construct call with defused arguments, some versions of RStudio evaluate
-  # in the global environment (?).
-  eval_tidy(quo(view_fun(!!x, !!title)))
+  # Make a `View()` call that we evaluate in the parent frame,
+  # as if the user called `View()` directly rather than `view()`.
+  # If `expr` directly references a data frame in the parent frame, this
+  # allows RStudio and Positron to "track" that original object
+  # for live updates in the data viewer.
+  inject((!!fn)(!!expr, !!title), env = env)
+
+  invisible(x)
+}
+
+view_with_coercion <- function(x, n, title, fn) {
+  if (is.null(n)) {
+    n <- get_tibble_option_view_max()
+  }
+
+  x <- head(x, n + 1)
+  x <- as.data.frame(x)
+
+  if (nrow(x) > n) {
+    message("Showing the first ", n, " rows.")
+    x <- head(x, n)
+  }
+
+  # Since we just created `x`, there won't be anything for
+  # RStudio or Positron to "track", so don't even make an effort
+  # to try and evaluate in the parent frame with the original
+  # expression
+  fn(x, title)
 
   invisible(x)
 }
