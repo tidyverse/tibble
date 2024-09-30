@@ -24,7 +24,7 @@
 view <- function(x, title = NULL, ..., n = NULL) {
   check_dots_empty()
 
-  if (!rlang::is_interactive()) {
+  if (!is_interactive()) {
     return(invisible(x))
   }
 
@@ -65,7 +65,7 @@ view_with_coercion <- function(x, n, title, fn) {
 
   if (nrow(x) > n) {
     message("Showing the first ", n, " rows.")
-    x <- head(x, n)
+    x <- x[seq_len(n), , drop = FALSE]
   }
 
   # Since we just created `x`, there won't be anything for
