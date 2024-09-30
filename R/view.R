@@ -65,7 +65,7 @@ view_with_coercion <- function(x, n, title, fn) {
 
   if (nrow(x) > n) {
     message("Showing the first ", n, " rows.")
-    x <- x[seq_len(n), , drop = FALSE]
+    x <- vec_slice(x, seq_len(n))
   }
 
   # Since we just created `x`, there won't be anything for
