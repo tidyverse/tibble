@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9032
+
+## Features
+
+  - Rework `view()` to better work with RStudio and Positron (@DavisVaughan, #1551, #1603).
+
+
 # tibble 3.2.1.9031
 
 ## Continuous integration
