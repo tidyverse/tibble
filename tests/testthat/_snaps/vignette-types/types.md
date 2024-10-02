@@ -72,6 +72,7 @@ The following overview contains example values for each type:
 ```
 #> Rows: 1
 #> Columns: 23
+#> Warning in is.na(x): is.na() applied to non-(list or vector) of type 'language'
 #> $ logical       <lgl> TRUE
 #> $ integer       <int> 1
 #> $ double        <dbl> 1.5
