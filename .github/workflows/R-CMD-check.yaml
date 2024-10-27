@@ -41,7 +41,6 @@ concurrency:
 
 name: rcc
 
-
 jobs:
   rcc-smoke:
     runs-on: ubuntu-latest
