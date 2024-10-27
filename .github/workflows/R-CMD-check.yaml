@@ -18,9 +18,17 @@ on:
   workflow_dispatch:
     inputs:
       ref:
-        description: "Branch or tag to check out"
+        description: "Branch, tag, or commit to check out"
         required: false
         default: "main"
+      versions-matrix:
+        description: "Create a matrix of R versions"
+        type: boolean
+        default: false
+      dep-suggests-matrix:
+        description: "Create a matrix of suggested dependencies"
+        type: boolean
+        default: false
   merge_group:
     types:
       - checks_requested
@@ -51,6 +59,38 @@ jobs:
         with:
           ref: ${{ inputs.ref }}
 
+      - name: Update status for rcc
+        # FIXME: Wrap into action
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check status of this workflow
+          state="pending"
+          sha=${{ inputs.ref }}
+          if [ -z "${sha}" ]; then
+            sha=${{ github.head_ref }}
+          fi
+          if [ -z "${sha}" ]; then
+            sha=${{ github.sha }}
+          fi
+          sha=$(git rev-parse ${sha})
+
+          html_url=$(gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq -r .html_url)
+
+          description="${{ github.workflow }} / ${{ github.job }}"
+
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            repos/${{ github.repository }}/statuses/${sha} \
+            -f "state=${state}" -f "target_url=${html_url}" -f "description=${description}" -f "context=rcc"
+        shell: bash
+
       - uses: ./.github/workflows/rate-limit
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
@@ -70,21 +110,25 @@ jobs:
 
       - name: Install package
         run: |
-          R CMD INSTALL .
+          _R_SHLIB_STRIP_=true R CMD INSTALL .
         shell: bash
 
       - uses: ./.github/workflows/custom/after-install
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
       - id: versions-matrix
-        # Only run for pull requests if the base repo is different from the head repo, always run for other events
-        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository
+        # Only run for pull requests if the base repo is different from the head repo, not for workflow_dispatch if not requested, always run for other events
+        if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository) && (github.event_name != 'workflow_dispatch' || inputs.versions-matrix)
         uses: ./.github/workflows/versions-matrix
 
       - id: dep-suggests-matrix
+        # Not for workflow_dispatch if not requested, always run for other events
+        if: github.event_name != 'workflow_dispatch' || inputs.dep-suggests-matrix
         uses: ./.github/workflows/dep-suggests-matrix
 
       - uses: ./.github/workflows/update-snapshots
+        with:
+          base: ${{ inputs.ref || github.head_ref }}
 
       - uses: ./.github/workflows/style
 
@@ -119,6 +163,46 @@ jobs:
         with:
           name: rcc-smoke-sha
           path: rcc-smoke-sha.txt
+
+      - name: Update status for rcc
+        # FIXME: Wrap into action
+        if: always() && github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check status of this workflow
+          if [ "${{ job.status }}" == "success" ]; then
+            state="success"
+          else
+            state="failure"
+          fi
+
+          sha=${{ steps.commit.outputs.sha }}
+          if [ -z "${sha}" ]; then
+            sha=${{ inputs.ref }}
+          fi
+          if [ -z "${sha}" ]; then
+            sha=${{ github.head_ref }}
+          fi
+          if [ -z "${sha}" ]; then
+            sha=${{ github.sha }}
+          fi
+            sha=$(git rev-parse ${sha})
+
+          html_url=$(gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq -r .html_url)
+
+          description="${{ github.workflow }} / ${{ github.job }}"
+
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            repos/${{ github.repository }}/statuses/${sha} \
+            -f "state=${state}" -f "target_url=${html_url}" -f "description=${description}" -f "context=rcc"
+        shell: bash
 
   rcc-smoke-check-matrix:
     runs-on: ubuntu-latest
