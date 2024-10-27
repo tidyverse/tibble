@@ -3,6 +3,11 @@ description: >
   This action will run `testthat::test_local()` for tests that seem to use snapshots,
   this is determined by reading and grepping the test files.
   If the tests are failing, snapshots are updated, and a pull request is opened.
+inputs:
+  base:
+    description: "The base branch to create the pull request against."
+    required: false
+    default: "main"
 
 runs:
   using: "composite"
@@ -67,8 +72,8 @@ runs:
       id: cpr
       uses: peter-evans/create-pull-request@v6
       with:
-        base: ${{ github.head_ref }}
-        branch: snapshot-${{ github.ref_name }}-${{ github.job }}-${{ steps.matrix-desc.outputs.branch }}
+        base: ${{ inputs.base }}
+        branch: snapshot-${{ inputs.base }}-${{ github.job }}-${{ steps.matrix-desc.outputs.branch }}
         delete-branch: true
         title: "test: Snapshot updates for ${{ github.job }} (${{ steps.matrix-desc.outputs.text }})"
         body: "Automated changes by [create-pull-request](https://github.com/peter-evans/create-pull-request) GitHub action${{ github.event.number && format(' for #{0}', github.event.number) || '' }}."

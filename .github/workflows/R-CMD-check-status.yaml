@@ -16,11 +16,10 @@ jobs:
 
     name: "Update commit status"
 
-    # Only run if triggered by rcc workflow
-    if: github.event.workflow_run.name == 'rcc'
-
     steps:
       - name: "Update commit status"
+        # Only run if triggered by rcc workflow
+        if: github.event.workflow_run.name == 'rcc'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
