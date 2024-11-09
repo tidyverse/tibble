@@ -43,7 +43,7 @@ jobs:
     env:
       FLEDGE_GHA_CI: true
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
 
