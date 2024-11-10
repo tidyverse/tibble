@@ -41,7 +41,6 @@ concurrency:
 
 name: rcc
 
-
 jobs:
   rcc-smoke:
     runs-on: ubuntu-latest
@@ -107,7 +106,7 @@ jobs:
           cache-version: rcc-smoke-2
           needs: check, website
           # Beware of using dev pkgdown here, has brought in dev dependencies in the past
-          extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/styler r-lib/pkgdown@f-readme-tweak deps::.
+          extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/styler r-lib/pkgdown deps::.
 
       - name: Install package
         run: |
@@ -268,6 +267,8 @@ jobs:
         with:
           results: ${{ runner.os }}-r${{ matrix.r }}
 
+# The status update is taken care of by R-CMD-check-status.yaml
+
   rcc-suggests:
     needs:
       - rcc-smoke
@@ -341,3 +342,5 @@ jobs:
       - uses: ./.github/workflows/check
         with:
           results: ${{ matrix.package }}
+
+# The status update is taken care of by R-CMD-check-status.yaml
