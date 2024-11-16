@@ -95,7 +95,7 @@ runs:
       env:
         GITHUB_PAT: ${{ inputs.token }}
       with:
-        pak-version: devel
+        pak-version: stable
         needs: ${{ inputs.needs }}
         packages: ${{ inputs.packages }}
         extra-packages: ${{ inputs.extra-packages }} ${{ ( matrix.config.covr && 'any::covr' ) || '' }} ${{ steps.get-extra.outputs.packages }}
