@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9035
+
+## Continuous integration
+
+  - Use stable pak (#1607).
+
+
 # tibble 3.2.1.9034
 
 ## Continuous integration
