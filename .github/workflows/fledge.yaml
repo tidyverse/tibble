@@ -72,8 +72,18 @@ jobs:
           packages: cynkra/fledge
           cache-version: fledge-1
 
+      - name: Count rulesets
+        # Assume that branch is protected if ruleset exists
+        id: rulesets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          n_rulesets=$(gh api repos/${{ github.repository }}/rulesets -q length)
+          echo "count=${n_rulesets}" >> $GITHUB_OUTPUT
+        shell: bash
+
       - name: Switch to branch if branch protection is enabled
-        if: github.ref_protected == 'true' || inputs.pr == 'true'
+        if: github.ref_protected == 'true' || inputs.pr == 'true' || steps.rulesets.outputs.count > 0
         run: |
           git checkout -b fledge
           git push -f -u origin HEAD
@@ -83,14 +93,14 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          check_default_branch <- ("${{ github.ref_protected == 'true' || inputs.pr == 'true' }}" != "true")
+          check_default_branch <- ("${{ github.ref_protected == 'true' || inputs.pr == 'true' || steps.rulesets.outputs.count > 0 }}" != "true")
           if (fledge::bump_version(which = "dev", no_change_behavior = "noop", check_default_branch = check_default_branch)) {
             fledge::finalize_version(push = TRUE)
           }
         shell: Rscript {0}
 
       - name: Create and merge PR if branch protection is enabled
-        if: github.ref_protected == 'true' || inputs.pr == 'true'
+        if: github.ref_protected == 'true' || inputs.pr == 'true' || steps.rulesets.outputs.count > 0
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
