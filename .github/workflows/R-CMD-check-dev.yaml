@@ -27,8 +27,6 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: r-lib/actions/setup-r@v2
-        with:
-          install-r: false
 
       - id: set-matrix
         uses: ./.github/workflows/dep-matrix
@@ -70,7 +68,6 @@ jobs:
 
       - uses: ./.github/workflows/install
         with:
-          install-r: false
           cache-version: rcc-dev-base-1
           needs: check
           extra-packages: "any::rcmdcheck any::remotes ."
@@ -118,7 +115,6 @@ jobs:
 
       - uses: ./.github/workflows/install
         with:
-          install-r: false
           cache-version: rcc-dev-${{ matrix.package }}-1
           needs: check
           extra-packages: "any::rcmdcheck any::remotes ."
