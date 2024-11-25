@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9037
+
+## Continuous integration
+
+- Need to install R on Ubuntu 24.04 (#1612).
+
+- Use Ubuntu 24.04 and styler PR (#1610).
+
+
 # tibble 3.2.1.9036
 
 ## Continuous integration
