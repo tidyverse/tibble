@@ -106,7 +106,7 @@ jobs:
           cache-version: rcc-smoke-2
           needs: check, website
           # Beware of using dev pkgdown here, has brought in dev dependencies in the past
-          extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/styler#1235 r-lib/pkgdown deps::.
+          extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/styler r-lib/pkgdown deps::.
 
       - name: Install package
         run: |
