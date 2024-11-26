@@ -1,6 +1,10 @@
 name: "Lock threads"
-
+permissions:
+  issues: write
+  pull-requests: write
+  discussions: write
 on:
+  workflow_dispatch:
   schedule:
     - cron: "37 2 * * *"
 
