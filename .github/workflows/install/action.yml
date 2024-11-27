@@ -78,7 +78,7 @@ runs:
     - name: Remove pkg-config@0.29.2
       if: runner.os == 'macOS'
       run: |
-        brew uninstall pkg-config@0.29.2
+        brew uninstall pkg-config@0.29.2 || true
       shell: bash
 
     - uses: r-lib/actions/setup-pandoc@v2
