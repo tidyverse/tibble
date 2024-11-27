@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9039
+
+## Continuous integration
+
+- Explicit permissions (#1614).
+
+
 # tibble 3.2.1.9038
 
 ## Continuous integration
