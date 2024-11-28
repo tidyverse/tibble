@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9040
+
+## Continuous integration
+
+- Ignore errors when removing pkg-config on macOS (#1615).
+
+
 # tibble 3.2.1.9039
 
 ## Continuous integration
