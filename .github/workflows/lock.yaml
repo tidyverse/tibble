@@ -12,7 +12,7 @@ jobs:
   lock:
     runs-on: ubuntu-24.04
     steps:
-      - uses: dessant/lock-threads@v5
+      - uses: krlmlr/lock-threads@patch-1
         with:
           github-token: ${{ github.token }}
           issue-inactive-days: "365"
