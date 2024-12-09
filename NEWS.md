@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9043
+
+## Continuous integration
+
+- Avoid failure in fledge workflow if no changes (#1618).
+
+
 # tibble 3.2.1.9042
 
 ## Continuous integration
