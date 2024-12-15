@@ -30,7 +30,7 @@ frame_data(...)
 
 Use \code{\link[=tibble]{tibble()}} instead of \code{data_frame()}.
 
-Use \link{quasiquotation} instead of \code{tibble_()}, \code{data_frame_()}, and \code{lst_()}.
+Use \link[rlang:topic-inject]{rlang::quasiquotation} instead of \code{tibble_()}, \code{data_frame_()}, and \code{lst_()}.
 
 Use \code{\link[=as_tibble]{as_tibble()}} instead of \code{as_data_frame()} or \code{as.tibble()}, but mind the
 new signature and semantics.

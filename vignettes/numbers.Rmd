@@ -70,7 +70,7 @@ The formatting survives most data transformations.
 Currently, formatting must be applied manually for each column.
 The following pattern may help doing this consistently for all columns in a tibble, or for some columns based on their name.
 
-```{r}
+```{r, eval = rlang::is_installed("dplyr")}
 library(dplyr, warn.conflicts = FALSE)
 
 markets <-

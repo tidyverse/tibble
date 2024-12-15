@@ -19,14 +19,14 @@ tibble_row(
 \arguments{
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
 A set of name-value pairs. These arguments are
-processed with \code{\link[rlang:defusing-advanced]{rlang::quos()}} and support unquote via \code{\link{!!}} and
-unquote-splice via \code{\link{!!!}}. Use \verb{:=} to create columns that start with a dot.
+processed with \code{\link[rlang:defusing-advanced]{rlang::quos()}} and support unquote via \code{\link[rlang:injection-operator]{rlang::!!}} and
+unquote-splice via \code{\link[rlang:splice-operator]{rlang::!!!}}. Use \verb{:=} to create columns that start with a dot.
 
 Arguments are evaluated sequentially.
-You can refer to previously created elements directly or using the \link{.data}
+You can refer to previously created elements directly or using the \link[rlang:dot-data]{rlang::.data}
 pronoun.
-To refer explicitly to objects in the calling environment, use \code{\link{!!}} or
-\link{.env}, e.g. \code{!!.data} or \code{.env$.data} for the special case of an object
+To refer explicitly to objects in the calling environment, use \code{\link[rlang:injection-operator]{rlang::!!}} or
+\link[rlang:dot-data]{rlang::.env}, e.g. \code{!!.data} or \code{.env$.data} for the special case of an object
 named \code{.data}.}
 
 \item{.rows}{The number of rows, useful to create a 0-column tibble or
@@ -184,6 +184,6 @@ tibble_row(a = 1, lm = lm(Height ~ Girth + Volume, data = trees))
 Use \code{\link[=as_tibble]{as_tibble()}} to turn an existing object into a tibble. Use
 \code{enframe()} to convert a named vector into a tibble. Name repair is
 detailed in \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
-See \link{quasiquotation} for more details on tidy dots semantics,
+See \link[rlang:topic-inject]{rlang::quasiquotation} for more details on tidy dots semantics,
 i.e. exactly how  the \code{...} argument is processed.
 }

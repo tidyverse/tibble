@@ -29,7 +29,7 @@ jobs:
           curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
         shell: bash
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       # FIXME: Avoid reissuing succesful jobs
       # https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#list-jobs-for-a-workflow-run
@@ -67,7 +67,7 @@ jobs:
 
     runs-on: ubuntu-22.04
 
-    name: ${{ matrix.package }}
+    name: 'revdep: ${{ matrix.package }}'
 
     # Begin custom: services
     # End custom: services
@@ -91,7 +91,7 @@ jobs:
           curl -s --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" https://api.github.com/rate_limit
         shell: bash
 
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       # Begin custom: before install
       # End custom: before install

@@ -3,6 +3,12 @@ name: fledge
 on:
   # for manual triggers
   workflow_dispatch:
+    inputs:
+      pr:
+        description: "Create PR"
+        required: false
+        type: boolean
+        default: false
   # daily run
   schedule:
   - cron: "30 0 * * *"
@@ -13,41 +19,104 @@ concurrency:
 
 jobs:
   check_fork:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       is_forked: ${{ steps.check.outputs.is_forked }}
     steps:
       - name: Check if the repo is forked
         id: check
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          echo "is_forked=$(curl -s -H "Accept: application/vnd.github+json" -H 'Authorization: Bearer ${{ github.token }}' -H "X-GitHub-Api-Version: 2022-11-28" ${GITHUB_API_URL}/repos/${GITHUB_REPOSITORY} | jq .fork)" >> $GITHUB_OUTPUT
+          is_forked=$(gh api repos/${{ github.repository }} | jq .fork)
+          echo "is_forked=${is_forked}" >> $GITHUB_OUTPUT
+        shell: bash
 
   fledge:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     needs: check_fork
     if: needs.check_fork.outputs.is_forked == 'false'
     permissions:
       contents: write
+      pull-requests: write
+      actions: write
     env:
-      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
       FLEDGE_GHA_CI: true
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+          fetch-tags: true
 
-      - uses: ./.github/workflows/git-identity
+      - name: Configure Git identity
+        run: |
+          env | sort
+          git config --local user.name "$GITHUB_ACTOR"
+          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
+        shell: bash
 
-      - uses: ./.github/workflows/install
+      - name: Update apt
+        run: |
+          sudo apt-get update
+        shell: bash
+
+      - uses: r-lib/actions/setup-r@v2
         with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          install-r: false
-          cache-version: fledge-1
+          use-public-rspm: true
+
+      - uses: r-lib/actions/setup-r-dependencies@v2
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          pak-version: devel
           packages: cynkra/fledge
+          cache-version: fledge-1
+
+      - name: Count rulesets
+        # Assume that branch is protected if ruleset exists
+        id: rulesets
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          n_rulesets=$(gh api repos/${{ github.repository }}/rulesets -q length)
+          echo "count=${n_rulesets}" >> $GITHUB_OUTPUT
+        shell: bash
+
+      - name: Switch to branch if branch protection is enabled
+        if: github.ref_protected == 'true' || inputs.pr == 'true' || steps.rulesets.outputs.count > 0
+        run: |
+          git checkout -b fledge
+          git push -f -u origin HEAD
+        shell: bash
 
       - name: Bump version
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          if (fledge::bump_version(which = "dev", no_change_behavior = "noop")) {
+          check_default_branch <- ("${{ github.ref_protected == 'true' || inputs.pr == 'true' || steps.rulesets.outputs.count > 0 }}" != "true")
+          if (fledge::bump_version(which = "dev", no_change_behavior = "noop", check_default_branch = check_default_branch)) {
             fledge::finalize_version(push = TRUE)
           }
+        shell: Rscript {0}
+
+      - name: Create and merge PR if branch protection is enabled
+        if: github.ref_protected == 'true' || inputs.pr == 'true' || steps.rulesets.outputs.count > 0
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -ex
+          if [ -n "$(git diff main --numstat)" ]; then
+            gh pr create --base main --head fledge --fill-first
+            gh workflow run rcc -f ref=$(git rev-parse HEAD)
+            gh pr merge --squash --auto
+          else
+            echo "No changes."
+          fi
+        shell: bash
+
+      - name: Check release
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          fledge:::release_after_cran_built_binaries()
         shell: Rscript {0}

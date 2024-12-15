@@ -39,12 +39,46 @@ runs:
         echo "_R_CHECK_FUTURE_FILE_TIMESTAMPS_=false" | tee -a $GITHUB_ENV
         # prevent rgl issues because no X11 display is available
         echo "RGL_USE_NULL=true" | tee -a $GITHUB_ENV
+        # from https://github.com/r-devel/r-dev-web/blob/main/CRAN/QA/Kurt/lib/R/Scripts/check_CRAN_incoming.R
+        echo "_R_CHECK_CRAN_INCOMING_CHECK_FILE_URIS_=true" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_CRAN_INCOMING_NOTE_GNU_MAKE_=true" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_PACKAGE_DEPENDS_IGNORE_MISSING_ENHANCES_=true" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_CODE_CLASS_IS_STRING_=true" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_CODOC_VARIABLES_IN_USAGES_=true" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_CONNECTIONS_LEFT_OPEN_=true" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_DATALIST_=true" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_NEWS_IN_PLAIN_TEXT_=true" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_PACKAGES_USED_CRAN_INCOMING_NOTES_=true" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_RD_CONTENTS_KEYWORDS_=true" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_R_DEPENDS_=warn" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_S3_METHODS_SHOW_POSSIBLE_ISSUES_=true" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_THINGS_IN_TEMP_DIR_=true" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_UNDOC_USE_ALL_NAMES_=true" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_URLS_SHOW_301_STATUS_=true" | tee -a $GITHUB_ENV
+        echo "_R_CXX_USE_NO_REMAP_=true" | tee -a $GITHUB_ENV
+        # There is no way to disable recency and frequency checks when the incoming checks are run
+        # echo "_R_CHECK_CRAN_INCOMING_=true" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_CRAN_INCOMING_SKIP_LARGE_VERSION_=true" | tee -a $GITHUB_ENV
+      shell: bash
+
+    - name: Set environment variables (non-Windows only)
+      if: runner.os != 'Windows'
+      run: |
+        echo "_R_CHECK_BASHISMS_=true" | tee -a $GITHUB_ENV
       shell: bash
 
     - name: Update apt
       if: runner.os == 'Linux'
       run: |
         sudo apt-get update
+        sudo apt-get install -y aspell
+        echo "_R_CHECK_CRAN_INCOMING_USE_ASPELL_=true" | tee -a $GITHUB_ENV
+      shell: bash
+
+    - name: Remove pkg-config@0.29.2
+      if: runner.os == 'macOS'
+      run: |
+        brew uninstall pkg-config@0.29.2 || true
       shell: bash
 
     - uses: r-lib/actions/setup-pandoc@v2
@@ -57,13 +91,17 @@ runs:
         use-public-rspm: true
 
     - id: get-extra
-      uses: ./.github/workflows/get-extra
+      run: |
+        set -x
+        packages=$( ( grep Config/gha/extra-packages DESCRIPTION || true ) | cut -d " " -f 2)
+        echo packages=$packages >> $GITHUB_OUTPUT
+      shell: bash
 
     - uses: r-lib/actions/setup-r-dependencies@v2
       env:
         GITHUB_PAT: ${{ inputs.token }}
       with:
-        pak-version: devel
+        pak-version: stable
         needs: ${{ inputs.needs }}
         packages: ${{ inputs.packages }}
         extra-packages: ${{ inputs.extra-packages }} ${{ ( matrix.config.covr && 'any::covr' ) || '' }} ${{ steps.get-extra.outputs.packages }}
@@ -82,4 +120,41 @@ runs:
       run: |
         sudo ln -s $(which true) /usr/local/bin/qpdf
         sudo ln -s $(which true) /usr/local/bin/checkbashisms
+      shell: bash
+
+    - name: Install ccache
+      uses: krlmlr/ccache-action@parallel-dir
+      with:
+        max-size: 10G
+        verbose: 1
+        save: false
+        restore: false
+
+    - name: Use ccache for compiling R code, and parallelize
+      run: |
+        mkdir -p ~/.R
+        echo 'CC      :=  ccache $(CC)' >> ~/.R/Makevars
+        echo 'CXX     :=  ccache $(CXX)' >> ~/.R/Makevars
+        echo 'CXX11   :=  ccache $(CXX11)' >> ~/.R/Makevars
+        echo 'CXX14   :=  ccache $(CXX14)' >> ~/.R/Makevars
+        echo 'CXX17   :=  ccache $(CXX17)' >> ~/.R/Makevars
+        echo 'MAKEFLAGS = -j2' >> ~/.R/Makevars
+        cat ~/.R/Makevars
+
+        echo 'CCACHE_SLOPPINESS=locale,time_macros' | tee -a $GITHUB_ENV
+
+        # echo 'CCACHE_DEBUG=true' | tee -a $GITHUB_ENV
+        # echo "CCACHE_DEBUGDIR=$(dirname $(pwd))/ccache-debug" | tee -a $GITHUB_ENV
+        # mkdir -p $(dirname $(pwd))/.ccache-debug
+
+        echo 'PKG_BUILD_EXTRA_FLAGS=false' | tee -a $GITHUB_ENV
+
+        # Repair
+        git rm -rf .ccache || true
+        rm -rf .ccache
+      shell: bash
+
+    - name: Show R CMD config --all
+      run: |
+        R CMD config --all
       shell: bash

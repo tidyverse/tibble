@@ -12,9 +12,12 @@ vignette: >
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
+  eval = rlang::is_installed(c("dplyr", "formattable", "ggplot2", "tidyr")),
   error = (Sys.getenv("IN_PKGDOWN") == "")
 )
+```
 
+```{r, include = FALSE}
 library(tibble)
 library(formattable)
 library(dplyr)
@@ -94,7 +97,7 @@ stocks %>%
 
 For ggplot2 we need to do [some work](https://github.com/tidyverse/ggplot2/pull/4065) to show apply the formatting to the scales.
 
-```{r, eval = (Sys.getenv("IN_GALLEY") == "")}
+```{r, eval = (Sys.getenv("IN_GALLEY") == ""), fig.alt="Example plot showing stock over time, separated by id"}
 library(ggplot2)
 
 # Needs https://github.com/tidyverse/ggplot2/pull/4065 or similar
