@@ -33,23 +33,17 @@ tibble_ <- function(xs) {
 #' @export
 #' @rdname deprecated
 data_frame_ <- function(xs) {
-  deprecate_soft("2.0.0", "data_frame_()", "tibble()",
+  deprecate_stop("2.0.0", "data_frame_()", "tibble()",
     details = '`tibble()` supports dynamic dots, see `?"dyn-dots"`.'
   )
-
-  xs <- compat_lazy_dots(xs, caller_env())
-  tibble(!!!xs)
 }
 
 #' @export
 #' @rdname deprecated
 lst_ <- function(xs) {
-  deprecate_soft("2.0.0", "lst_()", "lst()",
+  deprecate_stop("2.0.0", "lst_()", "lst()",
     details = '`lst()` supports dynamic dots, see `?"dyn-dots"`.'
   )
-
-  xs <- compat_lazy_dots(xs, caller_env())
-  lst(!!!xs)
 }
 
 #' @description
@@ -59,8 +53,8 @@ lst_ <- function(xs) {
 #' @export
 #' @rdname deprecated
 as_data_frame <- function(x, ...) {
-  deprecate_warn("2.0.0", "as_data_frame()", "as_tibble()",
-    details = "The signature and semantics have changed, see `?as_tibble`."
+  deprecate_warn("2.0.0", "as_data_frame()",
+    details = "Please use `as_tibble()` (with slightly different semantics) to convert to a tibble, or `as.data.frame()` to convert to a data frame."
   )
 
   as_tibble(x, ...)
@@ -81,9 +75,7 @@ as.tibble <- function(x, ...) {
 #' @export
 #' @rdname deprecated
 frame_data <- function(...) {
-  deprecate_soft("2.0.0", "frame_data()", "tribble()")
-
-  tribble(...)
+  deprecate_stop("2.0.0", "frame_data()", "tribble()")
 }
 
 #' Name repair

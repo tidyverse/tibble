@@ -17,7 +17,7 @@
     Condition
       Error:
       ! Column 1 must be named.
-      Use .name_repair to specify repair.
+      Use `.name_repair` to specify repair.
       Caused by error in `repaired_names()`:
       ! Names can't be empty.
       x Empty name found at location 1.

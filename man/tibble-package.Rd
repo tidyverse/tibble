@@ -14,7 +14,7 @@ Provides a 'tbl_df' class (the 'tibble') with stricter checking and better forma
 
 The tibble package provides utilities for handling \strong{tibbles}, where
 "tibble" is a colloquial term for the S3 \code{\link{tbl_df}} class. The \code{\link{tbl_df}}
-class is a special case of the base \code{\link[base:data.frame]{data.frame}}.
+class is a special case of the base \code{\link[base:data.frame]{data.frame}}
 class, developed in response to lessons learned over many years of data
 analysis with data frames.
 
@@ -28,8 +28,9 @@ Tibble is the central data structure for the set of packages known as the
 General resources:
 \itemize{
 \item Website for the tibble package: \url{https://tibble.tidyverse.org}
-\item \href{https://r4ds.had.co.nz/tibbles.html}{Tibbles chapter} in \emph{R for Data
-Science}
+\item \href{https://adv-r.hadley.nz/vectors-chap.html}{Vectors chapter} in \emph{Advanced R}
+(2nd edition), specifically the
+\href{https://adv-r.hadley.nz/vectors-chap.html#tibble}{Data frames and tibbles section}
 }
 
 Resources on specific topics:
@@ -50,7 +51,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Kirill Müller \email{krlmlr+r@mailbox.org}
+\strong{Maintainer}: Kirill Müller \email{kirill@cynkra.com} (\href{https://orcid.org/0000-0002-1416-3412}{ORCID})
 
 Authors:
 \itemize{

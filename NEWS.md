@@ -1,4 +1,72 @@
-<!-- NEWS.md is maintained by https://cynkra.github.io/fledge, do not edit -->
+<!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
+
+# tibble 3.2.1
+
+## Internal
+
+- Use symbol instead of string in `.Call()`.
+
+
+# tibble 3.2.0
+
+## Features
+
+- Accurate location of the source of an error in error messages (#1379, #1065, #1508).
+
+- `as_data_frame()` now also refers to `as.data.frame()` in its deprecation message (#1149, #1506).
+
+## Breaking changes
+
+- Deprecated functions and arguments where we could not detect usage by other CRAN packages (#1515):
+
+    - `data_frame_()`, `lst_()`, `frame_data()`
+    
+    - `as_tibble(validate = )`, `as_tibble(NULL)`, `new_tibble(subclass = )`
+    
+    - `add_row()` and `add_column()` for non-data-frame input
+    
+    - `add_column()` for input with non-unique names
+    
+    - corner cases for `tbl[[x]]`
+
+- Breaking change: Remove `knit_print.trunc_mat()` method (#1516).
+
+- Forward `trunc_mat()` to new-style pillar methods (#1517).
+
+## Bug fixes
+
+- Allow `glue()` and other classed characters for subassignment (#1150, #1503).
+
+## Performance
+
+- Reduce overhead of single-column subset assignment (#1363).
+
+## Documentation
+
+- New `vignette("extending")` (#275, #1512).
+
+- Minor updates (#1151, #1070, #1512, #1485).
+
+- Update example for `nrow` argument to `new_tibble()` (@heavywatal, #1394).
+
+- Fix display of mermaid diagrams in `vignette("formats")` (@maelle, #1497, #1498).
+
+- Remove ANSI escapes from invariants article on pkgdown (#1374).
+
+## Internal
+
+- Require vctrs >= 0.4.1 and pillar >= 1.8.1
+
+- Use cli for formatting conditions (#1387).
+
+- Use `vec_as_location(missing = "error")` for better error messages (#741, #1511).
+
+- Remove compatibility code for RSDA package which is broken anyway due to other changes (#923, #1509).
+
+- Skip tests if suggested packages not available (#1246, @MichaelChirico).
+
+- Remove obsolete tests (#1513).
+
 
 # tibble 3.1.8
 

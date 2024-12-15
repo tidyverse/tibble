@@ -21,7 +21,7 @@
 #' enframe(list(one = 1, two = 2:3, three = 4:6))
 enframe <- function(x, name = "name", value = "value") {
   if (is.null(value)) {
-    cnd_signal(error_enframe_value_null())
+    abort_enframe_value_null()
   }
 
   if (is.null(x)) {
@@ -30,7 +30,7 @@ enframe <- function(x, name = "name", value = "value") {
 
   # FIXME: Enable again for data frames, add test
   if (!vec_is(x) || is.data.frame(x)) {
-    cnd_signal(error_enframe_must_be_vector(x))
+    abort_enframe_must_be_vector(x)
   }
 
   if (is.null(name)) {
@@ -43,15 +43,6 @@ enframe <- function(x, name = "name", value = "value") {
 
   names(df) <- c(name, value)
   new_tibble(df, nrow = vec_size(x))
-}
-
-vectbl_set_names <- function(x, names = NULL) {
-  # Work around https://github.com/r-lib/vctrs/issues/1419
-  if (inherits(x, "vctrs_rcrd")) {
-    # A rcrd can't have names?
-    return(x)
-  }
-  vec_set_names(x, names)
 }
 
 #' @rdname enframe
@@ -77,12 +68,12 @@ deframe <- function(x) {
   vectbl_set_names(value, as.character(name))
 }
 
-error_enframe_value_null <- function() {
-  tibble_error("`value` can't be NULL.")
+abort_enframe_value_null <- function(call = caller_env()) {
+  tibble_abort(call = call, "`value` can't be NULL.")
 }
 
-error_enframe_must_be_vector <- function(x) {
-  tibble_error(paste0(
+abort_enframe_must_be_vector <- function(x, call = caller_env()) {
+  tibble_abort(call = call, paste0(
     "The `x` argument to `enframe()` must be a vector, not ", class(x)[[1]], "."
   ))
 }

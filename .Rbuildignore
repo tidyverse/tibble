@@ -31,3 +31,10 @@
 ^tests/testthat/helper-rstudio\.R$
 ^vignettes/invariants\.md$
 ^bench$
+^configure$
+^R/aaa-r-version\.R$
+^src/version\.txt$
+^\.Rprofile$
+^src/Makevars\.debug$
+^\.vscode$
+^\.gitpod\.yml$

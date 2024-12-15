@@ -5,6 +5,16 @@ pluralise_msg <- function(message, objects) {
   )
 }
 
+format_n <- function(x) collapse(quote_n(x))
+
+quote_n <- function(x) UseMethod("quote_n")
+#' @export
+quote_n.default <- function(x) as.character(x)
+#' @export
+quote_n.character <- function(x) tick(x)
+
+collapse <- function(x) paste(x, collapse = ", ")
+
 pluralise_commas <- function(message, objects, ...) {
   paste0(
     pluralise_n(message, length(objects)),
@@ -48,20 +58,19 @@ pluralise_n <- function(message, n) {
 }
 
 bullets <- function(header, ..., info = NULL) {
-  # FIXME: Convert info to i with rlang >= 0.4.12, use set_default_name(bullets, "*")
   # FIXME: Avoid ensure_full_stop()
   bullets <- vec_c(..., .name_spec = "{outer}")
+  bullets <- set_default_name(bullets, "*")
 
-  paste0(
-    ensure_full_stop(header), "\n",
-    format_error_bullets(ensure_full_stop(bullets)),
-    if (!is.null(info)) paste0("\n", format_error_bullets(c(i = info)))
+  vec_c(
+    ensure_full_stop(vec_c(header, bullets, .name_spec = "{outer}")),
+    i = info,
+    .name_spec = "{outer}"
   )
 }
 
 problems <- function(header, ..., .problem = " problem(s)") {
   problems <- vec_c(..., .name_spec = "{outer}")
-  problems <- set_default_name(problems, "x")
   MAX_BULLETS <- 6L
   if (length(problems) >= MAX_BULLETS) {
     n_more <- length(problems) - MAX_BULLETS + 1L
@@ -70,7 +79,16 @@ problems <- function(header, ..., .problem = " problem(s)") {
     length(problems) <- MAX_BULLETS
   }
 
+  problems <- set_default_name(problems, "x")
   bullets(header, problems)
+}
+
+pre_dots <- function(x) {
+  if (length(x) > 0) {
+    paste0(cli::symbol$ellipsis, " ", x)
+  } else {
+    character()
+  }
 }
 
 commas <- function(problems) {

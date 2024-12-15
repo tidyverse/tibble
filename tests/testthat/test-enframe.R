@@ -1,4 +1,3 @@
-
 # enframe -----------------------------------------------------------------
 
 test_that("can convert unnamed vector", {
@@ -54,16 +53,16 @@ test_that("can enframe without names", {
 })
 
 test_that("can't use value = NULL", {
-  expect_tibble_error(
+  expect_tibble_abort(
     enframe(letters, value = NULL),
-    error_enframe_value_null()
+    abort_enframe_value_null()
   )
 })
 
 test_that("can't pass non-vector", {
-  expect_tibble_error(
+  expect_tibble_abort(
     enframe(lm(speed ~ ., cars)),
-    error_enframe_must_be_vector(lm(speed ~ ., cars))
+    abort_enframe_must_be_vector(lm(speed ~ ., cars))
   )
 })
 
@@ -118,7 +117,7 @@ test_that("can roundtrip record", {
 
 
 test_that("output test", {
-  expect_snapshot_with_error({
+  expect_snapshot(error = TRUE, {
     enframe(1:3, value = NULL)
 
     nrow(enframe(Titanic))

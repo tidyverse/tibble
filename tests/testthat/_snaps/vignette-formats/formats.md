@@ -43,25 +43,11 @@ This also applies to columns derived from `x`.
 
 ```r
 library(dplyr)
-#> 
-#> Attaching package: 'dplyr'
-#> The following objects are masked from 'package:tibble':
-#> 
-#>     collapse, dim_desc
-#> The following object is masked from 'package:testthat':
-#> 
-#>     matches
-#> The following objects are masked from 'package:stats':
-#> 
-#>     filter, lag
-#> The following objects are masked from 'package:base':
-#> 
-#>     intersect, setdiff, setequal, union
-tbl2 <- 
+tbl2 <-
   tbl %>%
   mutate(
-    y = x + 1, 
-    z = x * x, 
+    y = x + 1,
+    z = x * x,
     v = y + z,
     lag = lag(x, default = x[[1]]),
     sin = sin(x),
@@ -82,9 +68,9 @@ Summaries also maintain the formatting.
 
 
 ```r
-tbl2 %>% 
-  group_by(lag) %>% 
-  summarize(z = mean(z)) %>% 
+tbl2 %>%
+  group_by(lag) %>%
+  summarize(z = mean(z)) %>%
   ungroup()
 #> # A tibble: 2 x 2
 #>   lag        z         
@@ -99,18 +85,13 @@ Same for pivoting operations.
 
 ```r
 library(tidyr)
-#> 
-#> Attaching package: 'tidyr'
-#> The following object is masked from 'package:testthat':
-#> 
-#>     matches
 
-stocks <- 
-  expand_grid(id = factor(1:4), year = 2018:2022) %>% 
+stocks <-
+  expand_grid(id = factor(1:4), year = 2018:2022) %>%
   mutate(stock = currency(runif(20) * 10000))
 
-stocks %>% 
-  pivot_wider(id, names_from = year, values_from = stock)
+stocks %>%
+  pivot_wider(id_cols = id, names_from = year, values_from = stock)
 #> # A tibble: 4 x 6
 #>   id    `2018`     `2019`     `2020`     `2021`     `2022`    
 #>   <fct> <formttbl> <formttbl> <formttbl> <formttbl> <formttbl>
@@ -127,23 +108,21 @@ For ggplot2 we need to do [some work](https://github.com/tidyverse/ggplot2/pull/
 library(ggplot2)
 
 # Needs https://github.com/tidyverse/ggplot2/pull/4065 or similar
-stocks %>% 
+stocks %>%
   ggplot(aes(x = year, y = stock, color = id)) +
   geom_line()
 ```
 
-![](${TEMP}/formats_files/figure-markdown_strict/unnamed-chunk-7-1.png)
-
 It pays off to specify formatting very early in the process.
 The diagram below shows the principal stages of data analysis and exploration from "R for data science".
 
-![](${TEMP}/formats_files/figure-markdown_strict/unnamed-chunk-8-1.png)
+
 
 The subsequent diagram adds data formats, communication options, and explicit data formatting.
 The original r4ds transitions are highlighted in bold.
 There are two principal options where to apply formatting for results: right before communicating them, or right after importing.
 
-![](${TEMP}/formats_files/figure-markdown_strict/unnamed-chunk-9-1.png)
+
 
 Applying formatting early in the process gives the added benefit of showing the data in a useful format during the "Tidy", "Transform", and "Visualize" stages.
 For this to be useful, we need to ensure that the formatting options applied early:
@@ -162,11 +141,11 @@ Often it's possible to derive a rule-based approach for formatting.
 
 
 ```r
-tbl3 <- 
-  tibble(id = letters[1:3], x = 9:11) %>% 
+tbl3 <-
+  tibble(id = letters[1:3], x = 9:11) %>%
   mutate(
-    y = x + 1, 
-    z = x * x, 
+    y = x + 1,
+    z = x * x,
     v = y + z,
     lag = lag(x, default = x[[1]]),
     sin = sin(x),
@@ -182,10 +161,10 @@ tbl3
 #> 2 b        10    11   100   111     9 -0.544  112.     1
 #> 3 c        11    12   121   133    10 -1.00   112.     1
 
-tbl3 %>% 
+tbl3 %>%
   mutate(
-    across(where(is.numeric), digits, 3),
-    across(where(~ is.numeric(.x) && mean(.x) > 50), digits, 1)
+    across(where(is.numeric), ~ digits(.x, 3)),
+    across(where(~ is.numeric(.x) && mean(.x) > 50), ~ digits(.x, 1))
   )
 #> # A tibble: 3 x 9
 #>   id    x          y          z          v          lag       sin    mean  var  
@@ -200,11 +179,11 @@ These rules can be stored in `quos()`:
 
 ```r
 rules <- quos(
-  across(where(is.numeric), digits, 3),
-  across(where(~ is.numeric(.x) && mean(.x) > 50), digits, 1)
+  across(where(is.numeric), ~ digits(.x, 3)),
+  across(where(~ is.numeric(.x) && mean(.x) > 50), ~ digits(.x, 1))
 )
 
-tbl3 %>% 
+tbl3 %>%
   mutate(!!!rules)
 #> # A tibble: 3 x 9
 #>   id    x          y          z          v          lag       sin    mean  var  

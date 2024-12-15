@@ -76,7 +76,7 @@ The `with_*()` functions allow for a more concise notation
 ```{r with-df-def}
 with_df <- function(code, verbose = FALSE) {
   code <- rlang::enexpr(code)
-  
+
   full_code <- rlang::quo({
     df <- new_df()
     !!code
@@ -91,7 +91,7 @@ with_df <- function(code, verbose = FALSE) {
 ```{r with-tbl-def, include = FALSE}
 with_tbl <- function(code, verbose = FALSE) {
   code <- rlang::enexpr(code)
-  
+
   full_code <- rlang::quo({
     tbl <- new_tbl()
     !!code

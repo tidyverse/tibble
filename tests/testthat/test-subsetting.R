@@ -129,9 +129,9 @@ test_that("[.tbl_df is careful about column indexes (#83)", {
       foo[-4],
       class = "vctrs_error_subscript_oob"
     )
-    expect_tibble_error(
+    expect_error(
       foo[c(1:3, NA)],
-      error_na_column_index(4)
+      class = "vctrs_error_subscript_type"
     )
 
     expect_error(foo[as.matrix(1)])
@@ -156,14 +156,14 @@ test_that("[.tbl_df is careful about column flags (#83)", {
       foo[c(TRUE, TRUE, FALSE, FALSE)],
       class = "vctrs_error_subscript_size"
     )
-    expect_tibble_error(
+    expect_error(
       foo[c(TRUE, TRUE, NA)],
-      error_na_column_index(3)
+      class = "vctrs_error_subscript_type"
     )
 
-    expect_tibble_error(
+    expect_tibble_abort(
       foo[as.matrix(TRUE)],
-      error_subset_matrix_must_have_same_dimensions(quote(as.matrix(TRUE)))
+      abort_subset_matrix_must_have_same_dimensions(quote(as.matrix(TRUE)))
     )
     expect_error(
       foo[array(TRUE, dim = c(1, 1, 1))],
@@ -344,15 +344,6 @@ test_that("[[.tbl_df throws error with NA index", {
   })
 })
 
-test_that("can use recursive indexing with [[", {
-  scoped_lifecycle_silence()
-
-  foo <- tibble(x = list(y = 1:3, z = 4:5))
-  expect_equal(foo[[c(1, 1)]], 1:3)
-
-  # [[ with a matrix seems broken, despite an implementation in [[.data.frame
-})
-
 test_that("[[ returns NULL if name doesn't exist", {
   scoped_lifecycle_silence()
 
@@ -403,6 +394,7 @@ test_that("can use classed character indexes (#778)", {
   expect_null(df[[mychr("c")]])
 
   expect_silent(df[mychr(letters[1:2])] <- df)
+  expect_silent(df[mychr(letters[3:4])] <- df)
   expect_silent(df[[mychr("c")]] <- 1)
   expect_silent(df[[mychr("a")]] <- df[["a"]])
 })
@@ -413,7 +405,8 @@ test_that("can use classed integer indexes (#778)", {
   expect_identical(df[myint(1:3), myint(1:2)], df)
   expect_identical(df[[myint(2)]], df[[2]])
 
-  expect_silent(df[mylgl(TRUE), ] <- df)
+  expect_silent(df[myint(1:2)] <- df)
+  expect_silent(df[myint(3:4)] <- list(c = 4, d = 5))
   expect_silent(df[[myint(2)]] <- df[[2]])
   expect_silent(df[[myint(3)]] <- 1)
 })
@@ -422,6 +415,8 @@ test_that("can use classed logical indexes (#778)", {
   df <- tibble::tibble(a = 1:3, b = LETTERS[1:3])
 
   expect_identical(df[mylgl(TRUE), mylgl(TRUE)], df)
+
+  expect_silent(df[mylgl(TRUE), ] <- df)
   expect_silent(df[mylgl(TRUE), mylgl(TRUE)] <- df)
 })
 
@@ -512,17 +507,17 @@ test_that("[<-.tbl_df can remove columns", {
 test_that("[<-.tbl_df throws an error with duplicate indexes (#658)", {
   verify_errors({
     df <- tibble(x = 1:2, y = x)
-    expect_tibble_error(
+    expect_tibble_abort(
       df[c(1, 1)] <- 3,
-      error_duplicate_column_subscript_for_assignment(c(1, 1))
+      abort_assign_duplicate_column_subscript(c(1, 1))
     )
-    expect_tibble_error(
+    expect_tibble_abort(
       df[, c(1, 1)] <- 3,
-      error_duplicate_column_subscript_for_assignment(c(1, 1))
+      abort_assign_duplicate_column_subscript(c(1, 1))
     )
-    expect_tibble_error(
+    expect_tibble_abort(
       df[c(1, 1), ] <- 3,
-      error_duplicate_row_subscript_for_assignment(c(1, 1))
+      abort_assign_duplicate_row_subscript(c(1, 1))
     )
   })
 })
@@ -595,20 +590,20 @@ test_that("[<-.tbl_df supports matrix on the RHS (#762)", {
   expect_identical(df, tibble(x = 8:5, y = 4:1))
 
   df <- tibble(x = 1:4, y = letters[1:4])
-  expect_tibble_error(
+  expect_tibble_abort(
     df[1:3, 1:2] <- matrix(6:1, ncol = 2),
-    error_assign_incompatible_type(
+    abort_assign_incompatible_type(
       df, as.data.frame(matrix(6:1, ncol = 2)), 2, quote(matrix(6:1, ncol = 2)),
-      cnd_message(tryCatch(vctrs::vec_assign(letters, 1:3, 3:1), error = identity))
+      tryCatch(vctrs::vec_assign(letters, 1:3, 3:1), error = identity)
     )
   )
-  expect_tibble_error(
+  expect_tibble_abort(
     df[1:2] <- array(8:1, dim = c(2, 1, 4)),
-    error_need_rhs_vector_or_null(quote(array(8:1, dim = c(2, 1, 4))))
+    abort_need_rhs_vector_or_null(quote(array(8:1, dim = c(2, 1, 4))))
   )
-  expect_tibble_error(
+  expect_tibble_abort(
     df[1:2] <- array(8:1, dim = c(4, 1, 2)),
-    error_need_rhs_vector_or_null(quote(array(8:1, dim = c(4, 1, 2))))
+    abort_need_rhs_vector_or_null(quote(array(8:1, dim = c(4, 1, 2))))
   )
 })
 
@@ -725,13 +720,13 @@ test_that("$<- throws different warning if attempting a partial initialization (
     fixed = TRUE
   )
 
-  expect_tibble_error(
+  expect_tibble_abort(
     expect_warning(
       df$z[1:2] <- 2,
       "Unknown or uninitialised column: `z`",
       fixed = TRUE
     ),
-    error_assign_incompatible_size(3, list(1:2), 1, NULL, quote(`<dbl>`))
+    abort_assign_incompatible_size(3, list(1:2), 1, NULL, quote(`<dbl>`))
   )
 })
 
@@ -749,20 +744,22 @@ test_that("$<- recycles only values of length one", {
   verify_errors({
     df <- tibble(x = 1:3)
 
-    expect_tibble_error(
+    expect_tibble_abort(
       df$w <- 8:9,
-      error_assign_incompatible_size(3, list(8:9), 1, NULL, quote(8:9))
+      abort_assign_incompatible_size(3, list(8:9), 1, NULL, quote(8:9))
     )
 
-    expect_tibble_error(
+    expect_tibble_abort(
       df$a <- character(),
-      error_assign_incompatible_size(3, list(character()), 1, NULL, quote(character()))
+      abort_assign_incompatible_size(3, list(character()), 1, NULL, quote(character()))
     )
   })
 })
 
 test_that("output test", {
-  expect_snapshot_with_error({
+  skip_if_not_installed("vctrs", "0.4.1.9000")
+
+  expect_snapshot(error = TRUE, {
     "# [.tbl_df is careful about names (#1245)"
     foo <- tibble(x = 1:10, y = 1:10)
     foo[c("x", "y", "z")]
