@@ -32,7 +32,7 @@
 \item{width}{Width of text output to generate. This defaults to \code{NULL}, which
 means use the \code{width} \link[pillar:pillar_options]{option}.}
 
-\item{...}{Passed on to \code{\link[pillar:tbl_format_setup]{pillar::tbl_format_setup()}}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{n}{Number of rows to show. If \code{NULL}, the default, will print all rows
 if less than the \code{print_max} \link[pillar:pillar_options]{option}.
