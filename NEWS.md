@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9044
+
+## Documentation
+
+- Document that `...` must be empty in `print.tbl_df()`.
+
+## Uncategorized
+
+- Merge branch 'docs'.
+
+
 # tibble 3.2.1.9043
 
 ## Continuous integration
