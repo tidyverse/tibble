@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Column formats • tibble</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="48x48" href="../favicon-48x48.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="icon" sizes="any" href="../favicon.ico">
@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9043</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9044</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -138,11 +138,11 @@ after the decimal point. This also applies to columns derived from
 <span></span>
 <span><span class="va">tbl2</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 8</span></span></span>
-<span><span class="co">#&gt;           x         y         z         v       lag      sin    mean   var</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fm&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:f&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     9.000    10.000    81.000    91.000     9.000    0.412 111.667     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    10.000    11.000   100.000   111.000     9.000   -0.544 111.667     1</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    11.000    12.000   121.000   133.000    10.000   -1.000 111.667     1</span></span></code></pre></div>
+<span><span class="co">#&gt;           x         y         z         v      lag    sin    mean   var</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fm&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:f&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     9.000    10.000    81.000    91.000    9.000  0.412 111.667     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>    10.000    11.000   100.000   111.000    9.000 -0.544 111.667     1</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>    11.000    12.000   121.000   133.000   10.000 -1.000 111.667     1</span></span></code></pre></div>
 <p>Summaries also maintain the formatting.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">tbl2</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
@@ -244,11 +244,11 @@ rule-based approach for formatting.</p>
 <span>    <span class="fu"><a href="https://dplyr.tidyverse.org/reference/across.html" class="external-link">across</a></span><span class="op">(</span><span class="fu"><a href="https://tidyselect.r-lib.org/reference/where.html" class="external-link">where</a></span><span class="op">(</span><span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/numeric.html" class="external-link">is.numeric</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span> <span class="op">&amp;&amp;</span> <span class="fu"><a href="https://rdrr.io/r/base/mean.html" class="external-link">mean</a></span><span class="op">(</span><span class="va">.x</span><span class="op">)</span> <span class="op">&gt;</span> <span class="fl">50</span><span class="op">)</span>, <span class="op">~</span> <span class="fu"><a href="https://renkun-ken.github.io/formattable/reference/digits.html" class="external-link">digits</a></span><span class="op">(</span><span class="va">.x</span>, <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
 <span>  <span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 9</span></span></span>
-<span><span class="co">#&gt;   id            x         y         z         v     lag    sin  mean   var</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:f&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> a         9.000    10.000      81.0      91.0   9.000  0.412 111.7 1.000</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> b        10.000    11.000     100.0     111.0   9.000 -0.544 111.7 1.000</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> c        11.000    12.000     121.0     133.0  10.000 -1.000 111.7 1.000</span></span></code></pre></div>
+<span><span class="co">#&gt;   id            x         y         z       v    lag    sin  mean   var</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:f&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> a         9.000    10.000      81.0    91.0  9.000  0.412 111.7 1.000</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> b        10.000    11.000     100.0   111.0  9.000 -0.544 111.7 1.000</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> c        11.000    12.000     121.0   133.0 10.000 -1.000 111.7 1.000</span></span></code></pre></div>
 <p>These rules can be stored in <code><a href="https://rlang.r-lib.org/reference/defusing-advanced.html" class="external-link">quos()</a></code>:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">rules</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rlang.r-lib.org/reference/defusing-advanced.html" class="external-link">quos</a></span><span class="op">(</span></span>
@@ -259,11 +259,11 @@ rule-based approach for formatting.</p>
 <span><span class="va">tbl3</span> <span class="op"><a href="https://magrittr.tidyverse.org/reference/pipe.html" class="external-link">%&gt;%</a></span></span>
 <span>  <span class="fu"><a href="https://dplyr.tidyverse.org/reference/mutate.html" class="external-link">mutate</a></span><span class="op">(</span><span class="op">!</span><span class="op">!</span><span class="op">!</span><span class="va">rules</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 9</span></span></span>
-<span><span class="co">#&gt;   id            x         y         z         v     lag    sin  mean   var</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:f&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> a         9.000    10.000      81.0      91.0   9.000  0.412 111.7 1.000</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> b        10.000    11.000     100.0     111.0   9.000 -0.544 111.7 1.000</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> c        11.000    12.000     121.0     133.0  10.000 -1.000 111.7 1.000</span></span></code></pre></div>
+<span><span class="co">#&gt;   id            x         y         z       v    lag    sin  mean   var</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:fmt&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:f&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl:&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> a         9.000    10.000      81.0    91.0  9.000  0.412 111.7 1.000</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> b        10.000    11.000     100.0   111.0  9.000 -0.544 111.7 1.000</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span> c        11.000    12.000     121.0   133.0 10.000 -1.000 111.7 1.000</span></span></code></pre></div>
 <p>This poses a few drawbacks:</p>
 <ul>
 <li>The syntax is repetitive and not very intuitive</li>
