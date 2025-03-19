@@ -64,10 +64,10 @@ fully described in \code{\link[=tbl_df-class]{tbl_df}}.
 \item \code{tibble()} is much lazier than \code{\link[base:data.frame]{base::data.frame()}} in terms of
 transforming the user's input.
 \itemize{
-\item Character vectors are not coerced to factor.
 \item List-columns are expressly anticipated and do not require special tricks.
 \item Column names are not modified.
 \item Inner names in columns are left unchanged.
+\item For R < 4.0, \href{https://blog.r-project.org/2020/02/16/stringsasfactors/}{character vectors were not coerced to factor}.
 }
 \item \code{tibble()} builds columns sequentially. When defining a column, you can
 refer to columns created earlier in the call. Only columns of length one
