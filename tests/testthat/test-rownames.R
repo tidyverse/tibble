@@ -24,7 +24,7 @@ test_that("rownames_to_column keeps the tbl classes (#882)", {
   expect_equal(res$rowname, rownames(mtcars))
   expect_tibble_abort(
     rownames_to_column(mtcars, "wt"),
-    abort_column_names_must_be_unique("wt", repair = FALSE)
+    abort_column_names_must_be_unique("wt", repair_hint = FALSE)
   )
 
   mtcars2 <- as_tibble(mtcars, rownames = NA)
@@ -35,7 +35,7 @@ test_that("rownames_to_column keeps the tbl classes (#882)", {
   expect_equal(res1$`Make&Model`, rownames(mtcars))
   expect_tibble_abort(
     rownames_to_column(mtcars2, "wt"),
-    abort_column_names_must_be_unique("wt", repair = FALSE)
+    abort_column_names_must_be_unique("wt", repair_hint = FALSE)
   )
 })
 
@@ -46,7 +46,7 @@ test_that("rowid_to_column keeps the tbl classes", {
   expect_equal(res$rowid, seq_len(nrow(mtcars)))
   expect_tibble_abort(
     rowid_to_column(mtcars, "wt"),
-    abort_column_names_must_be_unique("wt", repair = FALSE)
+    abort_column_names_must_be_unique("wt", repair_hint = FALSE)
   )
 
   mtcars2 <- as_tibble(mtcars, rownames = NA)
@@ -57,7 +57,7 @@ test_that("rowid_to_column keeps the tbl classes", {
   expect_equal(res1$row_id, seq_len(nrow(mtcars)))
   expect_tibble_abort(
     rowid_to_column(mtcars2, "wt"),
-    abort_column_names_must_be_unique("wt", repair = FALSE)
+    abort_column_names_must_be_unique("wt", repair_hint = FALSE)
   )
 })
 

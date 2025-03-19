@@ -177,11 +177,11 @@ tbl_subassign_row <- function(x, i, value, i_arg, value_arg, call) {
 
 vectbl_assign <- function(x, i, value) {
   if (is.logical(value)) {
-    if (.Call("tibble_need_coerce", value)) {
+    if (.Call(`tibble_need_coerce`, value)) {
       value <- vec_slice(x, NA_integer_)
     }
   } else {
-    if (.Call("tibble_need_coerce", x)) {
+    if (.Call(`tibble_need_coerce`, x)) {
       d <- dim(x)
       dn <- dimnames(x)
       x <- vec_slice(value, rep(NA_integer_, length(x)))

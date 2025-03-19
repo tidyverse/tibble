@@ -1,5 +1,7 @@
 ---
-output: downlit::readme_document
+output:
+  github_document:
+    html_preview: false
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -10,12 +12,43 @@ knitr::opts_chunk$set(
   comment = "#>",
   fig.path = "README-"
 )
+
+clean_output <- function(x, options) {
+  x <- gsub("0x[0-9a-f]+", "0xdeadbeef", x)
+  x <- gsub("dataframe_[0-9]*_[0-9]*", "      dataframe_42_42      ", x)
+  x <- gsub("[0-9]*\\.___row_number ASC", "42.___row_number ASC", x)
+
+  index <- x
+  index <- gsub("─", "-", index)
+  index <- strsplit(paste(index, collapse = "\n"), "\n---\n")[[1]][[2]]
+  writeLines(index, "index.md")
+
+  x <- gsub('(`vignette[(]"([^"]+)"[)]`)', "[\\1](https://tibble.tidyverse.org/articles/\\2.html)", x)
+  x <- fansi::strip_sgr(x)
+  x
+}
+
+options(
+  cli.num_colors = 256,
+  cli.width = 71,
+  width = 71,
+  pillar.bold = TRUE,
+  pillar.max_title_chars = 5,
+  pillar.min_title_chars = 5,
+  pillar.max_footer_lines = 12,
+  conflicts.policy = list(warn = FALSE)
+)
+
+local({
+  hook_source <- knitr::knit_hooks$get("document")
+  knitr::knit_hooks$set(document = clean_output)
+})
 ```
 
-# tibble <img src="man/figures/logo.png" align="right" />
+# tibble <img src="man/figures/logo.png" align="right" alt="" />
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/tidyverse/tibble/workflows/R-CMD-check/badge.svg)](https://github.com/tidyverse/tibble/actions)
+[![R-CMD-check](https://github.com/tidyverse/tibble/workflows/rcc/badge.svg)](https://github.com/tidyverse/tibble/actions)
 [![Codecov test coverage](https://codecov.io/gh/tidyverse/tibble/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/tibble?branch=main)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/tibble)](https://cran.r-project.org/package=tibble)
 [![Life cycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
@@ -37,8 +70,8 @@ install.packages("tidyverse")
 install.packages("tibble")
 
 # Or the the development version from GitHub:
-# install.packages("devtools")
-devtools::install_github("tidyverse/tibble")
+# install.packages("pak")
+pak::pak("tidyverse/tibble")
 ```
 
 ## Usage

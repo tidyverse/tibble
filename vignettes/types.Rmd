@@ -10,8 +10,12 @@ vignette: >
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
   collapse = TRUE,
+  eval = rlang::is_installed(c("dplyr", "tidyr", "purrr")),
   comment = "#>"
 )
+```
+
+```{r, include = FALSE}
 library(dplyr)
 library(tidyr)
 library(purrr)
@@ -48,7 +52,7 @@ set_names(rep_along(all_methods, list("")), all_methods) %>%
 
 
 ```{r data, echo = FALSE}
-data <- list(
+data <- compact(list(
   "Atomic" = rlang::quos(
     logical = TRUE,
     integer = 1L,
@@ -68,7 +72,7 @@ data <- list(
     difftime = vctrs::new_duration(1)
   ),
 
-  "Objects from other packages" = rlang::quos(
+  "Objects from other packages" = if (rlang::is_installed(c("bit64", "blob", "hms"))) rlang::quos(
     hms = hms::hms(1),
     integer64 = bit64::as.integer64(1e10),
     blob = blob::blob(raw(1))
@@ -99,7 +103,7 @@ data <- list(
     expression = parse(text = "a <- 1\nb<- 2"),
     quosures = rlang::quos(a = 1)
   )
-)
+))
 ```
 
 ```{r table, echo = FALSE}

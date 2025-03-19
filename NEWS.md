@@ -1,161 +1,455 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# tibble 3.1.8.9010
+# tibble 3.2.1.9045
 
 ## Chore
 
-- Remove obsolete tests (#1513).
+- IDE.
 
-- Use `vec_as_location(missing = "error")` for better error messages (#741, #1511).
+
+# tibble 3.2.1.9044
+
+## Documentation
+
+- Document that `...` must be empty in `print.tbl_df()`.
 
 ## Uncategorized
 
-- Merge pull request #1512 from tidyverse/docs-1151-1070-275-tweaks.
+- Merge branch 'docs'.
 
 
-# tibble 3.1.8.9009
+# tibble 3.2.1.9043
+
+## Continuous integration
+
+- Avoid failure in fledge workflow if no changes (#1618).
+
+
+# tibble 3.2.1.9042
+
+## Continuous integration
+
+- Fetch tags for fledge workflow to avoid unnecessary NEWS entries (#1617).
+
+
+# tibble 3.2.1.9041
+
+## Continuous integration
+
+- Use larger retry count for lock-threads workflow (#1616).
+
+
+# tibble 3.2.1.9040
+
+## Continuous integration
+
+- Ignore errors when removing pkg-config on macOS (#1615).
+
+
+# tibble 3.2.1.9039
+
+## Continuous integration
+
+- Explicit permissions (#1614).
+
+
+# tibble 3.2.1.9038
+
+## Continuous integration
+
+- Use styler from main branch (#1613).
+
+
+# tibble 3.2.1.9037
+
+## Continuous integration
+
+- Need to install R on Ubuntu 24.04 (#1612).
+
+- Use Ubuntu 24.04 and styler PR (#1610).
+
+
+# tibble 3.2.1.9036
+
+## Continuous integration
+
+  - Correctly detect branch protection (#1608).
+
+
+# tibble 3.2.1.9035
+
+## Continuous integration
+
+  - Use stable pak (#1607).
+
+
+# tibble 3.2.1.9034
+
+## Continuous integration
+
+  - Trigger run (#1606).
+    
+      - ci: Trigger run
+    
+      - ci: Latest changes
+
+
+# tibble 3.2.1.9033
+
+## Continuous integration
+
+  - Use pkgdown branch (#1604).
+    
+      - ci: Use pkgdown branch
+    
+      - ci: Updates from duckdb
+    
+      - ci: Trigger run
+
+
+# tibble 3.2.1.9032
 
 ## Features
 
-- Revert `as_data_frame()` now also refers to `as.data.frame()` in its deprecation message.
+  - Rework `view()` to better work with RStudio and Positron (@DavisVaughan, #1551, #1603).
 
-Revert "Merge pull request #1504 from tidyverse/f-1202-as-row-names"
 
-This reverts commit 83e617811b837423ffc2fbd4533946cf05ae2563, reversing
-changes made to 21729a3c850accd490f6837094bde319094d9b9e.
+# tibble 3.2.1.9031
+
+## Continuous integration
+
+  - Install via R CMD INSTALL ., not pak (#1601).
+    
+      - ci: Install via R CMD INSTALL ., not pak
+    
+      - ci: Bump version of upload-artifact action
+
+
+# tibble 3.2.1.9030
+
+## Continuous integration
+
+  - Install local package for pkgdown builds.
+
+  - Improve support for protected branches with fledge.
+
+  - Improve support for protected branches, without fledge.
+
+
+# tibble 3.2.1.9029
 
 ## Chore
 
-- Remove compatibility code for RSDA package which is broken anyway due to other changes (#923, #1509).
+- Auto-update from GitHub Actions.
 
-- Accurate location of error source in error messages (#1065, #1508).
+  Run: https://github.com/tidyverse/tibble/actions/runs/10425484383
 
-## Uncategorized
+## Continuous integration
 
-- Merge pull request #1510 from tidyverse/f-split-frontend-2.
+- Sync with latest developments.
 
 
-# tibble 3.1.8.9008
+# tibble 3.2.1.9028
+
+## Continuous integration
+
+- Use v2 instead of master.
+
+
+# tibble 3.2.1.9027
+
+## Continuous integration
+
+- Inline action.
+
+
+# tibble 3.2.1.9026
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/10224243858
+
+
+# tibble 3.2.1.9025
+
+## Continuous integration
+
+- Use dev roxygen2 and decor.
+
+
+# tibble 3.2.1.9024
+
+## Documentation
+
+- Request to not edit `NEWS.md`.
+
+
+# tibble 3.2.1.9023
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/9884064046
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/9871752503
+
+## Continuous integration
+
+- Use roxygen2 PR to fix documentation.
+
+## Testing
+
+- Snapshot updates for rcc-smoke (null) (#1597).
+
+
+# tibble 3.2.1.9022
+
+## Chore
+
+- Drop fansi and import cli (@olivroy, #1589).
+
+## Continuous integration
+
+- Fix on Windows, tweak lock workflow.
+
+
+# tibble 3.2.1.9021
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/9728440241
+
+
+# tibble 3.2.1.9020
+
+## Continuous integration
+
+- Avoid checking bashisms on Windows.
+
+- Better commit message.
+
+- Bump versions, better default, consume custom matrix.
+
+
+# tibble 3.2.1.9019
+
+## Chore
+
+- Upkeep drop crayon + mockr (@olivroy, #1587).
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/9687521438
+
+- Replace non-API `SET_S4_OBJECT()` with `Rf_asS4()` (@olivroy, #1588).
+
+## Continuous integration
+
+- Fix.
+
+- Remove dead workflow.
+
+- Recent updates.
+
+
+# tibble 3.2.1.9018
+
+## Chore
+
+- Snapshot updates (#1580).
+
+
+# tibble 3.2.1.9017
+
+## Bug fixes
+
+- `new_tibble()` and `as_tibble()` support attributes named `"n"` and `"x"` (#1573, #1574).
+
+
+# tibble 3.2.1.9016
+
+- Internal changes only.
+
+
+# tibble 3.2.1.9015
+
+## Chore
+
+- Revert "Fix as_tibble() usage".
+
+  This reverts commit 49d0b63504c4e3f77beaf2889ace12cad7d3f293.
+
+
+# tibble 3.2.1.9014
+
+- Internal changes only.
+
+
+# tibble 3.2.1.9013
+
+## Features
+
+- `as_tibble()` calls `as.data.frame()` for objects that are not subclasses of `"tbl_df"` (@TimTaylor, #1556, #1557).
+
+## Chore
+
+- Check fast path first.
+
+
+# tibble 3.2.1.9012
+
+## Chore
+
+- Skip tests if packages are missing.
+
+## Testing
+
+- Skip tests if packages are missing.
+
+
+# tibble 3.2.1.9011
+
+- Merge pull request #1565 from tidyverse/snapshot-main-rcc-smoke-null.
+
+
+# tibble 3.2.1.9010
+
+- Merge pull request #1562 from tidyverse/snapshot-main-rcc-smoke-null.
+
+- Merge pull request #1561 from tidyverse/snapshot-main-rcc-full-config-os-macos-latest-r-release.
+
+
+# tibble 3.2.1.9009
+
+- Merge pull request #1560 from tidyverse/snapshot-main-R-CMD-check-base-null.
+
+
+# tibble 3.2.1.9008
+
+## Documentation
+
+- Fix rendering if suggested packages are missing.
+
+
+# tibble 3.2.1.9007
+
+## Testing
+
+- Override :: to avoid failures in tests without suggested packages.
+
+
+# tibble 3.2.1.9006
+
+- Merge branch 'docs'.
+
+
+# tibble 3.2.1.9005
+
+## Chore
+
+- Snapshot updates for rcc-smoke (null) (#1548).
+
+
+# tibble 3.2.1.9004
+
+## Documentation
+
+- Alt text (@maelle, #1528, #1539).
+
+
+# tibble 3.2.1.9003
+
+- Merged cran-3.2.1 into main.
+
+
+# tibble 3.2.1.9002
+
+- Internal changes only.
+
+
+# tibble 3.2.1.9001
+
+- Merge pull request #1527 from tidyverse/snapshot-main-rcc-smoke-null.
+
+
+# tibble 3.2.1.9000
+
+- Internal changes only.
+
+
+# tibble 3.2.1
+
+## Internal
+
+- Use symbol instead of string in `.Call()`.
+
+
+# tibble 3.2.0
+
+## Features
+
+- Accurate location of the source of an error in error messages (#1379, #1065, #1508).
+
+- `as_data_frame()` now also refers to `as.data.frame()` in its deprecation message (#1149, #1506).
+
+## Breaking changes
+
+- Deprecated functions and arguments where we could not detect usage by other CRAN packages (#1515):
+
+    - `data_frame_()`, `lst_()`, `frame_data()`
+    
+    - `as_tibble(validate = )`, `as_tibble(NULL)`, `new_tibble(subclass = )`
+    
+    - `add_row()` and `add_column()` for non-data-frame input
+    
+    - `add_column()` for input with non-unique names
+    
+    - corner cases for `tbl[[x]]`
+
+- Breaking change: Remove `knit_print.trunc_mat()` method (#1516).
+
+- Forward `trunc_mat()` to new-style pillar methods (#1517).
 
 ## Bug fixes
 
 - Allow `glue()` and other classed characters for subassignment (#1150, #1503).
 
-## Features
-
-- `as_data_frame()` now also refers to `as.data.frame()` in its deprecation message (#1149, #1506).
-
-## Chore
-
-- Retry continuous benchmarks until success (#1505).
-
-- Fix tests (#1500).
-
-
-# tibble 3.1.8.9007
-
-## Chore
-
-- Use usethis namespace.
-
-- Add GitPod infrastructure.
-
-- Require R \>= 3.4.0, dependency hygiene (#1490, #1071).
-
-Closes #1071. Closes #1490.
-
-## Documentation
-
-- Fix display of mermaid diagrams in `vignette("formats")` (@maelle, #1497, #1498).
-
-## Uncategorized
-
-- Snapshot updates for rcc-smoke (null) (#1495).
-
-Snapshot updates for rcc-smoke (null)
-
-
-# tibble 3.1.8.9006
-
-- Internal changes only.
-
-
-# tibble 3.1.8.9005
-
-- Internal changes only.
-
-
-# tibble 3.1.8.9004
-
-- Internal changes only.
-
-
-# tibble 3.1.8.9003
-
-## Chore
-
-- Remove legacy expectation (#1468).
-
-## Documentation
-
-- Use lambda in `across()` in vignette for compatibility with dplyr 1.1.0 (#1485).
-
-## Uncategorized
-
-- Merge pull request #1481 from tidyverse/snapshot-main-rcc-smoke-null.
-
-
-
-- Harmonize yaml formatting.
-
-- Revert changes to matrix section.
-
-- Merge pull request #1475 from tidyverse/snapshot-main-rcc-smoke-null.
-
-
-
-- Merge pull request #1474 from IndrajeetPatil/doc_edits.
-
-
-
-
-# tibble 3.1.8.9002
-
-## Features
-
-- Correct top-level calls are shown for the vast majority of errors (#1379).
-
-- Using cli for formatting conditions (#1387).
-
-## Chore
-
-- Check if R version changed (#1365).
-
-- Define responsibility for setting row names and class (#1364).
-
-## Documentation
-
-- Update example for `nrow` argument to `new_tibble()` (@heavywatal, #1394).
-
-- Remove ANSI escapes from invariants article on pkgdown (#1374).
-
 ## Performance
 
 - Reduce overhead of single-column subset assignment (#1363).
 
+## Documentation
 
-# tibble 3.1.8.9001
+- New `vignette("extending")` (#275, #1512).
 
-## Chore
+- Minor updates (#1151, #1070, #1512, #1485).
+
+- Update example for `nrow` argument to `new_tibble()` (@heavywatal, #1394).
+
+- Fix display of mermaid diagrams in `vignette("formats")` (@maelle, #1497, #1498).
+
+- Remove ANSI escapes from invariants article on pkgdown (#1374).
+
+## Internal
 
 - Require vctrs >= 0.4.1 and pillar >= 1.8.1
 
+- Use cli for formatting conditions (#1387).
+
+- Use `vec_as_location(missing = "error")` for better error messages (#741, #1511).
+
+- Remove compatibility code for RSDA package which is broken anyway due to other changes (#923, #1509).
+
 - Skip tests if suggested packages not available (#1246, @MichaelChirico).
 
-
-# tibble 3.1.8.9000
-
-- Internal changes only.
+- Remove obsolete tests (#1513).
 
 
 # tibble 3.1.8

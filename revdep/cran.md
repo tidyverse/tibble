@@ -1,49 +1,32 @@
 ## revdepcheck results
 
-We checked 3485 reverse dependencies (3460 from CRAN + 25 from Bioconductor), comparing R CMD check results across CRAN and dev versions of this package.
+We checked 2057 reverse dependencies, comparing R CMD check results across CRAN and dev versions of this package.
 
- * We saw 5 new problems
- * We failed to check 16 packages
+ * We saw 3 new problems
+ * We failed to check 8 packages
 
 Issues with CRAN packages are summarised below.
 
 ### New problems
 (This reports the first line of each new failure)
 
-* bibliometrix
-  checking examples ... ERROR
+* covidcast
+  checking running R code from vignettes ... ERROR
+  checking re-building of vignette outputs ... NOTE
 
-* ggdag
-  checking examples ... ERROR
+* LexisNexisTools
   checking tests ... ERROR
 
-* ggESDA
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... WARNING
-
-* PUMP
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... WARNING
-
-* RSDA
-  checking examples ... ERROR
-  checking re-building of vignette outputs ... WARNING
+* NMdata
+  checking tests ... ERROR
 
 ### Failed to check
 
-* beadplexr     (NA)
-* cinaR         (NA)
-* ctsem         (NA)
-* FAMetA        (NA)
-* genekitr      (NA)
-* ggPMX         (NA)
-* immcp         (NA)
-* loon.tourr    (NA)
-* nlmixr2rpt    (NA)
-* numbat        (NA)
-* OlinkAnalyze  (NA)
-* Platypus      (NA)
-* RVA           (NA)
-* tinyarray     (NA)
-* vivid         (NA)
-* xpose.nlmixr2 (NA)
+* bigrquerystorage (NA)
+* ctsem            (NA)
+* EcoEnsemble      (NA)
+* glmmfields       (NA)
+* loon.tourr       (NA)
+* multinma         (NA)
+* treestats        (NA)
+* triptych         (NA)

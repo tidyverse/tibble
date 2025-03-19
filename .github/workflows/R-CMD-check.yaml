@@ -1,4 +1,4 @@
-# Workflow derived from https://github.com/r-lib/actions/tree/master/examples
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 # Need help debugging build failures? Start at https://github.com/r-lib/actions#where-to-find-help
 #
 # NOTE: This workflow is overkill for most R packages and
@@ -9,24 +9,45 @@ on:
     branches:
       - main
       - master
+      - release
+      - cran-*
   pull_request:
     branches:
       - main
       - master
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Branch, tag, or commit to check out"
+        required: false
+        default: "main"
+      versions-matrix:
+        description: "Create a matrix of R versions"
+        type: boolean
+        default: false
+      dep-suggests-matrix:
+        description: "Create a matrix of suggested dependencies"
+        type: boolean
+        default: false
+  merge_group:
+    types:
+      - checks_requested
   schedule:
     - cron: "10 0 * * *"
 
 concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref || '' }}-${{ github.base_ref || '' }}
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.ref || github.head_ref || github.sha }}-${{ github.base_ref || '' }}
   cancel-in-progress: true
 
 name: rcc
 
 jobs:
   rcc-smoke:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
+      versions-matrix: ${{ steps.versions-matrix.outputs.matrix }}
+      dep-suggests-matrix: ${{ steps.dep-suggests-matrix.outputs.matrix }}
 
     name: "Smoke test: stock R"
 
@@ -34,7 +55,41 @@ jobs:
     # End custom: services
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.ref }}
+
+      - name: Update status for rcc
+        # FIXME: Wrap into action
+        if: github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check status of this workflow
+          state="pending"
+          sha=${{ inputs.ref }}
+          if [ -z "${sha}" ]; then
+            sha=${{ github.head_ref }}
+          fi
+          if [ -z "${sha}" ]; then
+            sha=${{ github.sha }}
+          fi
+          sha=$(git rev-parse ${sha})
+
+          html_url=$(gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq -r .html_url)
+
+          description="${{ github.workflow }} / ${{ github.job }}"
+
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            repos/${{ github.repository }}/statuses/${sha} \
+            -f "state=${state}" -f "target_url=${html_url}" -f "description=${description}" -f "context=rcc"
+        shell: bash
 
       - uses: ./.github/workflows/rate-limit
         with:
@@ -48,68 +103,50 @@ jobs:
       - uses: ./.github/workflows/install
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          install-r: false
-          cache-version: rcc-smoke-1
-          needs: check
-          extra-packages: any::rcmdcheck any::roxygen2 r-lib/styler
+          cache-version: rcc-smoke-2
+          needs: check, website
+          # Beware of using dev pkgdown here, has brought in dev dependencies in the past
+          extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/styler r-lib/pkgdown deps::.
+
+      - name: Install package
+        run: |
+          _R_SHLIB_STRIP_=true R CMD INSTALL .
+        shell: bash
 
       - uses: ./.github/workflows/custom/after-install
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
+      - id: versions-matrix
+        # Only run for pull requests if the base repo is different from the head repo, not for workflow_dispatch if not requested, always run for other events
+        if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository) && (github.event_name != 'workflow_dispatch' || inputs.versions-matrix)
+        uses: ./.github/workflows/versions-matrix
+
+      - id: dep-suggests-matrix
+        # Not for workflow_dispatch if not requested, always run for other events
+        if: github.event_name != 'workflow_dispatch' || inputs.dep-suggests-matrix
+        uses: ./.github/workflows/dep-suggests-matrix
+
       - uses: ./.github/workflows/update-snapshots
-        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+        with:
+          base: ${{ inputs.ref || github.head_ref }}
 
       - uses: ./.github/workflows/style
-        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
 
       - uses: ./.github/workflows/roxygenize
-        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+
+      - name: Remove config files from previous iteration
+        run: |
+          rm -f .github/dep-suggests-matrix.json .github/versions-matrix.json
+        shell: bash
 
       - id: commit
-        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
         uses: ./.github/workflows/commit
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
 
       - uses: ./.github/workflows/check
         with:
           results: ${{ runner.os }}-smoke-test
-
-  # Runs in a separate workflow, because it's using dev pkgdown
-  # which might bring in other dev dependencies
-  pkgdown:
-    needs: rcc-smoke
-
-    runs-on: ubuntu-latest
-
-    name: "pkgdown"
-
-    # Begin custom: services
-    # End custom: services
-
-    steps:
-      - uses: actions/checkout@v3
-        with:
-          ref: ${{ needs.rcc-smoke.outputs.sha }}
-
-      - uses: ./.github/workflows/rate-limit
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
-      - uses: ./.github/workflows/git-identity
-        if: github.event_name == 'push'
-
-      - uses: ./.github/workflows/custom/before-install
-        if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
-
-      - uses: ./.github/workflows/install
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-          install-r: false
-          cache-version: pkgdown-1
-          needs: website
-          extra-packages: r-lib/pkgdown local::.
-
-      - uses: ./.github/workflows/custom/after-install
-        if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
       - uses: ./.github/workflows/pkgdown-build
         if: github.event_name != 'push'
@@ -117,94 +154,96 @@ jobs:
       - uses: ./.github/workflows/pkgdown-deploy
         if: github.event_name == 'push'
 
-  # Windows checks can be run in parallel and independently
-  # when they alone take as long as the smoke and full tests combined.
-  # To achieve this, remove the "needs:" element below.
-  rcc-windows:
-    # Begin custom: early run
-    needs: rcc-smoke
-    # End custom: early run
+      # Upload sha as artifact
+      - run: |
+          echo -n "${{ steps.commit.outputs.sha }}" > rcc-smoke-sha.txt
+        shell: bash
 
-    runs-on: ${{ matrix.config.os }}
+      - uses: actions/upload-artifact@v4
+        with:
+          name: rcc-smoke-sha
+          path: rcc-smoke-sha.txt
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }}) ${{ matrix.config.desc }}
+      - name: Update status for rcc
+        # FIXME: Wrap into action
+        if: always() && github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Check status of this workflow
+          if [ "${{ job.status }}" == "success" ]; then
+            state="success"
+          else
+            state="failure"
+          fi
 
-    # Begin custom: services
-    # End custom: services
+          sha=${{ steps.commit.outputs.sha }}
+          if [ -z "${sha}" ]; then
+            sha=${{ inputs.ref }}
+          fi
+          if [ -z "${sha}" ]; then
+            sha=${{ github.head_ref }}
+          fi
+          if [ -z "${sha}" ]; then
+            sha=${{ github.sha }}
+          fi
+            sha=$(git rev-parse ${sha})
 
-    strategy:
-      fail-fast: false
-      matrix:
-        config:
-          - {os: windows-latest, r: 'release'}
-          # Use 3.6 to trigger usage of RTools35
-          - {os: windows-latest, r: '3.6'}
+          html_url=$(gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq -r .html_url)
+
+          description="${{ github.workflow }} / ${{ github.job }}"
+
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            repos/${{ github.repository }}/statuses/${sha} \
+            -f "state=${state}" -f "target_url=${html_url}" -f "description=${description}" -f "context=rcc"
+        shell: bash
+
+  rcc-smoke-check-matrix:
+    runs-on: ubuntu-24.04
+
+    name: "Check matrix"
+
+    needs:
+      - rcc-smoke
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ needs.rcc-smoke.outputs.sha }}
 
-      - uses: ./.github/workflows/custom/before-install
-        if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
-
-      - uses: ./.github/workflows/install
+      - uses: ./.github/workflows/matrix-check
         with:
-          r-version: ${{ matrix.config.r }}
-          cache-version: rcc-windows-1
-          token: ${{ secrets.GITHUB_TOKEN }}
-          needs: check
+          matrix: ${{ needs.rcc-smoke.outputs.versions-matrix }}
 
-      - uses: ./.github/workflows/custom/after-install
-        if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
-
-      - uses: ./.github/workflows/update-snapshots
-        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
-
-      - uses: ./.github/workflows/check
+      - uses: ./.github/workflows/matrix-check
         with:
-          results: ${{ runner.os }}-r${{ matrix.config.r }}
+          matrix: ${{ needs.rcc-smoke.outputs.dep-suggests-matrix }}
 
   rcc-full:
-    needs: rcc-smoke
+    needs:
+      - rcc-smoke
 
-    runs-on: ${{ matrix.config.os }}
+    runs-on: ${{ matrix.os }}
 
-    name: ${{ matrix.config.os }} (${{ matrix.config.r }}) ${{ matrix.config.desc }}
+    if: ${{ needs.rcc-smoke.outputs.versions-matrix != '' }}
+
+    name: 'rcc: ${{ matrix.os }} (${{ matrix.r }}) ${{ matrix.desc }}'
 
     # Begin custom: services
     # End custom: services
 
     strategy:
       fail-fast: false
-      matrix:
-        config:
-          - {os: macos-latest,   r: 'release'}
-
-          - {os: ubuntu-20.04,   r: 'release'}
-
-          # Use older ubuntu to maximise backward compatibility
-          - {os: ubuntu-22.04,   r: 'devel',     http-user-agent: 'release'}
-          - {os: ubuntu-22.04,   r: 'release',   covr: true,                  desc: 'with covr'}
-          - {os: ubuntu-22.04,   r: 'oldrel-1'}
-
-          # Begin custom: R 3.6
-          - {os: ubuntu-22.04,   r: 'oldrel-2'}
-          # End custom: R 3.6
-
-          # Begin custom: R 3.5
-          - {os: ubuntu-22.04,   r: 'oldrel-3'}
-          # End custom: R 3.5
-
-          # Begin custom: R 3.4
-          - {os: ubuntu-22.04,   r: 'oldrel-4'}
-          # End custom: R 3.4
-
-          # Begin custom: matrix elements
-          # End custom: matrix elements
+      matrix: ${{fromJson(needs.rcc-smoke.outputs.versions-matrix)}}
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           ref: ${{ needs.rcc-smoke.outputs.sha }}
 
@@ -213,7 +252,7 @@ jobs:
 
       - uses: ./.github/workflows/install
         with:
-          r-version: ${{ matrix.config.r }}
+          r-version: ${{ matrix.r }}
           cache-version: rcc-full-1
           token: ${{ secrets.GITHUB_TOKEN }}
           needs: check
@@ -226,4 +265,81 @@ jobs:
 
       - uses: ./.github/workflows/check
         with:
-          results: ${{ runner.os }}-r${{ matrix.config.r }}
+          results: ${{ runner.os }}-r${{ matrix.r }}
+
+# The status update is taken care of by R-CMD-check-status.yaml
+
+  rcc-suggests:
+    needs:
+      - rcc-smoke
+
+    runs-on: ubuntu-22.04
+
+    if: ${{ needs.rcc-smoke.outputs.dep-suggests-matrix != '' }}
+
+    name: Without ${{ matrix.package }}
+
+    # Begin custom: services
+    # End custom: services
+
+    strategy:
+      fail-fast: false
+      matrix: ${{fromJson(needs.rcc-smoke.outputs.dep-suggests-matrix)}}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: ./.github/workflows/custom/before-install
+        if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
+
+      - uses: ./.github/workflows/install
+        with:
+          cache-version: rcc-dev-${{ matrix.package }}-1
+          needs: check
+          extra-packages: "any::rcmdcheck any::remotes ."
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Remove ${{ matrix.package }} and all strong dependencies
+        run: |
+          pkg <- "${{ matrix.package }}"
+          pkgs <- tools::package_dependencies(pkg, reverse = TRUE)[[1]]
+          installed <- rownames(utils::installed.packages())
+          to_remove <- c(pkg, intersect(pkgs, installed))
+          print(to_remove)
+          remove.packages(to_remove)
+        shell: Rscript {0}
+
+      - name: Session info
+        run: |
+          options(width = 100)
+          if (!requireNamespace("sessioninfo", quietly = TRUE)) install.packages("sessioninfo")
+          pkgs <- installed.packages()[, "Package"]
+          sessioninfo::session_info(pkgs, include_base = TRUE)
+        shell: Rscript {0}
+
+      - uses: ./.github/workflows/custom/after-install
+        if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
+
+      - name: Define _R_CHECK_FORCE_SUGGESTS_
+        run: |
+          cat('_R_CHECK_FORCE_SUGGESTS_=false\n', file = Sys.getenv("GITHUB_ENV"), append = TRUE)
+        shell: Rscript {0}
+
+      - name: Must allow NOTEs, even with _R_CHECK_FORCE_SUGGESTS_
+        run: |
+          if (Sys.getenv("RCMDCHECK_ERROR_ON") %in% c("", "note")) {
+            cat('RCMDCHECK_ERROR_ON="warning"\n', file = Sys.getenv("GITHUB_ENV"), append = TRUE)
+          }
+        shell: Rscript {0}
+
+      - name: Check env vars
+        run: |
+          print(Sys.getenv('_R_CHECK_FORCE_SUGGESTS_'))
+          print(Sys.getenv('RCMDCHECK_ERROR_ON'))
+        shell: Rscript {0}
+
+      - uses: ./.github/workflows/check
+        with:
+          results: ${{ matrix.package }}
+
+# The status update is taken care of by R-CMD-check-status.yaml

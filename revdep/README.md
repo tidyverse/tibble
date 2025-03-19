@@ -1,58 +1,23 @@
 # Revdeps
 
-## Failed to check (41)
+## Failed to check (8)
 
-|package       |version |error |warning |note |
-|:-------------|:-------|:-----|:-------|:----|
-|NA            |?       |      |        |     |
-|beadplexr     |?       |      |        |     |
-|cinaR         |?       |      |        |     |
-|NA            |?       |      |        |     |
-|ctsem         |3.7.2   |1     |        |     |
-|NA            |?       |      |        |     |
-|NA            |?       |      |        |     |
-|NA            |?       |      |        |     |
-|NA            |?       |      |        |     |
-|FAMetA        |0.1.5   |1     |        |     |
-|NA            |?       |      |        |     |
-|genekitr      |?       |      |        |     |
-|ggPMX         |?       |      |        |     |
-|immcp         |?       |      |        |     |
-|NA            |?       |      |        |     |
-|NA            |?       |      |        |     |
-|NA            |?       |      |        |     |
-|loon.tourr    |?       |      |        |     |
-|NA            |?       |      |        |     |
-|NA            |?       |      |        |     |
-|NA            |?       |      |        |     |
-|NA            |?       |      |        |     |
-|nlmixr2rpt    |?       |      |        |     |
-|numbat        |?       |      |        |     |
-|NA            |?       |      |        |     |
-|OlinkAnalyze  |?       |      |        |     |
-|NA            |?       |      |        |     |
-|NA            |?       |      |        |     |
-|Platypus      |?       |      |        |     |
-|NA            |?       |      |        |     |
-|NA            |?       |      |        |     |
-|RVA           |?       |      |        |     |
-|NA            |?       |      |        |     |
-|NA            |?       |      |        |     |
-|NA            |?       |      |        |     |
-|NA            |?       |      |        |     |
-|NA            |?       |      |        |     |
-|tinyarray     |?       |      |        |     |
-|vivid         |?       |      |        |     |
-|NA            |?       |      |        |     |
-|xpose.nlmixr2 |?       |      |        |     |
+|package          |version |error |warning |note |
+|:----------------|:-------|:-----|:-------|:----|
+|bigrquerystorage |1.1.0   |1     |        |     |
+|ctsem            |3.9.1   |1     |        |     |
+|EcoEnsemble      |1.0.5   |1     |        |     |
+|glmmfields       |0.1.8   |1     |        |     |
+|loon.tourr       |?       |      |        |     |
+|multinma         |0.6.1   |1     |        |     |
+|treestats        |1.0.5   |1     |        |     |
+|triptych         |0.1.2   |1     |        |     |
 
-## New problems (5)
+## New problems (3)
 
-|package      |version |error  |warning |note |
-|:------------|:-------|:------|:-------|:----|
-|[bibliometrix](problems.md#bibliometrix)|4.1.1   |__+1__ |        |     |
-|[ggdag](problems.md#ggdag)|0.2.7   |__+2__ |        |     |
-|[ggESDA](problems.md#ggesda)|0.2.0   |__+1__ |__+1__  |     |
-|[PUMP](problems.md#pump)|1.0.1   |__+1__ |__+1__  |     |
-|[RSDA](problems.md#rsda)|3.0.13  |__+1__ |__+1__  |     |
+|package         |version |error  |warning |note     |
+|:---------------|:-------|:------|:-------|:--------|
+|[covidcast](problems.md#covidcast)|0.5.2   |__+1__ |        |1 __+1__ |
+|[LexisNexisTools](problems.md#lexisnexistools)|0.3.7   |__+1__ |        |         |
+|[NMdata](problems.md#nmdata)|0.1.5   |__+1__ |        |         |
 

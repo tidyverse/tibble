@@ -36,11 +36,7 @@ render_galley <- function(name, md_name) {
   installed <- galley_use_installed()
   # stopifnot(!installed)
 
-  if (installed) {
-    input_path <- system.file("doc", name, package = pkg)
-  } else {
-    input_path <- system.file("vignettes", name, package = pkg)
-  }
+  input_path <- file.path("vignettes", name)
 
   # Need fixed file name for stability
   output_dir <- tempdir()

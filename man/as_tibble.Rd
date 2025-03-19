@@ -41,7 +41,7 @@ as_tibble(
 
 \method{as_tibble}{table}(x, `_n` = "n", ..., n = `_n`, .name_repair = "check_unique")
 
-\method{as_tibble}{NULL}(x, ...)
+\method{as_tibble}{`NULL`}(x, ...)
 
 \method{as_tibble}{default}(x, ...)
 

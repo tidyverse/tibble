@@ -5,7 +5,6 @@ test_that("print() returns output invisibly", {
 })
 
 test_that("output test", {
-  skip_if_not_installed("mockr")
   skip_if(getRversion() < "3.2")
 
   expect_snapshot({
@@ -48,19 +47,11 @@ test_that("output test", {
       n = 5L,
       width = 30L
     )
-
-    print_with_mocked_format_body(trunc_mat(df_all, n = 1L, n_extra = 2L, width = 30L))
-
-    print_with_mocked_format_body(trunc_mat(df_all, n = 1L, n_extra = 0L, width = 30L))
-
-    df <- tibble(!!!set_names(c(5, 3), c("mean(x)", "var(x)")))
-    print_with_mocked_format_body(trunc_mat(df, width = 28))
   })
 })
 
 test_that("full output test", {
   skip_if(getRversion() < "3.2")
-  skip_on_os("windows")
 
   expect_snapshot({
     df <- tibble(x = as.POSIXct("2016-01-01 12:34:56 GMT") + 1:12)
@@ -72,10 +63,4 @@ test_that("full output test", {
     df <- setNames(tibble(1:3, 4:6), x)
     print(df, n = 8L, width = 60L)
   })
-})
-
-test_that("big_mark() works for large numbers", {
-  expect_match(big_mark(123), "123")
-  expect_match(big_mark(123456), "123.456")
-  expect_match(big_mark(123456789), "123.456.789")
 })

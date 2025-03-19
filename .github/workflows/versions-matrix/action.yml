@@ -1,0 +1,19 @@
+name: "Actions to compute a matrix with all R and OS versions"
+
+outputs:
+  matrix:
+    description: "Generated matrix"
+    value: ${{ steps.set-matrix.outputs.matrix }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Install json2yaml
+      run: |
+        sudo npm install -g json2yaml
+      shell: bash
+
+    - id: set-matrix
+      run: |
+        Rscript ./.github/workflows/versions-matrix/action.R
+      shell: bash

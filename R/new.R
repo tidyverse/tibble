@@ -92,15 +92,28 @@ new_tibble <- function(x, ..., nrow = NULL, class = NULL, subclass = NULL) {
     class <- c(class[!class %in% tibble_class], tibble_class_no_data_frame)
   }
 
-  slots <- c("x", "n", "class")
-  args[slots] <- list(x, nrow, class)
-
   # `new_data_frame()` restores compact row names
   # Can't add to the assignment above, a literal NULL would be inserted otherwise
   args[["row.names"]] <- NULL
 
+  # Attributes n and x are special and must be assigned after construction
+  an <- args[["n"]]
+  ax <- args[["x"]]
+  args[["n"]] <- NULL
+  args[["x"]] <- NULL
+
   # need exec() to avoid evaluating language attributes (e.g. rsample)
-  exec(new_data_frame, !!!args)
+  out <- exec(new_data_frame, x = x, n = nrow, !!!args, class = class)
+
+  if (!is.null(an)) {
+    attr(out, "n") <- an
+  }
+
+  if (!is.null(ax)) {
+    attr(out, "x") <- ax
+  }
+
+  out
 }
 
 #' @description
