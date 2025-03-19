@@ -7,10 +7,10 @@ special behaviour, such as enhanced printing. Tibbles are
 fully described in tbl_df.
 tibble() is much lazier than base::data.frame() in terms of
 transforming the user's input.
-Character vectors are not coerced to factor.
 List-columns are expressly anticipated and do not require special tricks.
 Column names are not modified.
 Inner names in columns are left unchanged.
+For R &amp;lt; 4.0, character vectors were not coerced to factor.
 
 tibble() builds columns sequentially. When defining a column, you can
 refer to columns created earlier in the call. Only columns of length one
@@ -31,10 +31,10 @@ special behaviour, such as enhanced printing. Tibbles are
 fully described in tbl_df.
 tibble() is much lazier than base::data.frame() in terms of
 transforming the user's input.
-Character vectors are not coerced to factor.
 List-columns are expressly anticipated and do not require special tricks.
 Column names are not modified.
 Inner names in columns are left unchanged.
+For R &amp;lt; 4.0, character vectors were not coerced to factor.
 
 tibble() builds columns sequentially. When defining a column, you can
 refer to columns created earlier in the call. Only columns of length one
@@ -112,10 +112,10 @@ addition to <code>data.frame</code>. This allows so-called "tibbles" to exhibit 
 special behaviour, such as <a href="formatting.html">enhanced printing</a>. Tibbles are
 fully described in <code><a href="tbl_df-class.html">tbl_df</a></code>.</p></li>
 <li><p><code>tibble()</code> is much lazier than <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">base::data.frame()</a></code> in terms of
-transforming the user's input.</p><ul><li><p>Character vectors are not coerced to factor.</p></li>
-<li><p>List-columns are expressly anticipated and do not require special tricks.</p></li>
+transforming the user's input.</p><ul><li><p>List-columns are expressly anticipated and do not require special tricks.</p></li>
 <li><p>Column names are not modified.</p></li>
 <li><p>Inner names in columns are left unchanged.</p></li>
+<li><p>For R &lt; 4.0, <a href="https://blog.r-project.org/2020/02/16/stringsasfactors/" class="external-link">character vectors were not coerced to factor</a>.</p></li>
 </ul></li>
 <li><p><code>tibble()</code> builds columns sequentially. When defining a column, you can
 refer to columns created earlier in the call. Only columns of length one
