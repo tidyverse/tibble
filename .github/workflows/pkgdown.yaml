@@ -1,4 +1,4 @@
-# Workflow derived from https://github.com/r-lib/actions/tree/master/examples
+# Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 # Also included in R-CMD-check.yaml, this workflow only listens to pushes to branches
 # that start with "docs*"
 on:
@@ -16,7 +16,7 @@ concurrency:
 
 jobs:
   pkgdown:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
 
     name: "pkgdown"
 
@@ -39,7 +39,6 @@ jobs:
       - uses: ./.github/workflows/install
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          install-r: false
           cache-version: pkgdown-2
           needs: website
           extra-packages: r-lib/pkgdown local::.

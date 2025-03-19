@@ -18,3 +18,5 @@ CRAN-RELEASE
 docs
 .vscode/
 src/version.txt
+/.cache/
+/compile_commands.json

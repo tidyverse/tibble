@@ -32,8 +32,8 @@ static void copy_attributes(SEXP out, SEXP data)
   if (!Rf_isNull(att)){
     SET_ATTRIB(out, pairlist_shallow_copy(ATTRIB(data))) ;
   }
-  SET_OBJECT(out, OBJECT(data));
-  if (IS_S4_OBJECT(data)) {
+  SET_OBJECT(out, Rf_isObject(data));
+  if (Rf_isS4(data)) {
     Rf_asS4(out, TRUE, FALSE);
   }
 }
