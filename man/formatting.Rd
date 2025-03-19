@@ -32,7 +32,7 @@
 \item{width}{Width of text output to generate. This defaults to \code{NULL}, which
 means use the \code{width} \link[pillar:pillar_options]{option}.}
 
-\item{...}{Passed on to \code{\link[pillar:tbl_format_setup]{pillar::tbl_format_setup()}}.}
+\item{...}{These dots are for future extensions and must be empty.}
 
 \item{n}{Number of rows to show. If \code{NULL}, the default, will print all rows
 if less than the \code{print_max} \link[pillar:pillar_options]{option}.
@@ -83,7 +83,7 @@ print(mtcars, width = 10)
 mtcars2 <- as_tibble(cbind(mtcars, mtcars), .name_repair = "unique")
 print(mtcars2, n = 25, max_extra_cols = 3)
 
-\dontshow{if (requireNamespace("nycflights13", quietly = TRUE)) (if (getRversion() >= "3.4") withAutoprint else force)(\{ # examplesIf}
+\dontshow{if (requireNamespace("nycflights13", quietly = TRUE)) withAutoprint(\{ # examplesIf}
 print(nycflights13::flights, max_footer_lines = 1)
 print(nycflights13::flights, width = Inf)
 \dontshow{\}) # examplesIf}

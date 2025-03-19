@@ -12,12 +12,10 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
-      - uses: r-lib/actions/pr-fetch@master
+      - uses: r-lib/actions/pr-fetch@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: r-lib/actions/setup-r@master
-        with:
-          install-r: false
+      - uses: r-lib/actions/setup-r@v2
       - name: Configure Git identity
         run: |
           env | sort
@@ -39,7 +37,7 @@ jobs:
             git add man/ NAMESPACE
             git commit -m 'Document'
           fi
-      - uses: r-lib/actions/pr-push@master
+      - uses: r-lib/actions/pr-push@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
   style:
@@ -51,12 +49,10 @@ jobs:
       GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - uses: actions/checkout@v4
-      - uses: r-lib/actions/pr-fetch@master
+      - uses: r-lib/actions/pr-fetch@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
-      - uses: r-lib/actions/setup-r@master
-        with:
-          install-r: false
+      - uses: r-lib/actions/setup-r@v2
       - name: Configure Git identity
         run: |
           env | sort
@@ -77,7 +73,7 @@ jobs:
             git add '*.R' '*.Rmd'
             git commit -m 'Style'
           fi
-      - uses: r-lib/actions/pr-push@master
+      - uses: r-lib/actions/pr-push@v2
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
   merge:

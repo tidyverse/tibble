@@ -24,8 +24,8 @@
 #' and [pillar::pillar_options] for options that control the display in the console.
 #'
 # Copied from pillar::format.tbl() to avoid roxygen2 warning
+#' @inheritParams rlang::args_dots_empty
 #' @param x Object to format or print.
-#' @param ... Passed on to [tbl_format_setup()].
 #' @param n Number of rows to show. If `NULL`, the default, will print all rows
 #'   if less than the `print_max` [option][pillar::pillar_options].
 #'   Otherwise, will print as many rows as specified by the

@@ -1,5 +1,177 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9045
+
+## Chore
+
+- IDE.
+
+
+# tibble 3.2.1.9044
+
+## Documentation
+
+- Document that `...` must be empty in `print.tbl_df()`.
+
+## Uncategorized
+
+- Merge branch 'docs'.
+
+
+# tibble 3.2.1.9043
+
+## Continuous integration
+
+- Avoid failure in fledge workflow if no changes (#1618).
+
+
+# tibble 3.2.1.9042
+
+## Continuous integration
+
+- Fetch tags for fledge workflow to avoid unnecessary NEWS entries (#1617).
+
+
+# tibble 3.2.1.9041
+
+## Continuous integration
+
+- Use larger retry count for lock-threads workflow (#1616).
+
+
+# tibble 3.2.1.9040
+
+## Continuous integration
+
+- Ignore errors when removing pkg-config on macOS (#1615).
+
+
+# tibble 3.2.1.9039
+
+## Continuous integration
+
+- Explicit permissions (#1614).
+
+
+# tibble 3.2.1.9038
+
+## Continuous integration
+
+- Use styler from main branch (#1613).
+
+
+# tibble 3.2.1.9037
+
+## Continuous integration
+
+- Need to install R on Ubuntu 24.04 (#1612).
+
+- Use Ubuntu 24.04 and styler PR (#1610).
+
+
+# tibble 3.2.1.9036
+
+## Continuous integration
+
+  - Correctly detect branch protection (#1608).
+
+
+# tibble 3.2.1.9035
+
+## Continuous integration
+
+  - Use stable pak (#1607).
+
+
+# tibble 3.2.1.9034
+
+## Continuous integration
+
+  - Trigger run (#1606).
+    
+      - ci: Trigger run
+    
+      - ci: Latest changes
+
+
+# tibble 3.2.1.9033
+
+## Continuous integration
+
+  - Use pkgdown branch (#1604).
+    
+      - ci: Use pkgdown branch
+    
+      - ci: Updates from duckdb
+    
+      - ci: Trigger run
+
+
+# tibble 3.2.1.9032
+
+## Features
+
+  - Rework `view()` to better work with RStudio and Positron (@DavisVaughan, #1551, #1603).
+
+
+# tibble 3.2.1.9031
+
+## Continuous integration
+
+  - Install via R CMD INSTALL ., not pak (#1601).
+    
+      - ci: Install via R CMD INSTALL ., not pak
+    
+      - ci: Bump version of upload-artifact action
+
+
+# tibble 3.2.1.9030
+
+## Continuous integration
+
+  - Install local package for pkgdown builds.
+
+  - Improve support for protected branches with fledge.
+
+  - Improve support for protected branches, without fledge.
+
+
+# tibble 3.2.1.9029
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/10425484383
+
+## Continuous integration
+
+- Sync with latest developments.
+
+
+# tibble 3.2.1.9028
+
+## Continuous integration
+
+- Use v2 instead of master.
+
+
+# tibble 3.2.1.9027
+
+## Continuous integration
+
+- Inline action.
+
+
+# tibble 3.2.1.9026
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/10224243858
+
+
 # tibble 3.2.1.9025
 
 ## Continuous integration
