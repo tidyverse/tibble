@@ -39,3 +39,4 @@
 ^\.vscode$
 ^\.gitpod\.yml$
 ^tests/testthat/helper-sync\.R$
+^index\.md$

@@ -1,49 +1,7 @@
----
-output:
-  github_document:
-    html_preview: false
----
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-```{r, echo = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>",
-  fig.path = "README-"
-)
 
-clean_output <- function(x, options) {
-  x <- gsub("0x[0-9a-f]+", "0xdeadbeef", x)
-  x <- gsub("dataframe_[0-9]*_[0-9]*", "      dataframe_42_42      ", x)
-  x <- gsub("[0-9]*\\.___row_number ASC", "42.___row_number ASC", x)
-
-  index <- x
-  index <- gsub("─", "-", index)
-  index <- strsplit(paste(index, collapse = "\n"), "\n---\n")[[1]][[2]]
-  writeLines(index, "index.md")
-
-  x <- gsub('(`vignette[(]"([^"]+)"[)]`)', "[\\1](https://tibble.tidyverse.org/articles/\\2.html)", x)
-  x <- fansi::strip_sgr(x)
-  x
-}
-
-options(
-  cli.num_colors = 256,
-  cli.width = 71,
-  width = 71,
-  pillar.bold = TRUE,
-  pillar.max_title_chars = 5,
-  pillar.min_title_chars = 5,
-  pillar.max_footer_lines = 12,
-  conflicts.policy = list(warn = FALSE)
-)
-
-local({
-  hook_source <- knitr::knit_hooks$get("document")
-  knitr::knit_hooks$set(document = clean_output)
-})
-```
 
 # tibble <img src="man/figures/logo.png" align="right" alt="" />
 
@@ -62,7 +20,8 @@ If you are new to tibbles, the best place to start is the [tibbles chapter](http
 
 ## Installation
 
-```{r, eval = FALSE}
+
+``` r
 # The easiest way to get tibble is to install the whole tidyverse:
 install.packages("tidyverse")
 
@@ -76,44 +35,67 @@ pak::pak("tidyverse/tibble")
 
 ## Usage
 
-```{r}
+
+``` r
 library(tibble)
 ```
 
 Create a tibble from an existing object with `as_tibble()`:
 
-```{r}
+
+``` r
 data <- data.frame(a = 1:3, b = letters[1:3], c = Sys.Date() - 1:3)
 data
+#>   a b          c
+#> 1 1 a 2025-03-18
+#> 2 2 b 2025-03-17
+#> 3 3 c 2025-03-16
 
 as_tibble(data)
+#> [38;5;246m# A tibble: 3 × 3[39m
+#>       [1ma[22m [1mb[22m     [1mc[22m         
+#>   [3m[38;5;246m<int>[39m[23m [3m[38;5;246m<chr>[39m[23m [3m[38;5;246m<date>[39m[23m    
+#> [38;5;250m1[39m     1 a     2025-03-18
+#> [38;5;250m2[39m     2 b     2025-03-17
+#> [38;5;250m3[39m     3 c     2025-03-16
 ```
 
 This will work for reasonable inputs that are already data.frames, lists, matrices, or tables.
 
 You can also create a new tibble from column vectors with `tibble()`:
 
-```{r}
+
+``` r
 tibble(x = 1:5, y = 1, z = x^2 + y)
+#> [38;5;246m# A tibble: 5 × 3[39m
+#>       [1mx[22m     [1my[22m     [1mz[22m
+#>   [3m[38;5;246m<int>[39m[23m [3m[38;5;246m<dbl>[39m[23m [3m[38;5;246m<dbl>[39m[23m
+#> [38;5;250m1[39m     1     1     2
+#> [38;5;250m2[39m     2     1     5
+#> [38;5;250m3[39m     3     1    10
+#> [38;5;250m4[39m     4     1    17
+#> [38;5;250m5[39m     5     1    26
 ```
 
 `tibble()` does much less than `data.frame()`: it never changes the type of the inputs (e.g. it keeps list columns as is), it never changes the names of variables, it only recycles inputs of length 1, and it never creates `row.names()`. You can read more about these features in `vignette("tibble")`.
 
 You can define a tibble row-by-row with `tribble()`:
 
-```{r}
+
+``` r
 tribble(
   ~x, ~y,  ~z,
   "a", 2,  3.6,
   "b", 1,  8.5
 )
+#> [38;5;246m# A tibble: 2 × 3[39m
+#>   [1mx[22m         [1my[22m     [1mz[22m
+#>   [3m[38;5;246m<chr>[39m[23m [3m[38;5;246m<dbl>[39m[23m [3m[38;5;246m<dbl>[39m[23m
+#> [38;5;250m1[39m a         2   3.6
+#> [38;5;250m2[39m b         1   8.5
 ```
 
 ## Related work
 
 The tibble print method draws inspiration from [data.table](https://rdatatable.gitlab.io/data.table), and [frame](https://github.com/patperry/r-frame). Like `data.table::data.table()`, `tibble()` doesn't change column names and doesn't use rownames.
 
----
-## Code of Conduct
-
-Please note that the tibble project is released with a [Contributor Code of Conduct](https://tibble.tidyverse.org/CODE_OF_CONDUCT.html). By contributing to this project, you agree to abide by its terms.
