@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9046
+
+## Chore
+
+- Create `index.md` for pkgdown.
+
+- Ignore files.
+
+- Fix `R CMD check` errors on R-devel.
+
+## Continuous integration
+
+- Keep a copy of the vignettes inside the tests (#1576, #1586).
+
+## Documentation
+
+- Update comparison between tibble and data.frame (@olivroy, #1567).
+
+- Use pak for installing dev version in README (@luisDVA, #1600).
+
+
 # tibble 3.2.1.9045
 
 ## Chore
