@@ -9,7 +9,7 @@
 #' @keywords internal
 #' @name deprecated
 data_frame <- function(...) {
-  deprecate_stop("1.1.0", "data_frame()", "tibble()")
+  deprecate_stop("3.3.0", "data_frame()", "tibble()")
 
   # Unquote-splice to avoid argument matching
   tibble(!!!quos(...))
