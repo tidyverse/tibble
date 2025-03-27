@@ -9,7 +9,8 @@ add_column(
   ...,
   .before = NULL,
   .after = NULL,
-  .name_repair = c("check_unique", "unique", "universal", "minimal")
+  .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet",
+    "universal_quiet")
 )
 }
 \arguments{

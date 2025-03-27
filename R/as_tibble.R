@@ -59,7 +59,7 @@
 #' df <- as_tibble(m)
 as_tibble <- function(x, ...,
                       .rows = NULL,
-                      .name_repair = c("check_unique", "unique", "universal", "minimal"),
+                      .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet"),
                       rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
   UseMethod("as_tibble")
 }
@@ -68,7 +68,7 @@ as_tibble <- function(x, ...,
 #' @rdname as_tibble
 as_tibble.data.frame <- function(x, validate = NULL, ...,
                                  .rows = NULL,
-                                 .name_repair = c("check_unique", "unique", "universal", "minimal"),
+                                 .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet"),
                                  rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
   if (!is.null(validate)) {
     deprecate_stop("2.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)")
@@ -103,7 +103,7 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
 #' @export
 #' @rdname as_tibble
 as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
-                           .name_repair = c("check_unique", "unique", "universal", "minimal")) {
+                           .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet")) {
   if (!is.null(validate)) {
     deprecate_stop("2.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)")
   }
@@ -279,7 +279,7 @@ as_tibble.default <- function(x, ...) {
 #' as_tibble_row(list(c = "three", d = list(4:5)))
 #' as_tibble_row(1:3, .name_repair = "unique")
 as_tibble_row <- function(x,
-                          .name_repair = c("check_unique", "unique", "universal", "minimal")) {
+                          .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet")) {
   if (!vec_is(x)) {
     abort_as_tibble_row_vector(x)
   }

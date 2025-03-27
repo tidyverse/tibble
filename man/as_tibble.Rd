@@ -16,7 +16,8 @@ as_tibble(
   x,
   ...,
   .rows = NULL,
-  .name_repair = c("check_unique", "unique", "universal", "minimal"),
+  .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet",
+    "universal_quiet"),
   rownames = pkgconfig::get_config("tibble::rownames", NULL)
 )
 
@@ -25,7 +26,8 @@ as_tibble(
   validate = NULL,
   ...,
   .rows = NULL,
-  .name_repair = c("check_unique", "unique", "universal", "minimal"),
+  .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet",
+    "universal_quiet"),
   rownames = pkgconfig::get_config("tibble::rownames", NULL)
 )
 
@@ -34,7 +36,8 @@ as_tibble(
   validate = NULL,
   ...,
   .rows = NULL,
-  .name_repair = c("check_unique", "unique", "universal", "minimal")
+  .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet",
+    "universal_quiet")
 )
 
 \method{as_tibble}{matrix}(x, ..., validate = NULL, .name_repair = NULL)
@@ -47,7 +50,8 @@ as_tibble(
 
 as_tibble_row(
   x,
-  .name_repair = c("check_unique", "unique", "universal", "minimal")
+  .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet",
+    "universal_quiet")
 )
 
 as_tibble_col(x, column_name = "value")

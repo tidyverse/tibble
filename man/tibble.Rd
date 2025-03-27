@@ -8,12 +8,14 @@
 tibble(
   ...,
   .rows = NULL,
-  .name_repair = c("check_unique", "unique", "universal", "minimal")
+  .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet",
+    "universal_quiet")
 )
 
 tibble_row(
   ...,
-  .name_repair = c("check_unique", "unique", "universal", "minimal")
+  .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet",
+    "universal_quiet")
 )
 }
 \arguments{

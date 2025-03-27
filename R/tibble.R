@@ -157,7 +157,7 @@
 #' try(tibble(a = 2, b = !!bogus))
 tibble <- function(...,
                    .rows = NULL,
-                   .name_repair = c("check_unique", "unique", "universal", "minimal")) {
+                   .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet")) {
   xs <- quos(...)
 
   tibble_quos(xs, .rows, .name_repair)
@@ -177,7 +177,7 @@ tibble <- function(...,
 #' # Use tibble_row() to construct a one-row tibble:
 #' tibble_row(a = 1, lm = lm(Height ~ Girth + Volume, data = trees))
 tibble_row <- function(...,
-                       .name_repair = c("check_unique", "unique", "universal", "minimal")) {
+                       .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet")) {
   xs <- enquos(...)
 
   tibble_quos(xs, .rows = 1, .name_repair = .name_repair, single_row = TRUE)
