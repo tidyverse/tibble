@@ -196,9 +196,10 @@ test_that("as_tibble() implements unique_quiet", {
   })
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
+  # it is "quiet" despite `quiet` being FALSE
   expect_equal(
     names(invalid_df),
-    vec_as_names(rep("", 3), repair = "unique_quiet", quiet = TRUE)
+    vec_as_names(rep("", 3), repair = "unique_quiet", quiet = FALSE)
   )
 })
 
@@ -210,9 +211,10 @@ test_that("as_tibble() implements universal_quiet", {
   })
   expect_equal(length(invalid_df), 3)
   expect_equal(nrow(invalid_df), 1)
+  # it is "quiet" despite `quiet` being FALSE
   expect_equal(
     names(invalid_df),
-    vec_as_names(rep("", 3), repair = "universal_quiet", quiet = TRUE)
+    vec_as_names(rep("", 3), repair = "universal_quiet", quiet = FALSE)
   )
 })
 
