@@ -44,6 +44,8 @@
 #'   * `"check_unique"`: (default value), no name repair, but check they are
 #'     `unique`,
 #'   * `"universal"`: Make the names `unique` and syntactic
+#'   * `"unique_quiet"`: Same as `"unique"`, but "quiet"
+#'   * `"universal_quiet"`: Same as `"universal"`, but "quiet"
 #'   * a function: apply custom name repair (e.g., `.name_repair = make.names`
 #'     for names in the style of base R).
 #'   * A purrr-style anonymous function, see [rlang::as_function()]
