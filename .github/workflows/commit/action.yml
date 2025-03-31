@@ -20,7 +20,7 @@ runs:
         if [ -n "$(git status --porcelain)" ]; then
           echo "Changed"
           protected=${{ github.ref_protected }}
-          foreign=${{ github.event.pull_request.head.repo.full_name != github.repository }}
+          foreign=${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
           if [ "${foreign}" = "true" ]; then
             # https://github.com/krlmlr/actions-sync/issues/44
             echo "Can't push to foreign branch"
