@@ -44,6 +44,8 @@
 #'   * `"check_unique"`: (default value), no name repair, but check they are
 #'     `unique`,
 #'   * `"universal"`: Make the names `unique` and syntactic
+#'   * `"unique_quiet"`: Same as `"unique"`, but "quiet"
+#'   * `"universal_quiet"`: Same as `"universal"`, but "quiet"
 #'   * a function: apply custom name repair (e.g., `.name_repair = make.names`
 #'     for names in the style of base R).
 #'   * A purrr-style anonymous function, see [rlang::as_function()]
@@ -157,7 +159,7 @@
 #' try(tibble(a = 2, b = !!bogus))
 tibble <- function(...,
                    .rows = NULL,
-                   .name_repair = c("check_unique", "unique", "universal", "minimal")) {
+                   .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet")) {
   xs <- quos(...)
 
   tibble_quos(xs, .rows, .name_repair)
@@ -177,7 +179,7 @@ tibble <- function(...,
 #' # Use tibble_row() to construct a one-row tibble:
 #' tibble_row(a = 1, lm = lm(Height ~ Girth + Volume, data = trees))
 tibble_row <- function(...,
-                       .name_repair = c("check_unique", "unique", "universal", "minimal")) {
+                       .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet")) {
   xs <- enquos(...)
 
   tibble_quos(xs, .rows = 1, .name_repair = .name_repair, single_row = TRUE)

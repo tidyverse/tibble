@@ -125,7 +125,7 @@ rbind_at <- function(old, new, pos) {
 #'
 #' @export
 add_column <- function(.data, ..., .before = NULL, .after = NULL,
-                       .name_repair = c("check_unique", "unique", "universal", "minimal")) {
+                       .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet")) {
   if (!is.data.frame(.data)) {
     deprecate_stop("2.1.1", "add_column(.data = 'must be a data frame')")
   }
