@@ -6,6 +6,8 @@ on:
     branches:
       - "docs*"
       - "cran-*"
+      # The main branch is excluded here, it is handled by the R-CMD-check workflow.
+      # This workflow is only for handling pushes to designated branches.
   workflow_dispatch:
 
 name: pkgdown
