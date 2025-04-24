@@ -30,7 +30,10 @@ include_list <- list(macos, windows, linux_devel, linux, covr)
 
 if (file.exists(".github/versions-matrix.R")) {
   custom <- source(".github/versions-matrix.R")$value
-  include_list <- c(include_list, list(custom))
+  if (is.data.frame(custom)) {
+    custom <- list(custom)
+  }
+  include_list <- c(include_list, custom)
 }
 
 print(include_list)
@@ -56,5 +59,7 @@ to_json <- function(x) {
 configs <- unlist(lapply(include_list, to_json))
 json <- paste0('{"include":[', paste(configs, collapse = ","), ']}')
 
-writeLines(paste0("matrix=", json), Sys.getenv("GITHUB_OUTPUT"))
+if (Sys.getenv("GITHUB_OUTPUT") != "") {
+  writeLines(paste0("matrix=", json), Sys.getenv("GITHUB_OUTPUT"))
+}
 writeLines(json)

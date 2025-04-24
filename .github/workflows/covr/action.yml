@@ -1,0 +1,45 @@
+name: "Actions to run covr for an R package"
+inputs:
+  token:
+    description: codecov token
+    required: false
+
+runs:
+  using: "composite"
+  steps:
+    - name: Run coverage check
+      run: |
+        if (dir.exists("tests/testthat")) {
+          cov <- covr::package_coverage(
+            quiet = FALSE,
+            clean = FALSE,
+            install_path = file.path(normalizePath(Sys.getenv("RUNNER_TEMP"), winslash = "/"), "package")
+          )
+          covr::to_cobertura(cov)
+        } else {
+          message("No tests found, coverage not tested.")
+        }
+      shell: Rscript {0}
+
+    - uses: codecov/codecov-action@v5
+      with:
+        # Fail if error if not on PR, or if on PR and token is given
+        fail_ci_if_error: ${{ github.event_name != 'pull_request' || inputs.token }}
+        files: ./cobertura.xml
+        plugins: noop
+        disable_search: true
+        token: ${{ inputs.token }}
+
+    - name: Show testthat output
+      if: always()
+      run: |
+        ## --------------------------------------------------------------------
+        find '${{ runner.temp }}/package' -name 'testthat.Rout*' -exec cat '{}' \; || true
+      shell: bash
+
+    - name: Upload test results
+      if: failure()
+      uses: actions/upload-artifact@v4
+      with:
+        name: coverage-test-failures
+        path: ${{ runner.temp }}/package
