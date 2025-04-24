@@ -1,6 +1,6 @@
 # Workflow derived from https://github.com/r-lib/actions/tree/v2/examples
 # Also included in R-CMD-check.yaml, this workflow only listens to pushes to branches
-# that start with "docs*"
+# that start with "docs*" or "cran-*" and does not need to act on pushes to the main branch.
 on:
   push:
     branches:
