@@ -44,8 +44,7 @@ name: rcc
 jobs:
   rcc-smoke:
     runs-on: ubuntu-24.04
-    permissions:
-      contents: write
+
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
       versions-matrix: ${{ steps.versions-matrix.outputs.matrix }}
