@@ -33,7 +33,7 @@ on:
     types:
       - checks_requested
   schedule:
-    - cron: "10 0 * * *"
+    - cron: "10 1 * * *"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}-${{ inputs.ref || github.head_ref || github.sha }}-${{ github.base_ref || '' }}
@@ -52,6 +52,9 @@ jobs:
       dep-suggests-matrix: ${{ steps.dep-suggests-matrix.outputs.matrix }}
 
     name: "Smoke test: stock R"
+
+    permissions:
+      contents: write
 
     # Begin custom: services
     # End custom: services
@@ -106,17 +109,18 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           cache-version: rcc-smoke-2
-          needs: check, website
+          needs: build, check, website
           # Beware of using dev pkgdown here, has brought in dev dependencies in the past
           extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/styler r-lib/pkgdown deps::.
 
+      - uses: ./.github/workflows/custom/after-install
+        if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
+
+      # Must come after the custom after-install workflow
       - name: Install package
         run: |
           _R_SHLIB_STRIP_=true R CMD INSTALL .
         shell: bash
-
-      - uses: ./.github/workflows/custom/after-install
-        if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
       - id: versions-matrix
         # Only run for pull requests if the base repo is different from the head repo, not for workflow_dispatch if not requested, always run for other events
@@ -257,7 +261,7 @@ jobs:
           r-version: ${{ matrix.r }}
           cache-version: rcc-full-1
           token: ${{ secrets.GITHUB_TOKEN }}
-          needs: check
+          needs: build, check
 
       - uses: ./.github/workflows/custom/after-install
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
@@ -266,8 +270,14 @@ jobs:
         if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
 
       - uses: ./.github/workflows/check
+        if: ${{ ! matrix.covr }}
         with:
           results: ${{ runner.os }}-r${{ matrix.r }}
+
+      - uses: ./.github/workflows/covr
+        if: ${{ matrix.covr }}
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
 # The status update is taken care of by R-CMD-check-status.yaml
 
@@ -297,7 +307,7 @@ jobs:
       - uses: ./.github/workflows/install
         with:
           cache-version: rcc-dev-${{ matrix.package }}-1
-          needs: check
+          needs: build, check
           extra-packages: "any::rcmdcheck any::remotes ."
           token: ${{ secrets.GITHUB_TOKEN }}
 

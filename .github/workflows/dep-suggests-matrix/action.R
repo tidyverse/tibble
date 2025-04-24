@@ -24,9 +24,10 @@ if (Sys.getenv("GITHUB_BASE_REF") != "") {
   system("git fetch origin ${GITHUB_BASE_REF}")
   # Use .. to avoid having to fetch the entire history
   # https://github.com/krlmlr/actions-sync/issues/45
-  has_diff <- (system("git diff origin/${GITHUB_BASE_REF}.. | egrep '^[+][^+]' | grep -q ::") == 0)
+  diff_cmd <- "git diff origin/${GITHUB_BASE_REF}.. -- R/ tests/ | egrep '^[+][^+]' | grep -q ::"
+  has_diff <- (system(diff_cmd) == 0)
   if (has_diff) {
-    system("git diff origin/${GITHUB_BASE_REF}.. | egrep '^[+][^+]' | grep -q ::")
+    writeLines(system(diff_cmd, intern = TRUE))
     packages <- get_deps()
   } else {
     writeLines("No changes using :: found, not checking without suggested packages")
