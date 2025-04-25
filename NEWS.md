@@ -1,5 +1,18 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9049
+
+## Continuous integration
+
+- Explain (#1630).
+
+- Add xml2 for covr, print testthat results (#1629).
+
+- Fix (#1628).
+
+- Sync (#1627).
+
+
 # tibble 3.2.1.9048
 
 ## Chore
