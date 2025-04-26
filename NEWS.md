@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9050
+
+## Continuous integration
+
+- Correct installation of xml2 (#1631).
+
+
 # tibble 3.2.1.9049
 
 ## Continuous integration
