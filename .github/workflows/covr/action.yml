@@ -23,8 +23,8 @@ runs:
 
     - uses: codecov/codecov-action@v5
       with:
-        # Fail if error if not on PR, or if on PR and token is given
-        fail_ci_if_error: ${{ github.event_name != 'pull_request' || inputs.token }}
+        # Fail if token is given
+        fail_ci_if_error: ${{ inputs.token != '' }}
         files: ./cobertura.xml
         plugins: noop
         disable_search: true
