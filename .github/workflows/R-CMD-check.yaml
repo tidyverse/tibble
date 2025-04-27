@@ -331,11 +331,6 @@ jobs:
       - uses: ./.github/workflows/custom/after-install
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
-      - name: Define _R_CHECK_FORCE_SUGGESTS_
-        run: |
-          cat('_R_CHECK_FORCE_SUGGESTS_=false\n', file = Sys.getenv("GITHUB_ENV"), append = TRUE)
-        shell: Rscript {0}
-
       - name: Must allow NOTEs, even with _R_CHECK_FORCE_SUGGESTS_
         run: |
           if (Sys.getenv("RCMDCHECK_ERROR_ON") %in% c("", "note")) {

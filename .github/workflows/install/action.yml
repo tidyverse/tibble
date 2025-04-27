@@ -59,6 +59,7 @@ runs:
         # There is no way to disable recency and frequency checks when the incoming checks are run
         # echo "_R_CHECK_CRAN_INCOMING_=true" | tee -a $GITHUB_ENV
         echo "_R_CHECK_CRAN_INCOMING_SKIP_LARGE_VERSION_=true" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_FORCE_SUGGESTS_=false" | tee -a $GITHUB_ENV
       shell: bash
 
     - name: Set environment variables (non-Windows only)
