@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9051
+
+## Continuous integration
+
+- Only fail covr builds if token is given (#1633).
+
+- Always use `_R_CHECK_FORCE_SUGGESTS_=false` (#1632).
+
+
 # tibble 3.2.1.9050
 
 ## Continuous integration
