@@ -25,15 +25,17 @@ if (Sys.getenv("GITHUB_BASE_REF") != "") {
   # Use .. to avoid having to fetch the entire history
   # https://github.com/krlmlr/actions-sync/issues/45
   diff_cmd <- "git diff origin/${GITHUB_BASE_REF}.. -- R/ tests/ | egrep '^[+][^+]' | grep -q ::"
-  has_diff <- (system(diff_cmd) == 0)
-  if (has_diff) {
-    writeLines(system(diff_cmd, intern = TRUE))
+  diff_lines <- system(diff_cmd, intern = TRUE)
+  if (length(diff_lines) > 0) {
+    writeLines("Changes using :: in R/ or tests/:")
+    writeLines(diff_lines)
     packages <- get_deps()
   } else {
-    writeLines("No changes using :: found, not checking without suggested packages")
+    writeLines("No changes using :: found in R/ or tests/, not checking without suggested packages")
     packages <- character()
   }
 } else {
+  writeLines("No GITHUB_BASE_REF, checking without suggested packages")
   packages <- get_deps()
 }
 
@@ -41,7 +43,7 @@ if (length(packages) > 0) {
   json <- paste0(
     '{"package":[',
     paste0('"', packages, '"', collapse = ","),
-    ']}'
+    "]}"
   )
   writeLines(paste0("matrix=", json), Sys.getenv("GITHUB_OUTPUT"))
   writeLines(json)

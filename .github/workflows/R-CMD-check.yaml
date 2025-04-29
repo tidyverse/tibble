@@ -54,6 +54,7 @@ jobs:
 
     permissions:
       contents: write
+      statuses: write
 
     # Begin custom: services
     # End custom: services
@@ -264,6 +265,18 @@ jobs:
 
       - uses: ./.github/workflows/custom/after-install
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
+
+      - name: Must allow NOTEs if packages are missing, even with _R_CHECK_FORCE_SUGGESTS_
+        run: |
+          if (Sys.getenv("RCMDCHECK_ERROR_ON") %in% c("", "note")) {
+            pkgs <- setdiff(desc::desc_get_deps()$package, "R")
+            installable <- vapply(pkgs, FUN.VALUE = logical(1), requireNamespace, quietly = TRUE)
+            if (any(!installable)) {
+              message("Missing packages: ", paste(pkgs[!installable], collapse = ", "))
+              cat('RCMDCHECK_ERROR_ON="warning"\n', file = Sys.getenv("GITHUB_ENV"), append = TRUE)
+            }
+          }
+        shell: Rscript {0}
 
       - uses: ./.github/workflows/update-snapshots
         if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
