@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9052
+
+## Continuous integration
+
+- Permissions, better tests for missing suggests, lints (#1634).
+
+
 # tibble 3.2.1.9051
 
 ## Continuous integration
