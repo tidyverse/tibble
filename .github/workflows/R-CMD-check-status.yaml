@@ -16,6 +16,10 @@ jobs:
 
     name: "Update commit status"
 
+    permissions:
+      contents: read
+      statuses: write
+
     steps:
       - name: "Update commit status"
         # Only run if triggered by rcc workflow

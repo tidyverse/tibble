@@ -59,6 +59,7 @@ runs:
         # There is no way to disable recency and frequency checks when the incoming checks are run
         # echo "_R_CHECK_CRAN_INCOMING_=true" | tee -a $GITHUB_ENV
         echo "_R_CHECK_CRAN_INCOMING_SKIP_LARGE_VERSION_=true" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_FORCE_SUGGESTS_=false" | tee -a $GITHUB_ENV
       shell: bash
 
     - name: Set environment variables (non-Windows only)
@@ -104,7 +105,7 @@ runs:
         pak-version: stable
         needs: ${{ inputs.needs }}
         packages: ${{ inputs.packages }}
-        extra-packages: ${{ inputs.extra-packages }} ${{ ( matrix.config.covr && 'any::covr' ) || '' }} ${{ steps.get-extra.outputs.packages }}
+        extra-packages: ${{ inputs.extra-packages }} ${{ ( matrix.covr && 'covr xml2' ) || '' }} ${{ steps.get-extra.outputs.packages }}
         cache-version: ${{ inputs.cache-version }}
 
     - name: Add pkg.lock to .gitignore

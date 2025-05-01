@@ -1,5 +1,61 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9052
+
+## Continuous integration
+
+- Permissions, better tests for missing suggests, lints (#1634).
+
+
+# tibble 3.2.1.9051
+
+## Continuous integration
+
+- Only fail covr builds if token is given (#1633).
+
+- Always use `_R_CHECK_FORCE_SUGGESTS_=false` (#1632).
+
+
+# tibble 3.2.1.9050
+
+## Continuous integration
+
+- Correct installation of xml2 (#1631).
+
+
+# tibble 3.2.1.9049
+
+## Continuous integration
+
+- Explain (#1630).
+
+- Add xml2 for covr, print testthat results (#1629).
+
+- Fix (#1628).
+
+- Sync (#1627).
+
+
+# tibble 3.2.1.9048
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/14178874040
+
+## Continuous integration
+
+- Only block direct updates for pull requests.
+
+
+# tibble 3.2.1.9047
+
+## Continuous integration
+
+- Add permissions to update.
+
+
 # tibble 3.2.1.9046
 
 ## Chore

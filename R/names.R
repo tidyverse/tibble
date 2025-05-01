@@ -1,5 +1,5 @@
 vectbl_names2 <- function(x,
-                          .name_repair = c("check_unique", "unique", "universal", "minimal"),
+                          .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet"),
                           quiet = FALSE,
                           call = caller_env()) {
   name <- vec_names2(x, repair = "minimal", quiet = quiet)
@@ -8,7 +8,7 @@ vectbl_names2 <- function(x,
 
 set_repaired_names <- function(x,
                                repair_hint,
-                               .name_repair = c("check_unique", "unique", "universal", "minimal"),
+                               .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet"),
                                quiet = FALSE,
                                call = caller_env()) {
   names <- repaired_names(names2(x), repair_hint, .name_repair = .name_repair, quiet = quiet, call = call)
@@ -17,7 +17,7 @@ set_repaired_names <- function(x,
 
 repaired_names <- function(name,
                            repair_hint,
-                           .name_repair = c("check_unique", "unique", "universal", "minimal"),
+                           .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet"),
                            quiet = FALSE,
                            details = NULL,
                            call = caller_env()) {

@@ -30,12 +30,15 @@ include_list <- list(macos, windows, linux_devel, linux, covr)
 
 if (file.exists(".github/versions-matrix.R")) {
   custom <- source(".github/versions-matrix.R")$value
-  include_list <- c(include_list, list(custom))
+  if (is.data.frame(custom)) {
+    custom <- list(custom)
+  }
+  include_list <- c(include_list, custom)
 }
 
 print(include_list)
 
-filter <- read.dcf("DESCRIPTION")[1,]["Config/gha/filter"]
+filter <- read.dcf("DESCRIPTION")[1, ]["Config/gha/filter"]
 if (!is.na(filter)) {
   filter_expr <- parse(text = filter)[[1]]
   subset_fun_expr <- bquote(function(x) subset(x, .(filter_expr)))
@@ -54,7 +57,9 @@ to_json <- function(x) {
 }
 
 configs <- unlist(lapply(include_list, to_json))
-json <- paste0('{"include":[', paste(configs, collapse = ","), ']}')
+json <- paste0('{"include":[', paste(configs, collapse = ","), "]}")
 
-writeLines(paste0("matrix=", json), Sys.getenv("GITHUB_OUTPUT"))
+if (Sys.getenv("GITHUB_OUTPUT") != "") {
+  writeLines(paste0("matrix=", json), Sys.getenv("GITHUB_OUTPUT"))
+}
 writeLines(json)

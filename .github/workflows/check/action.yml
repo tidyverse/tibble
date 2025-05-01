@@ -13,16 +13,6 @@ runs:
         args: 'c("--no-manual", "--as-cran", "--no-multiarch")'
         error-on: ${{ env.RCMDCHECK_ERROR_ON || '"note"' }}
 
-    - name: Run coverage check
-      if: ${{ matrix.config.covr }}
-      run: |
-        if (dir.exists("tests/testthat")) {
-          covr::codecov()
-        } else {
-          message("No tests found, coverage not tested.")
-        }
-      shell: Rscript {0}
-
     - name: Show test output
       if: always()
       run: |

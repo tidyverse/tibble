@@ -2,7 +2,7 @@
 # Can't be run as part of commits
 on:
   schedule:
-    - cron: "5 0 * * *" # 05:00 UTC every day only run on main branch
+    - cron: "0 5 * * *" # 05:00 UTC every day only run on main branch
   push:
     branches:
       - "cran-*"
@@ -69,7 +69,7 @@ jobs:
       - uses: ./.github/workflows/install
         with:
           cache-version: rcc-dev-base-1
-          needs: check
+          needs: build, check
           extra-packages: "any::rcmdcheck any::remotes ."
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -116,7 +116,7 @@ jobs:
       - uses: ./.github/workflows/install
         with:
           cache-version: rcc-dev-${{ matrix.package }}-1
-          needs: check
+          needs: build, check
           extra-packages: "any::rcmdcheck any::remotes ."
           token: ${{ secrets.GITHUB_TOKEN }}
 

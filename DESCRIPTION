@@ -1,6 +1,6 @@
 Package: tibble
 Title: Simple Data Frames
-Version: 3.2.1.9046
+Version: 3.2.1.9052
 Authors@R: 
     c(person(given = "Kirill",
              family = "M\u00fcller",
@@ -38,7 +38,7 @@ Imports:
     pkgconfig,
     rlang (>= 1.0.2),
     utils,
-    vctrs (>= 0.4.2)
+    vctrs (>= 0.5.0)
 Suggests: 
     bench,
     bit64,
