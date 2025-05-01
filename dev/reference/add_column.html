@@ -9,7 +9,7 @@ frame."><meta property="og:image" content="https://tibble.tidyverse.org/logo.svg
 
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9051</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9052</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -71,7 +71,8 @@ frame.</p>
 <span>  <span class="va">...</span>,</span>
 <span>  .before <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  .after <span class="op">=</span> <span class="cn">NULL</span>,</span>
-<span>  .name_repair <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"check_unique"</span>, <span class="st">"unique"</span>, <span class="st">"universal"</span>, <span class="st">"minimal"</span><span class="op">)</span></span>
+<span>  .name_repair <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"check_unique"</span>, <span class="st">"unique"</span>, <span class="st">"universal"</span>, <span class="st">"minimal"</span>, <span class="st">"unique_quiet"</span>,</span>
+<span>    <span class="st">"universal_quiet"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -100,6 +101,8 @@ new columns, default: after last column.</p></dd>
 <li><p><code>"check_unique"</code>: (default value), no name repair, but check they are
 <code>unique</code>,</p></li>
 <li><p><code>"universal"</code>: Make the names <code>unique</code> and syntactic</p></li>
+<li><p><code>"unique_quiet"</code>: Same as <code>"unique"</code>, but "quiet"</p></li>
+<li><p><code>"universal_quiet"</code>: Same as <code>"universal"</code>, but "quiet"</p></li>
 <li><p>a function: apply custom name repair (e.g., <code>.name_repair = make.names</code>
 for names in the style of base R).</p></li>
 <li><p>A purrr-style anonymous function, see <code><a href="https://rlang.r-lib.org/reference/as_function.html" class="external-link">rlang::as_function()</a></code></p></li>
