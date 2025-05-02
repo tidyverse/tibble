@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9053
+
+## Features
+
+- Support new vctrs `.name_repair` options: `unique_quiet`, `universal_quiet` (@andreranza, #1549, #1625).
+
+
 # tibble 3.2.1.9052
 
 ## Continuous integration
