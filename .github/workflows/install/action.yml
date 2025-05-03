@@ -60,6 +60,7 @@ runs:
         # echo "_R_CHECK_CRAN_INCOMING_=true" | tee -a $GITHUB_ENV
         echo "_R_CHECK_CRAN_INCOMING_SKIP_LARGE_VERSION_=true" | tee -a $GITHUB_ENV
         echo "_R_CHECK_FORCE_SUGGESTS_=false" | tee -a $GITHUB_ENV
+        echo "_R_CHECK_THINGS_IN_OTHER_DIRS_=true" | tee -a $GITHUB_ENV
       shell: bash
 
     - name: Set environment variables (non-Windows only)
@@ -94,7 +95,7 @@ runs:
     - id: get-extra
       run: |
         set -x
-        packages=$( ( grep Config/gha/extra-packages DESCRIPTION || true ) | cut -d " " -f 2)
+        packages=$( ( grep Config/gha/extra-packages DESCRIPTION || true ) | cut -d " " -f 2-)
         echo packages=$packages >> $GITHUB_OUTPUT
       shell: bash
 
@@ -105,7 +106,7 @@ runs:
         pak-version: stable
         needs: ${{ inputs.needs }}
         packages: ${{ inputs.packages }}
-        extra-packages: ${{ inputs.extra-packages }} ${{ ( matrix.covr && 'covr xml2' ) || '' }} ${{ steps.get-extra.outputs.packages }}
+        extra-packages: ${{ inputs.extra-packages }} ${{ ( matrix.covr && 'r-lib/covr#611 xml2' ) || '' }} ${{ steps.get-extra.outputs.packages }}
         cache-version: ${{ inputs.cache-version }}
 
     - name: Add pkg.lock to .gitignore

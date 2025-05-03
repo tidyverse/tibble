@@ -3,69 +3,29 @@ name: "Action to auto-style a package"
 runs:
   using: "composite"
   steps:
-    - name: Check styler options
+    - name: Check air.toml
       id: check
       run: |
         set -x
-        scope=$( ( grep Config/autostyle/scope DESCRIPTION || true ) | cut -d " " -f 2)
-        strict=$( ( grep Config/autostyle/strict DESCRIPTION || true ) | cut -d " " -f 2)
-        rmd=$( ( grep Config/autostyle/rmd DESCRIPTION || true ) | cut -d " " -f 2)
-        echo scope=$scope >> $GITHUB_OUTPUT
-        echo strict=$strict >> $GITHUB_OUTPUT
-        echo rmd=$rmd >> $GITHUB_OUTPUT
+        if [ -f air.toml ]; then
+          echo enabled=true >> $GITHUB_OUTPUT
+        else
+          echo enabled=false >> $GITHUB_OUTPUT
+        fi
       shell: bash
 
-    - uses: actions/cache@v4
-      if: ${{ steps.check.outputs.scope }}
-      with:
-        path: |
-          ~/.cache/R/R.cache
-        key: ${{ runner.os }}-2-${{ github.run_id }}-
-        restore-keys: |
-          ${{ runner.os }}-2-
+    - name: Install air
+      if: ${{ steps.check.outputs.enabled == 'true' }}
+      uses: posit-dev/setup-air@v1
 
-    - name: Imprint run ID
-      if: ${{ steps.check.outputs.scope }}
+    - name: Run air
+      if: ${{ steps.check.outputs.enabled == 'true' }}
       run: |
-        mkdir -p ~/.cache/R/R.cache/styler
-        touch ~/.cache/R/R.cache/${{ github.run_id }}
+        air format .
       shell: bash
 
-    - name: Show cache
-      if: ${{ steps.check.outputs.scope }}
+    - name: Check Git status
+      if: ${{ steps.check.outputs.enabled == 'true' }}
       run: |
-        ls -l ~/.cache/R/R.cache
-        ls -l ~/.cache/R/R.cache/styler
-      shell: bash
-
-    - name: Enable styler cache
-      if: ${{ steps.check.outputs.scope }}
-      run: |
-        styler::cache_activate(verbose = TRUE)
-      shell: Rscript {0}
-
-    - name: Run styler
-      if: ${{ steps.check.outputs.scope }}
-      run: |
-        strict <- as.logical("${{ steps.check.outputs.strict }}")
-        if (is.na(strict)) {
-          strict <- FALSE
-        }
-        rmd <- as.logical("${{ steps.check.outputs.rmd }}")
-        if (is.na(rmd)) {
-          rmd <- TRUE
-        }
-        styler::style_pkg(
-          scope = "${{ steps.check.outputs.scope }}",
-          strict = strict,
-          filetype = c("R", "Rprofile", if (rmd) c("Rmd", "Rmarkdown", "Rnw", "Qmd"))
-        )
-      shell: Rscript {0}
-
-    - name: Show cache again
-      if: ${{ steps.check.outputs.scope }}
-      run: |
-        ls -l ~/.cache/R/R.cache
-        ls -l ~/.cache/R/R.cache/styler
-        gdu -s --inodes ~/.cache/R/R.cache/styler/* || du -s --inodes ~/.cache/R/R.cache/styler/*
+        git status
       shell: bash
