@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9054
+
+## Continuous integration
+
+- Enhance permissions for workflow (#1635).
+
+
 # tibble 3.2.1.9053
 
 ## Features
