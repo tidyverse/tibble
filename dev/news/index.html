@@ -70,95 +70,6 @@
 <li><p><code><a href="../reference/as_tibble.html">as_tibble()</a></code> calls <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> for objects that are not subclasses of <code>"tbl_df"</code> (<a href="https://github.com/TimTaylor" class="external-link">@TimTaylor</a>, <a href="https://github.com/tidyverse/tibble/issues/1556" class="external-link">#1556</a>, <a href="https://github.com/tidyverse/tibble/issues/1557" class="external-link">#1557</a>).</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="chore-3-2-1-9900">Chore<a class="anchor" aria-label="anchor" href="#chore-3-2-1-9900"></a></h3>
-<ul><li>
-<p>Auto-update from GitHub Actions.</p>
-<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/14178874040" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/14178874040</a></p>
-</li>
-<li><p>Create <code>index.md</code> for pkgdown.</p></li>
-<li><p>Ignore files.</p></li>
-<li><p>Fix <code>R CMD check</code> errors on R-devel.</p></li>
-<li>
-<p>IDE.</p>
-<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/10425484383" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/10425484383</a></p>
-<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/10224243858" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/10224243858</a></p>
-<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/9884064046" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/9884064046</a></p>
-<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/9871752503" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/9871752503</a></p>
-</li>
-<li>
-<p>Drop fansi and import cli (<a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/tidyverse/tibble/issues/1589" class="external-link">#1589</a>).</p>
-<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/9728440241" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/9728440241</a></p>
-</li>
-<li>
-<p>Upkeep drop crayon + mockr (<a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/tidyverse/tibble/issues/1587" class="external-link">#1587</a>).</p>
-<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/9687521438" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/9687521438</a></p>
-</li>
-<li><p>Replace non-API <code>SET_S4_OBJECT()</code> with <code>Rf_asS4()</code> (<a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/tidyverse/tibble/issues/1588" class="external-link">#1588</a>).</p></li>
-<li><p>Snapshot updates (<a href="https://github.com/tidyverse/tibble/issues/1580" class="external-link">#1580</a>).</p></li>
-<li>
-<p>Revert “Fix as_tibble() usage”.</p>
-<p>This reverts commit 49d0b63504c4e3f77beaf2889ace12cad7d3f293.</p>
-</li>
-<li><p>Check fast path first.</p></li>
-<li><p>Skip tests if packages are missing.</p></li>
-<li><p>Snapshot updates for rcc-smoke (null) (<a href="https://github.com/tidyverse/tibble/issues/1548" class="external-link">#1548</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9900">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9900"></a></h3>
-<ul><li><p>Enhance permissions for workflow (<a href="https://github.com/tidyverse/tibble/issues/1635" class="external-link">#1635</a>).</p></li>
-<li><p>Permissions, better tests for missing suggests, lints (<a href="https://github.com/tidyverse/tibble/issues/1634" class="external-link">#1634</a>).</p></li>
-<li><p>Only fail covr builds if token is given (<a href="https://github.com/tidyverse/tibble/issues/1633" class="external-link">#1633</a>).</p></li>
-<li><p>Always use <code>_R_CHECK_FORCE_SUGGESTS_=false</code> (<a href="https://github.com/tidyverse/tibble/issues/1632" class="external-link">#1632</a>).</p></li>
-<li><p>Correct installation of xml2 (<a href="https://github.com/tidyverse/tibble/issues/1631" class="external-link">#1631</a>).</p></li>
-<li><p>Explain (<a href="https://github.com/tidyverse/tibble/issues/1630" class="external-link">#1630</a>).</p></li>
-<li><p>Add xml2 for covr, print testthat results (<a href="https://github.com/tidyverse/tibble/issues/1629" class="external-link">#1629</a>).</p></li>
-<li><p>Fix (<a href="https://github.com/tidyverse/tibble/issues/1628" class="external-link">#1628</a>).</p></li>
-<li><p>Sync (<a href="https://github.com/tidyverse/tibble/issues/1627" class="external-link">#1627</a>).</p></li>
-<li><p>Only block direct updates for pull requests.</p></li>
-<li><p>Add permissions to update.</p></li>
-<li><p>Keep a copy of the vignettes inside the tests (<a href="https://github.com/tidyverse/tibble/issues/1576" class="external-link">#1576</a>, <a href="https://github.com/tidyverse/tibble/issues/1586" class="external-link">#1586</a>).</p></li>
-<li><p>Avoid failure in fledge workflow if no changes (<a href="https://github.com/tidyverse/tibble/issues/1618" class="external-link">#1618</a>).</p></li>
-<li><p>Fetch tags for fledge workflow to avoid unnecessary NEWS entries (<a href="https://github.com/tidyverse/tibble/issues/1617" class="external-link">#1617</a>).</p></li>
-<li><p>Use larger retry count for lock-threads workflow (<a href="https://github.com/tidyverse/tibble/issues/1616" class="external-link">#1616</a>).</p></li>
-<li><p>Ignore errors when removing pkg-config on macOS (<a href="https://github.com/tidyverse/tibble/issues/1615" class="external-link">#1615</a>).</p></li>
-<li><p>Explicit permissions (<a href="https://github.com/tidyverse/tibble/issues/1614" class="external-link">#1614</a>).</p></li>
-<li><p>Use styler from main branch (<a href="https://github.com/tidyverse/tibble/issues/1613" class="external-link">#1613</a>).</p></li>
-<li><p>Need to install R on Ubuntu 24.04 (<a href="https://github.com/tidyverse/tibble/issues/1612" class="external-link">#1612</a>).</p></li>
-<li><p>Use Ubuntu 24.04 and styler PR (<a href="https://github.com/tidyverse/tibble/issues/1610" class="external-link">#1610</a>).</p></li>
-<li><p>Correctly detect branch protection (<a href="https://github.com/tidyverse/tibble/issues/1608" class="external-link">#1608</a>).</p></li>
-<li><p>Use stable pak (<a href="https://github.com/tidyverse/tibble/issues/1607" class="external-link">#1607</a>).</p></li>
-<li>
-<p>Trigger run (<a href="https://github.com/tidyverse/tibble/issues/1606" class="external-link">#1606</a>).</p>
-<ul><li><p>ci: Trigger run</p></li>
-<li><p>ci: Latest changes</p></li>
-</ul></li>
-<li>
-<p>Use pkgdown branch (<a href="https://github.com/tidyverse/tibble/issues/1604" class="external-link">#1604</a>).</p>
-<ul><li><p>ci: Use pkgdown branch</p></li>
-<li><p>ci: Updates from duckdb</p></li>
-</ul></li>
-<li>
-<p>Install via R CMD INSTALL ., not pak (<a href="https://github.com/tidyverse/tibble/issues/1601" class="external-link">#1601</a>).</p>
-<ul><li><p>ci: Install via R CMD INSTALL ., not pak</p></li>
-<li><p>ci: Bump version of upload-artifact action</p></li>
-</ul></li>
-<li><p>Install local package for pkgdown builds.</p></li>
-<li><p>Improve support for protected branches with fledge.</p></li>
-<li><p>Improve support for protected branches, without fledge.</p></li>
-<li><p>Sync with latest developments.</p></li>
-<li><p>Use v2 instead of master.</p></li>
-<li><p>Inline action.</p></li>
-<li><p>Use dev roxygen2 and decor.</p></li>
-<li><p>Use roxygen2 PR to fix documentation.</p></li>
-<li><p>Fix on Windows, tweak lock workflow.</p></li>
-<li><p>Avoid checking bashisms on Windows.</p></li>
-<li><p>Better commit message.</p></li>
-<li><p>Bump versions, better default, consume custom matrix.</p></li>
-<li><p>Fix.</p></li>
-<li><p>Remove dead workflow.</p></li>
-<li><p>Recent updates.</p></li>
-</ul></div>
-<div class="section level3">
 <h3 id="documentation-3-2-1-9900">Documentation<a class="anchor" aria-label="anchor" href="#documentation-3-2-1-9900"></a></h3>
 <ul><li><p>Update comparison between tibble and data.frame (<a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/tidyverse/tibble/issues/1567" class="external-link">#1567</a>).</p></li>
 <li><p>Use pak for installing dev version in README (<a href="https://github.com/luisDVA" class="external-link">@luisDVA</a>, <a href="https://github.com/tidyverse/tibble/issues/1600" class="external-link">#1600</a>).</p></li>
@@ -169,20 +80,8 @@
 </ul></div>
 <div class="section level3">
 <h3 id="testing-3-2-1-9900">Testing<a class="anchor" aria-label="anchor" href="#testing-3-2-1-9900"></a></h3>
-<ul><li><p>Snapshot updates for rcc-smoke (null) (<a href="https://github.com/tidyverse/tibble/issues/1597" class="external-link">#1597</a>).</p></li>
-<li><p>Skip tests if packages are missing.</p></li>
+<ul><li><p>Skip tests if packages are missing.</p></li>
 <li><p>Override :: to avoid failures in tests without suggested packages.</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-3-2-1-9900">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-3-2-1-9900"></a></h3>
-<ul><li><p>Merge branch ‘docs’.</p></li>
-<li><p>Internal changes only.</p></li>
-<li><p>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1565" class="external-link">#1565</a> from tidyverse/snapshot-main-rcc-smoke-null.</p></li>
-<li><p>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1562" class="external-link">#1562</a> from tidyverse/snapshot-main-rcc-smoke-null.</p></li>
-<li><p>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1561" class="external-link">#1561</a> from tidyverse/snapshot-main-rcc-full-config-os-macos-latest-r-release.</p></li>
-<li><p>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1560" class="external-link">#1560</a> from tidyverse/snapshot-main-R-CMD-check-base-null.</p></li>
-<li><p>Merged cran-3.2.1 into main.</p></li>
-<li><p>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1527" class="external-link">#1527</a> from tidyverse/snapshot-main-rcc-smoke-null.</p></li>
 </ul></div>
 </div>
     <div class="section level2">
