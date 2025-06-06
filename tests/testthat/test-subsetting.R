@@ -55,6 +55,24 @@ test_that("[ with 0 cols returns correct number of rows", {
   expect_equal(nrow(trees_tbl[-(1:10), 0]), nrow_trees - 10)
 })
 
+test_that("[ with '0' for rows works correctly (#1636)", {
+  simple_tbl <- tibble(a = 1:3)
+  simple_df <- data.frame(a = 1:3)
+
+  expect_identical(
+    simple_tbl["0", ],
+    as_tibble(simple_df["0", , drop = FALSE])
+  )
+  expect_identical(
+    simple_tbl[as.character(0:1), ],
+    as_tibble(simple_df[as.character(0:1), , drop = FALSE])
+  )
+  expect_identical(
+    simple_tbl[as.character(-1:0), ],
+    as_tibble(simple_df[as.character(-1:0), , drop = FALSE])
+  )
+})
+
 test_that("[ with explicit NULL works as expected (#696)", {
   trees_tbl <- as_tibble(trees)
 
