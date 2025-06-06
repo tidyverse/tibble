@@ -60,15 +60,15 @@ test_that("[ with '0' for rows works correctly (#1636)", {
   simple_df <- data.frame(a = 1:3)
 
   expect_identical(
-    simple_tbl["0", ],
+    suppressWarnings(simple_tbl["0", ]),
     as_tibble(simple_df["0", , drop = FALSE])
   )
   expect_identical(
-    simple_tbl[as.character(0:1), ],
+    suppressWarnings(simple_tbl[as.character(0:1), ]),
     as_tibble(simple_df[as.character(0:1), , drop = FALSE])
   )
   expect_identical(
-    simple_tbl[as.character(-1:0), ],
+    suppressWarnings(simple_tbl[as.character(-1:0), ]),
     as_tibble(simple_df[as.character(-1:0), , drop = FALSE])
   )
 })
