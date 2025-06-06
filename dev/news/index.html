@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9054</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9900</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -53,465 +53,138 @@
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="../logo.svg" class="logo" alt=""><h1>Changelog</h1>
-      <small>Source: <a href="https://github.com/tidyverse/tibble/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
+      <small>Source: <a href="https://github.com/tidyverse/tibble/blob/cran-3.2.1.9900/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9054" id="tibble-3219054">tibble 3.2.1.9054<a class="anchor" aria-label="anchor" href="#tibble-3219054"></a></h2>
+<h2 class="pkg-version" data-toc-text="3.2.1.9900" id="tibble-3219900">tibble 3.2.1.9900<a class="anchor" aria-label="anchor" href="#tibble-3219900"></a></h2>
 <div class="section level3">
-<h3 id="continuous-integration-3-2-1-9054">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9054"></a></h3>
-<ul><li>Enhance permissions for workflow (<a href="https://github.com/tidyverse/tibble/issues/1635" class="external-link">#1635</a>).</li>
+<h3 id="bug-fixes-3-2-1-9900">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-3-2-1-9900"></a></h3>
+<ul><li><p>Subset tibble with <code>"0"</code> for row index (<a href="https://github.com/eitsupi" class="external-link">@eitsupi</a>, <a href="https://github.com/tidyverse/tibble/issues/1636" class="external-link">#1636</a>, <a href="https://github.com/tidyverse/tibble/issues/1637" class="external-link">#1637</a>).</p></li>
+<li><p><code><a href="../reference/new_tibble.html">new_tibble()</a></code> and <code><a href="../reference/as_tibble.html">as_tibble()</a></code> support attributes named <code>"n"</code> and <code>"x"</code> (<a href="https://github.com/tidyverse/tibble/issues/1573" class="external-link">#1573</a>, <a href="https://github.com/tidyverse/tibble/issues/1574" class="external-link">#1574</a>).</p></li>
 </ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9053" id="tibble-3219053">tibble 3.2.1.9053<a class="anchor" aria-label="anchor" href="#tibble-3219053"></a></h2>
 <div class="section level3">
-<h3 id="features-3-2-1-9053">Features<a class="anchor" aria-label="anchor" href="#features-3-2-1-9053"></a></h3>
-<ul><li>Support new vctrs <code>.name_repair</code> options: <code>unique_quiet</code>, <code>universal_quiet</code> (<a href="https://github.com/andreranza" class="external-link">@andreranza</a>, <a href="https://github.com/tidyverse/tibble/issues/1549" class="external-link">#1549</a>, <a href="https://github.com/tidyverse/tibble/issues/1625" class="external-link">#1625</a>).</li>
+<h3 id="features-3-2-1-9900">Features<a class="anchor" aria-label="anchor" href="#features-3-2-1-9900"></a></h3>
+<ul><li><p>Support new vctrs <code>.name_repair</code> options: <code>unique_quiet</code>, <code>universal_quiet</code> (<a href="https://github.com/andreranza" class="external-link">@andreranza</a>, <a href="https://github.com/tidyverse/tibble/issues/1549" class="external-link">#1549</a>, <a href="https://github.com/tidyverse/tibble/issues/1625" class="external-link">#1625</a>).</p></li>
+<li><p>Rework <code><a href="../reference/view.html">view()</a></code> to better work with RStudio and Positron (<a href="https://github.com/DavisVaughan" class="external-link">@DavisVaughan</a>, <a href="https://github.com/tidyverse/tibble/issues/1551" class="external-link">#1551</a>, <a href="https://github.com/tidyverse/tibble/issues/1603" class="external-link">#1603</a>).</p></li>
+<li><p><code><a href="../reference/as_tibble.html">as_tibble()</a></code> calls <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> for objects that are not subclasses of <code>"tbl_df"</code> (<a href="https://github.com/TimTaylor" class="external-link">@TimTaylor</a>, <a href="https://github.com/tidyverse/tibble/issues/1556" class="external-link">#1556</a>, <a href="https://github.com/tidyverse/tibble/issues/1557" class="external-link">#1557</a>).</p></li>
 </ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9052" id="tibble-3219052">tibble 3.2.1.9052<a class="anchor" aria-label="anchor" href="#tibble-3219052"></a></h2>
 <div class="section level3">
-<h3 id="continuous-integration-3-2-1-9052">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9052"></a></h3>
-<ul><li>Permissions, better tests for missing suggests, lints (<a href="https://github.com/tidyverse/tibble/issues/1634" class="external-link">#1634</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9051" id="tibble-3219051">tibble 3.2.1.9051<a class="anchor" aria-label="anchor" href="#tibble-3219051"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9051">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9051"></a></h3>
-<ul><li><p>Only fail covr builds if token is given (<a href="https://github.com/tidyverse/tibble/issues/1633" class="external-link">#1633</a>).</p></li>
-<li><p>Always use <code>_R_CHECK_FORCE_SUGGESTS_=false</code> (<a href="https://github.com/tidyverse/tibble/issues/1632" class="external-link">#1632</a>).</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9050" id="tibble-3219050">tibble 3.2.1.9050<a class="anchor" aria-label="anchor" href="#tibble-3219050"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9050">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9050"></a></h3>
-<ul><li>Correct installation of xml2 (<a href="https://github.com/tidyverse/tibble/issues/1631" class="external-link">#1631</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9049" id="tibble-3219049">tibble 3.2.1.9049<a class="anchor" aria-label="anchor" href="#tibble-3219049"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9049">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9049"></a></h3>
-<ul><li><p>Explain (<a href="https://github.com/tidyverse/tibble/issues/1630" class="external-link">#1630</a>).</p></li>
-<li><p>Add xml2 for covr, print testthat results (<a href="https://github.com/tidyverse/tibble/issues/1629" class="external-link">#1629</a>).</p></li>
-<li><p>Fix (<a href="https://github.com/tidyverse/tibble/issues/1628" class="external-link">#1628</a>).</p></li>
-<li><p>Sync (<a href="https://github.com/tidyverse/tibble/issues/1627" class="external-link">#1627</a>).</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9048" id="tibble-3219048">tibble 3.2.1.9048<a class="anchor" aria-label="anchor" href="#tibble-3219048"></a></h2>
-<div class="section level3">
-<h3 id="chore-3-2-1-9048">Chore<a class="anchor" aria-label="anchor" href="#chore-3-2-1-9048"></a></h3>
+<h3 id="chore-3-2-1-9900">Chore<a class="anchor" aria-label="anchor" href="#chore-3-2-1-9900"></a></h3>
 <ul><li>
 <p>Auto-update from GitHub Actions.</p>
 <p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/14178874040" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/14178874040</a></p>
 </li>
-</ul></div>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9048">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9048"></a></h3>
-<ul><li>Only block direct updates for pull requests.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9047" id="tibble-3219047">tibble 3.2.1.9047<a class="anchor" aria-label="anchor" href="#tibble-3219047"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9047">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9047"></a></h3>
-<ul><li>Add permissions to update.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9046" id="tibble-3219046">tibble 3.2.1.9046<a class="anchor" aria-label="anchor" href="#tibble-3219046"></a></h2>
-<div class="section level3">
-<h3 id="chore-3-2-1-9046">Chore<a class="anchor" aria-label="anchor" href="#chore-3-2-1-9046"></a></h3>
-<ul><li><p>Create <code>index.md</code> for pkgdown.</p></li>
+<li><p>Create <code>index.md</code> for pkgdown.</p></li>
 <li><p>Ignore files.</p></li>
 <li><p>Fix <code>R CMD check</code> errors on R-devel.</p></li>
+<li>
+<p>IDE.</p>
+<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/10425484383" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/10425484383</a></p>
+<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/10224243858" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/10224243858</a></p>
+<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/9884064046" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/9884064046</a></p>
+<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/9871752503" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/9871752503</a></p>
+</li>
+<li>
+<p>Drop fansi and import cli (<a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/tidyverse/tibble/issues/1589" class="external-link">#1589</a>).</p>
+<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/9728440241" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/9728440241</a></p>
+</li>
+<li>
+<p>Upkeep drop crayon + mockr (<a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/tidyverse/tibble/issues/1587" class="external-link">#1587</a>).</p>
+<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/9687521438" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/9687521438</a></p>
+</li>
+<li><p>Replace non-API <code>SET_S4_OBJECT()</code> with <code>Rf_asS4()</code> (<a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/tidyverse/tibble/issues/1588" class="external-link">#1588</a>).</p></li>
+<li><p>Snapshot updates (<a href="https://github.com/tidyverse/tibble/issues/1580" class="external-link">#1580</a>).</p></li>
+<li>
+<p>Revert “Fix as_tibble() usage”.</p>
+<p>This reverts commit 49d0b63504c4e3f77beaf2889ace12cad7d3f293.</p>
+</li>
+<li><p>Check fast path first.</p></li>
+<li><p>Skip tests if packages are missing.</p></li>
+<li><p>Snapshot updates for rcc-smoke (null) (<a href="https://github.com/tidyverse/tibble/issues/1548" class="external-link">#1548</a>).</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="continuous-integration-3-2-1-9046">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9046"></a></h3>
-<ul><li>Keep a copy of the vignettes inside the tests (<a href="https://github.com/tidyverse/tibble/issues/1576" class="external-link">#1576</a>, <a href="https://github.com/tidyverse/tibble/issues/1586" class="external-link">#1586</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="documentation-3-2-1-9046">Documentation<a class="anchor" aria-label="anchor" href="#documentation-3-2-1-9046"></a></h3>
-<ul><li><p>Update comparison between tibble and data.frame (<a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/tidyverse/tibble/issues/1567" class="external-link">#1567</a>).</p></li>
-<li><p>Use pak for installing dev version in README (<a href="https://github.com/luisDVA" class="external-link">@luisDVA</a>, <a href="https://github.com/tidyverse/tibble/issues/1600" class="external-link">#1600</a>).</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9045" id="tibble-3219045">tibble 3.2.1.9045<a class="anchor" aria-label="anchor" href="#tibble-3219045"></a></h2>
-<div class="section level3">
-<h3 id="chore-3-2-1-9045">Chore<a class="anchor" aria-label="anchor" href="#chore-3-2-1-9045"></a></h3>
-<ul><li>IDE.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9044" id="tibble-3219044">tibble 3.2.1.9044<a class="anchor" aria-label="anchor" href="#tibble-3219044"></a></h2>
-<div class="section level3">
-<h3 id="documentation-3-2-1-9044">Documentation<a class="anchor" aria-label="anchor" href="#documentation-3-2-1-9044"></a></h3>
-<ul><li>Document that <code>...</code> must be empty in <code><a href="../reference/formatting.html">print.tbl_df()</a></code>.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="uncategorized-3-2-1-9044">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-3-2-1-9044"></a></h3>
-<ul><li>Merge branch ‘docs’.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9043" id="tibble-3219043">tibble 3.2.1.9043<a class="anchor" aria-label="anchor" href="#tibble-3219043"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9043">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9043"></a></h3>
-<ul><li>Avoid failure in fledge workflow if no changes (<a href="https://github.com/tidyverse/tibble/issues/1618" class="external-link">#1618</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9042" id="tibble-3219042">tibble 3.2.1.9042<a class="anchor" aria-label="anchor" href="#tibble-3219042"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9042">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9042"></a></h3>
-<ul><li>Fetch tags for fledge workflow to avoid unnecessary NEWS entries (<a href="https://github.com/tidyverse/tibble/issues/1617" class="external-link">#1617</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9041" id="tibble-3219041">tibble 3.2.1.9041<a class="anchor" aria-label="anchor" href="#tibble-3219041"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9041">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9041"></a></h3>
-<ul><li>Use larger retry count for lock-threads workflow (<a href="https://github.com/tidyverse/tibble/issues/1616" class="external-link">#1616</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9040" id="tibble-3219040">tibble 3.2.1.9040<a class="anchor" aria-label="anchor" href="#tibble-3219040"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9040">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9040"></a></h3>
-<ul><li>Ignore errors when removing pkg-config on macOS (<a href="https://github.com/tidyverse/tibble/issues/1615" class="external-link">#1615</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9039" id="tibble-3219039">tibble 3.2.1.9039<a class="anchor" aria-label="anchor" href="#tibble-3219039"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9039">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9039"></a></h3>
-<ul><li>Explicit permissions (<a href="https://github.com/tidyverse/tibble/issues/1614" class="external-link">#1614</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9038" id="tibble-3219038">tibble 3.2.1.9038<a class="anchor" aria-label="anchor" href="#tibble-3219038"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9038">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9038"></a></h3>
-<ul><li>Use styler from main branch (<a href="https://github.com/tidyverse/tibble/issues/1613" class="external-link">#1613</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9037" id="tibble-3219037">tibble 3.2.1.9037<a class="anchor" aria-label="anchor" href="#tibble-3219037"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9037">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9037"></a></h3>
-<ul><li><p>Need to install R on Ubuntu 24.04 (<a href="https://github.com/tidyverse/tibble/issues/1612" class="external-link">#1612</a>).</p></li>
+<h3 id="continuous-integration-3-2-1-9900">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9900"></a></h3>
+<ul><li><p>Enhance permissions for workflow (<a href="https://github.com/tidyverse/tibble/issues/1635" class="external-link">#1635</a>).</p></li>
+<li><p>Permissions, better tests for missing suggests, lints (<a href="https://github.com/tidyverse/tibble/issues/1634" class="external-link">#1634</a>).</p></li>
+<li><p>Only fail covr builds if token is given (<a href="https://github.com/tidyverse/tibble/issues/1633" class="external-link">#1633</a>).</p></li>
+<li><p>Always use <code>_R_CHECK_FORCE_SUGGESTS_=false</code> (<a href="https://github.com/tidyverse/tibble/issues/1632" class="external-link">#1632</a>).</p></li>
+<li><p>Correct installation of xml2 (<a href="https://github.com/tidyverse/tibble/issues/1631" class="external-link">#1631</a>).</p></li>
+<li><p>Explain (<a href="https://github.com/tidyverse/tibble/issues/1630" class="external-link">#1630</a>).</p></li>
+<li><p>Add xml2 for covr, print testthat results (<a href="https://github.com/tidyverse/tibble/issues/1629" class="external-link">#1629</a>).</p></li>
+<li><p>Fix (<a href="https://github.com/tidyverse/tibble/issues/1628" class="external-link">#1628</a>).</p></li>
+<li><p>Sync (<a href="https://github.com/tidyverse/tibble/issues/1627" class="external-link">#1627</a>).</p></li>
+<li><p>Only block direct updates for pull requests.</p></li>
+<li><p>Add permissions to update.</p></li>
+<li><p>Keep a copy of the vignettes inside the tests (<a href="https://github.com/tidyverse/tibble/issues/1576" class="external-link">#1576</a>, <a href="https://github.com/tidyverse/tibble/issues/1586" class="external-link">#1586</a>).</p></li>
+<li><p>Avoid failure in fledge workflow if no changes (<a href="https://github.com/tidyverse/tibble/issues/1618" class="external-link">#1618</a>).</p></li>
+<li><p>Fetch tags for fledge workflow to avoid unnecessary NEWS entries (<a href="https://github.com/tidyverse/tibble/issues/1617" class="external-link">#1617</a>).</p></li>
+<li><p>Use larger retry count for lock-threads workflow (<a href="https://github.com/tidyverse/tibble/issues/1616" class="external-link">#1616</a>).</p></li>
+<li><p>Ignore errors when removing pkg-config on macOS (<a href="https://github.com/tidyverse/tibble/issues/1615" class="external-link">#1615</a>).</p></li>
+<li><p>Explicit permissions (<a href="https://github.com/tidyverse/tibble/issues/1614" class="external-link">#1614</a>).</p></li>
+<li><p>Use styler from main branch (<a href="https://github.com/tidyverse/tibble/issues/1613" class="external-link">#1613</a>).</p></li>
+<li><p>Need to install R on Ubuntu 24.04 (<a href="https://github.com/tidyverse/tibble/issues/1612" class="external-link">#1612</a>).</p></li>
 <li><p>Use Ubuntu 24.04 and styler PR (<a href="https://github.com/tidyverse/tibble/issues/1610" class="external-link">#1610</a>).</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9036" id="tibble-3219036">tibble 3.2.1.9036<a class="anchor" aria-label="anchor" href="#tibble-3219036"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9036">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9036"></a></h3>
-<ul><li>Correctly detect branch protection (<a href="https://github.com/tidyverse/tibble/issues/1608" class="external-link">#1608</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9035" id="tibble-3219035">tibble 3.2.1.9035<a class="anchor" aria-label="anchor" href="#tibble-3219035"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9035">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9035"></a></h3>
-<ul><li>Use stable pak (<a href="https://github.com/tidyverse/tibble/issues/1607" class="external-link">#1607</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9034" id="tibble-3219034">tibble 3.2.1.9034<a class="anchor" aria-label="anchor" href="#tibble-3219034"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9034">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9034"></a></h3>
-<ul><li>
+<li><p>Correctly detect branch protection (<a href="https://github.com/tidyverse/tibble/issues/1608" class="external-link">#1608</a>).</p></li>
+<li><p>Use stable pak (<a href="https://github.com/tidyverse/tibble/issues/1607" class="external-link">#1607</a>).</p></li>
+<li>
 <p>Trigger run (<a href="https://github.com/tidyverse/tibble/issues/1606" class="external-link">#1606</a>).</p>
 <ul><li><p>ci: Trigger run</p></li>
 <li><p>ci: Latest changes</p></li>
 </ul></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9033" id="tibble-3219033">tibble 3.2.1.9033<a class="anchor" aria-label="anchor" href="#tibble-3219033"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9033">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9033"></a></h3>
-<ul><li>
+<li>
 <p>Use pkgdown branch (<a href="https://github.com/tidyverse/tibble/issues/1604" class="external-link">#1604</a>).</p>
 <ul><li><p>ci: Use pkgdown branch</p></li>
 <li><p>ci: Updates from duckdb</p></li>
-<li><p>ci: Trigger run</p></li>
 </ul></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9032" id="tibble-3219032">tibble 3.2.1.9032<a class="anchor" aria-label="anchor" href="#tibble-3219032"></a></h2>
-<div class="section level3">
-<h3 id="features-3-2-1-9032">Features<a class="anchor" aria-label="anchor" href="#features-3-2-1-9032"></a></h3>
-<ul><li>Rework <code><a href="../reference/view.html">view()</a></code> to better work with RStudio and Positron (<a href="https://github.com/DavisVaughan" class="external-link">@DavisVaughan</a>, <a href="https://github.com/tidyverse/tibble/issues/1551" class="external-link">#1551</a>, <a href="https://github.com/tidyverse/tibble/issues/1603" class="external-link">#1603</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9031" id="tibble-3219031">tibble 3.2.1.9031<a class="anchor" aria-label="anchor" href="#tibble-3219031"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9031">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9031"></a></h3>
-<ul><li>
+<li>
 <p>Install via R CMD INSTALL ., not pak (<a href="https://github.com/tidyverse/tibble/issues/1601" class="external-link">#1601</a>).</p>
 <ul><li><p>ci: Install via R CMD INSTALL ., not pak</p></li>
 <li><p>ci: Bump version of upload-artifact action</p></li>
 </ul></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9030" id="tibble-3219030">tibble 3.2.1.9030<a class="anchor" aria-label="anchor" href="#tibble-3219030"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9030">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9030"></a></h3>
-<ul><li><p>Install local package for pkgdown builds.</p></li>
+<li><p>Install local package for pkgdown builds.</p></li>
 <li><p>Improve support for protected branches with fledge.</p></li>
 <li><p>Improve support for protected branches, without fledge.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9029" id="tibble-3219029">tibble 3.2.1.9029<a class="anchor" aria-label="anchor" href="#tibble-3219029"></a></h2>
-<div class="section level3">
-<h3 id="chore-3-2-1-9029">Chore<a class="anchor" aria-label="anchor" href="#chore-3-2-1-9029"></a></h3>
-<ul><li>
-<p>Auto-update from GitHub Actions.</p>
-<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/10425484383" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/10425484383</a></p>
-</li>
-</ul></div>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9029">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9029"></a></h3>
-<ul><li>Sync with latest developments.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9028" id="tibble-3219028">tibble 3.2.1.9028<a class="anchor" aria-label="anchor" href="#tibble-3219028"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9028">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9028"></a></h3>
-<ul><li>Use v2 instead of master.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9027" id="tibble-3219027">tibble 3.2.1.9027<a class="anchor" aria-label="anchor" href="#tibble-3219027"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9027">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9027"></a></h3>
-<ul><li>Inline action.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9026" id="tibble-3219026">tibble 3.2.1.9026<a class="anchor" aria-label="anchor" href="#tibble-3219026"></a></h2>
-<div class="section level3">
-<h3 id="chore-3-2-1-9026">Chore<a class="anchor" aria-label="anchor" href="#chore-3-2-1-9026"></a></h3>
-<ul><li>
-<p>Auto-update from GitHub Actions.</p>
-<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/10224243858" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/10224243858</a></p>
-</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9025" id="tibble-3219025">tibble 3.2.1.9025<a class="anchor" aria-label="anchor" href="#tibble-3219025"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9025">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9025"></a></h3>
-<ul><li>Use dev roxygen2 and decor.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9024" id="tibble-3219024">tibble 3.2.1.9024<a class="anchor" aria-label="anchor" href="#tibble-3219024"></a></h2>
-<div class="section level3">
-<h3 id="documentation-3-2-1-9024">Documentation<a class="anchor" aria-label="anchor" href="#documentation-3-2-1-9024"></a></h3>
-<ul><li>Request to not edit <code>NEWS.md</code>.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9023" id="tibble-3219023">tibble 3.2.1.9023<a class="anchor" aria-label="anchor" href="#tibble-3219023"></a></h2>
-<div class="section level3">
-<h3 id="chore-3-2-1-9023">Chore<a class="anchor" aria-label="anchor" href="#chore-3-2-1-9023"></a></h3>
-<ul><li>
-<p>Auto-update from GitHub Actions.</p>
-<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/9884064046" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/9884064046</a></p>
-</li>
-<li>
-<p>Auto-update from GitHub Actions.</p>
-<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/9871752503" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/9871752503</a></p>
-</li>
-</ul></div>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9023">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9023"></a></h3>
-<ul><li>Use roxygen2 PR to fix documentation.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-3-2-1-9023">Testing<a class="anchor" aria-label="anchor" href="#testing-3-2-1-9023"></a></h3>
-<ul><li>Snapshot updates for rcc-smoke (null) (<a href="https://github.com/tidyverse/tibble/issues/1597" class="external-link">#1597</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9022" id="tibble-3219022">tibble 3.2.1.9022<a class="anchor" aria-label="anchor" href="#tibble-3219022"></a></h2>
-<div class="section level3">
-<h3 id="chore-3-2-1-9022">Chore<a class="anchor" aria-label="anchor" href="#chore-3-2-1-9022"></a></h3>
-<ul><li>Drop fansi and import cli (<a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/tidyverse/tibble/issues/1589" class="external-link">#1589</a>).</li>
-</ul></div>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9022">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9022"></a></h3>
-<ul><li>Fix on Windows, tweak lock workflow.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9021" id="tibble-3219021">tibble 3.2.1.9021<a class="anchor" aria-label="anchor" href="#tibble-3219021"></a></h2>
-<div class="section level3">
-<h3 id="chore-3-2-1-9021">Chore<a class="anchor" aria-label="anchor" href="#chore-3-2-1-9021"></a></h3>
-<ul><li>
-<p>Auto-update from GitHub Actions.</p>
-<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/9728440241" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/9728440241</a></p>
-</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9020" id="tibble-3219020">tibble 3.2.1.9020<a class="anchor" aria-label="anchor" href="#tibble-3219020"></a></h2>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9020">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9020"></a></h3>
-<ul><li><p>Avoid checking bashisms on Windows.</p></li>
+<li><p>Sync with latest developments.</p></li>
+<li><p>Use v2 instead of master.</p></li>
+<li><p>Inline action.</p></li>
+<li><p>Use dev roxygen2 and decor.</p></li>
+<li><p>Use roxygen2 PR to fix documentation.</p></li>
+<li><p>Fix on Windows, tweak lock workflow.</p></li>
+<li><p>Avoid checking bashisms on Windows.</p></li>
 <li><p>Better commit message.</p></li>
 <li><p>Bump versions, better default, consume custom matrix.</p></li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9019" id="tibble-3219019">tibble 3.2.1.9019<a class="anchor" aria-label="anchor" href="#tibble-3219019"></a></h2>
-<div class="section level3">
-<h3 id="chore-3-2-1-9019">Chore<a class="anchor" aria-label="anchor" href="#chore-3-2-1-9019"></a></h3>
-<ul><li><p>Upkeep drop crayon + mockr (<a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/tidyverse/tibble/issues/1587" class="external-link">#1587</a>).</p></li>
-<li>
-<p>Auto-update from GitHub Actions.</p>
-<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/9687521438" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/9687521438</a></p>
-</li>
-<li><p>Replace non-API <code>SET_S4_OBJECT()</code> with <code>Rf_asS4()</code> (<a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/tidyverse/tibble/issues/1588" class="external-link">#1588</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="continuous-integration-3-2-1-9019">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-2-1-9019"></a></h3>
-<ul><li><p>Fix.</p></li>
+<li><p>Fix.</p></li>
 <li><p>Remove dead workflow.</p></li>
 <li><p>Recent updates.</p></li>
 </ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9018" id="tibble-3219018">tibble 3.2.1.9018<a class="anchor" aria-label="anchor" href="#tibble-3219018"></a></h2>
 <div class="section level3">
-<h3 id="chore-3-2-1-9018">Chore<a class="anchor" aria-label="anchor" href="#chore-3-2-1-9018"></a></h3>
-<ul><li>Snapshot updates (<a href="https://github.com/tidyverse/tibble/issues/1580" class="external-link">#1580</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9017" id="tibble-3219017">tibble 3.2.1.9017<a class="anchor" aria-label="anchor" href="#tibble-3219017"></a></h2>
-<div class="section level3">
-<h3 id="bug-fixes-3-2-1-9017">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-3-2-1-9017"></a></h3>
-<ul><li>
-<code><a href="../reference/new_tibble.html">new_tibble()</a></code> and <code><a href="../reference/as_tibble.html">as_tibble()</a></code> support attributes named <code>"n"</code> and <code>"x"</code> (<a href="https://github.com/tidyverse/tibble/issues/1573" class="external-link">#1573</a>, <a href="https://github.com/tidyverse/tibble/issues/1574" class="external-link">#1574</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9016" id="tibble-3219016">tibble 3.2.1.9016<a class="anchor" aria-label="anchor" href="#tibble-3219016"></a></h2>
-<ul><li>Internal changes only.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9015" id="tibble-3219015">tibble 3.2.1.9015<a class="anchor" aria-label="anchor" href="#tibble-3219015"></a></h2>
-<div class="section level3">
-<h3 id="chore-3-2-1-9015">Chore<a class="anchor" aria-label="anchor" href="#chore-3-2-1-9015"></a></h3>
-<ul><li>
-<p>Revert “Fix as_tibble() usage”.</p>
-<p>This reverts commit 49d0b63504c4e3f77beaf2889ace12cad7d3f293.</p>
-</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9014" id="tibble-3219014">tibble 3.2.1.9014<a class="anchor" aria-label="anchor" href="#tibble-3219014"></a></h2>
-<ul><li>Internal changes only.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9013" id="tibble-3219013">tibble 3.2.1.9013<a class="anchor" aria-label="anchor" href="#tibble-3219013"></a></h2>
-<div class="section level3">
-<h3 id="features-3-2-1-9013">Features<a class="anchor" aria-label="anchor" href="#features-3-2-1-9013"></a></h3>
-<ul><li>
-<code><a href="../reference/as_tibble.html">as_tibble()</a></code> calls <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> for objects that are not subclasses of <code>"tbl_df"</code> (<a href="https://github.com/TimTaylor" class="external-link">@TimTaylor</a>, <a href="https://github.com/tidyverse/tibble/issues/1556" class="external-link">#1556</a>, <a href="https://github.com/tidyverse/tibble/issues/1557" class="external-link">#1557</a>).</li>
+<h3 id="documentation-3-2-1-9900">Documentation<a class="anchor" aria-label="anchor" href="#documentation-3-2-1-9900"></a></h3>
+<ul><li><p>Update comparison between tibble and data.frame (<a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/tidyverse/tibble/issues/1567" class="external-link">#1567</a>).</p></li>
+<li><p>Use pak for installing dev version in README (<a href="https://github.com/luisDVA" class="external-link">@luisDVA</a>, <a href="https://github.com/tidyverse/tibble/issues/1600" class="external-link">#1600</a>).</p></li>
+<li><p>Document that <code>...</code> must be empty in <code><a href="../reference/formatting.html">print.tbl_df()</a></code>.</p></li>
+<li><p>Request to not edit <code>NEWS.md</code>.</p></li>
+<li><p>Fix rendering if suggested packages are missing.</p></li>
+<li><p>Alt text (<a href="https://github.com/maelle" class="external-link">@maelle</a>, <a href="https://github.com/tidyverse/tibble/issues/1528" class="external-link">#1528</a>, <a href="https://github.com/tidyverse/tibble/issues/1539" class="external-link">#1539</a>).</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="chore-3-2-1-9013">Chore<a class="anchor" aria-label="anchor" href="#chore-3-2-1-9013"></a></h3>
-<ul><li>Check fast path first.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9012" id="tibble-3219012">tibble 3.2.1.9012<a class="anchor" aria-label="anchor" href="#tibble-3219012"></a></h2>
-<div class="section level3">
-<h3 id="chore-3-2-1-9012">Chore<a class="anchor" aria-label="anchor" href="#chore-3-2-1-9012"></a></h3>
-<ul><li>Skip tests if packages are missing.</li>
+<h3 id="testing-3-2-1-9900">Testing<a class="anchor" aria-label="anchor" href="#testing-3-2-1-9900"></a></h3>
+<ul><li><p>Snapshot updates for rcc-smoke (null) (<a href="https://github.com/tidyverse/tibble/issues/1597" class="external-link">#1597</a>).</p></li>
+<li><p>Skip tests if packages are missing.</p></li>
+<li><p>Override :: to avoid failures in tests without suggested packages.</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="testing-3-2-1-9012">Testing<a class="anchor" aria-label="anchor" href="#testing-3-2-1-9012"></a></h3>
-<ul><li>Skip tests if packages are missing.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9011" id="tibble-3219011">tibble 3.2.1.9011<a class="anchor" aria-label="anchor" href="#tibble-3219011"></a></h2>
-<ul><li>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1565" class="external-link">#1565</a> from tidyverse/snapshot-main-rcc-smoke-null.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9010" id="tibble-3219010">tibble 3.2.1.9010<a class="anchor" aria-label="anchor" href="#tibble-3219010"></a></h2>
-<ul><li><p>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1562" class="external-link">#1562</a> from tidyverse/snapshot-main-rcc-smoke-null.</p></li>
+<h3 id="uncategorized-3-2-1-9900">Uncategorized<a class="anchor" aria-label="anchor" href="#uncategorized-3-2-1-9900"></a></h3>
+<ul><li><p>Merge branch ‘docs’.</p></li>
+<li><p>Internal changes only.</p></li>
+<li><p>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1565" class="external-link">#1565</a> from tidyverse/snapshot-main-rcc-smoke-null.</p></li>
+<li><p>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1562" class="external-link">#1562</a> from tidyverse/snapshot-main-rcc-smoke-null.</p></li>
 <li><p>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1561" class="external-link">#1561</a> from tidyverse/snapshot-main-rcc-full-config-os-macos-latest-r-release.</p></li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9009" id="tibble-3219009">tibble 3.2.1.9009<a class="anchor" aria-label="anchor" href="#tibble-3219009"></a></h2>
-<ul><li>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1560" class="external-link">#1560</a> from tidyverse/snapshot-main-R-CMD-check-base-null.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9008" id="tibble-3219008">tibble 3.2.1.9008<a class="anchor" aria-label="anchor" href="#tibble-3219008"></a></h2>
-<div class="section level3">
-<h3 id="documentation-3-2-1-9008">Documentation<a class="anchor" aria-label="anchor" href="#documentation-3-2-1-9008"></a></h3>
-<ul><li>Fix rendering if suggested packages are missing.</li>
+<li><p>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1560" class="external-link">#1560</a> from tidyverse/snapshot-main-R-CMD-check-base-null.</p></li>
+<li><p>Merged cran-3.2.1 into main.</p></li>
+<li><p>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1527" class="external-link">#1527</a> from tidyverse/snapshot-main-rcc-smoke-null.</p></li>
 </ul></div>
 </div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9007" id="tibble-3219007">tibble 3.2.1.9007<a class="anchor" aria-label="anchor" href="#tibble-3219007"></a></h2>
-<div class="section level3">
-<h3 id="testing-3-2-1-9007">Testing<a class="anchor" aria-label="anchor" href="#testing-3-2-1-9007"></a></h3>
-<ul><li>Override :: to avoid failures in tests without suggested packages.</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9006" id="tibble-3219006">tibble 3.2.1.9006<a class="anchor" aria-label="anchor" href="#tibble-3219006"></a></h2>
-<ul><li>Merge branch ‘docs’.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9005" id="tibble-3219005">tibble 3.2.1.9005<a class="anchor" aria-label="anchor" href="#tibble-3219005"></a></h2>
-<div class="section level3">
-<h3 id="chore-3-2-1-9005">Chore<a class="anchor" aria-label="anchor" href="#chore-3-2-1-9005"></a></h3>
-<ul><li>Snapshot updates for rcc-smoke (null) (<a href="https://github.com/tidyverse/tibble/issues/1548" class="external-link">#1548</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9004" id="tibble-3219004">tibble 3.2.1.9004<a class="anchor" aria-label="anchor" href="#tibble-3219004"></a></h2>
-<div class="section level3">
-<h3 id="documentation-3-2-1-9004">Documentation<a class="anchor" aria-label="anchor" href="#documentation-3-2-1-9004"></a></h3>
-<ul><li>Alt text (<a href="https://github.com/maelle" class="external-link">@maelle</a>, <a href="https://github.com/tidyverse/tibble/issues/1528" class="external-link">#1528</a>, <a href="https://github.com/tidyverse/tibble/issues/1539" class="external-link">#1539</a>).</li>
-</ul></div>
-</div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9003" id="tibble-3219003">tibble 3.2.1.9003<a class="anchor" aria-label="anchor" href="#tibble-3219003"></a></h2>
-<ul><li>Merged cran-3.2.1 into main.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9002" id="tibble-3219002">tibble 3.2.1.9002<a class="anchor" aria-label="anchor" href="#tibble-3219002"></a></h2>
-<ul><li>Internal changes only.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9001" id="tibble-3219001">tibble 3.2.1.9001<a class="anchor" aria-label="anchor" href="#tibble-3219001"></a></h2>
-<ul><li>Merge pull request <a href="https://github.com/tidyverse/tibble/issues/1527" class="external-link">#1527</a> from tidyverse/snapshot-main-rcc-smoke-null.</li>
-</ul></div>
-    <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9000" id="tibble-3219000">tibble 3.2.1.9000<a class="anchor" aria-label="anchor" href="#tibble-3219000"></a></h2>
-<ul><li>Internal changes only.</li>
-</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="3.2.1" id="tibble-321">tibble 3.2.1<a class="anchor" aria-label="anchor" href="#tibble-321"></a></h2><p class="text-muted">CRAN release: 2023-03-20</p>
 <div class="section level3">
