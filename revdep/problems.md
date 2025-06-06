@@ -1,134 +1,3 @@
-# covidcast
-
-<details>
-
-* Version: 0.5.2
-* GitHub: https://github.com/cmu-delphi/covidcast
-* Source code: https://github.com/cran/covidcast
-* Date/Publication: 2023-07-12 23:40:06 UTC
-* Number of recursive dependencies: 90
-
-Run `revdepcheck::cloud_details(, "covidcast")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking re-building of vignette outputs ... NOTE
-    ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘correlation-utils.Rmd’ using rmarkdown
-    --- finished re-building ‘correlation-utils.Rmd’
-    
-    --- re-building ‘covidcast.Rmd’ using rmarkdown
-    
-    Quitting from covidcast.Rmd:37-45 [unnamed-chunk-1]
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    NULL
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    
-    Error: processing vignette 'covidcast.Rmd' failed with diagnostics:
-    Rate limit exceeded when fetching data from API anonymously. See the "API keys" section of the `covidcast_signal()` documentation for information on registering for an API key.
-    ℹ Message from server:
-    ℹ Rate limit exceeded for anonymous queries. To remove this limit, register a free API key at https://api.delphi.cmu.edu/epidata/admin/registration_form
-    --- failed re-building ‘covidcast.Rmd’
-    
-    --- re-building ‘external-data.Rmd’ using rmarkdown
-    ```
-
-## In both
-
-*   checking data for non-ASCII characters ... NOTE
-    ```
-      Note: found 20 marked UTF-8 strings
-    ```
-
-# MachineShop
-
-<details>
-
-* Version: 3.8.0
-* GitHub: https://github.com/brian-j-smith/MachineShop
-* Source code: https://github.com/cran/MachineShop
-* Date/Publication: 2024-08-19 17:40:16 UTC
-* Number of recursive dependencies: 234
-
-Run `revdepcheck::cloud_details(, "MachineShop")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  5.2Mb
-      sub-directories of 1Mb or more:
-        R   3.5Mb
-    ```
-
-## In both
-
-*   checking package dependencies ... NOTE
-    ```
-    Package suggested but not available for checking: ‘rms’
-    ```
-
-*   checking Rd cross-references ... NOTE
-    ```
-    Unknown package ‘rms’ in Rd xrefs
-    ```
-
-# metan
-
-<details>
-
-* Version: 1.19.0
-* GitHub: https://github.com/nepem-ufsc/metan
-* Source code: https://github.com/cran/metan
-* Date/Publication: 2024-12-15 01:00:02 UTC
-* Number of recursive dependencies: 100
-
-Run `revdepcheck::cloud_details(, "metan")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking installed package size ... NOTE
-    ```
-      installed size is  6.4Mb
-      sub-directories of 1Mb or more:
-        R      3.0Mb
-        help   3.0Mb
-    ```
-
-## In both
-
-*   checking running R code from vignettes ... ERROR
-    ```
-    Errors in running code in vignettes:
-    when running code in ‘metan_start.Rmd’
-      ...
-    G6  2.30 2.17 1.40 1.43 2.88 1.77 3.26 3.40 3.41 3.68 2.43 1.67 2.56 3.12
-    G7  2.75 2.48 1.36 1.88 3.12 1.88 2.63 4.05 3.05 4.20 2.70 2.57 2.50 3.19
-    G8  2.84 2.57 1.72 1.92 3.62 2.10 3.43 4.26 3.97 4.59 3.06 2.19 2.97 2.79
-    G9  2.34 1.79 1.10 1.34 2.96 1.43 3.11 4.38 4.06 4.07 2.69 1.53 2.37 1.99
-    
-    > model2 <- gamem_met(data_ge, ENV, GEN, REP, everything())
-    
-      When sourcing ‘metan_start.R’:
-    Error: function 'cholmod_factor_ldetA' not provided by package 'Matrix'
-    Execution halted
-    
-      ‘metan_start.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
-    ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘metan_start.Rmd’ using rmarkdown
-    ```
-
 # opendataformat
 
 <details>
@@ -382,20 +251,20 @@ Run `revdepcheck::cloud_details(, "opendataformat")` for more info
            3 Zufriedenstellend
            4       Weniger gut
            5          Schlecht
-      [1] "Dataset successfully written to '/tmp/RtmpQLP3hS/MY_XML.odf.zip'"
-      [1] "Dataset successfully written to '/tmp/RtmpQLP3hS/MY_XML.zip'"
-      [1] "Dataset successfully written to '/tmp/RtmpQLP3hS/MY_XML.odf.zip'"
-      [1] "Dataset successfully written to '/tmp/RtmpQLP3hS/MY_XML.odf.zip'"
-      [1] "Dataset successfully written to '/tmp/RtmpQLP3hS/MY_XML.odf.zip'"
-      [1] "Dataset successfully written to '/tmp/RtmpQLP3hS/df_with_extrem_values.odf.zip'"
-      [1] "Dataset successfully written to '/tmp/RtmpQLP3hS/MY_XML.odf.zip'"
-      [1] "Dataset successfully written to '/tmp/RtmpQLP3hS/MY_XML2.odf.zip'"
-      [1] "Dataset successfully written to '/tmp/RtmpQLP3hS/MY_XML.odf.zip'"
-      [1] "Dataset successfully written to '/tmp/RtmpQLP3hS/MY_XML.zip'"
-      [1] "Dataset successfully written to '/tmp/RtmpQLP3hS/MY_XML.odf.zip'"
-      [1] "Dataset successfully written to '/tmp/RtmpQLP3hS/MY_XML.odf.zip'"
-      [1] "Dataset successfully written to '/tmp/RtmpQLP3hS/MY_XML.odf.zip'"
-      [1] "Dataset successfully written to '/tmp/RtmpQLP3hS/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/df_with_extrem_values.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML2.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
       [ FAIL 17 | WARN 0 | SKIP 0 | PASS 680 ]
       
       ══ Failed tests ════════════════════════════════════════════════════════════════
