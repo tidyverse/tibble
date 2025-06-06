@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.2.1.9055
+
+## Bug fixes
+
+- Subset tibble with `"0"` for row index (@eitsupi, #1636, #1637).
+
+
 # tibble 3.2.1.9054
 
 ## Continuous integration
