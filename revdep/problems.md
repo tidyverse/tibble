@@ -1,237 +1,400 @@
-# covidcast
+# opendataformat
 
 <details>
 
-* Version: 0.5.2
-* GitHub: https://github.com/cmu-delphi/covidcast
-* Source code: https://github.com/cran/covidcast
-* Date/Publication: 2023-07-12 23:40:06 UTC
-* Number of recursive dependencies: 93
+* Version: 2.2.0
+* GitHub: https://github.com/opendataformat/r-package-opendataformat
+* Source code: https://github.com/cran/opendataformat
+* Date/Publication: 2025-03-11 15:30:02 UTC
+* Number of recursive dependencies: 108
 
-Run `revdepcheck::cloud_details(, "covidcast")` for more info
+Run `revdepcheck::cloud_details(, "opendataformat")` for more info
 
 </details>
 
 ## Newly broken
 
-*   checking running R code from vignettes ... ERROR
+*   checking tests ... ERROR
     ```
-    Errors in running code in vignettes:
-    when running code in ‘multi-signals.Rmd’
-      ...
-    
-    > signals <- covidcast_signals(data_source = "jhu-csse", 
-    +     signal = c("confirmed_7dav_incidence_prop", "deaths_7dav_incidence_prop"), 
-    +     star .... [TRUNCATED] 
-    
-      When sourcing ‘multi-signals.R’:
-    Error: Rate limit exceeded when fetching data from API anonymously. See the "API keys" section of the `covidcast_signal()` documentation for information on registering for an API key.
-    ℹ Message from server:
-    ℹ Rate limit exceeded for anonymous queries. To remove this limit, register a free API key at https://api.delphi.cmu.edu/epidata/admin/registration_form
-    Execution halted
-    when running code in ‘plotting-signals.Rmd’
-      ...
-    server maintenance, and new features.
-    
-    > dv <- covidcast_signal(data_source = "doctor-visits", 
-    +     signal = "smoothed_adj_cli", start_day = "2020-07-01", end_day = "2020-07-14")
-    
-      When sourcing ‘plotting-signals.R’:
-    Error: Rate limit exceeded when fetching data from API anonymously. See the "API keys" section of the `covidcast_signal()` documentation for information on registering for an API key.
-    ℹ Message from server:
-    ℹ Rate limit exceeded for anonymous queries. To remove this limit, register a free API key at https://api.delphi.cmu.edu/epidata/admin/registration_form
-    Execution halted
-    
-      ‘correlation-utils.Rmd’ using ‘UTF-8’... OK
-      ‘covidcast.Rmd’ using ‘UTF-8’... OK
-      ‘external-data.Rmd’ using ‘UTF-8’... OK
-      ‘multi-signals.Rmd’ using ‘UTF-8’... failed
-      ‘plotting-signals.Rmd’ using ‘UTF-8’... failed
-    ```
-
-*   checking re-building of vignette outputs ... NOTE
-    ```
-    Error(s) in re-building vignettes:
-    --- re-building ‘correlation-utils.Rmd’ using rmarkdown
-    --- finished re-building ‘correlation-utils.Rmd’
-    
-    --- re-building ‘covidcast.Rmd’ using rmarkdown
-    
-    Quitting from lines  at lines 38-45 [unnamed-chunk-1] (covidcast.Rmd)
-    Error: processing vignette 'covidcast.Rmd' failed with diagnostics:
-    Rate limit exceeded when fetching data from API anonymously. See the "API keys" section of the `covidcast_signal()` documentation for information on registering for an API key.
-    ℹ Message from server:
-    ℹ Rate limit exceeded for anonymous queries. To remove this limit, register a free API key at https://api.delphi.cmu.edu/epidata/admin/registration_form
-    --- failed re-building ‘covidcast.Rmd’
-    
-    --- re-building ‘external-data.Rmd’ using rmarkdown
+      Running ‘testthat.R’
+    Running the tests in ‘tests/testthat.R’ failed.
+    Complete output:
+      > library(testthat)
+      > library(ISLR)
+      > library(opendataformat)
+      > 
+      > test_check("opendataformat")
+      [1] "No metadata in en available. Active language is 'NA'."
+      [1] "No metadata in en available. Active language is 'NA'."
+      [1] "No metadata in 'fr' available. Active language is 'en'."
+      [4m[1mDataset:[0m[0m  soep-core v38.1: bap
+      [1mLabel:[0m
+      [en]Data from individual questionnaires 2010
+      [de]Daten vom Personenfragebogen 2010
+      [1mDescription:[0m
+      [en]The data were collected as part of the SOEP-Core study using the questionnaire "Living in Germany - Survey 2010 on the social situation - Personal questionnaire for all. This questionnaire is addressed to the individual persons in the household. A view of the survey instrument can be found here: https://www.diw.de/documents/dokumentenarchiv/17/diw_01.c.369781.de/soepfrabo_personen_2010.pdf
+      [de]Die Daten wurden im Rahmen der Studie SOEP-Core mittels des Fragebogens „Leben in Deutschland – Befragung 2010 zur sozialen Lage - Personenfragebogen für alle“ erhoben. Dieser Fragebogen richtet sich an die einzelnen Personen im Haushalt. Eine Ansicht des Erhebungsinstrumentes finden Sie hier: https://www.diw.de/documents/dokumentenarchiv/17/diw_01.c.369781.de/soepfrabo_personen_2010.pdf
+      [1mlanguages:[0m
+          en de (active: en)
+      [1mURL:[0m
+          https://paneldata.org/soep-core/data/bap
+      [1mVariables:[0m
+        Variable                          Label en                          Label de
+      1    bap87                    Current Health    Gesundheitszustand gegenwärtig
+      2  bap9201    hours of sleep, normal workday  Stunden Schlaf, normaler Werktag
+      3  bap9001     Pressed For Time Last 4 Weeks  Eile, Zeitdruck letzten 4 Wochen
+      4  bap9002 Run-down, Melancholy Last 4 Weeks Niedergeschlagen letzten 4 Wochen
+      5  bap9003        Well-balanced Last 4 Weeks     Ausgeglichen letzten 4 Wochen
+      6    bap96                            Height                       Körpergröße
+      7     name                         Firstname                           Vorname
+      [4m[1mDataset:[0m[0m  soep-core v38.1: bap
+      [1mLabel:[0m
+      [en]Data from individual questionnaires 2010
+      [de]Daten vom Personenfragebogen 2010
+      [1mDescription:[0m
+      [en]The data were collected as part of the SOEP-Core study using the questionnaire "Living in Germany - Survey 2010 on the social situation - Personal questionnaire for all. This questionnaire is addressed to the individual persons in the household. A view of the survey instrument can be found here: https://www.diw.de/documents/dokumentenarchiv/17/diw_01.c.369781.de/soepfrabo_personen_2010.pdf
+      [de]Die Daten wurden im Rahmen der Studie SOEP-Core mittels des Fragebogens „Leben in Deutschland – Befragung 2010 zur sozialen Lage - Personenfragebogen für alle“ erhoben. Dieser Fragebogen richtet sich an die einzelnen Personen im Haushalt. Eine Ansicht des Erhebungsinstrumentes finden Sie hier: https://www.diw.de/documents/dokumentenarchiv/17/diw_01.c.369781.de/soepfrabo_personen_2010.pdf
+      [1mlanguages:[0m
+          en de (active: en)
+      [1mURL:[0m
+          https://paneldata.org/soep-core/data/bap
+      [1mVariables:[0m
+        Variable                          Label en                          Label de
+      1    bap87                    Current Health    Gesundheitszustand gegenwärtig
+      2  bap9201    hours of sleep, normal workday  Stunden Schlaf, normaler Werktag
+      3  bap9001     Pressed For Time Last 4 Weeks  Eile, Zeitdruck letzten 4 Wochen
+      4  bap9002 Run-down, Melancholy Last 4 Weeks Niedergeschlagen letzten 4 Wochen
+      5  bap9003        Well-balanced Last 4 Weeks     Ausgeglichen letzten 4 Wochen
+      6    bap96                            Height                       Körpergröße
+      7     name                         Firstname                           Vorname
+      [4m[1mDataset:[0m[0m  soep-core v38.1: bap
+      [1mLabel:[0m
+      [en]Data from individual questionnaires 2010
+      [1mDescription:[0m
+      [en]The data were collected as part of the SOEP-Core study using the questionnaire "Living in Germany - Survey 2010 on the social situation - Personal questionnaire for all. This questionnaire is addressed to the individual persons in the household. A view of the survey instrument can be found here: https://www.diw.de/documents/dokumentenarchiv/17/diw_01.c.369781.de/soepfrabo_personen_2010.pdf
+      [1mlanguages:[0m
+          en de (active: en)
+      [1mURL:[0m
+          https://paneldata.org/soep-core/data/bap
+      [1mVariables:[0m
+        Variable                          Label en
+      1    bap87                    Current Health
+      2  bap9201    hours of sleep, normal workday
+      3  bap9001     Pressed For Time Last 4 Weeks
+      4  bap9002 Run-down, Melancholy Last 4 Weeks
+      5  bap9003        Well-balanced Last 4 Weeks
+      6    bap96                            Height
+      7     name                         Firstname
+      [4m[1mDataset:[0m[0m  soep-core v38.1: bap
+      [1mLabel:[0m
+      [en]Data from individual questionnaires 2010
+      [1mDescription:[0m
+      [en]The data were collected as part of the SOEP-Core study using the questionnaire "Living in Germany - Survey 2010 on the social situation - Personal questionnaire for all. This questionnaire is addressed to the individual persons in the household. A view of the survey instrument can be found here: https://www.diw.de/documents/dokumentenarchiv/17/diw_01.c.369781.de/soepfrabo_personen_2010.pdf
+      [1mlanguages:[0m
+          en de (active: en)
+      [1mURL:[0m
+          https://paneldata.org/soep-core/data/bap
+      [1mVariables:[0m
+        Variable                          Label en
+      1    bap87                    Current Health
+      2  bap9201    hours of sleep, normal workday
+      3  bap9001     Pressed For Time Last 4 Weeks
+      4  bap9002 Run-down, Melancholy Last 4 Weeks
+      5  bap9003        Well-balanced Last 4 Weeks
+      6    bap96                            Height
+      7     name                         Firstname
+      [4m[1mDataset:[0m[0m  soep-core v38.1: bap
+      [1mLabel:[0m
+      [de]Daten vom Personenfragebogen 2010
+      [1mDescription:[0m
+      [de]Die Daten wurden im Rahmen der Studie SOEP-Core mittels des Fragebogens „Leben in Deutschland – Befragung 2010 zur sozialen Lage - Personenfragebogen für alle“ erhoben. Dieser Fragebogen richtet sich an die einzelnen Personen im Haushalt. Eine Ansicht des Erhebungsinstrumentes finden Sie hier: https://www.diw.de/documents/dokumentenarchiv/17/diw_01.c.369781.de/soepfrabo_personen_2010.pdf
+      [1mlanguages:[0m
+          en de (active: en)
+      [1mURL:[0m
+          https://paneldata.org/soep-core/data/bap
+      [1mVariables:[0m
+        Variable                          Label de
+      1    bap87    Gesundheitszustand gegenwärtig
+      2  bap9201  Stunden Schlaf, normaler Werktag
+      3  bap9001  Eile, Zeitdruck letzten 4 Wochen
+      4  bap9002 Niedergeschlagen letzten 4 Wochen
+      5  bap9003     Ausgeglichen letzten 4 Wochen
+      6    bap96                       Körpergröße
+      7     name                           Vorname
+      [4m[1mDataset:[0m[0m  soep-core v38.1: bap
+      [1mLabel:[0m
+      [de]Daten vom Personenfragebogen 2010
+      [1mDescription:[0m
+      [de]Die Daten wurden im Rahmen der Studie SOEP-Core mittels des Fragebogens „Leben in Deutschland – Befragung 2010 zur sozialen Lage - Personenfragebogen für alle“ erhoben. Dieser Fragebogen richtet sich an die einzelnen Personen im Haushalt. Eine Ansicht des Erhebungsinstrumentes finden Sie hier: https://www.diw.de/documents/dokumentenarchiv/17/diw_01.c.369781.de/soepfrabo_personen_2010.pdf
+      [1mlanguages:[0m
+          en de (active: en)
+      [1mURL:[0m
+          https://paneldata.org/soep-core/data/bap
+      [1mVariables:[0m
+        Variable                          Label de
+      1    bap87    Gesundheitszustand gegenwärtig
+      2  bap9201  Stunden Schlaf, normaler Werktag
+      3  bap9001  Eile, Zeitdruck letzten 4 Wochen
+      4  bap9002 Niedergeschlagen letzten 4 Wochen
+      5  bap9003     Ausgeglichen letzten 4 Wochen
+      6    bap96                       Körpergröße
+      7     name                           Vorname
+      [4m[1mVariable:[0m[0m  bap87
+      [1mLabel:[0m
+      [en]Current Health
+      [de]Gesundheitszustand gegenwärtig
+      [1mDescription:[0m
+      [en]Question: How would you describe your current health?
+      [de]Frage: Wie würden Sie Ihren gegenwärtigen Gesundheitszustand beschreiben?
+      [1mType:[0m
+          numeric
+      [1mURL:[0m
+          https://paneldata.org/soep-core/data/bap/bap87
+      [1mValue Labels:[0m
+       Value             en                de
+          -2 Does not apply   trifft nicht zu
+          -1      No Answer      keine Angabe
+           1      Very good          Sehr gut
+           2           Good               Gut
+           3   Satisfactory Zufriedenstellend
+           4           Poor       Weniger gut
+           5            Bad          Schlecht
+      [4m[1mVariable:[0m[0m  bap87
+      [1mLabel:[0m
+      [en]Current Health
+      [de]Gesundheitszustand gegenwärtig
+      [1mDescription:[0m
+      [en]Question: How would you describe your current health?
+      [de]Frage: Wie würden Sie Ihren gegenwärtigen Gesundheitszustand beschreiben?
+      [1mType:[0m
+          numeric
+      [1mURL:[0m
+          https://paneldata.org/soep-core/data/bap/bap87
+      [1mValue Labels:[0m
+       Value             en                de
+          -2 Does not apply   trifft nicht zu
+          -1      No Answer      keine Angabe
+           1      Very good          Sehr gut
+           2           Good               Gut
+           3   Satisfactory Zufriedenstellend
+           4           Poor       Weniger gut
+           5            Bad          Schlecht
+      [4m[1mVariable:[0m[0m  bap87
+      [1mLabel:[0m
+      [en]Current Health
+      [1mDescription:[0m
+      [en]Question: How would you describe your current health?
+      [1mType:[0m
+          numeric
+      [1mURL:[0m
+          https://paneldata.org/soep-core/data/bap/bap87
+      [1mValue Labels:[0m
+       Value             en
+          -2 Does not apply
+          -1      No Answer
+           1      Very good
+           2           Good
+           3   Satisfactory
+           4           Poor
+           5            Bad
+      [4m[1mVariable:[0m[0m  bap87
+      [1mLabel:[0m
+      [en]Current Health
+      [1mDescription:[0m
+      [en]Question: How would you describe your current health?
+      [1mType:[0m
+          numeric
+      [1mURL:[0m
+          https://paneldata.org/soep-core/data/bap/bap87
+      [1mValue Labels:[0m
+       Value             en
+          -2 Does not apply
+          -1      No Answer
+           1      Very good
+           2           Good
+           3   Satisfactory
+           4           Poor
+           5            Bad
+      [4m[1mVariable:[0m[0m  bap87
+      [1mLabel:[0m
+      [de]Gesundheitszustand gegenwärtig
+      [1mDescription:[0m
+      [de]Frage: Wie würden Sie Ihren gegenwärtigen Gesundheitszustand beschreiben?
+      [1mType:[0m
+          numeric
+      [1mURL:[0m
+          https://paneldata.org/soep-core/data/bap/bap87
+      [1mValue Labels:[0m
+       Value                de
+          -2   trifft nicht zu
+          -1      keine Angabe
+           1          Sehr gut
+           2               Gut
+           3 Zufriedenstellend
+           4       Weniger gut
+           5          Schlecht
+      [4m[1mVariable:[0m[0m  bap87
+      [1mLabel:[0m
+      [de]Gesundheitszustand gegenwärtig
+      [1mDescription:[0m
+      [de]Frage: Wie würden Sie Ihren gegenwärtigen Gesundheitszustand beschreiben?
+      [1mType:[0m
+          numeric
+      [1mURL:[0m
+          https://paneldata.org/soep-core/data/bap/bap87
+      [1mValue Labels:[0m
+       Value                de
+          -2   trifft nicht zu
+          -1      keine Angabe
+           1          Sehr gut
+           2               Gut
+           3 Zufriedenstellend
+           4       Weniger gut
+           5          Schlecht
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/df_with_extrem_values.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML2.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [1] "Dataset successfully written to '/tmp/RtmpZHVCPc/MY_XML.odf.zip'"
+      [ FAIL 17 | WARN 0 | SKIP 0 | PASS 680 ]
+      
+      ══ Failed tests ════════════════════════════════════════════════════════════════
+      ── Failure ('test-as_odf_tbl.R:69:3'): as_odf_tbl ──────────────────────────────
+      names(attributes(df_out)) not equal to c(...).
+      Lengths differ: 13 is not 14
+      ── Failure ('test-as_odf_tbl.R:143:3'): as_odf_tbl ─────────────────────────────
+      names(attributes(df_out)) not equal to c(...).
+      Lengths differ: 15 is not 16
+      ── Failure ('test-read_odf.R:8:3'): read_odf_all ───────────────────────────────
+      names(attributes(df)) not equal to c(...).
+      Lengths differ: 13 is not 14
+      ── Failure ('test-read_odf.R:80:3'): read_odf_all ──────────────────────────────
+      names(attributes(df)) not equal to c(...).
+      Lengths differ: 13 is not 14
+      ── Failure ('test-read_odf.R:154:3'): read_odf_variables ───────────────────────
+      names(attributes(df)) not equal to c(...).
+      Lengths differ: 15 is not 16
+      ── Failure ('test-read_odf.R:210:3'): read_odf_de ──────────────────────────────
+      names(attributes(df)) not equal to c(...).
+      Lengths differ: 11 is not 12
+      ── Failure ('test-read_odf.R:267:3'): read_odf_specific_rows ───────────────────
+      names(attributes(df)) not equal to c(...).
+      Lengths differ: 13 is not 14
+      ── Failure ('test-read_odf.R:346:3'): read_odf_specific_rows2 ──────────────────
+      names(attributes(df)) not equal to c(...).
+      Lengths differ: 13 is not 14
+      ── Failure ('test-read_odf.R:425:3'): read_odf_specific_variables ──────────────
+      names(attributes(df)) not equal to c(...).
+      Lengths differ: 13 is not 14
+      ── Failure ('test-read_odf.R:488:3'): read_odf_specific_variables ──────────────
+      names(attributes(df)) not equal to c(...).
+      Lengths differ: 13 is not 14
+      ── Failure ('test-read_odf.R:570:3'): read_odf_specific_rows_and_cols ──────────
+      names(attributes(df)) not equal to c(...).
+      Lengths differ: 13 is not 14
+      ── Failure ('test-read_odf.R:657:3'): read_odf_specific_rows_and_cols2 ─────────
+      names(attributes(df)) not equal to c(...).
+      Lengths differ: 13 is not 14
+      ── Failure ('test-read_odf.R:745:3'): read_odf_specific_language_rows_and_cols ──
+      names(attributes(df)) not equal to c(...).
+      Lengths differ: 11 is not 12
+      ── Failure ('test_merge.R:35:3'): merge.odf ────────────────────────────────────
+      names(attributes(df_out)) not equal to c(...).
+      Lengths differ: 6 is not 8
+      ── Failure ('test_merge.R:78:3'): merge.odf ────────────────────────────────────
+      names(attributes(df_out2)) not equal to c(...).
+      Lengths differ: 6 is not 8
+      ── Failure ('test_merge.R:122:3'): merge.odf ───────────────────────────────────
+      names(attributes(df_out2)) not equal to c(...).
+      Lengths differ: 6 is not 8
+      ── Failure ('test_merge.R:168:3'): merge.odf ───────────────────────────────────
+      names(attributes(df_out2)) not equal to c(...).
+      Lengths differ: 6 is not 8
+      
+      [ FAIL 17 | WARN 0 | SKIP 0 | PASS 680 ]
+      Error: Test failures
+      Execution halted
     ```
 
 ## In both
 
 *   checking data for non-ASCII characters ... NOTE
     ```
-      Note: found 20 marked UTF-8 strings
+      Note: found 8 marked UTF-8 strings
     ```
 
-# LexisNexisTools
+# oppr
 
 <details>
 
-* Version: 0.3.7
-* GitHub: https://github.com/JBGruber/LexisNexisTools
-* Source code: https://github.com/cran/LexisNexisTools
-* Date/Publication: 2023-07-05 13:33:03 UTC
-* Number of recursive dependencies: 119
+* Version: 1.0.4
+* GitHub: https://github.com/prioritizr/oppr
+* Source code: https://github.com/cran/oppr
+* Date/Publication: 2022-09-08 11:00:24 UTC
+* Number of recursive dependencies: 101
 
-Run `revdepcheck::cloud_details(, "LexisNexisTools")` for more info
+Run `revdepcheck::cloud_details(, "oppr")` for more info
 
 </details>
 
 ## Newly broken
 
-*   checking tests ... ERROR
+*   checking re-building of vignette outputs ... ERROR
     ```
-      Running ‘spelling.R’
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library("testthat")
-      > library("LexisNexisTools")
-      LexisNexisTools Version 0.3.7
-      Warning messages:
-      1: In .recacheSubclasses(def@className, def, env) :
-        undefined subclass "ndiMatrix" of class "replValueSp"; definition not updated
-      2: In .recacheSubclasses(def@className, def, env) :
-        undefined subclass "pcorMatrix" of class "replValueSp"; definition not updated
-      3: In .recacheSubclasses(def@className, def, env) :
-        undefined subclass "ndiMatrix" of class "replValueSp"; definition not updated
-      4: In .recacheSubclasses(def@className, def, env) :
-        undefined subclass "pcorMatrix" of class "replValueSp"; definition not updated
-      > 
-      > test_check("LexisNexisTools")
-      
-        |                                                  | 0 % ~calculating  
-        |+++++                                             | 10% ~00s          
-        |++++++++++                                        | 20% ~00s          
-        |+++++++++++++++                                   | 30% ~00s          
-        |++++++++++++++++++++                              | 40% ~00s          
-        |+++++++++++++++++++++++++                         | 50% ~00s          
-        |++++++++++++++++++++++++++++++                    | 60% ~00s          
-        |+++++++++++++++++++++++++++++++++++               | 70% ~00s          
-        |++++++++++++++++++++++++++++++++++++++++          | 80% ~00s          
-        |+++++++++++++++++++++++++++++++++++++++++++++     | 90% ~00s          
-        |++++++++++++++++++++++++++++++++++++++++++++++++++| 100% elapsed=00s  
-      [ FAIL 2 | WARN 0 | SKIP 3 | PASS 96 ]
-      
-      ══ Skipped tests (3) ═══════════════════════════════════════════════════════════
-      • !dir.exists("/home/johannes/Dropbox/LexisNexis_sample_files/") is TRUE (1):
-        'test-lnt_read_uni.R:23:3'
-      • On CRAN (2): 'test-lnt_convert.R:149:3', 'test-lnt_read_uni.R:33:3'
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Failure ('test-lnt_read.R:7:3'): Read in sample file ────────────────────────
-      {
-          ...
-      } not equal to readRDS("../files/LNToutput.RDS").
-      Attributes: < Component "paragraphs": Attributes: < Names: 2 string mismatches > >
-      Attributes: < Component "paragraphs": Attributes: < Length mismatch: comparison on first 2 components > >
-      Attributes: < Component "paragraphs": Attributes: < Component 1: Modes: character, externalptr > >
-      Attributes: < Component "paragraphs": Attributes: < Component 1: Lengths: 3, 1 > >
-      Attributes: < Component "paragraphs": Attributes: < Component 1: target is character, current is externalptr > >
-      Attributes: < Component "paragraphs": Attributes: < Component 2: Modes: numeric, character > >
-      Attributes: < Component "paragraphs": Attributes: < Component 2: Lengths: 122, 3 > >
-      Attributes: < Component "paragraphs": Attributes: < Component 2: target is numeric, current is character > >
-      ── Failure ('test-lnt_read.R:14:3'): Read in sample file ───────────────────────
-      {
-          ...
-      } not equal to readRDS("../files/LNToutput.RDS").
-      Attributes: < Component "paragraphs": Attributes: < Names: 2 string mismatches > >
-      Attributes: < Component "paragraphs": Attributes: < Length mismatch: comparison on first 2 components > >
-      Attributes: < Component "paragraphs": Attributes: < Component 1: Modes: character, externalptr > >
-      Attributes: < Component "paragraphs": Attributes: < Component 1: Lengths: 3, 1 > >
-      Attributes: < Component "paragraphs": Attributes: < Component 1: target is character, current is externalptr > >
-      Attributes: < Component "paragraphs": Attributes: < Component 2: Modes: numeric, character > >
-      Attributes: < Component "paragraphs": Attributes: < Component 2: Lengths: 122, 3 > >
-      Attributes: < Component "paragraphs": Attributes: < Component 2: target is numeric, current is character > >
-      
-      [ FAIL 2 | WARN 0 | SKIP 3 | PASS 96 ]
-      Error: Test failures
-      Execution halted
+    Error(s) in re-building vignettes:
+    --- re-building ‘oppr.Rmd’ using rmarkdown_notangle
+    
+    Quitting from oppr.Rmd:18-71 [unnamed-chunk-1]
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    [1m[34m<error/rlang_error>[39m[22m
+    [1m[33mError[39m in [1m[94m`loadNamespace()`[39m[1m:[22m
+    [33m![39m there is no package called 'fansi'
+    ---
+    [1mBacktrace:[22m
+    [90m    [39m▆
+    [90m 1. [39m└─[1mbase[22m::loadNamespace(x)
+    [90m 2. [39m  └─base::withRestarts(stop(cond), retry_loadNamespace = function() NULL)
+    [90m 3. [39m    └─base (local) withOneRestart(expr, restarts[[1L]])
+    [90m 4. [39m      └─base (local) doWithOneRestart(return(expr), restart)
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    
+    Error: processing vignette 'oppr.Rmd' failed with diagnostics:
+    there is no package called 'fansi'
+    --- failed re-building ‘oppr.Rmd’
+    
+    SUMMARY: processing the following file failed:
+      ‘oppr.Rmd’
+    
+    Error: Vignette re-building failed.
+    Execution halted
     ```
 
-# NMdata
+## In both
 
-<details>
-
-* Version: 0.1.5
-* GitHub: https://github.com/philipdelff/NMdata
-* Source code: https://github.com/cran/NMdata
-* Date/Publication: 2024-02-21 08:10:02 UTC
-* Number of recursive dependencies: 80
-
-Run `revdepcheck::cloud_details(, "NMdata")` for more info
-
-</details>
-
-## Newly broken
-
-*   checking tests ... ERROR
+*   checking package dependencies ... NOTE
     ```
-      Running ‘spelling.R’
-      Running ‘testthat.R’
-    Running the tests in ‘tests/testthat.R’ failed.
-    Complete output:
-      > library(testthat)
-      > library(NMdata)
-      NMdata 0.1.5. Browse NMdata documentation at
-      https://philipdelff.github.io/NMdata/
-      > 
-      > test_check("NMdata")
-      
-      Overview of model scanning results:
-                                  lst nrows ncols success warning
-                               <char> <int> <int>  <lgcl>  <lgcl>
-      1: testData/nonmem//xgxr001.lst   905    40    TRUE   FALSE
-      2: testData/nonmem//xgxr002.lst   905    34    TRUE   FALSE
-      3: testData/nonmem//xgxr003.lst   905    34    TRUE   FALSE
-      4: testData/nonmem//xgxr004.lst   731    35    TRUE   FALSE
-      5: testData/nonmem//xgxr005.lst   447    35    TRUE   FALSE
-      6: testData/nonmem//xgxr006.lst   893    35    TRUE   FALSE
-      7: testData/nonmem//xgxr007.lst   893    35    TRUE   FALSE
-      8: testData/nonmem//xgxr008.lst   893    35    TRUE   FALSE
-      9: testData/nonmem//xgxr009.lst   131    35    TRUE   FALSE
-      Error in (function (data, drop, col.flagn = "FLAG", rename, copy, file,  : 
-        drop cannot contain empty strings and NA's.
-      Table written to testOutput/flagsCount_5.csv
-         variable Nmissing
-           <fctr>    <int>
-      1:       DV      150
-      [ FAIL 1 | WARN 3 | SKIP 1 | PASS 271 ]
-      
-      ══ Skipped tests (1) ═══════════════════════════════════════════════════════════
-      • empty test (1): 'test_flagsCount.R:6:1'
-      
-      ══ Failed tests ════════════════════════════════════════════════════════════════
-      ── Failure ('test_NMscanData.R:449:5'): use as.fun to get a tibble ─────────────
-      `res1` has changed from known value recorded in 'testReference/NMscanData_18.rds'.
-      Attributes: < Names: 3 string mismatches >
-      Attributes: < Length mismatch: comparison on first 3 components >
-      Attributes: < Component 1: Modes: list, externalptr >
-      Attributes: < Component 1: Lengths: 6, 1 >
-      Attributes: < Component 1: names for target but not for current >
-      Attributes: < Component 1: current is not list-like >
-      Attributes: < Component 2: Modes: character, list >
-      Attributes: < Component 2: Lengths: 4, 6 >
-      Attributes: < Component 2: names for current but not for target >
-      ...
-      Backtrace:
-          ▆
-       1. └─testthat::expect_equal_to_reference(res1, fileRef, version = 2) at test_NMscanData.R:449:5
-       2.   └─testthat::expect_known_value(..., update = update)
-      
-      [ FAIL 1 | WARN 3 | SKIP 1 | PASS 271 ]
-      Error: Test failures
-      Execution halted
+    Package suggested but not available for checking: ‘gurobi’
+    ```
+
+*   checking C++ specification ... NOTE
+    ```
+      Specified C++11: please drop specification unless essential
+    ```
+
+*   checking installed package size ... NOTE
+    ```
+      installed size is 13.8Mb
+      sub-directories of 1Mb or more:
+        R      1.5Mb
+        libs  11.3Mb
     ```
 
