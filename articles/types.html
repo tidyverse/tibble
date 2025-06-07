@@ -6,15 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Column types • tibble</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="48x48" href="../favicon-48x48.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.9/font.css" rel="stylesheet">
-<link href="../deps/Source_Code_Pro-0.4.9/font.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Column types">
@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +89,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>Column types</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/docs/vignettes/types.Rmd" class="external-link"><code>vignettes/types.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/cran-3.3.0/vignettes/types.Rmd" class="external-link"><code>vignettes/types.Rmd</code></a></small>
       <div class="d-none name"><code>types.Rmd</code></div>
     </div>
 
@@ -307,8 +307,8 @@ in the header of a column indicates an integer column, and
 <span><span class="co">#&gt; $ `named list`  <span style="color: #949494; font-style: italic;">&lt;named list&gt;</span> 1</span></span>
 <span><span class="co">#&gt; $ factor        <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span> A</span></span>
 <span><span class="co">#&gt; $ ordered       <span style="color: #949494; font-style: italic;">&lt;ord&gt;</span> a</span></span>
-<span><span class="co">#&gt; $ Date          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2024-12-15</span></span>
-<span><span class="co">#&gt; $ POSIXt        <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span> 2024-12-15 10:03:20</span></span>
+<span><span class="co">#&gt; $ Date          <span style="color: #949494; font-style: italic;">&lt;date&gt;</span> 2025-06-07</span></span>
+<span><span class="co">#&gt; $ POSIXt        <span style="color: #949494; font-style: italic;">&lt;dttm&gt;</span> 2025-06-07 08:40:08</span></span>
 <span><span class="co">#&gt; $ difftime      <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span> 1 secs</span></span>
 <span><span class="co">#&gt; $ hms           <span style="color: #949494; font-style: italic;">&lt;time&gt;</span> 00:00:01</span></span>
 <span><span class="co">#&gt; $ integer64     <span style="color: #949494; font-style: italic;">&lt;int64&gt;</span> 10000000000</span></span>
@@ -316,7 +316,7 @@ in the header of a column indicates an integer column, and
 <span><span class="co">#&gt; $ data.frame    <span style="color: #949494; font-style: italic;">&lt;df[,1]&gt;</span> &lt;data.frame[1 x 1]&gt;</span></span>
 <span><span class="co">#&gt; $ tbl_df        <span style="color: #949494; font-style: italic;">&lt;tibble[,1]&gt;</span> &lt;tbl_df[1 x 1]&gt;</span></span>
 <span><span class="co">#&gt; $ AsIs          <span style="color: #949494; font-style: italic;">&lt;I&lt;int&gt;&gt;</span> 1</span></span>
-<span><span class="co">#&gt; $ unspecified   <span style="color: #949494; font-style: italic;">&lt;???&gt;</span> NA</span></span>
+<span><span class="co">#&gt; $ unspecified   <span style="color: #949494; font-style: italic;">&lt;???&gt;</span> <span style="color: #BB0000;">NA</span></span></span>
 <span><span class="co">#&gt; $ vctrs_list_of <span style="color: #949494; font-style: italic;">&lt;list&lt;int&gt;&gt;</span> 1</span></span>
 <span><span class="co">#&gt; $ vctrs_vctr    <span style="color: #949494; font-style: italic;">&lt;vctrs_vc&gt;</span> 1</span></span>
 <span><span class="co">#&gt; $ quosures      <span style="color: #949494; font-style: italic;">&lt;quos&gt;</span> &lt;~1&gt;</span></span></code></pre>
@@ -347,7 +347,7 @@ can be overridden, but most of the time it is more useful to override
 <span><span class="co">#&gt;             "sym"</span></span>
 <span><span class="co">#&gt;         }, typeof(x))</span></span>
 <span><span class="co">#&gt; }</span></span>
-<span><span class="co">#&gt; &lt;bytecode: 0x55ada2538e50&gt;</span></span>
+<span><span class="co">#&gt; &lt;bytecode: 0x5577a4310090&gt;</span></span>
 <span><span class="co">#&gt; &lt;environment: namespace:pillar&gt;</span></span></code></pre></div>
 </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
@@ -363,7 +363,7 @@ can be overridden, but most of the time it is more useful to override
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.9000.</p>
 </div>
 
   </div></footer>

@@ -6,15 +6,15 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <title>Tibbles • tibble</title>
-<!-- favicons --><link rel="icon" type="image/png" sizes="48x48" href="../favicon-48x48.png">
+<!-- favicons --><link rel="icon" type="image/png" sizes="96x96" href="../favicon-96x96.png">
 <link rel="icon" type="”image/svg+xml”" href="../favicon.svg">
 <link rel="apple-touch-icon" sizes="180x180" href="../apple-touch-icon.png">
 <link rel="icon" sizes="any" href="../favicon.ico">
 <link rel="manifest" href="../site.webmanifest">
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.9/font.css" rel="stylesheet">
-<link href="../deps/Source_Code_Pro-0.4.9/font.css" rel="stylesheet">
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/Source_Sans_Pro-0.4.10/font.css" rel="stylesheet">
+<link href="../deps/Source_Code_Pro-0.4.10/font.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
 <link href="../deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Tibbles">
@@ -28,7 +28,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.2.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,7 +89,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>Tibbles</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/docs/vignettes/tibble.Rmd" class="external-link"><code>vignettes/tibble.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/cran-3.3.0/vignettes/tibble.Rmd" class="external-link"><code>vignettes/tibble.Rmd</code></a></small>
       <div class="d-none name"><code>tibble.Rmd</code></div>
     </div>
 
@@ -177,7 +177,7 @@ written with an eye for performance:</p>
 <code class="sourceCode R"><span><span class="va">l</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">replicate</a></span><span class="op">(</span><span class="fl">26</span>, <span class="fu"><a href="https://rdrr.io/r/base/sample.html" class="external-link">sample</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span>, simplify <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/names.html" class="external-link">names</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span> <span class="op">&lt;-</span> <span class="va">letters</span></span>
 <span></span>
-<span><span class="va">timing</span> <span class="op">&lt;-</span> <span class="fu">bench</span><span class="fu">::</span><span class="fu"><a href="http://bench.r-lib.org/reference/mark.html" class="external-link">mark</a></span><span class="op">(</span></span>
+<span><span class="va">timing</span> <span class="op">&lt;-</span> <span class="fu">bench</span><span class="fu">::</span><span class="fu"><a href="https://bench.r-lib.org/reference/mark.html" class="external-link">mark</a></span><span class="op">(</span></span>
 <span>  <span class="fu"><a href="../reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span>,</span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame</a></span><span class="op">(</span><span class="va">l</span><span class="op">)</span>,</span>
 <span>  check <span class="op">=</span> <span class="cn">FALSE</span></span>
@@ -185,10 +185,10 @@ written with an eye for performance:</p>
 <span></span>
 <span><span class="va">timing</span></span></code></pre></div>
 <pre><code><span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 2 × 14</span></span></span>
-<span><span class="co">#&gt;   expression    min         mean         median      max         `itr/sec`</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> as_tibble(l)  0.000287696 0.0006251376 0.000327178 0.004508219     <span style="text-decoration: underline;">1</span>600.</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> as.data.fram… 0.000791522 0.0016640039 0.001098172 0.007652914      601.</span></span>
+<span><span class="co">#&gt;   expression min         mean         median      max         `itr/sec`</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;bench_tm&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> as_tibble… 0.000287696 0.0006251376 0.000327178 0.004508219     <span style="text-decoration: underline;">1</span>600.</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span> as.data.f… 0.000791522 0.0016640039 0.001098172 0.007652914      601.</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># ℹ 8 more variables: mem_alloc &lt;bnch_byt&gt;, n_gc &lt;dbl&gt;, n_itr &lt;int&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   total_time &lt;bench_tm&gt;, result &lt;list&gt;, memory &lt;list&gt;, time &lt;list&gt;,</span></span></span>
 <span><span class="co">#&gt; <span style="color: #949494;">#   gc &lt;list&gt;</span></span></span></code></pre>
@@ -374,7 +374,7 @@ on this behavior, it may become an error in a forthcoming version.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.9000.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.9000.</p>
 </div>
 
   </div></footer>
