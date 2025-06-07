@@ -34,7 +34,11 @@
 new_tibble <- function(x, ..., nrow = NULL, class = NULL, subclass = NULL) {
   # For compatibility with tibble < 2.0.0
   if (is.null(class) && !is.null(subclass)) {
-    deprecate_stop("2.0.0", "tibble::new_tibble(subclass = )", "new_tibble(class = )")
+    deprecate_stop(
+      "2.0.0",
+      "tibble::new_tibble(subclass = )",
+      "new_tibble(class = )"
+    )
   }
 
   #' @section Construction:
@@ -52,7 +56,13 @@ new_tibble <- function(x, ..., nrow = NULL, class = NULL, subclass = NULL) {
   #' (But this is not checked by the constructor).
   #' This takes the place of the "row.names" attribute in a data frame.
   if (!is.null(nrow)) {
-    if (!is.numeric(nrow) || length(nrow) != 1 || nrow < 0 || !is_integerish(nrow, 1) || nrow >= 2147483648) {
+    if (
+      !is.numeric(nrow) ||
+        length(nrow) != 1 ||
+        nrow < 0 ||
+        !is_integerish(nrow, 1) ||
+        nrow >= 2147483648
+    ) {
       abort_new_tibble_nrow_must_be_nonnegative()
     }
     nrow <- as.integer(nrow)
@@ -160,7 +170,12 @@ validate_nrow <- function(names, lengths, nrow) {
   # Validate column lengths, don't recycle
   bad_len <- which(lengths != nrow)
   if (has_length(bad_len)) {
-    abort_incompatible_size(nrow, names, lengths, "Requested with `nrow` argument")
+    abort_incompatible_size(
+      nrow,
+      names,
+      lengths,
+      "Requested with `nrow` argument"
+    )
   }
 }
 
@@ -174,5 +189,8 @@ abort_new_tibble_must_be_list <- function(call = caller_env()) {
 }
 
 abort_new_tibble_nrow_must_be_nonnegative <- function(call = caller_env()) {
-  tibble_abort(call = call, "`nrow` must be a nonnegative whole number smaller than 2^31.")
+  tibble_abort(
+    call = call,
+    "`nrow` must be a nonnegative whole number smaller than 2^31."
+  )
 }

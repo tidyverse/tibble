@@ -93,7 +93,10 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
   }
 
   if (!has_length(value, length(x))) {
-    deprecate_soft("3.0.0", "tibble::`names<-`(value = 'must have the same length as `x`')")
+    deprecate_soft(
+      "3.0.0",
+      "tibble::`names<-`(value = 'must have the same length as `x`')"
+    )
 
     # FIXME: Reset NA to "" in names
 
@@ -111,7 +114,10 @@ as.data.frame.tbl_df <- function(x, row.names = NULL, optional = FALSE, ...) {
   }
 
   if (!is_character(value)) {
-    deprecate_soft("3.0.0", "tibble::`names<-`(value = 'must be a character vector')")
+    deprecate_soft(
+      "3.0.0",
+      "tibble::`names<-`(value = 'must be a character vector')"
+    )
     value <- as.character(value)
   }
 

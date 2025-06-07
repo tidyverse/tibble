@@ -42,3 +42,4 @@
 ^index\.md$
 ^\.cache$
 ^compile_commands\.json$
+^[\.]?air\.toml$

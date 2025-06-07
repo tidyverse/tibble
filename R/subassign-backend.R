@@ -12,7 +12,16 @@
 #'   `NULL` elements indicate column removal.
 #' @param i_arg,value_arg Argument names.
 #' @noRd
-tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg, call = caller_env()) {
+tbl_subassign <- function(
+  x,
+  i,
+  j,
+  value,
+  i_arg,
+  j_arg,
+  value_arg,
+  call = caller_env()
+) {
   if (is.null(i)) {
     xo <- unclass(x)
 
@@ -29,10 +38,23 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg, call = caller
       j <- seq_along(xo)
       names(j) <- names2(j)
     } else if (!is.null(j_arg)) {
-      j <- vectbl_as_new_col_index(j, xo, j_arg, names2(value), value_arg, call = call)
+      j <- vectbl_as_new_col_index(
+        j,
+        xo,
+        j_arg,
+        names2(value),
+        value_arg,
+        call = call
+      )
     }
 
-    value <- vectbl_recycle_rhs_rows(value, fast_nrow(xo), i_arg = NULL, value_arg, call)
+    value <- vectbl_recycle_rhs_rows(
+      value,
+      fast_nrow(xo),
+      i_arg = NULL,
+      value_arg,
+      call
+    )
     value <- vectbl_recycle_rhs_cols(value, length(j), call)
 
     xo <- tbl_subassign_col(xo, j, value)
@@ -59,7 +81,14 @@ tbl_subassign <- function(x, i, j, value, i_arg, j_arg, value_arg, call = caller
       # (Invariant: x[[j]] is equivalent to x[[vec_as_location(j)]],
       # allowed by corollary that only existing columns can be updated)
       if (!is.null(j_arg)) {
-        j <- vectbl_as_new_col_index(j, xo, j_arg, names2(value), value_arg, call = call)
+        j <- vectbl_as_new_col_index(
+          j,
+          xo,
+          j_arg,
+          names2(value),
+          value_arg,
+          call = call
+        )
       }
 
       # Fill up columns if necessary
@@ -87,7 +116,15 @@ vectbl_recycle_rhs_rows <- function(value, nrow, i_arg, value_arg, call) {
         }
       },
       vctrs_error_recycle_incompatible_size = function(cnd) {
-        abort_assign_incompatible_size(nrow, value, j, i_arg, value_arg, cnd, call = call)
+        abort_assign_incompatible_size(
+          nrow,
+          value,
+          j,
+          i_arg,
+          value_arg,
+          cnd,
+          call = call
+        )
       },
       vctrs_error_scalar_type = function(cnd) {
         abort_assign_vector(value, j, value_arg, cnd, call = call)
@@ -168,7 +205,14 @@ tbl_subassign_row <- function(x, i, value, i_arg, value_arg, call) {
       # Side effect: check if `value` can be recycled
       vectbl_recycle_rhs_rows(value, length(i), i_arg, value_arg, call)
 
-      abort_assign_incompatible_type(x, recycled_value, j, value_arg, cnd, call = call)
+      abort_assign_incompatible_type(
+        x,
+        recycled_value,
+        j,
+        value_arg,
+        cnd,
+        call = call
+      )
     }
   )
 

@@ -49,7 +49,9 @@ lst_quos <- function(xs) {
   output <- rep_named(rep_along(xs, ""), list(NULL))
 
   for (i in seq_along(xs)) {
-    unique_output <- output[!duplicated(names(output)[seq_len(i)], fromLast = TRUE)]
+    unique_output <- output[
+      !duplicated(names(output)[seq_len(i)], fromLast = TRUE)
+    ]
     res <- eval_tidy(xs[[i]], unique_output)
     if (!is.null(res)) {
       lengths[[i]] <- NROW(res)

@@ -186,9 +186,12 @@ test_that("formattable (#785)", {
 
 test_that("frame_matrix constructs a matrix as expected", {
   result <- frame_matrix(
-    ~col1, ~col2,
-    10, 3,
-    5, 2
+    ~col1,
+    ~col2,
+    10,
+    3,
+    5,
+    2
   )
   expected <- matrix(c(10, 5, 3, 2), ncol = 2)
   colnames(expected) <- c("col1", "col2")
@@ -197,7 +200,8 @@ test_that("frame_matrix constructs a matrix as expected", {
 
 test_that("frame_matrix constructs empty matrix as expected", {
   result <- frame_matrix(
-    ~col1, ~col2
+    ~col1,
+    ~col2
   )
   expected <- matrix(logical(), ncol = 2)
   colnames(expected) <- c("col1", "col2")
@@ -207,9 +211,12 @@ test_that("frame_matrix constructs empty matrix as expected", {
 test_that("frame_matrix cannot have list columns", {
   expect_tibble_abort(
     frame_matrix(
-      ~x,   ~y,
-      "a", 1:3,
-      "b", 4:6
+      ~x,
+      ~y,
+      "a",
+      1:3,
+      "b",
+      4:6
     ),
     abort_frame_matrix_list(c(2, 4))
   )
@@ -218,7 +225,8 @@ test_that("frame_matrix cannot have list columns", {
 test_that("tribble and frame_matrix cannot have named arguments", {
   expect_tibble_abort(
     extract_frame_data_from_dots(
-      ~x, ~y,
+      ~x,
+      ~y,
       "a" = 1:3,
       "b" = 4:6
     ),

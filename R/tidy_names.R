@@ -51,7 +51,9 @@ tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
   }
 
   make_syntactic <- function(name, syntactic) {
-    if (!syntactic) return(name)
+    if (!syntactic) {
+      return(name)
+    }
 
     blank <- name == ""
     fix_syntactic <- (name != "") & !is_syntactic(name)
@@ -60,7 +62,9 @@ tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
   }
 
   append_pos <- function(name) {
-    need_append_pos <- duplicated(name) | duplicated(name, fromLast = TRUE) | name == ""
+    need_append_pos <- duplicated(name) |
+      duplicated(name, fromLast = TRUE) |
+      name == ""
     if (any(need_append_pos)) {
       rx <- "[.][.][1-9][0-9]*$"
       has_suffix <- grepl(rx, name)
@@ -69,13 +73,19 @@ tidy_names <- function(name, syntactic = FALSE, quiet = FALSE) {
     }
 
     need_append_pos <- which(need_append_pos)
-    name[need_append_pos] <- paste0(name[need_append_pos], "..", need_append_pos)
+    name[need_append_pos] <- paste0(
+      name[need_append_pos],
+      "..",
+      need_append_pos
+    )
     name
   }
 
   describe_tidying <- function(orig_name, name, quiet) {
     stopifnot(length(orig_name) == length(name))
-    if (quiet) return()
+    if (quiet) {
+      return()
+    }
     new_names <- name != orig_name
     if (any(new_names)) {
       message(

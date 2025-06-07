@@ -157,9 +157,18 @@
 #' tibble(a = 2, b = !!a)
 #' try(tibble(a = 2, b = .env$bogus))
 #' try(tibble(a = 2, b = !!bogus))
-tibble <- function(...,
-                   .rows = NULL,
-                   .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet")) {
+tibble <- function(
+  ...,
+  .rows = NULL,
+  .name_repair = c(
+    "check_unique",
+    "unique",
+    "universal",
+    "minimal",
+    "unique_quiet",
+    "universal_quiet"
+  )
+) {
   xs <- quos(...)
 
   tibble_quos(xs, .rows, .name_repair)
@@ -178,8 +187,17 @@ tibble <- function(...,
 #'
 #' # Use tibble_row() to construct a one-row tibble:
 #' tibble_row(a = 1, lm = lm(Height ~ Girth + Volume, data = trees))
-tibble_row <- function(...,
-                       .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet")) {
+tibble_row <- function(
+  ...,
+  .name_repair = c(
+    "check_unique",
+    "unique",
+    "universal",
+    "minimal",
+    "unique_quiet",
+    "universal_quiet"
+  )
+) {
   xs <- enquos(...)
 
   tibble_quos(xs, .rows = 1, .name_repair = .name_repair, single_row = TRUE)
@@ -213,7 +231,13 @@ is.tibble <- function(x) {
   is_tibble(x)
 }
 
-tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE, call = caller_env()) {
+tibble_quos <- function(
+  xs,
+  .rows,
+  .name_repair,
+  single_row = FALSE,
+  call = caller_env()
+) {
   # Evaluate each column in turn
   col_names <- given_col_names <- names2(xs)
   empty_col_names <- which(col_names == "")
@@ -254,16 +278,32 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE, call = call
             map(output[idx_to_fix], vec_recycle, current_size)
 
           # Refill entire data mask
-          map2(output[idx_to_fix], col_names[idx_to_fix], add_to_env2, env = env)
+          map2(
+            output[idx_to_fix],
+            col_names[idx_to_fix],
+            add_to_env2,
+            env = env
+          )
 
           first_size <- current_size
         } else {
-          res <- vectbl_recycle_rows(res, first_size, j, given_col_names[[j]], call)
+          res <- vectbl_recycle_rows(
+            res,
+            first_size,
+            j,
+            given_col_names[[j]],
+            call
+          )
         }
       }
 
       output[[j]] <- res
-      col_names[[j]] <- add_to_env2(res, given_col_names[[j]], col_names[[j]], env)
+      col_names[[j]] <- add_to_env2(
+        res,
+        given_col_names[[j]],
+        col_names[[j]],
+        env
+      )
     }
   }
 
@@ -273,7 +313,12 @@ tibble_quos <- function(xs, .rows, .name_repair, single_row = FALSE, call = call
   output <- output[!is_null]
 
   output <- splice_dfs(output)
-  output <- set_repaired_names(output, repair_hint = TRUE, .name_repair = .name_repair, call = call)
+  output <- set_repaired_names(
+    output,
+    repair_hint = TRUE,
+    .name_repair = .name_repair,
+    call = call
+  )
 
   new_tibble(output, nrow = first_size %||% 0L)
 }
@@ -322,8 +367,12 @@ splice_dfs <- function(x) {
 
 vectbl_recycle_rows <- function(x, n, j, name, call = caller_env()) {
   size <- vec_size(x)
-  if (size == n) return(x)
-  if (size == 1) return(vec_recycle(x, n))
+  if (size == n) {
+    return(x)
+  }
+  if (size == 1) {
+    return(vec_recycle(x, n))
+  }
 
   if (name == "") {
     name <- j
@@ -341,13 +390,22 @@ abort_tibble_row_size_one <- function(j, name, size, call = caller_env()) {
     desc <- paste0("at position ", j)
   }
 
-  tibble_abort(call = call, problems(
-    "All vectors must be size one, use `list()` to wrap.",
-    paste0("Column ", desc, " is of size ", size, ".")
-  ))
+  tibble_abort(
+    call = call,
+    problems(
+      "All vectors must be size one, use `list()` to wrap.",
+      paste0("Column ", desc, " is of size ", size, ".")
+    )
+  )
 }
 
-abort_incompatible_size <- function(.rows, vars, vars_len, rows_source, call = caller_env()) {
+abort_incompatible_size <- function(
+  .rows,
+  vars,
+  vars_len,
+  rows_source,
+  call = caller_env()
+) {
   vars_split <- split(vars, vars_len)
 
   vars_split[["1"]] <- NULL
@@ -366,10 +424,13 @@ abort_incompatible_size <- function(.rows, vars, vars_len, rows_source, call = c
     paste0("Size ", x, ": ", pluralise_commas(text, y))
   })
 
-  tibble_abort(call = call, bullets(
-    "Tibble columns must have compatible sizes:",
-    if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
-    problems,
-    info = "Only values of size one are recycled."
-  ))
+  tibble_abort(
+    call = call,
+    bullets(
+      "Tibble columns must have compatible sizes:",
+      if (!is.null(.rows)) paste0("Size ", .rows, ": ", rows_source),
+      problems,
+      info = "Only values of size one are recycled."
+    )
+  )
 }

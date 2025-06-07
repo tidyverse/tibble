@@ -57,21 +57,46 @@
 #' m <- matrix(rnorm(50), ncol = 5)
 #' colnames(m) <- c("a", "b", "c", "d", "e")
 #' df <- as_tibble(m)
-as_tibble <- function(x, ...,
-                      .rows = NULL,
-                      .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet"),
-                      rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
+as_tibble <- function(
+  x,
+  ...,
+  .rows = NULL,
+  .name_repair = c(
+    "check_unique",
+    "unique",
+    "universal",
+    "minimal",
+    "unique_quiet",
+    "universal_quiet"
+  ),
+  rownames = pkgconfig::get_config("tibble::rownames", NULL)
+) {
   UseMethod("as_tibble")
 }
 
 #' @export
 #' @rdname as_tibble
-as_tibble.data.frame <- function(x, validate = NULL, ...,
-                                 .rows = NULL,
-                                 .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet"),
-                                 rownames = pkgconfig::get_config("tibble::rownames", NULL)) {
+as_tibble.data.frame <- function(
+  x,
+  validate = NULL,
+  ...,
+  .rows = NULL,
+  .name_repair = c(
+    "check_unique",
+    "unique",
+    "universal",
+    "minimal",
+    "unique_quiet",
+    "universal_quiet"
+  ),
+  rownames = pkgconfig::get_config("tibble::rownames", NULL)
+) {
   if (!is.null(validate)) {
-    deprecate_stop("2.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)")
+    deprecate_stop(
+      "2.0.0",
+      "tibble::as_tibble(validate = )",
+      "as_tibble(.name_repair =)"
+    )
   }
 
   if (!identical(class(x), "data.frame") && !inherits(x, "tbl_df")) {
@@ -96,22 +121,49 @@ as_tibble.data.frame <- function(x, validate = NULL, ...,
       old_rownames <- seq_len(abs(old_rownames[2L]))
     }
     old_rownames <- as.character(old_rownames)
-    add_column(result, !!rownames := old_rownames, .before = 1L, .name_repair = "minimal")
+    add_column(
+      result,
+      !!rownames := old_rownames,
+      .before = 1L,
+      .name_repair = "minimal"
+    )
   }
 }
 
 #' @export
 #' @rdname as_tibble
-as_tibble.list <- function(x, validate = NULL, ..., .rows = NULL,
-                           .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet")) {
+as_tibble.list <- function(
+  x,
+  validate = NULL,
+  ...,
+  .rows = NULL,
+  .name_repair = c(
+    "check_unique",
+    "unique",
+    "universal",
+    "minimal",
+    "unique_quiet",
+    "universal_quiet"
+  )
+) {
   if (!is.null(validate)) {
-    deprecate_stop("2.0.0", "tibble::as_tibble(validate = )", "as_tibble(.name_repair =)")
+    deprecate_stop(
+      "2.0.0",
+      "tibble::as_tibble(validate = )",
+      "as_tibble(.name_repair =)"
+    )
   }
 
   lst_to_tibble(x, .rows, .name_repair, col_lengths(x))
 }
 
-lst_to_tibble <- function(x, .rows, .name_repair, lengths = NULL, call = caller_env()) {
+lst_to_tibble <- function(
+  x,
+  .rows,
+  .name_repair,
+  lengths = NULL,
+  call = caller_env()
+) {
   x <- unclass(x)
   x <- set_repaired_names(x, repair_hint = TRUE, .name_repair, call = call)
   x <- check_valid_cols(x, call = call)
@@ -150,10 +202,17 @@ recycle_columns <- function(x, .rows, lengths) {
 
   # Shortcut if all columns have the requested or implied length
   different_len <- which(lengths != nrow)
-  if (is_empty(different_len)) return(new_tibble(x, nrow = nrow, subclass = NULL))
+  if (is_empty(different_len)) {
+    return(new_tibble(x, nrow = nrow, subclass = NULL))
+  }
 
   if (any(lengths[different_len] != 1)) {
-    abort_incompatible_size(.rows, names(x), lengths, "Requested with `.rows` argument")
+    abort_incompatible_size(
+      .rows,
+      names(x),
+      lengths,
+      "Requested with `.rows` argument"
+    )
   }
 
   if (nrow != 1L) {
@@ -188,8 +247,13 @@ as_tibble.matrix <- function(x, ..., validate = NULL, .name_repair = NULL) {
   m <- matrixToDataFrame(x)
   names <- colnames(x)
   if (is.null(.name_repair)) {
-    if ((is.null(names) || any(bad_names <- duplicated(names) | names == "")) && has_length(x)) {
-      deprecate_warn("2.0.0", "as_tibble.matrix(x = 'must have unique column names if `.name_repair` is omitted')",
+    if (
+      (is.null(names) || any(bad_names <- duplicated(names) | names == "")) &&
+        has_length(x)
+    ) {
+      deprecate_warn(
+        "2.0.0",
+        "as_tibble.matrix(x = 'must have unique column names if `.name_repair` is omitted')",
         details = "Using compatibility `.name_repair`."
       )
       compat_names <- paste0("V", seq_along(m))
@@ -228,7 +292,13 @@ as_tibble.ts <- function(x, ..., .name_repair = "minimal") {
 #' @export
 #' @param n Name for count column, default: `"n"`.
 #' @rdname as_tibble
-as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`, .name_repair = "check_unique") {
+as_tibble.table <- function(
+  x,
+  `_n` = "n",
+  ...,
+  n = `_n`,
+  .name_repair = "check_unique"
+) {
   if (!missing(`_n`)) {
     warn("Please pass `n` as a named argument to `as_tibble.table()`.")
   }
@@ -237,7 +307,8 @@ as_tibble.table <- function(x, `_n` = "n", ..., n = `_n`, .name_repair = "check_
 
   names(df) <- repaired_names(
     c(names2(dimnames(x)), n),
-    repair_hint = TRUE, .name_repair = .name_repair
+    repair_hint = TRUE,
+    .name_repair = .name_repair
   )
 
   # Names already repaired:
@@ -260,7 +331,8 @@ as_tibble.default <- function(x, ...) {
   value <- x
   if (is_atomic(value)) {
     signal_superseded(
-      "3.0.0", "as_tibble(x = 'can\\'t be an atomic vector')",
+      "3.0.0",
+      "as_tibble(x = 'can\\'t be an atomic vector')",
       "as_tibble_col()"
     )
   }
@@ -278,8 +350,17 @@ as_tibble.default <- function(x, ...) {
 #' as_tibble_row(c(a = 1, b = 2))
 #' as_tibble_row(list(c = "three", d = list(4:5)))
 #' as_tibble_row(1:3, .name_repair = "unique")
-as_tibble_row <- function(x,
-                          .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet")) {
+as_tibble_row <- function(
+  x,
+  .name_repair = c(
+    "check_unique",
+    "unique",
+    "universal",
+    "minimal",
+    "unique_quiet",
+    "universal_quiet"
+  )
+) {
   if (!vec_is(x)) {
     abort_as_tibble_row_vector(x)
   }
@@ -342,7 +423,12 @@ matrixToDataFrame <- function(x) {
 
 # Errors ------------------------------------------------------------------
 
-abort_column_scalar_type <- function(names, positions, classes, call = caller_env()) {
+abort_column_scalar_type <- function(
+  names,
+  positions,
+  classes,
+  call = caller_env()
+) {
   tibble_abort(
     call = call,
     problems(
@@ -354,17 +440,25 @@ abort_column_scalar_type <- function(names, positions, classes, call = caller_en
 }
 
 abort_as_tibble_row_vector <- function(x, call = caller_env()) {
-  tibble_abort(call = call, paste0(
-    "`x` must be a vector in `as_tibble_row()`, not ", class(x)[[1]], "."
-  ))
+  tibble_abort(
+    call = call,
+    paste0(
+      "`x` must be a vector in `as_tibble_row()`, not ",
+      class(x)[[1]],
+      "."
+    )
+  )
 }
 
 abort_as_tibble_row_size_one <- function(j, name, size, call = caller_env()) {
   desc <- tick(name)
   desc[name == ""] <- paste0("at position ", j[name == ""])
 
-  tibble_abort(call = call, problems(
-    "All elements must be size one, use `list()` to wrap.",
-    paste0("Element ", desc, " is of size ", size, ".")
-  ))
+  tibble_abort(
+    call = call,
+    problems(
+      "All elements must be size one, use `list()` to wrap.",
+      paste0("Element ", desc, " is of size ", size, ".")
+    )
+  )
 }

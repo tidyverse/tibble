@@ -90,11 +90,16 @@ args_recycle <- function(args) {
 }
 pmap <- function(.l, .f, ...) {
   args <- args_recycle(.l)
-  do.call("mapply", c(
-    FUN = list(quote(.f)),
-    args, MoreArgs = quote(list(...)),
-    SIMPLIFY = FALSE, USE.NAMES = FALSE
-  ))
+  do.call(
+    "mapply",
+    c(
+      FUN = list(quote(.f)),
+      args,
+      MoreArgs = quote(list(...)),
+      SIMPLIFY = FALSE,
+      USE.NAMES = FALSE
+    )
+  )
 }
 
 probe <- function(.x, .p, ...) {
@@ -199,6 +204,5 @@ imap <- function(.x, .f, ...) {
 vecpurrr_index <- function(x) {
   names(x) %||% seq_along(x)
 }
-
 
 # nocov end

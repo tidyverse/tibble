@@ -128,8 +128,14 @@ extract_frame_names_from_dots <- function(dots, call = caller_env()) {
   frame_names
 }
 
-validate_rectangular_shape <- function(frame_names, frame_rest, call = caller_env()) {
-  if (length(frame_names) == 0 && length(frame_rest) == 0) return()
+validate_rectangular_shape <- function(
+  frame_names,
+  frame_rest,
+  call = caller_env()
+) {
+  if (length(frame_names) == 0 && length(frame_rest) == 0) {
+    return()
+  }
 
   # Figure out the associated number of rows and number of columns,
   # and validate that the supplied formula produces a rectangular
@@ -140,7 +146,9 @@ validate_rectangular_shape <- function(frame_names, frame_rest, call = caller_en
 }
 
 turn_frame_data_into_tibble <- function(names, rest, call = caller_env()) {
-  if (is_empty(names)) return(new_tibble(list(), nrow = 0))
+  if (is_empty(names)) {
+    return(new_tibble(list(), nrow = 0))
+  }
 
   nrow <- length(rest) / length(names)
   dim(rest) <- c(length(names), nrow)
@@ -173,7 +181,11 @@ turn_matrix_into_column_list <- function(frame_mat, call) {
   return(frame_col)
 }
 
-turn_frame_data_into_frame_matrix <- function(names, rest, call = caller_env()) {
+turn_frame_data_into_frame_matrix <- function(
+  names,
+  rest,
+  call = caller_env()
+) {
   list_cols <- which(map_lgl(rest, needs_list_col))
   if (has_length(list_cols)) {
     abort_frame_matrix_list(list_cols, call)
@@ -198,41 +210,59 @@ subclass_tribble_c_errors <- function(name, code, call) {
 # Errors ------------------------------------------------------------------
 
 abort_tribble_needs_columns <- function(call = caller_env()) {
-  tibble_abort(call = call, "Must specify at least one column using the `~name` syntax.")
+  tibble_abort(
+    call = call,
+    "Must specify at least one column using the `~name` syntax."
+  )
 }
 
 abort_tribble_named_after_tilde <- function(call = caller_env()) {
-  tibble_abort(call = call, "When using the `~name` syntax, subsequent values must not have names.")
+  tibble_abort(
+    call = call,
+    "When using the `~name` syntax, subsequent values must not have names."
+  )
 }
 
 abort_tribble_lhs_column_syntax <- function(lhs, call = caller_env()) {
-  tibble_abort(call = call, problems(
-    "All column specifications must use the `~name` syntax.",
-    paste0("Found ", expr_label(lhs), " on the left-hand side of `~`.")
-  ))
+  tibble_abort(
+    call = call,
+    problems(
+      "All column specifications must use the `~name` syntax.",
+      paste0("Found ", expr_label(lhs), " on the left-hand side of `~`.")
+    )
+  )
 }
 
 abort_tribble_rhs_column_syntax <- function(rhs, call = caller_env()) {
-  tibble_abort(call = call, problems(
-    'All column specifications must use the `~name` or `~"name"` syntax.',
-    paste0("Found ", expr_label(rhs), " on the right-hand side of `~`.")
-  ))
+  tibble_abort(
+    call = call,
+    problems(
+      'All column specifications must use the `~name` or `~"name"` syntax.',
+      paste0("Found ", expr_label(rhs), " on the right-hand side of `~`.")
+    )
+  )
 }
 
 abort_tribble_non_rectangular <- function(cols, cells, call = caller_env()) {
-  tibble_abort(call = call, bullets(
-    "Data must be rectangular:",
-    paste0("Found ", cols, " columns."),
-    paste0("Found ", cells, " cells."),
-    info = paste0(cells, " is not an integer multiple of ", cols, ".")
-  ))
+  tibble_abort(
+    call = call,
+    bullets(
+      "Data must be rectangular:",
+      paste0("Found ", cols, " columns."),
+      paste0("Found ", cells, " cells."),
+      info = paste0(cells, " is not an integer multiple of ", cols, ".")
+    )
+  )
 }
 
 abort_frame_matrix_list <- function(pos, call = caller_env()) {
-  tibble_abort(call = call, problems(
-    "All values must be atomic:",
-    pluralise_commas("Found list-valued element(s) at position(s) ", pos, ".")
-  ))
+  tibble_abort(
+    call = call,
+    problems(
+      "All values must be atomic:",
+      pluralise_commas("Found list-valued element(s) at position(s) ", pos, ".")
+    )
+  )
 }
 
 abort_tribble_c <- function(name, cnd, call) {
