@@ -3,7 +3,10 @@ test_that("error class", {
 })
 
 test_that("aborting with class", {
-  expect_error(abort_enframe_value_null(), class = tibble_error_class("enframe_value_null")[[1]])
+  expect_error(
+    abort_enframe_value_null(),
+    class = tibble_error_class("enframe_value_null")[[1]]
+  )
 })
 
 test_that("output test", {
@@ -30,7 +33,11 @@ test_that("output test", {
     print_error(abort_column_scalar_type("a", 3, "environment"))
     print_error(abort_column_scalar_type("", 3, "environment"))
     print_error(abort_column_scalar_type(letters[2:3], 3:4, c("name", "NULL")))
-    print_error(abort_column_scalar_type(c("", "", LETTERS), 1:28, c("QQ", "VV", letters)))
+    print_error(abort_column_scalar_type(
+      c("", "", LETTERS),
+      1:28,
+      c("QQ", "VV", letters)
+    ))
 
     print_error(abort_as_tibble_row_vector(new_environment()))
     print_error(abort_as_tibble_row_size_one(3, "foo", 7))
@@ -47,7 +54,10 @@ test_that("output test", {
     "# names"
     print_error(abort_column_names_cannot_be_empty(1, repair_hint = TRUE))
     print_error(abort_column_names_cannot_be_empty(2:3, repair_hint = TRUE))
-    print_error(abort_column_names_cannot_be_empty(seq_along(letters), repair_hint = TRUE))
+    print_error(abort_column_names_cannot_be_empty(
+      seq_along(letters),
+      repair_hint = TRUE
+    ))
     print_error(abort_column_names_cannot_be_empty(4:6, repair_hint = FALSE))
 
     print_error(abort_column_names_cannot_be_dot_dot(1, repair_hint = FALSE))
@@ -55,7 +65,10 @@ test_that("output test", {
     print_error(abort_column_names_cannot_be_dot_dot(1:26, repair_hint = TRUE))
 
     print_error(abort_column_names_must_be_unique("a", repair_hint = FALSE))
-    print_error(abort_column_names_must_be_unique(letters[2:3], repair_hint = TRUE))
+    print_error(abort_column_names_must_be_unique(
+      letters[2:3],
+      repair_hint = TRUE
+    ))
     print_error(abort_column_names_must_be_unique(LETTERS, repair_hint = TRUE))
 
     "# new"
@@ -83,16 +96,38 @@ test_that("output test", {
     print_error(abort_assign_duplicate_row_subscript(c(1, 1)))
     print_error(abort_assign_duplicate_row_subscript(c(1, 1, 2, 2)))
 
-    print_error(abort_assign_incompatible_size(3, list(1:2), 1, NULL, quote(rhs)))
-    print_error(abort_assign_incompatible_size(4, list(1:4, 3:4), 2, quote(4:1), quote(rhs)))
+    print_error(abort_assign_incompatible_size(
+      3,
+      list(1:2),
+      1,
+      NULL,
+      quote(rhs)
+    ))
+    print_error(abort_assign_incompatible_size(
+      4,
+      list(1:4, 3:4),
+      2,
+      quote(4:1),
+      quote(rhs)
+    ))
 
-    print_error(abort_assign_incompatible_type(tibble(a = 1), list("c"), 1, quote(rhs)))
+    print_error(abort_assign_incompatible_type(
+      tibble(a = 1),
+      list("c"),
+      1,
+      quote(rhs)
+    ))
     print_error(abort_assign_vector(list("c"), 1, quote(rhs)))
 
     "# subsetting-matrix"
     print_error(abort_subset_matrix_must_be_logical(quote(is.na(x) + 1)))
-    print_error(abort_subset_matrix_must_have_same_dimensions(quote(t(is.na(x)))))
-    print_error(abort_subset_matrix_scalar_type(quote(is.na(x)), quote(new_environment())))
+    print_error(abort_subset_matrix_must_have_same_dimensions(quote(t(is.na(
+      x
+    )))))
+    print_error(abort_subset_matrix_scalar_type(
+      quote(is.na(x)),
+      quote(new_environment())
+    ))
     print_error(abort_subset_matrix_must_be_scalar(quote(is.na(x)), quote(1:3)))
 
     "# tibble"

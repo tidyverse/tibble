@@ -43,8 +43,12 @@ local({
 
       if (!is_configure) {
         stop(
-          "Package was previously compiled with ", binary_version, ", ",
-          "current is ", R.version.string, ". ",
+          "Package was previously compiled with ",
+          binary_version,
+          ", ",
+          "current is ",
+          R.version.string,
+          ". ",
           "Object files deleted, please try again.",
           call. = FALSE
         )

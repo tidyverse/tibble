@@ -115,7 +115,6 @@ test_that("can roundtrip record", {
 
 # output ------------------------------------------------------------------
 
-
 test_that("output test", {
   expect_snapshot(error = TRUE, {
     enframe(1:3, value = NULL)

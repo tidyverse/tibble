@@ -124,14 +124,32 @@ rbind_at <- function(old, new, pos) {
 #' try(df %>% add_column(z = 1:5))
 #'
 #' @export
-add_column <- function(.data, ..., .before = NULL, .after = NULL,
-                       .name_repair = c("check_unique", "unique", "universal", "minimal", "unique_quiet", "universal_quiet")) {
+add_column <- function(
+  .data,
+  ...,
+  .before = NULL,
+  .after = NULL,
+  .name_repair = c(
+    "check_unique",
+    "unique",
+    "universal",
+    "minimal",
+    "unique_quiet",
+    "universal_quiet"
+  )
+) {
   if (!is.data.frame(.data)) {
     deprecate_stop("2.1.1", "add_column(.data = 'must be a data frame')")
   }
 
-  if (has_length(.data) && (!is_named(.data) || anyDuplicated(names2(.data))) && missing(.name_repair)) {
-    deprecate_stop("3.0.0", "add_column(.data = 'must have unique names')",
+  if (
+    has_length(.data) &&
+      (!is_named(.data) || anyDuplicated(names2(.data))) &&
+      missing(.name_repair)
+  ) {
+    deprecate_stop(
+      "3.0.0",
+      "add_column(.data = 'must have unique names')",
       details = 'Use `.name_repair = "minimal"`.'
     )
   }
@@ -170,7 +188,12 @@ add_column <- function(.data, ..., .before = NULL, .after = NULL,
 
 # helpers -----------------------------------------------------------------
 
-pos_from_before_after_names <- function(before, after, names, call = caller_env()) {
+pos_from_before_after_names <- function(
+  before,
+  after,
+  names,
+  call = caller_env()
+) {
   before <- check_names_before_after(before, names)
   after <- check_names_before_after(after, names)
 
@@ -249,7 +272,12 @@ abort_both_before_after <- function(call = caller_env()) {
 }
 
 abort_unknown_column_names <- function(j, parent = NULL, call = caller_env()) {
-  tibble_abort(call = call, pluralise_commas("Can't find column(s) ", tick(j), " in `.data`."), j = j, parent = parent)
+  tibble_abort(
+    call = call,
+    pluralise_commas("Can't find column(s) ", tick(j), " in `.data`."),
+    j = j,
+    parent = parent
+  )
 }
 
 abort_incompatible_new_cols <- function(n, df, call = caller_env()) {
@@ -258,8 +286,10 @@ abort_incompatible_new_cols <- function(n, df, call = caller_env()) {
     bullets(
       "New columns must be compatible with `.data`:",
       x = paste0(
-        pluralise_n("New column(s) ha[s](ve)", ncol(df)), " ",
-        nrow(df), " rows"
+        pluralise_n("New column(s) ha[s](ve)", ncol(df)),
+        " ",
+        nrow(df),
+        " rows"
       ),
       i = pluralise_count("`.data` has ", n, " row(s)")
     ),
@@ -270,5 +300,12 @@ abort_incompatible_new_cols <- function(n, df, call = caller_env()) {
 
 abort_dim_column_index <- function(j, call = caller_env()) {
   # friendly_type_of() doesn't distinguish between matrices and arrays
-  tibble_abort(call = call, paste0("Must use a vector in `[`, not an object of class ", class(j)[[1]], "."))
+  tibble_abort(
+    call = call,
+    paste0(
+      "Must use a vector in `[`, not an object of class ",
+      class(j)[[1]],
+      "."
+    )
+  )
 }

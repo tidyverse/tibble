@@ -2,8 +2,14 @@ test_that("tibble returns correct number of rows with all combinatinos", {
   expect_equal(nrow(tibble(value = 1:10)), 10L)
   expect_equal(nrow(tibble(value = 1:10, name = "recycle_me")), 10L)
   expect_equal(nrow(tibble(name = "recycle_me", value = 1:10)), 10L)
-  expect_equal(nrow(tibble(name = "recycle_me", value = 1:10, value2 = 11:20)), 10L)
-  expect_equal(nrow(tibble(value = 1:10, name = "recycle_me", value2 = 11:20)), 10L)
+  expect_equal(
+    nrow(tibble(name = "recycle_me", value = 1:10, value2 = 11:20)),
+    10L
+  )
+  expect_equal(
+    nrow(tibble(value = 1:10, name = "recycle_me", value2 = 11:20)),
+    10L
+  )
 })
 
 test_that("NULL is ignored (#580)", {

@@ -61,15 +61,27 @@ NULL
 
 # Only for documentation, doesn't do anything
 #' @rdname formatting
-print.tbl_df <- function(x, width = NULL, ..., n = NULL, max_extra_cols = NULL,
-                         max_footer_lines = NULL) {
+print.tbl_df <- function(
+  x,
+  width = NULL,
+  ...,
+  n = NULL,
+  max_extra_cols = NULL,
+  max_footer_lines = NULL
+) {
   NextMethod()
 }
 
 # Only for documentation, doesn't do anything
 #' @rdname formatting
-format.tbl_df <- function(x, width = NULL, ..., n = NULL, max_extra_cols = NULL,
-                          max_footer_lines = NULL) {
+format.tbl_df <- function(
+  x,
+  width = NULL,
+  ...,
+  n = NULL,
+  max_extra_cols = NULL,
+  max_footer_lines = NULL
+) {
   NextMethod()
 }
 
@@ -102,7 +114,9 @@ format.tbl_df <- function(x, width = NULL, ..., n = NULL, max_extra_cols = NULL,
 #' @export
 #' @keywords internal
 trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
-  deprecate_soft("3.1.0", "tibble::trunc_mat()",
+  deprecate_soft(
+    "3.1.0",
+    "tibble::trunc_mat()",
     details = "Printing has moved to the pillar package."
   )
 
@@ -110,7 +124,12 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
     class(x) <- c("tbl", class(x))
   }
 
-  setup <- pillar::tbl_format_setup(x, width = width, n = n, max_extra_cols = n_extra)
+  setup <- pillar::tbl_format_setup(
+    x,
+    width = width,
+    n = n,
+    max_extra_cols = n_extra
+  )
 
   header <- pillar::tbl_format_header(x, setup)
   body <- pillar::tbl_format_body(x, setup)

@@ -1,4 +1,10 @@
-render_galley_ext <- function(input_path, pkg, installed, output_dir, output_file) {
+render_galley_ext <- function(
+  input_path,
+  pkg,
+  installed,
+  output_dir,
+  output_file
+) {
   # stopifnot(!installed)
   if (installed) {
     library(pkg, character.only = TRUE)
@@ -48,8 +54,11 @@ render_galley <- function(name, md_name) {
     callr::r(
       render_galley_ext,
       args = list(
-        input_path = input_path, pkg = pkg, installed = installed,
-        output_dir = output_dir, output_file = output_file
+        input_path = input_path,
+        pkg = pkg,
+        installed = installed,
+        output_dir = output_dir,
+        output_file = output_file
       ),
       callback = function(x) {
         out_text <<- c(out_text, x)
@@ -73,8 +82,15 @@ render_galley <- function(name, md_name) {
 scrub_tempdir <- function(x) {
   stable_tmpdir <- "${TEMP}"
 
-  tmpdir_rx <- utils::glob2rx(paste0("*", dirname(tempdir()), "*"), trim.head = TRUE)
-  gsub(paste0("(/private)?", tmpdir_rx, "[/\\\\]+Rtmp[0-9a-zA-Z]+"), stable_tmpdir, x)
+  tmpdir_rx <- utils::glob2rx(
+    paste0("*", dirname(tempdir()), "*"),
+    trim.head = TRUE
+  )
+  gsub(
+    paste0("(/private)?", tmpdir_rx, "[/\\\\]+Rtmp[0-9a-zA-Z]+"),
+    stable_tmpdir,
+    x
+  )
 }
 
 scrub <- function(x) {
@@ -104,13 +120,15 @@ test_galley <- function(name, variant = NULL) {
     testthat::skip_if_not_installed("testthat", "3.1.1")
     testthat::expect_snapshot_file(
       path,
-      name = md_name, compare = testthat::compare_file_text,
+      name = md_name,
+      compare = testthat::compare_file_text,
       variant = variant
     )
   } else {
     testthat::expect_snapshot_file(
       path,
-      name = md_name, compare = testthat::compare_file_text
+      name = md_name,
+      compare = testthat::compare_file_text
     )
   }
 

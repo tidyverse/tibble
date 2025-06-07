@@ -1,9 +1,13 @@
 #' @export
 str.tbl_df <- function(object, ..., indent.str = " ", nest.lev = 0) {
-  if (nest.lev != 0L) cat(" ")
+  if (nest.lev != 0L) {
+    cat(" ")
+  }
   cat(
     tibble::obj_sum(object),
-    " (S3: ", paste0(class(object), collapse = "/"), ")",
+    " (S3: ",
+    paste0(class(object), collapse = "/"),
+    ")",
     "\n",
     sep = ""
   )

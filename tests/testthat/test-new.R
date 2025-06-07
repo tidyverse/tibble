@@ -92,7 +92,10 @@ test_that("new_tibble checks", {
 
   expect_identical(new_tibble(list(), nrow = 0), tibble())
   expect_identical(new_tibble(list(), nrow = 5), tibble(.rows = 5))
-  expect_identical(new_tibble(list(a = 1:3, b = 4:6), nrow = 3), tibble(a = 1:3, b = 4:6))
+  expect_identical(
+    new_tibble(list(a = 1:3, b = 4:6), nrow = 3),
+    tibble(a = 1:3, b = 4:6)
+  )
   expect_tibble_abort(
     new_tibble(1:3, nrow = 1),
     abort_new_tibble_must_be_list()
@@ -141,7 +144,12 @@ test_that("new_tibble checks", {
 test_that("validate_tibble() checks", {
   expect_tibble_abort(
     validate_tibble(new_tibble(list(a = 1, b = 2:3), nrow = 1)),
-    abort_incompatible_size(1, c("a", "b"), 1:2, "Requested with `nrow` argument")
+    abort_incompatible_size(
+      1,
+      c("a", "b"),
+      1:2,
+      "Requested with `nrow` argument"
+    )
   )
 })
 

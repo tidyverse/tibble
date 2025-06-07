@@ -40,7 +40,11 @@ test_that("output test", {
 
     print_without_body(as_unknown_rows(trees[integer(), ]), n = 5L, width = 30L)
 
-    print_without_body(as_unknown_rows(trees[, character()]), n = 5L, width = 30L)
+    print_without_body(
+      as_unknown_rows(trees[, character()]),
+      n = 5L,
+      width = 30L
+    )
 
     print_without_body(
       as_unknown_rows(tibble(a = seq.int(10000))),

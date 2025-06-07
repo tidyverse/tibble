@@ -18,13 +18,17 @@ get_lang_strings <- function() {
 
 get_native_lang_string <- function() {
   lang_strings <- get_lang_strings()
-  if (length(lang_strings$same) == 0) testthat::skip("No native language string available")
+  if (length(lang_strings$same) == 0) {
+    testthat::skip("No native language string available")
+  }
   lang_strings$same[[1L]]
 }
 
 get_alien_lang_string <- function() {
   lang_strings <- get_lang_strings()
-  if (length(lang_strings$different) == 0) testthat::skip("No alien language string available")
+  if (length(lang_strings$different) == 0) {
+    testthat::skip("No alien language string available")
+  }
   lang_strings$different[[1L]]
 }
 
@@ -35,7 +39,9 @@ with_non_utf8_locale <- function(code) {
 }
 
 set_non_utf8_locale <- function() {
-  if (.Platform$OS.type == "windows") return(NULL)
+  if (.Platform$OS.type == "windows") {
+    return(NULL)
+  }
   tryCatch(
     locale <- set_locale("en_US.ISO88591"),
     warning = function(e) {
@@ -46,7 +52,9 @@ set_non_utf8_locale <- function() {
 }
 
 set_locale <- function(locale) {
-  if (is.null(locale)) return(NULL)
+  if (is.null(locale)) {
+    return(NULL)
+  }
   locale <- Sys.getlocale("LC_CTYPE")
   Sys.setlocale("LC_CTYPE", locale)
   locale

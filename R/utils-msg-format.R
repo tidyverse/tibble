@@ -38,7 +38,6 @@ pluralise <- function(message, objects) {
 pluralise_n <- function(message, n) {
   stopifnot(n >= 0)
 
-
   # Don't strip parens if they have a space in between
   # (but not if the space comes before the closing paren)
 

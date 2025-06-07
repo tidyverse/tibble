@@ -61,7 +61,10 @@ test_that("corner case", {
     expect_equal(tidy_names(c("a..2", "a")), c("a..2", "a"))
     expect_equal(tidy_names(c("a..3", "a", "a")), c("a..1", "a..2", "a..3"))
     expect_equal(tidy_names(c("a..2", "a", "a")), c("a..1", "a..2", "a..3"))
-    expect_equal(tidy_names(c("a..2", "a..2", "a..2")), c("a..1", "a..2", "a..3"))
+    expect_equal(
+      tidy_names(c("a..2", "a..2", "a..2")),
+      c("a..1", "a..2", "a..3")
+    )
   })
 })
 

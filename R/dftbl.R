@@ -51,15 +51,21 @@ same_as_tbl_code <- function(df_code, tbl_code) {
 }
 
 same_as_tbl <- function(df, tbl) {
-  if (length(df) != length(tbl)) return(FALSE)
-  if (length(df) < 2) return(FALSE)
+  if (length(df) != length(tbl)) {
+    return(FALSE)
+  }
+  if (length(df) < 2) {
+    return(FALSE)
+  }
   df <- df[-1]
   tbl <- tbl[-1]
 
   df_obj <- df[[length(df)]]
   tbl_obj <- tbl[[length(tbl)]]
 
-  if (is.data.frame(df_obj) != is.data.frame(tbl_obj)) return(FALSE)
+  if (is.data.frame(df_obj) != is.data.frame(tbl_obj)) {
+    return(FALSE)
+  }
 
   if (is.data.frame(tbl_obj)) {
     df[[length(df)]] <- as_tibble_deep(df_obj)
@@ -118,7 +124,12 @@ set_dftbl_source_hook <- function() {
 
   dftbl_source_hook <- function(x, options) {
     nonempty <- which(x != "")
-    x[nonempty] <- vapply(x[nonempty], old_source_hook, options, FUN.VALUE = character(1))
+    x[nonempty] <- vapply(
+      x[nonempty],
+      old_source_hook,
+      options,
+      FUN.VALUE = character(1)
+    )
     if (isTRUE(options$dftbl)) {
       x <- vapply(x, dftbl_source_hook_one, FUN.VALUE = character(1))
     }
@@ -138,7 +149,11 @@ set_dftbl_chunk_hook <- function() {
   dftbl_chunk_hook <- function(x, options) {
     x <- old_chunk_hook(x, options)
     if (isTRUE(options$dftbl)) {
-      x <- paste0('<table class="dftbl"><tbody><tr><td>\n\n', x, "\n\n</td></tr></tbody></table>")
+      x <- paste0(
+        '<table class="dftbl"><tbody><tr><td>\n\n',
+        x,
+        "\n\n</td></tr></tbody></table>"
+      )
       x <- gsub("<tr><td>\n\n</td></tr>", "", x, fixed = TRUE)
     }
     x

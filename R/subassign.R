@@ -3,8 +3,12 @@
 `$<-.tbl_df` <- function(x, name, value) {
   tbl_subassign(
     x,
-    i = NULL, as_string(name), list(value),
-    i_arg = NULL, j_arg = name, value_arg = substitute(value)
+    i = NULL,
+    as_string(name),
+    list(value),
+    i_arg = NULL,
+    j_arg = name,
+    value_arg = substitute(value)
   )
 }
 
@@ -43,7 +47,13 @@
     # FIXME: as_utf8_character() needs rlang > 0.4.11
     j <- chr_unserialise_unicode(as.character(j))
   } else {
-    if (!is.vector(j) || length(j) != 1L || is.na(j) || (is.numeric(j) && j < 0) || is.logical(j)) {
+    if (
+      !is.vector(j) ||
+        length(j) != 1L ||
+        is.na(j) ||
+        (is.numeric(j) && j < 0) ||
+        is.logical(j)
+    ) {
       vectbl_as_col_location2(j, length(x), j_arg = j_arg, assign = TRUE)
     }
   }
@@ -55,7 +65,15 @@
   value <- list(value)
 
   # j is already pretty
-  tbl_subassign(x, i, j, value, i_arg = i_arg, j_arg = NULL, value_arg = value_arg)
+  tbl_subassign(
+    x,
+    i,
+    j,
+    value,
+    i_arg = i_arg,
+    j_arg = NULL,
+    value_arg = value_arg
+  )
 }
 
 
@@ -118,7 +136,14 @@ vectbl_as_new_row_index <- function(i, x, i_arg, call) {
   }
 }
 
-vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL, call = caller_env()) {
+vectbl_as_new_col_index <- function(
+  j,
+  x,
+  j_arg,
+  names = "",
+  value_arg = NULL,
+  call = caller_env()
+) {
   # Creates a named index vector
   # Values: index
   # Name: column name (for all columns)
@@ -172,7 +197,14 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL, c
 
     names[old] <- names(x)[j[old]]
   } else {
-    j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = TRUE, call = call)
+    j <- vectbl_as_col_location(
+      j,
+      length(x),
+      names(x),
+      j_arg = j_arg,
+      assign = TRUE,
+      call = call
+    )
 
     if (length(names) != 1L) {
       # Side effect: check compatibility
@@ -197,7 +229,12 @@ vectbl_as_new_col_index <- function(j, x, j_arg, names = "", value_arg = NULL, c
   j
 }
 
-vectbl_as_col_subscript <- function(j, j_arg, assign = FALSE, call = caller_env()) {
+vectbl_as_col_subscript <- function(
+  j,
+  j_arg,
+  assign = FALSE,
+  call = caller_env()
+) {
   subclass_col_index_errors(
     vec_as_subscript(j, call = call),
     j_arg = j_arg,
@@ -207,19 +244,30 @@ vectbl_as_col_subscript <- function(j, j_arg, assign = FALSE, call = caller_env(
 
 numtbl_as_row_location_assign <- function(i, n, i_arg, call) {
   subclass_row_index_errors(
-    num_as_location(i, n, missing = "error", oob = "extend", zero = "error", call = call),
-    i_arg = i_arg, assign = TRUE
+    num_as_location(
+      i,
+      n,
+      missing = "error",
+      oob = "extend",
+      zero = "error",
+      call = call
+    ),
+    i_arg = i_arg,
+    assign = TRUE
   )
 }
 
 vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE, call) {
   if (is_bare_atomic(i) && is.matrix(i) && ncol(i) == 1) {
     what <- paste0(
-      "tibble::", if (assign) "`[<-`" else "`[`",
+      "tibble::",
+      if (assign) "`[<-`" else "`[`",
       "(i = 'can\\'t be a matrix')"
     )
 
-    lifecycle::deprecate_soft("3.0.0", what,
+    lifecycle::deprecate_soft(
+      "3.0.0",
+      what,
       details = "Convert to a vector.",
       env = foreign_caller_env()
     )
@@ -227,7 +275,12 @@ vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE, call) {
   }
 
   subclass_row_index_errors(
-    vec_as_location(i, n, missing = if (assign) "error" else "propagate", call = call),
+    vec_as_location(
+      i,
+      n,
+      missing = if (assign) "error" else "propagate",
+      call = call
+    ),
     i_arg = i_arg,
     assign = assign
   )
@@ -235,8 +288,16 @@ vectbl_as_row_location <- function(i, n, i_arg, assign = FALSE, call) {
 
 numtbl_as_col_location_assign <- function(j, n, j_arg, call) {
   subclass_col_index_errors(
-    num_as_location(j, n, missing = "error", oob = "extend", zero = "error", call = call),
-    j_arg = j_arg, assign = TRUE
+    num_as_location(
+      j,
+      n,
+      missing = "error",
+      oob = "extend",
+      zero = "error",
+      call = call
+    ),
+    j_arg = j_arg,
+    assign = TRUE
   )
 }
 
@@ -260,15 +321,30 @@ result_vectbl_wrap_rhs <- function(value) {
 # Errors ------------------------------------------------------------------
 
 abort_need_rhs_vector <- function(value_arg, call = caller_env()) {
-  tibble_abort(call = call, paste0(tick(as_label(value_arg)), " must be a vector, a bare list, a data frame or a matrix."))
+  tibble_abort(
+    call = call,
+    paste0(
+      tick(as_label(value_arg)),
+      " must be a vector, a bare list, a data frame or a matrix."
+    )
+  )
 }
 
 abort_need_rhs_vector_or_null <- function(value_arg, call = caller_env()) {
-  tibble_abort(call = call, paste0(tick(as_label(value_arg)), " must be a vector, a bare list, a data frame, a matrix, or NULL."))
+  tibble_abort(
+    call = call,
+    paste0(
+      tick(as_label(value_arg)),
+      " must be a vector, a bare list, a data frame, a matrix, or NULL."
+    )
+  )
 }
 
 abort_assign_columns_non_na_only <- function(call = caller_env()) {
-  tibble_abort(call = call, "Can't use NA as column index in a tibble for assignment.")
+  tibble_abort(
+    call = call,
+    "Can't use NA as column index in a tibble for assignment."
+  )
 }
 
 abort_assign_columns_non_missing_only <- function(call = caller_env()) {
@@ -277,19 +353,46 @@ abort_assign_columns_non_missing_only <- function(call = caller_env()) {
 
 abort_assign_duplicate_column_subscript <- function(j, call = caller_env()) {
   j <- unique(j[duplicated(j)])
-  tibble_abort(call = call, pluralise_commas("Column index(es) ", j, " [is](are) used more than once for assignment."), j = j)
+  tibble_abort(
+    call = call,
+    pluralise_commas(
+      "Column index(es) ",
+      j,
+      " [is](are) used more than once for assignment."
+    ),
+    j = j
+  )
 }
 
 abort_assign_rows_non_na_only <- function(call = caller_env()) {
-  tibble_abort(call = call, "Can't use NA as row index in a tibble for assignment.")
+  tibble_abort(
+    call = call,
+    "Can't use NA as row index in a tibble for assignment."
+  )
 }
 
 abort_assign_duplicate_row_subscript <- function(i, call = caller_env()) {
   i <- unique(i[duplicated(i)])
-  tibble_abort(call = call, pluralise_commas("Row index(es) ", i, " [is](are) used more than once for assignment."), i = i)
+  tibble_abort(
+    call = call,
+    pluralise_commas(
+      "Row index(es) ",
+      i,
+      " [is](are) used more than once for assignment."
+    ),
+    i = i
+  )
 }
 
-abort_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg, parent = NULL, call = caller_env()) {
+abort_assign_incompatible_size <- function(
+  nrow,
+  value,
+  j,
+  i_arg,
+  value_arg,
+  parent = NULL,
+  call = caller_env()
+) {
   if (is.null(i_arg)) {
     target <- "existing data"
     existing <- pluralise_count("Existing data has ", nrow, " row(s)")
@@ -307,11 +410,19 @@ abort_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg, par
 
   tibble_abort(
     bullets(
-      paste0("Assigned data ", tick(as_label(value_arg)), " must be compatible with ", target, ":"),
+      paste0(
+        "Assigned data ",
+        tick(as_label(value_arg)),
+        " must be compatible with ",
+        target,
+        ":"
+      ),
       x = existing,
       x = new,
       i = if (nrow != 1) "Only vectors of size 1 are recycled",
-      i = if (nrow == 1 && vec_size(value[[j]]) != 1) "Row updates require a list value. Do you need `list()` or `as.list()`?"
+      i = if (nrow == 1 && vec_size(value[[j]]) != 1) {
+        "Row updates require a list value. Do you need `list()` or `as.list()`?"
+      }
     ),
     expected = nrow,
     actual = vec_size(value[[j]]),
@@ -321,12 +432,23 @@ abort_assign_incompatible_size <- function(nrow, value, j, i_arg, value_arg, par
   )
 }
 
-abort_assign_incompatible_type <- function(x, value, j, value_arg, parent = NULL, call = caller_env()) {
+abort_assign_incompatible_type <- function(
+  x,
+  value,
+  j,
+  value_arg,
+  parent = NULL,
+  call = caller_env()
+) {
   name <- names(x)[[j]]
 
   tibble_abort(
     bullets(
-      paste0("Assigned data ", tick(as_label(value_arg)), " must be compatible with existing data:"),
+      paste0(
+        "Assigned data ",
+        tick(as_label(value_arg)),
+        " must be compatible with existing data:"
+      ),
       i = paste0("Error occurred for column ", tick(name))
     ),
     expected = x[[j]],
@@ -338,7 +460,13 @@ abort_assign_incompatible_type <- function(x, value, j, value_arg, parent = NULL
   )
 }
 
-abort_assign_vector <- function(value, j, value_arg, parent = NULL, call = caller_env()) {
+abort_assign_vector <- function(
+  value,
+  j,
+  value_arg,
+  parent = NULL,
+  call = caller_env()
+) {
   tibble_abort(
     paste0("Assigned data ", tick(as_label(value_arg)), " must be a vector."),
     actual = value[[j]],

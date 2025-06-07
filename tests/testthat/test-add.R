@@ -95,11 +95,23 @@ test_that("can add row inbetween", {
 test_that("can safely add to factor columns everywhere (#296)", {
   df <- tibble(a = factor(letters[1:3]))
   expect_identical(add_row(df), tibble(a = factor(c(letters[1:3], NA))))
-  expect_identical(add_row(df, .before = 1), tibble(a = factor(c(NA, letters[1:3]))))
-  expect_identical(add_row(df, .before = 2), tibble(a = factor(c("a", NA, letters[2:3]))))
+  expect_identical(
+    add_row(df, .before = 1),
+    tibble(a = factor(c(NA, letters[1:3])))
+  )
+  expect_identical(
+    add_row(df, .before = 2),
+    tibble(a = factor(c("a", NA, letters[2:3])))
+  )
   expect_identical(add_row(df, a = "d"), tibble(a = c(letters[1:4])))
-  expect_identical(add_row(df, a = "d", .before = 1), tibble(a = c("d", letters[1:3])))
-  expect_identical(add_row(df, a = "d", .before = 2), tibble(a = c("a", "d", letters[2:3])))
+  expect_identical(
+    add_row(df, a = "d", .before = 1),
+    tibble(a = c("d", letters[1:3]))
+  )
+  expect_identical(
+    add_row(df, a = "d", .before = 2),
+    tibble(a = c("a", "d", letters[2:3]))
+  )
 })
 
 test_that("error if both .before and .after are given", {
@@ -202,7 +214,10 @@ test_that("add_column() keeps unchanged if no arguments", {
 
 test_that("add_column() can add to empty tibble or data frame", {
   expect_identical(add_column(tibble(.rows = 3), a = 1:3), tibble(a = 1:3))
-  expect_identical(add_column(as.data.frame(tibble(.rows = 3)), a = 1:3), data.frame(a = 1:3))
+  expect_identical(
+    add_column(as.data.frame(tibble(.rows = 3)), a = 1:3),
+    data.frame(a = 1:3)
+  )
 })
 
 test_that("error if adding existing columns", {
@@ -246,7 +261,10 @@ test_that("can recyle when adding multiple columns of length 1", {
 test_that("can recyle for zero-row data frame (#167)", {
   df <- tibble(a = 1:3)[0, ]
   df_new <- add_column(df, b = 4, c = character())
-  expect_identical(df_new, tibble(a = integer(), b = numeric(), c = character()))
+  expect_identical(
+    df_new,
+    tibble(a = integer(), b = numeric(), c = character())
+  )
 })
 
 test_that("can add as first column via .before = 1", {

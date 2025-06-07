@@ -112,7 +112,10 @@ test_that("Can convert tables to data frame", {
 
 test_that("Superseded: Can convert unnamed atomic vectors to tibble by default", {
   expect_equal(as_tibble(1:3), tibble(value = 1:3))
-  expect_equal(as_tibble(c(TRUE, FALSE, NA)), tibble(value = c(TRUE, FALSE, NA)))
+  expect_equal(
+    as_tibble(c(TRUE, FALSE, NA)),
+    tibble(value = c(TRUE, FALSE, NA))
+  )
   expect_equal(as_tibble(1.5:3.5), tibble(value = 1.5:3.5))
   expect_equal(as_tibble(letters), tibble(value = letters))
 })
@@ -267,7 +270,11 @@ test_that("as_tibble.matrix() supports .name_repair", {
   )
   expect_identical(names(universal), paste0("...", 1:2))
 
-  x <- matrix(1:6, nrow = 3, dimnames = list(x = LETTERS[1:3], y = c("if", "when")))
+  x <- matrix(
+    1:6,
+    nrow = 3,
+    dimnames = list(x = LETTERS[1:3], y = c("if", "when"))
+  )
 
   expect_identical(
     names(as_tibble(x)),
@@ -350,7 +357,12 @@ test_that("as_tibble.table() supports .name_repair", {
 test_that("as_tibble.ts() supports .name_repair, minimal by default (#537)", {
   skip_if_not_installed("vctrs", "0.3.8.9001")
 
-  x <- ts(matrix(rnorm(6), nrow = 3), start = c(1961, 1), frequency = 12, names = NULL)
+  x <- ts(
+    matrix(rnorm(6), nrow = 3),
+    start = c(1961, 1),
+    frequency = 12,
+    names = NULL
+  )
 
   expect_identical(
     names(as_tibble(x)),
@@ -365,7 +377,12 @@ test_that("as_tibble.ts() supports .name_repair, minimal by default (#537)", {
   )
   expect_identical(names(universal), paste0("...", 1:2))
 
-  x <- ts(matrix(rnorm(6), nrow = 3), start = c(1961, 1), frequency = 12, names = c("if", "when"))
+  x <- ts(
+    matrix(rnorm(6), nrow = 3),
+    start = c(1961, 1),
+    frequency = 12,
+    names = c("if", "when")
+  )
 
   expect_identical(
     names(as_tibble(x)),
@@ -439,10 +456,22 @@ test_that("as.tibble() is an alias of as_tibble()", {
 # as_tibble_row -----------------------------------------------------------
 
 test_that("as_tibble_row() can convert named bare vectors to data frame", {
-  expect_identical(as_tibble_row(setNames(nm = 1:3)), tibble(`1` = 1L, `2` = 2L, `3` = 3L))
-  expect_identical(as_tibble_row(setNames(nm = c(TRUE, FALSE))), tibble(`TRUE` = TRUE, `FALSE` = FALSE))
-  expect_identical(as_tibble_row(setNames(nm = 1.5:3.5)), tibble(`1.5` = 1.5, `2.5` = 2.5, `3.5` = 3.5))
-  expect_identical(as_tibble_row(setNames(nm = letters)), tibble(!!!setNames(nm = letters)))
+  expect_identical(
+    as_tibble_row(setNames(nm = 1:3)),
+    tibble(`1` = 1L, `2` = 2L, `3` = 3L)
+  )
+  expect_identical(
+    as_tibble_row(setNames(nm = c(TRUE, FALSE))),
+    tibble(`TRUE` = TRUE, `FALSE` = FALSE)
+  )
+  expect_identical(
+    as_tibble_row(setNames(nm = 1.5:3.5)),
+    tibble(`1.5` = 1.5, `2.5` = 2.5, `3.5` = 3.5)
+  )
+  expect_identical(
+    as_tibble_row(setNames(nm = letters)),
+    tibble(!!!setNames(nm = letters))
+  )
   expect_identical(
     as_tibble_row(list(a = 1, b = list(2:3))),
     tibble(a = 1, b = list(2:3))
@@ -491,7 +520,7 @@ test_that("as_tibble_row() works with non-bare vectors (#797)", {
       "1st" = remove_first_dimname(Titanic[1, , , , drop = FALSE]),
       "2nd" = remove_first_dimname(Titanic[2, , , , drop = FALSE]),
       "3rd" = remove_first_dimname(Titanic[3, , , , drop = FALSE]),
-      Crew  = remove_first_dimname(Titanic[4, , , , drop = FALSE])
+      Crew = remove_first_dimname(Titanic[4, , , , drop = FALSE])
     )
   )
 })
@@ -501,7 +530,10 @@ test_that("as_tibble_row() works with non-bare vectors (#797)", {
 
 test_that("as_tibble_col() can convert atomic vectors to data frame", {
   expect_identical(as_tibble_col(1:3), tibble(value = 1:3))
-  expect_identical(as_tibble_col(list(4, 5:6), column_name = "data"), tibble(data = list(4, 5:6)))
+  expect_identical(
+    as_tibble_col(list(4, 5:6), column_name = "data"),
+    tibble(data = list(4, 5:6))
+  )
 
   expect_tibble_abort(
     as_tibble_col(lm(y ~ x, data.frame(x = 1:3, y = 2:4))),
@@ -543,7 +575,11 @@ test_that("`validate` always raises lifecycle warning.", {
   )
 
   expect_error(
-    as_tibble(list(a = 1, "hi", a = 2), validate = FALSE, .name_repair = "minimal")
+    as_tibble(
+      list(a = 1, "hi", a = 2),
+      validate = FALSE,
+      .name_repair = "minimal"
+    )
   )
 
   df <- data.frame(a = 1, "hi", a = 2)
@@ -561,11 +597,19 @@ test_that("`validate` always raises lifecycle warning.", {
 
 test_that("Inconsistent `validate` and `.name_repair` used together raise a warning.", {
   expect_error(
-    as_tibble(list(a = 1, "hi"), validate = FALSE, .name_repair = "check_unique")
+    as_tibble(
+      list(a = 1, "hi"),
+      validate = FALSE,
+      .name_repair = "check_unique"
+    )
   )
 
   expect_error(
-    as_tibble(list(a = 1, "hi", a = 2), validate = TRUE, .name_repair = "minimal")
+    as_tibble(
+      list(a = 1, "hi", a = 2),
+      validate = TRUE,
+      .name_repair = "minimal"
+    )
   )
 
   df <- data.frame(a = 1, "hi", a = 2)
@@ -706,7 +750,11 @@ test_that("converting from matrix removes row names by default", {
 test_that("converting from matrix keeps row names if argument has them, with rownames = NA", {
   x <- matrix(1:30, 6, 5, dimnames = list(letters[1:6], LETTERS[1:5]))
   df <- data.frame(
-    A = 1:6, B = 7:12, C = 13:18, D = 19:24, E = 25:30,
+    A = 1:6,
+    B = 7:12,
+    C = 13:18,
+    D = 19:24,
+    E = 25:30,
     row.names = letters[1:6]
   )
 
@@ -717,7 +765,14 @@ test_that("converting from matrix keeps row names if argument has them, with row
 
 test_that("converting from matrix supports storing row names in a column", {
   x <- matrix(1:30, 6, 5, dimnames = list(letters[1:6], LETTERS[1:5]))
-  df <- tibble(id = letters[1:6], A = 1:6, B = 7:12, C = 13:18, D = 19:24, E = 25:30)
+  df <- tibble(
+    id = letters[1:6],
+    A = 1:6,
+    B = 7:12,
+    C = 13:18,
+    D = 19:24,
+    E = 25:30
+  )
   out <- as_tibble(x, rownames = "id")
   expect_identical(out, df)
 })

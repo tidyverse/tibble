@@ -154,7 +154,9 @@ NULL
   # Column or matrix subsetting if nargs() == 2L
   if (n_real_args <= 2L) {
     if (!missing(drop)) {
-      warn("`drop` argument ignored for subsetting a tibble with `x[j]`, it has an effect only for `x[i, j]`.")
+      warn(
+        "`drop` argument ignored for subsetting a tibble with `x[j]`, it has an effect only for `x[i, j]`."
+      )
       drop <- FALSE
     }
 
@@ -173,12 +175,22 @@ NULL
   if (is.null(j)) {
     xo <- x
   } else {
-    j <- vectbl_as_col_location(j, length(x), names(x), j_arg = j_arg, assign = FALSE)
+    j <- vectbl_as_col_location(
+      j,
+      length(x),
+      names(x),
+      j_arg = j_arg,
+      assign = FALSE
+    )
 
     xo <- .subset(x, j)
 
     if (anyDuplicated.default(j)) {
-      xo <- set_repaired_names(xo, repair_hint = FALSE, .name_repair = "minimal")
+      xo <- set_repaired_names(
+        xo,
+        repair_hint = FALSE,
+        .name_repair = "minimal"
+      )
     }
   }
 
@@ -200,7 +212,9 @@ NULL
 
 tbl_subset2 <- function(x, j, j_arg, call = caller_env()) {
   if (is.matrix(j)) {
-    deprecate_stop("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a matrix')",
+    deprecate_stop(
+      "3.0.0",
+      "tibble::`[[.tbl_df`(j = 'can\\'t be a matrix')",
       details = "Recursive subsetting is deprecated for tibbles.",
       env = foreign_caller_env()
     )
@@ -212,12 +226,16 @@ tbl_subset2 <- function(x, j, j_arg, call = caller_env()) {
 
   if (is.numeric(j)) {
     if (length(j) == 1L) {
-      if (is.na(j) || j < 1 || j > length(x) || (is.double(j) && j != trunc(j))) {
+      if (
+        is.na(j) || j < 1 || j > length(x) || (is.double(j) && j != trunc(j))
+      ) {
         # Side effect: throw error for invalid j
         vectbl_as_col_location2(j, length(x), j_arg = j_arg, call = call)
       }
     } else if (length(j) == 2L) {
-      deprecate_stop("3.0.0", "tibble::`[[.tbl_df`(j = 'can\\'t be a vector of length 2')",
+      deprecate_stop(
+        "3.0.0",
+        "tibble::`[[.tbl_df`(j = 'can\\'t be a vector of length 2')",
         details = "Recursive subsetting is deprecated for tibbles.",
         env = foreign_caller_env()
       )
@@ -228,7 +246,9 @@ tbl_subset2 <- function(x, j, j_arg, call = caller_env()) {
   } else if (is.symbol(j)) {
     # FIXME: Only relevant for R < 3.4
     j <- as.character(j)
-  } else if (is.logical(j) || length(j) != 1L || !is_bare_atomic(j) || is.na(j)) {
+  } else if (
+    is.logical(j) || length(j) != 1L || !is_bare_atomic(j) || is.na(j)
+  ) {
     # Side effect: throw error for invalid j
     vectbl_as_col_location2(j, length(x), names(x), j_arg = j_arg, call = call)
   }
@@ -236,7 +256,12 @@ tbl_subset2 <- function(x, j, j_arg, call = caller_env()) {
   .subset2(x, j)
 }
 
-vectbl_as_col_subscript2 <- function(j, j_arg, assign = FALSE, call = caller_env()) {
+vectbl_as_col_subscript2 <- function(
+  j,
+  j_arg,
+  assign = FALSE,
+  call = caller_env()
+) {
   subclass_col_index_errors(
     vec_as_subscript2(j, logical = "error", call = call),
     j_arg = j_arg,
@@ -244,7 +269,14 @@ vectbl_as_col_subscript2 <- function(j, j_arg, assign = FALSE, call = caller_env
   )
 }
 
-vectbl_as_col_location2 <- function(j, n, names = NULL, j_arg, assign = FALSE, call = caller_env()) {
+vectbl_as_col_location2 <- function(
+  j,
+  n,
+  names = NULL,
+  j_arg,
+  assign = FALSE,
+  call = caller_env()
+) {
   subclass_col_index_errors(
     vec_as_location2(j, n, names, call = call),
     j_arg = j_arg,
@@ -252,7 +284,13 @@ vectbl_as_col_location2 <- function(j, n, names = NULL, j_arg, assign = FALSE, c
   )
 }
 
-vectbl_as_row_location2 <- function(i, n, i_arg, assign = FALSE, call = caller_env()) {
+vectbl_as_row_location2 <- function(
+  i,
+  n,
+  i_arg,
+  assign = FALSE,
+  call = caller_env()
+) {
   subclass_row_index_errors(
     vec_as_location2(i, n, call = call),
     i_arg = i_arg,
@@ -269,12 +307,14 @@ vectbl_set_names <- function(x, names = NULL) {
   vec_set_names(x, names)
 }
 
-vectbl_as_col_location <- function(j,
-                                   n,
-                                   names = NULL,
-                                   j_arg,
-                                   assign = FALSE,
-                                   call = caller_env()) {
+vectbl_as_col_location <- function(
+  j,
+  n,
+  names = NULL,
+  j_arg,
+  assign = FALSE,
+  call = caller_env()
+) {
   subclass_col_index_errors(
     vec_as_location(j, n, names, missing = "error", call = call),
     j_arg = j_arg,
@@ -282,7 +322,13 @@ vectbl_as_col_location <- function(j,
   )
 }
 
-vectbl_as_row_index <- function(i, x, i_arg, assign = FALSE, call = caller_env()) {
+vectbl_as_row_index <- function(
+  i,
+  x,
+  i_arg,
+  assign = FALSE,
+  call = caller_env()
+) {
   stopifnot(!is.null(i))
 
   nr <- fast_nrow(x)
@@ -321,7 +367,9 @@ fix_oob <- function(i, n, warn = TRUE) {
 fix_oob_positive <- function(i, n, warn = TRUE) {
   oob <- which(i > n)
   if (warn && length(oob) > 0) {
-    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [0, rows] if positive,')",
+    deprecate_soft(
+      "3.0.0",
+      "tibble::`[.tbl_df`(i = 'must lie in [0, rows] if positive,')",
       details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
       env = foreign_caller_env()
     )
@@ -334,14 +382,18 @@ fix_oob_positive <- function(i, n, warn = TRUE) {
 fix_oob_negative <- function(i, n, warn = TRUE) {
   oob <- (i < -n)
   if (warn && any(oob, na.rm = TRUE)) {
-    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must lie in [-rows, 0] if negative,')",
+    deprecate_soft(
+      "3.0.0",
+      "tibble::`[.tbl_df`(i = 'must lie in [-rows, 0] if negative,')",
       details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
       env = foreign_caller_env()
     )
   }
 
   i <- i[!oob]
-  if (is_empty(i)) i <- seq_len(n)
+  if (is_empty(i)) {
+    i <- seq_len(n)
+  }
   i
 }
 
@@ -349,7 +401,9 @@ fix_oob_invalid <- function(i, is_na_orig) {
   oob <- which(is.na(i) & !is_na_orig)
 
   if (length(oob) > 0) {
-    deprecate_soft("3.0.0", "tibble::`[.tbl_df`(i = 'must use valid row names')",
+    deprecate_soft(
+      "3.0.0",
+      "tibble::`[.tbl_df`(i = 'must use valid row names')",
       details = "Use `NA_integer_` as row index to obtain a row full of `NA` values.",
       env = foreign_caller_env()
     )
