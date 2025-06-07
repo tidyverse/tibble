@@ -75,3 +75,4 @@ Config/autostyle/scope: line_breaks
 Config/autostyle/strict: true
 Config/autostyle/rmd: false
 Config/Needs/website: tidyverse/tidytemplate
+Config/usethis/last-upkeep: 2025-06-07
