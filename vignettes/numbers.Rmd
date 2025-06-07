@@ -7,7 +7,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
+```{r}
+#| label: setup
+#| include: false
 library(tibble)
 set.seed(1014)
 knitr::opts_chunk$set(
@@ -21,7 +23,8 @@ Underlines are used to highlight groups of three digits.
 The display differs from the default display for data frames, see `vignette("digits")` for an overview over the differences.
 This display works for many, but not for all use cases.
 
-```{r numbers-2}
+```{r}
+#| label: numbers-2
 library(tibble)
 ```
 
@@ -30,7 +33,8 @@ library(tibble)
 The easiest way to customize the display of numbers and other data in a tibble is to define options.
 See `?pillar::pillar_options` for a comprehensive overview.
 
-```{r numbers-3}
+```{r}
+#| label: numbers-3
 tibble(x = 123.4567)
 old <- options(pillar.sigfig = 7)
 tibble(x = 123.4567)
@@ -48,7 +52,8 @@ The new `num()` constructor allows creating vectors that behave like numbers but
 Below a few examples are shown, see `?num` for a comprehensive overview.
 Similarly, `char()` allows customizing the display of character columns.
 
-```{r numbers-5}
+```{r}
+#| label: numbers-5
 num(-1:3, notation = "sci")
 tibble(
   x4 = num(8:12 * 100 + 0.5, digits = 4),
@@ -70,7 +75,8 @@ The formatting survives most data transformations.
 Currently, formatting must be applied manually for each column.
 The following pattern may help doing this consistently for all columns in a tibble, or for some columns based on their name.
 
-```{r, eval = rlang::is_installed("dplyr")}
+```{r}
+#| eval: !expr rlang::is_installed("dplyr")
 library(dplyr, warn.conflicts = FALSE)
 
 markets <-
@@ -94,7 +100,8 @@ We are working on seamlessly applying this formatting to the final presentation 
 
 When applying arithmetic operations on numbers created by `num()`, the result inherits the formatting of the first `num` object.
 
-```{r numbers-13}
+```{r}
+#| label: numbers-13
 num(1) + 2
 1 + num(2)
 1L + num(2)
@@ -108,7 +115,8 @@ num(3, digits = 2) * num(4, sigfig = 2)
 
 Similarly, for mathematical operations, the formatting is inherited.
 
-```{r numbers-14}
+```{r}
+#| label: numbers-14
 min(num(1:3, label = "$"))
 mean(num(1:3, notation = "eng"))
 sin(num(1:3, label = "%", scale = 100))
@@ -120,7 +128,8 @@ sin(num(1:3, label = "%", scale = 100))
 In some cases, the ideal formatting changes after a transformation.
 `num()` can be applied repeatedly, the last setting wins.
 
-```{r numbers-15}
+```{r}
+#| label: numbers-15
 num(1:3 + 0.125, digits = 4)
 transf <- 10^num(1:3 + 0.125, digits = 4)
 transf
@@ -131,20 +140,24 @@ num(transf, sigfig = 3)
 
 The `var()` function is one of the examples where the formatting is lost:
 
-```{r numbers-16}
+```{r}
+#| label: numbers-16
 x <- num(c(1, 2, 4), notation = "eng")
 var(x)
 ```
 
 The `median()` function is worse, it breaks for `num()` objects:
 
-```{r numbers-16-a, error = TRUE}
+```{r}
+#| label: numbers-16-a
+#| error: true
 median(x)
 ```
 
 One way to recover is to apply `num()` to the result:
 
-```{r numbers-16a}
+```{r}
+#| label: numbers-16a
 num(var(x), notation = "eng")
 num(median(as.numeric(x)), notation = "eng")
 ```
@@ -152,7 +165,8 @@ num(median(as.numeric(x)), notation = "eng")
 For automatic recovery, we can also define our version of `var()`, or even overwrite the base implementation.
 Note that this pattern is still experimental and may be subject to change:
 
-```{r numbers-16b}
+```{r}
+#| label: numbers-16b
 var_ <- function(x, ...) {
   out <- var(vctrs::vec_proxy(x), ...)
   vctrs::vec_restore(out, x)
@@ -163,7 +177,8 @@ var_(x)
 This pattern can be applied to all functions that lose the formatting.
 The `make_restore()` function defined below is a function factory that consumes a function and returns a derived function:
 
-```{r numbers-16c}
+```{r}
+#| label: numbers-16c
 make_restore <- function(fun) {
   force(fun)
   function(x, ...) {

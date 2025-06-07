@@ -9,7 +9,8 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
@@ -18,7 +19,8 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 library(tibble)
 library(formattable)
 library(dplyr)
@@ -26,7 +28,8 @@ library(tidyr)
 library(ggplot2)
 ```
 
-```{r setup}
+```{r}
+#| label: setup
 library(tibble)
 ```
 
@@ -42,7 +45,8 @@ tbl <- tibble(x = digits(9:11, 3))
 tbl
 ```
 
-```{r echo = FALSE}
+```{r}
+#| echo: false
 vec_ptype_abbr.formattable <- function(x, ...) {
   "dbl:fmt"
 }
@@ -98,7 +102,9 @@ stocks %>%
 
 For ggplot2 we need to do [some work](https://github.com/tidyverse/ggplot2/pull/4065) to show apply the formatting to the scales.
 
-```{r, eval = (Sys.getenv("IN_GALLEY") == ""), fig.alt="Example plot showing stock over time, separated by id"}
+```{r}
+#| eval: !expr (Sys.getenv("IN_GALLEY") == "")
+#| fig-alt: Example plot showing stock over time, separated by id
 library(ggplot2)
 
 # Needs https://github.com/tidyverse/ggplot2/pull/4065 or similar
@@ -110,7 +116,9 @@ stocks %>%
 It pays off to specify formatting very early in the process.
 The diagram below shows the principal stages of data analysis and exploration from "R for data science".
 
-```{r echo = FALSE, eval = (Sys.getenv("IN_GALLEY") == "")}
+```{r}
+#| echo: false
+#| eval: !expr (Sys.getenv("IN_GALLEY") == "")
 text <- paste(
   readLines(here::here("vignettes/r4ds.mmd")),
   collapse = "\n"
@@ -122,7 +130,9 @@ The subsequent diagram adds data formats, communication options, and explicit da
 The original r4ds transitions are highlighted in bold.
 There are two principal options where to apply formatting for results: right before communicating them, or right after importing.
 
-```{r echo = FALSE, eval = (Sys.getenv("IN_GALLEY") == "")}
+```{r}
+#| echo: false
+#| eval: !expr (Sys.getenv("IN_GALLEY") == "")
 text <- paste(
   readLines(here::here("vignettes/formats.mmd")),
   collapse = "\n"

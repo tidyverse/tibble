@@ -8,7 +8,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r setup, include = FALSE}
+```{r}
+#| label: setup
+#| include: false
 library(tibble)
 set.seed(1014)
 knitr::opts_chunk$set(

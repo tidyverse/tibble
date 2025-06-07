@@ -24,7 +24,8 @@ vignette: >
 }
 </style>
 
-```{r, include = FALSE}
+```{r}
+#| include: false
 # To suppress messages
 library(tibble)
 library(vctrs)
@@ -59,7 +60,8 @@ We resolve this by first defining column access with `[[` and `$`, then column-w
 
 In this article, all behaviors are demonstrated using one example data frame and its tibble equivalent:
 
-```{r setup}
+```{r}
+#| label: setup
 library(tibble)
 library(vctrs)
 
@@ -77,7 +79,10 @@ new_tbl <- function() {
 
 Results of the same code for data frames and tibbles are presented side by side:
 
-```{r show, dftbl = TRUE, dftbl_always = TRUE}
+```{r}
+#| label: show
+#| dftbl: true
+#| dftbl_always: true
 new_df()
 ```
 
@@ -86,14 +91,16 @@ If the results are identical (after converting to a data frame if necessary), on
 Subsetting operations are read-only.
 The same objects are reused in all examples:
 
-```{r ro}
+```{r}
+#| label: ro
 df <- new_df()
 tbl <- new_tbl()
 ```
 
 Where needed, we also show examples with hierarchical columns containing a data frame or a matrix:
 
-```{r setup2}
+```{r}
+#| label: setup2
 new_tbl2 <- function() {
   tibble(
     tb = tbl,
@@ -112,7 +119,9 @@ df2 <- new_df2()
 tbl2 <- new_tbl2()
 ```
 
-```{r show-compare-2, dftbl = TRUE}
+```{r}
+#| label: show-compare-2
+#| dftbl: true
 new_df()
 ```
 
@@ -121,7 +130,9 @@ The `with_*()` functions (omitted here for brevity) allow for a more concise not
 These functions take an assignment expression, execute it on a fresh copy of the data, and return the data for printing.
 The first example prints what's really executed, further examples omit this output.
 
-```{r with-def, include = FALSE}
+```{r}
+#| label: with-def
+#| include: false
 with_df <- function(code, verbose = FALSE) {
   code <- rlang::enexpr(code)
 
@@ -169,7 +180,9 @@ with_tbl2 <- function(code) {
 }
 ```
 
-```{r with-demo, dftbl = TRUE}
+```{r}
+#| label: with-demo
+#| dftbl: true
 with_df(df$n <- rev(df$n), verbose = TRUE)
 ```
 
@@ -179,20 +192,30 @@ with_df(df$n <- rev(df$n), verbose = TRUE)
 
 `x[[j]]` is equal to `.subset2(x, j)`.
 
-```{r double-bracket-equivalent-to-subset2, dftbl = TRUE}
+```{r}
+#| label: double-bracket-equivalent-to-subset2
+#| dftbl: true
 df[[1]]
 .subset2(df, 1)
 ```
 
 
-```{r double-bracket-equivalent-to-subset2-detail, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: double-bracket-equivalent-to-subset2-detail
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 identical(df[[3]], .subset2(df, 3))
 identical(df2[["df"]], .subset2(df2, "df"))
 ```
 
 NB: `x[[j]]` always returns an object of size `nrow(x)` if the column exists.
 
-```{r double-bracket-retains-size, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: double-bracket-retains-size
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 vec_size(df[[1]])
 vec_size(df[[3]])
 vec_size(df2[[1]])
@@ -201,7 +224,9 @@ vec_size(df2[[2]])
 
 `j` must be a single number or a string, as enforced by `.subset2(x, j)`.
 
-```{r double-bracket-requires-scalar-j-index, dftbl = TRUE}
+```{r}
+#| label: double-bracket-requires-scalar-j-index
+#| dftbl: true
 df[[1:2]]
 df[[c("n", "c")]]
 df[[TRUE]]
@@ -210,7 +235,9 @@ df[[mean]]
 
 `NA` indexes, numeric out-of-bounds (OOB) values, and non-integers throw an error:
 
-```{r double-bracket-j-oob-numeric, dftbl = TRUE}
+```{r}
+#| label: double-bracket-j-oob-numeric
+#| dftbl: true
 df[[NA]]
 df[[NA_character_]]
 df[[NA_integer_]]
@@ -222,7 +249,9 @@ df[[Inf]]
 
 Character OOB access is silent because a common package idiom is to check for the absence of a column with `is.null(df[[var]])`.
 
-```{r double-bracket-j-oob-character, dftbl = TRUE}
+```{r}
+#| label: double-bracket-j-oob-character
+#| dftbl: true
 df[["x"]]
 ```
 
@@ -230,13 +259,19 @@ df[["x"]]
 
 `x$name` and `x$"name"` are equal to `x[["name"]]`.
 
-```{r dollar-equivalent-to-subset, dftbl = TRUE}
+```{r}
+#| label: dollar-equivalent-to-subset
+#| dftbl: true
 df$n
 df$"n"
 df[["n"]]
 ```
 
-```{r dollar-equivalent-to-subset-detail, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: dollar-equivalent-to-subset-detail
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 identical(df$li, df[["li"]])
 identical(df2$tb, df2[["tb"]])
 identical(df2$m, df2[["m"]])
@@ -245,7 +280,9 @@ identical(df2$m, df2[["m"]])
 Unlike data frames, tibbles do not partially match names.
 Because `df$x` is rarely used in packages, it can raise a warning:
 
-```{r dollar-equivalent-to-subset-pmatch, dftbl = TRUE}
+```{r}
+#| label: dollar-equivalent-to-subset-pmatch
+#| dftbl: true
 df$l
 df$not_present
 ```
@@ -261,13 +298,17 @@ This implies that `j` must be a numeric or character vector, or a logical vector
 [^subset-extract-commute]: `x[j][[jj]]` is equal to `x[[ j[[jj]] ]]`, in particular `x[j][[1]]` is equal to `x[[j]]` for scalar numeric or integer `j`.
 
 
-```{r bracket-j-definition, dftbl = TRUE}
+```{r}
+#| label: bracket-j-definition
+#| dftbl: true
 df[1:2]
 ```
 
 When subsetting repeated indexes, the resulting column names are undefined, do not rely on them.
 
-```{r bracket-j-duplication, dftbl = TRUE}
+```{r}
+#| label: bracket-j-duplication
+#| dftbl: true
 df[c(1, 1)]
 ```
 
@@ -275,13 +316,17 @@ For tibbles with repeated column names, subsetting by name uses the first matchi
 
 `nrow(df[j])` equals `nrow(df)`.
 
-```{r bracket-j-empty, dftbl = TRUE}
+```{r}
+#| label: bracket-j-empty
+#| dftbl: true
 df[integer()]
 ```
 
 Tibbles support indexing by a logical matrix, but only if all values in the returned vector are compatible.
 
-```{r bracket-j-logical-matrix, dftbl = TRUE}
+```{r}
+#| label: bracket-j-logical-matrix
+#| dftbl: true
 df[is.na(df)]
 df[!is.na(df)]
 ```
@@ -291,12 +336,18 @@ df[!is.na(df)]
 `x[, j]` is equal to `x[j]`.
 Tibbles do not perform column extraction if `x[j]` would yield a single column.
 
-```{r bracket-missing-i, dftbl = TRUE}
+```{r}
+#| label: bracket-missing-i
+#| dftbl: true
 df[, 1]
 df[, 1:2]
 ```
 
-```{r bracket-missing-i-detail, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: bracket-missing-i-detail
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 identical(df[, 2:3], df[2:3])
 identical(df2[, 1:2], df2[1:2])
 ```
@@ -305,11 +356,17 @@ identical(df2[, 1:2], df2[1:2])
 
 For backward compatiblity, `x[, j, drop = TRUE]` performs column __extraction__, returning `x[j][[1]]` when `ncol(x[j])` is 1.
 
-```{r bracket-always-returns-tibble-drop, dftbl = TRUE}
+```{r}
+#| label: bracket-always-returns-tibble-drop
+#| dftbl: true
 df[, 1, drop = TRUE]
 ```
 
-```{r bracket-always-returns-tibble-drop-detail, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: bracket-always-returns-tibble-drop-detail
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 identical(df[, 3, drop = TRUE], df[[3]])
 identical(df2[, 1, drop = TRUE], df2[[1]])
 identical(df2[, 2, drop = TRUE], df2[[2]])
@@ -324,14 +381,18 @@ identical(df2[, 2, drop = TRUE], df2[[2]])
 [^row-subset-efficiency]: Row subsetting `x[i, ]` is not defined in terms of `x[[j]][i]` because that definition does not generalise to matrix and data frame columns.
 For efficiency and backward compatibility, `i` is converted to an integer vector by `vec_as_index(i, nrow(x))` first.
 
-```{r bracket-i, dftbl = TRUE}
+```{r}
+#| label: bracket-i
+#| dftbl: true
 df[3, ]
 ```
 
 This means that `i` must be a numeric vector, or a logical vector of length `nrow(x)` or 1.
 For compatibility, `i` can also be a character vector containing positive numbers.
 
-```{r bracket-i-wrong-type, dftbl = TRUE}
+```{r}
+#| label: bracket-i-wrong-type
+#| dftbl: true
 df[mean, ]
 df[list(1), ]
 df["1", ]
@@ -339,7 +400,9 @@ df["1", ]
 
 Exception: OOB values generate warnings instead of errors:
 
-```{r bracket-i-oob, dftbl = TRUE}
+```{r}
+#| label: bracket-i-oob
+#| dftbl: true
 df[10, ]
 df["x", ]
 ```
@@ -348,14 +411,18 @@ df["x", ]
 Unlike data frames, only logical vectors of length 1 are recycled.
 <!-- TODO: should this be an error? #648 -->
 
-```{r bracket-i-recycle, dftbl = TRUE}
+```{r}
+#| label: bracket-i-recycle
+#| dftbl: true
 df[c(TRUE, FALSE), ]
 ```
 
 NB: scalar logicals are recycled, but scalar numerics are not.
 That makes the `x[NA, ]` and `x[NA_integer_, ]` return different results.
 
-```{r bracket-i-na, dftbl = TRUE}
+```{r}
+#| label: bracket-i-na
+#| dftbl: true
 df[NA, ]
 df[NA_integer_, ]
 ```
@@ -364,7 +431,9 @@ df[NA_integer_, ]
 
 `drop = TRUE` has no effect when not selecting a single row:
 
-```{r bracket-i-drop, dftbl = TRUE}
+```{r}
+#| label: bracket-i-drop
+#| dftbl: true
 df[1, , drop = TRUE]
 ```
 
@@ -384,7 +453,11 @@ df[1, , drop = TRUE]
 
 [^bracket-flip]: A more efficient implementation of `x[i, j]` would forward to `x[j][i, ]`.
 
-```{r bracket-i-j-equivalent-to-i-subset-then-j, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: bracket-i-j-equivalent-to-i-subset-then-j
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 df[1, 1]
 df[1, ][1]
 identical(df[1, 2:3], df[2:3][1, ])
@@ -401,7 +474,8 @@ identical(df2[2:3, 1:2], df2[1:2][2:3, ])
 [^bracket2-flip]: Cell subsetting `x[[i, j]]` is not defined in terms of `x[[j]][[i]]` because that definition does not generalise to list, matrix and data frame columns.
 A more efficient implementation of `x[[i, j]]` would check that `j` is a scalar and forward to `x[i, j][[1]]`.
 
-```{r bracket-bracket-i-j-equivalent-to-i-subset-then-j}
+```{r}
+#| label: bracket-bracket-i-j-equivalent-to-i-subset-then-j
 df[[1, 1]]
 df[[1, 3]]
 ```
@@ -417,19 +491,31 @@ Unlike `x[i, ]`, `x[[i, ]]` is not valid.
 
 If `a` is a vector then `x[[j]] <- a` replaces the `j`th column with value `a`.
 
-```{r double-bracket-assign-definition, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: double-bracket-assign-definition
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 with_df(df[[1]] <- 0)
 with_df(df[[3]] <- 4:1)
 with_df2(df2[[1]] <- 0)
 with_df2(df2[[2]] <- 4:1)
 ```
 
-```{r double-bracket-assign-requires-scalar-j-index, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: double-bracket-assign-requires-scalar-j-index
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 with_df(df[[1]] <- 0)
 with_df(df[["c"]] <- 0)
 ```
 
-```{r double-bracket-assign-requires-scalar-j-index-error, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: double-bracket-assign-requires-scalar-j-index-error
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 with_df(df[[TRUE]] <- 0)
 with_df(df[[1:3]] <- 0)
 with_df(df[[c("n", "c")]] <- 0)
@@ -444,13 +530,19 @@ with_df(df[[NA_character_]] <- 0)
 (The only exception is when `a` is `NULL`, as described below.)
 Recycling also works for list, data frame, and matrix columns.
 
-```{r double-bracket-assign-recycle, dftbl = TRUE}
+```{r}
+#| label: double-bracket-assign-recycle
+#| dftbl: true
 with_df(df[["li"]] <- list(0))
 with_df2(df2[["tb"]] <- df[1, ])
 with_df2(df2[["m"]] <- df2[["m"]][1, , drop = FALSE])
 ```
 
-```{r double-bracket-requires-size, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: double-bracket-requires-size
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 with_df(df[[1]] <- 1)
 with_df(df[[1]] <- 4:1)
 with_df(df[[1]] <- 3:1)
@@ -460,7 +552,9 @@ with_df(df[[1]] <- 2:1)
 `j` must be a scalar numeric or a string, and cannot be `NA`.
 If `j` is OOB, a new column is added on the right hand side, with name repair if needed.
 
-```{r double-bracket-assign-supports-new, dftbl = TRUE}
+```{r}
+#| label: double-bracket-assign-supports-new
+#| dftbl: true
 with_df(df[["x"]] <- 0)
 with_df(df[[4]] <- 0)
 with_df(df[[5]] <- 0)
@@ -470,7 +564,11 @@ with_df(df[[5]] <- 0)
 
 `df[[j]] <- a` replaces the complete column so can change the type.
 
-```{r double-bracket-assign-supports-type-change, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: double-bracket-assign-supports-type-change
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 with_df(df[[1]] <- df[[2]])
 with_df(df[[2]] <- df[[3]])
 with_df(df[[3]] <- df2[[1]])
@@ -480,14 +578,22 @@ with_df2(df2[[2]] <- df[[1]])
 
 `[[<-` supports removing a column by assigning `NULL` to it.
 
-```{r double-bracket-assign-supports-null, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: double-bracket-assign-supports-null
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 with_df(df[[1]] <- NULL)
 with_df2(df2[[2]] <- NULL)
 ```
 
 Removing a nonexistent column is a no-op.
 
-```{r double-bracket-assign-supports-null-unknown, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: double-bracket-assign-supports-null-unknown
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 with_df(df[["q"]] <- NULL)
 ```
 
@@ -497,18 +603,26 @@ with_df(df[["q"]] <- NULL)
 
 [^column-assign-symmetry]: `$` behaves almost completely symmetrically to `[[` when comparing subsetting and subassignment.
 
-```{r dollar-equivalent-to-subset-assign, dftbl = TRUE}
+```{r}
+#| label: dollar-equivalent-to-subset-assign
+#| dftbl: true
 with_df(df$n <- 0)
 with_df(df[["n"]] <- 0)
 ```
 
-```{r dollar-equivalent-to-subset-assign-detail, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: dollar-equivalent-to-subset-assign-detail
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 with_df(df$"n" <- 0)
 ```
 
 `$<-` does not perform partial matching.
 
-```{r dollar-equivalent-to-subset-assign-pmatch, dftbl = TRUE}
+```{r}
+#| label: dollar-equivalent-to-subset-assign-pmatch
+#| dftbl: true
 with_df(df$l <- 0)
 with_df(df[["l"]] <- 0)
 ```
@@ -522,14 +636,18 @@ with_df(df[["l"]] <- 0)
 
 If `inherits(a, "list")` or `inherits(a, "data.frame")` is `TRUE`, then `x[j] <- a` is equivalent to `x[[j[[1]]] <- a[[1]]`, `x[[j[[2]]]] <- a[[2]]`, ...
 
-```{r bracket-assign-def, dftbl = TRUE}
+```{r}
+#| label: bracket-assign-def
+#| dftbl: true
 with_df(df[1:2] <- list("x", 4:1))
 with_df(df[c("li", "x", "c")] <- list("x", 4:1, NULL))
 ```
 
 If `length(a)` equals 1, then it is recycled to the same length as `j`.
 
-```{r bracket-assign-recycles, dftbl = TRUE}
+```{r}
+#| label: bracket-assign-recycles
+#| dftbl: true
 with_df(df[1:2] <- list(1))
 with_df(df[1:2] <- list(0, 0, 0))
 with_df(df[1:3] <- list(0, 0))
@@ -537,19 +655,27 @@ with_df(df[1:3] <- list(0, 0))
 
 An attempt to update the same column twice gives an error.
 
-```{r, bracket-assign-multiple, dftbl = TRUE}
+```{r}
+#| label: bracket-assign-multiple
+#| dftbl: true
 with_df(df[c(1, 1)] <- list(1, 2))
 ```
 
 If `a` contains `NULL` values, the corresponding columns are removed *after* updating (i.e. position indexes refer to columns before any modifications).
 
-```{r bracket-assign-remove, dftbl = TRUE}
+```{r}
+#| label: bracket-assign-remove
+#| dftbl: true
 with_df(df[1:2] <- list(NULL, 4:1))
 ```
 
 `NA` indexes are not supported.
 
-```{r bracket-assign-na, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: bracket-assign-na
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 with_df(df[NA] <- list("x"))
 with_df(df[NA_integer_] <- list("x"))
 with_df(df[NA_character_] <- list("x"))
@@ -557,7 +683,11 @@ with_df(df[NA_character_] <- list("x"))
 
 Just like column updates, `[<-` supports changing the type of an existing column.
 
-```{r bracket-assign-supports-type-change, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: bracket-assign-supports-type-change
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 with_df(df[1] <- df[2])
 with_df(df[2] <- df[3])
 with_df(df[3] <- df2[1])
@@ -568,7 +698,9 @@ with_df2(df2[2] <- df[1])
 Appending columns at the end (without gaps) is supported.
 The name of new columns is determined by the LHS, the RHS, or by name repair (in that order of precedence).
 
-```{r bracket-assign-names, dftbl = TRUE}
+```{r}
+#| label: bracket-assign-names
+#| dftbl: true
 with_df(df[c("x", "y")] <- tibble("x", x = 4:1))
 with_df(df[3:4] <- list("x", x = 4:1))
 with_df(df[4] <- list(4:1))
@@ -577,7 +709,9 @@ with_df(df[5] <- list(4:1))
 
 Tibbles support indexing by a logical matrix, but only for a scalar RHS, and if all columns updated are compatible with the value assigned.
 
-```{r bracket-j-assign-logical-matrix, dftbl = TRUE}
+```{r}
+#| label: bracket-j-assign-logical-matrix
+#| dftbl: true
 with_df(df[is.na(df)] <- 4)
 with_df(df[is.na(df)] <- 1:2)
 with_df(df[matrix(c(rep(TRUE, 5), rep(FALSE, 7)), ncol = 3)] <- 4)
@@ -589,7 +723,9 @@ If `is.matrix(a)`, then `a` is coerced to a data frame with `as.data.frame()` be
 If rows are assigned, the matrix type must be compatible with all columns.
 If `is.array(a)` and `any(dim(a)[-1:-2] != 1)`, an error is thrown.
 
-```{r bracket-assign-array, dftbl = TRUE}
+```{r}
+#| label: bracket-assign-array
+#| dftbl: true
 with_df(df[1:2] <- matrix(8:1, ncol = 2))
 with_df(df[1:3, 1:2] <- matrix(6:1, ncol = 2))
 with_df(df[1:2] <- array(4:1, dim = c(4, 1, 1)))
@@ -603,14 +739,18 @@ with_df(df[1:2] <- array(8:1, dim = c(4, 1, 2)))
 If `vec_is(a)`, then `x[j] <- a` is equivalent to `x[j] <- list(a)`.
 This is primarily provided for backward compatibility.
 
-```{r bracket-assign-wraps, dftbl = TRUE}
+```{r}
+#| label: bracket-assign-wraps
+#| dftbl: true
 with_df(df[1] <- 0)
 with_df(df[1] <- list(0))
 ```
 
 Matrices must be wrapped in `list()` before assignment to create a matrix column.
 
-```{r bracket-assign-matrix, dftbl = TRUE}
+```{r}
+#| label: bracket-assign-matrix
+#| dftbl: true
 with_df(df[1] <- list(matrix(1:8, ncol = 2)))
 
 with_df(df[1:2] <- list(matrix(1:8, ncol = 2)))
@@ -621,7 +761,9 @@ with_df(df[1:2] <- list(matrix(1:8, ncol = 2)))
 Entire columns can be removed.
 Specifying `i` is an error.
 
-```{r bracket-assign-null, dftbl = TRUE}
+```{r}
+#| label: bracket-assign-null
+#| dftbl: true
 with_df(df[1] <- NULL)
 with_df(df[, 2:3] <- NULL)
 with_df(df[1, 2:3] <- NULL)
@@ -633,7 +775,9 @@ Any other type for `a` is an error.
 Note that if `is.list(a)` is `TRUE`, but `inherits(a, "list")` is `FALSE`, then `a` is considered to be a scalar.
 See `?vec_is` and `?vec_proxy` for details.
 
-```{r bracket-assign-non-vector, dftbl = TRUE}
+```{r}
+#| label: bracket-assign-non-vector
+#| dftbl: true
 with_df(df[1] <- mean)
 with_df(df[1] <- lm(mpg ~ wt, data = mtcars))
 ```
@@ -646,12 +790,18 @@ with_df(df[1] <- lm(mpg ~ wt, data = mtcars))
 
 [^row-assign-symmetry]: `x[i, ]` is symmetrical for subset and subassignment.
 
-```{r bracket-i-assign, dftbl = TRUE}
+```{r}
+#| label: bracket-i-assign
+#| dftbl: true
 with_df(df[2:3, ] <- df[1, ])
 with_df(df[c(FALSE, TRUE, TRUE, FALSE), ] <- df[1, ])
 ```
 
-```{r bracket-i-assign-detail, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: bracket-i-assign-detail
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 with_df(df[0:2, ] <- df[1, ])
 with_df(df[0, ] <- df[1, ])
 with_df(df[-2, ] <- df[1, ])
@@ -665,13 +815,19 @@ with_df(df[NA, ] <- df[1, ])
 
 Only values of size one can be recycled.
 
-```{r bracket-i-recycle-assign, dftbl = TRUE}
+```{r}
+#| label: bracket-i-recycle-assign
+#| dftbl: true
 with_df(df[2:3, ] <- df[1, ])
 with_df(df[2:3, ] <- list(df$n[1], df$c[1:2], df$li[1]))
 with_df(df[2:4, ] <- df[1:2, ])
 ```
 
-```{r bracket-i-recycle-assign-detail, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: bracket-i-recycle-assign-detail
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 with_df2(df2[2:4, ] <- df2[1, ])
 with_df2(df2[2:4, ] <- df2[2:3, ])
 ```
@@ -679,7 +835,9 @@ with_df2(df2[2:4, ] <- df2[2:3, ])
 For compatibility, only a warning is issued for indexing beyond the number of rows.
 Appending rows right at the end of the existing data is supported, without warning.
 
-```{r bracket-i-oob-num, dftbl = TRUE}
+```{r}
+#| label: bracket-i-oob-num
+#| dftbl: true
 with_df(df[5, ] <- df[1, ])
 with_df(df[5:7, ] <- df[1, ])
 with_df(df[6, ] <- df[1, ])
@@ -690,11 +848,17 @@ with_df(df[-6, ] <- df[1, ])
 
 For compatibility, `i` can also be a character vector containing positive numbers.
 
-```{r bracket-i-character, dftbl = TRUE}
+```{r}
+#| label: bracket-i-character
+#| dftbl: true
 with_df(df[as.character(1:3), ] <- df[1, ])
 ```
 
-```{r bracket-i-character-detail, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: bracket-i-character-detail
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 with_df(df[as.character(-(1:3)), ] <- df[1, ])
 with_df(df[as.character(3:5), ] <- df[1, ])
 with_df(df[as.character(-(3:5)), ] <- df[1, ])
@@ -713,7 +877,9 @@ A more efficient implementation of `x[i, j] <- a` would forward to `x[j][i, ] <-
 Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 `x[i, j] <- a` can't change the data type of existing columns.
 
-```{r bracket-i-data-type, dftbl = TRUE}
+```{r}
+#| label: bracket-i-data-type
+#| dftbl: true
 with_df(df[2:3, 1] <- df[1:2, 2])
 with_df(df[2:3, 2] <- df[1:2, 3])
 with_df(df[2:3, 3] <- df2[1:2, 1])
@@ -723,21 +889,27 @@ with_df2(df2[2:3, 2] <- df[1:2, 1])
 
 A notable exception is the population of a column full of `NA` (which is of type `logical`), or the use of `NA` on the right-hand side of the assignment.
 
-```{r bracket-i-j-na-init, dftbl = TRUE}
+```{r}
+#| label: bracket-i-j-na-init
+#| dftbl: true
 with_df({df$x <- NA; df[2:3, "x"] <- 3:2})
 with_df({df[2:3, 2:3] <- NA})
 ```
 
 For programming, it is always safer (and faster) to use the correct type of `NA` to initialize columns.
 
-```{r bracket-i-j-typed-na-init, dftbl = TRUE}
+```{r}
+#| label: bracket-i-j-typed-na-init
+#| dftbl: true
 with_df({df$x <- NA_integer_; df[2:3, "x"] <- 3:2})
 ```
 
 
 For new columns, `x[i, j] <- a` fills the unassigned rows with `NA`.
 
-```{r subassign-ij-new-column, dftbl = TRUE}
+```{r}
+#| label: subassign-ij-new-column
+#| dftbl: true
 with_df(df[2:3, "n"] <- 1)
 with_df(df[2:3, "x"] <- 1)
 with_df(df[2:3, "n"] <- NULL)
@@ -745,7 +917,9 @@ with_df(df[2:3, "n"] <- NULL)
 
 Likewise, for new rows, `x[i, j] <- a` fills the unassigned columns with `NA`.
 
-```{r append-rows-only-all-columns, dftbl = TRUE}
+```{r}
+#| label: append-rows-only-all-columns
+#| dftbl: true
 with_df(df[5, "n"] <- list(0L))
 ```
 
@@ -759,7 +933,11 @@ with_df(df[5, "n"] <- list(0L))
 An efficient implementation would check that `i` and `j` are scalar and forward to `x[i, j][[1]] <- a`.
 
 
-```{r double-bracket-i-j-equivalent-to-row-subset-then-j, dftbl = TRUE, include = eval_details, eval = eval_details}
+```{r}
+#| label: double-bracket-i-j-equivalent-to-row-subset-then-j
+#| dftbl: true
+#| include: !expr eval_details
+#| eval: !expr eval_details
 with_df(df[[1, 1]] <- 0)
 with_df(df[1, ][[1]] <- 0)
 with_df(df[[1, 3]] <- list(NULL))
@@ -775,6 +953,9 @@ with_df(df[[1:2, 1]] <- 0)
 NB: `vec_size(a)` must equal 1.
 Unlike `x[i, ] <-`, `x[[i, ]] <-` is not valid.
 
-```{r check, dftbl = TRUE, include = FALSE}
+```{r}
+#| label: check
+#| dftbl: true
+#| include: false
 stopifnot(identical(df, new_df()))
 ```
