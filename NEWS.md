@@ -1,6 +1,6 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# tibble 3.2.1.9900
+# tibble 3.3.0
 
 ## Bug fixes
 
@@ -34,7 +34,7 @@
 
 - Skip tests if packages are missing.
 
-- Override :: to avoid failures in tests without suggested packages.
+- Override `::` to avoid failures in tests without suggested packages.
 
 
 # tibble 3.2.1
