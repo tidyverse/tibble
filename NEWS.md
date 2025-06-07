@@ -34,7 +34,7 @@
 
 - Skip tests if packages are missing.
 
-- Override :: to avoid failures in tests without suggested packages.
+- Override `::` to avoid failures in tests without suggested packages.
 
 
 # tibble 3.2.1
