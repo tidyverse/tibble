@@ -31,8 +31,7 @@ compat_lazy <- function(lazy, env = caller_env(), warn = TRUE) {
     return(as_quosure(lazy, env))
   }
 
-  out <- switch(
-    typeof(lazy),
+  out <- switch(typeof(lazy),
     symbol = ,
     language = new_quosure(lazy, env),
     character = {
