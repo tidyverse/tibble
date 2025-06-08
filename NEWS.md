@@ -1,5 +1,26 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.0.9000
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/15506522924
+
+- Use Quarto-style formatting in vignettes.
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/15506365201
+
+- Upkeep (#1641).
+
+## Documentation
+
+- Posit as copyright holder.
+
+
 # tibble 3.3.0
 
 ## Bug fixes
