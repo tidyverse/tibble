@@ -1,22 +1,17 @@
-#' @importFrom pillar tbl_sum
 #' @export
 pillar::tbl_sum
 
 #' @export
-#' @importFrom pillar dim_desc
 tbl_sum.tbl_df <- function(x, ...) {
   c("A tibble" = dim_desc(x))
 }
 
-#' @importFrom pillar obj_sum
 #' @export
 pillar::obj_sum
 
-#' @importFrom pillar type_sum
 #' @export
 pillar::type_sum
 
-#' @importFrom pillar size_sum
 #' @export
 pillar::size_sum
 

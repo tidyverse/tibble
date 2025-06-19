@@ -1,8 +1,16 @@
 ## usethis namespace: start
+#' @import rlang
 #' @importFrom lifecycle deprecate_soft
-#' @importFrom lifecycle deprecate_warn
 #' @importFrom lifecycle deprecate_stop
+#' @importFrom lifecycle deprecate_warn
 #' @importFrom lifecycle expect_deprecated
+#' @importFrom pillar dim_desc
+#' @importFrom pillar glimpse
+#' @importFrom pillar obj_sum
+#' @importFrom pillar size_sum
+#' @importFrom pillar style_subtle
+#' @importFrom pillar tbl_sum
+#' @importFrom pillar type_sum
 #' @importFrom pkgconfig set_config
 #' @importFrom utils head tail
 #' @importFrom vctrs new_data_frame
@@ -26,7 +34,6 @@
 #' @importFrom vctrs vec_set_names
 #' @importFrom vctrs vec_size
 #' @importFrom vctrs vec_slice
-#' @import rlang
 ## usethis namespace: end
 NULL
 
