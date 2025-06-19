@@ -1,7 +1,7 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
-# tibble <img src="man/figures/logo.png" align="right" alt="" />
+# tibble <img src="man/figures/logo.png" align="right" alt="Hexagonal logo for the R package ‘tibble’, styled with a sci-fi theme. The word ‘TIBBLE’ appears at the top in a futuristic font, and below it is a stylized table with colored bars resembling columns and rows, set against a starry space background." />
 
 <!-- badges: start -->
 
@@ -54,17 +54,17 @@ Create a tibble from an existing object with `as_tibble()`:
 data <- data.frame(a = 1:3, b = letters[1:3], c = Sys.Date() - 1:3)
 data
 #>   a b          c
-#> 1 1 a 2025-03-18
-#> 2 2 b 2025-03-17
-#> 3 3 c 2025-03-16
+#> 1 1 a 2025-06-18
+#> 2 2 b 2025-06-17
+#> 3 3 c 2025-06-16
 
 as_tibble(data)
 #> # A tibble: 3 × 3
 #>       a b     c         
 #>   <int> <chr> <date>    
-#> 1     1 a     2025-03-18
-#> 2     2 b     2025-03-17
-#> 3     3 c     2025-03-16
+#> 1     1 a     2025-06-18
+#> 2     2 b     2025-06-17
+#> 3     3 c     2025-06-16
 ```
 
 This will work for reasonable inputs that are already data.frames,

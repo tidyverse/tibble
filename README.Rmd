@@ -45,7 +45,7 @@ local({
 })
 ```
 
-# tibble <img src="man/figures/logo.png" align="right" alt="" />
+# tibble <img src="man/figures/logo.png" align="right" alt="Hexagonal logo for the R package ‘tibble’, styled with a sci-fi theme. The word ‘TIBBLE’ appears at the top in a futuristic font, and below it is a stylized table with colored bars resembling columns and rows, set against a starry space background." />
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/tidyverse/tibble/workflows/rcc/badge.svg)](https://github.com/tidyverse/tibble/actions)
