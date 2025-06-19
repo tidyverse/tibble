@@ -139,7 +139,6 @@ trunc_mat <- function(x, n = NULL, width = NULL, n_extra = NULL) {
   structure(list(text = text, summary = list(NULL)), class = "trunc_mat")
 }
 
-#' @importFrom pillar style_subtle
 #' @export
 format.trunc_mat <- function(x, width = NULL, ...) {
   unclass(x)[[1]]
