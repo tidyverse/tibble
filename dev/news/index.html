@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9900</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.3.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -57,20 +57,40 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="3.2.1.9900" id="tibble-3219900">tibble 3.2.1.9900<a class="anchor" aria-label="anchor" href="#tibble-3219900"></a></h2>
+<h2 class="pkg-version" data-toc-text="3.3.0.9000" id="tibble-3309000">tibble 3.3.0.9000<a class="anchor" aria-label="anchor" href="#tibble-3309000"></a></h2>
 <div class="section level3">
-<h3 id="bug-fixes-3-2-1-9900">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-3-2-1-9900"></a></h3>
+<h3 id="chore-3-3-0-9000">Chore<a class="anchor" aria-label="anchor" href="#chore-3-3-0-9000"></a></h3>
+<ul><li>
+<p>Auto-update from GitHub Actions.</p>
+<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/15506522924" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/15506522924</a></p>
+</li>
+<li><p>Use Quarto-style formatting in vignettes.</p></li>
+<li>
+<p>Auto-update from GitHub Actions.</p>
+<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/15506365201" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/15506365201</a></p>
+</li>
+<li><p>Upkeep (<a href="https://github.com/tidyverse/tibble/issues/1641" class="external-link">#1641</a>).</p></li>
+</ul></div>
+<div class="section level3">
+<h3 id="documentation-3-3-0-9000">Documentation<a class="anchor" aria-label="anchor" href="#documentation-3-3-0-9000"></a></h3>
+<ul><li>Posit as copyright holder.</li>
+</ul></div>
+</div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="3.3.0" id="tibble-330">tibble 3.3.0<a class="anchor" aria-label="anchor" href="#tibble-330"></a></h2><p class="text-muted">CRAN release: 2025-06-08</p>
+<div class="section level3">
+<h3 id="bug-fixes-3-3-0">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-3-3-0"></a></h3>
 <ul><li><p>Subset tibble with <code>"0"</code> for row index (<a href="https://github.com/eitsupi" class="external-link">@eitsupi</a>, <a href="https://github.com/tidyverse/tibble/issues/1636" class="external-link">#1636</a>, <a href="https://github.com/tidyverse/tibble/issues/1637" class="external-link">#1637</a>).</p></li>
 <li><p><code><a href="../reference/new_tibble.html">new_tibble()</a></code> and <code><a href="../reference/as_tibble.html">as_tibble()</a></code> support attributes named <code>"n"</code> and <code>"x"</code> (<a href="https://github.com/tidyverse/tibble/issues/1573" class="external-link">#1573</a>, <a href="https://github.com/tidyverse/tibble/issues/1574" class="external-link">#1574</a>).</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="features-3-2-1-9900">Features<a class="anchor" aria-label="anchor" href="#features-3-2-1-9900"></a></h3>
+<h3 id="features-3-3-0">Features<a class="anchor" aria-label="anchor" href="#features-3-3-0"></a></h3>
 <ul><li><p>Support new vctrs <code>.name_repair</code> options: <code>unique_quiet</code>, <code>universal_quiet</code> (<a href="https://github.com/andreranza" class="external-link">@andreranza</a>, <a href="https://github.com/tidyverse/tibble/issues/1549" class="external-link">#1549</a>, <a href="https://github.com/tidyverse/tibble/issues/1625" class="external-link">#1625</a>).</p></li>
 <li><p>Rework <code><a href="../reference/view.html">view()</a></code> to better work with RStudio and Positron (<a href="https://github.com/DavisVaughan" class="external-link">@DavisVaughan</a>, <a href="https://github.com/tidyverse/tibble/issues/1551" class="external-link">#1551</a>, <a href="https://github.com/tidyverse/tibble/issues/1603" class="external-link">#1603</a>).</p></li>
 <li><p><code><a href="../reference/as_tibble.html">as_tibble()</a></code> calls <code><a href="https://rdrr.io/r/base/as.data.frame.html" class="external-link">as.data.frame()</a></code> for objects that are not subclasses of <code>"tbl_df"</code> (<a href="https://github.com/TimTaylor" class="external-link">@TimTaylor</a>, <a href="https://github.com/tidyverse/tibble/issues/1556" class="external-link">#1556</a>, <a href="https://github.com/tidyverse/tibble/issues/1557" class="external-link">#1557</a>).</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="documentation-3-2-1-9900">Documentation<a class="anchor" aria-label="anchor" href="#documentation-3-2-1-9900"></a></h3>
+<h3 id="documentation-3-3-0">Documentation<a class="anchor" aria-label="anchor" href="#documentation-3-3-0"></a></h3>
 <ul><li><p>Update comparison between tibble and data.frame (<a href="https://github.com/olivroy" class="external-link">@olivroy</a>, <a href="https://github.com/tidyverse/tibble/issues/1567" class="external-link">#1567</a>).</p></li>
 <li><p>Use pak for installing dev version in README (<a href="https://github.com/luisDVA" class="external-link">@luisDVA</a>, <a href="https://github.com/tidyverse/tibble/issues/1600" class="external-link">#1600</a>).</p></li>
 <li><p>Document that <code>...</code> must be empty in <code><a href="../reference/formatting.html">print.tbl_df()</a></code>.</p></li>
@@ -79,9 +99,9 @@
 <li><p>Alt text (<a href="https://github.com/maelle" class="external-link">@maelle</a>, <a href="https://github.com/tidyverse/tibble/issues/1528" class="external-link">#1528</a>, <a href="https://github.com/tidyverse/tibble/issues/1539" class="external-link">#1539</a>).</p></li>
 </ul></div>
 <div class="section level3">
-<h3 id="testing-3-2-1-9900">Testing<a class="anchor" aria-label="anchor" href="#testing-3-2-1-9900"></a></h3>
+<h3 id="testing-3-3-0">Testing<a class="anchor" aria-label="anchor" href="#testing-3-3-0"></a></h3>
 <ul><li><p>Skip tests if packages are missing.</p></li>
-<li><p>Override :: to avoid failures in tests without suggested packages.</p></li>
+<li><p>Override <code>::</code> to avoid failures in tests without suggested packages.</p></li>
 </ul></div>
 </div>
     <div class="section level2">
@@ -911,7 +931,7 @@
    </div>
   <footer><div class="container">
   <div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="https://hadley.nz" class="external-link">Hadley Wickham</a>, <a href="https://www.rstudio.com" class="external-link"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" width="72"></a>.</p>
+  <p>Developed by <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="https://hadley.nz" class="external-link">Hadley Wickham</a>, <a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" width="62" style="margin-bottom: 3px;"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">

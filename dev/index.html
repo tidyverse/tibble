@@ -32,7 +32,7 @@
 
     <a class="navbar-brand me-2" href="index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.2.1.9900</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.3.0.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -122,17 +122,17 @@
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, b <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">data</span></span>
 <span><span class="co">#&gt;   a b          c</span></span>
-<span><span class="co">#&gt; 1 1 a 2025-03-18</span></span>
-<span><span class="co">#&gt; 2 2 b 2025-03-17</span></span>
-<span><span class="co">#&gt; 3 3 c 2025-03-16</span></span>
+<span><span class="co">#&gt; 1 1 a 2025-06-18</span></span>
+<span><span class="co">#&gt; 2 2 b 2025-06-17</span></span>
+<span><span class="co">#&gt; 3 3 c 2025-06-16</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 3</span></span></span>
 <span><span class="co">#&gt;       <span style="font-weight: bold;">a</span> <span style="font-weight: bold;">b</span>     <span style="font-weight: bold;">c</span>         </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 a     2025-03-18</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 b     2025-03-17</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 c     2025-03-16</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 a     2025-06-18</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 b     2025-06-17</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 c     2025-06-16</span></span></code></pre></div>
 <p>This will work for reasonable inputs that are already data.frames, lists, matrices, or tables.</p>
 <p>You can also create a new tibble from column vectors with <code><a href="reference/tibble.html">tibble()</a></code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -207,7 +207,7 @@
 <li>
 <a href="https://hadley.nz" class="external-link">Hadley Wickham</a> <br><small class="roles"> Author </small>   </li>
 <li>
-<a href="https://www.rstudio.com" class="external-link"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" width="72"></a> <br><small class="roles"> Copyright holder, funder </small>   </li>
+<a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" width="62" style="margin-bottom: 3px;"></a> <br><small class="roles"> Copyright holder, funder </small>  <a href="https://ror.org/03wc8by49" class="external-link"><img src="https://raw.githubusercontent.com/ror-community/ror-logos/main/ror-icon-rgb.svg" class="ror" alt="ROR"></a> </li>
 <li><a href="authors.html">More about authors...</a></li>
 </ul>
 </div>
@@ -229,7 +229,7 @@
    </div>
   <footer><div class="container">
   <div class="pkgdown-footer-left">
-  <p>Developed by <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="https://hadley.nz" class="external-link">Hadley Wickham</a>, <a href="https://www.rstudio.com" class="external-link"><img src="https://www.tidyverse.org/rstudio-logo.svg" alt="RStudio" width="72"></a>.</p>
+  <p>Developed by <a href="https://krlmlr.info" class="external-link">Kirill Müller</a>, <a href="https://hadley.nz" class="external-link">Hadley Wickham</a>, <a href="https://www.posit.co" class="external-link"><img src="https://www.tidyverse.org/posit-logo.svg" alt="Posit" height="16" width="62" style="margin-bottom: 3px;"></a>.</p>
 </div>
 
 <div class="pkgdown-footer-right">
