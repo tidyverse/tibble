@@ -1,30 +1,19 @@
 Package: tibble
 Title: Simple Data Frames
 Version: 3.3.0.9000
-Authors@R: 
-    c(person(given = "Kirill",
-             family = "M\u00fcller",
-             role = c("aut", "cre"),
-             email = "kirill@cynkra.com",
-             comment = c(ORCID = "0000-0002-1416-3412")),
-      person(given = "Hadley",
-             family = "Wickham",
-             role = "aut",
-             email = "hadley@rstudio.com"),
-      person(given = "Romain",
-             family = "Francois",
-             role = "ctb",
-             email = "romain@r-enthusiasts.com"),
-      person(given = "Jennifer",
-             family = "Bryan",
-             role = "ctb",
-             email = "jenny@rstudio.com"),
-      person("Posit Software, PBC", role = c("cph", "fnd"), comment = c(ROR = "03wc8by49")))
-Description: Provides a 'tbl_df' class (the 'tibble') with stricter checking and better formatting than the traditional
-    data frame.
+Authors@R: c(
+    person("Kirill", "Müller", , "kirill@cynkra.com", role = c("aut", "cre"),
+           comment = c(ORCID = "0000-0002-1416-3412")),
+    person("Hadley", "Wickham", , "hadley@rstudio.com", role = "aut"),
+    person("Romain", "Francois", , "romain@r-enthusiasts.com", role = "ctb"),
+    person("Jennifer", "Bryan", , "jenny@rstudio.com", role = "ctb"),
+    person("Posit Software, PBC", role = c("cph", "fnd"),
+           comment = c(ROR = "03wc8by49"))
+  )
+Description: Provides a 'tbl_df' class (the 'tibble') with stricter
+    checking and better formatting than the traditional data frame.
 License: MIT + file LICENSE
-URL: https://tibble.tidyverse.org/,
-    https://github.com/tidyverse/tibble
+URL: https://tibble.tidyverse.org/, https://github.com/tidyverse/tibble
 BugReports: https://github.com/tidyverse/tibble/issues
 Depends: 
     R (>= 3.4.0)
@@ -64,14 +53,14 @@ Suggests:
     withr
 VignetteBuilder: 
     knitr
-Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2.9000
+Config/autostyle/rmd: false
+Config/autostyle/scope: line_breaks
+Config/autostyle/strict: true
+Config/Needs/website: tidyverse/tidytemplate
 Config/testthat/edition: 3
 Config/testthat/parallel: true
 Config/testthat/start-first: vignette-formats, as_tibble, add, invariants
-Config/autostyle/scope: line_breaks
-Config/autostyle/strict: true
-Config/autostyle/rmd: false
-Config/Needs/website: tidyverse/tidytemplate
 Config/usethis/last-upkeep: 2025-06-07
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.3.2.9000

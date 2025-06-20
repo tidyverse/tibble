@@ -1,4 +1,3 @@
-#' @importFrom methods setOldClass
 #' @exportClass tbl_df
 setOldClass(c("tbl_df", "tbl", "data.frame"))
 
