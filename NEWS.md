@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.0.9001
+
+## Chore
+
+- Cynkra's Spring Cleaning (@Layalchristine24, #1643, #1644).
+
+
 # tibble 3.3.0.9000
 
 ## Chore
