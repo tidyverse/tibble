@@ -176,7 +176,7 @@ test_that("can add new column", {
 })
 
 test_that("add_column() works with 0-col tibbles (#786)", {
-  local_options(lifecycle_verbosity = "error")
+  rlang::local_options(lifecycle_verbosity = "error")
 
   expect_identical(
     add_column(new_tibble(list(), nrow = 1), a = 1),
