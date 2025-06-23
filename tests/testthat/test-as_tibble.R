@@ -494,16 +494,22 @@ test_that("as_tibble_row() works with non-bare vectors (#797)", {
   )
 
   time <- vec_slice(Sys.time(), 1)
-  expect_identical(
-    as_tibble_row(time, .name_repair = "unique"),
-    tibble(...1 = time)
+  withr::with_options(
+    list(rlib_name_repair_verbosity = "quiet"),
+    expect_identical(
+      as_tibble_row(time, .name_repair = "unique"),
+      tibble(...1 = time)
+    )
   )
-  expect_identical(
-    as_tibble_row(trees[1:3, ], .name_repair = "unique"),
-    tibble(
-      ...1 = remove_rownames(trees[1, ]),
-      ...2 = remove_rownames(trees[2, ]),
-      ...3 = remove_rownames(trees[3, ])
+  withr::with_options(
+    list(rlib_name_repair_verbosity = "quiet"),
+    expect_identical(
+      as_tibble_row(trees[1:3, ], .name_repair = "unique"),
+      tibble(
+        ...1 = remove_rownames(trees[1, ]),
+        ...2 = remove_rownames(trees[2, ]),
+        ...3 = remove_rownames(trees[3, ])
+      )
     )
   )
 
