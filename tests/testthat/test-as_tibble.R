@@ -494,6 +494,7 @@ test_that("as_tibble_row() works with non-bare vectors (#797)", {
   )
 
   time <- vec_slice(Sys.time(), 1)
+  withr::local_options(list(rlib_name_repair_verbosity = "quiet"))
   expect_identical(
     as_tibble_row(time, .name_repair = "unique"),
     tibble(...1 = time)
