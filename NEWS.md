@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.0.9002
+
+## Testing
+
+- Suppress `message()` output in some as_tibble tests (@MichaelChirico, #1647).
+
+- Snapshot updates for rcc-full ({"os":"ubuntu-22.04","r":"devel","http-user-agent":"release"}) (#1649).
+
+
 # tibble 3.3.0.9001
 
 ## Chore
