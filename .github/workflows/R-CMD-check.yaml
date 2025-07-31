@@ -250,6 +250,8 @@ jobs:
       fail-fast: false
       matrix: ${{fromJson(needs.rcc-smoke.outputs.versions-matrix)}}
 
+    timeout-minutes: 240
+
     steps:
       - uses: actions/checkout@v4
         with:
@@ -289,6 +291,7 @@ jobs:
           results: ${{ runner.os }}-r${{ matrix.r }}
 
       - uses: ./.github/workflows/covr
+        timeout-minutes: 240
         if: ${{ matrix.covr }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
