@@ -15,7 +15,8 @@ friendly_type_of <- function(x, length = FALSE) {
 }
 
 as_friendly_type <- function(type) {
-  switch(type,
+  switch(
+    type,
     logical = "a logical vector",
     integer = "an integer vector",
     numeric = ,

@@ -346,7 +346,7 @@ test_that("[.tbl_df is careful about attributes (#155)", {
   expect_identical(attr(df[1:2, ], "along for the ride"), "still here")
   expect_identical(attr(df[-1, ], "along for the ride"), "still here")
 
-  expect_identical(attr(df[, ], "along for the ride"), "still here")
+  expect_identical(attr(df[,], "along for the ride"), "still here")
   expect_identical(attr(df[], "along for the ride"), "still here")
 })
 
@@ -725,7 +725,7 @@ test_that("[<-.tbl_df is careful about attributes (#155)", {
   expect_identical(attr(df, "along for the ride"), "still here")
   expect_false(has_rownames(df))
 
-  df[, ] <- df
+  df[,] <- df
   expect_identical(attr(df, "along for the ride"), "still here")
   expect_false(has_rownames(df))
   df[] <- df
@@ -882,7 +882,7 @@ test_that("output test", {
     foo[[]]
     foo[[, 1]]
     foo[[1, ]]
-    foo[[, ]]
+    foo[[,]]
     foo[[1:3]]
     foo[[letters[1:3]]]
     foo[[TRUE]]
@@ -957,7 +957,7 @@ test_that("output test", {
     df[] <- list(0, 0)
     df[1, ] <- 1:3
     df[1:2, ] <- 1:3
-    df[, ] <- 1:2
+    df[,] <- 1:2
     df[1, ] <- list(a = 1:3, b = 1)
     df[1, ] <- list(a = 1, b = 1:3)
     df[1:2, ] <- list(a = 1:3, b = 1)
@@ -1040,7 +1040,7 @@ test_that("output test", {
     foo[[]] <- 1
     foo[[, 1]] <- 1
     foo[[1, ]] <- 1
-    foo[[, ]] <- 1
+    foo[[,]] <- 1
     foo[[1:3]] <- 1
     foo[[letters[1:3]]] <- 1
     foo[[TRUE]] <- 1
