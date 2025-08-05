@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.0.9004
+
+## Continuous integration
+
+- Cleanup and fix macOS (#1661).
+
+
 # tibble 3.3.0.9003
 
 ## Chore
