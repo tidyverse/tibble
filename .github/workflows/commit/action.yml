@@ -11,53 +11,76 @@ outputs:
 runs:
   using: "composite"
   steps:
+    - name: Check for changes
+      id: check
+      run: |
+        set -x
+        if [ -n "$(git status --porcelain)" ]; then
+          echo "has_changes=true" | tee -a $GITHUB_OUTPUT
+        else
+          echo "has_changes=false" | tee -a $GITHUB_OUTPUT
+        fi
+      shell: bash
+
     - name: Commit if changed, create a PR if protected
       id: commit
+      if: steps.check.outputs.has_changes == 'true'
       env:
         GITHUB_TOKEN: ${{ inputs.token }}
       run: |
         set -x
-        if [ -n "$(git status --porcelain)" ]; then
-          echo "Changed"
-          protected=${{ github.ref_protected }}
-          foreign=${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
-          if [ "${foreign}" = "true" ]; then
-            # https://github.com/krlmlr/actions-sync/issues/44
-            echo "Can't push to foreign branch"
-          elif [ "${protected}" = "true" ]; then
-            current_branch=$(git branch --show-current)
-            new_branch=gha-commit-$(git rev-parse --short HEAD)
-            git checkout -b ${new_branch}
-            git add .
-            git commit -m "chore: Auto-update from GitHub Actions"$'\n'$'\n'"Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-            # Force-push, used in only one place
-            # Alternative: separate branch names for each usage
-            git push -u origin HEAD -f
+        protected=${{ github.ref_protected }}
+        foreign=${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
+        is_pr=${{ github.event_name == 'pull_request' }}
+        if [ "${is_pr}" = "true" ]; then
+          # Running on a PR - will use reviewdog in next step
+          echo "Code changes detected on PR, will suggest changes via reviewdog"
+          echo "use_reviewdog=true" | tee -a $GITHUB_OUTPUT
+          git reset HEAD
+          git status
+        elif [ "${foreign}" = "true" ]; then
+          # https://github.com/krlmlr/actions-sync/issues/44
+          echo "Can't push to foreign branch"
+        elif [ "${protected}" = "true" ]; then
+          current_branch=$(git branch --show-current)
+          new_branch=gha-commit-$(git rev-parse --short HEAD)
+          git checkout -b ${new_branch}
+          git add .
+          git commit -m "chore: Auto-update from GitHub Actions"$'\n'$'\n'"Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          # Force-push, used in only one place
+          # Alternative: separate branch names for each usage
+          git push -u origin HEAD -f
 
-            existing_pr=$(gh pr list --state open --base main --head ${new_branch} --json number --jq '.[] | .number')
-            if [ -n "${existing_pr}" ]; then
-              echo "Existing PR: ${existing_pr}"
-            else
-              gh pr create --base main --head ${new_branch} --title "chore: Auto-update from GitHub Actions" --body "Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-            fi
-
-            gh workflow run rcc -f ref=$(git rev-parse HEAD)
-            gh pr merge --merge --auto
+          existing_pr=$(gh pr list --state open --base main --head ${new_branch} --json number --jq '.[] | .number')
+          if [ -n "${existing_pr}" ]; then
+            echo "Existing PR: ${existing_pr}"
           else
-            git fetch
-            if [ -n "${GITHUB_HEAD_REF}" ]; then
-              git add .
-              git stash save
-              git switch ${GITHUB_HEAD_REF}
-              git merge origin/${GITHUB_BASE_REF} --no-edit
-              git stash pop
-            fi
-            git add .
-            git commit -m "chore: Auto-update from GitHub Actions"$'\n'$'\n'"Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-            git push -u origin HEAD
-
-            # Only set output if changed
-            echo sha=$(git rev-parse HEAD) >> $GITHUB_OUTPUT
+            gh pr create --base main --head ${new_branch} --title "chore: Auto-update from GitHub Actions" --body "Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
           fi
+
+          gh workflow run rcc -f ref=$(git rev-parse HEAD)
+          gh pr merge --merge --auto
+        else
+          git fetch
+          if [ -n "${GITHUB_HEAD_REF}" ]; then
+            git add .
+            git stash save
+            git switch ${GITHUB_HEAD_REF}
+            git merge origin/${GITHUB_BASE_REF} --no-edit
+            git stash pop
+          fi
+          git add .
+          git commit -m "chore: Auto-update from GitHub Actions"$'\n'$'\n'"Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          git push -u origin HEAD
+
+          # Only set output if changed
+          echo sha=$(git rev-parse HEAD) >> $GITHUB_OUTPUT
         fi
       shell: bash
+
+    - name: Suggest changes via reviewdog
+      if: steps.commit.outputs.use_reviewdog == 'true'
+      uses: krlmlr/action-suggester@main
+      with:
+        github_token: ${{ inputs.token }}
+        tool_name: "rcc"
