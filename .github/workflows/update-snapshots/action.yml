@@ -56,19 +56,24 @@ runs:
       if: ${{ steps.run-tests.outputs.changed }}
       id: check-changed
       run: |
-        echo "changed=$(git status --porcelain -- tests/testthat/_snaps | head -n 1)" >> $GITHUB_OUTPUT
+        set -x
+        if [ "${{ github.event_name}}" != "pull_request" ] ; then
+          echo "changed=$(git status --porcelain -- tests/testthat/_snaps | head -n 1)" | tee -a $GITHUB_OUTPUT
+        fi
       shell: bash
 
     - name: Derive branch name
       if: ${{ steps.check-changed.outputs.changed }}
       id: matrix-desc
       run: |
+        set -x
         config=$(echo '${{ toJSON(matrix) }}' | jq -c .)
-        echo "text=$(echo ${config})" >> $GITHUB_OUTPUT
-        echo "branch=$(echo ${config} | sed -r 's/[^0-9a-zA-Z]+/-/g;s/^-//;s/-$//')" >> $GITHUB_OUTPUT
+        echo "text=$(echo ${config})" | tee -a $GITHUB_OUTPUT
+        echo "branch=$(echo ${config} | sed -r 's/[^0-9a-zA-Z]+/-/g;s/^-//;s/-$//')" | tee -a $GITHUB_OUTPUT
       shell: bash
 
     - name: Create pull request
+      # Fall through if PR, will use reviewdog/action-suggester in the commit action
       if: ${{ steps.check-changed.outputs.changed }}
       id: cpr
       uses: peter-evans/create-pull-request@v6
