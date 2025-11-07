@@ -32,7 +32,7 @@ runs:
         protected=${{ github.ref_protected }}
         foreign=${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
         is_pr=${{ github.event_name == 'pull_request' }}
-        if [ "${is_pr}" = "true" ]; then
+        if [ "${is_pr}" = "true" ] && [ "${foreign}" = "true" ]; then
           # Running on a PR - will use reviewdog in next step
           echo "Code changes detected on PR, will suggest changes via reviewdog"
           echo "use_reviewdog=true" | tee -a $GITHUB_OUTPUT

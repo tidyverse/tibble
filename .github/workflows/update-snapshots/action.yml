@@ -24,9 +24,10 @@ runs:
           pattern <- paste0(patterns, collapse = "|")
           tryCatch(
             {
-              result <- as.data.frame(testthat::test_local(pattern = pattern, reporter = "silent", stop_on_failure = FALSE))
-              print(result)
+              Sys.setenv(TESTTHAT_PARALLEL = FALSE)
+              result <- as.data.frame(testthat::test_local(pattern = pattern, reporter = "location", stop_on_failure = FALSE))
               failures <- result[result$failed + result$warning > 0, ]
+              print(failures)
               if (nrow(failures) > 0) {
                 writeLines("Snapshot tests failed/warned.")
                 print(failures[names(failures) != "result"])

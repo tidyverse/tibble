@@ -10,6 +10,7 @@ on:
       - main
       - master
       - release
+      - next
       - cran-*
   pull_request:
     branches:
@@ -27,6 +28,14 @@ on:
         default: false
       dep-suggests-matrix:
         description: "Create a matrix of suggested dependencies"
+        type: boolean
+        default: false
+      run-rcc-full:
+        description: "Run rcc-full job"
+        type: boolean
+        default: false
+      run-rcc-suggests:
+        description: "Run rcc-suggests job"
         type: boolean
         default: false
   merge_group:
@@ -67,17 +76,16 @@ jobs:
           ref: ${{ inputs.ref }}
 
       - name: Update status for rcc
+        if: github.actor != 'Copilot'
         # FIXME: Wrap into action
-        if: github.event_name == 'workflow_dispatch'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          echo "Actor: ${{ github.actor }}"
+
           # Check status of this workflow
           state="pending"
           sha=${{ inputs.ref }}
-          if [ -z "${sha}" ]; then
-            sha=${{ github.head_ref }}
-          fi
           if [ -z "${sha}" ]; then
             sha=${{ github.sha }}
           fi
@@ -174,7 +182,7 @@ jobs:
 
       - name: Update status for rcc
         # FIXME: Wrap into action
-        if: always() && github.event_name == 'workflow_dispatch'
+        if: always() && (github.actor != 'Copilot')
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
@@ -190,12 +198,42 @@ jobs:
             sha=${{ inputs.ref }}
           fi
           if [ -z "${sha}" ]; then
-            sha=${{ github.head_ref }}
-          fi
-          if [ -z "${sha}" ]; then
             sha=${{ github.sha }}
           fi
             sha=$(git rev-parse ${sha})
+
+          html_url=$(gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            repos/${{ github.repository }}/actions/runs/${{ github.run_id }} | jq -r .html_url)
+
+          description="${{ github.workflow }} / ${{ github.job }}"
+
+          gh api \
+            --method POST \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            repos/${{ github.repository }}/statuses/${sha} \
+            -f "state=${state}" -f "target_url=${html_url}" -f "description=${description}" -f "context=rcc"
+        shell: bash
+
+      - name: Update status for rcc (Copilot)
+        # Update status directly when triggered by Copilot or bots, since they can't dispatch workflows
+        if: always() && (github.actor == 'Copilot')
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Set status to success if job succeeded, failure otherwise
+          if [ "${{ job.status }}" == "success" ]; then
+            state="success"
+          else
+            state="failure"
+          fi
+          sha=${{ inputs.ref }}
+          if [ -z "${sha}" ]; then
+            sha=${{ github.sha }}
+          fi
+          sha=$(git rev-parse ${sha})
 
           html_url=$(gh api \
             -H "Accept: application/vnd.github+json" \
@@ -239,7 +277,7 @@ jobs:
 
     runs-on: ${{ matrix.os }}
 
-    if: ${{ needs.rcc-smoke.outputs.versions-matrix != '' }}
+    if: ${{ needs.rcc-smoke.outputs.versions-matrix != '' && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.run-rcc-full)) }}
 
     name: 'rcc: ${{ matrix.os }} (${{ matrix.r }}) ${{ matrix.desc }}'
 
@@ -301,7 +339,7 @@ jobs:
 
     runs-on: ubuntu-22.04
 
-    if: ${{ needs.rcc-smoke.outputs.dep-suggests-matrix != '' }}
+    if: ${{ needs.rcc-smoke.outputs.dep-suggests-matrix != '' && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.run-rcc-suggests)) }}
 
     name: Without ${{ matrix.package }}
 

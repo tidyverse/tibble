@@ -111,7 +111,7 @@ runs:
         pak-version: stable
         needs: ${{ inputs.needs }}
         packages: ${{ inputs.packages }}
-        extra-packages: ${{ inputs.extra-packages }} ${{ ( matrix.covr && 'r-lib/covr#611 xml2' ) || '' }} ${{ steps.get-extra.outputs.packages }}
+        extra-packages: ${{ inputs.extra-packages }} ${{ ( matrix.covr && 'r-lib/covr xml2' ) || '' }} ${{ steps.get-extra.outputs.packages }}
         cache-version: ${{ inputs.cache-version }}
 
     - name: Add pkg.lock to .gitignore
