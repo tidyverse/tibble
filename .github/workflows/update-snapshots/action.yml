@@ -24,7 +24,8 @@ runs:
           pattern <- paste0(patterns, collapse = "|")
           tryCatch(
             {
-              result <- as.data.frame(testthat::test_local(pattern = pattern, reporter = "silent", stop_on_failure = FALSE))
+              Sys.setenv(TESTTHAT_PARALLEL = FALSE)
+              result <- as.data.frame(testthat::test_local(pattern = pattern, reporter = "location", stop_on_failure = FALSE))
               print(result)
               failures <- result[result$failed + result$warning > 0, ]
               if (nrow(failures) > 0) {
