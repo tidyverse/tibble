@@ -1,0 +1,15 @@
+AlignAfterOpenBracket: BlockIndent
+AllowAllArgumentsOnNextLine: false
+AllowAllParametersOfDeclarationOnNextLine: false
+AllowShortFunctionsOnASingleLine: Empty
+IncludeBlocks: Preserve
+SpaceAfterCStyleCast: true
+Standard: Auto
+AllowShortBlocksOnASingleLine: false
+BasedOnStyle: Google
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+IndentWidth: 2
+DerivePointerAlignment: false
+PointerAlignment: Left
+BinPackArguments: false
+BinPackParameters: false
