@@ -1,0 +1,46 @@
+# In comments: the options used by DuckDB.
+
+BasedOnStyle: Google
+# BasedOnStyle: LLVM
+AlignAfterOpenBracket: BlockIndent
+# AlignAfterOpenBracket: Align
+AllowAllArgumentsOnNextLine: false
+# AllowAllArgumentsOnNextLine: true
+AllowAllParametersOfDeclarationOnNextLine: false
+# AllowAllParametersOfDeclarationOnNextLine: true
+AlwaysBreakAfterReturnType: None
+PenaltyReturnTypeOnItsOwnLine: 1000
+AllowShortFunctionsOnASingleLine: Empty
+# AllowShortFunctionsOnASingleLine: false
+IncludeBlocks: Preserve
+# IncludeBlocks: Regroup
+SpaceAfterCStyleCast: false
+Standard: Auto
+AllowShortBlocksOnASingleLine: false
+Cpp11BracedListStyle: false
+IndentCaseLabels: false
+ConstructorInitializerAllOnOneLineOrOnePerLine: true
+ContinuationIndentWidth: 2
+IndentWidth: 2
+# TabWidth: 4
+# IndentWidth: 4
+# ColumnLimit: 120
+# UseTab: ForIndentation
+DerivePointerAlignment: false
+PointerAlignment: Left
+# PointerAlignment: Right
+BinPackArguments: false
+BinPackParameters: false
+AlignConsecutiveMacros: true
+AlignTrailingComments: true
+AllowAllConstructorInitializersOnNextLine: true
+SpaceBeforeCpp11BracedList: true
+SpaceBeforeCtorInitializerColon: true
+SpaceBeforeInheritanceColon: true
+SpacesInAngles: false
+SpacesInCStyleCastParentheses: false
+SpacesInConditionalStatement: false
+AllowShortLambdasOnASingleLine: Inline
+AllowShortLoopsOnASingleLine: false
+AlwaysBreakTemplateDeclarations: Yes
+AccessModifierOffset: -2

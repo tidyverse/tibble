@@ -43,3 +43,4 @@
 ^\.cache$
 ^compile_commands\.json$
 ^[\.]?air\.toml$
+^\.clang-format$
