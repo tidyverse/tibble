@@ -305,6 +305,7 @@
     Condition
       Error in `FUN()`:
       ! `x` must be a vector, not an environment.
+      i Read our FAQ about scalar types (`?vctrs::faq_error_scalar_type`) to learn more.
     Code
       as_tibble_row(list(a = 1:3))
     Condition
