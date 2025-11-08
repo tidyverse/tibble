@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.0.9007
+
+## Continuous integration
+
+- Sync (#1668).
+
+
 # tibble 3.3.0.9006
 
 ## Continuous integration
