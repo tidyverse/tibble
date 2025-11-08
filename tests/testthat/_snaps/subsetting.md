@@ -97,7 +97,7 @@
     Condition
       Error in `foo[foo]`:
       ! Can't subset columns with `foo`.
-      x `foo` must be logical, numeric, or character, not a <tbl_df/tbl/data.frame> object.
+      x `foo` must be logical, numeric, or character, not a <tbl_df> object.
     Code
       # # [.tbl_df is careful about row indexes
       foo <- tibble(x = 1:3, y = 1:3, z = 1:3)
@@ -156,7 +156,7 @@
     Condition
       Error in `foo[foo, ]`:
       ! Can't subset rows with `foo`.
-      x `foo` must be logical, numeric, or character, not a <tbl_df/tbl/data.frame> object.
+      x `foo` must be logical, numeric, or character, not a <tbl_df> object.
     Code
       # # [.tbl_df is careful about column flags (#83)
       foo <- tibble(x = 1:10, y = 1:10, z = 1:10)
@@ -386,7 +386,7 @@
     Condition
       Error in `foo[[foo]]`:
       ! Can't extract column with `foo`.
-      x `foo` must be numeric or character, not a <tbl_df/tbl/data.frame> object.
+      x `foo` must be numeric or character, not a <tbl_df> object.
     Code
       # # [[.tbl_df throws error with NA index
       foo <- tibble(x = 1:10, y = 1:10)
@@ -892,7 +892,7 @@
     Condition
       Error in `[[<-`:
       ! Can't assign column with `foo`.
-      x `foo` must be numeric or character, not a <tbl_df/tbl/data.frame> object.
+      x `foo` must be numeric or character, not a <tbl_df> object.
     Code
       foo[[1:3, 1]] <- 1
     Condition
@@ -916,7 +916,7 @@
     Condition
       Error in `[[<-`:
       ! Can't assign row with `foo`.
-      x `foo` must be numeric or character, not a <tbl_df/tbl/data.frame> object.
+      x `foo` must be numeric or character, not a <tbl_df> object.
     Code
       # # [[<-.tbl_df throws an error with OOB assignment
       df <- tibble(x = 1:2, y = x)
@@ -935,6 +935,7 @@
       ! Assigned data `mean` must be a vector.
       Caused by error in `vec_size()`:
       ! `x` must be a vector, not a function.
+      i Read our FAQ about scalar types (`?vctrs::faq_error_scalar_type`) to learn more.
     Code
       df[[1]] <- lm(y ~ x, df)
     Condition
@@ -942,6 +943,9 @@
       ! Assigned data `lm(y ~ x, df)` must be a vector.
       Caused by error in `vec_size()`:
       ! `x` must be a vector, not a <lm> object.
+      x Detected incompatible scalar S3 list. To be treated as a vector, the object must explicitly inherit from <list> or should implement a `vec_proxy()` method. Class: <lm>.
+      i If this object comes from a package, please report this error to the package author.
+      i Read our FAQ about creating vector types (`?vctrs::howto_faq_fix_scalar_type_error`) to learn more.
     Code
       # # [[<-.tbl_df recycles only values of length one
       df <- tibble(x = 1:3)

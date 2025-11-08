@@ -1,0 +1,51 @@
+name: "Copilot Setup Steps"
+
+# Automatically run the setup steps when they are changed to allow for easy validation, and
+# allow manual testing through the repository's "Actions" tab
+on:
+  workflow_dispatch:
+  push:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+  pull_request:
+    paths:
+      - .github/workflows/copilot-setup-steps.yml
+
+jobs:
+  # The job MUST be called `copilot-setup-steps` or it will not be picked up by Copilot.
+  copilot-setup-steps:
+    runs-on: ubuntu-latest
+
+    # Set the permissions to the lowest permissions possible needed for your steps.
+    # Copilot will be given its own token for its operations.
+    permissions:
+      # If you want to clone the repository as part of your setup steps, for example to install dependencies, you'll need the `contents: read` permission. If you don't clone the repository in your setup steps, Copilot will do this for you automatically after the steps complete.
+      contents: read
+
+    # You can define any steps you want, and they will run before the agent starts.
+    # If you do not check out your code, Copilot will do this for you.
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v5
+      - uses: ./.github/workflows/custom/before-install
+        if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
+
+      - uses: ./.github/workflows/install
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          cache-version: copilot
+          needs: build, check, website
+          # Beware of using dev pkgdown here, has brought in dev dependencies in the past
+          extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/styler r-lib/pkgdown deps::.
+
+      - uses: ./.github/workflows/custom/after-install
+        if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
+
+      # Must come after the custom after-install workflow
+      - name: Install package
+        run: |
+          UserNM=true R CMD INSTALL . || true
+        shell: bash
+
+      - name: Install air
+        uses: posit-dev/setup-air@v1
