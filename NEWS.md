@@ -1,5 +1,48 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.0.9007
+
+## Continuous integration
+
+- Sync (#1668).
+
+
+# tibble 3.3.0.9006
+
+## Continuous integration
+
+- Use reviewdog for external PRs (#1663).
+
+
+# tibble 3.3.0.9005
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/17451419215
+
+
+# tibble 3.3.0.9004
+
+## Continuous integration
+
+- Cleanup and fix macOS (#1661).
+
+
+# tibble 3.3.0.9003
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/16661919871
+
+## Continuous integration
+
+- Format with air, check detritus, better handling of `extra-packages` (#1660).
+
+
 # tibble 3.3.0.9002
 
 ## Testing

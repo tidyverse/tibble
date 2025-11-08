@@ -1,4 +1,5 @@
 name: "Actions to run covr for an R package"
+description: "Run covr to check code coverage for an R package and upload results to Codecov."
 inputs:
   token:
     description: codecov token
