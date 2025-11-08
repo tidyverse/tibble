@@ -1,8 +1,8 @@
 #include <inttypes.h>
 #include <limits.h>
 #include <stdint.h>
-#include <string.h>
 #include <stdlib.h>
+#include <string.h>
 #include "tibble.h"
 
 static long long string_to_int64(const char* x) {
@@ -29,8 +29,7 @@ static SEXP string_to_numeric_indexes(SEXP x, R_xlen_t int_i, SEXP int_out) {
     long long xi = string_to_int64(CHAR(STRING_ELT(x, i)));
     if (xi == LLONG_MIN) {
       out_vec[i] = NA_REAL;
-    }
-    else {
+    } else {
       out_vec[i] = (double)xi;
     }
   }
@@ -48,12 +47,10 @@ SEXP tibble_string_to_indices(SEXP x) {
     long long xi = string_to_int64(CHAR(STRING_ELT(x, i)));
     if (xi == LLONG_MIN) {
       out_vec[i] = NA_INTEGER;
-    }
-    else if (xi <= INT_MIN || xi > INT_MAX) {
+    } else if (xi <= INT_MIN || xi > INT_MAX) {
       out = string_to_numeric_indexes(x, i, out);
       break;
-    }
-    else {
+    } else {
       out_vec[i] = (int)xi;
     }
   }

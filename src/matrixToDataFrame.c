@@ -4,9 +4,7 @@
 #include <string.h>
 #include "tibble.h"
 
-
-static SEXP pairlist_shallow_copy(SEXP p)
-{
+static SEXP pairlist_shallow_copy(SEXP p) {
   SEXP attr;
   PROTECT(attr = Rf_cons(CAR(p), R_NilValue));
   SEXP q = attr;
@@ -23,14 +21,13 @@ static SEXP pairlist_shallow_copy(SEXP p)
   }
 
   UNPROTECT(1);
-  return attr ;
+  return attr;
 }
 
-static void copy_attributes(SEXP out, SEXP data)
-{
+static void copy_attributes(SEXP out, SEXP data) {
   SEXP att = ATTRIB(data);
-  if (!Rf_isNull(att)){
-    SET_ATTRIB(out, pairlist_shallow_copy(ATTRIB(data))) ;
+  if (!Rf_isNull(att)) {
+    SET_ATTRIB(out, pairlist_shallow_copy(ATTRIB(data)));
   }
   SET_OBJECT(out, Rf_isObject(data));
   if (Rf_isS4(data)) {
@@ -39,18 +36,17 @@ static void copy_attributes(SEXP out, SEXP data)
 }
 
 // same as copy_attributes but without names
-static void copy_most_attributes(SEXP out, SEXP data)
-{
+static void copy_most_attributes(SEXP out, SEXP data) {
   copy_attributes(out, data);
   Rf_setAttrib(out, R_NamesSymbol, R_NilValue);
 }
 
-static void get_dim(SEXP x, R_xlen_t *nrowptr, R_xlen_t *ncolptr)
-{
+static void get_dim(SEXP x, R_xlen_t* nrowptr, R_xlen_t* ncolptr) {
   int nprot = 0;
 
   SEXP dim;
-  PROTECT(dim = Rf_getAttrib(x, R_DimSymbol)); nprot++;
+  PROTECT(dim = Rf_getAttrib(x, R_DimSymbol));
+  nprot++;
   if (dim == R_NilValue || XLENGTH(dim) != 2) {
     Rf_error("`x` is not a matrix");
   }
@@ -81,16 +77,15 @@ static void get_dim(SEXP x, R_xlen_t *nrowptr, R_xlen_t *ncolptr)
   UNPROTECT(nprot);
 }
 
-
-static SEXP get_rownames(SEXP x, R_xlen_t nrow)
-{
+static SEXP get_rownames(SEXP x, R_xlen_t nrow) {
   int nprot = 0;
 
   SEXP rownames = R_NilValue;
 
   // check for row names, use them if present
   SEXP dimnames;
-  PROTECT(dimnames = Rf_getAttrib(x, R_DimNamesSymbol)); nprot++;
+  PROTECT(dimnames = Rf_getAttrib(x, R_DimNamesSymbol));
+  nprot++;
   if (TYPEOF(dimnames) == VECSXP && XLENGTH(dimnames) == 2) {
     rownames = VECTOR_ELT(dimnames, 0);
     if (TYPEOF(rownames) != STRSXP) {
@@ -101,11 +96,13 @@ static SEXP get_rownames(SEXP x, R_xlen_t nrow)
   // otherwise, allocate new row names attribute
   if (Rf_isNull(rownames)) {
     if (nrow <= INT_MAX) {
-      PROTECT(rownames = Rf_allocVector(INTSXP, 2)); nprot++;
+      PROTECT(rownames = Rf_allocVector(INTSXP, 2));
+      nprot++;
       INTEGER(rownames)[0] = NA_INTEGER;
       INTEGER(rownames)[1] = -(int)nrow;
     } else {
-      PROTECT(rownames = Rf_allocVector(REALSXP, 2)); nprot++;
+      PROTECT(rownames = Rf_allocVector(REALSXP, 2));
+      nprot++;
       REAL(rownames)[0] = NA_REAL;
       REAL(rownames)[1] = -(double)nrow;
     }
@@ -116,10 +113,9 @@ static SEXP get_rownames(SEXP x, R_xlen_t nrow)
 }
 
 // don't use DATAPTR, it's not part of the public API
-static void *get_data(SEXP x, size_t *widthptr)
-{
+static void* get_data(SEXP x, size_t* widthptr) {
   size_t width = 0;
-  void *ptr = NULL;
+  void* ptr = NULL;
 
   switch (TYPEOF(x)) {
   case LGLSXP:
@@ -157,20 +153,19 @@ static void copy_columns_atomic(SEXP out, SEXP x, R_xlen_t nrow, R_xlen_t ncol)
 {
   SEXPTYPE type = TYPEOF(x);
   size_t eltsize;
-  const char *src = get_data(x, &eltsize);
+  const char* src = get_data(x, &eltsize);
   size_t colsize = nrow * eltsize;
 
   for (R_xlen_t j = 0; j < ncol; j++) {
     SEXP col = Rf_allocVector(type, nrow);
     SET_VECTOR_ELT(out, j, col);
-    char *dst = get_data(col, NULL);
+    char* dst = get_data(col, NULL);
     memcpy(dst, src, colsize);
     src += colsize;
   }
 }
 
-static void copy_columns_str(SEXP out, SEXP x, R_xlen_t nrow, R_xlen_t ncol)
-{
+static void copy_columns_str(SEXP out, SEXP x, R_xlen_t nrow, R_xlen_t ncol) {
   R_xlen_t src = 0;
   for (R_xlen_t j = 0; j < ncol; j++) {
     SEXP col = Rf_allocVector(STRSXP, nrow);
@@ -183,8 +178,7 @@ static void copy_columns_str(SEXP out, SEXP x, R_xlen_t nrow, R_xlen_t ncol)
   }
 }
 
-static void copy_columns_vec(SEXP out, SEXP x, R_xlen_t nrow, R_xlen_t ncol)
-{
+static void copy_columns_vec(SEXP out, SEXP x, R_xlen_t nrow, R_xlen_t ncol) {
   R_xlen_t src = 0;
   for (R_xlen_t j = 0; j < ncol; j++) {
     SEXP col = Rf_allocVector(VECSXP, nrow);
@@ -197,8 +191,7 @@ static void copy_columns_vec(SEXP out, SEXP x, R_xlen_t nrow, R_xlen_t ncol)
   }
 }
 
-static void copy_column_attributes(SEXP out, SEXP x, R_xlen_t ncol)
-{
+static void copy_column_attributes(SEXP out, SEXP x, R_xlen_t ncol) {
   for (R_xlen_t j = 0; j < ncol; j++) {
     SEXP col = VECTOR_ELT(out, j);
     copy_most_attributes(col, x);
@@ -206,8 +199,7 @@ static void copy_column_attributes(SEXP out, SEXP x, R_xlen_t ncol)
   }
 }
 
-static SEXP get_class(void)
-{
+static SEXP get_class(void) {
   SEXP cls;
 
   PROTECT(cls = Rf_allocVector(STRSXP, 1));
@@ -217,15 +209,15 @@ static SEXP get_class(void)
   return cls;
 }
 
-SEXP tibble_matrixToDataFrame(SEXP x)
-{
+SEXP tibble_matrixToDataFrame(SEXP x) {
   int nprot = 0;
 
   R_xlen_t nrow = 0, ncol = 0;
   get_dim(x, &nrow, &ncol);
 
   SEXP out;
-  PROTECT(out = Rf_allocVector(VECSXP, ncol)); nprot++;
+  PROTECT(out = Rf_allocVector(VECSXP, ncol));
+  nprot++;
 
   switch (TYPEOF(x)) {
   case LGLSXP:
