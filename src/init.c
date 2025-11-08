@@ -10,7 +10,8 @@ static const R_CallMethodDef CallEntries[] = {
   { "tibble_restore_impl", (DL_FUNC)&tibble_restore_impl, 2 },
   { "tibble_need_coerce", (DL_FUNC)&tibble_need_coerce, 1 },
 
-  { NULL, NULL, 0 }};
+  { NULL, NULL, 0 }
+};
 
 void R_init_tibble(DllInfo* dll) {
   R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
