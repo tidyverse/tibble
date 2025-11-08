@@ -1,11 +1,15 @@
+# In comments: the options used by DuckDB.
+
 BasedOnStyle: Google
 # BasedOnStyle: LLVM
-AlignAfterOpenBracket: BlockIndent
+AlignAfterOpenBracket: DontAlign
 # AlignAfterOpenBracket: Align
 AllowAllArgumentsOnNextLine: false
 # AllowAllArgumentsOnNextLine: true
 AllowAllParametersOfDeclarationOnNextLine: false
 # AllowAllParametersOfDeclarationOnNextLine: true
+AlwaysBreakAfterReturnType: None
+PenaltyReturnTypeOnItsOwnLine: 1000
 AllowShortFunctionsOnASingleLine: Empty
 # AllowShortFunctionsOnASingleLine: false
 IncludeBlocks: Preserve
@@ -13,7 +17,10 @@ IncludeBlocks: Preserve
 SpaceAfterCStyleCast: false
 Standard: Auto
 AllowShortBlocksOnASingleLine: false
+Cpp11BracedListStyle: false
+IndentCaseLabels: false
 ConstructorInitializerAllOnOneLineOrOnePerLine: true
+ContinuationIndentWidth: 2
 IndentWidth: 2
 # TabWidth: 4
 # IndentWidth: 4
