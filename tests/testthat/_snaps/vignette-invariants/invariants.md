@@ -331,7 +331,8 @@ tbl[[1:2]]
 
 ``` r
 df[[c("n", "c")]]
-#> Error in .subset2(x, i, exact = exact): subscript out of bounds
+#> Error in `.subset2()`:
+#> ! subscript out of bounds
 ```
 
 </td><td>
@@ -363,7 +364,8 @@ tbl[[TRUE]]
 
 ``` r
 df[[mean]]
-#> Error in .subset2(x, i, exact = exact): invalid subscript type 'closure'
+#> Error in `.subset2()`:
+#> ! invalid subscript type 'closure'
 ```
 
 </td><td>
@@ -431,7 +433,8 @@ tbl[[NA_integer_]]
 
 ``` r
 df[[-1]]
-#> Error in .subset2(x, i, exact = exact): invalid negative subscript in get1index <real>
+#> Error in `.subset2()`:
+#> ! invalid negative subscript in get1index <real>
 ```
 
 </td><td>
@@ -447,7 +450,8 @@ tbl[[-1]]
 
 ``` r
 df[[4]]
-#> Error in .subset2(x, i, exact = exact): subscript out of bounds
+#> Error in `.subset2()`:
+#> ! subscript out of bounds
 ```
 
 </td><td>
@@ -982,7 +986,8 @@ For compatibility, `i` can also be a character vector containing positive number
 
 ``` r
 df[mean, ]
-#> Error in xj[i]: invalid subscript type 'closure'
+#> Error in `xj[i]`:
+#> ! invalid subscript type 'closure'
 ```
 
 </td><td>
@@ -998,7 +1003,8 @@ tbl[mean, ]
 
 ``` r
 df[list(1), ]
-#> Error in xj[i]: invalid subscript type 'list'
+#> Error in `xj[i]`:
+#> ! invalid subscript type 'list'
 ```
 
 </td><td>
@@ -1473,7 +1479,8 @@ with_tbl(tbl[[TRUE]] <- 0)
 
 ``` r
 with_df(df[[1:3]] <- 0)
-#> Error in `[[<-`(`*tmp*`, i, value = value): recursive indexing failed at level 2
+#> Error in `[[<-`:
+#> ! recursive indexing failed at level 2
 ```
 
 </td><td>
@@ -1489,7 +1496,8 @@ with_tbl(tbl[[1:3]] <- 0)
 
 ``` r
 with_df(df[[c("n", "c")]] <- 0)
-#> Error in x[[i]] <- value: more elements supplied than there are to replace
+#> Error in `x[[i]] <- value`:
+#> ! more elements supplied than there are to replace
 ```
 
 </td><td>
@@ -1505,7 +1513,8 @@ with_tbl(tbl[[c("n", "c")]] <- 0)
 
 ``` r
 with_df(df[[FALSE]] <- 0)
-#> Error in x[[i]] <- value: attempt to select less than one element in integerOneIndex
+#> Error in `x[[i]] <- value`:
+#> ! attempt to select less than one element in integerOneIndex
 ```
 
 </td><td>
@@ -1521,7 +1530,8 @@ with_tbl(tbl[[FALSE]] <- 0)
 
 ``` r
 with_df(df[[1:2]] <- 0)
-#> Error in x[[i]] <- value: more elements supplied than there are to replace
+#> Error in `x[[i]] <- value`:
+#> ! more elements supplied than there are to replace
 ```
 
 </td><td>
@@ -1537,7 +1547,8 @@ with_tbl(tbl[[1:2]] <- 0)
 
 ``` r
 with_df(df[[NA_integer_]] <- 0)
-#> Error in x[[i]] <- value: attempt to select more than one element in integerOneIndex
+#> Error in `x[[i]] <- value`:
+#> ! attempt to select more than one element in integerOneIndex
 ```
 
 </td><td>
@@ -1553,7 +1564,8 @@ with_tbl(tbl[[NA_integer_]] <- 0)
 
 ``` r
 with_df(df[[NA]] <- 0)
-#> Error in x[[i]] <- value: attempt to select more than one element in integerOneIndex
+#> Error in `x[[i]] <- value`:
+#> ! attempt to select more than one element in integerOneIndex
 ```
 
 </td><td>
@@ -1569,7 +1581,8 @@ with_tbl(tbl[[NA]] <- 0)
 
 ``` r
 with_df(df[[NA_character_]] <- 0)
-#> Error in if (names(x)[nc] == "") names(x)[nc] <- paste0("V", nc): missing value where TRUE/FALSE needed
+#> Error in `if (names(x)[nc] == "") ...`:
+#> ! missing value where TRUE/FALSE needed
 ```
 
 </td><td>
@@ -1615,7 +1628,8 @@ with_tbl(tbl[["li"]] <- list(0))
 
 ``` r
 with_df2(df2[["tb"]] <- df[1, ])
-#> Error in `[[<-.data.frame`(`*tmp*`, "tb", value = structure(list(n = 1L, : replacement has 1 row, data has 4
+#> Error in `[[<-.data.frame`:
+#> ! replacement has 1 row, data has 4
 ```
 
 </td><td>
@@ -1636,7 +1650,8 @@ with_tbl2(tbl2[["tb"]] <- tbl[1, ])
 
 ``` r
 with_df2(df2[["m"]] <- df2[["m"]][1, , drop = FALSE])
-#> Error in `[[<-.data.frame`(`*tmp*`, "m", value = structure(c(1, 0, 0, : replacement has 1 row, data has 4
+#> Error in `[[<-.data.frame`:
+#> ! replacement has 1 row, data has 4
 ```
 
 </td><td>
@@ -1707,7 +1722,8 @@ with_tbl(tbl[[1]] <- 4:1)
 
 ``` r
 with_df(df[[1]] <- 3:1)
-#> Error in `[[<-.data.frame`(`*tmp*`, 1, value = 3:1): replacement has 3 rows, data has 4
+#> Error in `[[<-.data.frame`:
+#> ! replacement has 3 rows, data has 4
 ```
 
 </td><td>
@@ -2309,7 +2325,8 @@ An attempt to update the same column twice gives an error.
 
 ``` r
 with_df(df[c(1, 1)] <- list(1, 2))
-#> Error in `[<-.data.frame`(`*tmp*`, c(1, 1), value = list(1, 2)): duplicate subscripts for columns
+#> Error in `[<-.data.frame`:
+#> ! duplicate subscripts for columns
 ```
 
 </td><td>
@@ -2356,7 +2373,8 @@ with_tbl(tbl[1:2] <- list(NULL, 4:1))
 
 ``` r
 with_df(df[NA] <- list("x"))
-#> Error in `[<-.data.frame`(`*tmp*`, NA, value = list("x")): missing values are not allowed in subscripted assignments of data frames
+#> Error in `[<-.data.frame`:
+#> ! missing values are not allowed in subscripted assignments of data frames
 ```
 
 </td><td>
@@ -2373,7 +2391,8 @@ with_tbl(tbl[NA] <- list("x"))
 
 ``` r
 with_df(df[NA_integer_] <- list("x"))
-#> Error in `[<-.data.frame`(`*tmp*`, NA_integer_, value = list("x")): missing values are not allowed in subscripted assignments of data frames
+#> Error in `[<-.data.frame`:
+#> ! missing values are not allowed in subscripted assignments of data frames
 ```
 
 </td><td>
@@ -2388,7 +2407,8 @@ with_tbl(tbl[NA_integer_] <- list("x"))
 
 ``` r
 with_df(df[NA_character_] <- list("x"))
-#> Error in `[<-.data.frame`(`*tmp*`, NA_character_, value = list("x")): missing values are not allowed in subscripted assignments of data frames
+#> Error in `[<-.data.frame`:
+#> ! missing values are not allowed in subscripted assignments of data frames
 ```
 
 </td><td>
@@ -2610,7 +2630,8 @@ with_tbl(tbl[4] <- list(4:1))
 
 ``` r
 with_df(df[5] <- list(4:1))
-#> Error in `[<-.data.frame`(`*tmp*`, 5, value = list(4:1)): new columns would leave holes after existing columns
+#> Error in `[<-.data.frame`:
+#> ! new columns would leave holes after existing columns
 ```
 
 </td><td>
@@ -3004,7 +3025,8 @@ with_tbl(tbl[, 2:3] <- NULL)
 
 ``` r
 with_df(df[1, 2:3] <- NULL)
-#> Error in x[[jj]][iseq] <- vjj: replacement has length zero
+#> Error in `x[[jj]][iseq] <- vjj`:
+#> ! replacement has length zero
 ```
 
 </td><td>
@@ -3027,7 +3049,8 @@ See `?vec_is` and `?vec_proxy` for details.
 
 ``` r
 with_df(df[1] <- mean)
-#> Error in rep(value, length.out = n): attempt to replicate an object of type 'closure'
+#> Error in `rep()`:
+#> ! attempt to replicate an object of type 'closure'
 ```
 
 </td><td>
@@ -3066,7 +3089,8 @@ with_df(df[1] <- lm(mpg ~ wt, data = mtcars))
 #> c(`(Intercept)` = 37.285126167342,
 #> : replacement element 7 has 5 rows
 #> to replace 4 rows
-#> Error in `[<-.data.frame`(`*tmp*`, 1, value = structure(list(coefficients = c(`(Intercept)` = 37.285126167342, : replacement element 10 has 3 rows, need 4
+#> Error in `[<-.data.frame`:
+#> ! replacement element 10 has 3 rows, need 4
 ```
 
 </td><td>
@@ -3207,7 +3231,8 @@ with_tbl(tbl[-2, ] <- tbl[1, ])
 
 ``` r
 with_df(df[-1:2, ] <- df[1, ])
-#> Error in seq_len(nrows)[i]: only 0's may be mixed with negative subscripts
+#> Error in `seq_len(nrows)[i]`:
+#> ! only 0's may be mixed with negative subscripts
 ```
 
 </td><td>
@@ -3224,7 +3249,8 @@ with_tbl(tbl[-1:2, ] <- tbl[1, ])
 
 ``` r
 with_df(df[NA_integer_, ] <- df[1, ])
-#> Error in `[<-.data.frame`(`*tmp*`, NA_integer_, , value = structure(list(: missing values are not allowed in subscripted assignments of data frames
+#> Error in `[<-.data.frame`:
+#> ! missing values are not allowed in subscripted assignments of data frames
 ```
 
 </td><td>
@@ -3241,7 +3267,8 @@ with_tbl(tbl[NA_integer_, ] <- tbl[1, ])
 
 ``` r
 with_df2(df2[NA_integer_, ] <- df2[1, ])
-#> Error in `[<-.data.frame`(`*tmp*`, NA_integer_, , value = structure(list(: missing values are not allowed in subscripted assignments of data frames
+#> Error in `[<-.data.frame`:
+#> ! missing values are not allowed in subscripted assignments of data frames
 ```
 
 </td><td>
@@ -3306,7 +3333,8 @@ with_tbl(tbl[FALSE, ] <- tbl[1, ])
 
 ``` r
 with_df(df[NA, ] <- df[1, ])
-#> Error in `[<-.data.frame`(`*tmp*`, NA, , value = structure(list(n = 1L, : missing values are not allowed in subscripted assignments of data frames
+#> Error in `[<-.data.frame`:
+#> ! missing values are not allowed in subscripted assignments of data frames
 ```
 
 </td><td>
@@ -3375,7 +3403,8 @@ with_tbl(tbl[2:3, ] <- list(tbl$n[1], tbl$c[1:2], tbl$li[1]))
 
 ``` r
 with_df(df[2:4, ] <- df[1:2, ])
-#> Error in `[<-.data.frame`(`*tmp*`, 2:4, , value = structure(list(n = c(1L, : replacement element 1 has 2 rows, need 3
+#> Error in `[<-.data.frame`:
+#> ! replacement element 1 has 2 rows, need 3
 ```
 
 </td><td>
@@ -3397,7 +3426,8 @@ with_tbl(tbl[2:4, ] <- tbl[1:2, ])
 
 ``` r
 with_df2(df2[2:4, ] <- df2[1, ])
-#> Error in `[<-.data.frame`(`*tmp*`, 2:4, , value = structure(list(tb = structure(list(: replacement element 1 is a matrix/data frame of 1 row, need 3
+#> Error in `[<-.data.frame`:
+#> ! replacement element 1 is a matrix/data frame of 1 row, need 3
 ```
 
 </td><td>
@@ -3418,7 +3448,8 @@ with_tbl2(tbl2[2:4, ] <- tbl2[1, ])
 
 ``` r
 with_df2(df2[2:4, ] <- df2[2:3, ])
-#> Error in `[<-.data.frame`(`*tmp*`, 2:4, , value = structure(list(tb = structure(list(: replacement element 1 is a matrix/data frame of 2 rows, need 3
+#> Error in `[<-.data.frame`:
+#> ! replacement element 1 is a matrix/data frame of 2 rows, need 3
 ```
 
 </td><td>
@@ -3688,7 +3719,8 @@ with_tbl(tbl[as.character(-(3:5)), ] <- tbl[1, ])
 
 ``` r
 with_df(df[NA_character_, ] <- df[1, ])
-#> Error in `[<-.data.frame`(`*tmp*`, NA_character_, , value = structure(list(: missing values are not allowed in subscripted assignments of data frames
+#> Error in `[<-.data.frame`:
+#> ! missing values are not allowed in subscripted assignments of data frames
 ```
 
 </td><td>
@@ -3981,7 +4013,8 @@ with_tbl(tbl[2:3, "x"] <- 1)
 
 ``` r
 with_df(df[2:3, "n"] <- NULL)
-#> Error in x[[jj]][iseq] <- vjj: replacement has length zero
+#> Error in `x[[jj]][iseq] <- vjj`:
+#> ! replacement has length zero
 ```
 
 </td><td>
@@ -4134,7 +4167,8 @@ with_tbl(tbl[1, ][[3]] <- list(NULL))
 
 ``` r
 with_df2(df2[[1, 1]] <- df[1, ])
-#> Error in `[[<-.data.frame`(`*tmp*`, iseq, value = structure(list(n = 1L, : replacement has 1 row, data has 4
+#> Error in `[[<-.data.frame`:
+#> ! replacement has 1 row, data has 4
 ```
 
 </td><td>
@@ -4185,7 +4219,8 @@ with_tbl2(tbl2[1, ][[1]] <- tbl[1, ])
 
 ``` r
 with_df2(df2[[1, 2]] <- t(1:4))
-#> Error in x[[jseq]][[iseq]] <- value: more elements supplied than there are to replace
+#> Error in `x[[jseq]][[iseq]] <- value`:
+#> ! more elements supplied than there are to replace
 ```
 
 </td><td>
@@ -4236,7 +4271,8 @@ with_tbl2(tbl2[1, ][[2]] <- t(1:4))
 
 ``` r
 df[[1:2, 1]]
-#> Error in col[[i, exact = exact]]: attempt to select more than one element in vectorIndex
+#> Error in `col[[i, exact = exact]]`:
+#> ! attempt to select more than one element in vectorIndex
 ```
 
 </td><td>
@@ -4252,7 +4288,8 @@ tbl[[1:2, 1]]
 
 ``` r
 with_df(df[[1:2, 1]] <- 0)
-#> Error in `[[<-.data.frame`(`*tmp*`, 1:2, 1, value = 0): only a single element should be replaced
+#> Error in `[[<-.data.frame`:
+#> ! only a single element should be replaced
 ```
 
 </td><td>
