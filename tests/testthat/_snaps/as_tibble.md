@@ -301,11 +301,6 @@
         * "a" at locations 1 and 2.
         * "b" at locations 3 and 4.
     Code
-      as_tibble_row(list(a = new_environment()))
-    Condition
-      Error in `FUN()`:
-      ! `x` must be a vector, not an environment.
-    Code
       as_tibble_row(list(a = 1:3))
     Condition
       Error in `as_tibble_row()`:
