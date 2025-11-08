@@ -1,5 +1,11 @@
 # Changelog
 
+## tibble 3.3.0.9007
+
+### Continuous integration
+
+- Sync ([\#1668](https://github.com/tidyverse/tibble/issues/1668)).
+
 ## tibble 3.3.0.9006
 
 ### Continuous integration
