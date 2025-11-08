@@ -5,12 +5,12 @@
 
 // According to the C standard, names starting with underscore are reserved
 static const R_CallMethodDef CallEntries[] = {
-  {"tibble_matrixToDataFrame", (DL_FUNC) &tibble_matrixToDataFrame, 1},
-  {"tibble_string_to_indices", (DL_FUNC) &tibble_string_to_indices, 1},
-  {"tibble_restore_impl", (DL_FUNC) &tibble_restore_impl, 2},
-  {"tibble_need_coerce", (DL_FUNC) &tibble_need_coerce, 1},
+  { "tibble_matrixToDataFrame", (DL_FUNC)&tibble_matrixToDataFrame, 1 },
+  { "tibble_string_to_indices", (DL_FUNC)&tibble_string_to_indices, 1 },
+  { "tibble_restore_impl", (DL_FUNC)&tibble_restore_impl, 2 },
+  { "tibble_need_coerce", (DL_FUNC)&tibble_need_coerce, 1 },
 
-  {NULL, NULL, 0}
+  { NULL, NULL, 0 }
 };
 
 void R_init_tibble(DllInfo* dll) {
