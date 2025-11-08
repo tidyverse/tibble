@@ -149,8 +149,11 @@ static void* get_data(SEXP x, size_t* widthptr) {
   return ptr;
 }
 
-static void copy_columns_atomic(SEXP out, SEXP x, R_xlen_t nrow, R_xlen_t ncol)
-{
+static void copy_columns_atomic(
+  SEXP out,
+  SEXP x,
+  R_xlen_t nrow,
+  R_xlen_t ncol) {
   SEXPTYPE type = TYPEOF(x);
   size_t eltsize;
   const char* src = get_data(x, &eltsize);
@@ -236,7 +239,7 @@ SEXP tibble_matrixToDataFrame(SEXP x) {
     break;
 
   default:
-    Rf_error("data type not handled") ;
+    Rf_error("data type not handled");
     break;
   }
 
