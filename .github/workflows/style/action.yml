@@ -33,7 +33,7 @@ runs:
       if: ${{ steps.check.outputs.clang_format_enabled == 'true' }}
       run: |
         shopt -s nullglob
-        clang-format -i src/*.{c,cc,cpp,h,hpp}'
+        clang-format -i src/*.{c,cc,cpp,h,hpp}
       shell: bash
 
     - name: Check Git status
