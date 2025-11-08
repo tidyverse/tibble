@@ -8,24 +8,36 @@ runs:
       run: |
         set -x
         if [ -f air.toml ]; then
-          echo enabled=true >> $GITHUB_OUTPUT
+          echo air_enabled=true >> $GITHUB_OUTPUT
         else
-          echo enabled=false >> $GITHUB_OUTPUT
+          echo air_enabled=false >> $GITHUB_OUTPUT
+        fi
+        if [ -f .clang-format ]; then
+          echo clang_format_enabled=true >> $GITHUB_OUTPUT
+        else
+          echo clang_format_enabled=false >> $GITHUB_OUTPUT
         fi
       shell: bash
 
     - name: Install air
-      if: ${{ steps.check.outputs.enabled == 'true' }}
+      if: ${{ steps.check.outputs.air_enabled == 'true' }}
       uses: posit-dev/setup-air@v1
 
     - name: Run air
-      if: ${{ steps.check.outputs.enabled == 'true' }}
+      if: ${{ steps.check.outputs.air_enabled == 'true' }}
       run: |
         air format .
       shell: bash
 
+    - name: Run clang-format
+      if: ${{ steps.check.outputs.clang_format_enabled == 'true' }}
+      run: |
+        shopt -s nullglob
+        clang-format -i src/*.{c,cc,cpp,h,hpp}
+      shell: bash
+
     - name: Check Git status
-      if: ${{ steps.check.outputs.enabled == 'true' }}
+      if: ${{ steps.check.outputs.air_enabled == 'true' || steps.check.outputs.clang_format_enabled == 'true' }}
       run: |
         git status
       shell: bash
