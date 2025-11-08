@@ -153,7 +153,8 @@ static void copy_columns_atomic(
   SEXP out,
   SEXP x,
   R_xlen_t nrow,
-  R_xlen_t ncol) {
+  R_xlen_t ncol
+) {
   SEXPTYPE type = TYPEOF(x);
   size_t eltsize;
   const char* src = get_data(x, &eltsize);

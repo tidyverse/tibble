@@ -2,7 +2,7 @@
 
 BasedOnStyle: Google
 # BasedOnStyle: LLVM
-AlignAfterOpenBracket: AlwaysBreak
+AlignAfterOpenBracket: BlockIndent
 # AlignAfterOpenBracket: Align
 AllowAllArgumentsOnNextLine: false
 # AllowAllArgumentsOnNextLine: true
