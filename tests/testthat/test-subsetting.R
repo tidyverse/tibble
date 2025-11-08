@@ -796,7 +796,7 @@ test_that("$<- recycles only values of length one", {
 })
 
 test_that("output test", {
-  skip_if_not_installed("vctrs", "0.4.1.9000")
+  skip_if_not_installed("vctrs", "0.6.5.9000")
 
   expect_snapshot(error = TRUE, {
     "# [.tbl_df is careful about names (#1245)"

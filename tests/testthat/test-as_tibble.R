@@ -815,10 +815,13 @@ test_that("output test", {
     as_tibble_row(set_names(as.list(1:26), paste0("..", 1:26)))
     as_tibble_row(list(a = 1, a = 1))
     as_tibble_row(list(a = 1, a = 1, b = 1, b = 1))
-    as_tibble_row(list(a = new_environment()))
-
     as_tibble_row(list(a = 1:3))
     as_tibble_row(list(a = 1:3, b = 1:3))
+  })
+
+  skip_if_not_installed("vctrs", "0.6.5.9000")
+  expect_snapshot(error = TRUE, {
+    as_tibble_row(list(a = new_environment()))
   })
 })
 
