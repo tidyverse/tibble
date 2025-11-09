@@ -314,3 +314,12 @@
       x Element `a` is of size 3.
       x Element `b` is of size 3.
 
+---
+
+    Code
+      as_tibble_row(list(a = new_environment()))
+    Condition
+      Error in `FUN()`:
+      ! `x` must be a vector, not an environment.
+      i Read our FAQ about scalar types (`?vctrs::faq_error_scalar_type`) to learn more.
+
