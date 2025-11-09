@@ -10,8 +10,6 @@ permissions:
   contents: read
   pull-requests: write
 
-name: reviewdog-suggester
-
 jobs:
   reviewdog:
     runs-on: ubuntu-latest
