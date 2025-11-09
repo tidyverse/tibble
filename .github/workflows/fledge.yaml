@@ -48,25 +48,14 @@ jobs:
           fetch-depth: 0
           fetch-tags: true
 
-      - name: Configure Git identity
-        run: |
-          env | sort
-          git config --local user.name "$GITHUB_ACTOR"
-          git config --local user.email "$GITHUB_ACTOR@users.noreply.github.com"
-        shell: bash
+      - uses: ./.github/workflows/git-identity
 
       - name: Update apt
         run: |
           sudo apt-get update
         shell: bash
 
-      - uses: r-lib/actions/setup-r@v2
-        with:
-          use-public-rspm: true
-
-      - uses: r-lib/actions/setup-r-dependencies@v2
-        env:
-          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+      - uses: ./.github/workflows/install
         with:
           pak-version: devel
           packages: cynkra/fledge
