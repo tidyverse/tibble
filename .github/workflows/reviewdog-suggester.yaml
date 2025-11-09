@@ -43,35 +43,14 @@ jobs:
         with:
           ref: ${{ github.event.workflow_run.head_sha }}
 
-      - name: Apply diff and suggest via reviewdog
+      - name: Apply diff
         if: steps.check-artifact.outputs.has_diff == 'true'
-        env:
-          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          # Install reviewdog
-          curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b /usr/local/bin
-
-          # Get PR number from the workflow run
-          PR_NUMBER=$(gh api \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            /repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }} \
-            --jq '.pull_requests[0].number')
-
-          echo "PR Number: ${PR_NUMBER}"
-
-          if [ -z "${PR_NUMBER}" ] || [ "${PR_NUMBER}" = "null" ]; then
-            echo "No PR associated with this workflow run"
-            exit 0
-          fi
-
-          # Convert diff to reviewdog format and post suggestions
-          cat reviewdog-diff.txt | reviewdog \
-            -f=diff \
-            -name="rcc" \
-            -reporter=github-pr-review \
-            -filter-mode=nofilter \
-            -fail-on-error=false
+          patch -p1 < reviewdog-diff.txt
         shell: bash
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Post suggestions via reviewdog
+        if: steps.check-artifact.outputs.has_diff == 'true'
+        uses: krlmlr/action-suggester@main
+        with:
+          tool_name: rcc

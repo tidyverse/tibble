@@ -92,3 +92,9 @@ runs:
       with:
         name: reviewdog-suggestions
         path: reviewdog-diff.txt
+
+    - name: Cleanup diff file
+      if: steps.commit.outputs.use_reviewdog == 'true'
+      run: |
+        rm reviewdog-diff.txt
+      shell: bash
