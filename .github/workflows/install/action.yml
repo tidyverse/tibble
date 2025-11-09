@@ -74,6 +74,12 @@ runs:
         echo "_R_CHECK_BASHISMS_=true" | tee -a $GITHUB_ENV
       shell: bash
 
+    - name: Review environment variables
+      run: |
+        set -x
+        env | sort
+      shell: bash
+
     - name: Update apt
       if: runner.os == 'Linux'
       run: |
