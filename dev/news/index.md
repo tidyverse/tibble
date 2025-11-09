@@ -1,5 +1,25 @@
 # Changelog
 
+## tibble 3.3.0.9008
+
+### Bug fixes
+
+- Avoid use of `SET_OBJECT()`
+  ([\#1671](https://github.com/tidyverse/tibble/issues/1671)).
+
+### Continuous integration
+
+- Enable `clang-format`
+  ([\#1670](https://github.com/tidyverse/tibble/issues/1670)).
+
+### Testing
+
+- Snapshot updates for R-CMD-check-dev ({“package”:“vctrs”})
+  ([\#1666](https://github.com/tidyverse/tibble/issues/1666)).
+
+- Snapshot updates for R-CMD-check-dev ({“package”:“knitr”})
+  ([\#1626](https://github.com/tidyverse/tibble/issues/1626)).
+
 ## tibble 3.3.0.9007
 
 ### Continuous integration
