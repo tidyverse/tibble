@@ -78,9 +78,17 @@ runs:
         fi
       shell: bash
 
-    - name: Suggest changes via reviewdog
+    - name: Save diff for reviewdog
       if: steps.commit.outputs.use_reviewdog == 'true'
-      uses: krlmlr/action-suggester@main
+      run: |
+        set -x
+        git diff > reviewdog-diff.txt
+        echo "Diff saved to artifact for reviewdog workflow"
+      shell: bash
+
+    - name: Upload diff artifact
+      if: steps.commit.outputs.use_reviewdog == 'true'
+      uses: actions/upload-artifact@v4
       with:
-        github_token: ${{ inputs.token }}
-        tool_name: "rcc"
+        name: reviewdog-suggestions
+        path: reviewdog-diff.txt

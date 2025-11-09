@@ -1,0 +1,77 @@
+name: Reviewdog Suggester
+
+on:
+  workflow_run:
+    workflows: ["rcc"]
+    types:
+      - completed
+
+permissions:
+  contents: read
+  pull-requests: write
+
+jobs:
+  reviewdog:
+    runs-on: ubuntu-latest
+    if: >
+      github.event.workflow_run.event == 'pull_request' &&
+      github.event.workflow_run.conclusion == 'success'
+
+    steps:
+      - name: Download artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: reviewdog-suggestions
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          run-id: ${{ github.event.workflow_run.id }}
+        continue-on-error: true
+
+      - name: Check if artifact exists
+        id: check-artifact
+        run: |
+          if [ -f reviewdog-diff.txt ]; then
+            echo "has_diff=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_diff=false" >> $GITHUB_OUTPUT
+            echo "No reviewdog diff artifact found"
+          fi
+        shell: bash
+
+      - name: Checkout PR
+        if: steps.check-artifact.outputs.has_diff == 'true'
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha }}
+
+      - name: Apply diff and suggest via reviewdog
+        if: steps.check-artifact.outputs.has_diff == 'true'
+        env:
+          REVIEWDOG_GITHUB_API_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Install reviewdog
+          curl -sfL https://raw.githubusercontent.com/reviewdog/reviewdog/master/install.sh | sh -s -- -b /usr/local/bin
+
+          # Get PR number from the workflow run
+          PR_NUMBER=$(gh api \
+            -H "Accept: application/vnd.github+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            /repos/${{ github.repository }}/actions/runs/${{ github.event.workflow_run.id }} \
+            --jq '.pull_requests[0].number')
+
+          echo "PR Number: ${PR_NUMBER}"
+
+          if [ -z "${PR_NUMBER}" ] || [ "${PR_NUMBER}" = "null" ]; then
+            echo "No PR associated with this workflow run"
+            exit 0
+          fi
+
+          # Convert diff to reviewdog format and post suggestions
+          cat reviewdog-diff.txt | reviewdog \
+            -f=diff \
+            -name="rcc" \
+            -reporter=github-pr-review \
+            -filter-mode=nofilter \
+            -fail-on-error=false
+        shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
