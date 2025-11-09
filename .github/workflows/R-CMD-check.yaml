@@ -76,7 +76,7 @@ jobs:
           ref: ${{ inputs.ref }}
 
       - name: Update status for rcc
-        if: github.actor != 'Copilot'
+        if: github.actor != 'Copilot' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
         # FIXME: Wrap into action
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -121,7 +121,7 @@ jobs:
           cache-version: rcc-smoke-2
           needs: build, check, website
           # Beware of using dev pkgdown here, has brought in dev dependencies in the past
-          extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/styler r-lib/pkgdown deps::.
+          extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/pkgdown deps::.
 
       - uses: ./.github/workflows/custom/after-install
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
@@ -182,7 +182,7 @@ jobs:
 
       - name: Update status for rcc
         # FIXME: Wrap into action
-        if: always() && (github.actor != 'Copilot')
+        if: always() && (github.actor != 'Copilot') && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
