@@ -27,54 +27,78 @@ runs:
       id: repo-state
       uses: ./.github/workflows/repo-state
 
-    - name: Commit if changed, create a PR if protected
-      id: commit
-      if: steps.check.outputs.has_changes == 'true'
+    - name: Commit and create PR on protected branch
+      if: steps.check.outputs.has_changes == 'true' && steps.repo-state.outputs.foreign == 'false' && steps.repo-state.outputs.protected == 'true'
       env:
         GITHUB_TOKEN: ${{ inputs.token }}
       run: |
         set -x
-        protected=${{ steps.repo-state.outputs.protected }}
-        foreign=${{ steps.repo-state.outputs.foreign }}
-        is_pr=${{ steps.repo-state.outputs.is_pr }}
-        if [ "${foreign}" = "true" ]; then
-          # https://github.com/krlmlr/actions-sync/issues/44
-          echo "Can't push to foreign branch"
-          gh issue comment ${{ github.event.pull_request.number }} --body "⚠️ Unable to push changes back to your branch because it is in a forked repository. Please apply the suggested changes manually."
-          exit 1
-        elif [ "${protected}" = "true" ]; then
-          current_branch=$(git branch --show-current)
-          new_branch=gha-commit-$(git rev-parse --short HEAD)
-          git checkout -b ${new_branch}
-          git add .
-          git commit -m "chore: Auto-update from GitHub Actions"$'\n'$'\n'"Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-          # Force-push, used in only one place
-          # Alternative: separate branch names for each usage
-          git push -u origin HEAD -f
+        current_branch=$(git branch --show-current)
+        new_branch=gha-commit-$(git rev-parse --short HEAD)
+        git checkout -b ${new_branch}
+        git add .
+        git commit -m "chore: Auto-update from GitHub Actions"$'\n'$'\n'"Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+        # Force-push, used in only one place
+        # Alternative: separate branch names for each usage
+        git push -u origin HEAD -f
 
-          existing_pr=$(gh pr list --state open --base main --head ${new_branch} --json number --jq '.[] | .number')
-          if [ -n "${existing_pr}" ]; then
-            echo "Existing PR: ${existing_pr}"
-          else
-            gh pr create --base main --head ${new_branch} --title "chore: Auto-update from GitHub Actions" --body "Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-          fi
-
-          gh workflow run rcc -f ref=$(git rev-parse HEAD)
-          gh pr merge --merge --auto
+        existing_pr=$(gh pr list --state open --base main --head ${new_branch} --json number --jq '.[] | .number')
+        if [ -n "${existing_pr}" ]; then
+          echo "Existing PR: ${existing_pr}"
         else
-          git fetch
-          if [ -n "${GITHUB_HEAD_REF}" ]; then
-            git add .
-            git stash save
-            git switch ${GITHUB_HEAD_REF}
-            git merge origin/${GITHUB_BASE_REF} --no-edit
-            git stash pop
-          fi
-          git add .
-          git commit -m "chore: Auto-update from GitHub Actions"$'\n'$'\n'"Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-          git push -u origin HEAD
-
-          # Only set output if changed
-          echo sha=$(git rev-parse HEAD) >> $GITHUB_OUTPUT
+          gh pr create --base main --head ${new_branch} --title "chore: Auto-update from GitHub Actions" --body "Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
         fi
+
+        gh workflow run rcc -f ref=$(git rev-parse HEAD)
+        gh pr merge --merge --auto
+      shell: bash
+
+    - name: Commit and push on unprotected branch
+      id: commit
+      if: steps.check.outputs.has_changes == 'true' && steps.repo-state.outputs.foreign == 'false' && steps.repo-state.outputs.protected == 'false'
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
+      run: |
+        set -x
+        git fetch
+        if [ -n "${GITHUB_HEAD_REF}" ]; then
+          git add .
+          git stash save
+          git switch ${GITHUB_HEAD_REF}
+          git merge origin/${GITHUB_BASE_REF} --no-edit
+          git stash pop
+        fi
+        git add .
+        git commit -m "chore: Auto-update from GitHub Actions"$'\n'$'\n'"Run: ${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+        git push -u origin HEAD
+
+        # Only set output if changed
+        echo sha=$(git rev-parse HEAD) >> $GITHUB_OUTPUT
+      shell: bash
+
+    - name: Create patch file for foreign branch
+      if: steps.check.outputs.has_changes == 'true' && steps.repo-state.outputs.foreign == 'true'
+      run: |
+        set -x
+        git diff > changes.patch
+        echo "Patch file created with uncommitted changes"
+        cat changes.patch
+      shell: bash
+
+    - name: Upload patch artifact
+      if: steps.check.outputs.has_changes == 'true' && steps.repo-state.outputs.foreign == 'true'
+      uses: actions/upload-artifact@v5
+      with:
+        name: changes-patch
+        path: changes.patch
+
+    - name: Fail on foreign branch
+      if: steps.check.outputs.has_changes == 'true' && steps.repo-state.outputs.foreign == 'true'
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
+      run: |
+        # https://github.com/krlmlr/actions-sync/issues/44
+        echo "Can't push to foreign branch"
+        gh issue comment ${{ github.event.pull_request.number }} --body "⚠️ Unable to push changes back to your branch because it is in a forked repository. Please download the patch file from the workflow artifacts and apply it manually using \`git apply changes.patch\`."
+        exit 1
       shell: bash
