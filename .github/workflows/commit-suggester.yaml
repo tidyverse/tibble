@@ -47,6 +47,8 @@ jobs:
 
       - name: Find PR number for branch from correct head repository
         id: find-pr
+        env:
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           PR_NUMBER=$(gh pr list --head ${{ github.event.workflow_run.head_branch }} --state open --json number,headRepositoryOwner --jq '.[] | select(.headRepositoryOwner.login == "${{ github.event.workflow_run.head_repository.owner.login }}") | .number' || echo "")
           echo "pr_number=$PR_NUMBER" >> $GITHUB_OUTPUT
