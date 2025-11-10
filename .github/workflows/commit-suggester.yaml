@@ -94,31 +94,3 @@ jobs:
 
           gh pr comment ${{ steps.find-pr.outputs.pr_number }} --repo ${{ github.repository }} --body-file comment.md
         shell: bash
-
-      - name: Apply diff
-        if: steps.check-artifact.outputs.has_diff == 'true'
-        run: |
-          patch -p1 < changes.patch
-          rm changes.patch
-        shell: bash
-
-      - uses: ./.github/workflows/git-identity
-        if: steps.check-artifact.outputs.has_diff == 'true'
-
-      - name: Commit and push changes
-        if: steps.check-artifact.outputs.has_diff == 'true'
-        run: |
-          git add -A
-          git commit -m "style: Apply automated formatting suggestions
-
-          Co-authored-by: github-actions[bot] <github-actions[bot]@users.noreply.github.com>"
-          git push
-        shell: bash
-
-      - name: Trigger rcc workflow
-        if: steps.check-artifact.outputs.has_diff == 'true'
-        env:
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          gh workflow run rcc --ref ${{ github.event.workflow_run.head_branch }}
-        shell: bash
