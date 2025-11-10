@@ -7,6 +7,8 @@
 #' `as_tibble()` is to [`tibble()`] as [base::as.data.frame()] is to
 #' [base::data.frame()].
 #'
+#' Boo
+#'
 #' `as_tibble()` is an S3 generic, with methods for:
 #' * [`data.frame`][base::data.frame()]: Thin wrapper around the `list` method
 #'   that implements tibble's treatment of [rownames].
