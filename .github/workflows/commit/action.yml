@@ -40,6 +40,7 @@ runs:
         if [ "${foreign}" = "true" ]; then
           # https://github.com/krlmlr/actions-sync/issues/44
           echo "Can't push to foreign branch"
+          gh issue comment ${{ github.event.pull_request.number }} --body "⚠️ Unable to push changes back to your branch because it is in a forked repository. Please apply the suggested changes manually."
           exit 1
         elif [ "${protected}" = "true" ]; then
           current_branch=$(git branch --show-current)
