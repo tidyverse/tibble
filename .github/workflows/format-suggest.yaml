@@ -42,4 +42,4 @@ jobs:
         with:
           level: error
           fail_level: error
-          tool_name: air
+          tool_name: air-and-clang-format
