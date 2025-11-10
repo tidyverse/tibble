@@ -10,7 +10,7 @@ static long long string_to_int64(const char* x) {
   long long xi = strtoll(x, &px, 10);
   if (*px) return LLONG_MIN;
   if (xi == LLONG_MAX) return LLONG_MIN;
-  if (xi < 1)  return LLONG_MIN;
+  if (xi < 1) return LLONG_MIN;
   return xi;
 }
 
