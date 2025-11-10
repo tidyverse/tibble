@@ -22,6 +22,11 @@ runs:
         fi
       shell: bash
 
+    - name: Determine repository state
+      if: steps.check.outputs.has_changes == 'true'
+      id: repo-state
+      uses: ./.github/workflows/repo-state
+
     - name: Commit if changed, create a PR if protected
       id: commit
       if: steps.check.outputs.has_changes == 'true'
@@ -29,18 +34,13 @@ runs:
         GITHUB_TOKEN: ${{ inputs.token }}
       run: |
         set -x
-        protected=${{ github.ref_protected }}
-        foreign=${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
-        is_pr=${{ github.event_name == 'pull_request' }}
-        if [ "${is_pr}" = "true" ] && [ "${foreign}" = "true" ]; then
-          # Running on a PR - will use reviewdog in next step
-          echo "Code changes detected on PR, will suggest changes via reviewdog"
-          echo "use_reviewdog=true" | tee -a $GITHUB_OUTPUT
-          git reset HEAD
-          git status
-        elif [ "${foreign}" = "true" ]; then
+        protected=${{ steps.repo-state.outputs.protected }}
+        foreign=${{ steps.repo-state.outputs.foreign }}
+        is_pr=${{ steps.repo-state.outputs.is_pr }}
+        if [ "${foreign}" = "true" ]; then
           # https://github.com/krlmlr/actions-sync/issues/44
           echo "Can't push to foreign branch"
+          exit 1
         elif [ "${protected}" = "true" ]; then
           current_branch=$(git branch --show-current)
           new_branch=gha-commit-$(git rev-parse --short HEAD)
@@ -76,25 +76,4 @@ runs:
           # Only set output if changed
           echo sha=$(git rev-parse HEAD) >> $GITHUB_OUTPUT
         fi
-      shell: bash
-
-    - name: Save diff for reviewdog
-      if: steps.commit.outputs.use_reviewdog == 'true'
-      run: |
-        set -x
-        git diff > reviewdog-diff.txt
-        echo "Diff saved to artifact for reviewdog workflow"
-      shell: bash
-
-    - name: Upload diff artifact
-      if: steps.commit.outputs.use_reviewdog == 'true'
-      uses: actions/upload-artifact@v4
-      with:
-        name: reviewdog-suggestions
-        path: reviewdog-diff.txt
-
-    - name: Cleanup diff file
-      if: steps.commit.outputs.use_reviewdog == 'true'
-      run: |
-        rm reviewdog-diff.txt
       shell: bash

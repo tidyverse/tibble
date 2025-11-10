@@ -1,5 +1,24 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.0.9009
+
+## Continuous integration
+
+- Fix.
+
+- Checkout unconditionally to avoid removal of patch file.
+
+- Improve reviewdog.
+
+- Run reviewdog from separate workflow.
+
+- Use workflows for fledge (#1676).
+
+## Testing
+
+- Snapshot updates for R-CMD-check-dev ({"package":"dplyr"}) (#1672).
+
+
 # tibble 3.3.0.9008
 
 ## Bug fixes

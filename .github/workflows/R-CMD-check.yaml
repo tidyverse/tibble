@@ -142,11 +142,19 @@ jobs:
         if: github.event_name != 'workflow_dispatch' || inputs.dep-suggests-matrix
         uses: ./.github/workflows/dep-suggests-matrix
 
+      - id: repo-state
+        name: Determine repository state
+        uses: ./.github/workflows/repo-state
+
+      # Styling on foreign PRs works through the format-suggest workflow
+      - uses: ./.github/workflows/style
+        if: steps.repo-state.outputs.foreign != 'true' or steps.repo-state.outputs.is_pr != 'true'
+
+      # Snapshot tests can't work in a way similar to format-suggests
+      # because it requires running code which is a security risk on pull_request_target workflows
       - uses: ./.github/workflows/update-snapshots
         with:
           base: ${{ inputs.ref || github.head_ref }}
-
-      - uses: ./.github/workflows/style
 
       - uses: ./.github/workflows/roxygenize
 

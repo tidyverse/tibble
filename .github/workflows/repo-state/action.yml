@@ -1,0 +1,28 @@
+name: "Determine repository state"
+description: "Expose protected, foreign, and is_pr context variables"
+outputs:
+  protected:
+    description: "Whether the current branch is protected"
+    value: ${{ steps.state.outputs.protected }}
+  foreign:
+    description: "Whether the PR is from a foreign repository"
+    value: ${{ steps.state.outputs.foreign }}
+  is_pr:
+    description: "Whether the event is a pull request"
+    value: ${{ steps.state.outputs.is_pr }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Determine repository state
+      id: state
+      run: |
+        set -x
+        protected=${{ github.ref_protected }}
+        foreign=${{ github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name != github.repository }}
+        is_pr=${{ github.event_name == 'pull_request' }}
+
+        echo "protected=${protected}" | tee -a $GITHUB_OUTPUT
+        echo "foreign=${foreign}" | tee -a $GITHUB_OUTPUT
+        echo "is_pr=${is_pr}" | tee -a $GITHUB_OUTPUT
+      shell: bash
