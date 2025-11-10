@@ -56,7 +56,7 @@ jobs:
 
           ```bash
           # Download and apply the patch directly
-          gh run download ${{ github.event.workflow_run.id }} --repo ${{ github.repository }} --name rcc && patch -p1 < changes.patch && rm changes.patch
+          gh run download ${{ github.event.workflow_run.id }} --repo ${{ github.repository }} --name changes-patch && patch -p1 < changes.patch && rm changes.patch
           ```
 
           ### Method 2: View the patch
