@@ -92,3 +92,8 @@ runs:
       run: |
         false
       shell: bash
+
+    - name: Reset Git changes
+      run: |
+        git reset -- tests/testthat/_snaps
+      shell: bash
