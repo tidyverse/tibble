@@ -40,6 +40,6 @@ jobs:
       - name: Suggest
         uses: reviewdog/action-suggester@v1
         with:
-          level: warning
+          level: error
           fail_level: error
           tool_name: air-and-clang-format
