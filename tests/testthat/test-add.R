@@ -329,7 +329,6 @@ test_that("missing row names stay missing when adding column", {
 
 test_that("output test", {
   expect_snapshot(error = TRUE, {
-    "Boo"
     add_row(tibble(), a = 1)
     add_row(tibble(), a = 1, b = 2)
     add_row(tibble(), !!!set_names(letters))
