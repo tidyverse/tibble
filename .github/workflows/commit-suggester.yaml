@@ -94,7 +94,7 @@ jobs:
         if: steps.check-artifact.outputs.has_diff == 'true'
         uses: thollander/actions-comment-pull-request@v3
         with:
-          pr_number: ${{ steps.find-pr.outputs.pr_number }}
-          filePath: comment.md
-          comment_tag: formatting-suggestions
+          pr-number: ${{ steps.find-pr.outputs.pr_number }}
+          file-path: comment.md
+          comment-tag: formatting-suggestions
           mode: recreate
