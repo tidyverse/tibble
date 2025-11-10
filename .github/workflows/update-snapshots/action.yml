@@ -94,7 +94,6 @@ runs:
       shell: bash
 
     - name: Reset Git changes
-      if: ${{ steps.check-changed.outputs.changed }}
       run: |
         git reset -- tests/testthat/_snaps
       shell: bash
