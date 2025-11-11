@@ -1,4 +1,4 @@
-name: commit-suggester.yaml
+name: commit-suggest.yaml
 
 on:
   workflow_run:
