@@ -1,5 +1,44 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.0.9010
+
+## Continuous integration
+
+- Implement review workflows (@krlmlr, #1675).
+
+- Fix.
+
+- Use comment action.
+
+- Comment only.
+
+- Token.
+
+- Find PR.
+
+- Fix.
+
+- Debug.
+
+- Fix data source.
+
+- Rename.
+
+- Get PR number correctly.
+
+- Need token.
+
+- Try again commenting from completion workflow.
+
+- Keep error.
+
+- Tweaks.
+
+- Syntax.
+
+- Use `pull_request_target`.
+
+
 # tibble 3.3.0.9009
 
 ## Continuous integration
