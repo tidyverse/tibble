@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.0.9011
+
+## Continuous integration
+
+- Rename (#1677).
+
+
 # tibble 3.3.0.9010
 
 ## Continuous integration
