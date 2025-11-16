@@ -118,14 +118,14 @@ jobs:
         with:
           cache-version: rcc-dev-${{ matrix.package }}-1
           needs: build, check
-          extra-packages: "any::rcmdcheck any::remotes ."
+          extra-packages: "any::rcmdcheck r-lib/remotes@f-618-universe ."
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Install dev version of ${{ matrix.package }}
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          remotes::install_dev("${{ matrix.package }}", "https://cloud.r-project.org", upgrade = "always")
+          remotes::install_runiverse("${{ matrix.package }}", linux_distro = "noble")
         shell: Rscript {0}
 
       - name: Session info
