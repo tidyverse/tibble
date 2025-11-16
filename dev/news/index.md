@@ -1,5 +1,11 @@
 # Changelog
 
+## tibble 3.3.0.9011
+
+### Continuous integration
+
+- Rename ([\#1677](https://github.com/tidyverse/tibble/issues/1677)).
+
 ## tibble 3.3.0.9010
 
 ### Continuous integration
