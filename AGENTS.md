@@ -49,6 +49,7 @@ devtools::install_dev_deps()
 - Use backticks for code references such as `function_call()`
 - PRs are generally squashed, a clean history within a PR is not necessary
 - Before resuming work on a PR, always merge the current base branch (typically `main`)
+- Do not edit `NEWS.md` directly - it is managed by maintainers
 
 ### Comment Style
 
@@ -65,6 +66,7 @@ devtools::install_dev_deps()
 - Maintain consistent indentation (2 spaces) and spacing patterns
 - Use meaningful variable names that reflect context
 - Run `styler::style_pkg()` before committing changes to ensure consistent formatting
+- Do not restyle code that has nothing to do with your changes
 - Never change deprecated functions
 
 ### Documentation
