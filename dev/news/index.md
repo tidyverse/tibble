@@ -1,5 +1,12 @@
 # Changelog
 
+## tibble 3.3.0.9012
+
+### Continuous integration
+
+- Install binaries from r-universe for dev workflow
+  ([\#1679](https://github.com/tidyverse/tibble/issues/1679)).
+
 ## tibble 3.3.0.9011
 
 ### Continuous integration
