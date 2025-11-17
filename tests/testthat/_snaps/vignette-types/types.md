@@ -32,36 +32,34 @@ For example, `<int>` in the header of a column indicates an integer column, and 
 
 
 
-|Class                       |Data type            |Example                          |Column header |
-|:---------------------------|:--------------------|:--------------------------------|:-------------|
-|Atomic                      |logical              |`TRUE`                           |lgl           |
-|                            |integer              |`1L`                             |int           |
-|                            |double               |`1.5`                            |dbl           |
-|                            |character            |`"A"`                            |chr           |
-|                            |complex              |`0+1i`                           |cpl           |
-|                            |raw                  |`as.raw(1)`                      |raw           |
-|                            |list                 |`list(1)`                        |list          |
-|                            |named list           |`list(a = 1)`                    |named list    |
-|Built-in objects            |factor               |`factor("A")`                    |fct           |
-|                            |ordered              |`ordered("a")`                   |ord           |
-|                            |Date                 |`Sys.Date()`                     |date          |
-|                            |POSIXt               |`Sys.time()`                     |dttm          |
-|                            |difftime             |`vctrs::new_duration(1)`         |drtn          |
-|Objects from other packages |hms                  |`hms::hms(1)`                    |time          |
-|                            |integer64            |`bit64::as.integer64(1e+10)`     |int64         |
-|                            |blob                 |`blob::blob(raw(1))`             |blob          |
-|Data frames                 |data.frame           |`data.frame(a = 1)`              |df[,1]        |
-|                            |tbl_df               |`tibble(a = 1)`                  |tibble[,1]    |
-|Unchanged                   |AsIs                 |`I(1L)`                          |I<int>        |
-|vctrs types                 |unspecified          |`vctrs::unspecified(1)`          |???           |
-|                            |vctrs_list_of        |`vctrs::list_of(c(1L))`          |list<int>     |
-|                            |vctrs_vctr           |`vctrs::new_vctr(1L)`            |vctrs_vc      |
-|                            |vctrs_partial_factor |`vctrs::partial_factor(letters)` |prtl_fctr     |
-|                            |vctrs_partial_frame  |`vctrs::partial_frame(a = 1)`    |prtl          |
-|Language objects            |function             |`function() NULL`                |fn            |
-|                            |symbol               |`quote(a)`                       |sym           |
-|                            |expression           |`parse(text = "a <- 1\nb<- 2")`  |expression    |
-|                            |quosures             |`rlang::quos(a = 1)`             |quos          |
+|Class                       |Data type     |Example                         |Column header |
+|:---------------------------|:-------------|:-------------------------------|:-------------|
+|Atomic                      |logical       |`TRUE`                          |lgl           |
+|                            |integer       |`1L`                            |int           |
+|                            |double        |`1.5`                           |dbl           |
+|                            |character     |`"A"`                           |chr           |
+|                            |complex       |`0+1i`                          |cpl           |
+|                            |raw           |`as.raw(1)`                     |raw           |
+|                            |list          |`list(1)`                       |list          |
+|                            |named list    |`list(a = 1)`                   |named list    |
+|Built-in objects            |factor        |`factor("A")`                   |fct           |
+|                            |ordered       |`ordered("a")`                  |ord           |
+|                            |Date          |`Sys.Date()`                    |date          |
+|                            |POSIXt        |`Sys.time()`                    |dttm          |
+|                            |difftime      |`vctrs::new_duration(1)`        |drtn          |
+|Objects from other packages |hms           |`hms::hms(1)`                   |time          |
+|                            |integer64     |`bit64::as.integer64(1e+10)`    |int64         |
+|                            |blob          |`blob::blob(raw(1))`            |blob          |
+|Data frames                 |data.frame    |`data.frame(a = 1)`             |df[,1]        |
+|                            |tbl_df        |`tibble(a = 1)`                 |tibble[,1]    |
+|Unchanged                   |AsIs          |`I(1L)`                         |I<int>        |
+|vctrs types                 |unspecified   |`vctrs::unspecified(1)`         |???           |
+|                            |vctrs_list_of |`vctrs::list_of(c(1L))`         |list<int>     |
+|                            |vctrs_vctr    |`vctrs::new_vctr(1L)`           |vctrs_vc      |
+|Language objects            |function      |`function() NULL`               |fn            |
+|                            |symbol        |`quote(a)`                      |sym           |
+|                            |expression    |`parse(text = "a <- 1\nb<- 2")` |expression    |
+|                            |quosures      |`rlang::quos(a = 1)`            |quos          |
 
 
 
