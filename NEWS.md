@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.0.9013
+
+## Chore
+
+- Set up Copilot instructions (#1681, #1682).
+
+- Remove deprecated `vctrs::partial_factor()` and `vctrs::partial_frame()` references (#1678, #1680).
+
+
 # tibble 3.3.0.9012
 
 ## Continuous integration
