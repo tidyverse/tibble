@@ -1,4 +1,5 @@
 <urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://tibble.tidyverse.org/dev/AGENTS.html</loc></url>
 <url><loc>https://tibble.tidyverse.org/dev/CODE_OF_CONDUCT.html</loc></url>
 <url><loc>https://tibble.tidyverse.org/dev/CONTRIBUTING.html</loc></url>
 <url><loc>https://tibble.tidyverse.org/dev/LICENSE-text.html</loc></url>
@@ -15,6 +16,7 @@
 <url><loc>https://tibble.tidyverse.org/dev/articles/wip/subassign.html</loc></url>
 <url><loc>https://tibble.tidyverse.org/dev/articles/wip/subset.html</loc></url>
 <url><loc>https://tibble.tidyverse.org/dev/authors.html</loc></url>
+<url><loc>https://tibble.tidyverse.org/dev/copilot-instructions.html</loc></url>
 <url><loc>https://tibble.tidyverse.org/dev/index.html</loc></url>
 <url><loc>https://tibble.tidyverse.org/dev/news/index.html</loc></url>
 <url><loc>https://tibble.tidyverse.org/dev/reference/add_column.html</loc></url>
