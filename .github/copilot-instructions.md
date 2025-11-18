@@ -6,7 +6,7 @@
 
 - Load for development: `pkgload::load_all()`
 - Run tests: `testthat::test_local(reporter = "check")`
-- Format code: `styler::style_pkg()`
+- Format code: `air format .`
 - Update documentation: `devtools::document()`
 
 Refer to `AGENTS.md` for more instructions.

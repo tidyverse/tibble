@@ -10,10 +10,10 @@ Tibbles are lazy and surly: they do less (don't change variable names or types, 
 
 ## Key Technologies
 
-- **Language**: R with C++ backend
+- **Language**: R with a few C functions
 - **Testing**: testthat framework
 - **Documentation**: roxygen2 with Markdown syntax
-- **Code Formatting**: styler (R formatting tool)
+- **Code Formatting**: air (R formatting tool)
 - **Build System**: R CMD, devtools
 
 ## Development Setup
@@ -22,7 +22,7 @@ Tibbles are lazy and surly: they do less (don't change variable names or types, 
 
 ```r
 # Install all development dependencies
-devtools::install_dev_deps()
+pak::pak()
 ```
 
 ### Install and run R
@@ -39,7 +39,7 @@ devtools::install_dev_deps()
 - Build package: `devtools::build()`
 - Check package: `devtools::check()`
 - Update `.Rd` documentation: `devtools::document()`
-- Format code: `styler::style_pkg()`
+- Format code: `air format .`
 
 ## Code Style and Documentation
 
