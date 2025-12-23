@@ -6,7 +6,7 @@
 
 - Remove deprecated `vctrs::partial_factor()` and `vctrs::partial_frame()` references (#1678, #1680).
 
-- Avoid use of `SET_OBJECT()` (#1671).
+- Avoid use of `SET_OBJECT()`, `ATTRIB()` and `SET_ATTRIB()` (#1671).
 
 - Spring Cleaning (@Layalchristine24, #1643, #1644).
 
