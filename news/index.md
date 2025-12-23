@@ -2,16 +2,7 @@
 
 ## tibble 3.3.1
 
-### Bug fixes
-
-- Avoid use of `SET_OBJECT()`
-  ([\#1671](https://github.com/tidyverse/tibble/issues/1671)).
-
 ### Chore
-
-- Set up Copilot instructions
-  ([\#1681](https://github.com/tidyverse/tibble/issues/1681),
-  [\#1682](https://github.com/tidyverse/tibble/issues/1682)).
 
 - Remove deprecated
   [`vctrs::partial_factor()`](https://vctrs.r-lib.org/reference/partial_factor.html)
@@ -20,111 +11,19 @@
   references ([\#1678](https://github.com/tidyverse/tibble/issues/1678),
   [\#1680](https://github.com/tidyverse/tibble/issues/1680)).
 
-- Auto-update from GitHub Actions.
+- Avoid use of `SET_OBJECT()`
+  ([\#1671](https://github.com/tidyverse/tibble/issues/1671)).
 
-  Run: <https://github.com/tidyverse/tibble/actions/runs/17451419215>
-
-  Run: <https://github.com/tidyverse/tibble/actions/runs/16661919871>
-
-- Cynkra’s Spring Cleaning
+- Spring Cleaning
   ([@Layalchristine24](https://github.com/Layalchristine24),
   [\#1643](https://github.com/tidyverse/tibble/issues/1643),
   [\#1644](https://github.com/tidyverse/tibble/issues/1644)).
 
-  Run: <https://github.com/tidyverse/tibble/actions/runs/15506522924>
-
 - Use Quarto-style formatting in vignettes.
-
-  Run: <https://github.com/tidyverse/tibble/actions/runs/15506365201>
-
-- Upkeep ([\#1641](https://github.com/tidyverse/tibble/issues/1641)).
-
-### Continuous integration
-
-- Install binaries from r-universe for dev workflow
-  ([\#1679](https://github.com/tidyverse/tibble/issues/1679)).
-
-- Rename ([\#1677](https://github.com/tidyverse/tibble/issues/1677)).
-
-- Implement review workflows ([@krlmlr](https://github.com/krlmlr),
-  [\#1675](https://github.com/tidyverse/tibble/issues/1675)).
-
-- Fix.
-
-- Use comment action.
-
-- Comment only.
-
-- Token.
-
-- Find PR.
-
-- Debug.
-
-- Fix data source.
-
-- Rename.
-
-- Get PR number correctly.
-
-- Need token.
-
-- Try again commenting from completion workflow.
-
-- Keep error.
-
-- Tweaks.
-
-- Syntax.
-
-- Use `pull_request_target`.
-
-- Checkout unconditionally to avoid removal of patch file.
-
-- Improve reviewdog.
-
-- Run reviewdog from separate workflow.
-
-- Use workflows for fledge
-  ([\#1676](https://github.com/tidyverse/tibble/issues/1676)).
-
-- Enable `clang-format`
-  ([\#1670](https://github.com/tidyverse/tibble/issues/1670)).
-
-- Sync ([\#1668](https://github.com/tidyverse/tibble/issues/1668)).
-
-- Use reviewdog for external PRs
-  ([\#1663](https://github.com/tidyverse/tibble/issues/1663)).
-
-- Cleanup and fix macOS
-  ([\#1661](https://github.com/tidyverse/tibble/issues/1661)).
-
-- Format with air, check detritus, better handling of `extra-packages`
-  ([\#1660](https://github.com/tidyverse/tibble/issues/1660)).
 
 ### Documentation
 
 - Posit as copyright holder.
-
-### Testing
-
-- Snapshot updates for R-CMD-check-dev ({“package”:“dplyr”})
-  ([\#1672](https://github.com/tidyverse/tibble/issues/1672)).
-
-- Snapshot updates for R-CMD-check-dev ({“package”:“vctrs”})
-  ([\#1666](https://github.com/tidyverse/tibble/issues/1666)).
-
-- Snapshot updates for R-CMD-check-dev ({“package”:“knitr”})
-  ([\#1626](https://github.com/tidyverse/tibble/issues/1626)).
-
-- Suppress [`message()`](https://rdrr.io/r/base/message.html) output in
-  some as_tibble tests
-  ([@MichaelChirico](https://github.com/MichaelChirico),
-  [\#1647](https://github.com/tidyverse/tibble/issues/1647)).
-
-- Snapshot updates for rcc-full
-  ({“os”:“ubuntu-22.04”,“r”:“devel”,“http-user-agent”:“release”})
-  ([\#1649](https://github.com/tidyverse/tibble/issues/1649)).
 
 ## tibble 3.3.0
 

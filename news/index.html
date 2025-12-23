@@ -59,69 +59,15 @@
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="3.3.1" id="tibble-331">tibble 3.3.1<a class="anchor" aria-label="anchor" href="#tibble-331"></a></h2>
 <div class="section level3">
-<h3 id="bug-fixes-3-3-1">Bug fixes<a class="anchor" aria-label="anchor" href="#bug-fixes-3-3-1"></a></h3>
-<ul><li>Avoid use of <code>SET_OBJECT()</code> (<a href="https://github.com/tidyverse/tibble/issues/1671" class="external-link">#1671</a>).</li>
-</ul></div>
-<div class="section level3">
 <h3 id="chore-3-3-1">Chore<a class="anchor" aria-label="anchor" href="#chore-3-3-1"></a></h3>
-<ul><li><p>Set up Copilot instructions (<a href="https://github.com/tidyverse/tibble/issues/1681" class="external-link">#1681</a>, <a href="https://github.com/tidyverse/tibble/issues/1682" class="external-link">#1682</a>).</p></li>
-<li><p>Remove deprecated <code><a href="https://vctrs.r-lib.org/reference/partial_factor.html" class="external-link">vctrs::partial_factor()</a></code> and <code><a href="https://vctrs.r-lib.org/reference/partial_frame.html" class="external-link">vctrs::partial_frame()</a></code> references (<a href="https://github.com/tidyverse/tibble/issues/1678" class="external-link">#1678</a>, <a href="https://github.com/tidyverse/tibble/issues/1680" class="external-link">#1680</a>).</p></li>
-<li>
-<p>Auto-update from GitHub Actions.</p>
-<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/17451419215" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/17451419215</a></p>
-<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/16661919871" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/16661919871</a></p>
-</li>
-<li>
-<p>Cynkra’s Spring Cleaning (<a href="https://github.com/Layalchristine24" class="external-link">@Layalchristine24</a>, <a href="https://github.com/tidyverse/tibble/issues/1643" class="external-link">#1643</a>, <a href="https://github.com/tidyverse/tibble/issues/1644" class="external-link">#1644</a>).</p>
-<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/15506522924" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/15506522924</a></p>
-</li>
-<li>
-<p>Use Quarto-style formatting in vignettes.</p>
-<p>Run: <a href="https://github.com/tidyverse/tibble/actions/runs/15506365201" class="external-link uri">https://github.com/tidyverse/tibble/actions/runs/15506365201</a></p>
-</li>
-<li><p>Upkeep (<a href="https://github.com/tidyverse/tibble/issues/1641" class="external-link">#1641</a>).</p></li>
-</ul></div>
-<div class="section level3">
-<h3 id="continuous-integration-3-3-1">Continuous integration<a class="anchor" aria-label="anchor" href="#continuous-integration-3-3-1"></a></h3>
-<ul><li><p>Install binaries from r-universe for dev workflow (<a href="https://github.com/tidyverse/tibble/issues/1679" class="external-link">#1679</a>).</p></li>
-<li><p>Rename (<a href="https://github.com/tidyverse/tibble/issues/1677" class="external-link">#1677</a>).</p></li>
-<li><p>Implement review workflows (<a href="https://github.com/krlmlr" class="external-link">@krlmlr</a>, <a href="https://github.com/tidyverse/tibble/issues/1675" class="external-link">#1675</a>).</p></li>
-<li><p>Fix.</p></li>
-<li><p>Use comment action.</p></li>
-<li><p>Comment only.</p></li>
-<li><p>Token.</p></li>
-<li><p>Find PR.</p></li>
-<li><p>Debug.</p></li>
-<li><p>Fix data source.</p></li>
-<li><p>Rename.</p></li>
-<li><p>Get PR number correctly.</p></li>
-<li><p>Need token.</p></li>
-<li><p>Try again commenting from completion workflow.</p></li>
-<li><p>Keep error.</p></li>
-<li><p>Tweaks.</p></li>
-<li><p>Syntax.</p></li>
-<li><p>Use <code>pull_request_target</code>.</p></li>
-<li><p>Checkout unconditionally to avoid removal of patch file.</p></li>
-<li><p>Improve reviewdog.</p></li>
-<li><p>Run reviewdog from separate workflow.</p></li>
-<li><p>Use workflows for fledge (<a href="https://github.com/tidyverse/tibble/issues/1676" class="external-link">#1676</a>).</p></li>
-<li><p>Enable <code>clang-format</code> (<a href="https://github.com/tidyverse/tibble/issues/1670" class="external-link">#1670</a>).</p></li>
-<li><p>Sync (<a href="https://github.com/tidyverse/tibble/issues/1668" class="external-link">#1668</a>).</p></li>
-<li><p>Use reviewdog for external PRs (<a href="https://github.com/tidyverse/tibble/issues/1663" class="external-link">#1663</a>).</p></li>
-<li><p>Cleanup and fix macOS (<a href="https://github.com/tidyverse/tibble/issues/1661" class="external-link">#1661</a>).</p></li>
-<li><p>Format with air, check detritus, better handling of <code>extra-packages</code> (<a href="https://github.com/tidyverse/tibble/issues/1660" class="external-link">#1660</a>).</p></li>
+<ul><li><p>Remove deprecated <code><a href="https://vctrs.r-lib.org/reference/partial_factor.html" class="external-link">vctrs::partial_factor()</a></code> and <code><a href="https://vctrs.r-lib.org/reference/partial_frame.html" class="external-link">vctrs::partial_frame()</a></code> references (<a href="https://github.com/tidyverse/tibble/issues/1678" class="external-link">#1678</a>, <a href="https://github.com/tidyverse/tibble/issues/1680" class="external-link">#1680</a>).</p></li>
+<li><p>Avoid use of <code>SET_OBJECT()</code> (<a href="https://github.com/tidyverse/tibble/issues/1671" class="external-link">#1671</a>).</p></li>
+<li><p>Spring Cleaning (<a href="https://github.com/Layalchristine24" class="external-link">@Layalchristine24</a>, <a href="https://github.com/tidyverse/tibble/issues/1643" class="external-link">#1643</a>, <a href="https://github.com/tidyverse/tibble/issues/1644" class="external-link">#1644</a>).</p></li>
+<li><p>Use Quarto-style formatting in vignettes.</p></li>
 </ul></div>
 <div class="section level3">
 <h3 id="documentation-3-3-1">Documentation<a class="anchor" aria-label="anchor" href="#documentation-3-3-1"></a></h3>
 <ul><li>Posit as copyright holder.</li>
-</ul></div>
-<div class="section level3">
-<h3 id="testing-3-3-1">Testing<a class="anchor" aria-label="anchor" href="#testing-3-3-1"></a></h3>
-<ul><li><p>Snapshot updates for R-CMD-check-dev ({“package”:“dplyr”}) (<a href="https://github.com/tidyverse/tibble/issues/1672" class="external-link">#1672</a>).</p></li>
-<li><p>Snapshot updates for R-CMD-check-dev ({“package”:“vctrs”}) (<a href="https://github.com/tidyverse/tibble/issues/1666" class="external-link">#1666</a>).</p></li>
-<li><p>Snapshot updates for R-CMD-check-dev ({“package”:“knitr”}) (<a href="https://github.com/tidyverse/tibble/issues/1626" class="external-link">#1626</a>).</p></li>
-<li><p>Suppress <code><a href="https://rdrr.io/r/base/message.html" class="external-link">message()</a></code> output in some as_tibble tests (<a href="https://github.com/MichaelChirico" class="external-link">@MichaelChirico</a>, <a href="https://github.com/tidyverse/tibble/issues/1647" class="external-link">#1647</a>).</p></li>
-<li><p>Snapshot updates for rcc-full ({“os”:“ubuntu-22.04”,“r”:“devel”,“http-user-agent”:“release”}) (<a href="https://github.com/tidyverse/tibble/issues/1649" class="external-link">#1649</a>).</p></li>
 </ul></div>
 </div>
     <div class="section level2">
