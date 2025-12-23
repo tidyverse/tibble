@@ -1,0 +1,4 @@
+# License
+
+    YEAR: 2013-2017
+    COPYRIGHT HOLDER: RStudio
