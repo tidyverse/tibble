@@ -1,177 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# tibble 3.3.0.9013
+# tibble 3.3.1
 
 ## Chore
-
-- Set up Copilot instructions (#1681, #1682).
 
 - Remove deprecated `vctrs::partial_factor()` and `vctrs::partial_frame()` references (#1678, #1680).
 
+- Avoid use of `SET_OBJECT()`, `ATTRIB()` and `SET_ATTRIB()` (#1671).
 
-# tibble 3.3.0.9012
-
-## Continuous integration
-
-- Install binaries from r-universe for dev workflow (#1679).
-
-
-# tibble 3.3.0.9011
-
-## Continuous integration
-
-- Rename (#1677).
-
-
-# tibble 3.3.0.9010
-
-## Continuous integration
-
-- Implement review workflows (@krlmlr, #1675).
-
-- Fix.
-
-- Use comment action.
-
-- Comment only.
-
-- Token.
-
-- Find PR.
-
-- Fix.
-
-- Debug.
-
-- Fix data source.
-
-- Rename.
-
-- Get PR number correctly.
-
-- Need token.
-
-- Try again commenting from completion workflow.
-
-- Keep error.
-
-- Tweaks.
-
-- Syntax.
-
-- Use `pull_request_target`.
-
-
-# tibble 3.3.0.9009
-
-## Continuous integration
-
-- Fix.
-
-- Checkout unconditionally to avoid removal of patch file.
-
-- Improve reviewdog.
-
-- Run reviewdog from separate workflow.
-
-- Use workflows for fledge (#1676).
-
-## Testing
-
-- Snapshot updates for R-CMD-check-dev ({"package":"dplyr"}) (#1672).
-
-
-# tibble 3.3.0.9008
-
-## Bug fixes
-
-- Avoid use of `SET_OBJECT()` (#1671).
-
-## Continuous integration
-
-- Enable `clang-format` (#1670).
-
-## Testing
-
-- Snapshot updates for R-CMD-check-dev ({"package":"vctrs"}) (#1666).
-
-- Snapshot updates for R-CMD-check-dev ({"package":"knitr"}) (#1626).
-
-
-# tibble 3.3.0.9007
-
-## Continuous integration
-
-- Sync (#1668).
-
-
-# tibble 3.3.0.9006
-
-## Continuous integration
-
-- Use reviewdog for external PRs (#1663).
-
-
-# tibble 3.3.0.9005
-
-## Chore
-
-- Auto-update from GitHub Actions.
-
-  Run: https://github.com/tidyverse/tibble/actions/runs/17451419215
-
-
-# tibble 3.3.0.9004
-
-## Continuous integration
-
-- Cleanup and fix macOS (#1661).
-
-
-# tibble 3.3.0.9003
-
-## Chore
-
-- Auto-update from GitHub Actions.
-
-  Run: https://github.com/tidyverse/tibble/actions/runs/16661919871
-
-## Continuous integration
-
-- Format with air, check detritus, better handling of `extra-packages` (#1660).
-
-
-# tibble 3.3.0.9002
-
-## Testing
-
-- Suppress `message()` output in some as_tibble tests (@MichaelChirico, #1647).
-
-- Snapshot updates for rcc-full ({"os":"ubuntu-22.04","r":"devel","http-user-agent":"release"}) (#1649).
-
-
-# tibble 3.3.0.9001
-
-## Chore
-
-- Cynkra's Spring Cleaning (@Layalchristine24, #1643, #1644).
-
-
-# tibble 3.3.0.9000
-
-## Chore
-
-- Auto-update from GitHub Actions.
-
-  Run: https://github.com/tidyverse/tibble/actions/runs/15506522924
+- Spring Cleaning (@Layalchristine24, #1643, #1644).
 
 - Use Quarto-style formatting in vignettes.
-
-- Auto-update from GitHub Actions.
-
-  Run: https://github.com/tidyverse/tibble/actions/runs/15506365201
-
-- Upkeep (#1641).
 
 ## Documentation
 
@@ -235,13 +74,13 @@
 - Deprecated functions and arguments where we could not detect usage by other CRAN packages (#1515):
 
     - `data_frame_()`, `lst_()`, `frame_data()`
-    
+
     - `as_tibble(validate = )`, `as_tibble(NULL)`, `new_tibble(subclass = )`
-    
+
     - `add_row()` and `add_column()` for non-data-frame input
-    
+
     - `add_column()` for input with non-unique names
-    
+
     - corner cases for `tbl[[x]]`
 
 - Breaking change: Remove `knit_print.trunc_mat()` method (#1516).
@@ -353,7 +192,7 @@
 
 ## Bug fixes
 
-- `tbl[row, col] <- rhs` treats an all-`NA` logical vector as a missing value both for existing data (#773) and for the right-hand side value (#868). This means that a column initialized with `NA` (of type `logical`) will change its type when a row is updated to a value of a different type. 
+- `tbl[row, col] <- rhs` treats an all-`NA` logical vector as a missing value both for existing data (#773) and for the right-hand side value (#868). This means that a column initialized with `NA` (of type `logical`) will change its type when a row is updated to a value of a different type.
 - `[[<-()` supports symbols (#893).
 
 ## Features

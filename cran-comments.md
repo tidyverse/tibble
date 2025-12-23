@@ -1,4 +1,4 @@
-tibble 3.3.0
+tibble 3.3.1
 
 ## Cran Repository Policy
 

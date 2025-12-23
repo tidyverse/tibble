@@ -25,10 +25,8 @@ static SEXP pairlist_shallow_copy(SEXP p) {
 }
 
 static void copy_attributes(SEXP out, SEXP data) {
-  SEXP att = ATTRIB(data);
-  if (!Rf_isNull(att)) {
-    SET_ATTRIB(out, pairlist_shallow_copy(ATTRIB(data)));
-  }
+  Rf_copyMostAttrib(data, out);
+
   // SET_OBJECT no longer available:
   if (Rf_isObject(data)) {
     Rf_setAttrib(out, R_ClassSymbol, Rf_getAttrib(data, R_ClassSymbol));
