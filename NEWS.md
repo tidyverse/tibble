@@ -1,6 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
-# tibble 3.3.0.9013
+# tibble 3.3.1
+
+## Bug fixes
+
+- Avoid use of `SET_OBJECT()` (#1671).
 
 ## Chore
 
@@ -8,24 +12,27 @@
 
 - Remove deprecated `vctrs::partial_factor()` and `vctrs::partial_frame()` references (#1678, #1680).
 
+- Auto-update from GitHub Actions.
 
-# tibble 3.3.0.9012
+  Run: https://github.com/tidyverse/tibble/actions/runs/17451419215
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/16661919871
+
+- Cynkra's Spring Cleaning (@Layalchristine24, #1643, #1644).
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/15506522924
+
+- Use Quarto-style formatting in vignettes.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/15506365201
+
+- Upkeep (#1641).
 
 ## Continuous integration
 
 - Install binaries from r-universe for dev workflow (#1679).
 
-
-# tibble 3.3.0.9011
-
-## Continuous integration
-
 - Rename (#1677).
-
-
-# tibble 3.3.0.9010
-
-## Continuous integration
 
 - Implement review workflows (@krlmlr, #1675).
 
@@ -38,8 +45,6 @@
 - Token.
 
 - Find PR.
-
-- Fix.
 
 - Debug.
 
@@ -61,13 +66,6 @@
 
 - Use `pull_request_target`.
 
-
-# tibble 3.3.0.9009
-
-## Continuous integration
-
-- Fix.
-
 - Checkout unconditionally to avoid removal of patch file.
 
 - Improve reviewdog.
@@ -76,106 +74,31 @@
 
 - Use workflows for fledge (#1676).
 
+- Enable `clang-format` (#1670).
+
+- Sync (#1668).
+
+- Use reviewdog for external PRs (#1663).
+
+- Cleanup and fix macOS (#1661).
+
+- Format with air, check detritus, better handling of `extra-packages` (#1660).
+
+## Documentation
+
+- Posit as copyright holder.
+
 ## Testing
 
 - Snapshot updates for R-CMD-check-dev ({"package":"dplyr"}) (#1672).
-
-
-# tibble 3.3.0.9008
-
-## Bug fixes
-
-- Avoid use of `SET_OBJECT()` (#1671).
-
-## Continuous integration
-
-- Enable `clang-format` (#1670).
-
-## Testing
 
 - Snapshot updates for R-CMD-check-dev ({"package":"vctrs"}) (#1666).
 
 - Snapshot updates for R-CMD-check-dev ({"package":"knitr"}) (#1626).
 
-
-# tibble 3.3.0.9007
-
-## Continuous integration
-
-- Sync (#1668).
-
-
-# tibble 3.3.0.9006
-
-## Continuous integration
-
-- Use reviewdog for external PRs (#1663).
-
-
-# tibble 3.3.0.9005
-
-## Chore
-
-- Auto-update from GitHub Actions.
-
-  Run: https://github.com/tidyverse/tibble/actions/runs/17451419215
-
-
-# tibble 3.3.0.9004
-
-## Continuous integration
-
-- Cleanup and fix macOS (#1661).
-
-
-# tibble 3.3.0.9003
-
-## Chore
-
-- Auto-update from GitHub Actions.
-
-  Run: https://github.com/tidyverse/tibble/actions/runs/16661919871
-
-## Continuous integration
-
-- Format with air, check detritus, better handling of `extra-packages` (#1660).
-
-
-# tibble 3.3.0.9002
-
-## Testing
-
 - Suppress `message()` output in some as_tibble tests (@MichaelChirico, #1647).
 
 - Snapshot updates for rcc-full ({"os":"ubuntu-22.04","r":"devel","http-user-agent":"release"}) (#1649).
-
-
-# tibble 3.3.0.9001
-
-## Chore
-
-- Cynkra's Spring Cleaning (@Layalchristine24, #1643, #1644).
-
-
-# tibble 3.3.0.9000
-
-## Chore
-
-- Auto-update from GitHub Actions.
-
-  Run: https://github.com/tidyverse/tibble/actions/runs/15506522924
-
-- Use Quarto-style formatting in vignettes.
-
-- Auto-update from GitHub Actions.
-
-  Run: https://github.com/tidyverse/tibble/actions/runs/15506365201
-
-- Upkeep (#1641).
-
-## Documentation
-
-- Posit as copyright holder.
 
 
 # tibble 3.3.0
