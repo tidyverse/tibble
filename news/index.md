@@ -11,7 +11,7 @@
   references ([\#1678](https://github.com/tidyverse/tibble/issues/1678),
   [\#1680](https://github.com/tidyverse/tibble/issues/1680)).
 
-- Avoid use of `SET_OBJECT()`
+- Avoid use of `SET_OBJECT()`, `ATTRIB()` and `SET_ATTRIB()`
   ([\#1671](https://github.com/tidyverse/tibble/issues/1671)).
 
 - Spring Cleaning
