@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.1.9000
+
+## fledge
+
+- CRAN release v3.3.1 (#1687).
+
+
 # tibble 3.3.1
 
 ## Chore
