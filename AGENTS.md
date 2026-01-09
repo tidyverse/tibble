@@ -81,9 +81,8 @@ pak::pak()
   for clarity
 - Maintain consistent indentation (2 spaces) and spacing patterns
 - Use meaningful variable names that reflect context
-- Run
-  [`styler::style_pkg()`](https://styler.r-lib.org/reference/style_pkg.html)
-  before committing changes to ensure consistent formatting
+- Run `styler::style_pkg()` before committing changes to ensure
+  consistent formatting
 - Do not restyle code that has nothing to do with your changes
 - Never change deprecated functions
 
