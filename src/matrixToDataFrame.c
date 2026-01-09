@@ -79,14 +79,11 @@ static void get_dim(SEXP x, R_xlen_t* nrowptr, R_xlen_t* ncolptr) {
 }
 
 static SEXP get_rownames(SEXP x, R_xlen_t nrow) {
-  int nprot = 0;
-
   SEXP rownames = R_NilValue;
 
   // check for row names, use them if present
   SEXP dimnames;
   PROTECT(dimnames = Rf_getAttrib(x, R_DimNamesSymbol));
-  nprot++;
   if (TYPEOF(dimnames) == VECSXP && XLENGTH(dimnames) == 2) {
     rownames = VECTOR_ELT(dimnames, 0);
     if (TYPEOF(rownames) != STRSXP) {
@@ -96,20 +93,10 @@ static SEXP get_rownames(SEXP x, R_xlen_t nrow) {
 
   // otherwise, allocate new row names attribute
   if (Rf_isNull(rownames)) {
-    if (nrow <= INT_MAX) {
-      PROTECT(rownames = Rf_allocVector(INTSXP, 2));
-      nprot++;
-      INTEGER(rownames)[0] = NA_INTEGER;
-      INTEGER(rownames)[1] = -(int)nrow;
-    } else {
-      PROTECT(rownames = Rf_allocVector(REALSXP, 2));
-      nprot++;
-      REAL(rownames)[0] = NA_REAL;
-      REAL(rownames)[1] = -(double)nrow;
-    }
+    rownames = tibble_make_rownames(nrow);
   }
 
-  UNPROTECT(nprot);
+  UNPROTECT(1);
   return rownames;
 }
 
