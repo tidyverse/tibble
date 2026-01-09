@@ -133,8 +133,12 @@ jobs:
         shell: bash
 
       - id: versions-matrix
-        # Only run for pull requests if the base repo is different from the head repo, not for workflow_dispatch if not requested, always run for other events
-        if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository) && (github.event_name != 'workflow_dispatch' || inputs.versions-matrix)
+        # Only run for:
+        # - pull requests if the base repo is different from the head repo and the branch name does not start with "cran-"
+        # Do not run for:
+        # - workflow_dispatch if not requested
+        # Always run for other events.
+        if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository || startsWith(github.head_ref, 'cran-')) && (github.event_name != 'workflow_dispatch' || inputs.versions-matrix)
         uses: ./.github/workflows/versions-matrix
 
       - id: dep-suggests-matrix
@@ -285,7 +289,7 @@ jobs:
 
     runs-on: ${{ matrix.os }}
 
-    if: ${{ needs.rcc-smoke.outputs.versions-matrix != '' && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.run-rcc-full)) }}
+    if: ${{ needs.rcc-smoke.outputs.versions-matrix != '' }}
 
     name: 'rcc: ${{ matrix.os }} (${{ matrix.r }}) ${{ matrix.desc }}'
 
