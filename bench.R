@@ -1,4 +1,5 @@
-cpp11::cpp_source(code = '
+cpp11::cpp_source(
+  code = '
 #include <cpp11/R.hpp>
 #include <Rinternals.h>
 

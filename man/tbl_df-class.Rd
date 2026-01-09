@@ -9,7 +9,7 @@ The \code{tbl_df} class is a subclass of \code{\link[base:data.frame]{data.frame
 created in order to have different default behaviour. The colloquial term
 "tibble" refers to a data frame that has the \code{tbl_df} class. Tibble is the
 central data structure for the set of packages known as the
-\href{https://tidyverse.org/packages/}{tidyverse}, including
+\href{https://www.tidyverse.org/packages/}{tidyverse}, including
 \href{https://dplyr.tidyverse.org/}{dplyr},
 \href{https://ggplot2.tidyverse.org/}{ggplot2},
 \href{https://tidyr.tidyverse.org/}{tidyr}, and
