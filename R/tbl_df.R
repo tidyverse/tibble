@@ -8,7 +8,7 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #' created in order to have different default behaviour. The colloquial term
 #' "tibble" refers to a data frame that has the `tbl_df` class. Tibble is the
 #' central data structure for the set of packages known as the
-#' [tidyverse](https://www.tidyverse.org/packages/), including
+#' [tidyverse](https://tidyverse.org/packages/), including
 #' [dplyr](https://dplyr.tidyverse.org/),
 #' [ggplot2](https://ggplot2.tidyverse.org/),
 #' [tidyr](https://tidyr.tidyverse.org/), and
