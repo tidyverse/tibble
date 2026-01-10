@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.3.0.9012</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.3.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,7 +90,7 @@
       <img src="../logo.svg" class="logo" alt=""><h1>Invariants: Comparing behavior with data frames</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/main/vignettes/invariants.Rmd" class="external-link"><code>vignettes/invariants.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/cran-3.3.1/vignettes/invariants.Rmd" class="external-link"><code>vignettes/invariants.Rmd</code></a></small>
       <div class="d-none name"><code>invariants.Rmd</code></div>
     </div>
 
@@ -297,7 +297,8 @@ what’s really executed, further examples omit this output.</p>
 <td>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"n"</span>, <span class="st">"c"</span><span class="op">)</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in .subset2(x, i, exact = exact): subscript out of bounds</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `.subset2()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> subscript out of bounds</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
@@ -325,7 +326,8 @@ what’s really executed, further examples omit this output.</p>
 <td>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[[</span><span class="va">mean</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in .subset2(x, i, exact = exact): invalid subscript type 'closure'</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `.subset2()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> invalid subscript type 'closure'</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
@@ -385,7 +387,8 @@ non-integers throw an error:</p>
 <td>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[[</span><span class="op">-</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in .subset2(x, i, exact = exact): invalid negative subscript in get1index &lt;real&gt;</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `.subset2()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> invalid negative subscript in get1index &lt;real&gt;</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
@@ -399,7 +402,8 @@ non-integers throw an error:</p>
 <td>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[[</span><span class="fl">4</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in .subset2(x, i, exact = exact): subscript out of bounds</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `.subset2()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> subscript out of bounds</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
@@ -752,7 +756,8 @@ numbers.</p>
 <td>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="va">mean</span>, <span class="op">]</span></span>
-<span><span class="co">#&gt; Error in xj[i]: invalid subscript type 'closure'</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `xj[i]`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> invalid subscript type 'closure'</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
@@ -766,7 +771,8 @@ numbers.</p>
 <td>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">)</span>, <span class="op">]</span></span>
-<span><span class="co">#&gt; Error in xj[i]: invalid subscript type 'list'</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `xj[i]`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> invalid subscript type 'list'</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
@@ -967,7 +973,8 @@ works for list, data frame, and matrix columns.</p>
 <td>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df2</span><span class="op">(</span><span class="va">df2</span><span class="op">[[</span><span class="st">"tb"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span><span class="fl">1</span>, <span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in `[[&lt;-.data.frame`(`*tmp*`, "tb", value = structure(list(n = 1L, : replacement has 1 row, data has 4</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[[&lt;-.data.frame`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> replacement has 1 row, data has 4</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb70"><pre class="downlit sourceCode r">
@@ -986,7 +993,8 @@ works for list, data frame, and matrix columns.</p>
 <td>
 <div class="sourceCode" id="cb71"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df2</span><span class="op">(</span><span class="va">df2</span><span class="op">[[</span><span class="st">"m"</span><span class="op">]</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">df2</span><span class="op">[[</span><span class="st">"m"</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>, , drop <span class="op">=</span> <span class="cn">FALSE</span><span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in `[[&lt;-.data.frame`(`*tmp*`, "m", value = structure(c(1, 0, 0, : replacement has 1 row, data has 4</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[[&lt;-.data.frame`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> replacement has 1 row, data has 4</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb72"><pre class="downlit sourceCode r">
@@ -1260,7 +1268,8 @@ length as <code>j</code>.</p>
 <td>
 <div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">1</span><span class="op">)</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in `[&lt;-.data.frame`(`*tmp*`, c(1, 1), value = list(1, 2)): duplicate subscripts for columns</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[&lt;-.data.frame`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> duplicate subscripts for columns</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb90"><pre class="downlit sourceCode r">
@@ -1351,7 +1360,8 @@ that order of precedence).</p>
 <td>
 <div class="sourceCode" id="cb96"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">5</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">4</span><span class="op">:</span><span class="fl">1</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in `[&lt;-.data.frame`(`*tmp*`, 5, value = list(4:1)): new columns would leave holes after existing columns</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[&lt;-.data.frame`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> new columns would leave holes after existing columns</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb97"><pre class="downlit sourceCode r">
@@ -1671,7 +1681,8 @@ error.</p>
 <td>
 <div class="sourceCode" id="cb119"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in x[[jj]][iseq] &lt;- vjj: replacement has length zero</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `x[[jj]][iseq] &lt;- vjj`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> replacement has length zero</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb120"><pre class="downlit sourceCode r">
@@ -1698,7 +1709,8 @@ and <code><a href="https://vctrs.r-lib.org/reference/vec_proxy.html" class="exte
 <td>
 <div class="sourceCode" id="cb121"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="va">mean</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in rep(value, length.out = n): attempt to replicate an object of type 'closure'</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `rep()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> attempt to replicate an object of type 'closure'</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb122"><pre class="downlit sourceCode r">
@@ -1737,7 +1749,8 @@ and <code><a href="https://vctrs.r-lib.org/reference/vec_proxy.html" class="exte
 <span><span class="co">#&gt; c(`(Intercept)` = 37.285126167342,</span></span>
 <span><span class="co">#&gt; : replacement element 7 has 5 rows</span></span>
 <span><span class="co">#&gt; to replace 4 rows</span></span>
-<span><span class="co">#&gt; Error in `[&lt;-.data.frame`(`*tmp*`, 1, value = structure(list(coefficients = c(`(Intercept)` = 37.285126167342, : replacement element 10 has 3 rows, need 4</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[&lt;-.data.frame`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> replacement element 10 has 3 rows, need 4</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb124"><pre class="downlit sourceCode r">
@@ -1828,7 +1841,8 @@ subassignment.&lt;/p&gt;"><sup>7</sup></a></p>
 <td>
 <div class="sourceCode" id="cb129"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">4</span>, <span class="op">]</span> <span class="op">&lt;-</span> <span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in `[&lt;-.data.frame`(`*tmp*`, 2:4, , value = structure(list(n = c(1L, : replacement element 1 has 2 rows, need 3</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[&lt;-.data.frame`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> replacement element 1 has 2 rows, need 3</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb130"><pre class="downlit sourceCode r">
@@ -2219,7 +2233,8 @@ rows with <code>NA</code>.</p>
 <td>
 <div class="sourceCode" id="cb158"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">with_df</span><span class="op">(</span><span class="va">df</span><span class="op">[</span><span class="fl">2</span><span class="op">:</span><span class="fl">3</span>, <span class="st">"n"</span><span class="op">]</span> <span class="op">&lt;-</span> <span class="cn">NULL</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Error in x[[jj]][iseq] &lt;- vjj: replacement has length zero</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `x[[jj]][iseq] &lt;- vjj`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> replacement has length zero</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb159"><pre class="downlit sourceCode r">

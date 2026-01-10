@@ -1,175 +1,32 @@
 # Changelog
 
-## tibble 3.3.0.9012
+## tibble 3.3.1.9000
 
-### Continuous integration
+### fledge
 
-- Install binaries from r-universe for dev workflow
-  ([\#1679](https://github.com/tidyverse/tibble/issues/1679)).
+- CRAN release v3.3.1
+  ([\#1687](https://github.com/tidyverse/tibble/issues/1687)).
 
-## tibble 3.3.0.9011
+## tibble 3.3.1
 
-### Continuous integration
+### Chore
 
-- Rename ([\#1677](https://github.com/tidyverse/tibble/issues/1677)).
+- Remove deprecated
+  [`vctrs::partial_factor()`](https://vctrs.r-lib.org/reference/partial_factor.html)
+  and
+  [`vctrs::partial_frame()`](https://vctrs.r-lib.org/reference/partial_frame.html)
+  references ([\#1678](https://github.com/tidyverse/tibble/issues/1678),
+  [\#1680](https://github.com/tidyverse/tibble/issues/1680)).
 
-## tibble 3.3.0.9010
-
-### Continuous integration
-
-- Implement review workflows ([@krlmlr](https://github.com/krlmlr),
-  [\#1675](https://github.com/tidyverse/tibble/issues/1675)).
-
-- Fix.
-
-- Use comment action.
-
-- Comment only.
-
-- Token.
-
-- Find PR.
-
-- Fix.
-
-- Debug.
-
-- Fix data source.
-
-- Rename.
-
-- Get PR number correctly.
-
-- Need token.
-
-- Try again commenting from completion workflow.
-
-- Keep error.
-
-- Tweaks.
-
-- Syntax.
-
-- Use `pull_request_target`.
-
-## tibble 3.3.0.9009
-
-### Continuous integration
-
-- Fix.
-
-- Checkout unconditionally to avoid removal of patch file.
-
-- Improve reviewdog.
-
-- Run reviewdog from separate workflow.
-
-- Use workflows for fledge
-  ([\#1676](https://github.com/tidyverse/tibble/issues/1676)).
-
-### Testing
-
-- Snapshot updates for R-CMD-check-dev ({“package”:“dplyr”})
-  ([\#1672](https://github.com/tidyverse/tibble/issues/1672)).
-
-## tibble 3.3.0.9008
-
-### Bug fixes
-
-- Avoid use of `SET_OBJECT()`
+- Avoid use of `SET_OBJECT()`, `ATTRIB()` and `SET_ATTRIB()`
   ([\#1671](https://github.com/tidyverse/tibble/issues/1671)).
 
-### Continuous integration
-
-- Enable `clang-format`
-  ([\#1670](https://github.com/tidyverse/tibble/issues/1670)).
-
-### Testing
-
-- Snapshot updates for R-CMD-check-dev ({“package”:“vctrs”})
-  ([\#1666](https://github.com/tidyverse/tibble/issues/1666)).
-
-- Snapshot updates for R-CMD-check-dev ({“package”:“knitr”})
-  ([\#1626](https://github.com/tidyverse/tibble/issues/1626)).
-
-## tibble 3.3.0.9007
-
-### Continuous integration
-
-- Sync ([\#1668](https://github.com/tidyverse/tibble/issues/1668)).
-
-## tibble 3.3.0.9006
-
-### Continuous integration
-
-- Use reviewdog for external PRs
-  ([\#1663](https://github.com/tidyverse/tibble/issues/1663)).
-
-## tibble 3.3.0.9005
-
-### Chore
-
-- Auto-update from GitHub Actions.
-
-  Run: <https://github.com/tidyverse/tibble/actions/runs/17451419215>
-
-## tibble 3.3.0.9004
-
-### Continuous integration
-
-- Cleanup and fix macOS
-  ([\#1661](https://github.com/tidyverse/tibble/issues/1661)).
-
-## tibble 3.3.0.9003
-
-### Chore
-
-- Auto-update from GitHub Actions.
-
-  Run: <https://github.com/tidyverse/tibble/actions/runs/16661919871>
-
-### Continuous integration
-
-- Format with air, check detritus, better handling of `extra-packages`
-  ([\#1660](https://github.com/tidyverse/tibble/issues/1660)).
-
-## tibble 3.3.0.9002
-
-### Testing
-
-- Suppress [`message()`](https://rdrr.io/r/base/message.html) output in
-  some as_tibble tests
-  ([@MichaelChirico](https://github.com/MichaelChirico),
-  [\#1647](https://github.com/tidyverse/tibble/issues/1647)).
-
-- Snapshot updates for rcc-full
-  ({“os”:“ubuntu-22.04”,“r”:“devel”,“http-user-agent”:“release”})
-  ([\#1649](https://github.com/tidyverse/tibble/issues/1649)).
-
-## tibble 3.3.0.9001
-
-### Chore
-
-- Cynkra’s Spring Cleaning
+- Spring Cleaning
   ([@Layalchristine24](https://github.com/Layalchristine24),
   [\#1643](https://github.com/tidyverse/tibble/issues/1643),
   [\#1644](https://github.com/tidyverse/tibble/issues/1644)).
 
-## tibble 3.3.0.9000
-
-### Chore
-
-- Auto-update from GitHub Actions.
-
-  Run: <https://github.com/tidyverse/tibble/actions/runs/15506522924>
-
 - Use Quarto-style formatting in vignettes.
-
-- Auto-update from GitHub Actions.
-
-  Run: <https://github.com/tidyverse/tibble/actions/runs/15506365201>
-
-- Upkeep ([\#1641](https://github.com/tidyverse/tibble/issues/1641)).
 
 ### Documentation
 

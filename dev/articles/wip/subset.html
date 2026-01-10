@@ -29,7 +29,7 @@
 
     <a class="navbar-brand me-2" href="../../index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.3.0.9012</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.3.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,7 +90,7 @@
       <img src="../../logo.svg" class="logo" alt=""><h1>Subsetting</h1>
             
       
-      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/main/vignettes/wip/subset.Rmd" class="external-link"><code>vignettes/wip/subset.Rmd</code></a></small>
+      <small class="dont-index">Source: <a href="https://github.com/tidyverse/tibble/blob/cran-3.3.1/vignettes/wip/subset.Rmd" class="external-link"><code>vignettes/wip/subset.Rmd</code></a></small>
       <div class="d-none name"><code>subset.Rmd</code></div>
     </div>
 
@@ -398,7 +398,8 @@ unpacked by tibbles, the <code>[[</code> only unpacks columns.</p>
 <td>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[[</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="st">"cd"</span><span class="op">]</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in col[[i, exact = exact]]: subscript out of bounds</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `col[[i, exact = exact]]`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> subscript out of bounds</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
@@ -559,7 +560,8 @@ tibbles.</p>
 <td>
 <div class="sourceCode" id="cb38"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fl">4</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in `[.data.frame`(df, 4): undefined columns selected</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[.data.frame`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> undefined columns selected</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb39"><pre class="downlit sourceCode r">
@@ -574,7 +576,8 @@ tibbles.</p>
 <td>
 <div class="sourceCode" id="cb40"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="cn">NA</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in `[.data.frame`(df, NA): undefined columns selected</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[.data.frame`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> undefined columns selected</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb41"><pre class="downlit sourceCode r">
@@ -589,7 +592,8 @@ tibbles.</p>
 <td>
 <div class="sourceCode" id="cb42"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="cn">NA_character_</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in `[.data.frame`(df, NA_character_): undefined columns selected</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[.data.frame`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> undefined columns selected</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb43"><pre class="downlit sourceCode r">
@@ -604,7 +608,8 @@ tibbles.</p>
 <td>
 <div class="sourceCode" id="cb44"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="cn">NA_integer_</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in `[.data.frame`(df, NA_integer_): undefined columns selected</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[.data.frame`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> undefined columns selected</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb45"><pre class="downlit sourceCode r">
@@ -692,7 +697,8 @@ omitting the row index:</p>
 <td>
 <div class="sourceCode" id="cb53"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="fl">4</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in `[.data.frame`(df, , 4): undefined columns selected</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[.data.frame`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> undefined columns selected</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb54"><pre class="downlit sourceCode r">
@@ -707,7 +713,8 @@ omitting the row index:</p>
 <td>
 <div class="sourceCode" id="cb55"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="cn">NA</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in `[.data.frame`(df, , NA): undefined columns selected</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[.data.frame`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> undefined columns selected</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb56"><pre class="downlit sourceCode r">
@@ -722,7 +729,8 @@ omitting the row index:</p>
 <td>
 <div class="sourceCode" id="cb57"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="cn">NA_character_</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in `[.data.frame`(df, , NA_character_): undefined columns selected</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[.data.frame`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> undefined columns selected</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb58"><pre class="downlit sourceCode r">
@@ -737,7 +745,8 @@ omitting the row index:</p>
 <td>
 <div class="sourceCode" id="cb59"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="cn">NA_integer_</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in `[.data.frame`(df, , NA_integer_): undefined columns selected</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[.data.frame`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> undefined columns selected</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb60"><pre class="downlit sourceCode r">
@@ -811,7 +820,8 @@ tibbles are a tad stricter:</p>
 <td>
 <div class="sourceCode" id="cb65"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in `[.data.frame`(df, 1:4): undefined columns selected</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[.data.frame`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> undefined columns selected</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb66"><pre class="downlit sourceCode r">
@@ -841,7 +851,8 @@ tibbles are a tad stricter:</p>
 <td>
 <div class="sourceCode" id="cb68"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in `[.default`(df, -1:2): only 0's may be mixed with negative subscripts</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[.default`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> only 0's may be mixed with negative subscripts</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb69"><pre class="downlit sourceCode r">
@@ -967,7 +978,8 @@ tibbles are a tad stricter:</p>
 <td>
 <div class="sourceCode" id="cb79"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in `[.data.frame`(df, c(FALSE, TRUE, FALSE, TRUE)): undefined columns selected</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[.data.frame`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> undefined columns selected</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb80"><pre class="downlit sourceCode r">
@@ -1039,7 +1051,8 @@ omitting the row index:</p>
 <td>
 <div class="sourceCode" id="cb85"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">4</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in `[.data.frame`(df, , 1:4): undefined columns selected</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[.data.frame`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> undefined columns selected</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb86"><pre class="downlit sourceCode r">
@@ -1069,7 +1082,8 @@ omitting the row index:</p>
 <td>
 <div class="sourceCode" id="cb88"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in .subset(x, j): only 0's may be mixed with negative subscripts</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `.subset()`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> only 0's may be mixed with negative subscripts</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb89"><pre class="downlit sourceCode r">
@@ -1207,7 +1221,8 @@ omitting the row index:</p>
 <td>
 <div class="sourceCode" id="cb101"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="cn">FALSE</span>, <span class="cn">TRUE</span>, <span class="cn">FALSE</span>, <span class="cn">TRUE</span><span class="op">)</span><span class="op">]</span></span>
-<span><span class="co">#&gt; Error in `[.data.frame`(df, , c(FALSE, TRUE, FALSE, TRUE)): undefined columns selected</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `[.data.frame`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> undefined columns selected</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb102"><pre class="downlit sourceCode r">
@@ -1337,7 +1352,8 @@ returns a list.</p>
 <td>
 <div class="sourceCode" id="cb112"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">df</span><span class="op">[</span><span class="op">-</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span>, <span class="op">]</span></span>
-<span><span class="co">#&gt; Error in xj[i]: only 0's may be mixed with negative subscripts</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BBBB00; font-weight: bold;">Error</span><span style="font-weight: bold;"> in `xj[i]`:</span></span></span>
+<span><span class="co">#&gt; <span style="color: #BBBB00;">!</span> only 0's may be mixed with negative subscripts</span></span></code></pre></div>
 </td>
 <td>
 <div class="sourceCode" id="cb113"><pre class="downlit sourceCode r">
