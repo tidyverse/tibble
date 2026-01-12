@@ -1,9 +1,12 @@
 # Revdeps
 
-## New problems (2)
+## Failed to check (5)
 
-|package        |version |error  |warning |note |
-|:--------------|:-------|:------|:-------|:----|
-|[opendataformat](problems.md#opendataformat)|2.2.0   |__+1__ |        |1    |
-|[oppr](problems.md#oppr)|1.0.4   |__+1__ |        |3    |
+|package    |version |error |warning |note |
+|:----------|:-------|:-----|:-------|:----|
+|ctsem      |3.10.4  |1     |        |     |
+|galvanizer |0.5.3   |1     |        |     |
+|loon.tourr |?       |      |        |     |
+|rshift     |3.1.2   |1     |        |     |
+|tidyjson   |0.3.2   |1     |        |     |
 

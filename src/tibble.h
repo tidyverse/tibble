@@ -9,5 +9,6 @@ SEXP tibble_string_to_indices(SEXP x);
 SEXP tibble_need_coerce(SEXP x);
 SEXP tibble_update_attrs(SEXP x, SEXP dots);
 SEXP tibble_restore_impl(SEXP xo, SEXP x);
+SEXP tibble_make_rownames(R_xlen_t nrow);
 
 #endif /* TIBBLE_H */

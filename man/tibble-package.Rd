@@ -19,7 +19,7 @@ class, developed in response to lessons learned over many years of data
 analysis with data frames.
 
 Tibble is the central data structure for the set of packages known as the
-\href{https://www.tidyverse.org/packages/}{tidyverse}, including
+\href{https://tidyverse.org/packages/}{tidyverse}, including
 \href{https://dplyr.tidyverse.org/}{dplyr},
 \href{https://ggplot2.tidyverse.org/}{ggplot2},
 \href{https://tidyr.tidyverse.org/}{tidyr}, and
