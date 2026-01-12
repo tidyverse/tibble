@@ -9,6 +9,8 @@
 
 ## tibble 3.3.1
 
+CRAN release: 2026-01-11
+
 ### Chore
 
 - Remove deprecated

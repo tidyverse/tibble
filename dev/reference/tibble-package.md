@@ -18,7 +18,7 @@ in response to lessons learned over many years of data analysis with
 data frames.
 
 Tibble is the central data structure for the set of packages known as
-the [tidyverse](https://www.tidyverse.org/packages/), including
+the [tidyverse](https://tidyverse.org/packages/), including
 [dplyr](https://dplyr.tidyverse.org/),
 [ggplot2](https://ggplot2.tidyverse.org/),
 [tidyr](https://tidyr.tidyverse.org/), and
