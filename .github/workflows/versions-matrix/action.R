@@ -22,9 +22,9 @@ r_versions <- c("devel", as.character(r_release))
 
 macos <- data.frame(os = "macos-latest", r = r_versions[2:3])
 windows <- data.frame(os = "windows-latest", r = r_versions[1:3])
-linux_devel <- data.frame(os = "ubuntu-22.04", r = r_versions[1], `http-user-agent` = "release", check.names = FALSE)
-linux <- data.frame(os = "ubuntu-22.04", r = r_versions[-1])
-covr <- data.frame(os = "ubuntu-22.04", r = r_versions[2], covr = "true", desc = "with covr")
+linux_devel <- data.frame(os = "ubuntu-24.04", r = r_versions[1], `http-user-agent` = "release", check.names = FALSE)
+linux <- data.frame(os = "ubuntu-24.04", r = r_versions[-1])
+covr <- data.frame(os = "ubuntu-24.04", r = r_versions[2], covr = "true", desc = "with covr")
 
 include_list <- list(macos, windows, linux_devel, linux, covr)
 
