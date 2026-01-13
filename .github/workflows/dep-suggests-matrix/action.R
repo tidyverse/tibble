@@ -15,7 +15,7 @@ get_deps <- function() {
 
   # Too big to fail, or can't be avoided:
   off_limits <- c("testthat", "rmarkdown", "rcmdcheck", deps_df_hard, deps_df_base)
-  off_limits_dep <- unlist(tools::package_dependencies(off_limits, recursive = TRUE, which = "strong"))
+  off_limits_dep <- unlist(tools::package_dependencies(off_limits, db = installed.packages(), recursive = TRUE, which = "strong"))
   setdiff(packages, c(off_limits, off_limits_dep))
 }
 

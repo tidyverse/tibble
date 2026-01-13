@@ -349,7 +349,7 @@ jobs:
     needs:
       - rcc-smoke
 
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     if: ${{ needs.rcc-smoke.outputs.dep-suggests-matrix != '' && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.run-rcc-suggests)) }}
 
