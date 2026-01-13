@@ -1,5 +1,10 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.1.9001
+
+- Merge branch 'cran-3.3.1'.
+
+
 # tibble 3.3.1.9000
 
 ## fledge
