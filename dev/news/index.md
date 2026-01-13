@@ -1,5 +1,9 @@
 # Changelog
 
+## tibble 3.3.1.9001
+
+- Merge branch ‘cran-3.3.1’.
+
 ## tibble 3.3.1.9000
 
 ### fledge
