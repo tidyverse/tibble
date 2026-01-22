@@ -1,5 +1,14 @@
 # Changelog
 
+## tibble 3.3.1.9002
+
+### Continuous integration
+
+- Fix comment
+  ([\#1690](https://github.com/tidyverse/tibble/issues/1690)).
+
+- Tweaks ([\#1689](https://github.com/tidyverse/tibble/issues/1689)).
+
 ## tibble 3.3.1.9001
 
 - Merge branch ‘cran-3.3.1’.
@@ -17,11 +26,9 @@ CRAN release: 2026-01-11
 
 ### Chore
 
-- Remove deprecated
-  [`vctrs::partial_factor()`](https://vctrs.r-lib.org/reference/partial_factor.html)
-  and
-  [`vctrs::partial_frame()`](https://vctrs.r-lib.org/reference/partial_frame.html)
-  references ([\#1678](https://github.com/tidyverse/tibble/issues/1678),
+- Remove deprecated `vctrs::partial_factor()` and
+  `vctrs::partial_frame()` references
+  ([\#1678](https://github.com/tidyverse/tibble/issues/1678),
   [\#1680](https://github.com/tidyverse/tibble/issues/1680)).
 
 - Avoid use of `SET_OBJECT()`, `ATTRIB()` and `SET_ATTRIB()`
@@ -1756,7 +1763,7 @@ Follow-up release.
 - [`as_tibble.data.frame()`](https://tibble.tidyverse.org/dev/reference/as_tibble.md)
   preserves attributes, and uses
   [`as_tibble.list()`](https://tibble.tidyverse.org/dev/reference/as_tibble.md)
-  to calling overriden methods which may lead to endless recursion.
+  to calling overridden methods which may lead to endless recursion.
 
 ### New features
 

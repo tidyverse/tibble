@@ -28,7 +28,7 @@ help you write a unit test, if needed).
   this before, we recommend using
   `usethis::create_from_github("batpigandme/tibble", fork = TRUE)`.
 
-- Install all development dependences with
+- Install all development dependencies with
   `devtools::install_dev_deps()`, and then make sure the package passes
   R CMD check by running `devtools::check()`. If R CMD check doesn’t
   pass cleanly, it’s a good idea to ask for help before continuing.

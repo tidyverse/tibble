@@ -160,7 +160,7 @@ the returned vector are compatible.
 
 ### Definition of `x[, j, drop = TRUE]`
 
-For backward compatiblity, `x[, j, drop = TRUE]` performs column
+For backward compatibility, `x[, j, drop = TRUE]` performs column
 **extraction**, returning `x[j][[1]]` when `ncol(x[j])` is 1.
 
 [TABLE]
