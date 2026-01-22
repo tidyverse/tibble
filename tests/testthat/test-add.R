@@ -86,7 +86,7 @@ test_that("can add as first row via .after = 0", {
   expect_identical(df_new, tibble(a = 2:3))
 })
 
-test_that("can add row inbetween", {
+test_that("can add row in between", {
   df <- tibble(a = 1:3)
   df_new <- add_row(df, a = 4:5, .after = 2)
   expect_identical(df_new, tibble(a = c(1:2, 4:5, 3L)))
@@ -279,7 +279,7 @@ test_that("can add as first column via .after = 0", {
   expect_identical(df_new, tibble(b = 2L, a = 3L))
 })
 
-test_that("can add column inbetween", {
+test_that("can add column in between", {
   df <- tibble(a = 1:3, c = 4:6)
   df_new <- add_column(df, b = -1:1, .after = 1)
   expect_identical(df_new, tibble(a = 1:3, b = -1:1, c = 4:6))

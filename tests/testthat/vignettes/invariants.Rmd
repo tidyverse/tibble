@@ -355,7 +355,7 @@ identical(df2[, 1:2], df2[1:2])
 
 ### Definition of `x[, j, drop = TRUE]`
 
-For backward compatiblity, `x[, j, drop = TRUE]` performs column __extraction__, returning `x[j][[1]]` when `ncol(x[j])` is 1.
+For backward compatibility, `x[, j, drop = TRUE]` performs column __extraction__, returning `x[j][[1]]` when `ncol(x[j])` is 1.
 
 ```{r}
 #| label: bracket-always-returns-tibble-drop

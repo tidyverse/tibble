@@ -1,4 +1,4 @@
-test_that("tibble returns correct number of rows with all combinatinos", {
+test_that("tibble returns correct number of rows with all combinations", {
   expect_equal(nrow(tibble(value = 1:10)), 10L)
   expect_equal(nrow(tibble(value = 1:10, name = "recycle_me")), 10L)
   expect_equal(nrow(tibble(name = "recycle_me", value = 1:10)), 10L)

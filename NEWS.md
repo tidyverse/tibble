@@ -890,7 +890,7 @@ Follow-up release.
 
 - The `.Dim` attribute is silently stripped from columns that are 1d matrices (#84).
 - Converting a tibble without row names to a regular data frame does not add explicit row names.
-- `as_tibble.data.frame()` preserves attributes, and uses `as_tibble.list()` to calling overriden methods which may lead to endless recursion.
+- `as_tibble.data.frame()` preserves attributes, and uses `as_tibble.list()` to calling overridden methods which may lead to endless recursion.
 
 
 ## New features

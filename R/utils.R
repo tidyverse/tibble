@@ -11,7 +11,7 @@ needs_list_col <- function(x) {
 }
 
 # Work around bug in R 3.3.0
-# Can be ressigned during loading (#544)
+# Can be reassigned during loading (#544)
 safe_match <- match
 
 

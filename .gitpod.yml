@@ -55,7 +55,7 @@ vscode:
     - go2sh.cmake-integration-vscode
     # buggy -- doesn't reliably interpret include files?
     # observed behavior: repeated saving of src/CMakeLists.txt
-    # changes detaction of include files -- sometimes it works, sometimes it doesn't,
+    # changes detection of include files -- sometimes it works, sometimes it doesn't,
     # with no detectable pattern
     # - ms-vscode.cmake-tools
     - EditorConfig.EditorConfig
