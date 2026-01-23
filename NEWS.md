@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.1.9003
+
+## Documentation
+
+- Fix typos across repository (#1685, #1691).
+
+
 # tibble 3.3.1.9002
 
 ## Continuous integration
