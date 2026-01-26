@@ -4,26 +4,6 @@
 #include <string.h>
 #include "tibble.h"
 
-static SEXP pairlist_shallow_copy(SEXP p) {
-  SEXP attr;
-  PROTECT(attr = Rf_cons(CAR(p), R_NilValue));
-  SEXP q = attr;
-  SET_TAG(q, TAG(p));
-  p = CDR(p);
-
-  while (!Rf_isNull(p)) {
-    SEXP s;
-    s = Rf_cons(CAR(p), R_NilValue);
-    SETCDR(q, s);
-    q = CDR(q);
-    SET_TAG(q, TAG(p));
-    p = CDR(p);
-  }
-
-  UNPROTECT(1);
-  return attr;
-}
-
 static void copy_attributes(SEXP out, SEXP data) {
   Rf_copyMostAttrib(data, out);
 
