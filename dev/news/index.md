@@ -1,5 +1,13 @@
 # Changelog
 
+## tibble 3.3.1.9003
+
+### Documentation
+
+- Fix typos across repository
+  ([\#1685](https://github.com/tidyverse/tibble/issues/1685),
+  [\#1691](https://github.com/tidyverse/tibble/issues/1691)).
+
 ## tibble 3.3.1.9002
 
 ### Continuous integration
