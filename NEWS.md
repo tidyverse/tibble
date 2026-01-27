@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.1.9004
+
+## Chore
+
+- Remove unused `pairlist_shallow_copy()` (#1692).
+
+
 # tibble 3.3.1.9003
 
 ## Documentation
