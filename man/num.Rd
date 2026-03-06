@@ -149,7 +149,7 @@ tibble(
 )
 }
 \seealso{
-Other vector classes: 
+Other vector classes:
 \code{\link{char}()}
 }
 \concept{vector classes}

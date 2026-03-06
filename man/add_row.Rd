@@ -50,7 +50,7 @@ df \%>\% add_row(x = 4)
 try(df \%>\% add_row(z = 10))
 }
 \seealso{
-Other addition: 
+Other addition:
 \code{\link{add_column}()}
 }
 \concept{addition}

@@ -81,7 +81,7 @@ tibble(abbr = char(lipsum, shorten = "abbreviate"))
 \dontshow{\}) # examplesIf}
 }
 \seealso{
-Other vector classes: 
+Other vector classes:
 \code{\link{num}()}
 }
 \concept{vector classes}
