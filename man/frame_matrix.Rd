@@ -11,7 +11,7 @@ frame_matrix(...)
 Arguments specifying the structure of a \code{frame_matrix}.
 Column names should be formulas, and may only appear before the data.
 These arguments are processed with \code{\link[rlang:list2]{rlang::list2()}}
-and support unquote via \code{\link[rlang:injection-operator]{!!}} and unquote-splice via \code{\link[rlang:splice-operator]{!!!}}.}
+and support unquote via \code{\link[rlang:!!]{!!}} and unquote-splice via \code{\link[rlang:!!!]{!!!}}.}
 }
 \value{
 A \link{matrix}.
@@ -30,6 +30,6 @@ frame_matrix(
 )
 }
 \seealso{
-See \link[rlang:topic-inject]{quasiquotation} for more details on tidy dots semantics,
+See \link[rlang:quasiquotation]{quasiquotation} for more details on tidy dots semantics,
 i.e. exactly how  the \code{...} argument is processed.
 }

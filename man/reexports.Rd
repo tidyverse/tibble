@@ -17,9 +17,9 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{magrittr}{\code{\link[magrittr:pipe]{\%>\%}}}
+  \item{magrittr}{\code{\link[magrittr]{\%>\%}}}
 
-  \item{pillar}{\code{\link[pillar]{glimpse}}, \code{\link[pillar:type_sum]{obj_sum}}, \code{\link[pillar:type_sum]{size_sum}}, \code{\link[pillar]{tbl_sum}}, \code{\link[pillar]{type_sum}}}
+  \item{pillar}{\code{\link[pillar]{glimpse}}, \code{\link[pillar]{obj_sum}}, \code{\link[pillar]{size_sum}}, \code{\link[pillar]{tbl_sum}}, \code{\link[pillar]{type_sum}}}
 
   \item{rlang}{\code{\link[rlang]{has_name}}}
 }}

@@ -9,14 +9,14 @@ lst(...)
 \arguments{
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
 A set of name-value pairs. These arguments are
-processed with \code{\link[rlang:defusing-advanced]{rlang::quos()}} and support unquote via \code{\link[rlang:injection-operator]{!!}} and
-unquote-splice via \code{\link[rlang:splice-operator]{!!!}}. Use \verb{:=} to create columns that start with a dot.
+processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{\link[rlang:!!]{!!}} and
+unquote-splice via \code{\link[rlang:!!!]{!!!}}. Use \verb{:=} to create columns that start with a dot.
 
 Arguments are evaluated sequentially.
-You can refer to previously created elements directly or using the \link[rlang:dot-data]{.data}
+You can refer to previously created elements directly or using the \link[rlang:.data]{.data}
 pronoun.
-To refer explicitly to objects in the calling environment, use \code{\link[rlang:injection-operator]{!!}} or
-\link[rlang:dot-data]{.env}, e.g. \code{!!.data} or \code{.env$.data} for the special case of an object
+To refer explicitly to objects in the calling environment, use \code{\link[rlang:!!]{!!}} or
+\link[rlang:.env]{.env}, e.g. \code{!!.data} or \code{.env$.data} for the special case of an object
 named \code{.data}.}
 }
 \value{
