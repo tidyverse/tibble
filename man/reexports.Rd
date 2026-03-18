@@ -19,8 +19,8 @@ below to see their documentation.
 \describe{
   \item{magrittr}{\code{\link[magrittr:\%>\%]{\%>\%}}}
 
-  \item{pillar}{\code{\link[pillarpillarpillarpillarpillar:glimpseobj_sumsize_sumtbl_sumtype_sum]{glimpseobj_sumsize_sumtbl_sumtype_sum}()()()()()}}
+  \item{pillar}{\code{\link[pillar:glimpse]{glimpse()}}, \code{\link[pillar:obj_sum]{obj_sum()}}, \code{\link[pillar:size_sum]{size_sum()}}, \code{\link[pillar:tbl_sum]{tbl_sum()}}, \code{\link[pillar:type_sum]{type_sum()}}}
 
-  \item{rlang}{\code{\link[rlang:has_name]{has_name}()}}
+  \item{rlang}{\code{\link[rlang:has_name]{has_name()}}}
 }}
 

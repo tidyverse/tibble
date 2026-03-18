@@ -150,6 +150,6 @@ tibble(
 }
 \seealso{
 Other vector classes:
-\code{\link{char}()}
+\code{\link[=char]{char()}}
 }
 \concept{vector classes}

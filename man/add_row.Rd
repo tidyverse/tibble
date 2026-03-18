@@ -51,6 +51,6 @@ try(df \%>\% add_row(z = 10))
 }
 \seealso{
 Other addition:
-\code{\link{add_column}()}
+\code{\link[=add_column]{add_column()}}
 }
 \concept{addition}

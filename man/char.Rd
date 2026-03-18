@@ -82,6 +82,6 @@ tibble(abbr = char(lipsum, shorten = "abbreviate"))
 }
 \seealso{
 Other vector classes:
-\code{\link{num}()}
+\code{\link[=num]{num()}}
 }
 \concept{vector classes}
