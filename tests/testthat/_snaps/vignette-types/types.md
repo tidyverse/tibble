@@ -27,6 +27,11 @@ For example, `<int>` in the header of a column indicates an integer column, and 
 
 
 
+```
+#> Registered S3 method overwritten by 'bit64':
+#>   method          from 
+#>   print.bitstring tools
+```
 
 
 
