@@ -22,9 +22,9 @@ frame_matrix(...)
   arguments are processed with
   [`rlang::list2()`](https://rlang.r-lib.org/reference/list2.html) and
   support unquote via
-  [`rlang::!!`](https://rlang.r-lib.org/reference/injection-operator.html)
-  and unquote-splice via
-  [`rlang::!!!`](https://rlang.r-lib.org/reference/splice-operator.html).
+  [`!!`](https://rlang.r-lib.org/reference/injection-operator.html) and
+  unquote-splice via
+  [`!!!`](https://rlang.r-lib.org/reference/splice-operator.html).
 
 ## Value
 
@@ -33,7 +33,7 @@ A [matrix](https://rdrr.io/r/base/matrix.html).
 ## See also
 
 See
-[rlang::quasiquotation](https://rlang.r-lib.org/reference/topic-inject.html)
+[quasiquotation](https://rlang.r-lib.org/reference/topic-inject.html)
 for more details on tidy dots semantics, i.e. exactly how the `...`
 argument is processed.
 

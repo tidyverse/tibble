@@ -63,19 +63,18 @@ tibble_row(
   A set of name-value pairs. These arguments are processed with
   [`rlang::quos()`](https://rlang.r-lib.org/reference/defusing-advanced.html)
   and support unquote via
-  [`rlang::!!`](https://rlang.r-lib.org/reference/injection-operator.html)
-  and unquote-splice via
-  [`rlang::!!!`](https://rlang.r-lib.org/reference/splice-operator.html).
-  Use `:=` to create columns that start with a dot.
+  [`!!`](https://rlang.r-lib.org/reference/injection-operator.html) and
+  unquote-splice via
+  [`!!!`](https://rlang.r-lib.org/reference/splice-operator.html). Use
+  `:=` to create columns that start with a dot.
 
   Arguments are evaluated sequentially. You can refer to previously
   created elements directly or using the
-  [rlang::.data](https://rlang.r-lib.org/reference/dot-data.html)
-  pronoun. To refer explicitly to objects in the calling environment,
-  use
-  [`rlang::!!`](https://rlang.r-lib.org/reference/injection-operator.html)
-  or [rlang::.env](https://rlang.r-lib.org/reference/dot-data.html),
-  e.g. `!!.data` or `.env$.data` for the special case of an object named
+  [.data](https://rlang.r-lib.org/reference/dot-data.html) pronoun. To
+  refer explicitly to objects in the calling environment, use
+  [`!!`](https://rlang.r-lib.org/reference/injection-operator.html) or
+  [.env](https://rlang.r-lib.org/reference/dot-data.html), e.g.
+  `!!.data` or `.env$.data` for the special case of an object named
   `.data`.
 
 - .rows:
@@ -127,7 +126,7 @@ to turn an existing object into a tibble. Use
 convert a named vector into a tibble. Name repair is detailed in
 [`vctrs::vec_as_names()`](https://vctrs.r-lib.org/reference/vec_as_names.html).
 See
-[rlang::quasiquotation](https://rlang.r-lib.org/reference/topic-inject.html)
+[quasiquotation](https://rlang.r-lib.org/reference/topic-inject.html)
 for more details on tidy dots semantics, i.e. exactly how the `...`
 argument is processed.
 
@@ -160,18 +159,18 @@ tibble(a, b = a * 2, c = 1)
 # Columns are available in subsequent expressions:
 tibble(x = runif(10), y = x * 2)
 #> # A tibble: 10 × 2
-#>          x      y
-#>      <dbl>  <dbl>
-#>  1 0.850   1.70  
-#>  2 0.954   1.91  
-#>  3 0.00536 0.0107
-#>  4 0.660   1.32  
-#>  5 0.189   0.378 
-#>  6 0.817   1.63  
-#>  7 0.824   1.65  
-#>  8 0.354   0.708 
-#>  9 0.805   1.61  
-#> 10 0.506   1.01  
+#>         x     y
+#>     <dbl> <dbl>
+#>  1 0.900  1.80 
+#>  2 0.617  1.23 
+#>  3 0.704  1.41 
+#>  4 0.546  1.09 
+#>  5 0.807  1.61 
+#>  6 0.184  0.368
+#>  7 0.725  1.45 
+#>  8 0.623  1.25 
+#>  9 0.0574 0.115
+#> 10 0.636  1.27 
 
 # tibble() never coerces its inputs,
 str(tibble(letters))

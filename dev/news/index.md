@@ -1,5 +1,52 @@
 # Changelog
 
+## tibble 3.3.1.9009
+
+### Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: <https://github.com/tidyverse/tibble/actions/runs/23228147975>
+
+## tibble 3.3.1.9008
+
+### Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: <https://github.com/tidyverse/tibble/actions/runs/22985467365>
+
+## tibble 3.3.1.9007
+
+### Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: <https://github.com/tidyverse/tibble/actions/runs/22935377852>
+
+## tibble 3.3.1.9006
+
+### Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: <https://github.com/tidyverse/tibble/actions/runs/22791024815>
+
+## tibble 3.3.1.9005
+
+### Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: <https://github.com/tidyverse/tibble/actions/runs/22747846410>
+
+## tibble 3.3.1.9004
+
+### Chore
+
+- Remove unused `pairlist_shallow_copy()`
+  ([\#1692](https://github.com/tidyverse/tibble/issues/1692)).
+
 ## tibble 3.3.1.9003
 
 ### Documentation

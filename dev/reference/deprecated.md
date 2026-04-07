@@ -6,7 +6,7 @@ Use [`tibble()`](https://tibble.tidyverse.org/dev/reference/tibble.md)
 instead of `data_frame()`.
 
 Use
-[rlang::quasiquotation](https://rlang.r-lib.org/reference/topic-inject.html)
+[quasiquotation](https://rlang.r-lib.org/reference/topic-inject.html)
 instead of `tibble_()`, `data_frame_()`, and `lst_()`.
 
 Use

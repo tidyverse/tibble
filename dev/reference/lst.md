@@ -26,19 +26,18 @@ lst(...)
   A set of name-value pairs. These arguments are processed with
   [`rlang::quos()`](https://rlang.r-lib.org/reference/defusing-advanced.html)
   and support unquote via
-  [`rlang::!!`](https://rlang.r-lib.org/reference/injection-operator.html)
-  and unquote-splice via
-  [`rlang::!!!`](https://rlang.r-lib.org/reference/splice-operator.html).
-  Use `:=` to create columns that start with a dot.
+  [`!!`](https://rlang.r-lib.org/reference/injection-operator.html) and
+  unquote-splice via
+  [`!!!`](https://rlang.r-lib.org/reference/splice-operator.html). Use
+  `:=` to create columns that start with a dot.
 
   Arguments are evaluated sequentially. You can refer to previously
   created elements directly or using the
-  [rlang::.data](https://rlang.r-lib.org/reference/dot-data.html)
-  pronoun. To refer explicitly to objects in the calling environment,
-  use
-  [`rlang::!!`](https://rlang.r-lib.org/reference/injection-operator.html)
-  or [rlang::.env](https://rlang.r-lib.org/reference/dot-data.html),
-  e.g. `!!.data` or `.env$.data` for the special case of an object named
+  [.data](https://rlang.r-lib.org/reference/dot-data.html) pronoun. To
+  refer explicitly to objects in the calling environment, use
+  [`!!`](https://rlang.r-lib.org/reference/injection-operator.html) or
+  [.env](https://rlang.r-lib.org/reference/dot-data.html), e.g.
+  `!!.data` or `.env$.data` for the special case of an object named
   `.data`.
 
 ## Value
@@ -54,7 +53,7 @@ lst(n = 5, x = runif(n))
 #> [1] 5
 #> 
 #> $x
-#> [1] 0.01541165 0.88650768 0.90355584 0.40385181 0.31612350
+#> [1] 0.2220037 0.1208247 0.5305426 0.7951219 0.3532806
 #> 
 
 # missing names are constructed from user's input
@@ -66,7 +65,7 @@ lst(1:3, z = letters[4:6], runif(3))
 #> [1] "d" "e" "f"
 #> 
 #> $`runif(3)`
-#> [1] 0.65806867 0.06178628 0.25907777
+#> [1] 0.9371862 0.6326068 0.6565604
 #> 
 
 a <- 1:3

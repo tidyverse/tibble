@@ -19,8 +19,8 @@ cases:
 - When updating with `[[<-` and `[<-`, type changes of entire columns
   are supported, but updating a part of a column requires that the new
   value is coercible to the existing type. See
-  [`vctrs::vec_slice()`](https://vctrs.r-lib.org/reference/vec_slice.html)
-  for the underlying implementation.
+  [`vec_slice()`](https://vctrs.r-lib.org/reference/vec_slice.html) for
+  the underlying implementation.
 
 Unstable return type and implicit partial matching can lead to surprises
 and bugs that are hard to catch. If you rely on code that requires the

@@ -55,7 +55,7 @@ in a list."><meta property="og:image" content="https://tibble.tidyverse.org/logo
 
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.3.1.9003</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.3.1.9009</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -152,13 +152,13 @@ in a list.</p>
 <dl><dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>&lt;<code><a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic-dots</a></code>&gt;
 A set of name-value pairs. These arguments are
-processed with <code><a href="https://rlang.r-lib.org/reference/defusing-advanced.html" class="external-link">rlang::quos()</a></code> and support unquote via <code><a href="https://rlang.r-lib.org/reference/injection-operator.html" class="external-link">rlang::!!</a></code> and
-unquote-splice via <code><a href="https://rlang.r-lib.org/reference/splice-operator.html" class="external-link">rlang::!!!</a></code>. Use <code>:=</code> to create columns that start with a dot.</p>
+processed with <code><a href="https://rlang.r-lib.org/reference/defusing-advanced.html" class="external-link">rlang::quos()</a></code> and support unquote via <code><a href="https://rlang.r-lib.org/reference/injection-operator.html" class="external-link">!!</a></code> and
+unquote-splice via <code><a href="https://rlang.r-lib.org/reference/splice-operator.html" class="external-link">!!!</a></code>. Use <code>:=</code> to create columns that start with a dot.</p>
 <p>Arguments are evaluated sequentially.
-You can refer to previously created elements directly or using the <a href="https://rlang.r-lib.org/reference/dot-data.html" class="external-link">rlang::.data</a>
+You can refer to previously created elements directly or using the <a href="https://rlang.r-lib.org/reference/dot-data.html" class="external-link">.data</a>
 pronoun.
-To refer explicitly to objects in the calling environment, use <code><a href="https://rlang.r-lib.org/reference/injection-operator.html" class="external-link">rlang::!!</a></code> or
-<a href="https://rlang.r-lib.org/reference/dot-data.html" class="external-link">rlang::.env</a>, e.g. <code>!!.data</code> or <code>.env$.data</code> for the special case of an object
+To refer explicitly to objects in the calling environment, use <code><a href="https://rlang.r-lib.org/reference/injection-operator.html" class="external-link">!!</a></code> or
+<a href="https://rlang.r-lib.org/reference/dot-data.html" class="external-link">.env</a>, e.g. <code>!!.data</code> or <code>.env$.data</code> for the special case of an object
 named <code>.data</code>.</p></dd>
 
 
@@ -194,7 +194,7 @@ frame, i.e. it has class <code>data.frame</code>.</p>
     <div class="dont-index"><p>Use <code><a href="as_tibble.html">as_tibble()</a></code> to turn an existing object into a tibble. Use
 <code><a href="enframe.html">enframe()</a></code> to convert a named vector into a tibble. Name repair is
 detailed in <code><a href="https://vctrs.r-lib.org/reference/vec_as_names.html" class="external-link">vctrs::vec_as_names()</a></code>.
-See <a href="https://rlang.r-lib.org/reference/topic-inject.html" class="external-link">rlang::quasiquotation</a> for more details on tidy dots semantics,
+See <a href="https://rlang.r-lib.org/reference/topic-inject.html" class="external-link">quasiquotation</a> for more details on tidy dots semantics,
 i.e. exactly how  the <code>...</code> argument is processed.</p></div>
     </div>
 
@@ -226,18 +226,18 @@ i.e. exactly how  the <code>...</code> argument is processed.</p></div>
 <span class="r-in"><span><span class="co"># Columns are available in subsequent expressions:</span></span></span>
 <span class="r-in"><span><span class="fu">tibble</span><span class="op">(</span>x <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, y <span class="op">=</span> <span class="va">x</span> <span class="op">*</span> <span class="fl">2</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 10 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>          x      y</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 0.850   1.70  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 0.954   1.91  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 0.005<span style="text-decoration: underline;">36</span> 0.010<span style="text-decoration: underline;">7</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 0.660   1.32  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 0.189   0.378 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 0.817   1.63  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 0.824   1.65  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 0.354   0.708 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 0.805   1.61  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 0.506   1.01  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         x     y</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> 0.900  1.80 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> 0.617  1.23 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> 0.704  1.41 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> 0.546  1.09 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> 0.807  1.61 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> 0.184  0.368</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> 0.725  1.45 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> 0.623  1.25 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> 0.057<span style="text-decoration: underline;">4</span> 0.115</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> 0.636  1.27 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># tibble() never coerces its inputs,</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="fu">tibble</span><span class="op">(</span><span class="va">letters</span><span class="op">)</span><span class="op">)</span></span></span>

@@ -17,7 +17,7 @@ evaluation and auto-name semantics."><meta property="og:image" content="https://
 
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.3.1.9003</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.3.1.9009</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,13 +88,13 @@ evaluation and auto-name semantics.</p>
 <dl><dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>&lt;<code><a href="https://rlang.r-lib.org/reference/dyn-dots.html" class="external-link">dynamic-dots</a></code>&gt;
 A set of name-value pairs. These arguments are
-processed with <code><a href="https://rlang.r-lib.org/reference/defusing-advanced.html" class="external-link">rlang::quos()</a></code> and support unquote via <code><a href="https://rlang.r-lib.org/reference/injection-operator.html" class="external-link">rlang::!!</a></code> and
-unquote-splice via <code><a href="https://rlang.r-lib.org/reference/splice-operator.html" class="external-link">rlang::!!!</a></code>. Use <code>:=</code> to create columns that start with a dot.</p>
+processed with <code><a href="https://rlang.r-lib.org/reference/defusing-advanced.html" class="external-link">rlang::quos()</a></code> and support unquote via <code><a href="https://rlang.r-lib.org/reference/injection-operator.html" class="external-link">!!</a></code> and
+unquote-splice via <code><a href="https://rlang.r-lib.org/reference/splice-operator.html" class="external-link">!!!</a></code>. Use <code>:=</code> to create columns that start with a dot.</p>
 <p>Arguments are evaluated sequentially.
-You can refer to previously created elements directly or using the <a href="https://rlang.r-lib.org/reference/dot-data.html" class="external-link">rlang::.data</a>
+You can refer to previously created elements directly or using the <a href="https://rlang.r-lib.org/reference/dot-data.html" class="external-link">.data</a>
 pronoun.
-To refer explicitly to objects in the calling environment, use <code><a href="https://rlang.r-lib.org/reference/injection-operator.html" class="external-link">rlang::!!</a></code> or
-<a href="https://rlang.r-lib.org/reference/dot-data.html" class="external-link">rlang::.env</a>, e.g. <code>!!.data</code> or <code>.env$.data</code> for the special case of an object
+To refer explicitly to objects in the calling environment, use <code><a href="https://rlang.r-lib.org/reference/injection-operator.html" class="external-link">!!</a></code> or
+<a href="https://rlang.r-lib.org/reference/dot-data.html" class="external-link">.env</a>, e.g. <code>!!.data</code> or <code>.env$.data</code> for the special case of an object
 named <code>.data</code>.</p></dd>
 
 </dl></div>
@@ -111,7 +111,7 @@ named <code>.data</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $x</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.01541165 0.88650768 0.90355584 0.40385181 0.31612350</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.2220037 0.1208247 0.5305426 0.7951219 0.3532806</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># missing names are constructed from user's input</span></span></span>
@@ -123,7 +123,7 @@ named <code>.data</code>.</p></dd>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "d" "e" "f"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $`runif(3)`</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.65806867 0.06178628 0.25907777</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.9371862 0.6326068 0.6565604</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">a</span> <span class="op">&lt;-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span></span></span>
