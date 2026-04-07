@@ -23,6 +23,8 @@ library(dplyr)
 library(tidyr)
 library(purrr)
 requireNamespace("hms", quietly = TRUE)
+requireNamespace("bit64", quietly = TRUE)
+requireNamespace("blob", quietly = TRUE)
 ```
 
 ```{r}
