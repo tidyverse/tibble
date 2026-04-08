@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.1.9010
+
+## Chore
+
+- Avoid import message on R-devel.
+
+
 # tibble 3.3.1.9009
 
 ## Chore
