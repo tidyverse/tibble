@@ -71,7 +71,7 @@ jobs:
     # End custom: services
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref }}
 
@@ -272,7 +272,7 @@ jobs:
       - rcc-smoke
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ needs.rcc-smoke.outputs.sha }}
 
@@ -302,7 +302,7 @@ jobs:
       matrix: ${{fromJson(needs.rcc-smoke.outputs.versions-matrix)}}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ needs.rcc-smoke.outputs.sha }}
 
@@ -364,7 +364,7 @@ jobs:
       matrix: ${{fromJson(needs.rcc-smoke.outputs.dep-suggests-matrix)}}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: ./.github/workflows/custom/before-install
         if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
