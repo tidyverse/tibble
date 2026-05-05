@@ -13,6 +13,7 @@ where the tibble implementation differs from the data frame
 implementation.
 
 ``` r
+
 library(tibble)
 new_df <- function() {
   df <- data.frame(a = 1:4)
@@ -40,6 +41,7 @@ Subsetting operations are read-only. The same objects are reused in all
 examples:
 
 ``` r
+
 df <- new_df()
 tbl <- new_tbl()
 ```

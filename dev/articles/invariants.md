@@ -24,6 +24,7 @@ In this article, all behaviors are demonstrated using one example data
 frame and its tibble equivalent:
 
 ``` r
+
 library(tibble)
 library(vctrs)
 new_df <- function() {
@@ -49,6 +50,7 @@ Subsetting operations are read-only. The same objects are reused in all
 examples:
 
 ``` r
+
 df <- new_df()
 tbl <- new_tbl()
 ```
@@ -57,6 +59,7 @@ Where needed, we also show examples with hierarchical columns containing
 a data frame or a matrix:
 
 ``` r
+
 new_tbl2 <- function() {
   tibble(
     tb = tbl,
@@ -130,7 +133,7 @@ is rarely used in packages, it can raise a warning:
 `x[c(j_1, j_2, ..., j_n)]` is equivalent to
 `tibble(x[[j_1]], x[[j_2]], ..., x[[j_n]])`, keeping the corresponding
 column names. This implies that `j` must be a numeric or character
-vector, or a logical vector with length 1 or `ncol(x)`.[¹](#fn1)
+vector, or a logical vector with length 1 or `ncol(x)`.[^1]
 
 [TABLE]
 
@@ -170,7 +173,7 @@ For backward compatibility, `x[, j, drop = TRUE]` performs column
 ### Definition of `x[i, ]`
 
 `x[i, ]` is equal to
-`tibble(vec_slice(x[[1]], i), vec_slice(x[[2]], i), ...)`.[²](#fn2)
+`tibble(vec_slice(x[[1]], i), vec_slice(x[[2]], i), ...)`.[^2]
 
 [TABLE]
 
@@ -203,18 +206,19 @@ makes the `x[NA, ]` and `x[NA_integer_, ]` return different results.
 
 ### Definition of `x[]` and `x[,]`
 
-`x[]` and `x[,]` are equivalent to `x`.[³](#fn3)
+`x[]` and `x[,]` are equivalent to `x`.[^3]
 
 ### Definition of `x[i, j]`
 
-`x[i, j]` is equal to `x[i, ][j]`.[⁴](#fn4)
+`x[i, j]` is equal to `x[i, ][j]`.[^4]
 
 ### Definition of `x[[i, j]]`
 
 `i` must be a numeric vector of length 1. `x[[i, j]]` is equal to
-`x[i, ][[j]]`, or `vctrs::vec_slice(x[[j]], i)`.[⁵](#fn5)
+`x[i, ][[j]]`, or `vctrs::vec_slice(x[[j]], i)`.[^5]
 
 ``` r
+
 df[[1, 1]]
 #> [1] 1
 df[[1, 3]]
@@ -254,7 +258,7 @@ Removing a nonexistent column is a no-op.
 ### Definition of `x$name <- a`
 
 `x$name <- a` and `x$"name" <- a` are equivalent to
-`x[["name"]] <- a`.[⁶](#fn6)
+`x[["name"]] <- a`.[^6]
 
 [TABLE]
 
@@ -348,7 +352,7 @@ details.
 ## Row subassignment: `x[i, ] <- list(...)`
 
 `x[i, ] <- a` is the same as `vec_slice(x[[j_1]], i) <- a[[1]]`,
-`vec_slice(x[[j_2]], i) <- a[[2]]`, … .[⁷](#fn7)
+`vec_slice(x[[j_2]], i) <- a[[2]]`, … .[^7]
 
 [TABLE]
 
@@ -371,7 +375,7 @@ positive numbers.
 
 ### Definition of `x[i, j] <- a`
 
-`x[i, j] <- a` is equivalent to `x[i, ][j] <- a`.[⁸](#fn8)
+`x[i, j] <- a` is equivalent to `x[i, ][j] <- a`.[^8]
 
 Subassignment to `x[i, j]` is stricter for tibbles than for data frames.
 `x[i, j] <- a` can’t change the data type of existing columns.
@@ -401,41 +405,40 @@ Likewise, for new rows, `x[i, j] <- a` fills the unassigned columns with
 ### Definition of `x[[i, j]] <- a`
 
 `i` must be a numeric vector of length 1. `x[[i, j]] <- a` is equivalent
-to `x[i, ][[j]] <- a`.[⁹](#fn9)
+to `x[i, ][[j]] <- a`.[^9]
 
 NB: `vec_size(a)` must equal 1. Unlike `x[i, ] <-`, `x[[i, ]] <-` is not
 valid.
 
-------------------------------------------------------------------------
+[^1]: `x[j][[jj]]` is equal to `x[[ j[[jj]] ]]`, in particular
+    `x[j][[1]]` is equal to `x[[j]]` for scalar numeric or integer `j`.
 
-1.  `x[j][[jj]]` is equal to `x[[ j[[jj]] ]]`, in particular `x[j][[1]]`
-    is equal to `x[[j]]` for scalar numeric or integer `j`.
-
-2.  Row subsetting `x[i, ]` is not defined in terms of `x[[j]][i]`
+[^2]: Row subsetting `x[i, ]` is not defined in terms of `x[[j]][i]`
     because that definition does not generalise to matrix and data frame
     columns. For efficiency and backward compatibility, `i` is converted
     to an integer vector by `vec_as_index(i, nrow(x))` first.
 
-3.  `x[,]` is equivalent to `x[]` because `x[, j]` is equivalent to
+[^3]: `x[,]` is equivalent to `x[]` because `x[, j]` is equivalent to
     `x[j]`.
 
-4.  A more efficient implementation of `x[i, j]` would forward to
+[^4]: A more efficient implementation of `x[i, j]` would forward to
     `x[j][i, ]`.
 
-5.  Cell subsetting `x[[i, j]]` is not defined in terms of `x[[j]][[i]]`
-    because that definition does not generalise to list, matrix and data
-    frame columns. A more efficient implementation of `x[[i, j]]` would
-    check that `j` is a scalar and forward to `x[i, j][[1]]`.
+[^5]: Cell subsetting `x[[i, j]]` is not defined in terms of
+    `x[[j]][[i]]` because that definition does not generalise to list,
+    matrix and data frame columns. A more efficient implementation of
+    `x[[i, j]]` would check that `j` is a scalar and forward to
+    `x[i, j][[1]]`.
 
-6.  `$` behaves almost completely symmetrically to `[[` when comparing
+[^6]: `$` behaves almost completely symmetrically to `[[` when comparing
     subsetting and subassignment.
 
-7.  `x[i, ]` is symmetrical for subset and subassignment.
+[^7]: `x[i, ]` is symmetrical for subset and subassignment.
 
-8.  `x[i, j]` is symmetrical for subsetting and subassignment. A more
+[^8]: `x[i, j]` is symmetrical for subsetting and subassignment. A more
     efficient implementation of `x[i, j] <- a` would forward to
     `x[j][i, ] <- a`.
 
-9.  `x[[i, j]]` is symmetrical for subsetting and subassignment. An
+[^9]: `x[[i, j]]` is symmetrical for subsetting and subassignment. An
     efficient implementation would check that `i` and `j` are scalar and
     forward to `x[i, j][[1]] <- a`.

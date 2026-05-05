@@ -1,5 +1,19 @@
 # Changelog
 
+## tibble 3.3.1.9011
+
+### Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: <https://github.com/tidyverse/tibble/actions/runs/25270192916>
+
+## tibble 3.3.1.9010
+
+### Chore
+
+- Avoid import message on R-devel.
+
 ## tibble 3.3.1.9009
 
 ### Chore
@@ -703,6 +717,7 @@ CRAN release: 2020-03-30
   include `"list"` in the class:
 
   ``` r
+
   structure(x, class = c("your_s3_class", "list"))
   ```
 
@@ -795,6 +810,7 @@ CRAN release: 2020-03-30
   Use the following pattern to catch errors emitted by tibble:
 
   ``` r
+
   tryCatch(
     your_code(),
     tibble_error = function(cnd) {

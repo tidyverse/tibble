@@ -5,6 +5,7 @@ subassignment operations, highlighting where the tibble implementation
 differs from the data frame implementation.
 
 ``` r
+
 library(tibble)
 new_df <- function() {
   df <- data.frame(a = 1:4)
@@ -33,6 +34,7 @@ For subassignment, we need a fresh copy of the data for each test. The
 omitted here for brevity):
 
 ``` r
+
 with_df <- function(code, verbose = FALSE) {
   code <- rlang::enexpr(code)
 
@@ -83,6 +85,7 @@ For columns of the stricter `"vctrs_vctr"` class, this class implements
 the check, which then works identically for data frames and tibbles:
 
 ``` r
+
 with_df({ df$v = vctrs::new_vctr(1:4); df$v[1:2] <- vctrs::new_vctr(4:3)})
 #>   a b         cd v
 #> 1 1 e          9 4

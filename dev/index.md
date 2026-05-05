@@ -18,6 +18,7 @@ chapter](https://r4ds.had.co.nz/tibbles.html) in *R for data science*.
 ## Installation
 
 ``` r
+
 # The easiest way to get tibble is to install the whole tidyverse:
 install.packages("tidyverse")
 
@@ -32,6 +33,7 @@ pak::pak("tidyverse/tibble")
 ## Usage
 
 ``` r
+
 library(tibble)
 ```
 
@@ -39,6 +41,7 @@ Create a tibble from an existing object with
 [`as_tibble()`](https://tibble.tidyverse.org/dev/reference/as_tibble.md):
 
 ``` r
+
 data <- data.frame(a = 1:3, b = letters[1:3], c = Sys.Date() - 1:3)
 data
 #>   a b          c
@@ -62,6 +65,7 @@ You can also create a new tibble from column vectors with
 [`tibble()`](https://tibble.tidyverse.org/dev/reference/tibble.md):
 
 ``` r
+
 tibble(x = 1:5, y = 1, z = x^2 + y)
 #> # A tibble: 5 × 3
 #>       x     y     z
@@ -86,6 +90,7 @@ You can define a tibble row-by-row with
 [`tribble()`](https://tibble.tidyverse.org/dev/reference/tribble.md):
 
 ``` r
+
 tribble(
   ~x, ~y,  ~z,
   "a", 2,  3.6,

@@ -25,6 +25,7 @@ helping you confront problems earlier and write cleaner code.
 ### Installation and Dependencies
 
 ``` r
+
 # Install all development dependencies
 pak::pak()
 ```

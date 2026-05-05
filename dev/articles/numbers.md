@@ -9,6 +9,7 @@ for an overview over the differences. This display works for many, but
 not for all use cases.
 
 ``` r
+
 library(tibble)
 ```
 
@@ -20,6 +21,7 @@ tibble is to define options. See
 for a comprehensive overview.
 
 ``` r
+
 tibble(x = 123.4567)
 #> # A tibble: 1 × 1
 #>       x
@@ -49,6 +51,7 @@ comprehensive overview. Similarly,
 customizing the display of character columns.
 
 ``` r
+
 num(-1:3, notation = "sci")
 #> <pillar_num(sci)[5]>
 #> [1] -1e0  0    1e0  2e0  3e0
@@ -87,6 +90,7 @@ following pattern may help doing this consistently for all columns in a
 tibble, or for some columns based on their name.
 
 ``` r
+
 library(dplyr, warn.conflicts = FALSE)
 
 markets <-
@@ -142,6 +146,7 @@ When applying arithmetic operations on numbers created by
 inherits the formatting of the first `num` object.
 
 ``` r
+
 num(1) + 2
 #> <pillar_num[1]>
 #> [1] 3
@@ -170,6 +175,7 @@ num(3, digits = 2) * num(4, sigfig = 2)
 Similarly, for mathematical operations, the formatting is inherited.
 
 ``` r
+
 min(num(1:3, label = "$"))
 #> <pillar_num{$}[1]>
 #> [1] 1
@@ -188,6 +194,7 @@ In some cases, the ideal formatting changes after a transformation.
 applied repeatedly, the last setting wins.
 
 ``` r
+
 num(1:3 + 0.125, digits = 4)
 #> <pillar_num:.4![3]>
 #> [1] 1.1250 2.1250 3.1250
@@ -206,6 +213,7 @@ The [`var()`](https://rdrr.io/r/stats/cor.html) function is one of the
 examples where the formatting is lost:
 
 ``` r
+
 x <- num(c(1, 2, 4), notation = "eng")
 var(x)
 #> [1] 2.333333
@@ -216,6 +224,7 @@ it breaks for
 [`num()`](https://tibble.tidyverse.org/dev/reference/num.md) objects:
 
 ``` r
+
 median(x)
 #> Error in `median()`:
 #> ! `median.pillar_num()` not implemented.
@@ -226,6 +235,7 @@ One way to recover is to apply
 result:
 
 ``` r
+
 num(var(x), notation = "eng")
 #> <pillar_num(eng)[1]>
 #> [1] 2.33e0
@@ -240,6 +250,7 @@ implementation. Note that this pattern is still experimental and may be
 subject to change:
 
 ``` r
+
 var_ <- function(x, ...) {
   out <- var(vctrs::vec_proxy(x), ...)
   vctrs::vec_restore(out, x)
@@ -254,6 +265,7 @@ The `make_restore()` function defined below is a function factory that
 consumes a function and returns a derived function:
 
 ``` r
+
 make_restore <- function(fun) {
   force(fun)
   function(x, ...) {

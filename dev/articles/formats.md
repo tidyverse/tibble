@@ -1,6 +1,7 @@
 # Column formats
 
 ``` r
+
 library(tibble)
 ```
 
@@ -12,6 +13,7 @@ contains useful vector classes that apply a custom formatting to
 numbers.
 
 ``` r
+
 library(formattable)
 
 tbl <- tibble(x = digits(9:11, 3))
@@ -29,6 +31,7 @@ method. It always will be shown with three digits after the decimal
 point. This also applies to columns derived from `x`.
 
 ``` r
+
 library(dplyr)
 tbl2 <-
   tbl %>%
@@ -54,6 +57,7 @@ tbl2
 Summaries also maintain the formatting.
 
 ``` r
+
 tbl2 %>%
   group_by(lag) %>%
   summarize(z = mean(z)) %>%
@@ -68,6 +72,7 @@ tbl2 %>%
 Same for pivoting operations.
 
 ``` r
+
 library(tidyr)
 
 stocks <-
@@ -90,6 +95,7 @@ work](https://github.com/tidyverse/ggplot2/pull/4065) to show apply the
 formatting to the scales.
 
 ``` r
+
 library(ggplot2)
 
 # Needs https://github.com/tidyverse/ggplot2/pull/4065 or similar
@@ -131,6 +137,7 @@ stages are run on the database. Often it’s possible to derive a
 rule-based approach for formatting.
 
 ``` r
+
 tbl3 <-
   tibble(id = letters[1:3], x = 9:11) %>%
   mutate(
@@ -168,6 +175,7 @@ These rules can be stored in
 [`quos()`](https://rlang.r-lib.org/reference/defusing-advanced.html):
 
 ``` r
+
 rules <- quos(
   across(where(is.numeric), ~ digits(.x, 3)),
   across(where(~ is.numeric(.x) && mean(.x) > 50), ~ digits(.x, 1))

@@ -1,4 +1,4 @@
-pandoc: 3.1.11
+pandoc: 3.8.3
 pkgdown: 2.2.0.9000
 pkgdown_sha: a6abe43ed48e58b1de42eba5e5541a5b6c46b46f
 articles:
@@ -11,7 +11,7 @@ articles:
   wip/subset: wip/subset.html
   tibble: tibble.html
   types: types.html
-last_built: 2026-04-07T03:53Z
+last_built: 2026-05-05T17:25Z
 urls:
   reference: https://tibble.tidyverse.org/reference
   article: https://tibble.tidyverse.org/articles

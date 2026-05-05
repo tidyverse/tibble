@@ -5,6 +5,7 @@ have stood the test of time, and drop the features that used to be
 convenient but are now frustrating.
 
 ``` r
+
 library(tibble)
 ```
 
@@ -18,6 +19,7 @@ frames:
   `stringsAsFactors = FALSE`!).
 
   ``` r
+
   tibble(x = letters)
   #> # A tibble: 26 × 1
   #>    x    
@@ -38,6 +40,7 @@ frames:
   This makes it easier to use with list-columns:
 
   ``` r
+
   tibble(x = 1:3, y = list(1:5, 1:10, 1:20))
   #> # A tibble: 3 × 2
   #>       x y         
@@ -54,6 +57,7 @@ frames:
 - It never adjusts the names of variables:
 
   ``` r
+
   names(data.frame(`crazy name` = 1))
   #> [1] "crazy.name"
   names(tibble(`crazy name` = 1))
@@ -63,6 +67,7 @@ frames:
 - It evaluates its arguments lazily and sequentially:
 
   ``` r
+
   tibble(x = 1:5, y = x ^ 2)
   #> # A tibble: 5 × 2
   #>       x     y
@@ -94,6 +99,7 @@ methods are much simpler than
 The method for lists has been written with an eye for performance:
 
 ``` r
+
 l <- replicate(26, sample(100), simplify = FALSE)
 names(l) <- letters
 
@@ -133,6 +139,7 @@ description of the column type, and uses font styles and color for
 highlighting:
 
 ``` r
+
 tibble(x = -5:100, y = 123.456 * (3^x))
 #> # A tibble: 106 × 2
 #>        x         y
@@ -183,6 +190,7 @@ tibble. Contrast this with a data frame: sometimes `[` returns a data
 frame and sometimes it just returns a vector:
 
 ``` r
+
 df1 <- data.frame(x = 1:3, y = 3:1)
 class(df1[, 1:2])
 #> [1] "data.frame"
@@ -199,6 +207,7 @@ class(df2[, 1])
 To extract a single column use `[[` or `$`:
 
 ``` r
+
 class(df2[[1]])
 #> [1] "integer"
 class(df2$x)
@@ -209,6 +218,7 @@ Tibbles are also stricter with `$`. Tibbles never do partial matching,
 and will throw a warning and return `NULL` if the column does not exist:
 
 ``` r
+
 df <- data.frame(abc = 1)
 df$a
 #> [1] 1
@@ -222,6 +232,7 @@ df2$a
 However, tibbles respect the `drop` argument if it is provided:
 
 ``` r
+
 data.frame(a = 1:3)[, "a", drop = TRUE]
 #> [1] 1 2 3
 tibble(a = 1:3)[, "a", drop = TRUE]
@@ -232,6 +243,7 @@ Tibbles do not support row names. They are removed when converting to a
 tibble or when subsetting:
 
 ``` r
+
 df <- data.frame(a = 1:3, row.names = letters[1:3])
 rownames(df)
 #> [1] "a" "b" "c"
@@ -258,6 +270,7 @@ first column with length different to one determines the number of rows
 in the tibble, conflicts lead to an error:
 
 ``` r
+
 tibble(a = 1, b = 1:3)
 #> # A tibble: 3 × 2
 #>       a     b
@@ -284,6 +297,7 @@ This also extends to tibbles with *zero* rows, which is sometimes
 important for programming:
 
 ``` r
+
 tibble(a = 1, b = integer())
 #> # A tibble: 0 × 2
 #> # ℹ 2 variables: a <dbl>, b <int>
@@ -299,6 +313,7 @@ columns. The result is silently coerced to a data frame. Do not rely on
 this behavior, it may become an error in a forthcoming version.
 
 ``` r
+
 tbl <- tibble(a = 1:3, b = 4:6)
 tbl * 2
 #>   a  b

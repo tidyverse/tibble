@@ -1,6 +1,7 @@
 # Comparing display with data frames
 
 ``` r
+
 library(tibble)
 ```
 
@@ -28,6 +29,7 @@ most significant digits of a number, without spending too much
 horizontal space and without distraction from insignificant digits.
 
 ``` r
+
 options(digits = 3)
 c(1.2345, 12.345, 123.45, 1234.5, 12345)
 #> [1]     1.23    12.35   123.45  1234.50 12345.00
@@ -50,6 +52,7 @@ terminal zeros are always shown if there is space, but hidden if the
 value is too insignificant:
 
 ``` r
+
 c(1, 1.00001)
 #> [1] 1 1
 tibble(x = c(1, 1.00001))
@@ -68,6 +71,7 @@ the decimal separator does **not** indicate that the number is larger,
 only that there exists a nonzero fractional part:
 
 ``` r
+
 c(123, 123.45, 567.89)
 #> [1] 123 123 568
 tibble(x = c(123, 123.45, 567.89))
@@ -85,6 +89,7 @@ To show more significant digits, set the `"pillar.sigfig"` option to a
 larger value:
 
 ``` r
+
 options(digits = 7)
 options(pillar.sigfig = 7)
 c(1.2345, 12.345, 123.45, 1234.5, 12345)
@@ -104,6 +109,7 @@ Setting `"pillar.sigfig"` to a larger value will not enhance the display
 with digits deemed insignificant:
 
 ``` r
+
 options(digits = 7)
 options(pillar.sigfig = 7)
 c(1.2345, 12.3456, 123.4567, 1234.5678, 12345.6789)
@@ -126,6 +132,7 @@ To show a fixed number of decimal digits, use
 `digits` argument:
 
 ``` r
+
 num(c(1.2345, 12.345, 123.45, 1234.5, 12345), digits = 2)
 #> <pillar_num:.2![5]>
 #> [1]     1.23    12.35   123.45  1234.50 12345.00
@@ -145,6 +152,7 @@ stronger the resistance to switching to scientific notation. The default
 `0` seems to be anchored at 13 digits for the integer part.
 
 ``` r
+
 123456789012
 #> [1] 123456789012
 123456789012.3
@@ -167,6 +175,7 @@ that must be exceeded for a switch to scientific notation to happen.
 This width includes the decimal separator.
 
 ``` r
+
 tibble(x = 123456789012)
 #> # A tibble: 1 × 1
 #>              x
@@ -215,6 +224,7 @@ at all in this case. The `notation` argument to
 options:
 
 ``` r
+
 num(12345678901234567, notation = "dec")
 #> <pillar_num(dec)[1]>
 #> [1] 12345678901234568
