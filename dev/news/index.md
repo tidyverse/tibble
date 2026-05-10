@@ -1,5 +1,21 @@
 # Changelog
 
+## tibble 3.3.1.9012
+
+### Continuous integration
+
+- Tweak fledge workflow and ccache action.
+
+- Cosmetics.
+
+- Bump action versions.
+
+- Install clang-format-21.
+
+- Align fledge workflow.
+
+- Harmonize.
+
 ## tibble 3.3.1.9011
 
 ### Chore
