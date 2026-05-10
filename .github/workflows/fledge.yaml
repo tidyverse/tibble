@@ -9,6 +9,9 @@ on:
         required: false
         type: boolean
         default: false
+  push:
+    paths:
+      - ".github/workflows/fledge.yaml"
   # daily run
   schedule:
   - cron: "30 0 * * *"
@@ -29,6 +32,8 @@ jobs:
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -euxo pipefail
+
           # Check if repo is not forked
           is_forked=$(gh api repos/${{ github.repository }} | jq .fork)
           if [ "$is_forked" == "true" ]; then
@@ -37,25 +42,27 @@ jobs:
           fi
 
           # Special case: duckdb and igraph
-          if [[ "${{ github.repository }}" == "krlmlr/duckdb-r" ]]; then
+          if [[ "${{ github.repository }}" == 'krlmlr/duckdb-r' ]]; then
             echo "Repository is krlmlr/duckdb-r. Skipping fledge workflow."
             exit 0
           fi
 
-          if [[ "${{ github.repository }}" == "krlmlr/rigraph" ]]; then
+          if [[ "${{ github.repository }}" == 'krlmlr/rigraph' ]]; then
             echo "Repository is krlmlr/rigraph. Skipping fledge workflow."
             exit 0
           fi
 
           # Fetch NEWS.md content via API without full checkout
-          news_content=$(gh api repos/${{ github.repository }}/contents/NEWS.md --jq .content 2>/dev/null | base64 -d 2>/dev/null)
-          if [ -z "$news_content" ]; then
+          gh api repos/${{ github.repository }}/contents/NEWS.md --jq .content 2>/dev/null | base64 -d > /tmp/news.md || true
+
+          if [ ! -s /tmp/news.md ]; then
             echo "NEWS.md not found. Skipping fledge workflow."
             exit 0
           fi
 
-          first_line=$(echo "$news_content" | head -n 1)
-          if ! [[ "$first_line" == *"fledge"* ]]; then
+          # Read first line of NEWS.md and check if it mentions fledge
+          news_content=$(head -n 1 /tmp/news.md)
+          if ! [[ "$news_content" == *"fledge"* ]]; then
             echo "NEWS.md does not mention fledge. Skipping fledge workflow."
             exit 0
           fi
