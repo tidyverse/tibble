@@ -10,6 +10,9 @@ on:
         type: boolean
         default: false
   push:
+    branches:
+      - main
+      - master
     paths:
       - ".github/workflows/fledge.yaml"
   # daily run
