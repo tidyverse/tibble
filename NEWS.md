@@ -1,5 +1,12 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.1.9013
+
+## Continuous integration
+
+- Only run fledge on pushes to main.
+
+
 # tibble 3.3.1.9012
 
 ## Continuous integration
