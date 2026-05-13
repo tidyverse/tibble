@@ -180,6 +180,10 @@ jobs:
       - uses: ./.github/workflows/pkgdown-build
         if: github.event_name != 'push'
 
+      # Deliberately deploy only on push
+      # Deployment on schedule adds too much noise.
+      # Deployment on pull_request is not possible because it requires a token with write permissions, which is not available in pull_request workflows for security reasons.
+      # Deployment on workflow_dispatch is available via the pkgdown workflow
       - uses: ./.github/workflows/pkgdown-deploy
         if: github.event_name == 'push'
 
