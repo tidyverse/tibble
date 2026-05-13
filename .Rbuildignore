@@ -45,3 +45,4 @@
 ^[\.]?air\.toml$
 ^\.clang-format$
 ^AGENTS\.md$
+^\.ccache$
