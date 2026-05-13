@@ -337,6 +337,8 @@ jobs:
 
       - uses: ./.github/workflows/update-snapshots
         if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+        with:
+          base: ${{ github.head_ref }}
 
       - uses: ./.github/workflows/check
         if: ${{ ! matrix.covr }}
