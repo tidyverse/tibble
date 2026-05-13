@@ -70,6 +70,14 @@ jobs:
           gh run download ${{ github.event.workflow_run.id }} --repo ${{ github.repository }} --name changes-patch && patch -p1 < changes.patch && rm changes.patch
           ```
 
+          Repo owners can also apply the patch automatically. Click the button to jump to the comment box, then post:
+
+          ```
+          /apply-patch
+          ```
+
+          [![Apply patch](https://img.shields.io/badge/Apply%20patch-%2Fapply--patch-2ea44f?style=for-the-badge&logo=github)](https://github.com/${{ github.repository }}/pull/${{ steps.find-pr.outputs.pr_number }}#new_comment_field)
+
           ### Method 2: View the patch
 
           <details>
