@@ -1,5 +1,10 @@
 # Changelog
 
+## tibble 3.3.1.9015
+
+- Ci: Unify fledge.yaml across cynkratemplate and fledge
+  ([\#86](https://github.com/tidyverse/tibble/issues/86)).
+
 ## tibble 3.3.1.9014
 
 ### Chore
