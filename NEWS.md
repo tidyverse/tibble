@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.1.9016
+
+## Continuous integration
+
+- Update ccache-action reference.
+
+- Bump action version.
+
+
 # tibble 3.3.1.9015
 
 - Ci: Unify fledge.yaml across cynkratemplate and fledge (#86).
