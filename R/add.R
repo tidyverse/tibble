@@ -2,7 +2,7 @@
 #'
 #' @description
 #' This is a convenient way to add one or more rows of data to an existing data
-#' frame. See [tribble()] for an easy way to create an complete
+#' frame. See [tribble()] for an easy way to create a complete
 #' data frame row-by-row. Use [tibble_row()] to ensure that the new data
 #' has only one row.
 #'

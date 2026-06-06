@@ -37,7 +37,7 @@ to a tibble.
 Generally, it is best to avoid row names, because they are basically a
 character column with different semantics than every other column.
 
-These functions allow to you detect if a data frame has row names
+These functions allow you to detect if a data frame has row names
 (\code{has_rownames()}), remove them (\code{remove_rownames()}), or convert
 them back-and-forth between an explicit column (\code{rownames_to_column()}
 and \code{column_to_rownames()}).

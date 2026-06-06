@@ -47,7 +47,7 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #'   Empty and duplicated column names are strongly discouraged, but the user
 #'   must indicate how to resolve. Read more in [vctrs::vec_as_names()].
 #' * Row names are not added and are strongly discouraged, in favor of storing
-#'   that info as a column. Read about in [rownames].
+#'   that info as a column. Read more in [rownames].
 #' * `df[, j]` returns a tibble; it does not automatically extract the column
 #'   inside. `df[, j, drop = FALSE]` is the default. Read more in [subsetting].
 #' * There is no partial matching when `$` is used to index by name. `df$name`

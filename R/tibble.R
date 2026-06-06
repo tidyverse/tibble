@@ -21,7 +21,7 @@
 #'     refer to columns created earlier in the call. Only columns of length one
 #'     are recycled.
 #'   * If a column evaluates to a data frame or tibble, it is nested or spliced.
-#'     If it evaluates to a matrix or a array, it remains a matrix or array,
+#'     If it evaluates to a matrix or an array, it remains a matrix or array,
 #'     respectively.
 #'     See examples.
 #'
@@ -61,7 +61,7 @@
 #'   `enframe()` to convert a named vector into a tibble. Name repair is
 #'   detailed in [vctrs::vec_as_names()].
 #'   See [quasiquotation] for more details on tidy dots semantics,
-#'   i.e. exactly how  the `...` argument is processed.
+#'   i.e. exactly how the `...` argument is processed.
 #' @export
 #' @examples
 #' # Unnamed arguments are named with their expression:

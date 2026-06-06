@@ -13,7 +13,7 @@
 #' @return A [tibble].
 #' @seealso
 #'   See [quasiquotation] for more details on tidy dots semantics,
-#'   i.e. exactly how  the `...` argument is processed.
+#'   i.e. exactly how the `...` argument is processed.
 #' @export
 #' @examples
 #' tribble(
@@ -62,7 +62,7 @@ tribble <- function(...) {
 #' @return A [matrix].
 #' @seealso
 #'   See [quasiquotation] for more details on tidy dots semantics,
-#'   i.e. exactly how  the `...` argument is processed.
+#'   i.e. exactly how the `...` argument is processed.
 #' @export
 #' @examples
 #' frame_matrix(

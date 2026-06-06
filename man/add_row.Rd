@@ -20,7 +20,7 @@ default: after last row.}
 }
 \description{
 This is a convenient way to add one or more rows of data to an existing data
-frame. See \code{\link[=tribble]{tribble()}} for an easy way to create an complete
+frame. See \code{\link[=tribble]{tribble()}} for an easy way to create a complete
 data frame row-by-row. Use \code{\link[=tibble_row]{tibble_row()}} to ensure that the new data
 has only one row.
 

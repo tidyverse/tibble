@@ -77,7 +77,7 @@ transforming the user's input.
 refer to columns created earlier in the call. Only columns of length one
 are recycled.
 \item If a column evaluates to a data frame or tibble, it is nested or spliced.
-If it evaluates to a matrix or a array, it remains a matrix or array,
+If it evaluates to a matrix or an array, it remains a matrix or array,
 respectively.
 See examples.
 }
@@ -189,5 +189,5 @@ Use \code{\link[=as_tibble]{as_tibble()}} to turn an existing object into a tibb
 \code{enframe()} to convert a named vector into a tibble. Name repair is
 detailed in \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
 See \link[rlang:quasiquotation]{quasiquotation} for more details on tidy dots semantics,
-i.e. exactly how  the \code{...} argument is processed.
+i.e. exactly how the \code{...} argument is processed.
 }

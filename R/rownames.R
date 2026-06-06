@@ -8,7 +8,7 @@
 #' Generally, it is best to avoid row names, because they are basically a
 #' character column with different semantics than every other column.
 #'
-#' These functions allow to you detect if a data frame has row names
+#' These functions allow you to detect if a data frame has row names
 #' (`has_rownames()`), remove them (`remove_rownames()`), or convert
 #' them back-and-forth between an explicit column (`rownames_to_column()`
 #' and `column_to_rownames()`).

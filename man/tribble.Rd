@@ -51,5 +51,5 @@ tribble(
 }
 \seealso{
 See \link[rlang:quasiquotation]{quasiquotation} for more details on tidy dots semantics,
-i.e. exactly how  the \code{...} argument is processed.
+i.e. exactly how the \code{...} argument is processed.
 }
