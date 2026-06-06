@@ -57,6 +57,7 @@
 #'
 #' @name formatting
 #' @aliases print.tbl format.tbl
+#' @return `NULL` (invisibly) for `print()` methods, a character vector for `format()` methods.
 NULL
 
 # Only for documentation, doesn't do anything

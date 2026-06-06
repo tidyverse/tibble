@@ -4,6 +4,10 @@
 \alias{tbl_df-class}
 \alias{tbl_df}
 \title{\code{tbl_df} class}
+\value{
+This is a class documentation page, not a function.
+Objects of class \code{tbl_df} are tibbles, a subclass of \code{\link[base:data.frame]{data.frame}}.
+}
 \description{
 The \code{tbl_df} class is a subclass of \code{\link[base:data.frame]{data.frame}},
 created in order to have different default behaviour. The colloquial term

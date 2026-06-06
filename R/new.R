@@ -21,6 +21,7 @@
 #' and [vctrs::df_list()] and [vctrs::new_data_frame()]
 #' for lower-level implementations.
 #'
+#' @return A tibble, i.e. an object of class [`tbl_df`][tbl_df-class].
 #' @export
 #' @examples
 #' # The nrow argument can be omitted:

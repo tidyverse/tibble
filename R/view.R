@@ -20,6 +20,7 @@
 #' @param n Maximum number of rows to display. Only used if `x` is not a
 #'   data frame. Uses the `view_max` [option][tibble_options] by default.
 #'
+#' @return `x`, invisibly.
 #' @export
 view <- function(x, title = NULL, ..., n = NULL) {
   check_dots_empty()

@@ -9,6 +9,9 @@ is.tibble(x)
 \arguments{
 \item{x}{An object}
 }
+\value{
+\code{TRUE} if the object inherits from the \code{tbl_df} class.
+}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#soft-deprecated}{\figure{lifecycle-soft-deprecated.svg}{options: alt='[Soft-deprecated]'}}}{\strong{[Soft-deprecated]}}
 

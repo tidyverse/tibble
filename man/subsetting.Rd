@@ -39,6 +39,10 @@ Default \code{FALSE}, ignored when accessing a column via \code{tbl[j]} .}
 \item{value}{A value to store in a row, column, range or cell.
 Tibbles are stricter than data frames in what is accepted here.}
 }
+\value{
+The subsetting methods return a tibble for \code{[}, a vector or
+scalar for \code{$} and \code{[[}, and a modified tibble for the assignment forms.
+}
 \description{
 Accessing columns, rows, or cells via \code{$}, \code{[[}, or \code{[} is mostly similar to
 \link[base:Extract]{regular data frames}. However, the

@@ -61,6 +61,8 @@ setOldClass(c("tbl_df", "tbl", "data.frame"))
 #'
 #' @name tbl_df-class
 #' @aliases tbl_df tbl_df-class
+#' @return This is a class documentation page, not a function.
+#'   Objects of class `tbl_df` are tibbles, a subclass of [`data.frame`][base::data.frame()].
 #' @seealso [tibble()], [as_tibble()], [tribble()], [print.tbl()],
 #'   [glimpse()]
 NULL

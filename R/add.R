@@ -15,6 +15,7 @@
 #'   `NA` value.
 #' @param .before,.after One-based row index where to add the new rows,
 #'   default: after last row.
+#' @return A data frame of the same type as `.data`, with the new rows added.
 #' @family addition
 #' @examples
 #' # add_row ---------------------------------
@@ -109,6 +110,7 @@ rbind_at <- function(old, new, pos) {
 #' @param .before,.after One-based column index or column name where to add the
 #'   new columns, default: after last column.
 #' @inheritParams tibble
+#' @return A data frame of the same type as `.data`, with the new columns added.
 #' @family addition
 #' @examples
 #' # add_column ---------------------------------

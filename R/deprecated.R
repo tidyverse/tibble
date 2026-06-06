@@ -5,6 +5,8 @@
 #'
 #' Use [tibble()] instead of `data_frame()`.
 #'
+#' @return These functions are deprecated and will be removed in a future
+#'   package version. They return a tibble, see [tibble()].
 #' @export
 #' @keywords internal
 #' @name deprecated

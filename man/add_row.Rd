@@ -18,6 +18,9 @@ only for columns that already exist in \code{.data} and unset columns will get a
 \item{.before, .after}{One-based row index where to add the new rows,
 default: after last row.}
 }
+\value{
+A data frame of the same type as \code{.data}, with the new rows added.
+}
 \description{
 This is a convenient way to add one or more rows of data to an existing data
 frame. See \code{\link[=tribble]{tribble()}} for an easy way to create an complete

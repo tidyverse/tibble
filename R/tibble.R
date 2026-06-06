@@ -223,6 +223,7 @@ is_tibble <- function(x) {
 #' Please use [is_tibble()] instead.
 #'
 #' @inheritParams is_tibble
+#' @return `TRUE` if the object inherits from the `tbl_df` class.
 #' @export
 #' @keywords internal
 is.tibble <- function(x) {

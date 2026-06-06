@@ -51,11 +51,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Kirill Müller \email{kirill@cynkra.com} (\href{https://orcid.org/0000-0002-1416-3412}{ORCID})
+\strong{Maintainer}: Kirill M<U+00FC>ller \email{kirill@cynkra.com} (\href{https://orcid.org/0000-0002-1416-3412}{ORCID})
 
 Authors:
 \itemize{
-  \item Kirill Müller \email{kirill@cynkra.com} (\href{https://orcid.org/0000-0002-1416-3412}{ORCID})
+  \item Kirill M<U+00FC>ller \email{kirill@cynkra.com} (\href{https://orcid.org/0000-0002-1416-3412}{ORCID})
   \item Hadley Wickham \email{hadley@rstudio.com}
 }
 

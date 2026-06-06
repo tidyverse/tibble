@@ -52,6 +52,7 @@
 #'   `r lifecycle::badge("soft-deprecated")`
 #'
 #'   For compatibility only, do not use for new code.
+#' @return A [tibble][tbl_df-class].
 #' @export
 #' @examples
 #' m <- matrix(rnorm(50), ncol = 5)

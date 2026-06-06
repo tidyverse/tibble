@@ -41,6 +41,9 @@ This argument is passed on as \code{repair} to \code{\link[vctrs:vec_as_names]{v
 See there for more details on these terms and the strategies used
 to enforce them.}
 }
+\value{
+A data frame of the same type as \code{.data}, with the new columns added.
+}
 \description{
 This is a convenient way to add one or more columns to an existing data
 frame.

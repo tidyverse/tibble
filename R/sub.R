@@ -129,6 +129,8 @@ NULL
 #' @rdname subsetting
 #' @param drop Coerce to a vector if fetching one column via `tbl[, j]` .
 #'   Default `FALSE`, ignored when accessing a column via `tbl[j]` .
+#' @return The subsetting methods return a tibble for `[`, a vector or
+#'   scalar for `$` and `[[`, and a modified tibble for the assignment forms.
 #' @export
 `[.tbl_df` <- function(x, i, j, drop = FALSE, ...) {
   i_arg <- substitute(i)

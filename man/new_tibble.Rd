@@ -20,6 +20,9 @@ validate_tibble(x)
 
 \item{subclass}{Deprecated, retained for compatibility. Please use the \code{class} argument.}
 }
+\value{
+A tibble, i.e. an object of class \code{\link[=tbl_df-class]{tbl_df}}.
+}
 \description{
 Creates or validates a subclass of a tibble.
 These function is mostly useful for package authors that implement subclasses

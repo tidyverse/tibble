@@ -47,6 +47,9 @@ The previously defined \code{n_extra} argument is soft-deprecated.}
 \item{max_footer_lines}{Maximum number of footer lines. If \code{NULL},
 the \code{max_footer_lines} \link[pillar:pillar_options]{option} is used.}
 }
+\value{
+\code{NULL} (invisibly) for \code{print()} methods, a character vector for \code{format()} methods.
+}
 \description{
 One of the main features of the \code{tbl_df} class is the printing:
 \itemize{

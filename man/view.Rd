@@ -17,6 +17,9 @@ the deparsed expression is used.}
 \item{n}{Maximum number of rows to display. Only used if \code{x} is not a
 data frame. Uses the \code{view_max} \link[=tibble_options]{option} by default.}
 }
+\value{
+\code{x}, invisibly.
+}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
