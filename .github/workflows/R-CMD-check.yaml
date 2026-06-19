@@ -119,7 +119,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           cache-version: rcc-smoke-2
-          needs: build, check, website
+          needs: build, check, website, roxygen2
           # Beware of using dev pkgdown here, has brought in dev dependencies in the past
           extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/pkgdown deps::.
 
@@ -312,6 +312,10 @@ jobs:
 
       - uses: ./.github/workflows/custom/before-install
         if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
+        with:
+          # Generic: forward any per-entry environment variables defined in the
+          # test matrix (see .github/versions-matrix.R) to the custom action.
+          env: ${{ matrix.env }}
 
       - uses: ./.github/workflows/install
         with:
@@ -336,7 +340,11 @@ jobs:
         shell: Rscript {0}
 
       - uses: ./.github/workflows/update-snapshots
-        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+        # Generic escape hatch: a custom action may set SKIP_UPDATE_SNAPSHOTS
+        # to opt out of running the snapshot updater,
+        # which runs tests directly via testthat::test_local()
+        # and is difficult to disable otherwise.
+        if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && env.SKIP_UPDATE_SNAPSHOTS != 'true'
         with:
           base: ${{ github.head_ref }}
 
