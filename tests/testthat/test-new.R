@@ -16,7 +16,7 @@ test_that("new_tibble() with new class argument", {
       list(b = 1:3),
       attr1 = "value1",
       attr2 = 2,
-      .Names = "b",
+      names = "b",
       row.names = .set_row_names(3L)
     )
   )
