@@ -1,5 +1,14 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.1.9019
+
+## Continuous integration
+
+- Run on Ubuntu 26.04.
+
+- Align workflows with template.
+
+
 # tibble 3.3.1.9018
 
 ## Chore
