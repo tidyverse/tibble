@@ -1,5 +1,29 @@
 # Changelog
 
+## tibble 3.3.1.9018
+
+### Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: <https://github.com/tidyverse/tibble/actions/runs/28496628711>
+
+## tibble 3.3.1.9017
+
+### Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: <https://github.com/tidyverse/tibble/actions/runs/27861831868>
+
+## tibble 3.3.1.9016
+
+### Continuous integration
+
+- Update ccache-action reference.
+
+- Bump action version.
+
 ## tibble 3.3.1.9015
 
 - Ci: Unify fledge.yaml across cynkratemplate and fledge
