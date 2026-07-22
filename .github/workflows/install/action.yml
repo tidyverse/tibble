@@ -110,6 +110,26 @@ runs:
         echo packages=$packages >> $GITHUB_OUTPUT
       shell: bash
 
+    - name: Let sudo keep R library env vars (ubuntu-26.04 forbids `sudo -E`)
+      # r-lib/actions/setup-r-dependencies installs pak with
+      #   sudo -E --preserve-env=PATH env R -e 'dir.create(Sys.getenv("R_LIB_FOR_PAK"), ...)'
+      # From the ubuntu-26.04 runner image on, the sudoers policy rejects `-E`
+      # ("sudo: preserving the entire environment is not supported, '-E' is
+      # ignored"), so R_LIB_FOR_PAK is stripped and dir.create() aborts with a
+      # zero-length 'path' argument. Whitelisting the R_* vars via env_keep
+      # preserves them across sudo's env_reset even though blanket `-E` is
+      # denied, without granting the setenv privilege.
+      # Root cause is the ubuntu-26.04 image, still in public preview
+      # (actions/runner-images#14226). No upstream r-lib/actions issue tracks the
+      # `sudo -E` breakage yet -- one should be filed; drop this once fixed.
+      if: runner.os == 'Linux'
+      run: |
+        sudo tee /etc/sudoers.d/r-lib-pak >/dev/null <<'EOF'
+        Defaults env_keep += "R_LIB_FOR_PAK R_LIBS R_LIBS_USER R_LIBS_SITE MAKEFLAGS"
+        EOF
+        sudo chmod 0440 /etc/sudoers.d/r-lib-pak
+      shell: bash
+
     - uses: r-lib/actions/setup-r-dependencies@v2
       env:
         GITHUB_PAT: ${{ inputs.token }}

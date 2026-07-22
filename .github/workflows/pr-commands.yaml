@@ -79,7 +79,7 @@ jobs:
   merge:
     if: startsWith(github.event.comment.body, '/merge')
     name: merge
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     steps:
       - name: Create and merge pull request
         run: |
@@ -94,6 +94,6 @@ jobs:
           # curl -s -X PUT --header "authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" $PR_URL/merge
   # A mock job just to ensure we have a successful build status
   finish:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-26.04
     steps:
       - run: true
