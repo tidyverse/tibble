@@ -73,9 +73,14 @@ transforming the user's input.
 \item Inner names in columns are left unchanged.
 \item For R < 4.0, \href{https://blog.r-project.org/2020/02/16/stringsasfactors/}{character vectors were not coerced to factor}.
 }
-\item \code{tibble()} builds columns sequentially. When defining a column, you can
-refer to columns created earlier in the call. Only columns of length one
-are recycled.
+\item \code{tibble()} builds columns sequentially.
+When defining a column, you can refer to columns created earlier in the
+call.
+Inputs are recycled using the \link[vctrs:theory-faq-recycling]{vctrs recycling rules}:
+only size-one inputs are recycled, and mixing size-one and size-zero
+inputs produces a zero-row tibble.
+This differs from \code{\link[base:data.frame]{base::data.frame()}} and can be overridden with \code{.rows}
+when you need a fixed row count.
 \item If a column evaluates to a data frame or tibble, it is nested or spliced.
 If it evaluates to a matrix or a array, it remains a matrix or array,
 respectively.
@@ -93,6 +98,9 @@ tibble(a, a * 2)
 
 # Scalars (vectors of length one) are recycled:
 tibble(a, b = a * 2, c = 1)
+# Zero-length inputs can create a zero-row tibble:
+tibble(a = 1, b = tibble())
+tibble(a = 1, b = tibble(.rows = 1))
 
 # Columns are available in subsequent expressions:
 tibble(x = runif(10), y = x * 2)
