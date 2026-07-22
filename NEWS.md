@@ -1,5 +1,101 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.1.9019
+
+## Continuous integration
+
+- Run on Ubuntu 26.04.
+
+- Align workflows with template.
+
+
+# tibble 3.3.1.9018
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/28496628711
+
+
+# tibble 3.3.1.9017
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/27861831868
+
+
+# tibble 3.3.1.9016
+
+## Continuous integration
+
+- Update ccache-action reference.
+
+- Bump action version.
+
+
+# tibble 3.3.1.9015
+
+- Ci: Unify fledge.yaml across cynkratemplate and fledge (#86).
+
+
+# tibble 3.3.1.9014
+
+## Chore
+
+- Add ccache to `.gitignore` and `.Rbuildignore`.
+
+## Continuous integration
+
+- Create snapshot update PR against correct branch.
+
+- Add reference to `/apply-patch` workflow in commit message.
+
+- Clarify rationale for not deploying on schedule.
+
+
+# tibble 3.3.1.9013
+
+## Continuous integration
+
+- Only run fledge on pushes to main.
+
+
+# tibble 3.3.1.9012
+
+## Continuous integration
+
+- Tweak fledge workflow and ccache action.
+
+- Cosmetics.
+
+- Bump action versions.
+
+- Install clang-format-21.
+
+- Align fledge workflow.
+
+- Harmonize.
+
+
+# tibble 3.3.1.9011
+
+## Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: https://github.com/tidyverse/tibble/actions/runs/25270192916
+
+
+# tibble 3.3.1.9010
+
+## Chore
+
+- Avoid import message on R-devel.
+
+
 # tibble 3.3.1.9009
 
 ## Chore

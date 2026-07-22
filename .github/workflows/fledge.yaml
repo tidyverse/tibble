@@ -9,6 +9,12 @@ on:
         required: false
         type: boolean
         default: false
+  push:
+    branches:
+      - main
+      - master
+    paths:
+      - ".github/workflows/fledge.yaml"
   # daily run
   schedule:
   - cron: "30 0 * * *"
@@ -18,24 +24,59 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  check_fork:
-    runs-on: ubuntu-24.04
+  check_news:
+    runs-on: ubuntu-26.04
     outputs:
-      is_forked: ${{ steps.check.outputs.is_forked }}
+      should_run: ${{ steps.check.outputs.should_run }}
     steps:
-      - name: Check if the repo is forked
+      # Fetch NEWS.md via API instead of full checkout for speed
+      - name: Check if not forked and NEWS.md mentions fledge
         id: check
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
+          set -euxo pipefail
+
+          # Check if repo is not forked
           is_forked=$(gh api repos/${{ github.repository }} | jq .fork)
-          echo "is_forked=${is_forked}" >> $GITHUB_OUTPUT
+          if [ "$is_forked" == "true" ]; then
+            echo "Repository is a fork. Skipping fledge workflow."
+            exit 0
+          fi
+
+          # Special case: duckdb and igraph
+          if [[ "${{ github.repository }}" == 'krlmlr/duckdb-r' ]]; then
+            echo "Repository is krlmlr/duckdb-r. Skipping fledge workflow."
+            exit 0
+          fi
+
+          if [[ "${{ github.repository }}" == 'krlmlr/rigraph' ]]; then
+            echo "Repository is krlmlr/rigraph. Skipping fledge workflow."
+            exit 0
+          fi
+
+          # Fetch NEWS.md content via API without full checkout
+          gh api repos/${{ github.repository }}/contents/NEWS.md --jq .content 2>/dev/null | base64 -d > /tmp/news.md || true
+
+          if [ ! -s /tmp/news.md ]; then
+            echo "NEWS.md not found. Skipping fledge workflow."
+            exit 0
+          fi
+
+          # Read first line of NEWS.md and check if it mentions fledge
+          news_content=$(head -n 1 /tmp/news.md)
+          if ! [[ "$news_content" == *"fledge"* ]]; then
+            echo "NEWS.md does not mention fledge. Skipping fledge workflow."
+            exit 0
+          fi
+
+          echo "should_run=true" >> $GITHUB_OUTPUT
         shell: bash
 
   fledge:
-    runs-on: ubuntu-24.04
-    needs: check_fork
-    if: needs.check_fork.outputs.is_forked == 'false'
+    runs-on: ubuntu-26.04
+    needs: check_news
+    if: needs.check_news.outputs.should_run == 'true'
     permissions:
       contents: write
       pull-requests: write
@@ -43,7 +84,7 @@ jobs:
     env:
       FLEDGE_GHA_CI: true
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           fetch-depth: 0
           fetch-tags: true
@@ -57,8 +98,8 @@ jobs:
 
       - uses: ./.github/workflows/install
         with:
-          pak-version: devel
-          packages: cynkra/fledge
+          token: ${{ secrets.GITHUB_TOKEN }}
+          packages: ${{ github.repository == 'cynkra/fledge' && 'local::.' || 'cynkra/fledge' }}
           cache-version: fledge-1
 
       - name: Count rulesets

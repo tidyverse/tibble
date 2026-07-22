@@ -52,7 +52,14 @@ name: rcc
 
 jobs:
   rcc-smoke:
-    runs-on: ubuntu-24.04
+    # Deliberately amd64. The smoke test is the gate that also styles,
+    # roxygenizes, updates snapshots, commits back and deploys pkgdown, so it
+    # must run on the most stable and available runner. The ubuntu-26.04-arm
+    # image is still in public preview (actions/runner-images#14226 -- possible
+    # instability and queueing), so arm64 is exercised in the full version matrix
+    # (rcc-full) instead, where fail-fast: false isolates failures and jobs don't
+    # mutate the repo. Revisit once the arm image is generally available.
+    runs-on: ubuntu-26.04
 
     outputs:
       sha: ${{ steps.commit.outputs.sha }}
@@ -71,7 +78,7 @@ jobs:
     # End custom: services
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref }}
 
@@ -119,7 +126,7 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           cache-version: rcc-smoke-2
-          needs: build, check, website
+          needs: build, check, website, roxygen2
           # Beware of using dev pkgdown here, has brought in dev dependencies in the past
           extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/pkgdown deps::.
 
@@ -180,6 +187,10 @@ jobs:
       - uses: ./.github/workflows/pkgdown-build
         if: github.event_name != 'push'
 
+      # Deliberately deploy only on push
+      # Deployment on schedule adds too much noise.
+      # Deployment on pull_request is not possible because it requires a token with write permissions, which is not available in pull_request workflows for security reasons.
+      # Deployment on workflow_dispatch is available via the pkgdown workflow
       - uses: ./.github/workflows/pkgdown-deploy
         if: github.event_name == 'push'
 
@@ -264,7 +275,7 @@ jobs:
         shell: bash
 
   rcc-smoke-check-matrix:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     name: "Check matrix"
 
@@ -272,7 +283,7 @@ jobs:
       - rcc-smoke
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ needs.rcc-smoke.outputs.sha }}
 
@@ -302,12 +313,16 @@ jobs:
       matrix: ${{fromJson(needs.rcc-smoke.outputs.versions-matrix)}}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           ref: ${{ needs.rcc-smoke.outputs.sha }}
 
       - uses: ./.github/workflows/custom/before-install
         if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
+        with:
+          # Generic: forward any per-entry environment variables defined in the
+          # test matrix (see .github/versions-matrix.R) to the custom action.
+          env: ${{ matrix.env }}
 
       - uses: ./.github/workflows/install
         with:
@@ -332,7 +347,13 @@ jobs:
         shell: Rscript {0}
 
       - uses: ./.github/workflows/update-snapshots
-        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+        # Generic escape hatch: a custom action may set SKIP_UPDATE_SNAPSHOTS
+        # to opt out of running the snapshot updater,
+        # which runs tests directly via testthat::test_local()
+        # and is difficult to disable otherwise.
+        if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) && env.SKIP_UPDATE_SNAPSHOTS != 'true'
+        with:
+          base: ${{ github.head_ref }}
 
       - uses: ./.github/workflows/check
         if: ${{ ! matrix.covr }}
@@ -350,7 +371,7 @@ jobs:
     needs:
       - rcc-smoke
 
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     if: ${{ needs.rcc-smoke.outputs.dep-suggests-matrix != '' && (github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.run-rcc-suggests)) }}
 
@@ -364,7 +385,7 @@ jobs:
       matrix: ${{fromJson(needs.rcc-smoke.outputs.dep-suggests-matrix)}}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: ./.github/workflows/custom/before-install
         if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''

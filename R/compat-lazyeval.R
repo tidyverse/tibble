@@ -51,7 +51,7 @@ compat_lazy <- function(lazy, env = caller_env(), warn = TRUE) {
       new_quosure(lazy, env)
     },
     list = if (inherits(lazy, "lazy")) {
-      lazy = new_quosure(lazy$expr, lazy$env)
+      lazy <- new_quosure(lazy$expr, lazy$env)
     }
   )
 

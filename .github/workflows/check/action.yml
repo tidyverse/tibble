@@ -24,7 +24,7 @@ runs:
 
     - name: Upload check results
       if: failure()
-      uses: actions/upload-artifact@main
+      uses: actions/upload-artifact@v5
       with:
         name: ${{ inputs.results }}-results
         path: check

@@ -29,11 +29,24 @@ runs:
         air format .
       shell: bash
 
+    - name: Install clang-format-21
+      if: ${{ steps.check.outputs.clang_format_enabled == 'true' }}
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends wget gnupg lsb-release ca-certificates software-properties-common
+        wget -O /tmp/llvm.sh https://apt.llvm.org/llvm.sh
+        chmod +x /tmp/llvm.sh
+        sudo /tmp/llvm.sh 21
+        sudo apt-get update
+        sudo apt-get install -y --no-install-recommends clang-format-21
+        clang-format-21 --version
+      shell: bash
+
     - name: Run clang-format
       if: ${{ steps.check.outputs.clang_format_enabled == 'true' }}
       run: |
         shopt -s nullglob
-        clang-format -i src/*.{c,cc,cpp,h,hpp}
+        clang-format-21 -i src/*.{c,cc,cpp,h,hpp}
       shell: bash
 
     - name: Check Git status

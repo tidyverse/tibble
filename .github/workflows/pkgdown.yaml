@@ -18,7 +18,7 @@ concurrency:
 
 jobs:
   pkgdown:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     name: "pkgdown"
 
@@ -26,7 +26,7 @@ jobs:
     # End custom: services
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: ./.github/workflows/rate-limit
         with:

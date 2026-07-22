@@ -14,14 +14,14 @@ name: rcc dev
 
 jobs:
   matrix:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     outputs:
       matrix: ${{ steps.set-matrix.outputs.matrix }}
 
     name: Collect deps
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: ./.github/workflows/rate-limit
         with:
@@ -33,7 +33,7 @@ jobs:
         uses: ./.github/workflows/dep-matrix
 
   check-matrix:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
     needs: matrix
 
     name: Check deps
@@ -51,7 +51,7 @@ jobs:
           echo $matrix | json2yaml
 
   R-CMD-check-base:
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     name: base
 
@@ -62,7 +62,7 @@ jobs:
       fail-fast: false
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: ./.github/workflows/custom/before-install
         if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
@@ -97,7 +97,7 @@ jobs:
       - matrix
       - R-CMD-check-base
 
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-26.04
 
     name: 'rcc-dev: ${{ matrix.package }}'
 
@@ -109,7 +109,7 @@ jobs:
       matrix: ${{fromJson(needs.matrix.outputs.matrix)}}
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
 
       - uses: ./.github/workflows/custom/before-install
         if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
@@ -125,7 +125,10 @@ jobs:
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          remotes::install_runiverse("${{ matrix.package }}", linux_distro = "noble")
+          # r-universe builds Linux binaries for ubuntu:latest, which now tracks
+          # 26.04 "resolute" (it no longer publishes "noble"). This matches the
+          # ubuntu-26.04 runner above.
+          remotes::install_runiverse("${{ matrix.package }}", linux_distro = "resolute")
         shell: Rscript {0}
 
       - name: Session info

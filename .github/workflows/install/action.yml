@@ -110,6 +110,26 @@ runs:
         echo packages=$packages >> $GITHUB_OUTPUT
       shell: bash
 
+    - name: Let sudo keep R library env vars (ubuntu-26.04 forbids `sudo -E`)
+      # r-lib/actions/setup-r-dependencies installs pak with
+      #   sudo -E --preserve-env=PATH env R -e 'dir.create(Sys.getenv("R_LIB_FOR_PAK"), ...)'
+      # From the ubuntu-26.04 runner image on, the sudoers policy rejects `-E`
+      # ("sudo: preserving the entire environment is not supported, '-E' is
+      # ignored"), so R_LIB_FOR_PAK is stripped and dir.create() aborts with a
+      # zero-length 'path' argument. Whitelisting the R_* vars via env_keep
+      # preserves them across sudo's env_reset even though blanket `-E` is
+      # denied, without granting the setenv privilege.
+      # Root cause is the ubuntu-26.04 image, still in public preview
+      # (actions/runner-images#14226). No upstream r-lib/actions issue tracks the
+      # `sudo -E` breakage yet -- one should be filed; drop this once fixed.
+      if: runner.os == 'Linux'
+      run: |
+        sudo tee /etc/sudoers.d/r-lib-pak >/dev/null <<'EOF'
+        Defaults env_keep += "R_LIB_FOR_PAK R_LIBS R_LIBS_USER R_LIBS_SITE MAKEFLAGS"
+        EOF
+        sudo chmod 0440 /etc/sudoers.d/r-lib-pak
+      shell: bash
+
     - uses: r-lib/actions/setup-r-dependencies@v2
       env:
         GITHUB_PAT: ${{ inputs.token }}
@@ -136,7 +156,8 @@ runs:
       shell: bash
 
     - name: Install ccache
-      uses: krlmlr/ccache-action@parallel-dir
+      # https://github.com/hendrikmuhs/ccache-action/issues/437
+      uses: hendrikmuhs/ccache-action@v1.2.22
       with:
         max-size: 10G
         verbose: 1
@@ -146,13 +167,30 @@ runs:
     - name: Use ccache for compiling R code, and parallelize
       run: |
         mkdir -p ~/.R
-        echo 'CC      :=  ccache $(CC)' >> ~/.R/Makevars
-        echo 'CXX     :=  ccache $(CXX)' >> ~/.R/Makevars
-        echo 'CXX11   :=  ccache $(CXX11)' >> ~/.R/Makevars
-        echo 'CXX14   :=  ccache $(CXX14)' >> ~/.R/Makevars
-        echo 'CXX17   :=  ccache $(CXX17)' >> ~/.R/Makevars
+        # Infer each compiler default for the active R version from R CMD config,
+        # then prepend ccache. Reading the resolved defaults preserves the
+        # standard flags R selects per version (e.g. -std=gnu2x for C, -std=gnu++17
+        # / -std=gnu++20 for C++); a plain "CC = ccache gcc" override would drop
+        # them and silently downgrade the standard across the version matrix.
+        # Inference uses an empty user Makevars so we always read the pristine
+        # Makeconf defaults, never a value we just wrote.
+        # Note: the versioned switches (CXX11..CXX23) intentionally come out as
+        # bare "g++" with no -std flag. R keeps the standard in a separate
+        # CXXnnSTD variable (CXX17STD = -std=gnu++17, ...) and applies it on top
+        # at compile time, so wrapping only CXXnn with ccache is correct and we
+        # must NOT pin -std here ourselves.
+        empty_makevars="$(mktemp)"
+        for var in CC CXX CXX11 CXX14 CXX17 CXX20 CXX23; do
+          val="$(R_MAKEVARS_USER="$empty_makevars" R CMD config "$var" 2>/dev/null || true)"
+          if [ -n "$val" ]; then
+            echo "$var = ccache $val" >> ~/.R/Makevars
+          fi
+        done
+        rm -f "$empty_makevars"
         echo 'MAKEFLAGS = -j2' >> ~/.R/Makevars
+        echo "===== generated ~/.R/Makevars ====="
         cat ~/.R/Makevars
+        echo "==================================="
 
         echo 'CCACHE_SLOPPINESS=locale,time_macros' | tee -a $GITHUB_ENV
 
