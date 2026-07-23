@@ -1,22 +1,41 @@
 # Workflow derived from https://github.com/posit-dev/setup-air/tree/main/examples
 
 on:
-  # Using `pull_request_target` over `pull_request` for elevated `GITHUB_TOKEN`
-  # privileges, otherwise we can't set `pull-requests: write` when the pull
-  # request comes from a fork, which is our main use case (external contributors).
+  # We keep `pull_request_target` (rather than `pull_request`) so that this job
+  # can post review suggestions on pull requests that come from forks, which is
+  # our main use case. A fork's `pull_request` run only gets a read-only token,
+  # so it cannot comment; `pull_request_target` runs with the base repository's
+  # token and can be granted `pull-requests: write`.
   #
-  # `pull_request_target` runs in the context of the target branch (`main`, usually),
-  # rather than in the context of the pull request like `pull_request` does. Due
-  # to this, we must explicitly checkout `ref: ${{ github.event.pull_request.head.sha }}`.
-  # This is typically frowned upon by GitHub, as it exposes you to potentially running
-  # untrusted code in a context where you have elevated privileges, but they explicitly
-  # call out the use case of reformatting and committing back / commenting on the PR
-  # as a situation that should be safe (because we aren't actually running the untrusted
-  # code, we are just treating it as passive data).
+  # SECURITY -- this is a classic "pwn request" surface, so the fork's code is
+  # treated strictly as *data to be formatted*, never as code to run:
+  #
+  #   1. The formatter tooling (the `style` action and the air / clang-format
+  #      binaries) is loaded from the BASE repository, not from the PR checkout.
+  #      This is the critical point. The naive pattern
+  #        - uses: actions/checkout@v6      # ref: fork head
+  #        - uses: ./.github/workflows/style
+  #      resolves `./...style` from the *checked-out fork*, so an attacker only
+  #      has to edit their fork's `style/action.yml` to run arbitrary commands
+  #      with our token and secrets. Here we run the base repo's copy instead
+  #      (checked out into `ci-base/`), so the fork controls only the input
+  #      files, not the code that executes.
+  #   2. air and clang-format merely parse and re-print source; they do not
+  #      evaluate it. No build / install / test step ever runs the fork's code.
+  #   3. The PR is checked out with `persist-credentials: false`, so the token
+  #      is not written to disk alongside untrusted files.
+  #   4. Permissions are reduced to `pull-requests: write` only, and
+  #      `harden-runner` observes (and can block) network egress.
+  #
   # https://securitylab.github.com/resources/github-actions-preventing-pwn-requests/
+  # https://gh.io/securely-using-pull_request_target
   pull_request_target:
 
 name: format-suggest.yaml
+
+# Deny everything by default; the job below opts back into the single scope it
+# needs. This caps the blast radius of the elevated `pull_request_target` token.
+permissions: {}
 
 jobs:
   format-suggest:
@@ -31,11 +50,40 @@ jobs:
       pull-requests: write
 
     steps:
-      - uses: actions/checkout@v6
+      # Defense in depth: monitor outbound network traffic from the runner.
+      # Switch `egress-policy` to `block` (with an `allowed-endpoints` list) to
+      # hard-fail on any connection outside the formatter tool downloads; run
+      # once in `audit` first to capture the exact endpoints to allow.
+      - name: Harden runner
+        uses: step-security/harden-runner@v2
+        with:
+          egress-policy: audit
+
+      # The untrusted PR code, checked out at the workspace root. It is DATA
+      # only -- nothing below executes it. `allow-unsafe-pr-checkout` is required
+      # by actions/checkout@v6 for a fork ref under pull_request_target; it is
+      # safe here specifically because the code that runs comes from `ci-base/`
+      # (the base repo), never from this checkout. See the security notes above.
+      - name: Check out PR code (treated as data)
+        uses: actions/checkout@v6
         with:
           ref: ${{ github.event.pull_request.head.sha }}
+          persist-credentials: false
+          allow-unsafe-pr-checkout: true
 
-      - uses: ./.github/workflows/style
+      # The trusted formatter tooling, from the base repository, into a separate
+      # directory the fork cannot influence.
+      - name: Check out trusted tooling from base repo
+        uses: actions/checkout@v6
+        with:
+          path: ci-base
+          persist-credentials: false
+
+      # Runs the base repo's `style` action against the PR code at the workspace
+      # root. Because the action comes from `ci-base/`, the fork controls only
+      # the files being formatted, not the code that runs.
+      - name: Format
+        uses: ./ci-base/.github/workflows/style
 
       - name: Suggest
         uses: reviewdog/action-suggester@v1
