@@ -38,11 +38,22 @@ jobs:
         run: |
           package <- read.dcf("DESCRIPTION")[, "Package"][[1]]
           deps <- tools:::package_dependencies(package, reverse = TRUE, which = c("Depends", "Imports", "LinkingTo", "Suggests"))[[1]]
-          json <- paste0(
-            '{"package":[',
-            paste0('"', deps, '"', collapse = ","),
-            ']}'
-          )
+          # Build the matrix JSON explicitly for the empty case: for a package with
+          # no (rev)dependencies, paste0('"', character(0), '"') collapses to the
+          # two-character string '""', so the naive construction emits
+          # {"package":[""]} (one empty-string entry) instead of an empty array.
+          # That spawns a spurious matrix job that runs install_runiverse("") and
+          # fails. Emit an empty array so the dependent matrix job is skipped when
+          # there are none.
+          if (length(deps) == 0) {
+            json <- '{"package":[]}'
+          } else {
+            json <- paste0(
+              '{"package":[',
+              paste0('"', deps, '"', collapse = ","),
+              ']}'
+            )
+          }
           writeLines(json)
           writeLines(paste0("matrix=", json), Sys.getenv("GITHUB_OUTPUT"))
         shell: Rscript {0}
