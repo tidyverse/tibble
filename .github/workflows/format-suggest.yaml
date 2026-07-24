@@ -50,14 +50,35 @@ jobs:
       pull-requests: write
 
     steps:
-      # Defense in depth: monitor outbound network traffic from the runner.
-      # Switch `egress-policy` to `block` (with an `allowed-endpoints` list) to
-      # hard-fail on any connection outside the formatter tool downloads; run
-      # once in `audit` first to capture the exact endpoints to allow.
+      # Defense in depth: block all outbound network traffic except the
+      # endpoints the formatters legitimately need. Even if a formatter ever
+      # mishandled attacker-controlled input, it could not exfiltrate the token
+      # or fetch a second-stage payload.
+      #
+      # The GitHub endpoints below were confirmed from a harden-runner `audit`
+      # run of this workflow (git checkout, setup-air / reviewdog binary
+      # downloads, reviewdog posting via the API). The apt.llvm.org / Ubuntu
+      # archive endpoints are only hit when a package ships a `.clang-format`
+      # file and the `style` action installs clang-format; they are included so
+      # C++ consumers of this template are not broken, even though a pure-R
+      # package never contacts them.
+      #
+      # If a run is ever blocked, harden-runner reports the denied endpoint in
+      # the job's "Harden Runner" step summary (and the StepSecurity insights
+      # for the run) -- add it here and re-run. See the note in the PR for the
+      # audit -> block workflow.
       - name: Harden runner
-        uses: step-security/harden-runner@v2
+        uses: step-security/harden-runner@bf7454d06d71f1098171f2acdf0cd4708d7b5920 # v2
         with:
-          egress-policy: audit
+          egress-policy: block
+          allowed-endpoints: >
+            github.com:443
+            api.github.com:443
+            release-assets.githubusercontent.com:443
+            objects.githubusercontent.com:443
+            codeload.github.com:443
+            apt.llvm.org:443
+            azure.archive.ubuntu.com:80
 
       # The untrusted PR code, checked out at the workspace root. It is DATA
       # only -- nothing below executes it. `allow-unsafe-pr-checkout` is required
@@ -86,7 +107,7 @@ jobs:
         uses: ./ci-base/.github/workflows/style
 
       - name: Suggest
-        uses: reviewdog/action-suggester@v1
+        uses: reviewdog/action-suggester@2558ba17e65a9039e73764a73009fc05fef28a46 # v1
         with:
           level: error
           fail_level: error
