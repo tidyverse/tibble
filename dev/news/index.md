@@ -1,5 +1,36 @@
 # Changelog
 
+## tibble 3.3.1.9020
+
+### Bug fixes
+
+- Replace deprecated `.Names` in
+  [`structure()`](https://rdrr.io/r/base/structure.html) test call.
+
+  R-devel deprecated the special
+  [`structure()`](https://rdrr.io/r/base/structure.html) argument
+  `.Names`, so the
+  [`new_tibble()`](https://tibble.tidyverse.org/dev/reference/new_tibble.md)
+  test in `test-new.R` triggered both a runtime
+  [`.Deprecated()`](https://rdrr.io/r/base/Deprecated.html) warning and
+  a “checking R code for possible problems” NOTE (“Found calls to
+  structure() using deprecated special names”), failing R CMD check on
+  R-devel. Use `names` instead, which is behavior-identical across all R
+  versions.
+
+  Co-Authored-By: Claude Opus 4.8 <noreply@anthropic.com>
+  Claude-Session:
+  <https://claude.ai/code/session_016BRYo2D5L4wpgaTFTHH2B7>
+
+#### ci
+
+- Emit empty package matrix when there are no (rev)deps.
+
+### Uncategorized
+
+- Ci: Harden `format-suggest` against `pull_request_target` pwn requests
+  ([\#93](https://github.com/tidyverse/tibble/issues/93)).
+
 ## tibble 3.3.1.9019
 
 ### Continuous integration

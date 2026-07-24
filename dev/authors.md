@@ -21,12 +21,12 @@ Source:
 [`DESCRIPTION`](https://github.com/tidyverse/tibble/blob/main/DESCRIPTION)
 
 Müller K, Wickham H (2026). *tibble: Simple Data Frames*. R package
-version 3.3.1.9019, <https://tibble.tidyverse.org/>.
+version 3.3.1.9020, <https://tibble.tidyverse.org/>.
 
     @Manual{,
       title = {tibble: Simple Data Frames},
       author = {Kirill Müller and Hadley Wickham},
       year = {2026},
-      note = {R package version 3.3.1.9019},
+      note = {R package version 3.3.1.9020},
       url = {https://tibble.tidyverse.org/},
     }
