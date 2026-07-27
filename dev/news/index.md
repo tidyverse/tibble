@@ -1,5 +1,11 @@
 # Changelog
 
+## tibble 3.3.1.9021
+
+### Continuous integration
+
+- Lock down `format-suggest` egress (audit → block).
+
 ## tibble 3.3.1.9020
 
 ### Bug fixes
