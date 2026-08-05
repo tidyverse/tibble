@@ -1,5 +1,16 @@
 # Changelog
 
+## tibble 3.3.1.9022
+
+- Ci: Run all smoke-test checks even when one fails
+  ([\#97](https://github.com/tidyverse/tibble/issues/97)).
+
+- Ci: Apply matrix `env` vars in the workflow, not in custom actions
+  ([\#95](https://github.com/tidyverse/tibble/issues/95)).
+
+- Ci: Link the responsible workflow run in snapshot update PRs
+  ([\#96](https://github.com/tidyverse/tibble/issues/96)).
+
 ## tibble 3.3.1.9021
 
 ### Continuous integration
