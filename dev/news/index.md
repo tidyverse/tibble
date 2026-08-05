@@ -1,5 +1,28 @@
 # Changelog
 
+## tibble 3.3.1.9023
+
+### Chore
+
+- Auto-update from GitHub Actions.
+
+  Run: <https://github.com/tidyverse/tibble/actions/runs/30974941843>
+
+### Continuous integration
+
+- Remove unused pr-commands workflow.
+
+### Uncategorized
+
+- Ci: Give every workflow and job an explicit `permissions` block
+  ([\#103](https://github.com/tidyverse/tibble/issues/103)).
+
+- Ci: Pass workflow context through the environment, not into script
+  text ([\#102](https://github.com/tidyverse/tibble/issues/102)).
+
+- Ci: Add a Windows arm64 (`windows-11-arm`) check on R-release
+  ([\#99](https://github.com/tidyverse/tibble/issues/99)).
+
 ## tibble 3.3.1.9022
 
 - Ci: Run all smoke-test checks even when one fails
