@@ -1,5 +1,15 @@
 # Changelog
 
+## tibble 3.3.1.9025
+
+### Continuous integration
+
+- Wrap the commit status update into an action.
+
+- Route ccache through one-word compiler wrappers on Unix.
+
+- Name every step and restore the log entry `setup-pandoc` swallows.
+
 ## tibble 3.3.1.9024
 
 ### Continuous integration
