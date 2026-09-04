@@ -126,11 +126,7 @@ runs:
 
     - name: Read `Config/gha/extra-packages` from DESCRIPTION
       id: get-extra
-      run: |
-        set -x
-        packages=$( ( grep Config/gha/extra-packages DESCRIPTION || true ) | cut -d " " -f 2-)
-        echo packages=$packages >> $GITHUB_OUTPUT
-      shell: bash
+      uses: ./.github/workflows/get-extra
 
     - name: Let sudo keep R library env vars (ubuntu-26.04 forbids `sudo -E`)
       # r-lib/actions/setup-r-dependencies installs pak with
@@ -276,7 +272,41 @@ runs:
         cat ~/.R/Makevars
         echo "==================================="
 
+        # Compile on every core the runner has, not the two this used to pin.
+        # Standard GitHub-hosted Linux runners have been 4-vCPU since 2024, so
+        # -j2 left half the box idle through the phase that dominates a build:
+        # measured on a 4-core box, 8 vendored unity objects with ccache
+        # disabled take 70.8 s at -j2 and 43.1 s at -j4 -- 1.64x, at identical
+        # user time. Peak RSS per unity object is ~834 MB, so four in flight is
+        # ~3.3 GB of the runner's 16 GB.
+        # detectCores() can return NA on exotic platforms; fall back to the old
+        # value there. `--as-cran` sets _R_CHECK_LIMIT_CORES_, but that polices
+        # the *package's* runtime parallelism, not compilation, so this is safe.
+        ncores="$(Rscript --vanilla -e 'n <- parallel::detectCores(); cat(if (is.na(n) || n < 1) 2L else as.integer(n))')"
+        echo "MAKEFLAGS = -j${ncores}" >> ~/.R/Makevars
+        echo "===== generated ~/.R/Makevars ====="
+        cat ~/.R/Makevars
+        echo "==================================="
+
         echo 'CCACHE_SLOPPINESS=locale,time_macros' | tee -a $GITHUB_ENV
+
+        # Do NOT export UserNM here, however tempting the `UserNM=true` trick
+        # from AGENTS.md looks. It is a development shortcut, not a CI setting.
+        #
+        # R takes the nm program from $UserNM in
+        # tools:::read_symbols_from_object_file, and that function serves two
+        # callers, not one: building `symbols.rds` at install time (which
+        # src/Makevars puts on the `all:` target), *and*
+        # tools:::check_so_symbols scanning the built .so during `R CMD check`.
+        # Pointing nm at `true` blinds the second one, so the check finds no
+        # symbols at all and reports "Found no calls to 'R_registerRoutines',
+        # 'R_useDynamicSymbols'" -- a NOTE, and with error_on = "note" a failed
+        # check on a package that registers its routines perfectly well.
+        #
+        # It is not worth scoping to the installs either: measured, the sweep is
+        # ~0.25 s per 90 MB of unstripped objects, so ~10-20 s for the whole
+        # ~2.5 GB tree -- under 5% of a commit's floor, against a footgun that
+        # silently weakens a CRAN check.
 
         # echo 'CCACHE_DEBUG=true' | tee -a $GITHUB_ENV
         # echo "CCACHE_DEBUGDIR=$(dirname $(pwd))/ccache-debug" | tee -a $GITHUB_ENV

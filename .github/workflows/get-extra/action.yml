@@ -8,9 +8,16 @@ runs:
   using: "composite"
   steps:
     - name: Get extra packages
+      # Read with read.dcf(), not `grep | cut`: a DCF value may wrap onto
+      # indented continuation lines, and `grep` only ever returns the first
+      # line -- which is blank exactly when the field wraps, as a multi-package
+      # value normally does. That silently yielded an empty string, so every
+      # reference in this field went unread, including the
+      # `=?ignore-build-errors` parameters that keep a dependency which cannot
+      # be built from source on some runner from failing the whole check.
       id: get-extra
       run: |
-        set -x
-        packages=$( ( grep Config/gha/extra-packages DESCRIPTION || true ) | cut -d " " -f 2)
-        echo packages=$packages >> $GITHUB_OUTPUT
-      shell: bash
+        x <- read.dcf("DESCRIPTION", fields = "Config/gha/extra-packages")[1, 1]
+        packages <- if (is.na(x)) "" else gsub("[[:space:]]+", " ", trimws(x))
+        cat("packages=", packages, "\n", sep = "", file = Sys.getenv("GITHUB_OUTPUT"), append = TRUE)
+      shell: Rscript {0}

@@ -283,7 +283,11 @@ append_summary(c(
   sprintf(
     "`%s` %s (dev) vs %s (CRAN), R %s%s.",
     plan$package, plan$dev_version, plan$cran_version, plan$r_version,
-    if (plan$retry_of > 0) sprintf(", retry of run %d", plan$retry_of) else ""
+    if (run_id_chr(plan$retry_of) != "0") {
+      sprintf(", retry of run %s", plan$retry_of)
+    } else {
+      ""
+    }
   ),
   "",
   headline,

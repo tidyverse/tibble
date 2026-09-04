@@ -20,6 +20,15 @@ env_flag <- function(name) {
   tolower(env_chr(name)) %in% c("1", "true", "yes")
 }
 
+# GitHub run ids passed `.Machine$integer.max` in 2026, so they are carried as
+# strings everywhere here: `as.integer("31048405399")` is a silent NA, and an
+# NA reaching `if (run > 0)` takes the whole planning job down.
+# "0" is the "no such run" sentinel, which is also what the workflow's job
+# outputs and plan.json already use.
+run_id_chr <- function(x) {
+  if (is.null(x) || length(x) != 1 || is.na(x)) "0" else trimws(as.character(x))
+}
+
 inform <- function(...) {
   message(paste0(...))
 }

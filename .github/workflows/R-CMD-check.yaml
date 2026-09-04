@@ -222,7 +222,7 @@ jobs:
         shell: bash
 
       - name: Upload the commit SHA reached by the smoke test
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         with:
           name: rcc-smoke-sha
           path: rcc-smoke-sha.txt

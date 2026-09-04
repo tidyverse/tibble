@@ -57,7 +57,29 @@ linux_arm64 <- data.frame(os = "ubuntu-26.04-arm", r = r_versions[1:2])
 # aarch64 Windows binaries, and setup-r's `use-public-rspm: true` enables PPM on
 # x86_64 Windows only, so dependencies are compiled from source on this runner
 # and it is the slowest entry in the matrix.
-windows_arm64 <- data.frame(os = "windows-11-arm", r = r_versions[2])
+#
+# Strictness note: this is the one entry that checks with `error_on = "error"`
+# instead of the default `"note"`, requested through the generic "env" field.
+# The aarch64 Rtools45 is documented as experimental, and its Fortran driver
+# makes `R CMD check` report a WARNING for every package that ships Fortran
+# sources: `flang` there is LLVM's `flang-new` invoked as
+# `aarch64-w64-mingw32-flang`, which loads the llvm-mingw configuration files
+# for that triple, and those add link-time flags (`-lc++`, `-rtlib=compiler-rt`,
+# `-pthread`) to every invocation, including the compile-only ones. The driver
+# then warns that each of them is unused, and `[-Wunused-command-line-argument]`
+# is one of the patterns `R CMD check` collects as a "significant warning" from
+# the installation log. Nothing in the package can suppress those: flang 19
+# rejects `-Qunused-arguments` ("unknown argument") and
+# `-Wno-unused-command-line-argument` ("Only `-Werror` is supported currently"),
+# and `--no-default-config` would drop the `-target` line that the same
+# configuration files supply. Errors -- a build that fails, a test that fails,
+# an example that fails -- still fail this entry, which is what it is here to
+# catch. Drop the "env" field once the toolchain stops emitting the warnings.
+windows_arm64 <- data.frame(
+  os = "windows-11-arm",
+  r = r_versions[2],
+  env = 'RCMDCHECK_ERROR_ON="error"'
+)
 
 include_list <- list(
   macos,

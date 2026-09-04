@@ -306,7 +306,7 @@ dev_closure <- sort(setdiff(
 
 # ---------------------------------------------------------------- baseline ---
 
-baseline_run <- 0L
+baseline_run <- "0"
 baseline_manifest <- list()
 local_baseline <- env_chr("REVDEP2_BASELINE_DIR")
 if (refresh_baseline) {
@@ -334,7 +334,7 @@ if (refresh_baseline) {
     if (is.null(manifest_path) || !file.exists(manifest_path)) {
       inform("Baseline artifact of run ", donor, " is unavailable; reusing nothing")
     } else {
-      baseline_run <- as.integer(donor)
+      baseline_run <- run_id_chr(donor)
       entries <- read_json(manifest_path)
       baseline_manifest <- setNames(
         entries,
@@ -378,7 +378,7 @@ baseline_verdict <- function(p) {
 }
 verdicts <- vapply(packages, baseline_verdict, character(1))
 reuse <- verdicts == "reuse"
-if (baseline_run > 0) {
+if (baseline_run != "0") {
   stale <- table(verdicts[!reuse])
   inform(
     "Baseline: ", sum(reuse), " reusable, ",
@@ -498,7 +498,7 @@ plan <- list(
   selection = selection,
   generated_at = now_utc(),
   timing_flavor = timing_flavor,
-  retry_of = if (nzchar(retry_run)) as.integer(retry_run) else 0L,
+  retry_of = if (nzchar(retry_run)) run_id_chr(retry_run) else "0",
   baseline = list(
     run_id = baseline_run,
     max_age_days = baseline_max_age,
@@ -543,7 +543,7 @@ set_output("matrix", jsonlite::toJSON(matrix, auto_unbox = TRUE))
 set_output("shards", as.character(k))
 set_output("packages", as.character(n))
 set_output("max_parallel", as.character(parallel))
-set_output("baseline_run", as.character(baseline_run))
+set_output("baseline_run", baseline_run)
 set_output("plan_hash", plan_hash)
 
 # ------------------------------------------------------------------ summary --
@@ -587,7 +587,7 @@ append_summary(c(
     if (length(baseline_manifest) > 0) {
       sprintf(
         "%s: %d reused, %d fresh",
-        if (baseline_run > 0) sprintf("run %d", baseline_run) else "local",
+        if (baseline_run != "0") sprintf("run %s", baseline_run) else "local",
         sum(reuse),
         sum(!reuse)
       )
