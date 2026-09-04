@@ -1,7 +1,7 @@
-# Fan-in for revdep2: merge every shard's results into one report, one
+# Fan-in for the revdepx workflow: merge every shard's results into one report, one
 # manifest, and one baseline for future runs to reuse.
 #
-# Reads all revdep2-results-* artifacts (every attempt; on a re-run the later
+# Reads all revdepx-results-* artifacts (every attempt; on a re-run the later
 # attempt wins per package), folds in the untouched results of the run being
 # retried so the report is always complete, and writes:
 #
@@ -22,7 +22,8 @@
 # Environment variables:
 #   RESULTS_DIR  - directory the shard artifacts were downloaded into (required)
 #   PLAN         - plan.json (default: plan.json)
-#   RETRY_DIR    - the revdep2-report artifact of the run being retried, if any
+#   RETRY_DIR    - the revdepx-report artifact of the run being retried, if
+#                  any -- a run of either workflow, since both publish it
 #   OUT_DIR      - report directory (default: revdep)
 #   BASELINE_OUT - baseline directory (default: baseline)
 #   TIMINGS_OUT  - timings directory (default: timings)
@@ -56,13 +57,13 @@ dir.create(timings_out, recursive = TRUE, showWarnings = FALSE)
 
 # ------------------------------------------------------------------- merge ---
 
-# Shard artifacts are named revdep2-results-<shard>-<attempt>; walking them in
+# Shard artifacts are named revdepx-results-<shard>-<attempt>; walking them in
 # attempt order makes the later attempt win when a shard was re-run.
 #
 # `download-artifact` only creates the per-artifact subdirectory when it
 # downloads more than one: a run planned into a single shard has its
 # manifest.ndjson land directly in `results_dir`, not in
-# `results_dir/revdep2-results-1-1/`. Run 31930350338 was that run, and the
+# `results_dir/revdepx-results-1-1/`. Run 31930350338 was that run, and the
 # collector found one directory (`results/pkgs`), no manifest in it, and
 # collected nothing -- then carried all 1011 results over from the run it was
 # retrying and committed them as if they were fresh. So the layout is
@@ -137,6 +138,52 @@ if (nzchar(retry_dir) && file.exists(file.path(retry_dir, "manifest.json"))) {
   )
 }
 
+# A subset run -- `packages: broken`, an explicit list, a `part` -- reports
+# the whole record too. The committed manifest is the durable record of every
+# package the last full run checked, and writing this run's slice over it
+# would shrink 3435 rows to 204 (run 32260705703 did exactly that): the
+# repository would remember only what was just re-checked, and the next
+# `packages: broken` would select from an amnesiac record. So rows for
+# packages *outside this run's plan* are kept from the committed manifest,
+# marked carried. Planned packages are deliberately not eligible: a planned
+# package with no fresh result is a dead shard, and the `missing` fill below
+# must say so rather than let a stale row paper over it. Entries are set
+# directly, not through take(): the committed report has no pkgs/ payload to
+# copy, and take() would unlink the destination it copies into.
+committed_manifest <- file.path(out_dir, "manifest.json")
+if (
+  (!identical(plan$selection, "all") || !is.null(plan$part)) &&
+    file.exists(committed_manifest)
+) {
+  planned <- unlist(lapply(plan$shards %||% list(), function(shard) {
+    vapply(
+      shard$packages %||% list(),
+      function(p) p$name %||% "",
+      character(1)
+    )
+  }))
+  kept <- 0L
+  for (entry in tryCatch(
+    read_json(committed_manifest),
+    error = function(e) list()
+  )) {
+    name <- entry$package %||% ""
+    if (!nzchar(name) || !is.null(entries[[name]]) || name %in% planned) {
+      next
+    }
+    entry$carried <- TRUE
+    entries[[name]] <- entry
+    kept <- kept + 1L
+  }
+  if (kept > 0) {
+    inform(
+      "Kept ",
+      kept,
+      " committed result(s) for packages outside this run's selection"
+    )
+  }
+}
+
 # Every package the plan named has to appear in the report, including the ones
 # whose shard uploaded nothing at all: a job that dies -- runner failure,
 # cancellation, the job timeout above the shard's own deadline -- takes its
@@ -198,6 +245,9 @@ write_json(
     dev_version = plan$dev_version,
     cran_version = plan$cran_version,
     r_version = plan$r_version,
+    base_image = plan$base_image,
+    engine = plan$engine,
+    workflow = env_chr("GITHUB_WORKFLOW"),
     sha = plan$sha,
     run_id = env_chr("GITHUB_RUN_ID"),
     retry_of = plan$retry_of,
@@ -228,6 +278,10 @@ for (entry in entries) {
     version = entry$version,
     our_cran_version = entry$our_cran_version,
     r_version = plan$r_version,
+    # The container platform the old half ran under. plan.R refuses a row
+    # whose tag differs from its own -- which also walls off every
+    # revdep2-era baseline, none of which carry the field.
+    base_image = plan$base_image,
     dep_fingerprint = entry$dep_fingerprint,
     checked_at = entry$old_checked_at,
     status_old = entry$status_old,
@@ -249,6 +303,12 @@ inform("Baseline carries ", length(baseline), " old-version result(s)")
 # the shard count honest: a model that overestimates the work cuts it into more
 # shards than the parallel capacity can run, and each extra shard is another
 # setup paid for nothing.
+# The canonical per-package number: the mean of the per-half durations that
+# exist -- two real measurements, their honest middle. "seconds" answers
+# "what does one half cost here", the unit the cost model doubles into a
+# package's bill. (Rows from the retired pair engine carried the pair's
+# shared wall clock in both fields, so their mean is that wall clock, and
+# the unit still holds.)
 seconds_of <- function(entry) {
   both <- suppressWarnings(as.numeric(c(entry$t_old, entry$t_new)))
   both <- both[!is.na(both) & both > 0]
@@ -304,13 +364,16 @@ shard_rows <- unname(shard_rows[order(as.numeric(names(shard_rows)))])
 timings <- list(
   run_id = env_chr("GITHUB_RUN_ID"),
   generated_at = now_utc(),
+  # The engine stamps the run so calibration() can filter shard rows: per-half
+  # seconds pool across engines, shard setup and install medians do not.
+  engine = plan$engine,
   r_version = plan$r_version,
   platform = R.version$platform,
   timing_flavor = plan$timing_flavor,
   packages = package_rows,
   shards = shard_rows
 )
-cal <- calibration(list(timings))
+cal <- calibration(list(timings), plan$engine)
 timings$calibration <- list(
   check_scale = cal$check_scale,
   setup_minutes = cal$setup_minutes,
@@ -361,6 +424,50 @@ comparison_of <- function(entry) {
     res
   }
   if (!file.exists(old_path) || !file.exists(new_path)) {
+    # A row carried from the committed manifest has no check payload -- it is
+    # the record speaking, not this run. Shimming it as an error made
+    # revdepcheck classify it "failed to check": run 32281237129 carried
+    # 3402 ok rows and its README announced "Failed to check (3407)", with a
+    # 28-line "Not checked (ok)" failure section for every one of them. An
+    # ok row becomes a clean two-sided comparison instead -- status "+",
+    # zero rows -- which the summary counts and every table ignores. Carried
+    # not-ok rows keep the shim: "failed to check, not by this run" is the
+    # closest bucket the report vocabulary has for them, and their committed
+    # sections are protected separately.
+    if (isTRUE(entry$carried) && identical(entry$result, "ok")) {
+      clean_half <- function() {
+        structure(
+          list(
+            package = entry$package,
+            version = entry$version %||% "0",
+            rversion = "",
+            platform = "",
+            errors = character(),
+            warnings = character(),
+            notes = character(),
+            description = sprintf(
+              "Package: %s\nVersion: %s\n",
+              entry$package,
+              entry$version %||% "0"
+            ),
+            cran = TRUE,
+            bioc = FALSE,
+            checkdir = "",
+            install_out = "",
+            test_fail = list(),
+            timeout = FALSE
+          ),
+          class = "rcmdcheck"
+        )
+      }
+      cmp <- tryCatch(
+        rcmdcheck::compare_checks(clean_half(), clean_half()),
+        error = function(e) NULL
+      )
+      if (!is.null(cmp)) {
+        return(cmp)
+      }
+    }
     message <- if (nzchar(entry$message %||% "")) {
       entry$message
     } else {
@@ -490,6 +597,17 @@ if (has_revdepcheck) {
 
   written <- setNames(integer(length(sections)), names(sections))
   for (entry in entries) {
+    # A carried row without a check payload has nothing to render a section
+    # from -- its committed section, where one exists, is already on disk
+    # and is better evidence than any shim. This run neither writes nor
+    # deletes for it. (Retry-carried rows are untouched by this: take()
+    # copied their payloads, so old.rds exists.)
+    if (
+      isTRUE(entry$carried) &&
+        !file.exists(file.path(out_dir, "pkgs", entry$package, "old.rds"))
+    ) {
+      next
+    }
     for (dir in names(sections)) {
       if (keeps_committed(entry, dir)) {
         next
@@ -585,7 +703,19 @@ not_ok <- sum(results_tbl != "ok")
 # it. So the run says out loud whether it compared anything at all, and the
 # workflow gates the commit on that; the artifact is uploaded either way, so
 # nothing is hidden, only the destructive step is skipped.
-compared <- tally("ok") + tally("newly_broken")
+#
+# Only *this run's* comparisons count. A retry whose shards all died still
+# carries the donor run's good results (`carried = TRUE`) -- that is the
+# retry contract -- but they are the donor's learning, not this run's, and a
+# gate they could pass would let the exact run this gate exists for (learnt
+# nothing, every fresh package `missing`) overwrite the record after all.
+compared <- sum(vapply(
+  entries,
+  function(e) {
+    !isTRUE(e$carried) && (e$result %in% c("ok", "newly_broken"))
+  },
+  logical(1)
+))
 set_output("compared", compared)
 if (compared == 0) {
   inform(
@@ -702,7 +832,7 @@ readme <- gsub("^(#+)(\\s)", "##\\1\\2", readme)
 
 run_id <- env_chr("GITHUB_RUN_ID")
 append_summary(c(
-  "## revdep2 results",
+  "## revdepx results",
   "",
   sprintf(
     "`%s` %s (dev) vs %s (CRAN), R %s%s.",
@@ -753,8 +883,10 @@ append_summary(c(
     # From the package rows, not the shard rows: a shard whose job died leaves
     # no timing of its own, but the checks it did finish are still in the
     # manifest the collector just merged.
-    # `seconds` is the pair's wall clock, not one half's, so it is not
-    # multiplied by `checks` -- the two ran at the same time.
+    # `seconds` is the canonical per-half number; `checks` says how many
+    # halves it stands for. Summing seconds is half the check wall clock,
+    # which the planned-vs-actual shard table already reports exactly. Close
+    # enough for a cost headline.
     check_minutes <- sum(vapply(
       package_rows,
       function(p) p$seconds / 60,
@@ -804,7 +936,7 @@ append_summary(c(
       )),
       "",
       sprintf(
-        "The next plan reads these from the `revdep2-timings` artifact of %s and sizes its shards with them.",
+        "The next plan of either workflow reads these from the `revdepx-timings` artifact of %s and sizes its shards with them.",
         this_run_link("this run")
       ),
       ""
@@ -813,14 +945,22 @@ append_summary(c(
   "### Getting the results",
   "",
   sprintf(
-    "The full report -- `problems.md`, `failures.md`, `cran.md` and every check's output -- is the `revdep2-report` artifact of %s.",
+    "The full report -- `problems.md`, `failures.md`, `cran.md` and every check's output -- is the `revdepx-report` artifact of %s.",
     this_run_link("this run")
   ),
   "",
   "```sh",
-  sprintf("gh run download %s --name revdep2-report --dir revdep/", run_id),
+  sprintf("gh run download %s --name revdepx-report --dir revdep/", run_id),
   "# retry everything that is not ok:",
-  sprintf("gh workflow run revdep2.yaml -f retry-run=%s", run_id),
+  sprintf(
+    "gh workflow run %s -f retry-run=%s",
+    local({
+      ref <- env_chr("GITHUB_WORKFLOW_REF")
+      file <- basename(sub("@.*$", "", ref))
+      if (nzchar(file) && grepl("[.]ya?ml$", file)) file else "revdep4.yaml"
+    }),
+    run_id
+  ),
   "```"
 ))
 
@@ -830,5 +970,5 @@ inform(
   sum(results_tbl == "ok"),
   " ok, ",
   not_ok,
-  " with findings -- see the summary and the revdep2-report artifact"
+  " with findings -- see the summary and the revdepx-report artifact"
 )

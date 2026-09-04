@@ -1,4 +1,5 @@
-# Shared helpers for the revdep2 workflow scripts.
+# Shared helpers for the revdepx workflow scripts (the revdep4
+# engines).
 # Sourced by plan.R, build.R, shard.R and collect.R; base R plus jsonlite only,
 # so every job can use it before any heavyweight dependency is installed.
 
@@ -249,8 +250,8 @@ gh_lines <- function(...) {
 #
 # Paginated, because a single page is not enough and the ones that fall off it
 # are exactly the ones that matter. A run publishes one
-# `revdep2-results-<shard>-<attempt>` per shard -- up to 250 -- and uploads
-# `revdep2-baseline`, `revdep2-timings` and `revdep2-report` last of all. Ask
+# `revdepx-results-<shard>-<attempt>` per shard -- up to 250 -- and uploads
+# `revdepx-baseline`, `revdepx-timings` and `revdepx-report` last of all. Ask
 # for one page of 100 and a run with a hundred shards hides its baseline behind
 # its results: reuse would silently stop and `retry-run` would fail outright,
 # both for a reason no log would name.
@@ -423,94 +424,13 @@ fetch_artifact <- function(run_id, name, dest) {
   fetch_artifact_id(id[[1]], dest, what)
 }
 
-# ------------------------------------------------------ prebuilt libraries --
+# ------------------------------------------------------- library helpers ----
 
-# A run's installed dependency library, carried to the next run as an
-# artifact: one tar of the package directories, plus the index a later plan
-# reads to decide which packages that run is good for.
-#
-# The tar is stored uncompressed on purpose -- upload-artifact zips what it
-# uploads, and deflating a few gigabytes twice buys nothing. Packing the
-# directories by name (rather than the library itself) keeps the member paths
-# at `<package>/...`, which is what a partial extraction asks for.
-
-# Package directories of `lib` that look installed, with their versions.
-library_versions <- function(lib) {
-  pkgs <- list.dirs(lib, full.names = FALSE, recursive = FALSE)
-  pkgs <- pkgs[file.exists(file.path(lib, pkgs, "DESCRIPTION"))]
-  versions <- vapply(
-    pkgs,
-    function(p) {
-      tryCatch(
-        unname(read.dcf(file.path(lib, p, "DESCRIPTION"), "Version")[1, 1]),
-        error = function(e) NA_character_
-      )
-    },
-    character(1)
-  )
-  versions[!is.na(versions)]
-}
-
-pack_library <- function(lib, dest, index_dest = NULL) {
-  versions <- library_versions(lib)
-  dir.create(dest, recursive = TRUE, showWarnings = FALSE)
-  index <- list(
-    run_id = env_chr("GITHUB_RUN_ID"),
-    created_at = now_utc(),
-    r_version = paste(
-      R.version$major,
-      sub("[.].*$", "", R.version$minor),
-      sep = "."
-    ),
-    platform = R.version$platform,
-    count = length(versions),
-    packages = unname(Map(
-      function(p, v) list(package = p, version = unname(v)),
-      names(versions),
-      versions
-    ))
-  )
-  write_json(index, file.path(dest, "lib.json"))
-  if (!is.null(index_dest)) {
-    dir.create(index_dest, recursive = TRUE, showWarnings = FALSE)
-    file.copy(
-      file.path(dest, "lib.json"),
-      file.path(index_dest, "lib.json"),
-      overwrite = TRUE
-    )
-  }
-  if (length(versions) == 0) {
-    inform("Nothing to pack: ", lib, " holds no installed packages")
-    return(character())
-  }
-  members <- tempfile("members-")
-  writeLines(names(versions), members)
-  on.exit(unlink(members))
-  tarball <- file.path(dest, "library.tar")
-  status <- system2(
-    "tar",
-    # Quoted: system2() quotes the command, but not the arguments.
-    shQuote(c("-cf", tarball, "-C", lib, "-T", members))
-  )
-  if (!identical(as.integer(status), 0L) || !file.exists(tarball)) {
-    inform("Packing ", lib, " failed; this run contributes no prebuilt library")
-    unlink(tarball)
-    return(character())
-  }
-  inform(
-    "Packed ",
-    length(versions),
-    " package(s) into ",
-    basename(tarball),
-    " (",
-    format(
-      structure(file.size(tarball), class = "object_size"),
-      units = "auto"
-    ),
-    ")"
-  )
-  names(versions)
-}
+# revdep2 carried a whole installed library between runs as a tar artifact,
+# with pack/unpack/restore machinery to match. The universe *image* replaced
+# all of that: the library travels inside the image, and reuse is a registry
+# pull. What survives is the one helper that never cared where a library came
+# from.
 
 # The packages of `lib` a caller may still want: everything not already
 # installed there, and nothing this session has loaded -- a package must never
@@ -520,143 +440,6 @@ missing_from <- function(lib, wanted) {
     unique(unlist(wanted, use.names = FALSE)),
     c(list.dirs(lib, full.names = FALSE, recursive = FALSE), loadedNamespaces())
   )
-}
-
-# Extract `take` out of a packed library into `lib`, and report what landed.
-unpack_library <- function(tarball, lib, take) {
-  dir.create(lib, recursive = TRUE, showWarnings = FALSE)
-  members <- tempfile("members-")
-  writeLines(take, members)
-  on.exit(unlink(members))
-  # A member the index promised but the tar does not hold makes tar exit
-  # non-zero after extracting the rest; what actually landed is the answer, so
-  # the status is not consulted. Its complaints still are, when fewer packages
-  # land than were asked for: "no space left on device" and "member not found"
-  # are the same shortfall here and the same silence before.
-  err <- tempfile(fileext = ".err")
-  on.exit(unlink(err), add = TRUE)
-  system2(
-    "tar",
-    # Quoted: system2() quotes the command, but not the arguments.
-    shQuote(c("-xf", tarball, "-C", lib, "-T", members)),
-    stdout = NULL,
-    stderr = err
-  )
-  got <- intersect(take, list.dirs(lib, full.names = FALSE, recursive = FALSE))
-  if (length(got) < length(take)) {
-    detail <- stderr_tail(err)
-    inform(sprintf(
-      "Prebuilt: tar produced %d of %d requested package(s)%s",
-      length(got),
-      length(take),
-      if (nzchar(detail)) paste0("; tar said: ", detail) else ""
-    ))
-  }
-  # A half-extracted package directory is worse than none: drop anything
-  # without a DESCRIPTION and let pak install it properly.
-  broken <- got[!file.exists(file.path(lib, got, "DESCRIPTION"))]
-  if (length(broken) > 0) {
-    unlink(file.path(lib, broken), recursive = TRUE)
-    inform("Prebuilt: discarded ", length(broken), " incomplete package(s)")
-  }
-  setdiff(got, broken)
-}
-
-# Unpack a library artifact this job already has on disk -- in practice this
-# run's own preflight library, handed to the shards through the workflow.
-#
-# This is the reuse that pays on the very first run: without it every shard
-# rebuilds from source what the preflight of the same run compiled minutes
-# earlier, once per shard.
-restore_local_library <- function(dir, lib, wanted) {
-  tarball <- file.path(dir, "library.tar")
-  if (!nzchar(dir) || !file.exists(tarball)) {
-    return(character())
-  }
-  take <- missing_from(lib, wanted)
-  index <- file.path(dir, "lib.json")
-  if (file.exists(index)) {
-    have <- vapply(
-      read_json(index)$packages,
-      function(e) e$package,
-      character(1)
-    )
-    take <- intersect(take, have)
-  }
-  if (length(take) == 0) {
-    return(character())
-  }
-  got <- unpack_library(tarball, lib, take)
-  inform(
-    "Prebuilt: restored ",
-    length(got),
-    " package(s) from this run's preflight"
-  )
-  got
-}
-
-# Unpack what earlier runs already built into `lib`, taking only the packages
-# in `wanted` that are not there yet.
-#
-# The plan named the donor runs, youngest first, and which packages each one
-# is good for; a younger donor always wins, and a donor that has nothing left
-# to give is never downloaded. Whatever lands here is still handed to pak
-# afterwards: the point is to skip *building* what has not changed, not to
-# skip resolving it.
-restore_prebuilt <- function(plan, lib, wanted) {
-  donors <- plan$prebuilt$runs %||% list()
-  if (length(donors) == 0 || length(unlist(wanted)) == 0) {
-    return(character())
-  }
-  dir.create(lib, recursive = TRUE, showWarnings = FALSE)
-  restored <- character()
-  for (donor in donors) {
-    run_id <- as.character(donor$run_id)
-    take <- intersect(
-      unlist(donor$packages, use.names = FALSE),
-      missing_from(lib, wanted)
-    )
-    if (length(take) == 0) {
-      next
-    }
-    inform("Prebuilt: fetching ", length(take), " package(s) from run ", run_id)
-    started <- Sys.time()
-    dir <- fetch_artifact(run_id, "revdep2-lib", tempfile("prebuilt-"))
-    tarball <- if (is.null(dir)) NULL else file.path(dir, "library.tar")
-    if (is.null(tarball) || !file.exists(tarball)) {
-      # Three different failures used to share one message, and the one that
-      # actually happened -- the artifact was there, the download or the
-      # unpacking was not -- was the one the message denied.
-      inform(sprintf(
-        "Prebuilt: nothing restored from run %s after %.0f s; %s",
-        run_id,
-        as.numeric(difftime(Sys.time(), started, units = "secs")),
-        if (is.null(dir)) {
-          "see the reason above"
-        } else {
-          paste0(
-            "the artifact unpacked to ",
-            paste(list.files(dir), collapse = ", "),
-            ", which has no library.tar"
-          )
-        }
-      ))
-      unlink(dir, recursive = TRUE)
-      next
-    }
-    got <- unpack_library(tarball, lib, take)
-    inform(sprintf(
-      "Prebuilt: restored %d of %d package(s) from run %s in %.0f s (%s tarball)",
-      length(got),
-      length(take),
-      run_id,
-      as.numeric(difftime(Sys.time(), started, units = "secs")),
-      format_bytes(file.size(tarball))
-    ))
-    unlink(dir, recursive = TRUE)
-    restored <- c(restored, got)
-  }
-  restored
 }
 
 # ------------------------------------------------------- the last report ----
@@ -740,9 +523,11 @@ report_packages <- function(dir) {
 # The collector writes one `timings.json` per run -- a row per package (how
 # long its checks actually took here, next to what CRAN reports for it) and a
 # row per shard (job, install and check minutes, next to what the plan
-# predicted) -- and publishes it as the small `revdep2-timings` artifact,
-# separate from the report the way `revdep2-lib-index` is separate from the
-# library: a plan reads it without downloading anything else.
+# predicted) -- and publishes it as the small `revdepx-timings` artifact,
+# separate from the report so
+# a plan reads it without downloading anything else. Runs of either revdepx
+# workflow publish and consume the same artifact: measured seconds are
+# canonical per-half wall clock, so the two engines share one pool.
 #
 # Three constants come out of it, each a median over what actually happened,
 # and each NULL when the runs measured nothing usable -- the caller keeps its
@@ -784,9 +569,18 @@ measured_check_seconds <- function(runs) {
 #   check_scale     - check seconds here per second CRAN reports (T_total);
 #                     these runners are not CRAN's machines
 #   setup_minutes   - per-shard fixed cost, from job start to the driver's
-#                     first line: the runner image, R, TinyTeX, the artifacts
+#                     first line: the runner image, R, the artifacts, and now
+#                     the universe image pull
 #   install_seconds - marginal cost of one more dependency in a shard's union
-calibration <- function(runs) {
+#                     (zero on the image path; measured only when a shard fell
+#                     back to building its own)
+#
+# `engine` filters the *shard* rows: the per-package `seconds` is canonical
+# per-half wall clock in both engines and pools freely, but a shard's setup
+# and install minutes are shaped by how that engine provisions and runs its
+# checks, so only same-engine runs may vote on those. Runs written before the
+# field existed carry no `engine` and are excluded from the shard medians.
+calibration <- function(runs, engine = NULL) {
   scales <- numeric()
   setups <- numeric()
   installs <- numeric()
@@ -800,6 +594,9 @@ calibration <- function(runs) {
       if (!is.na(seconds) && !is.na(cran) && seconds > 0 && cran > 0) {
         scales <- c(scales, seconds / cran)
       }
+    }
+    if (!is.null(engine) && !identical(run$engine %||% "", engine)) {
+      next
     }
     for (row in run$shards %||% list()) {
       shards <- shards + 1L
@@ -883,7 +680,7 @@ run_shard_job_minutes <- function(run_id) {
 # ------------------------------------------------------------ CRAN metadata --
 
 cran_repo <- function() {
-  env_chr("REVDEP2_CRAN_MIRROR", "https://cloud.r-project.org")
+  env_chr("REVDEPX_CRAN_MIRROR", "https://cloud.r-project.org")
 }
 
 # available.packages() for the canonical CRAN mirror, fetched once.
@@ -892,9 +689,16 @@ cran_db <- local({
   function() {
     if (is.null(db)) {
       inform("Fetching CRAN package metadata from ", cran_repo())
+      # No R_version filter on purpose (the containers may run a newer R
+      # than this script), but OS_type must apply: run 33777134786 planned
+      # hespdiv, an `OS_type: windows` package, three runs in a row -- the
+      # shard's download.packages(), which does filter by OS, then refused
+      # it each time ("no package 'hespdiv' at the repositories"), and the
+      # report carried a permanent phantom error for a package Linux can
+      # never check.
       db <<- utils::available.packages(
         repos = cran_repo(),
-        filters = c("CRAN", "duplicates")
+        filters = c("CRAN", "duplicates", "OS_type")
       )
     }
     db
@@ -904,6 +708,95 @@ cran_db <- local({
 base_packages <- function() {
   rownames(utils::installed.packages(priority = c("base", "recommended")))
 }
+
+# The Bioconductor repositories matching the running R version -- software,
+# annotation, experiment and workflows, the four that hold packages a
+# dependency field can name. The version mapping is the one
+# setRepositories() itself uses (in utils since R 4.5, in tools before
+# that); it is an internal, so an R that keeps it somewhere else degrades to
+# "no Bioconductor metadata" rather than an error. R_BIOC_VERSION overrides
+# the mapping, as it does for base R.
+bioc_repos <- function() {
+  mapping <- function(ns) {
+    as.character(get(
+      ".BioC_version_associated_with_R_version",
+      envir = getNamespace(ns)
+    )())
+  }
+  version <- tryCatch(
+    mapping("utils"),
+    error = function(e) tryCatch(mapping("tools"), error = function(e) NA)
+  )
+  if (is.na(version) || !nzchar(version)) {
+    return(character())
+  }
+  mirror <- env_chr("REVDEPX_BIOC_MIRROR", "https://bioconductor.org")
+  c(
+    BioCsoft = sprintf("%s/packages/%s/bioc", mirror, version),
+    BioCann = sprintf("%s/packages/%s/data/annotation", mirror, version),
+    BioCexp = sprintf("%s/packages/%s/data/experiment", mirror, version),
+    BioCworkflows = sprintf("%s/packages/%s/workflows", mirror, version)
+  )
+}
+
+# cran_db() plus the Bioconductor repositories: the metadata to resolve
+# *dependencies* against, as opposed to the metadata that decides what is a
+# CRAN reverse dependency. In run 32158907637, 121 packages came back
+# `depmissing` on Bioconductor dependencies (DESeq2, pwalign, ...) that pak
+# would have installed happily -- pinned_repos() has carried the Bioconductor
+# repositories all along -- but install_closure() intersected every
+# dependency list with CRAN's rownames, so the planner dropped the names
+# before pak ever saw them. Enumeration stays on cran_db(): the packages
+# *checked* are CRAN's reverse dependencies, and this db only widens what
+# they may depend on.
+#
+# On a Bioconductor fetch failure the CRAN half still serves, degraded to
+# exactly the old behaviour; the pinned install repositories are resolved
+# independently by pak, so a blip here cannot skew an install, only thin a
+# closure.
+dep_db <- local({
+  db <- NULL
+  function() {
+    if (is.null(db)) {
+      cran <- cran_db()
+      repos <- bioc_repos()
+      bioc <- if (length(repos) == 0) {
+        NULL
+      } else {
+        inform(
+          "Fetching Bioconductor package metadata (",
+          paste(names(repos), collapse = ", "),
+          ")"
+        )
+        tryCatch(
+          utils::available.packages(repos = repos, filters = "duplicates"),
+          error = function(e) {
+            inform(
+              "Could not fetch Bioconductor metadata: ",
+              conditionMessage(e)
+            )
+            NULL
+          }
+        )
+      }
+      if (is.null(bioc) || nrow(bioc) == 0) {
+        db <<- cran
+      } else {
+        merged <- rbind(cran, bioc[, colnames(cran), drop = FALSE])
+        merged <- merged[!duplicated(rownames(merged)), , drop = FALSE]
+        inform(
+          "Dependency metadata: ",
+          nrow(cran),
+          " CRAN + ",
+          nrow(merged) - nrow(cran),
+          " Bioconductor packages"
+        )
+        db <<- merged
+      }
+    }
+    db
+  }
+})
 
 # The packages that must be installed to check `packages`: their hard
 # dependencies and direct suggests, plus the recursive hard dependencies of
@@ -1121,11 +1014,11 @@ pinned_repos <- local({
 # Packages that must be in any CRAN snapshot. If pak cannot see these, it
 # cannot see anything, and what follows is not a dependency problem.
 metadata_probe <- function() {
-  strsplit(env_chr("REVDEP2_METADATA_PROBE", "vctrs,cli,R6"), ",")[[1]]
+  strsplit(env_chr("REVDEPX_METADATA_PROBE", "vctrs,cli,R6"), ",")[[1]]
 }
 
 metadata_timeout_seconds <- function() {
-  env_num("REVDEP2_METADATA_TIMEOUT_MINUTES", 10) * 60
+  env_num("REVDEPX_METADATA_TIMEOUT_MINUTES", 10) * 60
 }
 
 # How many of those packages pak can actually see, or -1 when it could not be
@@ -1240,7 +1133,7 @@ ensure_metadata <- local({
 # -------------------------------------------------- system requirements ----
 
 sysreqs_timeout_seconds <- function() {
-  env_num("REVDEP2_SYSREQS_TIMEOUT_MINUTES", 20) * 60
+  env_num("REVDEPX_SYSREQS_TIMEOUT_MINUTES", 20) * 60
 }
 
 # The system requirements of packages that were unpacked rather than installed.
@@ -1376,10 +1269,37 @@ ensure_check_sysreqs <- function(packages, label = "") {
   run <- run_with_timeout(
     function(repos, packages) {
       options(repos = repos)
-      wanted <- unique(unlist(
-        pak::pkg_sysreqs(packages)$packages$system_packages,
-        use.names = FALSE
-      ))
+      # In chunks: one pak::pkg_sysreqs() call over 3435 packages grew past
+      # 14 GB and was OOM-killed (run 32114635495) -- pak solves the whole
+      # set in one subprocess. Per-chunk calls each get a fresh, bounded
+      # subprocess, and the union of apt packages is the same.
+      wanted <- character()
+      for (part in split(
+        packages,
+        ceiling(seq_along(packages) / 300)
+      )) {
+        # Per-chunk tolerance: one chunk pak cannot solve (a package gone
+        # from the repositories, a resolution hiccup) must not cost the
+        # other chunks' system packages -- run 32148999976 lost the whole
+        # survey to a single subprocess error.
+        wanted <- unique(c(
+          wanted,
+          tryCatch(
+            unlist(
+              pak::pkg_sysreqs(part)$packages$system_packages,
+              use.names = FALSE
+            ),
+            error = function(e) {
+              message(
+                "sysreqs survey chunk failed (",
+                conditionMessage(e),
+                "); continuing with the other chunks"
+              )
+              character()
+            }
+          )
+        ))
+      }
       have <- pak::sysreqs_list_system_packages()
       present <- unique(c(
         have$package,
@@ -1421,10 +1341,28 @@ ensure_check_sysreqs <- function(packages, label = "") {
   # library, and these packages are not in it. Failure is reported and not
   # fatal -- the check will fail either way, and it will say why more clearly
   # than this can.
+  #
+  # `update` first, always: the base image deletes /var/lib/apt/lists after
+  # its own installs (as images do), and pak only refreshes them when it
+  # installs a sysreq of its own in the same container. Without this, every
+  # install below dies with "Unable to locate package" -- warned, non-fatal,
+  # and exactly the silent gap this function exists to close.
   sudo <- if (identical(Sys.info()[["effective_user"]], "root")) {
     character()
   } else {
     "sudo"
+  }
+  update_status <- suppressWarnings(system2(
+    if (length(sudo)) "sudo" else "apt-get",
+    c(
+      if (length(sudo)) "apt-get",
+      "-o",
+      "DPkg::Lock::Timeout=300",
+      "update"
+    )
+  ))
+  if (!identical(update_status, 0L)) {
+    inform(prefix, "apt-get update exited ", update_status, "; trying anyway")
   }
   status <- suppressWarnings(system2(
     if (length(sudo)) "sudo" else "apt-get",
@@ -1560,7 +1498,7 @@ install_in_chunks <- function(
 }
 
 install_timeout_seconds <- function() {
-  env_num("REVDEP2_INSTALL_TIMEOUT_MINUTES", 20) * 60
+  env_num("REVDEPX_INSTALL_TIMEOUT_MINUTES", 20) * 60
 }
 
 # Fingerprint of the *versions* of everything a check installs, from CRAN

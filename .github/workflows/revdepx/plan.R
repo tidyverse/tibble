@@ -1,10 +1,19 @@
-# Plan the sharded reverse-dependency check.
+# Plan the sharded reverse-dependency check, for both revdepx engines.
 #
 # Enumerates the reverse dependencies of the package in the current directory,
 # weighs each one by what its check is expected to cost on these runners,
-# decides which CRAN-baseline results from an earlier run can be reused, and
-# partitions the packages into cost-balanced shards. One shard becomes one
-# matrix leg of .github/workflows/revdep2.yaml.
+# decides which stored old-version results may stand beside this run's fresh
+# checks as second opinions, and partitions the packages into cost-balanced
+# shards. One shard becomes one matrix leg of revdep4.yaml.
+#
+# The bill the plan prices: a package's two halves run sequentially, so the
+# package costs both of them end to end, and REVDEPX_WORKERS packages run at
+# once, so a shard's wall clock is its check load divided by the workers.
+#
+# Both halves are always checked fresh. A stored old result from an
+# earlier run (the baseline) rides along as a *second opinion* -- the shard
+# records whether the fresh old check reproduced it (`baseline_agrees`) --
+# and never substitutes for the check itself.
 #
 # The partitioning is greedy, in two phases (see revdep2/README.md for why
 # greedy beats an exact formulation here):
@@ -12,9 +21,11 @@
 #   1. The K heaviest packages are dealt round-robin, one per shard, so no two
 #      giants share a leg.
 #   2. Every remaining package, heaviest first, goes to the shard where its
-#      marginal cost is smallest: its own check weight plus an install penalty
-#      for each dependency the shard does not already need. The penalty is what
-#      pulls packages with overlapping dependency trees onto the same shard.
+#      marginal cost is smallest: its own wall-clock contribution plus an
+#      install penalty for each dependency the shard does not already need.
+#      With the dependency universe baked into a shared image the penalty
+#      defaults to zero and the deal is pure load balancing; the knob stays
+#      for the fallback path, where a shard builds its own library after all.
 #
 # K is bounded by the parallel capacity, not by the budget alone. Only
 # `max-parallel` shards ever run at once, so shard K+1 of a full wave does not
@@ -25,61 +36,66 @@
 #
 # The cost model behind all of it -- how fast a check runs here, what a shard
 # costs before it checks anything, what one more dependency costs to install --
-# is calibrated from the timings artifact of the last runs, and falls back to
-# CRAN's numbers and the defaults below when no run has measured anything yet.
+# is calibrated from the timings artifact of the last runs of both workflows,
+# and falls back to CRAN's numbers and the defaults below when no run has
+# measured anything yet.
 #
 # Environment variables (inputs):
-#   REVDEP2_PACKAGES        - explicit packages to check (comma/space separated;
+#   REVDEPX_PACKAGES        - explicit packages to check (comma/space separated;
 #                             default: all reverse dependencies), or the word
 #                             `broken` to take them from the committed report
-#   REVDEP2_WHICH           - "strong" (default) or "most" (adds Suggests/
+#   REVDEPX_WHICH           - "strong" (default) or "most" (adds Suggests/
 #                             Enhances dependents)
-#   REVDEP2_RETRY_RUN       - run id of an earlier revdep2 run; check only the
-#                             packages that run could not declare ok
-#   REVDEP2_PART            - "i/G": check one G-th of the batch, for a revdep
+#   REVDEPX_WORKERS         - packages checked concurrently per shard
+#                             (default: 4)
+#   REVDEPX_R_VERSION       - the full R version the *containers* check under,
+#                             e.g. "4.5.3", resolved by the workflow; required,
+#                             because the baseline key must name the R that ran
+#                             the checks, not the R running this script
+#   REVDEPX_WORKFLOWS       - workflow files whose completed runs the history
+#                             walk mines for baselines and timings (default:
+#                             "revdep4.yaml")
+#   REVDEPX_RETRY_RUN       - run id of an earlier revdepx run; check
+#                             only the packages that run could not declare ok
+#   REVDEPX_PART            - "i/G": check one G-th of the batch, for a revdep
 #                             set too big for a single run (the plan refuses
 #                             such a batch and prints the G it needs)
-#   REVDEP2_RECHECK_REPORT  - if truthy, check what the committed report lists
-#                             as broken or failed (same as REVDEP2_PACKAGES=broken)
-#   REVDEP2_REPORT_DIR      - where that report lives (default: revdep)
-#   REVDEP2_SHARD_BUDGET_MINUTES - check-time target per shard (default: 45)
-#   REVDEP2_SHARD_CAPACITY_MINUTES - check minutes one shard may be given at
+#   REVDEPX_RECHECK_REPORT  - if truthy, check what the committed report lists
+#                             as broken or failed (same as REVDEPX_PACKAGES=broken)
+#   REVDEPX_REPORT_DIR      - where that report lives (default: revdep)
+#   REVDEPX_SHARD_BUDGET_MINUTES - check-time target per shard (default: 45)
+#   REVDEPX_SHARD_CAPACITY_MINUTES - check minutes one shard may be given at
 #                             most, which is what forces a second wave
-#                             (default: 80% of REVDEP2_DEADLINE_MINUTES)
-#   REVDEP2_LONG_RUN_HOURS  - estimated wall clock past which the plan warns in
+#                             (default: 80% of REVDEPX_DEADLINE_MINUTES)
+#   REVDEPX_LONG_RUN_HOURS  - estimated wall clock past which the plan warns in
 #                             the job summary; it never refuses for length
 #                             alone (default: 12)
-#   REVDEP2_MAX_SHARDS      - matrix legs to emit at most (default: 250)
-#   REVDEP2_MAX_PARALLEL    - legs to run concurrently, and so the size of one
+#   REVDEPX_MAX_SHARDS      - matrix legs to emit at most (default: 250)
+#   REVDEPX_MAX_PARALLEL    - legs to run concurrently, and so the size of one
 #                             wave (default: 20)
-#   REVDEP2_REFRESH_BASELINE- if truthy, ignore reusable baselines and re-check
-#                             the CRAN version of everything
-#   REVDEP2_BASELINE_MAX_AGE_DAYS - oldest baseline worth reusing (default: 30)
-#   REVDEP2_PREBUILT_MAX_RUNS - earlier runs whose prebuilt package libraries
-#                             this run may reuse (default: 5; 0 disables)
-#   REVDEP2_PREBUILT_MAX_AGE_DAYS - oldest prebuilt library worth reusing
-#                             (default: 14)
-#   REVDEP2_HISTORY_RUNS    - earlier runs the donor walk looks at at all
+#   REVDEPX_REFRESH_BASELINE- if truthy, offer no stored old results as second
+#                             opinions (the old half runs fresh either way)
+#   REVDEPX_BASELINE_MAX_AGE_DAYS - oldest baseline worth reusing (default: 30)
+#   REVDEPX_HISTORY_RUNS    - earlier runs the donor walk looks at at all
 #                             (default: 40)
-#   REVDEP2_PREFLIGHT_MIN_SHARDS - shards a package must be needed by before
-#                             the preflight installs it centrally; 1 is the
-#                             whole universe (default: 2)
-#   REVDEP2_MEASURED_MAX_RUNS - earlier runs whose measured timings calibrate
+#   REVDEPX_MEASURED_MAX_RUNS - earlier runs whose measured timings calibrate
 #                             the cost model (default: 3; 0 disables)
-#   REVDEP2_MEASURED_MAX_AGE_DAYS - oldest measurement worth trusting
+#   REVDEPX_MEASURED_MAX_AGE_DAYS - oldest measurement worth trusting
 #                             (default: 60)
-#   REVDEP2_MEASURED_DIR    - offline hook: a directory holding a timings.json,
+#   REVDEPX_MEASURED_DIR    - offline hook: a directory holding a timings.json,
 #                             used instead of walking the run history
-#   REVDEP2_CHECK_SCALE     - check seconds here per second CRAN reports;
+#   REVDEPX_CHECK_SCALE     - check seconds here per second CRAN reports;
 #                             overrides the measured value (default: measured,
 #                             else 1)
-#   REVDEP2_SETUP_MINUTES   - fixed cost of one shard before it checks anything;
-#                             overrides the measured value (default: measured,
-#                             else 6)
-#   REVDEP2_INSTALL_SECONDS - marginal install cost charged per dependency a
-#                             package adds to its shard; overrides the measured
-#                             value (default: measured, else 2.5)
-#   REVDEP2_TIMINGS_FILE    - offline hook: RDS or CSV with columns Package and
+#   REVDEPX_SETUP_MINUTES   - fixed cost of one shard before it checks anything,
+#                             image pull included; overrides the measured value
+#                             (default: measured, else 10)
+#   REVDEPX_INSTALL_SECONDS - marginal install cost charged per dependency a
+#                             package adds to its shard; only the image-less
+#                             fallback path installs anything, so this prices
+#                             nothing normally (default: measured from
+#                             same-engine runs, else 0)
+#   REVDEPX_TIMINGS_FILE    - offline hook: RDS or CSV with columns Package and
 #                             T_total, used instead of tools::CRAN_check_results()
 #   OUT                     - plan file to write (default: plan.json)
 #
@@ -94,10 +110,10 @@ source(file.path(
 
 out_path <- env_chr("OUT", "plan.json")
 which_input <- match.arg(
-  env_chr("REVDEP2_WHICH", "strong"),
+  env_chr("REVDEPX_WHICH", "strong"),
   c("strong", "most")
 )
-depth_raw <- tolower(env_chr("REVDEP2_DEPTH", "1"))
+depth_raw <- tolower(env_chr("REVDEPX_DEPTH", "1"))
 depth <- if (depth_raw %in% c("all", "max", "inf", "infinity")) {
   Inf
 } else {
@@ -106,33 +122,85 @@ depth <- if (depth_raw %in% c("all", "max", "inf", "infinity")) {
 if (is.na(depth) || depth < 1) {
   depth <- 1
 }
-budget <- env_num("REVDEP2_SHARD_BUDGET_MINUTES", 45)
-max_shards <- min(env_num("REVDEP2_MAX_SHARDS", 250), 250)
-max_parallel <- env_num("REVDEP2_MAX_PARALLEL", 20)
+budget <- env_num("REVDEPX_SHARD_BUDGET_MINUTES", 45)
+max_shards <- min(env_num("REVDEPX_MAX_SHARDS", 250), 250)
+max_parallel <- env_num("REVDEPX_MAX_PARALLEL", 20)
 # A shard stops starting checks at its own deadline and defers the rest, so the
 # deadline is what actually caps a shard's check load; the plan aims below it,
 # leaving the rest of the job for installing and for the checks running long.
-deadline_minutes <- env_num("REVDEP2_DEADLINE_MINUTES", 300)
-capacity <- env_num("REVDEP2_SHARD_CAPACITY_MINUTES", 0.8 * deadline_minutes)
-refresh_baseline <- env_flag("REVDEP2_REFRESH_BASELINE")
-baseline_max_age <- env_num("REVDEP2_BASELINE_MAX_AGE_DAYS", 30)
-max_prebuilt_runs <- env_num("REVDEP2_PREBUILT_MAX_RUNS", 5)
-prebuilt_max_age <- env_num("REVDEP2_PREBUILT_MAX_AGE_DAYS", 14)
-history_runs <- env_num("REVDEP2_HISTORY_RUNS", 40)
-max_measured_runs <- env_num("REVDEP2_MEASURED_MAX_RUNS", 3)
-measured_max_age <- env_num("REVDEP2_MEASURED_MAX_AGE_DAYS", 60)
-recheck_report <- env_flag("REVDEP2_RECHECK_REPORT")
-report_dir <- env_chr("REVDEP2_REPORT_DIR", "revdep")
-overhead_minutes <- env_num("REVDEP2_PACKAGE_OVERHEAD_MINUTES", 0.5)
-retry_run <- env_chr("REVDEP2_RETRY_RUN")
+deadline_minutes <- env_num("REVDEPX_DEADLINE_MINUTES", 300)
+capacity <- env_num("REVDEPX_SHARD_CAPACITY_MINUTES", 0.8 * deadline_minutes)
+refresh_baseline <- env_flag("REVDEPX_REFRESH_BASELINE")
+baseline_max_age <- env_num("REVDEPX_BASELINE_MAX_AGE_DAYS", 30)
+history_runs <- env_num("REVDEPX_HISTORY_RUNS", 40)
+max_measured_runs <- env_num("REVDEPX_MEASURED_MAX_RUNS", 3)
+measured_max_age <- env_num("REVDEPX_MEASURED_MAX_AGE_DAYS", 60)
+recheck_report <- env_flag("REVDEPX_RECHECK_REPORT")
+report_dir <- env_chr("REVDEPX_REPORT_DIR", "revdep")
+overhead_minutes <- env_num("REVDEPX_PACKAGE_OVERHEAD_MINUTES", 0.5)
+retry_run <- env_chr("REVDEPX_RETRY_RUN")
 repo <- env_chr("GITHUB_REPOSITORY")
-timing_flavor <- env_chr("REVDEP2_TIMING_FLAVOR", "r-release-linux-x86_64")
+# The CRAN flavor whose reported check times seed the cost model. CRAN runs no
+# oldrel Linux flavor, so even when the containers check under oldrel the
+# release flavor is the closest Linux number there is -- check_scale absorbs
+# the difference like any other speed gap.
+timing_flavor <- env_chr("REVDEPX_TIMING_FLAVOR", "r-release-linux-x86_64")
+# The queue engine is the only one -- the pair engine (revdep3) was retired
+# with its unmerged PR -- and the constant keeps the engine-tagged plan,
+# manifest and timings schema unchanged.
+engine <- "queue"
+workers <- max(1, env_num("REVDEPX_WORKERS", 4))
+# How many packages a shard works on at once: one per worker. This is the
+# divisor that turns a shard's check load into wall clock.
+parallelism <- workers
+workflow_files <- strsplit(
+  env_chr("REVDEPX_WORKFLOWS", "revdep4.yaml"),
+  "[,[:space:]]+"
+)[[1]]
+workflow_files <- workflow_files[nzchar(workflow_files)]
+# Which workflow file dispatched *this* run, for messages that print a
+# re-dispatch command. GITHUB_WORKFLOW_REF looks like
+# "owner/repo/.github/workflows/revdep4.yaml@refs/heads/main".
+this_workflow_file <- local({
+  ref <- env_chr("GITHUB_WORKFLOW_REF")
+  file <- basename(sub("@.*$", "", ref))
+  if (nzchar(file) && grepl("[.]ya?ml$", file)) file else "revdep4.yaml"
+})
 
+# The R the *checks* run under -- the container's, resolved by the workflow --
+# not the R running this script. Everything keyed on an R version (the
+# baseline verdict, the plan record, the image tags) means this one.
+r_full_version <- env_chr("REVDEPX_R_VERSION")
+if (!nzchar(r_full_version)) {
+  stop(
+    "REVDEPX_R_VERSION must be set to the container R version ",
+    "(the workflow resolves it before planning)",
+    call. = FALSE
+  )
+}
 r_version <- paste(
-  R.version$major,
-  sub("[.].*$", "", R.version$minor),
-  sep = "."
+  strsplit(r_full_version, ".", fixed = TRUE)[[1]][1:2],
+  collapse = "."
 )
+
+# The base image tag pins the container platform under the checks: rocker
+# r-ver at the resolved R version plus this tree's toolchain layer. It is
+# derived from the sibling script alone -- the same recipe base-image.sh
+# hashes -- so the plan can name it without docker and without waiting for the
+# base job. A baseline row records it, and only a run standing on the same
+# tag may reuse that row: a different base image means different system
+# libraries under the same package versions.
+base_image_tag <- local({
+  script <- file.path(
+    dirname(sub("--file=", "", grep("^--file=", commandArgs(), value = TRUE))),
+    "base-image.sh"
+  )
+  hash <- unname(tools::md5sum(script))
+  if (is.na(hash)) {
+    stop("Cannot hash ", script, " for the base image tag", call. = FALSE)
+  }
+  sprintf("r-%s-%s", r_full_version, substr(hash, 1, 12))
+})
 
 # ------------------------------------------------------------ empty plans ----
 
@@ -144,68 +212,81 @@ plan_nothing <- function(reason) {
   set_output("max_parallel", "1")
   set_output("baseline_run", "0")
   set_output("plan_hash", "none")
-  append_summary(c("## revdep2 plan", "", paste0("Nothing to check: ", reason)))
+  set_output("universe_count", "0")
+  append_summary(c("## revdepx plan", "", paste0("Nothing to check: ", reason)))
   quit(save = "no", status = 0)
 }
 
 # ------------------------------------------------------------ run history ----
 
-# The gh plumbing itself lives in util.R, because the preflight and the shards
-# fetch artifacts too; what is planned here is *which* earlier runs to take
-# them from.
+# The gh plumbing itself lives in util.R, because the shards fetch artifacts
+# too; what is planned here is *which* earlier runs to take them from.
 #
-# One walk over the workflow's completed runs, youngest first, answers every
-# question this plan asks of its history, and asks the API for a run's
-# artifacts at most once:
+# One walk over the completed runs of every workflow in REVDEPX_WORKFLOWS --
+# runs of the retired pair engine published the same artifacts under the same
+# names, so old history still serves -- youngest first across all of them,
+# answers every question this plan asks of its history, and asks the API for
+# a run's artifacts at most once:
 #
 #   * which run donates the CRAN baseline -- the newest one that still has it;
-#   * which runs donate prebuilt package libraries -- as many as it takes to
-#     cover everything this run installs, youngest first, each one credited
-#     only with what the younger ones did not already have;
 #   * which runs donate measured timings -- the youngest few, whose numbers
 #     calibrate the cost model below.
+#
+# (revdep2 also hunted prebuilt library donors here. The universe image made
+# that a registry pull, so the walk no longer carries it.)
 #
 # The walk stops as soon as it has all of them, and never looks at more than
 # `history_runs` runs; reuse is an optimization, and an optimization does not
 # get to spend the planning budget.
-scan_history <- function(want_baseline, want_timings, needed) {
+scan_history <- function(want_baseline, want_timings) {
   empty <- list(
     baseline_run = NULL,
-    prebuilt = list(),
     timings = list(),
     timings_runs = character(),
-    scanned = 0L,
-    missing = needed
+    scanned = 0L
   )
   if (!gh_ok() || !nzchar(repo)) {
     return(empty)
   }
-  rows <- gh_lines(
-    "api",
-    sprintf(
-      "repos/%s/actions/workflows/revdep2.yaml/runs?status=completed&per_page=%d",
-      repo,
-      history_runs
-    ),
-    "--jq",
-    ".workflow_runs[] | [.id, .created_at] | @tsv"
-  )
+  rows <- character()
+  for (workflow in workflow_files) {
+    got <- gh_lines(
+      "api",
+      sprintf(
+        "repos/%s/actions/workflows/%s/runs?status=completed&per_page=%d",
+        repo,
+        workflow,
+        history_runs
+      ),
+      "--jq",
+      ".workflow_runs[] | [.id, .created_at] | @tsv"
+    )
+    # A workflow file that does not exist here -- only one of the two PRs
+    # merged, or a fork carries one engine -- is an empty contribution, not an
+    # error; gh_lines() already returned NULL for it.
+    rows <- c(rows, got)
+  }
   rows <- rows[nzchar(rows)]
   if (length(rows) == 0) {
     return(empty)
   }
+  # Youngest first across both workflows: the per-workflow pages each come
+  # newest first, but the merge does not, and "the newest baseline" must mean
+  # the newest of either engine.
+  created_at <- vapply(
+    rows,
+    function(row) strsplit(row, "\t", fixed = TRUE)[[1]][[2]],
+    character(1),
+    USE.NAMES = FALSE
+  )
+  rows <- rows[order(created_at, decreasing = TRUE)]
   this_run <- env_chr("GITHUB_RUN_ID")
   baseline_run <- NULL
-  prebuilt <- list()
   timings <- list()
   timings_runs <- character()
   scanned <- 0L
   for (row in rows) {
-    if (
-      !want_baseline &&
-        length(timings) >= want_timings &&
-        (length(needed) == 0 || length(prebuilt) >= max_prebuilt_runs)
-    ) {
+    if (!want_baseline && length(timings) >= want_timings) {
       break
     }
     fields <- strsplit(row, "\t", fixed = TRUE)[[1]]
@@ -217,7 +298,7 @@ scan_history <- function(want_baseline, want_timings, needed) {
     scanned <- scanned + 1L
     ids <- run_artifacts(run)
     artifacts <- names(ids)
-    if (want_baseline && "revdep2-baseline" %in% artifacts) {
+    if (want_baseline && "revdepx-baseline" %in% artifacts) {
       baseline_run <- run
       want_baseline <- FALSE
     }
@@ -225,11 +306,11 @@ scan_history <- function(want_baseline, want_timings, needed) {
     # a check costs. They are tiny, so taking the youngest few and pooling them
     # is cheaper than trusting a single run that may have been a small retry.
     take_timings <- length(timings) < want_timings &&
-      "revdep2-timings" %in% artifacts &&
+      "revdepx-timings" %in% artifacts &&
       !is.na(created) &&
       as.numeric(Sys.Date() - created) <= measured_max_age
     if (take_timings) {
-      dir <- fetch_artifact_id(ids[["revdep2-timings"]], tempfile("timings-"))
+      dir <- fetch_artifact_id(ids[["revdepx-timings"]], tempfile("timings-"))
       measured <- read_timings(dir)
       unlink(dir, recursive = TRUE)
       if (
@@ -240,52 +321,12 @@ scan_history <- function(want_baseline, want_timings, needed) {
         timings_runs <- c(timings_runs, run)
       }
     }
-    # A library is only worth carrying while its binaries still match the R
-    # series and the platform they were built for, and while the runner image
-    # they were built on is plausibly the current one -- which is what the age
-    # cap stands in for, the same way it does for baselines.
-    take_library <- length(needed) > 0 &&
-      length(prebuilt) < max_prebuilt_runs &&
-      all(c("revdep2-lib", "revdep2-lib-index") %in% artifacts) &&
-      !is.na(created) &&
-      as.numeric(Sys.Date() - created) <= prebuilt_max_age
-    if (take_library) {
-      dir <- fetch_artifact_id(
-        ids[["revdep2-lib-index"]],
-        tempfile("lib-index-")
-      )
-      index_path <- if (is.null(dir)) NULL else file.path(dir, "lib.json")
-      index <- if (!is.null(index_path) && file.exists(index_path)) {
-        read_json(index_path)
-      } else {
-        NULL
-      }
-      unlink(dir, recursive = TRUE)
-      if (
-        !is.null(index) &&
-          identical(index$r_version, r_version) &&
-          identical(index$platform, R.version$platform)
-      ) {
-        have <- vapply(index$packages, function(e) e$package, character(1))
-        gain <- intersect(needed, have)
-        if (length(gain) > 0) {
-          prebuilt[[length(prebuilt) + 1]] <- list(
-            run_id = run,
-            created_at = fields[[2]],
-            packages = as.list(gain)
-          )
-          needed <- setdiff(needed, gain)
-        }
-      }
-    }
   }
   list(
     baseline_run = baseline_run,
-    prebuilt = prebuilt,
     timings = timings,
     timings_runs = timings_runs,
-    scanned = scanned,
-    missing = needed
+    scanned = scanned
   )
 }
 
@@ -355,7 +396,7 @@ selection <- "all"
 selection_md <- NULL
 retry_manifest <- NULL
 packages_input <- trimws(strsplit(
-  env_chr("REVDEP2_PACKAGES"),
+  env_chr("REVDEPX_PACKAGES"),
   "[,[:space:]]+"
 )[[1]])
 packages_input <- packages_input[nzchar(packages_input)]
@@ -399,11 +440,11 @@ if (length(packages_input) > 0) {
 } else if (nzchar(retry_run)) {
   selection <- sprintf("retry of run %s", retry_run)
   selection_md <- sprintf("retry of run %s", run_link(retry_run))
-  dir <- fetch_artifact(retry_run, "revdep2-report", tempfile("retry-"))
+  dir <- fetch_artifact(retry_run, "revdepx-report", tempfile("retry-"))
   manifest_path <- if (is.null(dir)) NULL else file.path(dir, "manifest.json")
   if (is.null(manifest_path) || !file.exists(manifest_path)) {
     stop(
-      "Cannot fetch the revdep2-report artifact of run ",
+      "Cannot fetch the revdepx-report artifact of run ",
       retry_run,
       call. = FALSE
     )
@@ -437,7 +478,7 @@ their_version <- setNames(unname(db[packages, "Version"]), packages)
 
 # ------------------------------------------------------------------ weights --
 
-timings_file <- env_chr("REVDEP2_TIMINGS_FILE")
+timings_file <- env_chr("REVDEPX_TIMINGS_FILE")
 if (nzchar(timings_file)) {
   inform("Reading check timings from ", timings_file)
   timings <- if (grepl("[.]rds$", timings_file)) {
@@ -464,7 +505,7 @@ t_total <- pmax(t_total, 60)
 # `part: i/G` takes one G-th of the batch, for a revdep set too big to check in
 # one run (see the refusal in the partitioning section, which computes G and
 # prints the dispatch lines). The cut is made here, on CRAN's times, because
-# everything downstream -- closures, the dependency universe, the prebuilt
+# everything downstream -- closures, the dependency universe, the image
 # lookup -- should see only the packages this run will check.
 #
 # Dealing the weight-ordered list round robin keeps the parts of similar size
@@ -472,7 +513,7 @@ t_total <- pmax(t_total, 60)
 # order from the same CRAN metadata. A package that moves between dispatches
 # can land in another part or in none; `retry-run` on the union is the sweep
 # for that, and nothing here depends on the parts being exact.
-part_input <- trimws(env_chr("REVDEP2_PART"))
+part_input <- trimws(env_chr("REVDEPX_PART"))
 part <- NULL
 if (nzchar(part_input)) {
   fields <- suppressWarnings(as.integer(strsplit(part_input, "/")[[1]]))
@@ -484,15 +525,19 @@ if (nzchar(part_input)) {
       fields[[1]] > fields[[2]]
   ) {
     stop(
-      "REVDEP2_PART must be `i/G` with 1 <= i <= G, not ",
+      "REVDEPX_PART must be `i/G` with 1 <= i <= G, not ",
       part_input,
       call. = FALSE
     )
   }
   part <- list(index = fields[[1]], of = fields[[2]])
-  mine <- order(-t_total)[
-    seq(part$index, length(packages), by = part$of)
-  ]
+  # Not `seq(index, n, by = of)`: seq() errors outright ("wrong sign in
+  # 'by'") when fewer packages remain than the part index -- `part: 4/4`
+  # over a 3-package explicit list must reach the empty-part plan_nothing()
+  # below, not die here.
+  positions <- seq_along(packages)
+  positions <- positions[positions %% part$of == part$index %% part$of]
+  mine <- order(-t_total)[positions]
   packages <- sort(packages[mine])
   t_total <- t_total[packages]
   known <- known[packages]
@@ -530,16 +575,20 @@ inform(
 # --------------------------------------------------------------- closures ----
 
 inform("Computing dependency closures")
-closure <- install_closure(packages, db)
+# Closures resolve against CRAN *and* Bioconductor: `db` decides what gets
+# checked (CRAN reverse dependencies), `deps_db` what those checks need
+# installed -- a CRAN package may depend on Bioconductor freely.
+deps_db <- dep_db()
+closure <- install_closure(packages, deps_db)
 fingerprint <- vapply(
   packages,
-  function(p) dep_fingerprint(closure[[p]], db),
+  function(p) dep_fingerprint(closure[[p]], deps_db),
   character(1)
 )
 
 # The dev version's own dependencies: every shard installs the dev binary, so
 # every shard needs them even when no revdep pulls them in. Parsed from the
-# checkout's DESCRIPTION, resolved against CRAN.
+# checkout's DESCRIPTION, resolved against the dependency metadata.
 parse_dep_field <- function(field) {
   value <- desc[field]
   if (is.na(value)) {
@@ -553,12 +602,17 @@ dev_deps <- unique(unlist(lapply(
   c("Depends", "Imports", "LinkingTo"),
   parse_dep_field
 )))
-dev_deps <- intersect(dev_deps, rownames(db))
+dev_deps <- intersect(dev_deps, rownames(deps_db))
 dev_closure <- sort(setdiff(
   unique(c(
     dev_deps,
     unlist(
-      tools::package_dependencies(dev_deps, db = db, which = "strong", recursive = TRUE),
+      tools::package_dependencies(
+        dev_deps,
+        db = deps_db,
+        which = "strong",
+        recursive = TRUE
+      ),
       use.names = FALSE
     )
   )),
@@ -567,14 +621,14 @@ dev_closure <- sort(setdiff(
 
 # Everything this run installs anywhere: the union of the revdeps' closures
 # and the dev version's own dependencies. It prices the partitioning penalty
-# below, and it is the set the prebuilt libraries of earlier runs are matched
+# below, and it is the list the universe image is built from
 # against.
 universe <- unique(c(unlist(closure, use.names = FALSE), dev_closure))
 
 # ------------------------------------------------------------ earlier runs ---
 
-local_baseline <- env_chr("REVDEP2_BASELINE_DIR")
-local_measured <- env_chr("REVDEP2_MEASURED_DIR")
+local_baseline <- env_chr("REVDEPX_BASELINE_DIR")
+local_measured <- env_chr("REVDEPX_MEASURED_DIR")
 history <- scan_history(
   # A retried run donates its own baseline, and the offline hooks bypass
   # discovery entirely; whatever is supplied that way, the walk stops looking
@@ -582,8 +636,7 @@ history <- scan_history(
   want_baseline = !refresh_baseline &&
     !nzchar(local_baseline) &&
     !nzchar(retry_run),
-  want_timings = if (nzchar(local_measured)) 0 else max_measured_runs,
-  needed = universe
+  want_timings = if (nzchar(local_measured)) 0 else max_measured_runs
 )
 
 # ---------------------------------------------------------------- baseline ---
@@ -594,7 +647,7 @@ if (refresh_baseline) {
   inform("Baseline reuse disabled by input")
 } else if (nzchar(local_baseline)) {
   # Offline hook for testing the eligibility rules without a GitHub run: a
-  # directory holding baseline.json, e.g. a downloaded revdep2-baseline
+  # directory holding baseline.json, e.g. a downloaded revdepx-baseline
   # artifact. The shard reads the same directory through BASELINE_DIR.
   manifest_path <- file.path(local_baseline, "baseline.json")
   if (file.exists(manifest_path)) {
@@ -616,7 +669,7 @@ if (refresh_baseline) {
   if (is.null(donor) || !nzchar(donor)) {
     inform("No earlier run with a baseline artifact found")
   } else {
-    dir <- fetch_artifact(donor, "revdep2-baseline", tempfile("baseline-"))
+    dir <- fetch_artifact(donor, "revdepx-baseline", tempfile("baseline-"))
     manifest_path <- if (is.null(dir)) NULL else file.path(dir, "baseline.json")
     if (is.null(manifest_path) || !file.exists(manifest_path)) {
       inform(
@@ -642,11 +695,21 @@ if (refresh_baseline) {
   }
 }
 
-# Reuse an old-version verdict only when everything that shaped it is
-# unchanged: the revdep's version, the CRAN version of the package under test,
-# the R series, and the resolved versions of the whole install closure -- plus
-# an age cap as the backstop for what metadata cannot see (system libraries,
-# the runner image).
+# Offer a stored old-version verdict as a second opinion only when everything
+# that shaped it is unchanged: the revdep's version, the CRAN version of the
+# package under test, the R series, the base image the checks stood on, and
+# the resolved versions of the whole install closure -- plus an age cap as
+# the backstop for what metadata cannot see (the universe image accumulates
+# deltas between full rebuilds). The old half runs fresh regardless; a row
+# that fails these conditions is not wrong, it is merely not comparable, and
+# a drift verdict against an incomparable row would be noise.
+#
+# The base-image condition is also the firewall against revdep2-era baselines:
+# those rows were measured on the runner's own R and toolchain, carry no
+# `base_image`, and two parsers and two machines apart they produced 8.4%
+# false newly-broken back when they were allowed to stand in for the old
+# half. Rows from either revdepx workflow name the same tag when nothing
+# changed -- which is exactly when a disagreement means drift and not noise.
 baseline_verdict <- function(p) {
   e <- baseline_manifest[[p]]
   if (is.null(e)) {
@@ -660,6 +723,9 @@ baseline_verdict <- function(p) {
   }
   if (!identical(e$r_version, r_version)) {
     return("r-version")
+  }
+  if (!identical(e$base_image, base_image_tag)) {
+    return("base-image")
   }
   if (!identical(e$dep_fingerprint, unname(fingerprint[[p]]))) {
     return("dependencies")
@@ -680,47 +746,14 @@ if (has_run(baseline_run)) {
   inform(
     "Baseline: ",
     sum(reuse),
-    " reusable, ",
+    " with a second opinion, ",
     sum(!reuse),
-    " to check fresh",
+    " without",
     if (length(stale) > 0) {
       paste0(" (", paste(names(stale), stale, sep = ": ", collapse = ", "), ")")
     } else {
       ""
     }
-  )
-}
-
-# --------------------------------------------------------------- prebuilt ---
-
-# What the preflight and the shards will unpack instead of building. Recording
-# it here rather than letting every job walk the history itself keeps the
-# decision in one place, makes it inspectable in the plan and the summary, and
-# spends the API calls once.
-prebuilt <- history$prebuilt
-prebuilt_covered <- length(universe) - length(history$missing)
-if (length(prebuilt) > 0) {
-  inform(
-    "Prebuilt libraries: ",
-    prebuilt_covered,
-    " of ",
-    length(universe),
-    " packages from ",
-    length(prebuilt),
-    " run(s) (",
-    paste(
-      vapply(
-        prebuilt,
-        function(d) sprintf("%s: %d", d$run_id, length(d$packages)),
-        character(1)
-      ),
-      collapse = ", "
-    ),
-    ")"
-  )
-} else if (max_prebuilt_runs > 0) {
-  inform(
-    "No reusable prebuilt package library found; everything is installed fresh"
   )
 }
 
@@ -735,22 +768,28 @@ if (length(prebuilt) > 0) {
 # Every constant is overridable by hand, and every fallback is the value that
 # was hard-coded before anything measured itself.
 measured_runs <- if (nzchar(local_measured)) {
-  # Offline hook for reading a downloaded revdep2-timings artifact, the way
-  # REVDEP2_BASELINE_DIR reads a downloaded baseline.
+  # Offline hook for reading a downloaded revdepx-timings artifact, the way
+  # REVDEPX_BASELINE_DIR reads a downloaded baseline.
   Filter(Negate(is.null), list(read_timings(local_measured)))
 } else {
   history$timings
 }
-cal <- calibration(measured_runs)
+cal <- calibration(measured_runs, engine)
 measured_seconds <- measured_check_seconds(measured_runs)
 
-check_scale <- env_num_opt("REVDEP2_CHECK_SCALE") %||% cal$check_scale %||% 1
-setup_minutes <- env_num_opt("REVDEP2_SETUP_MINUTES") %||%
+check_scale <- env_num_opt("REVDEPX_CHECK_SCALE") %||% cal$check_scale %||% 1
+# The fixed cost of a shard now includes pulling the universe image, so the
+# uncalibrated default sits above revdep2's 6.
+setup_minutes <- env_num_opt("REVDEPX_SETUP_MINUTES") %||%
   cal$setup_minutes %||%
-  6
-install_seconds <- env_num_opt("REVDEP2_INSTALL_SECONDS") %||%
+  10
+# Zero, because a shard's dependencies arrive inside the image it pulls; the
+# install penalty then prices nothing and the deal is pure load balancing.
+# The knob stays for the fallback world where shards build their own library
+# (and calibration reports what fallback shards actually measured).
+install_seconds <- env_num_opt("REVDEPX_INSTALL_SECONDS") %||%
   cal$install_seconds %||%
-  2.5
+  0
 
 if (length(measured_runs) > 0) {
   inform(
@@ -791,27 +830,26 @@ inform(
   " check times measured by an earlier run"
 )
 
-# Weight: what one package costs the shard in wall clock, which is one *pair*
-# of checks.
+# Weight: what one package costs a worker in wall clock.
 #
-# This used to be `((!reuse) + 1) *`: a reusable baseline stood in for the old
-# check, so such a package cost one check and everything else cost two. Both
-# halves always run now, so the condition is gone -- but so is the factor of
-# two, and that part is easy to get backwards. The two halves run
-# *concurrently*, so a package costs the shard the wall clock of the slower
-# one, not the sum. And `check_scale` is fitted from exactly that quantity:
-# `collect.R` records `t_old` and `t_new` as the pair's wall clock and
-# `calibration()` fits `median(seconds / T_total)` from it, so
-# `check_seconds` already *is* the pair. Multiplying by two here would price
-# every shard at twice its wall clock -- which buys twice the shards, each
-# paying its own setup, and defers packages at the deadline that would have
-# fit.
-weight <- check_seconds / 60 + overhead_minutes
+# `check_seconds` is calibrated to mean *one half*: `collect.R` records the
+# mean of the positive per-half durations and `calibration()` fits
+# `median(seconds / T_total)` from that. The halves run back to back, so the
+# package always costs both. Both halves run fresh: a stored old result is a
+# second opinion (`baseline_agrees`), never a substitute, so a baseline
+# changes no weight -- this is where revdep2's `((!reuse) + 1) *` factor
+# would otherwise come back, and it stays retired on purpose.
+halves <- 2
+weight <- halves * check_seconds / 60 + overhead_minutes
 
 # ------------------------------------------------------------- partitioning --
 
 n <- length(packages)
-total_check <- sum(weight)
+# What the whole batch costs in *wall clock*: the queue works
+# `parallelism` packages at once, so a shard's check minutes are its check
+# load divided by the workers -- a lower bound the per-shard model below
+# tightens for shards dominated by one giant.
+total_check <- sum(weight) / parallelism
 
 # How many shards can actually run at the same time. Everything past that waits
 # for a lane, so the shard count is counted in waves of this size.
@@ -865,10 +903,23 @@ ord <- order(-weight)
 # The greedy pass, for a given shard count. It is cheap enough (O(n x K) with a
 # bitmap per shard) to run more than once, which is what lets the deadline
 # check below see a real partition rather than an average.
+#
+# A shard's wall clock is modelled as
+#
+#   overhead + max(heaviest member, check sum / parallelism)
+#
+# The division alone would flatter a
+# shard dominated by one giant -- workers cannot share a package, so a shard
+# whose heaviest member outweighs everything else runs exactly as long as
+# that member, however many workers idle beside it. max(heaviest, mean work
+# per worker) is the standard lower bound for such a schedule, and the
+# two-ended queue tracks it closely: the giants start first, the cheap tail
+# packs the gaps.
 partition <- function(k) {
   assignment <- integer(n)
-  load <- rep(setup_minutes + length(dev_closure) * penalty, k)
-  check_load <- numeric(k)
+  overhead <- rep(setup_minutes + length(dev_closure) * penalty, k)
+  check_sum <- numeric(k)
+  check_max <- numeric(k)
   have <- matrix(FALSE, nrow = length(universe), ncol = k)
   have[match(dev_closure, universe), ] <- TRUE
 
@@ -876,8 +927,9 @@ partition <- function(k) {
     p <- ord[[i]]
     fresh <- sum(!have[dep_idx[[p]], s])
     assignment[[p]] <<- s
-    check_load[[s]] <<- check_load[[s]] + weight[[p]]
-    load[[s]] <<- load[[s]] + weight[[p]] + fresh * penalty
+    check_sum[[s]] <<- check_sum[[s]] + weight[[p]]
+    check_max[[s]] <<- max(check_max[[s]], weight[[p]])
+    overhead[[s]] <<- overhead[[s]] + fresh * penalty
     have[dep_idx[[p]], s] <<- TRUE
   }
 
@@ -892,12 +944,22 @@ partition <- function(k) {
     for (i in seq(k + 1L, n)) {
       p <- ord[[i]]
       fresh <- colSums(!have[dep_idx[[p]], , drop = FALSE])
-      score <- load + weight[[p]] + fresh * penalty
+      score <- overhead +
+        fresh * penalty +
+        pmax(
+          pmax(check_max, weight[[p]]),
+          (check_sum + weight[[p]]) / parallelism
+        )
       place(i, which.min(score))
     }
   }
 
-  list(assignment = assignment, load = load, check_load = check_load)
+  check_wall <- pmax(check_max, check_sum / parallelism)
+  list(
+    assignment = assignment,
+    load = overhead + check_wall,
+    check_load = check_wall
+  )
 }
 
 # `capacity` bounds the *checks* a shard may hold; the shard also spends its
@@ -950,7 +1012,7 @@ plan_too_big <- function() {
     deadline_minutes
   ))
   append_summary(c(
-    "## revdep2 plan",
+    "## revdepx plan",
     "",
     "**Too big for one run — nothing was started.**",
     "",
@@ -974,7 +1036,7 @@ plan_too_big <- function() {
     if (headroom <= 0) {
       c(
         sprintf(
-          "Setup and installs alone (~%.0f min) already exceed the deadline, so splitting the packages will not help: raise `REVDEP2_DEADLINE_MINUTES` (and the job's `timeout-minutes`, up to GitHub's 6 h ceiling) first.",
+          "Setup and installs alone (~%.0f min) already exceed the deadline, so splitting the packages will not help: raise `REVDEPX_DEADLINE_MINUTES` (and the job's `timeout-minutes`, up to GitHub's 6 h ceiling) first.",
           overhead
         ),
         ""
@@ -992,7 +1054,7 @@ plan_too_big <- function() {
         ),
         "",
         sprintf(
-          "Raise `REVDEP2_DEADLINE_MINUTES` (now %.0f) and the shard job's `timeout-minutes` (now 350, GitHub's ceiling is 6 h), or leave %s out of the run with an explicit `packages` list.",
+          "Raise `REVDEPX_DEADLINE_MINUTES` (now %.0f) and the shard job's `timeout-minutes` (now 350, GitHub's ceiling is 6 h), or leave %s out of the run with an explicit `packages` list.",
           deadline_minutes,
           if (length(giants) == 1) "it" else "them"
         ),
@@ -1005,7 +1067,8 @@ plan_too_big <- function() {
         "```sh",
         paste0(
           sprintf(
-            "gh workflow run revdep2.yaml -f part=%d/%d",
+            "gh workflow run %s -f part=%d/%d",
+            this_workflow_file,
             seq_len(parts),
             parts
           ),
@@ -1017,8 +1080,9 @@ plan_too_big <- function() {
           "The parts are cut from the same weight-ordered list, dealt round",
           "robin, so they are of similar size and together cover everything —",
           "and each part re-plans itself, so a part that is still too big says",
-          "so in turn. They share baselines and prebuilt libraries through the",
-          "usual artifacts, so the later parts start warmer than the first."
+          "so in turn. They share baselines, timings and the universe image",
+          "through the usual channels, so the later parts start warmer than",
+          "the first."
         ),
         ""
       )
@@ -1030,7 +1094,7 @@ plan_too_big <- function() {
       max_parallel
     ),
     sprintf(
-      "* raise `shard-capacity-minutes` (now %.0f) only together with `REVDEP2_DEADLINE_MINUTES` (now %.0f) and the shard job's `timeout-minutes` (350): the deadline is what a shard actually has.",
+      "* raise `shard-capacity-minutes` (now %.0f) only together with `REVDEPX_DEADLINE_MINUTES` (now %.0f) and the shard job's `timeout-minutes` (350): the deadline is what a shard actually has.",
       capacity,
       deadline_minutes
     ),
@@ -1054,11 +1118,11 @@ inform(sprintf(
 
 # A plan can fit the matrix and still be a bad idea: `which: most` at `depth:
 # 2` is 3419 packages and about 22 hours of waves here, which is a run nobody
-# is watching by the end and a day of artifacts riding on one preflight. It is
+# is watching by the end and a day of artifacts riding on one universe image. It is
 # a legitimate thing to ask for, so this warns rather than refuses -- but it
 # warns where the dispatcher will see it, not only in the wave line.
 wall_minutes <- waves * max(load)
-long_run_hours <- env_num("REVDEP2_LONG_RUN_HOURS", 12)
+long_run_hours <- env_num("REVDEPX_LONG_RUN_HOURS", 12)
 long_run <- wall_minutes > long_run_hours * 60
 
 # ------------------------------------------------------------------ output ---
@@ -1071,44 +1135,12 @@ shard_install <- lapply(shard_members, function(members) {
   sort(unique(c(dev_closure, unlist(closure[members], use.names = FALSE))))
 })
 
-# What the preflight installs, which is not the whole universe.
-#
-# A shard unpacks the preflight's library and builds only what is missing, so
-# preflighting a package is worth it exactly when more than one shard needs
-# it: build it once centrally instead of once per shard. A package only one
-# shard needs is built once either way -- the preflight merely moves that
-# build off the shard, where it runs 20-wide, and onto the critical path,
-# where it runs alone.
-#
-# On the 3434-revdep set, planned into 60 shards, that is 1639 of 4406
-# packages -- 37% of the preflight's work for no saving at all. Dropping them
-# is free in the strict sense: the total number of installs across the run is
-# identical (4406 either way), and so is the number of downloads, since a
-# package one shard needs is fetched once whoever fetches it.
-#
-# Going further is a real trade rather than a freebie. A threshold of 3 sheds
-# another 659 packages but has each of them built twice instead of once, so
-# the run does 5065 installs instead of 4406. Worth having as a knob for a
-# preflight under time pressure, not worth defaulting to.
-#
-# The threshold is capped at the shard count: with one shard every package is
-# needed by every shard, and the preflight installing nothing would leave the
-# next run without a donor library.
-preflight_min_shards <- max(
-  1L,
-  min(as.integer(env_num("REVDEP2_PREFLIGHT_MIN_SHARDS", 2)), k)
-)
-shards_needing <- table(unlist(shard_install, use.names = FALSE))
-preflight_union <- sort(names(shards_needing)[
-  shards_needing >= preflight_min_shards
-])
-inform(sprintf(
-  "Preflight installs %d of the %d packages in the universe: those at least %d shard(s) need (%d are needed by one shard, and stay with it)",
-  length(preflight_union),
-  length(universe),
-  preflight_min_shards,
-  sum(shards_needing < preflight_min_shards)
-))
+# revdep2 computed a preflight subset here -- the packages at least two shards
+# needed, because a host library was rebuilt per shard and a package one shard
+# needed was built once either way. The universe image dissolved that
+# arithmetic: every package is installed exactly once, into the image, and
+# every shard mounts all of them. So the plan records the whole universe, and
+# image.R reads it directly.
 
 shard_list <- lapply(seq_len(k), function(s) {
   members <- shard_members[[s]]
@@ -1149,7 +1181,13 @@ plan <- list(
   package = package,
   dev_version = dev_version,
   cran_version = cran_version,
+  # The container's R, full and as a series: what the checks run under, and
+  # what every baseline row is keyed on.
   r_version = r_version,
+  r_full_version = r_full_version,
+  base_image = base_image_tag,
+  engine = engine,
+  workers = workers,
   sha = head_sha,
   ref = env_chr("GITHUB_REF_NAME"),
   which = which_input,
@@ -1165,14 +1203,6 @@ plan <- list(
     max_age_days = baseline_max_age,
     reused = sum(reuse),
     fresh = sum(!reuse)
-  ),
-  prebuilt = list(
-    max_runs = max_prebuilt_runs,
-    max_age_days = prebuilt_max_age,
-    runs_scanned = history$scanned,
-    covered = prebuilt_covered,
-    missing = length(history$missing),
-    runs = prebuilt
   ),
   calibration = list(
     runs = if (nzchar(local_measured)) {
@@ -1204,14 +1234,12 @@ plan <- list(
     check_minutes = round(total_check, 1),
     estimate_minutes = round(sum(load), 1),
     wave_minutes = round(waves * max(load), 1),
-    universe = length(universe),
-    install_union = length(preflight_union),
-    preflight_min_shards = preflight_min_shards
+    universe = length(universe)
   ),
   dropped_unknown = as.list(dropped),
-  # The preflight's list, not the universe: the shards install their own
-  # unions, and what only one of them needs is left to it.
-  install_union = as.list(preflight_union),
+  # Everything any shard needs installed, dev closure included: the list
+  # image.R installs into the universe image.
+  universe = as.list(sort(universe)),
   dev_closure = as.list(dev_closure),
   shards = shard_list
 )
@@ -1239,6 +1267,7 @@ set_output("packages", as.character(n))
 set_output("max_parallel", as.character(parallel))
 set_output("baseline_run", baseline_run)
 set_output("plan_hash", plan_hash)
+set_output("universe_count", as.character(length(universe)))
 
 # ------------------------------------------------------------------ summary --
 
@@ -1262,9 +1291,9 @@ summary_df <- data.frame(
   check.names = FALSE
 )
 append_summary(c(
-  "## revdep2 plan",
+  "## revdepx plan",
   "",
-  if (env_flag("REVDEP2_DRY_RUN")) c("**Dry run: planning only, no checks started.**", ""),
+  if (env_flag("REVDEPX_DRY_RUN")) c("**Dry run: planning only, no checks started.**", ""),
   if (long_run) {
     c(
       sprintf(
@@ -1276,7 +1305,7 @@ append_summary(c(
         if (length(measured_runs) == 0) {
           "nothing is measured yet, so it is priced on CRAN's times, which have run about twice the local cost \u2014 the same plan calibrated is roughly half this"
         } else {
-          "a run this long rides on one preflight and a day of artifacts"
+          "a run this long rides on one universe image and a day of artifacts"
         }
       ),
       sprintf(
@@ -1314,7 +1343,7 @@ append_summary(c(
     "| Baseline | %s |",
     if (length(baseline_manifest) > 0) {
       sprintf(
-        "%s: %d reused, %d fresh",
+        "%s: %d with a second opinion, %d without",
         if (has_run(baseline_run)) {
           paste("run", run_link(baseline_run))
         } else {
@@ -1328,30 +1357,18 @@ append_summary(c(
     }
   ),
   sprintf(
-    "| Prebuilt packages | %s |",
-    if (length(prebuilt) > 0) {
-      sprintf(
-        "%d of %d from run%s %s",
-        prebuilt_covered,
-        length(universe),
-        if (length(prebuilt) > 1) "s" else "",
-        paste(
-          vapply(prebuilt, function(d) run_link(d$run_id), character(1)),
-          collapse = ", "
-        )
-      )
-    } else {
-      "none"
-    }
+    "| Engine | `%s`%s |",
+    engine,
+    sprintf(" (%d workers per shard)", workers)
   ),
   sprintf(
-    "| Preflight installs | %d of %d (what at least %d shard%s need%s; the other %d stay with the one shard that needs them) |",
-    length(preflight_union),
-    length(universe),
-    preflight_min_shards,
-    if (preflight_min_shards == 1) "" else "s",
-    if (preflight_min_shards == 1) "s" else "",
-    length(universe) - length(preflight_union)
+    "| Check platform | R %s in containers on base `%s` |",
+    r_full_version,
+    base_image_tag
+  ),
+  sprintf(
+    "| Universe | %d packages, baked into the shared image |",
+    length(universe)
   ),
   sprintf(
     "| Cost model | %s |",

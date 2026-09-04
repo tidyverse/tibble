@@ -1,0 +1,1407 @@
+# Containerized reverse-dependency check, queue engine:
+# plan + base image (parallel) -> build -> universe image -> test (matrix) -> collect.
+#
+# revdep2 ran the two halves of a package -- the CRAN release and the dev
+# build of this package -- as two simultaneous `R CMD check` processes on one
+# host. That is not a supported mode of operation for the packages being
+# checked: the PSOCK port collision needed a hand-rolled `R_PARALLEL_PORT`
+# split, the halves shared one TMPDIR, and any singleton a check assumes it
+# owns was a latent false `newly_broken`. This workflow removes the
+# simultaneity instead of isolating it: a package's old and new halves run
+# SEQUENTIALLY, and the lost concurrency is won back ACROSS packages -- a
+# custom bash work queue runs REVDEPX_WORKERS packages at once, each check in
+# its own container (see revdep4/queue.sh).
+#
+# The queue is two-ended over the shard's heaviest-first package list: one
+# worker eats from the heavy end, so the longest checks start first and are
+# never the straggler discovered last; the remaining workers eat from the
+# light end, draining the long tail of cheap packages in parallel; the two
+# ends meet in the middle. One container per package also isolates
+# *different* packages from each other -- stronger than revdep2, which only
+# ever separated the two halves' ports.
+#
+# Sequential halves make per-half durations real measurements -- revdep2
+# could only ever record the pair's shared wall clock. Both halves always
+# run fresh: where the plan finds a valid old-version result from an earlier
+# run it rides along as a *second
+# opinion* (`baseline_agrees` records whether the fresh old check reproduced
+# it, and disagreement is reported as drift), never as a substitute for the
+# check itself.
+#
+# The jobs:
+#
+#   plan      enumerates the revdeps, weighs them (measured timings, else
+#             CRAN's times scaled; sequential halves priced at two checks),
+#             deals cost-balanced shards sized by the worker count.
+#   base      builds (or finds, by content-derived tag) the check platform:
+#             rocker/r-ver at the pinned R version (4.6.1 by default -- at
+#             least one reverse dependency needs R-release) plus qpdf,
+#             ghostscript, pandoc, TeX, Xvfb and pak.
+#   build     builds the dev package binary INSIDE the base container -- the
+#             binary must load under the container's R, not the runner's.
+#   universe  installs the whole dependency universe (plus every system
+#             requirement) into a container from the base image -- or,
+#             delta-style, from the previous universe image when one fresh
+#             enough exists -- and commits + pushes the result to GHCR.
+#   test      one job per shard: pull the universe image, install the two
+#             igraph halves into bind-mounted single-package libraries, then
+#             run the queue over the shard's packages. Checks run in three
+#             slices with an upload after each, so a reclaimed runner loses
+#             at most a third of a shard.
+#   collect   folds every shard artifact into the revdepcheck-style report,
+#             the manifest, the baseline for later runs, and the timings the
+#             next plan calibrates from.
+#
+# The scripts live in `.github/workflows/revdepx/` (once shared with the
+# retired concurrent-pair sibling, revdep3, whose PR was closed unmerged);
+# artifacts, manifest schema and the universe image lineage are unchanged,
+# so history from the sibling's live runs still serves as baselines and
+# timings.
+#
+# Results land in artifacts:
+#   revdepx-report          the merged report -- fetch with
+#                           `gh run download <run-id> --name revdepx-report`
+#                           or ./.github/workflows/revdepx/fetch.sh <run-id>
+#   revdepx-baseline        old-version results, read back by later runs of
+#                           either workflow as a second opinion beside their
+#                           fresh old checks, while the revdep's version, our
+#                           CRAN version, the container R, the base image and
+#                           the resolved dependency versions all still match
+#   revdepx-timings         what the checks and shards actually cost; the
+#                           next plan (of either workflow) sizes shards by it
+#   revdepx-universe-report what the universe image build installed, loaded
+#                           and could not
+#
+# To re-check only what a run could not declare ok, dispatch again with
+# `retry-run: <run-id>`; the new report carries the old run's good results
+# over, so it is complete again.
+#
+# Dispatch-only, deliberately: nothing here runs on push. Check results never
+# turn the run red -- the summary and the report artifact are the
+# deliverable; only infrastructure failures fail jobs.
+
+on:
+  workflow_dispatch:
+    inputs:
+      ref:
+        description: "Branch, tag, or commit SHA to check (the tree must contain the revdepx scripts); default: the dispatched ref"
+        type: string
+        default: ""
+      packages:
+        description: "Packages to check (comma/space separated), or 'broken' to take what the committed revdep/ report lists as broken or failed; default: all reverse dependencies"
+        type: string
+        default: ""
+      which:
+        description: "Which reverse dependencies to enumerate"
+        type: choice
+        options:
+          - strong
+          - most
+        default: strong
+      depth:
+        description: "Levels of reverse dependencies: 1 = direct, 2 = also revdeps of revdeps, ..., 'all' = the full transitive closure"
+        type: string
+        default: "1"
+      retry-run:
+        description: "Run id of an earlier revdep4 run; re-check only its not-ok packages"
+        type: string
+        default: ""
+      part:
+        description: "Check one G-th of the reverse dependencies, as 'i/G'; for a set too big for one run (the plan says when, and with which G)"
+        type: string
+        default: ""
+      r-version:
+        description: "R version the checks run under: an explicit version like 4.6.1 (the pinned default -- at least one reverse dependency needs R-release), or 'oldrel'/'release' to resolve at run time."
+        type: string
+        default: "4.6.1"
+      workers:
+        description: "Packages checked concurrently per shard by the queue (one heavy lane, the rest light); default: the runner's core count"
+        type: string
+        default: ""
+      shard-budget-minutes:
+        description: "Check-time target per shard; smaller buys wall clock with more shards, up to one wave of max-parallel"
+        type: string
+        default: ""
+      max-parallel:
+        description: "Shards to run concurrently, and so the wave size the plan cuts: set it to the concurrency the account really has, never more (GitHub queues past its own limit anyway)"
+        type: string
+        default: ""
+      refresh-baseline:
+        description: "Offer no stored old results as second opinions (the old half always runs fresh either way)"
+        type: boolean
+        default: false
+      baseline-max-age-days:
+        description: "Oldest baseline result worth reusing"
+        type: string
+        default: ""
+      not-cran:
+        description: "Run the tests CRAN skips: sets NOT_CRAN=true, so skip_on_cran() does not skip (slower, noisier, and includes packages' own spelling tests)"
+        type: boolean
+        default: false
+      dry-run:
+        description: "Plan only: report the shards and reuse decisions, start no checks"
+        type: boolean
+        default: false
+
+name: revdep4
+
+# GitHub does not show a run the inputs it was dispatched with, so the ones
+# that decide how much work the run is go into the run's own title.
+run-name: "revdep4 ${{ inputs.packages && format('({0})', inputs.packages) || format('({0}, depth {1})', inputs.which || 'strong', inputs.depth || '1') }}${{ inputs['retry-run'] && format(', retry of {0}', inputs['retry-run']) || '' }}${{ inputs['dry-run'] && ', dry run' || '' }}"
+
+# Read-only by default; every job opts back into what it actually needs.
+permissions:
+  contents: read
+
+# One revdepx run per checked ref at a time -- the group is named revdepx,
+# not after this file, a relic of the retired sibling workflow that shared
+# it. Two runs interleaving on one ref would race the committed report, the
+# baseline lineage and the universe image's `latest` tag. A queued run waits
+# rather than killing shards mid-check.
+#
+# `github.ref_name`, not `github.ref`: the input holds a bare name ("main")
+# while `github.ref` is fully qualified ("refs/heads/main"), and a group
+# built from the mismatched pair would let a run dispatched with the input
+# filled in interleave with one dispatched without it -- on the very same
+# branch the group exists to serialize. (A SHA or tag typed into the input
+# forms its own group, which is correct: it is its own checked tree.)
+concurrency:
+  group: revdepx-${{ inputs.ref || github.ref_name }}
+  cancel-in-progress: false
+
+env:
+  REVDEPX_ENGINE: queue
+  REVDEPX_PACKAGES: ${{ inputs.packages || '' }}
+  REVDEPX_WHICH: ${{ inputs.which || 'strong' }}
+  REVDEPX_DEPTH: ${{ inputs.depth || '1' }}
+  REVDEPX_RETRY_RUN: ${{ inputs.retry-run || '' }}
+  REVDEPX_PART: ${{ inputs.part || '' }}
+  REVDEPX_R_VERSION_INPUT: ${{ inputs.r-version || '4.6.1' }}
+  REVDEPX_WORKERS: ${{ inputs.workers || vars.REVDEPX_WORKERS || '4' }}
+  # Hard memory cap per check container; empty lets queue.sh derive (total
+  # minus 2 GiB) / workers. A hungry check then kills its own container --
+  # one package's result -- instead of the runner. 6g deliberately
+  # overcommits the 15.6 GiB runner across 4 workers: checks rarely peak
+  # together, and the derived ~3.4g cap OOM-killed cc1plus during Stan/TMB
+  # compiles in run 32158907637 (dmesg: anon-rss ~3.3 GiB) -- misreported as
+  # packages "failing to install".
+  REVDEPX_MEMORY_PER_CHECK: ${{ vars.REVDEPX_MEMORY_PER_CHECK || '6g' }}
+  # Compiler flags appended for the check's own compile of the package under
+  # test (default -g0 in check-half.sh: debug info is what a Stan/TMB
+  # translation unit spends its compiler gigabytes on; set '-g' for CRAN's
+  # own flags) and MAKEFLAGS inside the check container (default -j1 there).
+  REVDEPX_CHECK_FLAGS: ${{ vars.REVDEPX_CHECK_FLAGS || '' }}
+  REVDEPX_CHECK_MAKEFLAGS: ${{ vars.REVDEPX_CHECK_MAKEFLAGS || '' }}
+  REVDEPX_SHARD_BUDGET_MINUTES: ${{ inputs.shard-budget-minutes || vars.REVDEPX_SHARD_BUDGET_MINUTES || '45' }}
+  REVDEPX_MAX_PARALLEL: ${{ inputs.max-parallel || vars.REVDEPX_MAX_PARALLEL || '20' }}
+  # Check minutes one shard may be planned to hold. Only a batch too big for
+  # one wave of REVDEPX_MAX_PARALLEL shards ever hits it, and then it decides
+  # how many waves there are; empty means 80% of REVDEPX_DEADLINE_MINUTES.
+  REVDEPX_SHARD_CAPACITY_MINUTES: ${{ vars.REVDEPX_SHARD_CAPACITY_MINUTES || '' }}
+  REVDEPX_REFRESH_BASELINE: ${{ inputs.refresh-baseline && '1' || '' }}
+  REVDEPX_BASELINE_MAX_AGE_DAYS: ${{ inputs.baseline-max-age-days || vars.REVDEPX_BASELINE_MAX_AGE_DAYS || '30' }}
+  REVDEPX_DRY_RUN: ${{ inputs.dry-run && '1' || '' }}
+  # Whether the checks behave like CRAN's own machines or like a developer's.
+  # `skip_on_cran()` reads `NOT_CRAN`; CRAN-like is the default: the point is
+  # to find what a released igraph would break, and a test CRAN never runs
+  # cannot break on CRAN.
+  REVDEPX_NOT_CRAN: ${{ inputs.not-cran && 'true' || 'false' }}
+  # How old the shared universe image may grow before a run rebuilds it from
+  # the base image instead of installing a delta on top. The delta path keeps
+  # runs fast; the periodic full rebuild keeps the image from accreting
+  # layers and stale system packages forever.
+  REVDEPX_IMAGE_MAX_AGE_DAYS: ${{ vars.REVDEPX_IMAGE_MAX_AGE_DAYS || '14' }}
+  # Per-check timeout: factor times the package's CRAN check time, but never
+  # below the floor -- CRAN's machines are not these runners. The floor is
+  # 30 min because a saturated shard runs each check at roughly half speed
+  # (measured queue-vs-pair inflation: median 1.5x, p90 1.8x, and up to
+  # ~3x in the hottest windows): run 32574134229 killed four packages at
+  # the old 20-min floor that finish in 7-12 min uncontended.
+  REVDEPX_TIMEOUT_FACTOR: ${{ vars.REVDEPX_TIMEOUT_FACTOR || '1.5' }}
+  REVDEPX_TIMEOUT_MIN_MINUTES: ${{ vars.REVDEPX_TIMEOUT_MIN_MINUTES || '30' }}
+  REVDEPX_DEADLINE_MINUTES: ${{ vars.REVDEPX_DEADLINE_MINUTES || '300' }}
+
+jobs:
+  plan:
+    runs-on: ubuntu-26.04
+
+    # Planning is minutes, not hours: the preflight that used to share this
+    # job lives in the universe job now.
+    timeout-minutes: 60
+
+    name: "Plan shards"
+
+    outputs:
+      # Fallbacks cover a planning step that did not run at all: `test` is
+      # guarded by `shards != '0'`, but its `strategy` must still parse.
+      matrix: ${{ steps.plan.outputs.matrix || '{"shard":["none"]}' }}
+      shards: ${{ steps.plan.outputs.shards || '0' }}
+      packages: ${{ steps.plan.outputs.packages || '0' }}
+      max_parallel: ${{ steps.plan.outputs.max_parallel || '1' }}
+      baseline_run: ${{ steps.plan.outputs.baseline_run || '0' }}
+      plan_hash: ${{ steps.plan.outputs.plan_hash || 'none' }}
+      universe_count: ${{ steps.plan.outputs.universe_count || '0' }}
+      r_version: ${{ steps.resolve.outputs.r_version }}
+
+    permissions:
+      contents: read
+      # To find the newest earlier run (of either workflow) with a baseline
+      # artifact, to read the retried run's report, and to fetch timings.
+      actions: read
+
+    steps:
+      - name: Check out the ref under test
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+
+      # The same resolution runs in the base and build jobs: the three run in
+      # parallel and each needs the answer before any of them could publish
+      # it. It is one cached HTTPS call; determinism within a run is what
+      # matters, and the alias moves at most once every few months.
+      - name: Resolve the R version
+        id: resolve
+        env:
+          INPUT: ${{ env.REVDEPX_R_VERSION_INPUT }}
+        run: |
+          set -eu
+          if printf '%s' "${INPUT}" | grep -Eq '^[0-9]+\.[0-9]+(\.[0-9]+)?$'; then
+            version="${INPUT}"
+          else
+            version=$(curl -fsSL --retry 3 "https://api.r-hub.io/rversions/resolve/${INPUT}" | jq -r '.version')
+          fi
+          if ! printf '%s' "${version}" | grep -Eq '^[0-9]+\.[0-9]+(\.[0-9]+)?$'; then
+            echo "::error::Could not resolve R version '${INPUT}' (got '${version}')"
+            exit 1
+          fi
+          echo "Checks run under R ${version}"
+          echo "REVDEPX_R_VERSION=${version}" >> "${GITHUB_ENV}"
+          echo "r_version=${version}" >> "${GITHUB_OUTPUT}"
+        shell: bash
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install jsonlite
+        run: |
+          install.packages("jsonlite")
+        shell: Rscript {0}
+
+      - name: Plan shards
+        id: plan
+        env:
+          GH_TOKEN: ${{ github.token }}
+          OUT: ${{ runner.temp }}/plan.json
+        run: |
+          Rscript ./.github/workflows/revdepx/plan.R
+        shell: bash
+
+      - name: Upload the shard plan
+        uses: actions/upload-artifact@v6
+        if: steps.plan.outputs.shards != '0'
+        with:
+          name: revdepx-plan
+          path: ${{ runner.temp }}/plan.json
+          retention-days: 30
+          overwrite: true
+
+  base:
+    # No needs: the base image depends only on the recipe in the checkout and
+    # the resolved R version, so this runs in parallel with planning. A base
+    # that already exists in the registry is found by tag and costs seconds.
+    if: inputs.dry-run != true
+
+    runs-on: ubuntu-26.04
+
+    timeout-minutes: 60
+
+    name: "Base image"
+
+    outputs:
+      image: ${{ steps.base.outputs.image }}
+
+    permissions:
+      contents: read
+      # To push the base image.
+      packages: write
+
+    steps:
+      - name: Check out the ref under test
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+
+      # Same resolution as in the plan job; see the comment there.
+      - name: Resolve the R version
+        env:
+          INPUT: ${{ env.REVDEPX_R_VERSION_INPUT }}
+        run: |
+          set -eu
+          if printf '%s' "${INPUT}" | grep -Eq '^[0-9]+\.[0-9]+(\.[0-9]+)?$'; then
+            version="${INPUT}"
+          else
+            version=$(curl -fsSL --retry 3 "https://api.r-hub.io/rversions/resolve/${INPUT}" | jq -r '.version')
+          fi
+          if ! printf '%s' "${version}" | grep -Eq '^[0-9]+\.[0-9]+(\.[0-9]+)?$'; then
+            echo "::error::Could not resolve R version '${INPUT}' (got '${version}')"
+            exit 1
+          fi
+          echo "REVDEPX_R_VERSION=${version}" >> "${GITHUB_ENV}"
+        shell: bash
+
+      - name: Log in to the container registry
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      - name: Build or find the base image
+        id: base
+        env:
+          REVDEPX_PUSH: "1"
+        run: |
+          set -eu
+          repo=$(printf '%s' "${GITHUB_REPOSITORY}" | tr '[:upper:]' '[:lower:]')
+          ref=$(./.github/workflows/revdepx/base-image.sh \
+            "${REVDEPX_R_VERSION}" "ghcr.io/${repo}/revdepx-base" | tail -n 1)
+          echo "Base image: ${ref}"
+          echo "image=${ref}" >> "${GITHUB_OUTPUT}"
+        shell: bash
+
+  build:
+    needs:
+      - base
+
+    if: inputs.dry-run != true
+
+    runs-on: ubuntu-26.04
+
+    timeout-minutes: 90
+
+    name: "Build the dev binary"
+
+    permissions:
+      contents: read
+      # To pull the base image.
+      packages: read
+
+    steps:
+      - name: Check out the ref under test
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+
+      - name: Log in to the container registry
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      # The build's own pak downloads (igraph's dependencies and their system
+      # requirements) are small next to the universe's, but caching them is
+      # one step.
+      - name: Cache the pak package cache
+        uses: actions/cache@v5
+        with:
+          path: ${{ runner.temp }}/pak-cache
+          key: revdepx-pak-build-${{ hashFiles('DESCRIPTION') }}
+          restore-keys: |
+            revdepx-pak-build-
+
+      # Inside the base container, because the binary must load under the
+      # container's R (the pinned oldrel), and a binary built by the runner's
+      # newer R would not.
+      - name: Build the binary in the base container
+        env:
+          BASE_IMAGE: ${{ needs.base.outputs.image }}
+        run: |
+          set -eu
+          mkdir -p "${RUNNER_TEMP}/pkg" "${RUNNER_TEMP}/pak-cache"
+          docker run --rm \
+            -v "${GITHUB_WORKSPACE}:/revdepx/src" \
+            -v "${RUNNER_TEMP}/pkg:/revdepx/pkg-out" \
+            -v "${RUNNER_TEMP}/pak-cache:/root/.cache/R/pkgcache" \
+            -w /revdepx/src \
+            -e REVDEPX_BUILD_DEPS=1 \
+            -e PKG_SYSREQS=true \
+            -e OUT_DIR=/revdepx/pkg-out \
+            -e GITHUB_SHA \
+            "${BASE_IMAGE}" \
+            Rscript ./.github/workflows/revdepx/build.R
+          # Root in the container wrote the pak cache, and its 600 lock
+          # files defeat the cache post-step's tar ("Permission denied",
+          # save skipped). Hand the tree back to the runner user.
+          sudo chown -R "$(id -u):$(id -g)" "${RUNNER_TEMP}/pak-cache" || true
+        shell: bash
+
+      - name: Upload the package binary
+        uses: actions/upload-artifact@v6
+        with:
+          name: revdepx-pkg
+          path: ${{ runner.temp }}/pkg
+          retention-days: 30
+          overwrite: true
+
+  universe:
+    needs:
+      - plan
+      - base
+
+    if: >-
+      !cancelled()
+      && needs.plan.result == 'success'
+      && needs.base.result == 'success'
+      && needs.plan.outputs.shards != '0'
+      && inputs.dry-run != true
+
+    runs-on: ubuntu-26.04
+
+    # Installing a whole dependency universe; when that goes wrong it tends
+    # to go wrong slowly. Below the 6 h ceiling so it ends as a failure with
+    # logs rather than as a hard kill.
+    timeout-minutes: 300
+
+    name: "Universe image"
+
+    outputs:
+      image: ${{ steps.publish.outputs.image }}
+      pushed: ${{ steps.publish.outputs.pushed }}
+      saved: ${{ steps.publish.outputs.saved }}
+
+    permissions:
+      contents: read
+      # To pull the base image and push the universe image.
+      packages: write
+
+    steps:
+      - name: Check out the ref under test
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+
+      - name: Download the shard plan
+        uses: actions/download-artifact@v7
+        with:
+          name: revdepx-plan
+          path: ${{ runner.temp }}/plan
+
+      - name: Log in to the container registry
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      # These runners have ONE disk: there is no separate /mnt volume, and
+      # RUNNER_TEMP, /var/lib/docker and the checkout all share the root
+      # filesystem (run 32068290691's sampler shows / only). So this cannot
+      # move docker anywhere roomier -- what it does is make room (the
+      # preinstalled toolchains this job never uses are tens of gigabytes)
+      # and put the data-root under RUNNER_TEMP, so every heavy write of
+      # this job lands in one accounted place. The commit step below
+      # measures against that one disk before copying anything large.
+      - name: Make room for docker on the one disk
+        run: |
+          set -eu
+          before=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc \
+            /usr/local/.ghcup /opt/hostedtoolcache/CodeQL \
+            /usr/local/share/powershell /usr/share/swift || true
+          sudo systemctl stop docker
+          sudo mkdir -p /etc/docker "${RUNNER_TEMP}/docker-data"
+          # The classic graphdriver store, explicitly: the runners' default
+          # containerd image store turns `docker commit` into an OCI index
+          # that references content the daemon never pulled -- push refuses
+          # it ("not all of them are available locally", run 32158907637),
+          # `--platform` cannot select a platform the commit never labelled,
+          # and save reduces to a manifest-only shell. The classic store
+          # commits a plain single-manifest image that pushes, saves and
+          # du-measures exactly as this workflow assumes.
+          echo "{\"data-root\": \"${RUNNER_TEMP}/docker-data\", \"features\": {\"containerd-snapshotter\": false}}" | sudo tee /etc/docker/daemon.json
+          sudo systemctl start docker
+          after=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
+          echo "Free disk on /: ${before}G -> ${after}G; docker data-root now on ${RUNNER_TEMP}"
+          docker info --format 'Docker root: {{ .DockerRootDir }}'
+        shell: bash
+
+      # The universe build downloads every dependency once; saving the pak
+      # cache under the plan's hash hands the next build a warm start even
+      # when the image itself cannot be reused.
+      - name: Cache the pak package cache
+        uses: actions/cache@v5
+        with:
+          path: ${{ runner.temp }}/pak-cache
+          key: revdepx-pak-${{ needs.plan.outputs.plan_hash }}
+          restore-keys: |
+            revdepx-pak-
+
+      - name: Start the resource sampler
+        run: |
+          mkdir -p "${RUNNER_TEMP}/universe-out"
+          watch=./.github/workflows/revdepx/watch-resources.sh
+          "${watch}" once "before the universe build"
+          RESOURCE_LOG="${RUNNER_TEMP}/universe-out/resources.log" \
+            RESOURCE_PHASE_FILE="${RUNNER_TEMP}/universe-out/phase" \
+            "${watch}" watch 30 "universe build" &
+          disown || true
+        shell: bash
+
+      - name: Build the universe image
+        id: build-universe
+        env:
+          BASE_IMAGE: ${{ needs.base.outputs.image }}
+        run: |
+          set -eu
+          repo=$(printf '%s' "${GITHUB_REPOSITORY}" | tr '[:upper:]' '[:lower:]')
+          universe="ghcr.io/${repo}/revdepx-universe"
+          echo "universe=${universe}" >> "${GITHUB_OUTPUT}"
+
+          # Delta warm start: begin from the previous universe image when it
+          # is fresh enough and stands on the same base (same R, same
+          # toolchain recipe); otherwise from the base image. pak upgrades
+          # whatever is stale either way -- the plan's fingerprints are
+          # CRAN-now, so a stale donor must never freeze versions.
+          from="${BASE_IMAGE}"
+          base_tag="${BASE_IMAGE##*:}"
+          if docker pull "${universe}:latest"; then
+            created=$(docker inspect --format '{{ .Created }}' "${universe}:latest" | cut -dT -f1)
+            age_days=$(( ( $(date +%s) - $(date -d "${created}" +%s) ) / 86400 ))
+            prior_base=$(docker run --rm "${universe}:latest" \
+              sh -c 'cat /opt/revdepx/lib-index.json 2>/dev/null' |
+              jq -r '.base_image // ""' || true)
+            if [ "${age_days}" -le "${REVDEPX_IMAGE_MAX_AGE_DAYS}" ] \
+              && [ "${prior_base}" = "${base_tag}" ]; then
+              echo "Starting from ${universe}:latest (${age_days} day(s) old, base ${prior_base})"
+              from="${universe}:latest"
+            else
+              echo "Previous universe image not reusable (age ${age_days} d, base '${prior_base}' vs '${base_tag}'); starting from the base image"
+            fi
+          else
+            echo "No previous universe image; starting from the base image"
+          fi
+
+          mkdir -p "${RUNNER_TEMP}/pak-cache" "${RUNNER_TEMP}/universe-out" \
+            "${RUNNER_TEMP}/universe-tmp"
+          # A /tmp must be world-writable with the sticky bit -- apt-key
+          # writes its temporary config there and apt's sandboxed _apt user
+          # cannot use a 755 directory: with a plain mkdir every repository
+          # fails signature verification ("Couldn't create temporary file
+          # /tmp/apt.conf.XXXX") and every apt-get pak runs fails with it.
+          # Reproduced and verified against rocker/r-ver:4.5.3 locally.
+          chmod 1777 "${RUNNER_TEMP}/universe-tmp"
+
+          # Streamed from inside this step, on top of the file-writing
+          # sampler the earlier step backgrounded: that one keeps appending
+          # to its RESOURCE_LOG, but its stdout stops reaching the job log
+          # the moment its own step ends -- and when a runner dies, the
+          # streamed lines are all that survives (the artifact upload and
+          # the `always()` steps die with it).
+          RESOURCE_PHASE_FILE="${RUNNER_TEMP}/universe-out/phase" \
+            ./.github/workflows/revdepx/watch-resources.sh watch 120 "universe build" &
+          sampler=$!
+          trap 'kill "${sampler}" 2> /dev/null || true' EXIT
+
+          status=0
+          # The memory cap contains OOM kills to the container: the sysreqs
+          # survey once ballooned past 14 GB and the GLOBAL oom-killer chose
+          # the fat R process over the runner agent by luck, not design.
+          docker run --name revdepx-universe-build \
+            --memory 14g --memory-swap 14g \
+            -v "${GITHUB_WORKSPACE}/.github/workflows/revdepx:/revdepx/scripts:ro" \
+            -v "${RUNNER_TEMP}/plan/plan.json:/revdepx/plan.json:ro" \
+            -v "${RUNNER_TEMP}/pak-cache:/root/.cache/R/pkgcache" \
+            -v "${RUNNER_TEMP}/universe-out:/revdepx/out" \
+            -v "${RUNNER_TEMP}/universe-tmp:/tmp" \
+            -e PLAN=/revdepx/plan.json \
+            -e OUT_DIR=/revdepx/out \
+            -e PKG_SYSREQS=true \
+            -e REVDEPX_BASE_IMAGE="${base_tag}" \
+            -e RESOURCE_PHASE_FILE=/revdepx/out/phase \
+            "${from}" \
+            Rscript /revdepx/scripts/image.R || status=$?
+          # Root in the container wrote the pak cache; without this the
+          # cache post-step's tar hits its 600 lock files and the save is
+          # skipped ("Permission denied"). On failure paths too -- a partial
+          # cache is precisely what makes the retry cheap.
+          sudo chown -R "$(id -u):$(id -g)" "${RUNNER_TEMP}/pak-cache" || true
+          if [ "${status}" -ne 0 ]; then
+            echo "::error::The universe image build failed (exit ${status}); shards will fall back to building their own libraries"
+            exit "${status}"
+          fi
+        shell: bash
+
+      # Everything here is written and UPLOADED before the commit below
+      # runs, because two runs (32068779192, 32084560474) died in that
+      # commit ~34 minutes in, runner and all -- and a dead runner turns out
+      # to lose even the log lines it already streamed. The numbers a
+      # post-mortem needs must be on the artifact store before the copy
+      # starts, or they do not exist.
+      - name: Record the state before the commit
+        id: precommit
+        run: |
+          set -eu
+          out="${RUNNER_TEMP}/universe-out"
+          mkdir -p "${out}"
+          upper=$(docker inspect \
+            --format '{{ .GraphDriver.Data.UpperDir }}' \
+            revdepx-universe-build 2> /dev/null || true)
+          delta_gb=""
+          delta_files=""
+          if [ -n "${upper}" ] && sudo test -d "${upper}"; then
+            delta_gb=$(sudo du -s -BG "${upper}" 2> /dev/null | cut -f1 |
+              tr -dc '0-9' || true)
+            delta_files=$(sudo du -s --inodes "${upper}" 2> /dev/null |
+              cut -f1 | tr -dc '0-9' || true)
+          fi
+          delta_gb=${delta_gb:-0}
+          delta_files=${delta_files:-0}
+          size_rw=""
+          if [ "${delta_gb}" = "0" ]; then
+            # The containerd image store leaves GraphDriver empty (run
+            # 32114635495 measured "upper: <none>" and skipped a commit
+            # that would have fit five times over), but docker itself can
+            # still price the rw layer. The file count is not available
+            # this way; the guard's fixed inode margin covers that.
+            size_rw=$(docker ps -as --no-trunc \
+              --filter name=revdepx-universe-build \
+              --format '{{.Size}}' 2> /dev/null | head -1 |
+              cut -d' ' -f1 || true)
+            case "${size_rw}" in
+              *TB)
+                delta_gb=$(awk -v s="${size_rw%TB}" \
+                  'BEGIN { printf "%d", s * 1024 + 1 }' || echo 0)
+                ;;
+              *GB)
+                delta_gb=$(awk -v s="${size_rw%GB}" \
+                  'BEGIN { printf "%d", s + 1 }' || echo 0)
+                ;;
+              *MB | *kB | *B)
+                delta_gb=1
+                ;;
+            esac
+            delta_gb=${delta_gb:-0}
+          fi
+          {
+            echo "upper: ${upper:-<none>}"
+            echo "size_rw: ${size_rw:-<not needed>}"
+            echo "delta_gb: ${delta_gb}"
+            echo "delta_files: ${delta_files}"
+            echo "--- df -BG ---"
+            df -BG || true
+            echo "--- df -i ---"
+            df -i || true
+            echo "--- meminfo ---"
+            grep -E 'MemTotal|MemAvailable|SwapTotal|SwapFree' /proc/meminfo || true
+            echo "--- docker system df ---"
+            docker system df || true
+          } | tee "${out}/pre-commit-state.txt"
+          echo "delta_gb=${delta_gb}" >> "${GITHUB_OUTPUT}"
+          echo "delta_files=${delta_files}" >> "${GITHUB_OUTPUT}"
+        shell: bash
+
+      - name: Publish the pre-commit state (survives a dying runner)
+        uses: actions/upload-artifact@v6
+        with:
+          name: revdepx-universe-precommit
+          path: ${{ runner.temp }}/universe-out/pre-commit-state.txt
+          retention-days: 30
+          overwrite: true
+
+      # `docker commit` writes a full copy of the container's rw layer -- the
+      # entire installed universe -- as a new image layer, on the same one
+      # disk everything else already occupies. Two runs died exactly there,
+      # with logs, artifacts and cache saves. So: commit only when the copy
+      # provably fits -- in bytes AND in inodes, since `df` can show free
+      # gigabytes while the inode table runs dry under millions of small
+      # package files -- and even then under a watchdog that stops the
+      # docker daemon before the disk starves the runner agent: a wrong
+      # measurement must never cost a third runner. A skipped or aborted
+      # commit is not a failed run, it is the shards' local-build fallback
+      # -- slower, but alive, and the same path a failed universe job
+      # already takes.
+      - name: Commit and push the universe image
+        id: publish
+        run: |
+          set -eu
+          universe=$(printf '%s' "${{ steps.build-universe.outputs.universe }}")
+          delta_gb=$(printf '%s' "${{ steps.precommit.outputs.delta_gb }}")
+          delta_gb=${delta_gb:-0}
+          delta_files=$(printf '%s' "${{ steps.precommit.outputs.delta_files }}")
+          delta_files=${delta_files:-0}
+          free_gb=$(df -BG --output=avail "${RUNNER_TEMP}" | tail -1 |
+            tr -dc '0-9')
+          free_inodes=$(df --output=iavail "${RUNNER_TEMP}" | tail -1 |
+            tr -dc '0-9')
+          echo "Universe delta: ${delta_gb}G in ${delta_files} files; free: ${free_gb}G, ${free_inodes} inodes"
+
+          # Streamed from inside the step (see the build step for why).
+          ./.github/workflows/revdepx/watch-resources.sh watch 60 "committing the universe image" &
+          sampler=$!
+          trap 'kill "${sampler}" 2> /dev/null || true' EXIT
+
+          committed=false
+          pushed=false
+          saved=false
+          if [ "${delta_gb}" -eq 0 ] \
+            || [ "${free_gb}" -lt "$((delta_gb + 8))" ] \
+            || [ "${free_inodes}" -lt "$((delta_files + 200000))" ]; then
+            # An unmeasurable delta (0) no longer means "hope": after two
+            # dead runners the burden of proof sits on the commit.
+            echo "::warning::Not committing the universe image: the copy needs ${delta_gb}G and ${delta_files} inodes, and ${free_gb}G and ${free_inodes} inodes are free. The shards will build shard-local libraries instead."
+          else
+            # The watchdog, not the guard, is what protects the runner: when
+            # disk, inodes or memory approach zero mid-commit it stops the
+            # docker daemon -- aborting the daemon-side copy, which a killed
+            # client would NOT abort -- then brings it back so the rest of
+            # the job (report, artifact, cache save, logout) still works.
+            (
+              while sleep 20; do
+                f=$(df -BG --output=avail "${RUNNER_TEMP}" 2> /dev/null |
+                  tail -1 | tr -dc '0-9') || break
+                i=$(df --output=iavail "${RUNNER_TEMP}" 2> /dev/null |
+                  tail -1 | tr -dc '0-9') || break
+                m=$(awk '/MemAvailable/ { print int($2 / 1048576) }' \
+                  /proc/meminfo 2> /dev/null) || break
+                if [ "${f:-0}" -lt 4 ] || [ "${i:-999999}" -lt 100000 ] \
+                  || [ "${m:-99}" -lt 1 ]; then
+                  echo "::warning::Aborting the commit: ${f}G disk, ${i} inodes, ${m}G memory left -- stopping docker before the runner dies"
+                  sudo systemctl stop docker || true
+                  sleep 3
+                  sudo systemctl start docker || true
+                  break
+                fi
+              done
+            ) &
+            watchdog=$!
+            if docker commit revdepx-universe-build "${universe}:run-${GITHUB_RUN_ID}"; then
+              committed=true
+            fi
+            kill "${watchdog}" 2> /dev/null || true
+            if [ "${committed}" = true ]; then
+              # The rw layer just became an image layer; dropping the
+              # container drops the original copy, so the disk peak subsides
+              # before the push wants scratch space.
+              docker rm revdepx-universe-build || true
+              docker tag "${universe}:run-${GITHUB_RUN_ID}" "${universe}:latest"
+              # --platform first: the containerd image store commits an OCI
+              # manifest INDEX, and a plain push refuses it outright
+              # ("trying to push a manifest list/index", run 32148999976).
+              # Pushing the single platform manifest is what the error
+              # itself prescribes; the plain push stays as the fallback for
+              # a daemon whose push has no --platform flag.
+              pushed=true
+              docker push --platform linux/amd64 "${universe}:run-${GITHUB_RUN_ID}" \
+                || docker push "${universe}:run-${GITHUB_RUN_ID}" \
+                || pushed=false
+            else
+              echo "::warning::docker commit failed or was aborted; the shards will build shard-local libraries instead"
+            fi
+          fi
+
+          if [ "${pushed}" = true ]; then
+            docker push --platform linux/amd64 "${universe}:latest" \
+              || docker push "${universe}:latest" || true
+            echo "image=${universe}:run-${GITHUB_RUN_ID}" >> "${GITHUB_OUTPUT}"
+          elif [ "${committed}" = true ]; then
+            # No registry (permissions, outage): hand the image to the shards
+            # as an artifact instead -- when the compressed save fits beside
+            # what is already on the disk. When not even that fits, the
+            # shards' local fallback carries the run.
+            free_gb=$(df -BG --output=avail "${RUNNER_TEMP}" | tail -1 |
+              tr -dc '0-9')
+            if [ "${free_gb}" -ge "$((delta_gb / 2 + 8))" ]; then
+              echo "::warning::Pushing to ${universe} failed; publishing the image as an artifact instead"
+              mkdir -p "${RUNNER_TEMP}/universe-image"
+              save_to="${RUNNER_TEMP}/universe-image/universe-image.tar.zst"
+              # --platform for the same containerd-store reason as the push:
+              # a plain save of a commit-created index once produced a
+              # 1336-BYTE manifest-only tar, and every shard died loading
+              # the empty shell it restored.
+              if docker save --platform linux/amd64 \
+                "${universe}:run-${GITHUB_RUN_ID}" 2> /dev/null |
+                zstd -T0 -3 > "${save_to}" \
+                || docker save "${universe}:run-${GITHUB_RUN_ID}" |
+                  zstd -T0 -3 > "${save_to}"; then
+                # A universe image compresses to gigabytes; anything under
+                # 100 MB is a manifest shell, not an image, and shipping it
+                # costs every shard its run.
+                if [ "$(stat -c %s "${save_to}" 2> /dev/null || echo 0)" -ge 104857600 ]; then
+                  saved=true
+                else
+                  echo "::warning::docker save produced $(stat -c %s "${save_to}" 2> /dev/null || echo 0) bytes for a ${delta_gb}G image -- discarding the shell; the shards will build shard-local libraries instead"
+                  rm -f "${save_to}"
+                fi
+              else
+                rm -f "${save_to}"
+              fi
+            else
+              echo "::warning::Pushing to ${universe} failed, and ${free_gb}G free is too little to save the ${delta_gb}G image as an artifact; the shards will build shard-local libraries instead"
+            fi
+            echo "image=" >> "${GITHUB_OUTPUT}"
+          else
+            echo "image=" >> "${GITHUB_OUTPUT}"
+          fi
+          echo "pushed=${pushed}" >> "${GITHUB_OUTPUT}"
+          echo "saved=${saved}" >> "${GITHUB_OUTPUT}"
+          docker rm revdepx-universe-build 2> /dev/null || true
+        shell: bash
+
+      - name: Upload the universe image artifact (registry fallback only)
+        uses: actions/upload-artifact@v6
+        if: steps.publish.outputs.saved == 'true'
+        with:
+          name: revdepx-universe-image
+          path: ${{ runner.temp }}/universe-image
+          retention-days: 7
+
+      - name: Report what the build consumed
+        if: always()
+        run: |
+          ./.github/workflows/revdepx/watch-resources.sh once "after the universe build"
+          ./.github/workflows/revdepx/watch-resources.sh oom
+        shell: bash
+
+      - name: Upload the universe build report
+        uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: revdepx-universe-report
+          path: ${{ runner.temp }}/universe-out
+          if-no-files-found: ignore
+          retention-days: 30
+          overwrite: true
+
+  test:
+    needs:
+      - plan
+      - base
+      - build
+      - universe
+
+    # A universe job that failed does not stop the shards: shard-prep.sh
+    # falls back to building a shard-local image from the base. Only the plan
+    # and the binary are hard prerequisites.
+    if: >-
+      !cancelled()
+      && needs.plan.result == 'success'
+      && needs.base.result == 'success'
+      && needs.build.result == 'success'
+      && needs.plan.outputs.shards != '0'
+      && inputs.dry-run != true
+
+    runs-on: ubuntu-26.04
+
+    # Below GitHub's 6 h ceiling, and above the shard's own deadline: the
+    # shard is meant to stop itself and defer what is left, not to be killed
+    # mid-check.
+    timeout-minutes: 350
+
+    name: "shard ${{ matrix.shard }} (${{ matrix.label }})"
+
+    permissions:
+      contents: read
+      # To download the baseline artifact, which lives on an earlier run.
+      actions: read
+      # To pull the universe image.
+      packages: read
+
+    strategy:
+      fail-fast: false
+      max-parallel: ${{ fromJSON(needs.plan.outputs.max_parallel) }}
+      matrix: ${{ fromJSON(needs.plan.outputs.matrix) }}
+
+    env:
+      # What the checks inside the containers see; check-half.sh forwards
+      # exactly these. CRAN-like check conditions for the revdeps, not the
+      # incoming gauntlet.
+      R_REMOTES_NO_ERRORS_FROM_WARNINGS: true
+      # prevent rgl issues because no X11 display is available
+      RGL_USE_NULL: true
+      _R_CHECK_CRAN_INCOMING_: false
+      _R_CHECK_SYSTEM_CLOCK_: false
+      _R_CHECK_FUTURE_FILE_TIMESTAMPS_: false
+      _R_CHECK_FORCE_SUGGESTS_: false
+      # `--as-cran` turns on `--run-donttest`, which is the most expensive
+      # thing a check does and the least useful thing for this workflow:
+      # `\donttest{}` is where packages put the examples too slow to run on
+      # CRAN, so it is where the runners spend hours and where the timeouts
+      # land.
+      _R_CHECK_DONTTEST_EXAMPLES_: false
+      # No spell checking: a misspelling in a revdep's DESCRIPTION is the
+      # same misspelling in both halves.
+      _R_CHECK_CRAN_INCOMING_USE_ASPELL_: false
+      # No timings in the check output. The two halves run at different
+      # times next to different queue neighbours, so per-stage
+      # `[user/elapsed]` stamps differ by construction and would be pure
+      # diff noise. What a stage cost is recorded by the elapsed stamping
+      # on the driver log instead -- which the salvage now carries into the
+      # results artifact for every failed half, and check-half.sh prints as
+      # a stage timeline in the job log when a half dies.
+      _R_CHECK_TIMINGS_: ""
+      _R_CHECK_EXAMPLE_TIMING_THRESHOLD_: 99999
+      # 300 lines of a failed test transcript in the check log, not R's
+      # default 13 -- thirteen routinely cuts off the failure itself. R still
+      # writes the complete transcript to `<file>.Rout.fail` regardless.
+      _R_CHECK_TESTS_NLINES_: 300
+
+      GH_TOKEN: ${{ github.token }}
+      SHARD: ${{ matrix.shard }}
+      TIMEOUT_FACTOR: ${{ vars.REVDEPX_TIMEOUT_FACTOR || '1.5' }}
+      TIMEOUT_MIN_MINUTES: ${{ vars.REVDEPX_TIMEOUT_MIN_MINUTES || '30' }}
+      DEADLINE_MINUTES: ${{ vars.REVDEPX_DEADLINE_MINUTES || '300' }}
+
+    steps:
+      - name: Check out the ref under test
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+
+      # The host runs only the driver: R with jsonlite and rcmdcheck to
+      # parse, compare and account. Everything a check needs -- TeX, pandoc,
+      # qpdf, the dependency library -- lives in the image. This is the whole
+      # of the host setup that revdep2 spent TinyTeX, pandoc and apt minutes
+      # on, once per shard.
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install jsonlite and rcmdcheck
+        run: |
+          install.packages(c("jsonlite", "rcmdcheck"))
+        shell: Rscript {0}
+
+      - name: Download the shard plan
+        uses: actions/download-artifact@v7
+        with:
+          name: revdepx-plan
+          path: ${{ runner.temp }}/plan
+
+      - name: Download the package binary
+        uses: actions/download-artifact@v7
+        with:
+          name: revdepx-pkg
+          path: ${{ runner.temp }}/pkg
+
+      # The baseline lives on an earlier run of either workflow; absence is
+      # not an error, the shard just records drift for nothing.
+      - name: Download the baseline results
+        uses: actions/download-artifact@v7
+        if: needs.plan.outputs.baseline_run != '0'
+        continue-on-error: true
+        with:
+          name: revdepx-baseline
+          run-id: ${{ needs.plan.outputs.baseline_run }}
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/baseline
+
+      # Only when the universe job could not push but could save: the image
+      # travelled as an artifact instead, and shard-prep.sh docker-loads it.
+      - name: Download the universe image artifact
+        uses: actions/download-artifact@v7
+        if: needs.universe.outputs.saved == 'true'
+        continue-on-error: true
+        with:
+          name: revdepx-universe-image
+          path: ${{ runner.temp }}/universe-image
+
+      - name: Log in to the container registry
+        uses: docker/login-action@v4
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ github.token }}
+
+      # One disk on these runners (no /mnt): free what the preinstalled
+      # toolchains hold before the universe image unpacks into the data-root,
+      # and put that data-root under RUNNER_TEMP beside the checks' work
+      # directories, so everything heavy is in one accounted place.
+      - name: Make room for docker on the one disk
+        run: |
+          set -eu
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc \
+            /usr/local/.ghcup /opt/hostedtoolcache/CodeQL \
+            /usr/local/share/powershell /usr/share/swift || true
+          sudo systemctl stop docker
+          sudo mkdir -p /etc/docker "${RUNNER_TEMP}/docker-data"
+          # The classic graphdriver store, explicitly: the runners' default
+          # containerd image store turns `docker commit` into an OCI index
+          # that references content the daemon never pulled -- push refuses
+          # it ("not all of them are available locally", run 32158907637),
+          # `--platform` cannot select a platform the commit never labelled,
+          # and save reduces to a manifest-only shell. The classic store
+          # commits a plain single-manifest image that pushes, saves and
+          # du-measures exactly as this workflow assumes.
+          echo "{\"data-root\": \"${RUNNER_TEMP}/docker-data\", \"features\": {\"containerd-snapshotter\": false}}" | sudo tee /etc/docker/daemon.json
+          sudo systemctl start docker
+          docker info --format 'Docker root: {{ .DockerRootDir }}'
+        shell: bash
+
+      # Both driver phases need these and neither can name them itself: the
+      # `runner` context does not reach the job's `env`, so they are set once
+      # here.
+      #
+      # `NOT_CRAN` is written here because `r-lib/actions/setup-r` writes
+      # `NOT_CRAN=true` into `$GITHUB_ENV`, and a later write is what
+      # reliably overrides an earlier one.
+      - name: Point the driver at this runner's directories
+        env:
+          NOT_CRAN_INPUT: ${{ env.REVDEPX_NOT_CRAN }}
+        run: |
+          mkdir -p "${RUNNER_TEMP}/tmp"
+          {
+            echo "NOT_CRAN=${NOT_CRAN_INPUT}"
+            echo "PLAN=${RUNNER_TEMP}/plan/plan.json"
+            echo "PKG_DIR=${RUNNER_TEMP}/pkg"
+            echo "BASELINE_DIR=${RUNNER_TEMP}/baseline"
+            echo "OUT_DIR=${RUNNER_TEMP}/results"
+            echo "REVDEPX_IMAGE_FILE=${RUNNER_TEMP}/revdepx-image-ref"
+            echo "REVDEPX_LIB_INDEX=${RUNNER_TEMP}/revdepx-lib-index.json"
+            # The driver's own temp files; the checks get per-container /tmp
+            # bind mounts under their work directories.
+            echo "TMPDIR=${RUNNER_TEMP}/tmp"
+            echo "TMP=${RUNNER_TEMP}/tmp"
+            echo "TEMP=${RUNNER_TEMP}/tmp"
+          } >> "${GITHUB_ENV}"
+        shell: bash
+
+      # Emit machine state while the work runs: a reclaimed runner never
+      # executes its `if: always()` steps, so only what was already streamed
+      # to the log survives.
+      - name: Start the resource sampler
+        run: |
+          mkdir -p "${RUNNER_TEMP}/results"
+          watch=./.github/workflows/revdepx/watch-resources.sh
+          "${watch}" once "shard ${SHARD} before the prepare phase"
+          RESOURCE_LOG="${RUNNER_TEMP}/results/resources.log" \
+            "${watch}" watch 30 "shard ${SHARD}" &
+          disown || true
+        shell: bash
+
+      # Pull the universe image (or load the artifact, or -- when the
+      # universe job died -- build a shard-local image from the base), and
+      # extract its library index for the driver's dependency screen.
+      - name: Prepare the check image
+        env:
+          UNIVERSE_IMAGE: ${{ needs.universe.outputs.image }}
+          REVDEPX_BASE_IMAGE: ${{ needs.base.outputs.image }}
+          PLAN: ${{ runner.temp }}/plan/plan.json
+        run: |
+          # Streamed from inside the step: on the local-build fallback this
+          # is the shard's longest phase, and the streamed samples are what
+          # survives if the runner dies in it (the file-writing sampler's
+          # stdout stopped reaching the log when its own step ended).
+          ./.github/workflows/revdepx/watch-resources.sh watch 120 "shard ${SHARD} image prep" &
+          sampler=$!
+          trap 'kill "${sampler}" 2> /dev/null || true' EXIT
+          ./.github/workflows/revdepx/shard-prep.sh \
+            "${UNIVERSE_IMAGE}" \
+            "${RUNNER_TEMP}/universe-image" \
+            "${REVDEPX_LIB_INDEX}" \
+            "${REVDEPX_IMAGE_FILE}"
+        shell: bash
+
+      - name: Prepare the shard
+        env:
+          PHASE: prepare
+        run: |
+          Rscript ./.github/workflows/revdepx/shard.R
+        shell: bash
+
+      # The checks run in three slices, each followed by an upload: a
+      # reclaimed runner loses at most a third of a shard, and the interim
+      # artifacts say `deferred` for the packages not yet reached, which is
+      # truer than the `missing` the collector would otherwise reconcile
+      # them into.
+      #
+      # `!cancelled()` rather than the default `success()`: a prepare step
+      # that failed still leaves a shard full of packages to account for, and
+      # the driver reports what it can, which is a result.
+      - name: Check the shard (1 of 3)
+        if: '!cancelled()'
+        env:
+          PHASE: check
+          CHECK_SLICE: 1/3
+        run: |
+          # Streamed from inside the step -- a sampler backgrounded in an
+          # earlier step stops reaching the job log when that step ends, and
+          # the checks are where the minutes (and the memory) actually go.
+          ./.github/workflows/revdepx/watch-resources.sh watch 60 "shard ${SHARD} checks (1/3)" &
+          sampler=$!
+          trap 'kill "${sampler}" 2> /dev/null || true' EXIT
+          Rscript ./.github/workflows/revdepx/shard.R
+        shell: bash
+
+      - name: Upload the shard results (1 of 3)
+        uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: revdepx-results-${{ matrix.shard }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/results
+          if-no-files-found: ignore
+          overwrite: true
+          retention-days: 30
+
+      - name: Check the shard (2 of 3)
+        if: '!cancelled()'
+        env:
+          PHASE: check
+          CHECK_SLICE: 2/3
+        run: |
+          ./.github/workflows/revdepx/watch-resources.sh watch 60 "shard ${SHARD} checks (2/3)" &
+          sampler=$!
+          trap 'kill "${sampler}" 2> /dev/null || true' EXIT
+          Rscript ./.github/workflows/revdepx/shard.R
+        shell: bash
+
+      - name: Upload the shard results (2 of 3)
+        uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: revdepx-results-${{ matrix.shard }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/results
+          if-no-files-found: ignore
+          overwrite: true
+          retention-days: 30
+
+      - name: Check the shard (3 of 3)
+        if: '!cancelled()'
+        env:
+          PHASE: check
+          CHECK_SLICE: 3/3
+        run: |
+          ./.github/workflows/revdepx/watch-resources.sh watch 60 "shard ${SHARD} checks (3/3)" &
+          sampler=$!
+          trap 'kill "${sampler}" 2> /dev/null || true' EXIT
+          Rscript ./.github/workflows/revdepx/shard.R
+        shell: bash
+
+      # Before the final upload, so the last sample and the OOM verdict ride
+      # in the artifact.
+      - name: Report what the shard consumed
+        if: always()
+        run: |
+          ./.github/workflows/revdepx/watch-resources.sh once "shard ${SHARD} after the checks"
+          ./.github/workflows/revdepx/watch-resources.sh oom
+          df -BG / "${RUNNER_TEMP}" 2>/dev/null || true
+        shell: bash
+
+      # Named per attempt: a re-run of one shard must not overwrite the
+      # results the other shards uploaded in the first attempt; the collector
+      # reads every attempt and lets the later one win per package.
+      - name: Upload the shard results
+        uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: revdepx-results-${{ matrix.shard }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/results
+          if-no-files-found: ignore
+          overwrite: true
+          retention-days: 30
+
+  collect:
+    needs:
+      - plan
+      - base
+      - build
+      - test
+
+    # `always()` so a run with red shards still reports -- a broken revdep is
+    # the result this workflow exists to surface. Guarded on the plan and the
+    # binary, because without those there is nothing to collect.
+    if: >-
+      always()
+      && needs.plan.result == 'success'
+      && needs.build.result == 'success'
+      && needs.plan.outputs.shards != '0'
+      && inputs.dry-run != true
+
+    runs-on: ubuntu-26.04
+
+    timeout-minutes: 120
+
+    name: "Collect results and report"
+
+    permissions:
+      # To commit the report back to the checked branch.
+      contents: write
+      # To download the retried run's report artifact, which lives on that
+      # run, and to read shard job durations for the timings.
+      actions: read
+
+    steps:
+      - name: Check out the ref under test
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ inputs.ref || github.ref }}
+
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
+        with:
+          use-public-rspm: true
+
+      - name: Install pak and jsonlite
+        run: |
+          install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
+          install.packages("jsonlite")
+        shell: Rscript {0}
+
+      # The reports come out of revdepcheck itself; when this fails the
+      # collector still writes a manifest-derived summary.
+      - name: Install revdepcheck
+        continue-on-error: true
+        env:
+          GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          pak::pkg_install("krlmlr/revdepcheck")
+        shell: Rscript {0}
+
+      - name: Download the shard plan
+        uses: actions/download-artifact@v7
+        with:
+          name: revdepx-plan
+          path: ${{ runner.temp }}/plan
+
+      # Tolerated because a run in which no shard uploaded anything is still
+      # worth a report: the collector reconciles against the plan and names
+      # every package it never heard about, which is what `retry-run` needs.
+      - name: Download the results of all shards
+        uses: actions/download-artifact@v7
+        continue-on-error: true
+        with:
+          pattern: revdepx-results-*
+          path: ${{ runner.temp }}/results
+
+      - name: Download the report of the run being retried
+        uses: actions/download-artifact@v7
+        if: env.REVDEPX_RETRY_RUN != ''
+        continue-on-error: true
+        with:
+          name: revdepx-report
+          run-id: ${{ env.REVDEPX_RETRY_RUN }}
+          github-token: ${{ github.token }}
+          path: ${{ runner.temp }}/retry-report
+
+      - name: Collect results
+        id: collect
+        env:
+          # To read how long the shard *jobs* took -- the minutes before
+          # their driver starts, which is what an extra shard really costs.
+          GH_TOKEN: ${{ github.token }}
+          PLAN: ${{ runner.temp }}/plan/plan.json
+          RESULTS_DIR: ${{ runner.temp }}/results
+          RETRY_DIR: ${{ runner.temp }}/retry-report
+          OUT_DIR: revdep
+          BASELINE_OUT: ${{ runner.temp }}/baseline
+          TIMINGS_OUT: ${{ runner.temp }}/timings
+        run: |
+          Rscript ./.github/workflows/revdepx/collect.R
+        shell: bash
+
+      - name: Upload the report
+        uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: revdepx-report
+          path: revdep
+          retention-days: 90
+          overwrite: true
+
+      # The report is also the repository's own record: `revdep/README.md`
+      # and friends have been committed here since revdepcheck wrote them,
+      # and `packages: broken` reads them back. Only the generated files and
+      # the manifest are staged.
+      #
+      # `!cancelled()` rather than `always()`: a cancelled run has no shard
+      # results, so its report is every package `missing`. `compared > 0`
+      # covers the rest of that family: a run in which *no* package produced
+      # a comparison learnt nothing, and must not overwrite the good record.
+      - name: Commit the report to the checked ref
+        if: >-
+          !cancelled()
+          && vars.REVDEPX_COMMIT_REPORT != 'false'
+          && steps.collect.outputs.compared != '0'
+        continue-on-error: true
+        env:
+          REF_INPUT: ${{ inputs.ref }}
+        run: |
+          set -eu
+          # Without a `ref` input the dispatch decides, and GitHub says
+          # outright what kind of ref it was; with one, only the remote can
+          # say whether it names a branch. Anything else -- a tag, a SHA, a
+          # branch that does not exist here -- has nowhere to put a commit.
+          if [ -z "${REF_INPUT}" ]; then
+            REF="${GITHUB_REF_NAME}"
+            if [ "${GITHUB_REF_TYPE}" != "branch" ]; then
+              echo "::notice::${REF} is a ${GITHUB_REF_TYPE}, not a branch; the report stays in the artifact only."
+              exit 0
+            fi
+          else
+            REF="${REF_INPUT}"
+            if ! git ls-remote --exit-code --heads origin "${REF}" > /dev/null 2>&1; then
+              echo "::notice::${REF} is not a branch of this repository; the report stays in the artifact only."
+              exit 0
+            fi
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Only what this run generated, and only what it managed to write:
+          # a collector that fell back to the manifest-derived summary has a
+          # README.md and no problems.md, which is a report, not an error.
+          files=""
+          for f in README.md problems.md failures.md cran.md manifest.json; do
+            if [ -f "revdep/${f}" ]; then
+              files="${files} revdep/${f}"
+            fi
+          done
+          # The per-package sections `problems.md` and `failures.md` are
+          # assembled from. `git add <dir>` stages removals as well, which is
+          # what retires a package the run found fixed.
+          for d in problems failures; do
+            if [ -d "revdep/${d}" ]; then
+              files="${files} revdep/${d}"
+            fi
+          done
+          if [ -z "${files}" ]; then
+            echo "::notice::No report files were written; nothing to commit."
+            exit 0
+          fi
+          git add -- ${files}
+          if git diff --cached --quiet; then
+            echo "::notice::The report is unchanged; nothing to commit."
+            exit 0
+          fi
+          git commit -m "chore: Update revdep report from revdep4 run ${GITHUB_RUN_ID}" \
+            -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          git fetch origin "${REF}"
+          git rebase "origin/${REF}"
+          git push origin "HEAD:${REF}"
+          echo "::notice::Report committed to ${REF}."
+        shell: bash
+
+      - name: Upload the new baseline
+        uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: revdepx-baseline
+          path: ${{ runner.temp }}/baseline
+          retention-days: 90
+          overwrite: true
+
+      # What the run cost, per package and per shard. Small on purpose and
+      # separate from the report: the next plan (of either workflow)
+      # downloads it to calibrate its cost model, and should not have to
+      # fetch a report to do so.
+      - name: Upload the measured timings
+        uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: revdepx-timings
+          path: ${{ runner.temp }}/timings
+          if-no-files-found: ignore
+          retention-days: 90
+          overwrite: true

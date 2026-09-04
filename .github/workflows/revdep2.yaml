@@ -1,23 +1,33 @@
 # Sharded reverse-dependency check:
-# plan + build (parallel) -> preflight -> test (matrix) -> collect.
+# plan+preflight and build (parallel) -> test (matrix) -> collect.
 #
 # The plan job enumerates the CRAN reverse dependencies of this package (to
-# any depth), weighs each one by the time CRAN's own Linux check machine
-# spends on it, decides which CRAN-baseline results from an earlier run are
-# still valid, and deals the packages into cost-balanced shards -- the
-# heaviest round-robin first, everything else placed where it shares the most
-# dependencies (see revdep2/README.md for the algorithm and its trade-offs).
+# any depth), weighs each one by what its check is expected to cost here --
+# what the last runs measured, or the time CRAN's own Linux check machine
+# spends on it, scaled to this one -- decides which CRAN-baseline results from
+# an earlier run are still valid, and deals the packages into cost-balanced
+# shards: the heaviest round-robin first, everything else placed where it
+# shares the most dependencies. The shard count follows the parallel capacity,
+# because only max-parallel shards ever run at once and every shard past that
+# pays another setup without starting any earlier (see revdep2/README.md for
+# the algorithm and its trade-offs).
 #
 # The build job compiles the dev version once into the binary artifact every
 # shard installs; it needs only the checkout, so it runs in parallel with
-# planning. The preflight job installs and loads the whole dependency
-# universe -- every package any revdep needs -- so broken dependencies surface
+# planning. The same job then preflights: it installs and loads the whole
+# dependency universe -- every package any revdep needs -- so broken dependencies surface
 # before the first check minute is spent, and the pak cache the shards restore
-# is warm.
+# is warm. Its library is published too, and unpacked rather than rebuilt
+# twice over: every shard takes this run's preflight library, and the plan
+# walks earlier runs youngest first for whatever that leaves -- until their
+# libraries cover everything this run installs, or the history runs out. pak
+# still runs over the whole set afterwards, because CRAN moves between runs
+# and what changed has to be built after all.
 #
-# Each test shard installs its dependency union, checks every one of its
-# packages against the CRAN version (or reuses a baseline), swaps in the dev
-# binary, checks again, and compares -- revdepcheck-style, one manifest line
+# Each test shard installs its dependency union, then checks every one of its
+# packages against the CRAN version and the dev version at the same time --
+# two `R CMD check` runs side by side against library stacks differing in that
+# one package -- and compares the pair, revdepcheck-style, one manifest line
 # and a pair of rcmdcheck results per package. A broken package is a result,
 # never a job failure; the shard defers what its deadline cannot fit and says
 # so.
@@ -35,6 +45,12 @@
 #                     revdep's version, our CRAN version, the R series and the
 #                     resolved dependency versions all still match (and the
 #                     result is younger than baseline-max-age-days)
+#   revdep2-lib       the preflight's installed dependency library, unpacked by
+#                     later runs to skip rebuilding what has not changed
+#   revdep2-lib-index what is in that library, so a plan can decide which runs
+#                     to take it from without downloading it
+#   revdep2-timings   what the checks and the shards actually cost, which is how
+#                     the next plan sizes its shards
 #
 # To re-check only what a run could not declare ok, dispatch again with
 # `retry-run: <run-id>`; the new report carries the old run's good results
@@ -55,7 +71,7 @@ on:
         type: string
         default: ""
       packages:
-        description: "Packages to check (comma/space separated; default: all reverse dependencies)"
+        description: "Packages to check (comma/space separated), or 'broken' to take what the committed revdep/ report lists as broken or failed; default: all reverse dependencies"
         type: string
         default: ""
       which:
@@ -73,12 +89,16 @@ on:
         description: "Run id of an earlier revdep2 run; re-check only its not-ok packages"
         type: string
         default: ""
+      part:
+        description: "Check one G-th of the reverse dependencies, as 'i/G'; for a set too big for one run (the plan says when, and with which G)"
+        type: string
+        default: ""
       shard-budget-minutes:
-        description: "Check-time target per shard; smaller buys wall clock with more shards"
+        description: "Check-time target per shard; smaller buys wall clock with more shards, up to one wave of max-parallel"
         type: string
         default: ""
       max-parallel:
-        description: "Shards to run concurrently"
+        description: "Shards to run concurrently, and so the wave size the plan cuts: set it to the concurrency the account really has, never more (GitHub queues past its own limit anyway)"
         type: string
         default: ""
       refresh-baseline:
@@ -89,12 +109,23 @@ on:
         description: "Oldest baseline result worth reusing"
         type: string
         default: ""
+      not-cran:
+        description: "Run the tests CRAN skips: sets NOT_CRAN=true, so skip_on_cran() does not skip (slower, noisier, and includes packages' own spelling tests)"
+        type: boolean
+        default: false
       dry-run:
         description: "Plan only: report the shards and reuse decisions, start no checks"
         type: boolean
         default: false
 
 name: revdep2
+
+# GitHub does not show a run the inputs it was dispatched with, so the two
+# that decide how much work the run is -- how wide the net is cast, and how
+# deep -- go into the run's own title, where the run list and every link to it
+# carry them. "Was that depth 2 or the whole closure?" is otherwise only
+# answerable by reading the plan job's log.
+run-name: "revdep2 ${{ inputs.packages && format('({0})', inputs.packages) || format('({0}, depth {1})', inputs.which || 'strong', inputs.depth || '1') }}${{ inputs['retry-run'] && format(', retry of {0}', inputs['retry-run']) || '' }}${{ inputs['dry-run'] && ', dry run' || '' }}"
 
 # Read-only by default; every job opts back into what it actually needs.
 # Note that for a pull request from a fork GitHub caps the token at read-only
@@ -114,22 +145,66 @@ env:
   REVDEP2_WHICH: ${{ inputs.which || 'strong' }}
   REVDEP2_DEPTH: ${{ inputs.depth || '1' }}
   REVDEP2_RETRY_RUN: ${{ inputs.retry-run || '' }}
+  REVDEP2_PART: ${{ inputs.part || '' }}
   REVDEP2_SHARD_BUDGET_MINUTES: ${{ inputs.shard-budget-minutes || vars.REVDEP2_SHARD_BUDGET_MINUTES || '45' }}
   REVDEP2_MAX_PARALLEL: ${{ inputs.max-parallel || vars.REVDEP2_MAX_PARALLEL || '20' }}
+  # Check minutes one shard may be planned to hold. Only a batch too big for
+  # one wave of REVDEP2_MAX_PARALLEL shards ever hits it, and then it decides
+  # how many waves there are; empty means 80% of REVDEP2_DEADLINE_MINUTES.
+  REVDEP2_SHARD_CAPACITY_MINUTES: ${{ vars.REVDEP2_SHARD_CAPACITY_MINUTES || '' }}
   REVDEP2_REFRESH_BASELINE: ${{ inputs.refresh-baseline && '1' || '' }}
   REVDEP2_BASELINE_MAX_AGE_DAYS: ${{ inputs.baseline-max-age-days || vars.REVDEP2_BASELINE_MAX_AGE_DAYS || '30' }}
   REVDEP2_DRY_RUN: ${{ inputs.dry-run && '1' || '' }}
+  # Whether the shards behave like CRAN's own check machines or like a
+  # developer's. `skip_on_cran()` reads `NOT_CRAN`, and `r-lib/actions/setup-r`
+  # sets it to `true` -- which is why packages' own `tests/spelling.R` runs
+  # here at all. CRAN-like is the default: the point of this workflow is to
+  # find what a released igraph would break, and a test CRAN never runs cannot
+  # break on CRAN. Dispatch with `not-cran: true` to widen the net again.
+  REVDEP2_NOT_CRAN: ${{ inputs.not-cran && 'true' || 'false' }}
+  # Prebuilt dependency libraries of earlier runs: how many runs may donate one
+  # (0 turns reuse off), and how old a library may be before its binaries are
+  # no longer trusted against the current runner image.
+  REVDEP2_PREBUILT_MAX_RUNS: ${{ vars.REVDEP2_PREBUILT_MAX_RUNS || '5' }}
+  REVDEP2_PREBUILT_MAX_AGE_DAYS: ${{ vars.REVDEP2_PREBUILT_MAX_AGE_DAYS || '14' }}
   # Per-check timeout: factor times the package's CRAN check time, but never
-  # below the floor -- CRAN's machines are not these runners.
+  # below the floor -- CRAN's machines are not these runners. The floor was 10
+  # minutes and killed 19 of 770 packages in run 31048405399, every one of them
+  # compile-heavy (Stan models, mostly) and fast on CRAN's own numbers: 13 of
+  # them had the floor as their whole budget. 20 minutes covers all 19.
   REVDEP2_TIMEOUT_FACTOR: ${{ vars.REVDEP2_TIMEOUT_FACTOR || '1.5' }}
-  REVDEP2_TIMEOUT_MIN_MINUTES: ${{ vars.REVDEP2_TIMEOUT_MIN_MINUTES || '10' }}
+  REVDEP2_TIMEOUT_MIN_MINUTES: ${{ vars.REVDEP2_TIMEOUT_MIN_MINUTES || '20' }}
   REVDEP2_DEADLINE_MINUTES: ${{ vars.REVDEP2_DEADLINE_MINUTES || '300' }}
 
 jobs:
+  # Planning and the preflight are one job.
+  #
+  # They were two, and the second did nothing the first had not already paid
+  # for: a runner, a checkout, `setup-r`, a pak install -- and then downloaded
+  # the plan artifact the first had just uploaded, only to read it back. That
+  # is about two minutes of a three-hour run, which is not the point; the point
+  # is that planning is 20 seconds of work wearing a whole job's overhead, and
+  # it sits on the critical path, because the preflight cannot start until it
+  # ends and every shard waits on the preflight.
+  #
+  # Merging them costs one thing, and it has to be bought back explicitly: a
+  # preflight failure used to be survivable, because the plan's outputs -- the
+  # shard matrix among them -- were already safe in a job that had succeeded.
+  # In one job a failing preflight step would take the matrix with it and the
+  # run would have nothing to check. So the plan's outputs are set before the
+  # preflight step runs, and the preflight step is `continue-on-error`: it
+  # shows as failed, the summary says what it could not install, and the shards
+  # go ahead and install those packages themselves. Which is exactly what the
+  # preflight is: an optimization, never a gate.
   plan:
     runs-on: ubuntu-26.04
 
-    name: "Plan revdep shards"
+    # The preflight installs the whole dependency universe; when that goes
+    # wrong it tends to go wrong slowly. Below the 6 h ceiling so it ends as a
+    # failure with logs rather than as a hard kill.
+    timeout-minutes: 300
+
+    name: "Plan shards and preflight dependencies"
 
     outputs:
       # Fallbacks cover a planning step that did not run at all: `test` is
@@ -144,21 +219,31 @@ jobs:
     permissions:
       contents: read
       # To find the newest earlier run with a baseline artifact and read its
-      # manifest, and to read the retried run's report.
+      # manifest, to read the retried run's report, and to download the
+      # prebuilt library artifacts of the runs the plan picked.
       actions: read
 
     steps:
-      - uses: actions/checkout@v6
+      - name: Check out the ref under test
+        uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref || github.ref }}
 
-      - uses: r-lib/actions/setup-r@v2
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
 
-      - name: Install jsonlite
+      # callr (and the processx it brings) is what puts a clock on the calls
+      # that have none of their own: pak's install runs in a callr child that
+      # can be killed, and the load test runs under a processx timeout. pak
+      # vendors its own copy of both and exports neither, so they are
+      # installed here in their own right. The planning step needs only
+      # jsonlite, but it is one install either way.
+      - name: Install pak, jsonlite and callr
         run: |
-          install.packages("jsonlite")
+          install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
+          install.packages(c("jsonlite", "callr"))
         shell: Rscript {0}
 
       - name: Plan shards
@@ -170,12 +255,144 @@ jobs:
           Rscript ./.github/workflows/revdep2/plan.R
         shell: bash
 
+      # Before anything can fail: the shards are planned, and the plan is
+      # published whatever the preflight goes on to do.
       - name: Upload the shard plan
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         if: steps.plan.outputs.shards != '0'
         with:
           name: revdep2-plan
           path: ${{ runner.temp }}/plan.json
+          retention-days: 30
+          overwrite: true
+
+      # ---- preflight ----------------------------------------------------
+      # Everything below is skipped by a dry run, which is what makes
+      # `dry-run` "plan only" now that there is no separate job to skip.
+
+      # A runner ships with ~25 GB of toolchains this job will never use, and
+      # a dependency universe of a few thousand packages -- sources, binaries,
+      # build directories and the installed library at once -- is the one job
+      # here that can plausibly fill the disk. Reclaiming the space is cheap
+      # insurance; printing what is left makes the next failure diagnosable
+      # instead of a bare exit 143.
+      - name: Make room for the dependency universe
+        if: steps.plan.outputs.shards != '0' && inputs.dry-run != true
+        run: |
+          before=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
+          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc \
+            /usr/local/.ghcup /opt/hostedtoolcache/CodeQL \
+            /usr/local/share/powershell /usr/share/swift || true
+          sudo docker image prune --all --force > /dev/null 2>&1 || true
+          after=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
+          echo "Free disk: ${before}G -> ${after}G"
+          free -g
+        shell: bash
+
+      # The preflight downloads every dependency binary once; saving the pak
+      # cache under the plan's hash hands the shards a warm start.
+      - name: Cache the pak package cache
+        if: steps.plan.outputs.shards != '0' && inputs.dry-run != true
+        uses: actions/cache@v5
+        with:
+          path: ~/.cache/R/pkgcache
+          key: revdep2-pak-${{ steps.plan.outputs.plan_hash }}
+          restore-keys: |
+            revdep2-pak-
+
+      - name: Install and load every dependency
+        # The plan is already uploaded and this job's outputs are already set,
+        # so a preflight that dies costs the run its warm start and nothing
+        # else: every shard installs what it needs either way. Failing the job
+        # here would take the shard matrix with it.
+        continue-on-error: true
+        if: steps.plan.outputs.shards != '0' && inputs.dry-run != true
+        env:
+          GH_TOKEN: ${{ github.token }}
+          PLAN: ${{ runner.temp }}/plan.json
+          OUT_DIR: ${{ runner.temp }}/preflight
+          LIB_OUT: ${{ runner.temp }}/lib
+          LIB_INDEX_OUT: ${{ runner.temp }}/lib-index
+          PKG_SYSREQS: true
+          RESOURCE_LOG: ${{ runner.temp }}/preflight/resources.log
+          # `/tmp` on this image is its own filesystem of about 8 GB -- half
+          # the RAM, so a tmpfs -- while the disk `runner.temp` lives on has
+          # over 100 GB free. Everything R does temporarily lands there:
+          # source builds, unpacked tarballs, and callr's own startup files.
+          # In run 31303054725 it filled after eleven chunks, and callr could
+          # then not start R at all -- "error writing to connection" from the
+          # saveRDS of its startup environment -- which failed every chunk
+          # after it in about a second. The space is on the big disk.
+          TMPDIR: ${{ runner.temp }}/tmp
+          TMP: ${{ runner.temp }}/tmp
+          TEMP: ${{ runner.temp }}/tmp
+          RESOURCE_PHASE_FILE: ${{ runner.temp }}/preflight/phase
+        run: |
+          mkdir -p "${RUNNER_TEMP}/preflight" "${RUNNER_TEMP}/tmp"
+          watch=./.github/workflows/revdep2/watch-resources.sh
+          # Backgrounded and left running, like the shard's. It used to be
+          # killed when this step ended, which left the two artifact uploads
+          # after it unsampled -- and this job's library artifact is gigabytes
+          # (4.1 GB in run 31951756102), so "the runner stopped answering while
+          # packing" was exactly as unanswerable as it was for shard 16.
+          # `preflight.R` moves the label on through RESOURCE_PHASE_FILE.
+          "${watch}" once "before the install"
+          "${watch}" watch 30 "preflight" &
+          disown || true
+          unbuffered=""
+          if command -v stdbuf > /dev/null 2>&1; then
+            unbuffered="stdbuf -oL -eL"
+          fi
+          status=0
+          ${unbuffered} Rscript ./.github/workflows/revdep2/preflight.R || status=$?
+          "${watch}" once "after the install"
+          exit "${status}"
+        shell: bash
+
+      # Runs even when the install step died, because "how much disk and
+      # memory were left" is the first question about a job that was killed
+      # rather than failed. It cannot run when the *runner* died -- hence the
+      # sampler above -- but it is what answers the question in every case
+      # where the job merely failed.
+      - name: Report what the install consumed
+        if: always() && steps.plan.outputs.shards != '0' && inputs.dry-run != true
+        run: |
+          ./.github/workflows/revdep2/watch-resources.sh once "after the job"
+          ./.github/workflows/revdep2/watch-resources.sh oom
+          du -sh ~/.cache/R/pkgcache "${RUNNER_TEMP}/lib" 2>/dev/null || true
+        shell: bash
+
+      - name: Upload the preflight report
+        uses: actions/upload-artifact@v6
+        if: always() && steps.plan.outputs.shards != '0' && inputs.dry-run != true
+        with:
+          name: revdep2-preflight
+          path: ${{ runner.temp }}/preflight
+          if-no-files-found: ignore
+          retention-days: 30
+          overwrite: true
+
+      # The library the next runs unpack. It is the big one -- a whole
+      # dependency universe, gigabytes of it -- so it is kept exactly as long
+      # as a plan would still reuse it, while the index that describes it is
+      # cheap and outlives it.
+      - name: Upload the preflight library
+        uses: actions/upload-artifact@v6
+        if: always() && steps.plan.outputs.shards != '0' && inputs.dry-run != true
+        with:
+          name: revdep2-lib
+          path: ${{ runner.temp }}/lib
+          if-no-files-found: ignore
+          retention-days: ${{ env.REVDEP2_PREBUILT_MAX_AGE_DAYS }}
+          overwrite: true
+
+      - name: Upload the library index
+        uses: actions/upload-artifact@v6
+        if: always() && steps.plan.outputs.shards != '0' && inputs.dry-run != true
+        with:
+          name: revdep2-lib-index
+          path: ${{ runner.temp }}/lib-index
+          if-no-files-found: ignore
           retention-days: 30
           overwrite: true
 
@@ -193,7 +410,8 @@ jobs:
       contents: read
 
     steps:
-      - uses: actions/checkout@v6
+      - name: Check out the ref under test
+        uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref || github.ref }}
 
@@ -211,74 +429,11 @@ jobs:
           Rscript ./.github/workflows/revdep2/build.R
         shell: bash
 
-      - name: Upload the package source
-        uses: actions/upload-artifact@v5
+      - name: Upload the package binary
+        uses: actions/upload-artifact@v6
         with:
           name: revdep2-pkg
           path: ${{ runner.temp }}/pkg
-          retention-days: 30
-          overwrite: true
-
-  preflight:
-    needs:
-      - plan
-
-    # A dry run stops after planning; skipping preflight cascades to test and,
-    # through the `needs.*.result == 'success'` guards, to collect.
-    if: needs.plan.outputs.shards != '0' && inputs.dry-run != true
-
-    runs-on: ubuntu-26.04
-
-    name: "Preflight all dependencies"
-
-    permissions:
-      contents: read
-
-    steps:
-      - uses: actions/checkout@v6
-        with:
-          ref: ${{ inputs.ref || github.ref }}
-
-      - uses: r-lib/actions/setup-r@v2
-        with:
-          use-public-rspm: true
-
-      - name: Install pak and jsonlite
-        run: |
-          install.packages("pak", repos = sprintf("https://r-lib.github.io/p/pak/stable/%s/%s/%s", .Platform$pkgType, R.Version()$os, R.Version()$arch))
-          install.packages("jsonlite")
-        shell: Rscript {0}
-
-      - name: Download the shard plan
-        uses: actions/download-artifact@v6
-        with:
-          name: revdep2-plan
-          path: ${{ runner.temp }}/plan
-
-      # The preflight downloads every dependency binary once; saving the pak
-      # cache under the plan's hash hands the shards a warm start.
-      - name: Cache the pak package cache
-        uses: actions/cache@v4
-        with:
-          path: ~/.cache/R/pkgcache
-          key: revdep2-pak-${{ needs.plan.outputs.plan_hash }}
-          restore-keys: |
-            revdep2-pak-
-
-      - name: Install and load every dependency
-        env:
-          PLAN: ${{ runner.temp }}/plan/plan.json
-          OUT_DIR: ${{ runner.temp }}/preflight
-          PKG_SYSREQS: true
-        run: |
-          Rscript ./.github/workflows/revdep2/preflight.R
-        shell: bash
-
-      - name: Upload the preflight library
-        uses: actions/upload-artifact@v5
-        with:
-          name: revdep2-preflight
-          path: ${{ runner.temp }}/preflight
           retention-days: 30
           overwrite: true
 
@@ -286,9 +441,22 @@ jobs:
     needs:
       - plan
       - build
-      - preflight
 
-    if: needs.plan.outputs.shards != '0'
+    # The preflight is an optimization and an early diagnosis, not a
+    # prerequisite: a shard installs its own dependency union anyway, and that
+    # union is a fraction of the universe the preflight takes on (~500 of 4400
+    # in the run that made this necessary). So a preflight that dies must not
+    # take the checks with it -- which is now a `continue-on-error` on the
+    # preflight step itself, since it shares a job with the planning that
+    # produces this matrix. `!cancelled()` still lets this job run past a
+    # failed `needs`, and the dry-run guard is spelled out because nothing
+    # upstream is skipped by it any more.
+    if: >-
+      !cancelled()
+      && needs.plan.result == 'success'
+      && needs.build.result == 'success'
+      && needs.plan.outputs.shards != '0'
+      && inputs.dry-run != true
 
     runs-on: ubuntu-26.04
 
@@ -301,7 +469,8 @@ jobs:
 
     permissions:
       contents: read
-      # To download the baseline artifact, which lives on an earlier run.
+      # To download the baseline and prebuilt-library artifacts, which live on
+      # earlier runs.
       actions: read
 
     strategy:
@@ -318,13 +487,67 @@ jobs:
       _R_CHECK_SYSTEM_CLOCK_: false
       _R_CHECK_FUTURE_FILE_TIMESTAMPS_: false
       _R_CHECK_FORCE_SUGGESTS_: false
+      # `--as-cran` turns on `--run-donttest`, which is the most expensive
+      # thing a check does and the least useful thing for this workflow:
+      # `\donttest{}` is where packages put the examples too slow to run on
+      # CRAN, so it is where the runners spend hours and where the timeouts
+      # land -- varPro's old half was killed at 1200s in "checking examples
+      # with --run-donttest". `\dontrun{}` is off unless asked for, and stays
+      # off. What is left is every example a package expects to run.
+      _R_CHECK_DONTTEST_EXAMPLES_: false
+      # No spell checking. It cannot tell us anything about igraph -- a
+      # misspelling in a revdep's DESCRIPTION is the same misspelling in both
+      # halves -- and it is noise in a log that is read to find real
+      # differences. `_R_CHECK_CRAN_INCOMING_: false` already suppresses it;
+      # this says so out loud so `--as-cran` cannot turn it back on.
+      _R_CHECK_CRAN_INCOMING_USE_ASPELL_: false
+      # No timings in the check output.
+      #
+      # `--as-cran` sets `_R_CHECK_TIMINGS_` to 10, which stamps every stage
+      # slower than that with its own `[user/elapsed]` pair and appends an
+      # "Examples with CPU ... > 5s" table. Both are pure noise here: they
+      # differ between the two halves by construction -- they are wall clock,
+      # measured on two checks racing each other for the same four cores --
+      # so every one of them is a line in the diff that says nothing about the
+      # package. `neutral_log()` strips them so the *comparison* is not fooled;
+      # this stops them being produced at all, so the diff a human reads is
+      # only what changed.
+      #
+      # Nothing is lost. What a stage cost is still recorded, per line and for
+      # every stage rather than only the slow ones, by the elapsed stamping in
+      # check-pair.sh -- which is on the driver log, not on the file the halves
+      # are compared through.
+      _R_CHECK_TIMINGS_: ""
+      _R_CHECK_EXAMPLE_TIMING_THRESHOLD_: 99999
+
+      # 300 lines of a failed test transcript in the check log, not R's default
+      # 13 -- thirteen routinely cuts off the failure itself, which is both
+      # what a reader wants and the part the old/new diff has to see to be
+      # worth printing. Not unlimited, because this text is carried in the
+      # check log, in the diff and in the summary, and one chatty test would
+      # otherwise bury the rest of the shard in all three. Nothing is lost by
+      # bounding it: R writes the *complete* transcript to `<file>.Rout.fail`
+      # whatever this is set to, and the shard keeps that file.
+      _R_CHECK_TESTS_NLINES_: 300
+
+      # What the driver reads in both of its phases and does not need the
+      # runner for. The `runner` context is not available this far up -- only
+      # in a step -- so the directories are set once in `$GITHUB_ENV` below.
+      GH_TOKEN: ${{ github.token }}
+      SHARD: ${{ matrix.shard }}
+      TIMEOUT_FACTOR: ${{ vars.REVDEP2_TIMEOUT_FACTOR || '1.5' }}
+      TIMEOUT_MIN_MINUTES: ${{ vars.REVDEP2_TIMEOUT_MIN_MINUTES || '20' }}
+      DEADLINE_MINUTES: ${{ vars.REVDEP2_DEADLINE_MINUTES || '300' }}
+      PKG_SYSREQS: true
 
     steps:
-      - uses: actions/checkout@v6
+      - name: Check out the ref under test
+        uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref || github.ref }}
 
-      - uses: r-lib/actions/setup-pandoc@v2
+      - name: Set up pandoc
+        uses: r-lib/actions/setup-pandoc@v2
 
       - name: Close the log group that setup-pandoc leaves open
         # See `.github/workflows/install/action.yml` for why this is needed.
@@ -334,11 +557,13 @@ jobs:
           echo "::endgroup::"
         shell: bash
 
-      - uses: r-lib/actions/setup-r@v2
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
 
-      - uses: r-lib/actions/setup-tinytex@v2
+      - name: Set up TinyTeX
+        uses: r-lib/actions/setup-tinytex@v2
 
       - name: Install system tools for checking
         run: |
@@ -353,7 +578,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Restore the pak package cache
-        uses: actions/cache/restore@v4
+        uses: actions/cache/restore@v5
         with:
           path: ~/.cache/R/pkgcache
           key: revdep2-pak-${{ needs.plan.outputs.plan_hash }}
@@ -361,21 +586,32 @@ jobs:
             revdep2-pak-
 
       - name: Download the shard plan
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: revdep2-plan
           path: ${{ runner.temp }}/plan
 
-      - name: Download the package source
-        uses: actions/download-artifact@v6
+      - name: Download the package binary
+        uses: actions/download-artifact@v7
         with:
           name: revdep2-pkg
           path: ${{ runner.temp }}/pkg
 
+      # This run's own preflight library: the shard unpacks it instead of
+      # building the same packages the preflight built minutes ago. It is a
+      # `needs`, so it is always there -- unless the preflight could not pack
+      # one, which is a slower shard, not a broken one.
+      - name: Download this run's preflight library
+        uses: actions/download-artifact@v7
+        continue-on-error: true
+        with:
+          name: revdep2-lib
+          path: ${{ runner.temp }}/lib
+
       # The baseline lives on an earlier run; absence is not an error, the
       # shard just checks the CRAN version fresh.
       - name: Download the baseline results
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         if: needs.plan.outputs.baseline_run != '0'
         continue-on-error: true
         with:
@@ -384,61 +620,214 @@ jobs:
           github-token: ${{ github.token }}
           path: ${{ runner.temp }}/baseline
 
-      - name: Check the shard
+      # Both driver steps need these and neither can name them itself: the
+      # `runner` context does not reach the job's `env`, so they are set here
+      # for every step that follows.
+      #
+      # `NOT_CRAN` is here rather than in the job's `env` because
+      # `r-lib/actions/setup-r` writes `NOT_CRAN=true` into `$GITHUB_ENV`, and
+      # a later write is what reliably overrides an earlier one. This step runs
+      # after it and before both driver steps.
+      - name: Point the driver at this runner's directories
         env:
-          SHARD: ${{ matrix.shard }}
-          PLAN: ${{ runner.temp }}/plan/plan.json
-          PKG_DIR: ${{ runner.temp }}/pkg
-          BASELINE_DIR: ${{ runner.temp }}/baseline
-          OUT_DIR: ${{ runner.temp }}/results
-          TIMEOUT_FACTOR: ${{ env.REVDEP2_TIMEOUT_FACTOR }}
-          TIMEOUT_MIN_MINUTES: ${{ env.REVDEP2_TIMEOUT_MIN_MINUTES }}
-          DEADLINE_MINUTES: ${{ env.REVDEP2_DEADLINE_MINUTES }}
-          PKG_SYSREQS: true
+          NOT_CRAN_INPUT: ${{ env.REVDEP2_NOT_CRAN }}
+        run: |
+          mkdir -p "${RUNNER_TEMP}/tmp"
+          {
+            echo "NOT_CRAN=${NOT_CRAN_INPUT}"
+            echo "PLAN=${RUNNER_TEMP}/plan/plan.json"
+            echo "PKG_DIR=${RUNNER_TEMP}/pkg"
+            echo "LIB_DIR=${RUNNER_TEMP}/lib"
+            echo "BASELINE_DIR=${RUNNER_TEMP}/baseline"
+            echo "OUT_DIR=${RUNNER_TEMP}/results"
+            # The same small `/tmp` as the preflight, and a shard builds source
+            # packages and unpacks check directories into it for hours.
+            echo "TMPDIR=${RUNNER_TEMP}/tmp"
+            echo "TMP=${RUNNER_TEMP}/tmp"
+            echo "TEMP=${RUNNER_TEMP}/tmp"
+          } >> "${GITHUB_ENV}"
+        shell: bash
+
+      # Two steps, one driver. The install is minutes to an hour and the checks
+      # are hours, and as one step the run page could only report their sum --
+      # so "shard 14 took five hours" said nothing about whether it spent them
+      # unpacking dependencies or checking packages, and the install times turn
+      # out to vary by a lot between shards. Split, each is timed by Actions
+      # itself and readable at a glance from the job page.
+      #
+      # The phases share the job's environment and the work directory; the
+      # install leaves the libraries and a note of what it cost behind, and the
+      # check picks both up. Nothing is done twice.
+      # The same sampler the preflight runs, for the same reason, and the shard
+      # needed it more.
+      #
+      # Shard 16 of run 31951756102 died with "The hosted runner lost
+      # communication with the server", whose own advice names starvation of
+      # CPU, memory or network as the causes -- and there was not one number
+      # from that job to say which, because a runner that stops answering takes
+      # its `if: always()` steps with it. Only what was already streamed to the
+      # log survives, so the numbers have to be emitted while the work runs.
+      #
+      # Backgrounded once here rather than per step: a process started in one
+      # step outlives it, and Actions reaps it with the job. `RESOURCE_LOG` also
+      # puts the series in the shard artifact, for the jobs that do reach their
+      # upload.
+      - name: Start the resource sampler
+        run: |
+          watch=./.github/workflows/revdep2/watch-resources.sh
+          "${watch}" once "shard ${SHARD} before the install"
+          RESOURCE_LOG="${RUNNER_TEMP}/results/resources.log" \
+            "${watch}" watch 30 "shard ${SHARD}" &
+          disown || true
+        shell: bash
+
+      - name: Install packages
+        env:
+          PHASE: install
+        run: |
+          Rscript ./.github/workflows/revdep2/shard.R
+        shell: bash
+
+      # The checks run in three slices, each followed by an upload.
+      #
+      # The driver has always written its results as it goes, so that a shard
+      # killed part way through still accounts for what it finished -- but the
+      # upload was one step at the end, and `if: always()` cannot save a step on
+      # a runner that is no longer there. Shard 16 of run 31951756102 got three
+      # minutes into a 196-minute check budget before
+      #
+      #   ##[error]The runner has received a shutdown signal.
+      #   ##[error]Process completed with exit code 143.
+      #
+      # took the whole job with it. The upload was skipped and all 87 packages
+      # were reported `missing`, having cost a runner an hour. At three slices
+      # that is bounded to a third of the shard, and the interim artifacts also
+      # say `deferred` for the packages not yet reached, which is truer than the
+      # `missing` the collector would otherwise reconcile them into.
+      #
+      # Three rather than more because each upload is a step, and the artifact
+      # carries the whole results directory every time; the shard's own deadline
+      # already caps the tail.
+      #
+      # `!cancelled()` rather than the default `success()`: an install step that
+      # *failed* still leaves a shard full of packages to account for, and the
+      # driver reports a package it could not install as a depfail, which is a
+      # result. Skipping this step instead left all 50 of shard 3's packages as
+      # `missing` in run 31893156685 -- the one outcome that tells nobody
+      # anything. The later slices additionally tolerate an earlier one having
+      # failed, for the same reason.
+      - name: Check the shard (1 of 3)
+        if: '!cancelled()'
+        env:
+          PHASE: check
+          CHECK_SLICE: 1/3
         run: |
           Rscript ./.github/workflows/revdep2/shard.R
         shell: bash
 
       # Named per attempt: a re-run of one shard must not overwrite the results
       # the other shards uploaded in the first attempt; the collector reads
-      # every attempt and lets the later one win per package.
-      - name: Upload the shard results
-        uses: actions/upload-artifact@v5
+      # every attempt and lets the later one win per package. `overwrite` so the
+      # slices replace one another under the one name -- they share a results
+      # directory, so the newest upload is a superset of the ones before it.
+      - name: Upload the shard results (1 of 3)
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: revdep2-results-${{ matrix.shard }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/results
           if-no-files-found: ignore
+          overwrite: true
+          retention-days: 30
+
+      - name: Check the shard (2 of 3)
+        if: '!cancelled()'
+        env:
+          PHASE: check
+          CHECK_SLICE: 2/3
+        run: |
+          Rscript ./.github/workflows/revdep2/shard.R
+        shell: bash
+
+      - name: Upload the shard results (2 of 3)
+        uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: revdep2-results-${{ matrix.shard }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/results
+          if-no-files-found: ignore
+          overwrite: true
+          retention-days: 30
+
+      - name: Check the shard (3 of 3)
+        if: '!cancelled()'
+        env:
+          PHASE: check
+          CHECK_SLICE: 3/3
+        run: |
+          Rscript ./.github/workflows/revdep2/shard.R
+        shell: bash
+
+      # Before the final upload, so the last sample and the OOM verdict ride in
+      # the artifact. It cannot run when the *runner* died -- hence the sampler
+      # started before the install -- but it is what answers "was it memory?" in
+      # every case where the job merely failed.
+      - name: Report what the shard consumed
+        if: always()
+        run: |
+          ./.github/workflows/revdep2/watch-resources.sh once "shard ${SHARD} after the checks"
+          ./.github/workflows/revdep2/watch-resources.sh oom
+          df -BG / "${RUNNER_TEMP}" 2>/dev/null || true
+        shell: bash
+
+      - name: Upload the shard results
+        uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: revdep2-results-${{ matrix.shard }}-${{ github.run_attempt }}
+          path: ${{ runner.temp }}/results
+          if-no-files-found: ignore
+          overwrite: true
           retention-days: 30
 
   collect:
     needs:
       - plan
       - build
-      - preflight
       - test
 
     # `always()` so a run with red shards still reports -- a broken revdep is
-    # the result this workflow exists to surface. Guarded on the earlier
-    # stages having succeeded, because without a plan and a binary there is
-    # nothing to collect; a dry run skips preflight and therefore this too.
-    if: always() && needs.plan.result == 'success' && needs.build.result == 'success' && needs.preflight.result == 'success' && needs.plan.outputs.shards != '0'
+    # the result this workflow exists to surface. Guarded on the plan and the
+    # binary, because without those there is nothing to collect, and on the
+    # dry-run input, which is now the only thing that stops this job from
+    # reporting: the preflight is a step of the plan job and cannot fail it, so
+    # a run whose preflight died still has shards, results, and packages to
+    # account for.
+    if: >-
+      always()
+      && needs.plan.result == 'success'
+      && needs.build.result == 'success'
+      && needs.plan.outputs.shards != '0'
+      && inputs.dry-run != true
 
     runs-on: ubuntu-26.04
 
     name: "Collect results and report"
 
     permissions:
-      contents: read
+      # To commit the report back to the checked branch.
+      contents: write
       # To download the retried run's report artifact, which lives on that run.
       actions: read
 
     steps:
-      - uses: actions/checkout@v6
+      - name: Check out the ref under test
+        uses: actions/checkout@v6
         with:
           ref: ${{ inputs.ref || github.ref }}
 
-      - uses: r-lib/actions/setup-r@v2
+      - name: Set up R
+        uses: r-lib/actions/setup-r@v2
         with:
           use-public-rspm: true
 
@@ -459,19 +848,23 @@ jobs:
         shell: Rscript {0}
 
       - name: Download the shard plan
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         with:
           name: revdep2-plan
           path: ${{ runner.temp }}/plan
 
+      # Tolerated because a run in which no shard uploaded anything is still
+      # worth a report: the collector reconciles against the plan and names
+      # every package it never heard about, which is what `retry-run` needs.
       - name: Download the results of all shards
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
+        continue-on-error: true
         with:
           pattern: revdep2-results-*
           path: ${{ runner.temp }}/results
 
       - name: Download the report of the run being retried
-        uses: actions/download-artifact@v6
+        uses: actions/download-artifact@v7
         if: env.REVDEP2_RETRY_RUN != ''
         continue-on-error: true
         with:
@@ -481,18 +874,23 @@ jobs:
           path: ${{ runner.temp }}/retry-report
 
       - name: Collect results
+        id: collect
         env:
+          # To read how long the shard *jobs* took -- the minutes before their
+          # driver starts, which is what an extra shard really costs.
+          GH_TOKEN: ${{ github.token }}
           PLAN: ${{ runner.temp }}/plan/plan.json
           RESULTS_DIR: ${{ runner.temp }}/results
           RETRY_DIR: ${{ runner.temp }}/retry-report
           OUT_DIR: revdep
           BASELINE_OUT: ${{ runner.temp }}/baseline
+          TIMINGS_OUT: ${{ runner.temp }}/timings
         run: |
           Rscript ./.github/workflows/revdep2/collect.R
         shell: bash
 
       - name: Upload the report
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: revdep2-report
@@ -500,11 +898,110 @@ jobs:
           retention-days: 90
           overwrite: true
 
+      # The report is also the repository's own record: `revdep/README.md` and
+      # friends have been committed here since `revdepcheck::cloud_check()`
+      # wrote them, and `recheck-report` reads them back. Only the four
+      # generated files and the manifest are staged -- the analysis, the
+      # examples and the notification scripts next to them are human-authored,
+      # and `pkgs/` is gigabytes of check output that belongs in the artifact
+      # only.
+      #
+      # A ref that is not a branch (a tag, a SHA, a fork's ref) cannot receive
+      # a commit; that is a fact about the dispatch, not a failure, so the step
+      # says so and stops. `continue-on-error` covers the rest: a protected
+      # branch, a read-only token on a fork, a race with another push. The
+      # report is in the artifact either way.
+      # `!cancelled()` rather than `always()`: a cancelled run has no shard
+      # results, so its report is every package `missing`. Run 31303054725 was
+      # cancelled and pushed 104k lines of that onto the branch it was testing.
+      # A run with red shards is a different thing and still reports.
+      #
+      # `compared > 0` covers the rest of that family: a run in which *no*
+      # package produced a comparison learnt nothing, and the committed report
+      # is the repository's record and what `packages: broken` reads back. The
+      # report is still built and uploaded; only overwriting the good one is
+      # skipped.
+      - name: Commit the report to the checked ref
+        if: >-
+          !cancelled()
+          && vars.REVDEP2_COMMIT_REPORT != 'false'
+          && steps.collect.outputs.compared != '0'
+        continue-on-error: true
+        env:
+          REF_INPUT: ${{ inputs.ref }}
+        run: |
+          set -eu
+          # Without a `ref` input the dispatch decides, and GitHub says outright
+          # what kind of ref it was; with one, only the remote can say whether
+          # it names a branch. Anything else -- a tag, a SHA, a branch that does
+          # not exist here -- has nowhere to put a commit.
+          if [ -z "${REF_INPUT}" ]; then
+            REF="${GITHUB_REF_NAME}"
+            if [ "${GITHUB_REF_TYPE}" != "branch" ]; then
+              echo "::notice::${REF} is a ${GITHUB_REF_TYPE}, not a branch; the report stays in the artifact only."
+              exit 0
+            fi
+          else
+            REF="${REF_INPUT}"
+            if ! git ls-remote --exit-code --heads origin "${REF}" > /dev/null 2>&1; then
+              echo "::notice::${REF} is not a branch of this repository; the report stays in the artifact only."
+              exit 0
+            fi
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          # Only what this run generated, and only what it managed to write:
+          # a collector that fell back to the manifest-derived summary has a
+          # README.md and no problems.md, which is a report, not an error.
+          files=""
+          for f in README.md problems.md failures.md cran.md manifest.json; do
+            if [ -f "revdep/${f}" ]; then
+              files="${files} revdep/${f}"
+            fi
+          done
+          # The per-package sections `problems.md` and `failures.md` are
+          # assembled from. `git add <dir>` stages removals as well, which is
+          # what retires a package the run found fixed.
+          for d in problems failures; do
+            if [ -d "revdep/${d}" ]; then
+              files="${files} revdep/${d}"
+            fi
+          done
+          if [ -z "${files}" ]; then
+            echo "::notice::No report files were written; nothing to commit."
+            exit 0
+          fi
+          git add -- ${files}
+          if git diff --cached --quiet; then
+            echo "::notice::The report is unchanged; nothing to commit."
+            exit 0
+          fi
+          git commit -m "chore: Update revdep report from run ${GITHUB_RUN_ID}" \
+            -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+          git fetch origin "${REF}"
+          git rebase "origin/${REF}"
+          git push origin "HEAD:${REF}"
+          echo "::notice::Report committed to ${REF}."
+        shell: bash
+
       - name: Upload the new baseline
-        uses: actions/upload-artifact@v5
+        uses: actions/upload-artifact@v6
         if: always()
         with:
           name: revdep2-baseline
           path: ${{ runner.temp }}/baseline
+          retention-days: 90
+          overwrite: true
+
+      # What the run cost, per package and per shard. Small on purpose and
+      # separate from the report: the next plan downloads it to calibrate its
+      # cost model, and should not have to fetch a report to do so.
+      - name: Upload the measured timings
+        uses: actions/upload-artifact@v6
+        if: always()
+        with:
+          name: revdep2-timings
+          path: ${{ runner.temp }}/timings
+          if-no-files-found: ignore
           retention-days: 90
           overwrite: true

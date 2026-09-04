@@ -26,6 +26,12 @@ fi
 mkdir -p "${dir}"
 gh run download "${run}" --name revdep2-report --dir "${dir}"
 
+# What the run cost, next to what it found: this is the file the next plan
+# calibrates on, and having it locally makes a dry run reproducible with
+# REVDEP2_MEASURED_DIR="${dir}".
+gh run download "${run}" --name revdep2-timings --dir "${dir}" ||
+  echo "Run ${run} published no timings artifact." >&2
+
 echo
 echo "Results of run ${run} are in ${dir}/:"
 ls "${dir}"
