@@ -24,4 +24,22 @@
       * Size 2: Existing data.
       * Size 3: Column `c`.
       i Only values of size one are recycled.
+    Code
+      tibble(a = 1:3, .rows = c(1L, 5L))
+    Condition
+      Error in `tibble()`:
+      ! `.rows` must be `NULL` or a single nonnegative whole number.
+      x `.rows` is c(1L, 5L).
+    Code
+      tibble(a = 1:3, .rows = 1.5)
+    Condition
+      Error in `tibble()`:
+      ! `.rows` must be `NULL` or a single nonnegative whole number.
+      x `.rows` is 1.5.
+    Code
+      tibble(.rows = -1)
+    Condition
+      Error in `tibble()`:
+      ! `.rows` must be `NULL` or a single nonnegative whole number.
+      x `.rows` is -1.
 
