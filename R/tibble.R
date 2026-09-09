@@ -252,8 +252,11 @@ tibble_quos <- function(
   first_size <- .rows
   if (
     !is.null(first_size) &&
-      (!is.numeric(first_size) || length(first_size) != 1 || is.na(first_size) ||
-        first_size < 0 || first_size != trunc(first_size))
+      (!is.numeric(first_size) ||
+        length(first_size) != 1 ||
+        is.na(first_size) ||
+        first_size < 0 ||
+        first_size != trunc(first_size))
   ) {
     abort_bad_rows_arg(first_size, call = call)
   }
