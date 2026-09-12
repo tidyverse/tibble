@@ -56,13 +56,13 @@ Useful links:
 Authors:
 \itemize{
   \item Kirill Müller \email{kirill@cynkra.com} (\href{https://orcid.org/0000-0002-1416-3412}{ORCID})
-  \item Hadley Wickham \email{hadley@rstudio.com}
+  \item Hadley Wickham \email{hadley@posit.co}
 }
 
 Other contributors:
 \itemize{
   \item Romain Francois \email{romain@r-enthusiasts.com} [contributor]
-  \item Jennifer Bryan \email{jenny@rstudio.com} [contributor]
+  \item Jennifer Bryan \email{jenny@posit.co} [contributor]
   \item Posit Software, PBC (\href{https://ror.org/03wc8by49}{ROR}) [copyright holder, funder]
 }
 
