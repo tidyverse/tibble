@@ -57,8 +57,8 @@ The following overview contains example values for each type:
     #> $ `named list`  <named list> 1
     #> $ factor        <fct> A
     #> $ ordered       <ord> a
-    #> $ Date          <date> 2026-09-04
-    #> $ POSIXt        <dttm> 2026-09-04 14:03:30
+    #> $ Date          <date> 2026-09-12
+    #> $ POSIXt        <dttm> 2026-09-12 05:40:43
     #> $ difftime      <drtn> 1 secs
     #> $ hms           <time> 00:00:01
     #> $ integer64     <int64> 10000000000
@@ -99,6 +99,6 @@ pillar:::type_sum.default
 #>             "sym"
 #>         }, typeof(x))
 #> }
-#> <bytecode: 0x5d22309f13e0>
+#> <bytecode: 0x5ae7bff75de8>
 #> <environment: namespace:pillar>
 ```

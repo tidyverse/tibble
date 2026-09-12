@@ -1,5 +1,13 @@
 # Changelog
 
+## tibble 3.3.1.9026
+
+### Bug fixes
+
+#### ci
+
+- Backport kit fixes from `rigraph`, `duckdb-r` and `dm`.
+
 ## tibble 3.3.1.9025
 
 ### Continuous integration
