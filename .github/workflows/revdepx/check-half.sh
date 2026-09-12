@@ -89,6 +89,20 @@ forward_env=(
   _R_CHECK_TESTS_NLINES_
 )
 
+# REVDEPX_CCACHE_DIR, when set, is a host directory the caller keeps for the
+# whole shard: it is mounted as the container's CCACHE_DIR and /usr/lib/ccache
+# goes on PATH, so the compilers R CMD check invokes run through ccache.
+#
+# This is where a compiler cache has something to cache. The two halves of a
+# revdep compile the SAME sources minutes apart -- only the package under test
+# in `lib-half` differs -- and inside the container both halves see identical
+# paths, because each mounts its own workdir at the same /revdepx/out. The
+# second half therefore hits on everything that does not depend on the package
+# under test. A revdep that names it in `LinkingTo` reads headers that really
+# do differ between halves, and ccache misses on exactly those objects,
+# because what it hashes is the preprocessed source: the comparison the two
+# halves exist to make is not weakened by caching, it just stops paying twice
+# for the parts that were never different.
 half=$1
 tarball=$2
 work=$3
@@ -196,6 +210,20 @@ run_args=(
   -v "${out}/tmp:/tmp"
   -v "${lib_half}:/revdepx/lib-half:ro"
 )
+# CCACHE_MAXSIZE bounds the shard's own disk, not the Actions cache: this
+# directory lives and dies with the runner and is never uploaded.
+ccache_env=""
+if [ -n "${REVDEPX_CCACHE_DIR:-}" ]; then
+  mkdir -p "${REVDEPX_CCACHE_DIR}"
+  run_args+=(
+    -v "${REVDEPX_CCACHE_DIR}:/revdepx/ccache"
+    -e CCACHE_DIR=/revdepx/ccache
+    -e "CCACHE_MAXSIZE=${REVDEPX_CCACHE_MAXSIZE:-5G}"
+  )
+  # Single-quoted: `$PATH` is the container's, resolved by the shell in there,
+  # not this one's spliced in from the runner.
+  ccache_env='PATH=/usr/lib/ccache:$PATH '
+fi
 if [ -n "${REVDEPX_MEMORY:-}" ]; then
   run_args+=(--memory "${REVDEPX_MEMORY}" --memory-swap "${REVDEPX_MEMORY}")
 fi
@@ -217,7 +245,7 @@ done
 in_container="command -v Xvfb > /dev/null 2>&1 \
 && { Xvfb :99 -screen 0 1280x1024x24 -ac -nolisten tcp > /dev/null 2>&1 & } ; \
 DISPLAY=:99 R_LIBS='/revdepx/lib-half:${universe_lib}' TMPDIR=/tmp \
-timeout --kill-after=60s ${seconds}s \
+${ccache_env}timeout --kill-after=60s ${seconds}s \
 R CMD check --no-manual --as-cran --output=/revdepx/out \
 '/revdepx/src/${src_name}'"
 

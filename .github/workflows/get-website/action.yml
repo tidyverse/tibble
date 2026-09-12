@@ -1,0 +1,107 @@
+name: "Action to resolve Config/Needs/website against the configured repositories"
+inputs:
+  needs:
+    description: "The `needs` value the caller passed to the install action"
+    required: false
+    default: ""
+outputs:
+  needs:
+    description: "The `needs` value with `website` removed, once the field has been expanded here"
+    value: ${{ steps.get-website.outputs.needs }}
+  packages:
+    description: "The website packages as pak refs, with the ones no repository carries left out"
+    value: ${{ steps.get-website.outputs.packages }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Resolve the website packages
+      # `needs: website` reaches pak as a dependency *type*
+      # (`lockfile_create(deps, dependencies = "Config/Needs/website")`),
+      # and a dependency type is resolved all-or-nothing:
+      # one entry that no repository carries fails the whole solve,
+      # before a single check runs.
+      # CRAN archives a backend from time to time --
+      # `adbi` and `RPresto` in September 2026 --
+      # and that must not take down a run that only wanted the website packages
+      # for the pkgdown reference index.
+      #
+      # No pak parameter reaches a dependency type:
+      # `?ignore-unavailable` is honoured for soft dependencies only,
+      # and `pkg=?ignore` drops the package even when it is available.
+      # So resolve the field here instead, and hand the result to pak as refs:
+      # every entry that is not a plain package name stays as it is and stays strict,
+      # every plain name the repositories carry is kept,
+      # and the rest is dropped with a warning in the job log.
+      # Nothing is removed from `DESCRIPTION`:
+      # a package that returns to CRAN is picked up again by the next run.
+      id: get-website
+      run: |
+        # `needs` is a comma- or space-separated list, the same spelling
+        # `r-lib/actions/setup-r-dependencies` accepts.
+        needs <- strsplit(trimws("${{ inputs.needs }}"), "[[:space:],]+")[[1]]
+        needs <- needs[nzchar(needs)]
+        refs <- character()
+
+        if ("website" %in% needs) {
+          needs <- setdiff(needs, "website")
+
+          # Read with read.dcf(), not `grep | cut`, for the reason `get-extra`
+          # spells out: a DCF value that wraps onto continuation lines is not
+          # what the first `grep` hit returns.
+          field <- read.dcf("DESCRIPTION", fields = "Config/Needs/website")[1, 1]
+
+          if (!is.na(field)) {
+            entries <- strsplit(trimws(gsub("[[:space:]]+", " ", field)), "[[:space:],]+")[[1]]
+            entries <- entries[nzchar(entries)]
+
+            # `setup-r` writes the RSPM repository into a user `.Rprofile`, so the
+            # repositories seen here are the ones pak resolves against. Fall back
+            # to CRAN for a local run that has no repository configured.
+            repos <- getOption("repos")
+            if (!length(repos) || any(repos == "@CRAN@")) {
+              options(repos = c(CRAN = "https://cloud.r-project.org"))
+            }
+            available <- available.packages()
+
+            # Only a plain name is looked up in a repository. An `owner/repo` or
+            # `type::ref` entry names a source of its own, and a broken one of
+            # those is a mistake in `DESCRIPTION` rather than an archival, so it
+            # keeps failing the run.
+            plain <- !grepl("[:/]", entries)
+            keep <- !plain | entries %in% rownames(available)
+
+            if (any(!keep)) {
+              cat(sprintf(
+                "::warning::Website packages left out, no configured repository carries them: %s\n",
+                paste(entries[!keep], collapse = ", ")
+              ))
+            }
+            refs <- entries[keep]
+
+            # A website package that is available can still suggest one that is
+            # not -- `duckdb` suggests the archived `adbcdrivermanager` -- and
+            # that fails the solve just as well. `pkg=?ignore-unavailable` is the
+            # parameter for exactly this case: it applies to soft dependencies,
+            # and only when the package is missing, so the dependency comes back
+            # by itself once the package does.
+            installed_base <- rownames(installed.packages(priority = "base"))
+            soft <- available[intersect(entries[keep & plain], rownames(available)), c("Suggests", "Enhances"), drop = FALSE]
+            soft <- unlist(strsplit(soft[!is.na(soft)], ","), use.names = FALSE)
+            soft <- trimws(sub("\\(.*", "", soft))
+            soft <- setdiff(unique(soft[nzchar(soft)]), c("R", installed_base, rownames(available)))
+
+            if (length(soft)) {
+              cat(sprintf(
+                "::warning::Soft dependencies of the website packages tolerated as unavailable: %s\n",
+                paste(soft, collapse = ", ")
+              ))
+              refs <- c(refs, paste0(soft, "=?ignore-unavailable"))
+            }
+          }
+        }
+
+        out <- Sys.getenv("GITHUB_OUTPUT")
+        cat("needs=", paste(needs, collapse = ","), "\n", sep = "", file = out, append = TRUE)
+        cat("packages=", paste(refs, collapse = " "), "\n", sep = "", file = out, append = TRUE)
+      shell: Rscript {0}

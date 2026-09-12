@@ -155,7 +155,25 @@ claimed_log=${workdir}/claimed.log
 manifest_lock=${manifest}.lock
 pkgs_dir=$(dirname -- "${manifest}")/pkgs
 
+# One compiler cache for the whole shard, handed to every check container.
+# Shard-wide rather than per package, because two packages that share a
+# LinkingTo dependency compile the same headers, and because it costs nothing
+# beyond what the halves already give: each package compiles twice here, so
+# the second half of the first package is already a hit. Under `.` like the
+# queue's own state, which no CRAN package can be named after.
+#
+# Export, because check-half.sh is a separate process; it mounts the directory
+# and does the PATH work. Set REVDEPX_CCACHE_DIR= (empty) to turn the whole
+# thing off and compile everything twice, as before.
+if [ -z "${REVDEPX_CCACHE_DIR+x}" ]; then
+  REVDEPX_CCACHE_DIR=${workdir}/.ccache
+fi
+export REVDEPX_CCACHE_DIR
+
 mkdir -p "${workdir}" "${state_dir}" "${pkgs_dir}"
+if [ -n "${REVDEPX_CCACHE_DIR}" ]; then
+  mkdir -p "${REVDEPX_CCACHE_DIR}"
+fi
 : > "${done_count}"
 : > "${fallback_count}"
 : > "${claimed_log}"
@@ -478,5 +496,13 @@ printf '{"workers":%d,"claims":%d,"completed":%d,"fallback_lines":%d,"deferred_a
   "${started_at}" "${finished_at}" > "${workdir}/queue-state.json"
 
 log "[queue] done: ${claims} claimed, ${completed} completed, ${deferred} deferred, ${fallback_lines} fallback line(s), ${worker_failures} worker death(s), $((EPOCHSECONDS - started_epoch))s"
+
+# What the compiler cache came to. `du` rather than `ccache --show-stats`,
+# because ccache lives in the check image and not on the runner; the number
+# that actually answers "did this help" is the per-half durations the run
+# already records, and this line only says the cache was there and filled.
+if [ -n "${REVDEPX_CCACHE_DIR:-}" ] && [ -d "${REVDEPX_CCACHE_DIR}" ]; then
+  log "[queue] ccache: $(du -sh "${REVDEPX_CCACHE_DIR}" 2> /dev/null | cut -f1) in ${REVDEPX_CCACHE_DIR}"
+fi
 
 exit 0

@@ -128,6 +128,15 @@ runs:
       id: get-extra
       uses: ./.github/workflows/get-extra
 
+    - name: Resolve `Config/Needs/website` from DESCRIPTION
+      # Expands `needs: website` into refs, dropping the packages that CRAN has
+      # archived, so a website dependency that went away does not fail the solve
+      # for every job that asks for it. See the action for the full reasoning.
+      id: get-website
+      uses: ./.github/workflows/get-website
+      with:
+        needs: ${{ inputs.needs }}
+
     - name: Let sudo keep R library env vars (ubuntu-26.04 forbids `sudo -E`)
       # r-lib/actions/setup-r-dependencies installs pak with
       #   sudo -E --preserve-env=PATH env R -e 'dir.create(Sys.getenv("R_LIB_FOR_PAK"), ...)'
@@ -153,10 +162,90 @@ runs:
         GITHUB_PAT: ${{ inputs.token }}
       with:
         pak-version: stable
-        needs: ${{ inputs.needs }}
+        needs: ${{ steps.get-website.outputs.needs }}
         packages: ${{ inputs.packages }}
-        extra-packages: ${{ inputs.extra-packages }} ${{ ( matrix.covr && 'r-lib/covr xml2' ) || '' }} ${{ steps.get-extra.outputs.packages }}
+        extra-packages: ${{ inputs.extra-packages }} ${{ ( matrix.covr && 'r-lib/covr xml2' ) || '' }} ${{ steps.get-extra.outputs.packages }} ${{ steps.get-website.outputs.packages }}
         cache-version: ${{ inputs.cache-version }}
+
+    # `Additional_repositories` is how DESCRIPTION names a repository that is
+    # not CRAN or Bioconductor, for dependencies that live outside them --
+    # a package archived from CRAN and still published elsewhere, most often.
+    # `R CMD check` reads the field to confirm such a dependency is *obtainable*
+    # (the CRAN incoming NOTE "Suggests or Enhances not in mainstream
+    # repositories" gains an "Availability using Additional_repositories
+    # specification" line), but it never installs from it, and neither does pak
+    # -- which reads `repos` alone. Without this step a package declaring the
+    # field checks against a dependency the runner does not have.
+    #
+    # The rule is narrow on purpose: a dependency is this step's business only
+    # when it is still missing after the pak solve *and* no configured
+    # repository carries it at all. That is what the field is for, and what
+    # `R CMD check` asks about. Anything CRAN still has stays with CRAN even
+    # when the additional repository also builds it -- an r-universe carries
+    # dev builds of whatever else its owner publishes, and for this package
+    # `arrow` and `nanoarrow` are in both lists, so a looser rule would swap a
+    # released dependency for a development snapshot on any runner where the
+    # first one failed to build. Folding the repository into the pak solve
+    # instead would do that everywhere.
+    #
+    # Best effort throughout. The dependencies that end up in this field are
+    # optional ones that may not build everywhere -- which is usually why they
+    # are not on CRAN -- and a package that declares one has to be written for
+    # its absence anyway (`skip_if_not_installed()`, `requireNamespace()`). So a
+    # failure here leaves the check running with one fewer optional dependency,
+    # exactly as `<package>=?ignore-build-errors` does in
+    # `Config/gha/extra-packages`, rather than failing the entry.
+    - name: Install dependencies from `Additional_repositories`
+      run: |
+        if (!file.exists("DESCRIPTION")) {
+          writeLines("No DESCRIPTION here, nothing to install.")
+          quit(save = "no")
+        }
+
+        desc <- read.dcf("DESCRIPTION")[1, ]
+        if (!("Additional_repositories" %in% names(desc))) {
+          writeLines("No `Additional_repositories` in DESCRIPTION, nothing to install.")
+          quit(save = "no")
+        }
+
+        urls <- trimws(strsplit(desc[["Additional_repositories"]], ",")[[1]])
+        urls <- urls[nzchar(urls)]
+
+        fields <- intersect(
+          c("Depends", "Imports", "LinkingTo", "Suggests", "Enhances"),
+          names(desc)
+        )
+        deps <- unlist(strsplit(desc[fields], ","))
+        # Drop the version requirement, keeping the bare package name.
+        deps <- trimws(sub("\\(.*", "", deps))
+        deps <- setdiff(deps[nzchar(deps)], c("R", rownames(installed.packages())))
+
+        # Read the source index in both cases, the one every repository has;
+        # `install.packages()` below still picks a binary where the platform
+        # prefers one. Mirrors what `R CMD check` itself reads.
+        index <- function(repos) {
+          rownames(utils::available.packages(
+            utils::contrib.url(repos, "source"),
+            filters = c("R_version", "duplicates")
+          ))
+        }
+
+        deps <- setdiff(deps, index(getOption("repos")))
+        todo <- intersect(deps, index(urls))
+
+        writeLines(paste0("Additional repositories: ", paste(urls, collapse = ", ")))
+        writeLines(paste0(
+          "Missing dependencies no configured repository carries: ",
+          paste(todo, collapse = ", ")
+        ))
+
+        for (pkg in todo) {
+          try(utils::install.packages(pkg, repos = c(getOption("repos"), urls)))
+          writeLines(paste0(
+            pkg, " available: ", requireNamespace(pkg, quietly = TRUE)
+          ))
+        }
+      shell: Rscript {0}
 
     - name: Add pkg.lock to .gitignore
       run: |
