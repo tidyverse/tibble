@@ -1,9 +1,45 @@
 name: "Action to create documentation with roxygen2"
+description: >
+  This action regenerates the documentation with `roxygen2::roxygenize()`.
+  roxygen2 has no strict mode, so the warnings it emits are collected,
+  and the step fails if there are any.
 
 runs:
   using: "composite"
   steps:
     - name: Roxygenize
       run: |
-        roxygen2::roxygenize()
+        ## -- Roxygenize --
+        # roxygen2 offers no strict mode, and `options(warn = 2)` is the wrong
+        # tool here: it would abort at the first warning, before the
+        # documentation is written, and it would also catch warnings unrelated
+        # to roxygenize(), e.g. from loading the package. Collecting the
+        # warnings of the roxygenize() call keeps the generated documentation,
+        # which the commit step still picks up, and fails the step afterwards.
+        warns <- character()
+
+        withCallingHandlers(
+          roxygen2::roxygenize(),
+          warning = function(w) {
+            warns <<- c(warns, conditionMessage(w))
+            invokeRestart("muffleWarning")
+          }
+        )
+
+        if (length(warns) == 0) {
+          writeLines("roxygen2 emitted no warnings.")
+        } else {
+          # Workflow commands are single-line, the payload needs escaping
+          escape <- function(x) {
+            x <- gsub("%", "%25", x, fixed = TRUE)
+            x <- gsub("\r", "%0D", x, fixed = TRUE)
+            gsub("\n", "%0A", x, fixed = TRUE)
+          }
+
+          writeLines(sprintf("roxygen2 emitted %d warning(s):", length(warns)))
+          writeLines(paste0("* ", warns))
+          writeLines(sprintf("::warning title=roxygen2::%s", escape(warns)))
+
+          stop("Fix the roxygen2 warnings above.", call. = FALSE)
+        }
       shell: Rscript {0}
