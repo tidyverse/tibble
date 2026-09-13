@@ -1,5 +1,25 @@
 # Changelog
 
+## tibble 3.3.1.9027
+
+### Features
+
+#### ci
+
+- Align the `revdep2`, `revdep4` and `revdepx` subsystems with
+  `rigraph`.
+
+### Continuous integration
+
+- Survive an archived CRAN package, cache revdep compiles
+  ([@krlmlr](https://github.com/krlmlr),
+  [\#1698](https://github.com/tidyverse/tibble/issues/1698)).
+
+### Uncategorized
+
+- Ci: Fail the roxygenize step on roxygen2 warnings
+  ([\#111](https://github.com/tidyverse/tibble/issues/111)).
+
 ## tibble 3.3.1.9026
 
 ### Bug fixes
