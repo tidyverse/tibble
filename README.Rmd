@@ -1,30 +1,34 @@
 ---
-output:
-  github_document:
-    html_preview: false
+output: cynkratemplate::readme_document
 ---
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
+<!-- README.md and index.md are generated from README.Rmd.
+     Edit that file and render it the usual way: rmarkdown::render(),
+     devtools::build_readme(), or the Knit button. The cynkratemplate
+     package must be installed; it supplies the output format. -->
 
 ```{r, echo = FALSE}
+# Keep the render reproducible: this README prints the current
+# time, which would otherwise make every render a diff.
+Sys.Date <- function() as.Date("2026-09-13")
 knitr::opts_chunk$set(
   collapse = TRUE,
   comment = "#>",
   fig.path = "README-"
 )
 
+# Applied to README.md only. On the pkgdown site downlit already
+# auto-links `vignette("x")`, so rewriting it there would replace
+# pkgdown's own link with one pointing at the released site.
+readme_only <- function(x) {
+  gsub('(`vignette[(]"([^"]+)"[)]`)', "[\\1](https://tibble.tidyverse.org/articles/\\2.html)", x)
+}
+
 clean_output <- function(x, options) {
   x <- gsub("0x[0-9a-f]+", "0xdeadbeef", x)
   x <- gsub("dataframe_[0-9]*_[0-9]*", "      dataframe_42_42      ", x)
   x <- gsub("[0-9]*\\.___row_number ASC", "42.___row_number ASC", x)
 
-  index <- x
-  index <- gsub("─", "-", index)
-  index <- strsplit(paste(index, collapse = "\n"), "\n---\n")[[1]][[2]]
-  writeLines(index, "index.md")
-
-  x <- gsub('(`vignette[(]"([^"]+)"[)]`)', "[\\1](https://tibble.tidyverse.org/articles/\\2.html)", x)
-  x <- fansi::strip_sgr(x)
   x
 }
 
