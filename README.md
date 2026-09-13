@@ -1,8 +1,7 @@
 
 <!-- README.md and index.md are generated from README.Rmd.
-     Edit that file and render it the usual way: rmarkdown::render(),
-     devtools::build_readme(), or the Knit button. The cynkratemplate
-     package must be installed; it supplies the output format. -->
+     Edit that file and render it the usual way: rmarkdown::render(), devtools::build_readme(), or the Knit button.
+     The cynkratemplate package must be installed; it supplies the output format. -->
 
 # tibble <img src="man/figures/logo.png" align="right" alt="Hexagonal logo for the R package ‘tibble’, styled with a sci-fi theme. The word ‘TIBBLE’ appears at the top in a futuristic font, and below it is a stylized table with colored bars resembling columns and rows, set against a starry space background." />
 
