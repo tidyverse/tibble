@@ -1,4 +1,7 @@
 name: "Actions to check a matrix with all R and OS versions, computed with the versions-matrix action"
+description: >
+  Print a generated matrix as raw text, as JSON and as YAML, so that a job
+  fanning out over it can be read before it runs.
 inputs:
   matrix:
     description: "Generated matrix"
@@ -20,6 +23,9 @@ runs:
         MATRIX: ${{ inputs.matrix }}
       run: |
         if [ -n "${MATRIX}" ]; then
+          # Raw first: `jq` says nothing useful about a matrix that is not
+          # valid JSON, and that is exactly when this job is being read.
+          printf '%s\n' "${MATRIX}"
           printf '%s' "${MATRIX}" | jq .
           printf '%s' "${MATRIX}" | json2yaml
         else

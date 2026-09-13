@@ -1,4 +1,6 @@
 name: "Actions to run for installing R packages"
+description: >
+  Install R and this package's dependencies, with a cache, the system requirements and the repositories they come from.
 inputs:
   token:
     description: GitHub token, set to secrets.GITHUB_TOKEN

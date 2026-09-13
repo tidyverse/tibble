@@ -1,0 +1,83 @@
+name: "Install and load every dependency"
+description: >
+  Install every reverse dependency once, and index the library, so the shards
+  share one installation rather than repeating it.
+
+inputs:
+  gh-token:
+    description: "Token for the package installs."
+    required: true
+  plan:
+    description: "The plan file."
+    required: true
+  out-dir:
+    description: "Where results go."
+    required: true
+  lib-out:
+    description: "Where the shared library goes."
+    required: true
+  lib-index-out:
+    description: "Where the library index goes."
+    required: true
+  resource-log:
+    description: "Where the resource sampler writes."
+    required: true
+  tmpdir:
+    description: "Temp directory."
+    required: true
+  tmp:
+    description: "Temp directory."
+    required: true
+  temp:
+    description: "Temp directory."
+    required: true
+  resource-phase-file:
+    description: "Where the sampler reads its phase."
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Install and load every dependency"
+      id: main
+      env:
+        GH_TOKEN: ${{ inputs.gh-token }}
+        PLAN: ${{ inputs.plan }}
+        OUT_DIR: ${{ inputs.out-dir }}
+        LIB_OUT: ${{ inputs.lib-out }}
+        LIB_INDEX_OUT: ${{ inputs.lib-index-out }}
+        RESOURCE_LOG: ${{ inputs.resource-log }}
+        TMPDIR: ${{ inputs.tmpdir }}
+        TMP: ${{ inputs.tmp }}
+        TEMP: ${{ inputs.temp }}
+        RESOURCE_PHASE_FILE: ${{ inputs.resource-phase-file }}
+        PKG_SYSREQS: true
+        # `/tmp` on this image is its own filesystem of about 8 GB -- half: 
+        # the RAM, so a tmpfs -- while the disk `runner.temp` lives on has: 
+        # over 100 GB free. Everything R does temporarily lands there: 
+        # source builds, unpacked tarballs, and callr's own startup files.: 
+        # In run 31303054725 it filled after eleven chunks, and callr could: 
+        # then not start R at all -- "error writing to connection" from the: 
+        # saveRDS of its startup environment -- which failed every chunk: 
+        # after it in about a second. The space is on the big disk.: 
+      run: |
+        mkdir -p "${RUNNER_TEMP}/preflight" "${RUNNER_TEMP}/tmp"
+        watch=./.github/workflows/revdep2/watch-resources.sh
+        # Backgrounded and left running, like the shard's. It used to be
+        # killed when this step ended, which left the two artifact uploads
+        # after it unsampled -- and this job's library artifact is gigabytes
+        # (4.1 GB in run 31951756102), so "the runner stopped answering while
+        # packing" was exactly as unanswerable as it was for shard 16.
+        # `preflight.R` moves the label on through RESOURCE_PHASE_FILE.
+        "${watch}" once "before the install"
+        "${watch}" watch 30 "preflight" &
+        disown || true
+        unbuffered=""
+        if command -v stdbuf > /dev/null 2>&1; then
+          unbuffered="stdbuf -oL -eL"
+        fi
+        status=0
+        ${unbuffered} Rscript ./.github/workflows/revdep2/preflight.R || status=$?
+        "${watch}" once "after the install"
+        exit "${status}"
+      shell: bash

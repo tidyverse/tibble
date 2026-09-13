@@ -1,4 +1,6 @@
 name: "Actions to check an R package"
+description: >
+  Run `R CMD check`, show the test output, and attach the check directory to the run where it failed.
 inputs:
   results:
     description: Slug for check results

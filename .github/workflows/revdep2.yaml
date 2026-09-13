@@ -278,17 +278,7 @@ jobs:
       # instead of a bare exit 143.
       - name: Make room for the dependency universe
         if: steps.plan.outputs.shards != '0' && inputs.dry-run != true
-        run: |
-          before=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
-          sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc \
-            /usr/local/.ghcup /opt/hostedtoolcache/CodeQL \
-            /usr/local/share/powershell /usr/share/swift || true
-          sudo docker image prune --all --force > /dev/null 2>&1 || true
-          after=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
-          echo "Free disk: ${before}G -> ${after}G"
-          free -g
-        shell: bash
-
+        uses: ./.github/workflows/revdep2-disk-room
       # The preflight downloads every dependency binary once; saving the pak
       # cache under the plan's hash hands the shards a warm start.
       - name: Cache the pak package cache
@@ -307,48 +297,18 @@ jobs:
         # here would take the shard matrix with it.
         continue-on-error: true
         if: steps.plan.outputs.shards != '0' && inputs.dry-run != true
-        env:
-          GH_TOKEN: ${{ github.token }}
-          PLAN: ${{ runner.temp }}/plan.json
-          OUT_DIR: ${{ runner.temp }}/preflight
-          LIB_OUT: ${{ runner.temp }}/lib
-          LIB_INDEX_OUT: ${{ runner.temp }}/lib-index
-          PKG_SYSREQS: true
-          RESOURCE_LOG: ${{ runner.temp }}/preflight/resources.log
-          # `/tmp` on this image is its own filesystem of about 8 GB -- half
-          # the RAM, so a tmpfs -- while the disk `runner.temp` lives on has
-          # over 100 GB free. Everything R does temporarily lands there:
-          # source builds, unpacked tarballs, and callr's own startup files.
-          # In run 31303054725 it filled after eleven chunks, and callr could
-          # then not start R at all -- "error writing to connection" from the
-          # saveRDS of its startup environment -- which failed every chunk
-          # after it in about a second. The space is on the big disk.
-          TMPDIR: ${{ runner.temp }}/tmp
-          TMP: ${{ runner.temp }}/tmp
-          TEMP: ${{ runner.temp }}/tmp
-          RESOURCE_PHASE_FILE: ${{ runner.temp }}/preflight/phase
-        run: |
-          mkdir -p "${RUNNER_TEMP}/preflight" "${RUNNER_TEMP}/tmp"
-          watch=./.github/workflows/revdep2/watch-resources.sh
-          # Backgrounded and left running, like the shard's. It used to be
-          # killed when this step ended, which left the two artifact uploads
-          # after it unsampled -- and this job's library artifact is gigabytes
-          # (4.1 GB in run 31951756102), so "the runner stopped answering while
-          # packing" was exactly as unanswerable as it was for shard 16.
-          # `preflight.R` moves the label on through RESOURCE_PHASE_FILE.
-          "${watch}" once "before the install"
-          "${watch}" watch 30 "preflight" &
-          disown || true
-          unbuffered=""
-          if command -v stdbuf > /dev/null 2>&1; then
-            unbuffered="stdbuf -oL -eL"
-          fi
-          status=0
-          ${unbuffered} Rscript ./.github/workflows/revdep2/preflight.R || status=$?
-          "${watch}" once "after the install"
-          exit "${status}"
-        shell: bash
-
+        uses: ./.github/workflows/revdep2-install-universe
+        with:
+          gh-token: ${{ github.token }}
+          plan: ${{ runner.temp }}/plan.json
+          out-dir: ${{ runner.temp }}/preflight
+          lib-out: ${{ runner.temp }}/lib
+          lib-index-out: ${{ runner.temp }}/lib-index
+          resource-log: ${{ runner.temp }}/preflight/resources.log
+          tmpdir: ${{ runner.temp }}/tmp
+          tmp: ${{ runner.temp }}/tmp
+          temp: ${{ runner.temp }}/tmp
+          resource-phase-file: ${{ runner.temp }}/preflight/phase
       # Runs even when the install step died, because "how much disk and
       # memory were left" is the first question about a job that was killed
       # rather than failed. It cannot run when the *runner* died -- hence the
@@ -629,25 +589,9 @@ jobs:
       # a later write is what reliably overrides an earlier one. This step runs
       # after it and before both driver steps.
       - name: Point the driver at this runner's directories
-        env:
-          NOT_CRAN_INPUT: ${{ env.REVDEP2_NOT_CRAN }}
-        run: |
-          mkdir -p "${RUNNER_TEMP}/tmp"
-          {
-            echo "NOT_CRAN=${NOT_CRAN_INPUT}"
-            echo "PLAN=${RUNNER_TEMP}/plan/plan.json"
-            echo "PKG_DIR=${RUNNER_TEMP}/pkg"
-            echo "LIB_DIR=${RUNNER_TEMP}/lib"
-            echo "BASELINE_DIR=${RUNNER_TEMP}/baseline"
-            echo "OUT_DIR=${RUNNER_TEMP}/results"
-            # The same small `/tmp` as the preflight, and a shard builds source
-            # packages and unpacks check directories into it for hours.
-            echo "TMPDIR=${RUNNER_TEMP}/tmp"
-            echo "TMP=${RUNNER_TEMP}/tmp"
-            echo "TEMP=${RUNNER_TEMP}/tmp"
-          } >> "${GITHUB_ENV}"
-        shell: bash
-
+        uses: ./.github/workflows/revdep2-driver-env
+        with:
+          not-cran-input: ${{ env.REVDEP2_NOT_CRAN }}
       # Two steps, one driver. The install is minutes to an hour and the checks
       # are hours, and as one step the run page could only report their sum --
       # so "shard 14 took five hours" said nothing about whether it spent them
@@ -927,62 +871,9 @@ jobs:
           && vars.REVDEP2_COMMIT_REPORT != 'false'
           && steps.collect.outputs.compared != '0'
         continue-on-error: true
-        env:
-          REF_INPUT: ${{ inputs.ref }}
-        run: |
-          set -eu
-          # Without a `ref` input the dispatch decides, and GitHub says outright
-          # what kind of ref it was; with one, only the remote can say whether
-          # it names a branch. Anything else -- a tag, a SHA, a branch that does
-          # not exist here -- has nowhere to put a commit.
-          if [ -z "${REF_INPUT}" ]; then
-            REF="${GITHUB_REF_NAME}"
-            if [ "${GITHUB_REF_TYPE}" != "branch" ]; then
-              echo "::notice::${REF} is a ${GITHUB_REF_TYPE}, not a branch; the report stays in the artifact only."
-              exit 0
-            fi
-          else
-            REF="${REF_INPUT}"
-            if ! git ls-remote --exit-code --heads origin "${REF}" > /dev/null 2>&1; then
-              echo "::notice::${REF} is not a branch of this repository; the report stays in the artifact only."
-              exit 0
-            fi
-          fi
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          # Only what this run generated, and only what it managed to write:
-          # a collector that fell back to the manifest-derived summary has a
-          # README.md and no problems.md, which is a report, not an error.
-          files=""
-          for f in README.md problems.md failures.md cran.md manifest.json; do
-            if [ -f "revdep/${f}" ]; then
-              files="${files} revdep/${f}"
-            fi
-          done
-          # The per-package sections `problems.md` and `failures.md` are
-          # assembled from. `git add <dir>` stages removals as well, which is
-          # what retires a package the run found fixed.
-          for d in problems failures; do
-            if [ -d "revdep/${d}" ]; then
-              files="${files} revdep/${d}"
-            fi
-          done
-          if [ -z "${files}" ]; then
-            echo "::notice::No report files were written; nothing to commit."
-            exit 0
-          fi
-          git add -- ${files}
-          if git diff --cached --quiet; then
-            echo "::notice::The report is unchanged; nothing to commit."
-            exit 0
-          fi
-          git commit -m "chore: Update revdep report from run ${GITHUB_RUN_ID}" \
-            -m "https://github.com/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-          git fetch origin "${REF}"
-          git rebase "origin/${REF}"
-          git push origin "HEAD:${REF}"
-          echo "::notice::Report committed to ${REF}."
-        shell: bash
+        uses: ./.github/workflows/revdep-commit-report
+        with:
+          ref: ${{ inputs.ref }}
 
       - name: Upload the new baseline
         uses: actions/upload-artifact@v6

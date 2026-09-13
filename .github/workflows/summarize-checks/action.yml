@@ -1,0 +1,47 @@
+name: "Summarize checks"
+description: >
+  Print the report the `collect-checks` action wrote, and fail where a check did.
+
+  The caller keeps a step of its own for this, because a failure has to land on
+  a step of the calling job: the step's name is what the run's job listing
+  carries, and the step's log is where a log tail looks. Printing the report
+  here rather than where it was built puts the annotations and the table on
+  that step.
+
+inputs:
+  failed-count:
+    description: "How many checks failed, from the collector."
+    required: true
+  report:
+    description: "Path of the plain-text report the collector wrote."
+    required: true
+  summary:
+    description: "Path of the Markdown report the collector wrote."
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Summarize checks"
+      id: main
+      env:
+        FAILED: ${{ inputs.failed-count }}
+        REPORT: ${{ inputs.report }}
+        SUMMARY: ${{ inputs.summary }}
+      run: |
+        ## -- Summarize checks --
+        set -uo pipefail
+
+        if [ -z "${REPORT}" ] || [ ! -f "${REPORT}" ]; then
+          echo "::error title=rcc: no summary::The checks were never collected, so their outcome is unknown."
+          exit 1
+        fi
+
+        cat "${SUMMARY}" >> "${GITHUB_STEP_SUMMARY}"
+        # Printing the report here, rather than where it was built, keeps the
+        # annotations and the table on the step that goes red -- and on stdout,
+        # which is what a log tail returns.
+        cat "${REPORT}"
+
+        [ "${FAILED:-1}" = "0" ] || exit 1
+      shell: bash

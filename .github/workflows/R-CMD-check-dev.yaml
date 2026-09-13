@@ -45,19 +45,12 @@ jobs:
     name: Check deps
 
     steps:
-      - name: Install json2yaml
-        run: |
-          sudo npm install -g json2yaml
+      - uses: actions/checkout@v6
 
       - name: Check matrix definition
-        # Passed through the environment rather than spliced into the script:
-        # the matrix is generated from DESCRIPTION in the checkout.
-        env:
-          MATRIX: ${{ needs.matrix.outputs.matrix }}
-        run: |
-          printf '%s\n' "${MATRIX}"
-          printf '%s' "${MATRIX}" | jq .
-          printf '%s' "${MATRIX}" | json2yaml
+        uses: ./.github/workflows/matrix-check
+        with:
+          matrix: ${{ needs.matrix.outputs.matrix }}
 
   R-CMD-check-base:
     runs-on: ubuntu-26.04
@@ -89,12 +82,7 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Session info
-        run: |
-          options(width = 100)
-          if (!requireNamespace("sessioninfo", quietly = TRUE)) install.packages("sessioninfo")
-          pkgs <- installed.packages()[, "Package"]
-          sessioninfo::session_info(pkgs, include_base = TRUE)
-        shell: Rscript {0}
+        uses: ./.github/workflows/session-info
 
       - name: Run the repository-specific after-install steps
         uses: ./.github/workflows/custom/after-install
@@ -153,12 +141,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Session info
-        run: |
-          options(width = 100)
-          if (!requireNamespace("sessioninfo", quietly = TRUE)) install.packages("sessioninfo")
-          pkgs <- installed.packages()[, "Package"]
-          sessioninfo::session_info(pkgs, include_base = TRUE)
-        shell: Rscript {0}
+        uses: ./.github/workflows/session-info
 
       - name: Run the repository-specific after-install steps
         uses: ./.github/workflows/custom/after-install

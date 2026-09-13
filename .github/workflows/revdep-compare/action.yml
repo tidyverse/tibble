@@ -1,0 +1,32 @@
+name: "Compare"
+description: >
+  Compare the two checks of a reverse dependency and fail where the output
+  differs, printing what changed.
+
+inputs:
+  package:
+    description: "The reverse dependency to check."
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Compare"
+      id: main
+      env:
+        PACKAGE: ${{ inputs.package }}
+      run: |
+        package <- Sys.getenv("PACKAGE")
+        dir <- file.path("revdep", package)
+        old <- readRDS(file.path(dir, "old.rds"))
+        new <- readRDS(file.path(dir, "new.rds"))
+        compare <- rcmdcheck::compare_checks(old, new)
+        compare
+        cmp <- compare$cmp
+        if (!identical(cmp[cmp$which == "old", "output"], cmp[cmp$which == "new", "output"])) {
+          if (!requireNamespace("waldo", quietly = TRUE)) install.packages("waldo")
+          print(waldo::compare(old, new))
+
+          stop("Check output differs.")
+        }
+      shell: Rscript {0}

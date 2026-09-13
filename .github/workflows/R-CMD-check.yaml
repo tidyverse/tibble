@@ -259,12 +259,14 @@ jobs:
       - name: Collect the outcomes of the checks
         id: outcomes
         if: always()
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        uses: ./.github/workflows/collect-checks
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
           # One `<step name>|<label>|<outcome>` per line, in the order the steps
           # run. The step name is the display name of the step above, which is
-          # how the job listing names it and the only handle on its number.
-          CHECKS: |
+          # how the job listing names it and the only handle on its number. This
+          # stays here because only this workflow can read `steps.<id>.outcome`.
+          checks: |
             Collect the R versions into a matrix|R versions matrix|${{ steps.versions-matrix.outcome }}
             Collect the suggested dependencies into a matrix|Suggested dependencies matrix|${{ steps.dep-suggests-matrix.outcome }}
             Style the R sources|Style|${{ steps.style.outcome }}
@@ -274,131 +276,19 @@ jobs:
             Run R CMD check|R CMD check|${{ steps.check.outcome }}
             Build the pkgdown website|pkgdown build|${{ steps.pkgdown-build.outcome }}
             Build and deploy the pkgdown website|pkgdown deploy|${{ steps.pkgdown-deploy.outcome }}
-        run: |
-          ## -- Collect the outcomes of the checks --
-          # Deliberately not `-e`: an unreadable job listing costs the deep links,
-          # it must not cost the summary that carries them.
-          set -uo pipefail
 
-          run_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
-
-          # A runner runs one job at a time, so its name picks this job out of the
-          # listing; the only job still in progress is the fallback for a listing
-          # that does not report a runner yet.
-          jobs_json=$(
-            gh api --paginate \
-              "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/attempts/${GITHUB_RUN_ATTEMPT}/jobs" \
-              --jq '.jobs[] | {id, status, runner_name, steps}'
-          ) || jobs_json=""
-
-          job=$(printf '%s\n' "${jobs_json}" | jq -c 'select(.runner_name == env.RUNNER_NAME)' | head -n 1)
-          if [ -z "${job}" ]; then
-            job=$(printf '%s\n' "${jobs_json}" | jq -c 'select(.status == "in_progress")' | head -n 1)
-          fi
-
-          job_id=$(printf '%s' "${job}" | jq -r '.id // empty' 2>/dev/null)
-          if [ -n "${job_id}" ]; then
-            job_url="${run_url}/job/${job_id}"
-          else
-            job_url="${run_url}"
-            echo "::warning title=rcc: no deep links::This job is not in the run's job listing, so the links in the summary point at the run."
-          fi
-
-          link() {
-            number=$(printf '%s' "${job}" | jq -r --arg name "${1}" '.steps[]? | select(.name == $name) | .number' 2>/dev/null | head -n 1)
-            if [ -n "${job_id}" ] && [ -n "${number}" ]; then
-              printf '%s#step:%s:1' "${job_url}" "${number}"
-            else
-              printf '%s' "${job_url}"
-            fi
-          }
-
-          preamble="Every check below runs with continue-on-error, so GitHub reports it as a successful step whatever it did. This table is where its outcome is published, and each link opens the step itself."
-
-          # The report is written rather than printed, and the next step prints it,
-          # so that the annotations and the table belong to the step that goes red.
-          md="${RUNNER_TEMP}/rcc-summary.md"
-          log="${RUNNER_TEMP}/rcc-summary.log"
-
-          {
-            echo "## Smoke test summary"
-            echo
-            echo "${preamble}"
-            echo
-            echo "| Check | Result |"
-            echo "| --- | --- |"
-          } > "${md}"
-
-          {
-            echo "${preamble}"
-            echo
-          } > "${log}"
-
-          labels=""
-          failed=0
-          check_failed=false
-
-          while IFS='|' read -r name label outcome; do
-            [ -n "${name}" ] || continue
-            outcome="${outcome:-skipped}"
-            url=$(link "${name}")
-
-            case "${outcome}" in
-              success) icon="✅" ;;
-              skipped) icon="⏭️" ;;
-              *)
-                icon="❌"
-                failed=$((failed + 1))
-                labels="${labels} ❌ ${label}"
-                [ "${label}" = "R CMD check" ] && check_failed=true
-                echo "::error title=rcc: ${label} failed::The \"${name}\" step failed. It is reported green because it runs with continue-on-error; read it at ${url}" >> "${log}"
-                ;;
-            esac
-
-            echo "| [${label}](${url}) | ${icon} ${outcome} |" >> "${md}"
-            echo "${icon} ${outcome} -- ${label} -- ${url}" >> "${log}"
-          done <<< "${CHECKS}"
-
-          if [ "${failed}" -ne 0 ]; then
-            note="${failed} check(s) failed. The step this is reported on is red on their behalf; nothing failed in the step itself."
-            if [ "${check_failed}" = true ]; then
-              note="${note} R CMD check attaches its \`check\` directory to the run: ${run_url}#artifacts"
-            fi
-            printf '\n%s\n' "${note}" >> "${md}"
-            printf '\n%s\n' "${note}" >> "${log}"
-          fi
-
-          {
-            echo "failed_count=${failed}"
-            echo "failed_labels=${labels}"
-          } >> "${GITHUB_OUTPUT}"
-        shell: bash
-
+      # This step stays in the workflow because it is the one that goes red, and
+      # both of the things that makes it worth reading -- the name the job
+      # listing carries, and the log a failure is read from -- belong to a step
+      # of this job and cannot be delegated.
       - name: >-
           Summarize checks${{ steps.outcomes.outputs.failed_labels }}
         if: always()
-        env:
-          FAILED: ${{ steps.outcomes.outputs.failed_count }}
-        run: |
-          ## -- Summarize checks --
-          set -uo pipefail
-
-          md="${RUNNER_TEMP}/rcc-summary.md"
-          log="${RUNNER_TEMP}/rcc-summary.log"
-
-          if [ ! -f "${log}" ]; then
-            echo "::error title=rcc: no summary::The checks were never collected, so their outcome is unknown."
-            exit 1
-          fi
-
-          cat "${md}" >> "${GITHUB_STEP_SUMMARY}"
-          # Printing the report here, rather than where it was built, keeps the
-          # annotations and the table on the step that goes red -- and on stdout,
-          # which is what a log tail returns.
-          cat "${log}"
-
-          [ "${FAILED:-1}" = "0" ] || exit 1
-        shell: bash
+        uses: ./.github/workflows/summarize-checks
+        with:
+          failed-count: ${{ steps.outcomes.outputs.failed_count }}
+          report: ${{ steps.outcomes.outputs.report }}
+          summary: ${{ steps.outcomes.outputs.summary }}
 
       - name: Update status for rcc (final)
         if: always() && (github.actor != 'Copilot') && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
@@ -502,17 +392,7 @@ jobs:
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
       - name: Must allow NOTEs if packages are missing, even with _R_CHECK_FORCE_SUGGESTS_
-        run: |
-          if (Sys.getenv("RCMDCHECK_ERROR_ON") %in% c("", "note")) {
-            pkgs <- setdiff(desc::desc_get_deps()$package, "R")
-            installable <- vapply(pkgs, FUN.VALUE = logical(1), requireNamespace, quietly = TRUE)
-            if (any(!installable)) {
-              message("Missing packages: ", paste(pkgs[!installable], collapse = ", "))
-              cat('RCMDCHECK_ERROR_ON="warning"\n', file = Sys.getenv("GITHUB_ENV"), append = TRUE)
-            }
-          }
-        shell: Rscript {0}
-
+        uses: ./.github/workflows/allow-notes-when-deps-missing
       - name: Update the testthat snapshots
         uses: ./.github/workflows/update-snapshots
         # Generic escape hatch: a custom action may set SKIP_UPDATE_SNAPSHOTS
@@ -584,12 +464,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Session info
-        run: |
-          options(width = 100)
-          if (!requireNamespace("sessioninfo", quietly = TRUE)) install.packages("sessioninfo")
-          pkgs <- installed.packages()[, "Package"]
-          sessioninfo::session_info(pkgs, include_base = TRUE)
-        shell: Rscript {0}
+        uses: ./.github/workflows/session-info
 
       - name: Run the repository-specific after-install steps
         uses: ./.github/workflows/custom/after-install

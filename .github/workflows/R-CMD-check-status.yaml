@@ -15,6 +15,12 @@
 #      status check. Even then the value must be a real 40-hex commit.
 #   2. No event field is interpolated with `${{ }}` into the script. Values
 #      reach the shell through the environment, where they stay inert data.
+#
+# The script itself lives in the `rcc-status-update` action, named in full
+# because this job has no checkout and a `./.github/workflows/...` reference
+# would need one. `@main` is the ref this workflow already runs from,
+# `workflow_run` using the default branch of the base repository, so naming it
+# changes nothing about which code runs.
 on:
   workflow_run:
     workflows:
@@ -46,124 +52,16 @@ jobs:
       statuses: write
 
     steps:
-      - name: "Update commit status"
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          REPO: ${{ github.repository }}
-          RUN_ID: ${{ github.event.workflow_run.id }}
-          RUN_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
-          RUN_STATUS: ${{ github.event.workflow_run.status }}
-          RUN_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
-          RUN_URL: ${{ github.event.workflow_run.html_url }}
-          RUN_NAME: ${{ github.event.workflow_run.name }}
-          HEAD_SHA: ${{ github.event.workflow_run.head_sha }}
-          HEAD_REPO: ${{ github.event.workflow_run.head_repository.full_name }}
-        run: |
-          set -euo pipefail
-
-          sha=""
-
-          if [ "${RUN_STATUS}" = "completed" ]; then
-            if [ "${RUN_CONCLUSION}" = "success" ]; then
-              state="success"
-            else
-              state="failure"
-            fi
-
-            # See rule 1 in the security note at the top of this file.
-            if [ "${HEAD_REPO}" = "${REPO}" ]; then
-              artifact_id=$(
-                gh api "repos/${REPO}/actions/runs/${RUN_ID}/artifacts" \
-                  --jq '[.artifacts[] | select(.name == "rcc-smoke-sha") | .id][0] // empty'
-              ) || artifact_id=""
-
-              if [ -n "${artifact_id}" ]; then
-                workdir=$(mktemp -d)
-                gh api "repos/${REPO}/actions/artifacts/${artifact_id}/zip" > "${workdir}/artifact.zip"
-                # -j flattens stored paths, so a crafted archive cannot write
-                # outside the temporary directory.
-                unzip -j -o "${workdir}/artifact.zip" -d "${workdir}" > /dev/null
-                candidate=$(tr -d '[:space:]' < "${workdir}/rcc-smoke-sha.txt") || candidate=""
-                rm -rf "${workdir}"
-
-                if printf '%s' "${candidate}" | grep -qE '^[0-9a-f]{40}$' &&
-                   gh api "repos/${REPO}/commits/${candidate}" --jq .sha > /dev/null 2>&1; then
-                  sha="${candidate}"
-                elif [ -n "${candidate}" ]; then
-                  echo "::warning::Ignoring unusable rcc-smoke-sha artifact contents"
-                fi
-              fi
-            fi
-          else
-            state="pending"
-          fi
-
-          if [ -z "${sha}" ]; then
-            sha="${HEAD_SHA}"
-          fi
-
-          description="${RUN_NAME}"
-          target_url="${RUN_URL}"
-
-          # A pull request shows this status as one line, and `rcc` pointing at
-          # the run leaves every reader to open it and find which of its fifty
-          # jobs is red. Name them instead, and when only one job failed, point
-          # at the step inside it -- `#step:<n>:<line>` is the anchor the job
-          # page numbers its steps by.
-          #
-          # Job names come from the workflow file of the head ref, so a fork
-          # writes them (see rule 1 above). They stay data: jq emits them,
-          # nothing evaluates them, and control characters go first so that a
-          # name can never turn into a workflow command in this log. The
-          # listing is best effort -- without it the status is what it was.
-          if [ "${state}" = "failure" ]; then
-            jobs=$(
-              gh api --paginate \
-                "repos/${REPO}/actions/runs/${RUN_ID}/attempts/${RUN_ATTEMPT}/jobs" \
-                --jq '
-                  def bad: . == "failure" or . == "timed_out" or . == "cancelled";
-                  .jobs[] | {
-                    id,
-                    name: (.name | gsub("[[:cntrl:]]"; " ") | .[0:80]),
-                    failed: (.conclusion | bad),
-                    step: ([.steps[]? | select(.conclusion | bad) | .number] | first)
-                  }
-                '
-            ) || jobs=""
-
-            total=$(printf '%s\n' "${jobs}" | grep -c . || true)
-            failures=$(printf '%s\n' "${jobs}" | jq -c 'select(.failed)') || failures=""
-            count=$(printf '%s\n' "${failures}" | grep -c . || true)
-
-            if [ "${count}" -gt 0 ]; then
-              # A status description is cut off at 140 characters, and half a
-              # job name is worth less than a count, so name them all only while
-              # they fit.
-              names=$(printf '%s\n' "${failures}" | jq -rs 'map(.name) | join(", ")')
-              description="${count} of ${total} jobs failed: ${names}"
-              if [ "${#description}" -gt 140 ]; then
-                first=$(printf '%s\n' "${failures}" | jq -r '.name' | head -n 1)
-                description="${count} of ${total} jobs failed: ${first}, and $((count - 1)) more"
-                description="${description:0:140}"
-              fi
-
-              if [ "${count}" -eq 1 ]; then
-                target_url="${RUN_URL}/job/$(printf '%s' "${failures}" | jq -r '.id')"
-                step=$(printf '%s' "${failures}" | jq -r '.step // empty')
-                if [ -n "${step}" ]; then
-                  target_url="${target_url}#step:${step}:1"
-                fi
-              fi
-            fi
-          fi
-
-          gh api \
-            --method POST \
-            -H "Accept: application/vnd.github+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "repos/${REPO}/statuses/${sha}" \
-            -f "state=${state}" \
-            -f "target_url=${target_url}" \
-            -f "description=${description}" \
-            -f "context=rcc"
-        shell: bash
+      - name: Update commit status
+        uses: cynkra/cynkratemplate/.github/workflows/rcc-status-update@main
+        with:
+          gh-token: ${{ secrets.GITHUB_TOKEN }}
+          repo: ${{ github.repository }}
+          run-id: ${{ github.event.workflow_run.id }}
+          run-attempt: ${{ github.event.workflow_run.run_attempt }}
+          run-status: ${{ github.event.workflow_run.status }}
+          run-conclusion: ${{ github.event.workflow_run.conclusion }}
+          run-url: ${{ github.event.workflow_run.html_url }}
+          run-name: ${{ github.event.workflow_run.name }}
+          head-sha: ${{ github.event.workflow_run.head_sha }}
+          head-repo: ${{ github.event.workflow_run.head_repository.full_name }}

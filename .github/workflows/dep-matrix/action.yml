@@ -1,4 +1,6 @@
 name: "Actions to compute a matrix with all dependent packages"
+description: >
+  Compute a matrix of this package's dependencies, for checking against their development versions.
 outputs:
   matrix:
     description: "Generated matrix"

@@ -1,0 +1,39 @@
+name: "Prepare the check image"
+description: >
+  Pull or load the image a shard checks in, falling back to the base image where
+  no universe was published.
+
+inputs:
+  universe-image:
+    description: "The published universe image."
+    required: true
+  revdepx-base-image:
+    description: "The base image to fall back to."
+    required: true
+  plan:
+    description: "The shard plan."
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Prepare the check image"
+      id: main
+      env:
+        UNIVERSE_IMAGE: ${{ inputs.universe-image }}
+        REVDEPX_BASE_IMAGE: ${{ inputs.revdepx-base-image }}
+        PLAN: ${{ inputs.plan }}
+      run: |
+        # Streamed from inside the step: on the local-build fallback this
+        # is the shard's longest phase, and the streamed samples are what
+        # survives if the runner dies in it (the file-writing sampler's
+        # stdout stopped reaching the log when its own step ended).
+        ./.github/workflows/revdepx/watch-resources.sh watch 120 "shard ${SHARD} image prep" &
+        sampler=$!
+        trap 'kill "${sampler}" 2> /dev/null || true' EXIT
+        ./.github/workflows/revdepx/shard-prep.sh \
+          "${UNIVERSE_IMAGE}" \
+          "${RUNNER_TEMP}/universe-image" \
+          "${REVDEPX_LIB_INDEX}" \
+          "${REVDEPX_IMAGE_FILE}"
+      shell: bash

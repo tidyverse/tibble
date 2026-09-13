@@ -1,0 +1,30 @@
+name: "Check new"
+description: >
+  Check the same reverse dependency against the package under test, and keep the
+  result for the comparison.
+
+inputs:
+  package:
+    description: "The reverse dependency to check."
+    required: true
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Check new"
+      id: main
+      env:
+        PACKAGE: ${{ inputs.package }}
+        _R_CHECK_CRAN_INCOMING_: false
+        _R_CHECK_SYSTEM_CLOCK_: false
+        _R_CHECK_FUTURE_FILE_TIMESTAMPS_: false
+      run: |
+        package <- Sys.getenv("PACKAGE")
+        path <- dir(".github", pattern = paste0("^", package), full.names = TRUE)[[1]]
+        print(path)
+
+        dir <- file.path("revdep", package)
+        check <- rcmdcheck::rcmdcheck(path, args = c("--no-manual", "--as-cran"), error_on = "never", check_dir = file.path(dir, "check"))
+        file.rename(file.path(dir, "check"), file.path(dir, "new"))
+        saveRDS(check, file.path(dir, "new.rds"))
+      shell: Rscript {0}

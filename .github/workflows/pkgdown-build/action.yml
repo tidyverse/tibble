@@ -1,4 +1,6 @@
 name: "Action to build a pkgdown website"
+description: >
+  Build the pkgdown website.
 
 runs:
   using: "composite"

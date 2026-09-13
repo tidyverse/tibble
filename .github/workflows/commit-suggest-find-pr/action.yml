@@ -1,0 +1,54 @@
+name: "Find PR number for branch from correct head repository"
+description: >
+  Find the open pull request a formatting patch belongs to, matching on the head
+  owner as well as the branch so that a fork cannot claim another's pull request.
+
+inputs:
+  gh-token:
+    description: "Token for the pull request lookup."
+    required: true
+  head-branch:
+    description: "The head branch of the triggering run."
+    required: true
+  head-owner:
+    description: "The owner of the head repository."
+    required: true
+
+outputs:
+  pr_number:
+    description: "The pull request number, empty where none matched."
+    value: ${{ steps.main.outputs.pr_number }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Find PR number for branch from correct head repository"
+      id: main
+      env:
+        GH_TOKEN: ${{ inputs.gh-token }}
+        HEAD_BRANCH: ${{ inputs.head-branch }}
+        HEAD_OWNER: ${{ inputs.head-owner }}
+      run: |
+        set -euo pipefail
+
+        # `--arg` keeps the owner login out of the jq program text,
+        # and `"${HEAD_BRANCH}"` keeps the branch name out of the shell's
+        # parsing -- see the security note at the top of this file.
+        pr_number=$(
+          gh pr list \
+            --repo "${GITHUB_REPOSITORY}" \
+            --head "${HEAD_BRANCH}" \
+            --state open \
+            --json number,headRepositoryOwner |
+            jq -r --arg owner "${HEAD_OWNER}" \
+              '[.[] | select(.headRepositoryOwner.login == $owner) | .number][0] // empty'
+        ) || pr_number=""
+
+        # Belt and braces: only ever emit a plain integer downstream.
+        if ! printf '%s' "${pr_number}" | grep -qE '^[0-9]+$'; then
+          echo "No matching open pull request found"
+          pr_number=""
+        fi
+
+        echo "pr_number=${pr_number}" >> "${GITHUB_OUTPUT}"
+      shell: bash

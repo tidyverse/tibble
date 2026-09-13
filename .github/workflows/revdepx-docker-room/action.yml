@@ -1,0 +1,32 @@
+name: "Make room for docker on the one disk"
+description: >
+  Move docker's data root onto the runner's temp disk, which is the only one
+  with room for a universe of packages, and report what that freed.
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Make room for docker on the one disk"
+      id: main
+      run: |
+        set -eu
+        before=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
+        sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc \
+          /usr/local/.ghcup /opt/hostedtoolcache/CodeQL \
+          /usr/local/share/powershell /usr/share/swift || true
+        sudo systemctl stop docker
+        sudo mkdir -p /etc/docker "${RUNNER_TEMP}/docker-data"
+        # The classic graphdriver store, explicitly: the runners' default
+        # containerd image store turns `docker commit` into an OCI index
+        # that references content the daemon never pulled -- push refuses
+        # it ("not all of them are available locally", run 32158907637),
+        # `--platform` cannot select a platform the commit never labelled,
+        # and save reduces to a manifest-only shell. The classic store
+        # commits a plain single-manifest image that pushes, saves and
+        # du-measures exactly as this workflow assumes.
+        echo "{\"data-root\": \"${RUNNER_TEMP}/docker-data\", \"features\": {\"containerd-snapshotter\": false}}" | sudo tee /etc/docker/daemon.json
+        sudo systemctl start docker
+        after=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
+        echo "Free disk on /: ${before}G -> ${after}G; docker data-root now on ${RUNNER_TEMP}"
+        docker info --format 'Docker root: {{ .DockerRootDir }}'
+      shell: bash

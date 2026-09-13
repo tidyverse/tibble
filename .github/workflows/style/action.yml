@@ -1,4 +1,6 @@
 name: "Action to auto-style a package"
+description: >
+  Format the R sources with air and the C sources with clang-format.
 
 runs:
   using: "composite"

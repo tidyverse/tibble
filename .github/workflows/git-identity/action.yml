@@ -1,4 +1,6 @@
 name: "Actions to set up a Git identity"
+description: >
+  Configure the Git identity that the generated commits are made under.
 
 runs:
   using: "composite"

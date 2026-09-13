@@ -1,4 +1,6 @@
 name: "Action to commit changes to the repository"
+description: >
+  Commit and push whatever the generating steps changed, opening a pull request instead where the branch is protected.
 inputs:
   token:
     description: "GitHub token"

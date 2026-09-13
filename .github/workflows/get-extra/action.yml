@@ -1,4 +1,6 @@
 name: "Action to determine extra packages to be installed"
+description: >
+  Resolve the extra packages a check needs into refs pak can install.
 outputs:
   packages:
     description: "List of extra packages"

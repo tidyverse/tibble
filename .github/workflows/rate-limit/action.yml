@@ -1,4 +1,6 @@
 name: "Check GitHub rate limits"
+description: >
+  Report what is left of the GitHub API rate limit.
 inputs:
   token: # id of input
     description: GitHub token, pass secrets.GITHUB_TOKEN

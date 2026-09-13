@@ -22,6 +22,12 @@
 # this job only needs the artifact, and not checking out
 # avoids placing a credentialed `.git/config`
 # next to attacker-controlled files.
+# That is why the steps below name their actions in full
+# rather than as `./.github/workflows/...`:
+# an action is fetched into the runner's action cache and not into the
+# workspace, so it is the one way to share a script with a job that has
+# no checkout. `@main` is the ref this workflow already runs from,
+# `workflow_run` using the default branch of the base repository.
 #
 # https://securitylab.github.com/resources/github-actions-preventing-pwn-requests/
 name: commit-suggest.yaml
@@ -76,101 +82,18 @@ jobs:
       - name: Find PR number for branch from correct head repository
         id: find-pr
         if: steps.check-artifact.outputs.has_diff == 'true'
-        env:
-          GH_TOKEN: ${{ github.token }}
-          HEAD_BRANCH: ${{ github.event.workflow_run.head_branch }}
-          HEAD_OWNER: ${{ github.event.workflow_run.head_repository.owner.login }}
-        run: |
-          set -euo pipefail
-
-          # `--arg` keeps the owner login out of the jq program text,
-          # and `"${HEAD_BRANCH}"` keeps the branch name out of the shell's
-          # parsing -- see the security note at the top of this file.
-          pr_number=$(
-            gh pr list \
-              --repo "${GITHUB_REPOSITORY}" \
-              --head "${HEAD_BRANCH}" \
-              --state open \
-              --json number,headRepositoryOwner |
-              jq -r --arg owner "${HEAD_OWNER}" \
-                '[.[] | select(.headRepositoryOwner.login == $owner) | .number][0] // empty'
-          ) || pr_number=""
-
-          # Belt and braces: only ever emit a plain integer downstream.
-          if ! printf '%s' "${pr_number}" | grep -qE '^[0-9]+$'; then
-            echo "No matching open pull request found"
-            pr_number=""
-          fi
-
-          echo "pr_number=${pr_number}" >> "${GITHUB_OUTPUT}"
-        shell: bash
-
+        uses: cynkra/cynkratemplate/.github/workflows/commit-suggest-find-pr@main
+        with:
+          gh-token: ${{ github.token }}
+          head-branch: ${{ github.event.workflow_run.head_branch }}
+          head-owner: ${{ github.event.workflow_run.head_repository.owner.login }}
       - name: Generate comment body
         if: steps.check-artifact.outputs.has_diff == 'true' && steps.find-pr.outputs.pr_number != ''
-        env:
-          RUN_ID: ${{ github.event.workflow_run.id }}
-          REPO: ${{ github.repository }}
-          PR_NUMBER: ${{ steps.find-pr.outputs.pr_number }}
-        run: |
-          set -euo pipefail
-
-          # A GitHub comment is capped at 65536 characters, and the patch is
-          # attacker-controlled, so cap what we embed and say so when we do.
-          max_bytes=40000
-          truncated=false
-          if [ "$(wc -c < changes.patch)" -gt "${max_bytes}" ]; then
-            head -c "${max_bytes}" changes.patch > patch.txt
-            truncated=true
-          else
-            cp changes.patch patch.txt
-          fi
-
-          # Pick a fence longer than the longest run of backticks in the patch.
-          # Otherwise a crafted patch could close the code block early and
-          # inject arbitrary Markdown into a comment authored by github-actions.
-          longest=$(
-            { grep -o '`\+' patch.txt || true; } |
-              awk '{ if (length($0) > n) n = length($0) } END { print n + 0 }'
-          )
-          if [ "${longest}" -lt 3 ]; then
-            fence_len=3
-          else
-            fence_len=$((longest + 1))
-          fi
-          fence=$(printf '`%.0s' $(seq 1 "${fence_len}"))
-
-          {
-            printf '## Formatting suggestions available\n\n'
-            printf 'A patch file with formatting suggestions has been generated. '
-            printf 'You can apply it using one of these methods:\n\n'
-            printf '### Method 1: Apply via gh CLI\n\n'
-            printf '%s\n' '```bash'
-            printf '# Download and apply the patch directly\n'
-            printf 'gh run download %s --repo %s --name changes-patch && patch -p1 < changes.patch && rm changes.patch\n' \
-              "${RUN_ID}" "${REPO}"
-            printf '%s\n\n' '```'
-            printf 'Repo owners can also apply the patch automatically. '
-            printf 'Click the button to jump to the comment box, then post:\n\n'
-            printf '%s\n' '```'
-            printf '/apply-patch\n'
-            printf '%s\n\n' '```'
-            printf '[![Apply patch](https://img.shields.io/badge/Apply%%20patch-%%2Fapply--patch-2ea44f?style=for-the-badge&logo=github)]'
-            printf '(https://github.com/%s/pull/%s#new_comment_field)\n\n' "${REPO}" "${PR_NUMBER}"
-            printf '### Method 2: View the patch\n\n'
-            printf '<details>\n'
-            printf '<summary>Click to see the patch contents</summary>\n\n'
-            printf '%sdiff\n' "${fence}"
-            cat patch.txt
-            printf '\n%s\n\n' "${fence}"
-            if [ "${truncated}" = "true" ]; then
-              printf '_Patch truncated at %s bytes; download the artifact for the full diff._\n\n' "${max_bytes}"
-            fi
-            printf '</details>\n\n'
-            printf -- '---\n'
-            printf '*This comment was automatically generated by the commit-suggester workflow.*\n'
-          } > comment.md
-        shell: bash
-
+        uses: cynkra/cynkratemplate/.github/workflows/commit-suggest-body@main
+        with:
+          run-id: ${{ github.event.workflow_run.id }}
+          repo: ${{ github.repository }}
+          pr-number: ${{ steps.find-pr.outputs.pr_number }}
       - name: Post or update comment
         if: steps.check-artifact.outputs.has_diff == 'true' && steps.find-pr.outputs.pr_number != ''
         uses: thollander/actions-comment-pull-request@24bffb9b452ba05a4f3f77933840a6a841d1b32b # v3.0.1

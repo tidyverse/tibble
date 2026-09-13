@@ -1,0 +1,101 @@
+name: "Build the universe image"
+description: >
+  Install every reverse dependency into one image, so a shard starts from a
+  library rather than building one.
+
+inputs:
+  base-image:
+    description: "The base image to install into."
+    required: true
+
+outputs:
+  universe:
+    description: "The tag of the image that was built."
+    value: ${{ steps.main.outputs.universe }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Build the universe image"
+      id: main
+      env:
+        BASE_IMAGE: ${{ inputs.base-image }}
+      run: |
+        set -eu
+        repo=$(printf '%s' "${GITHUB_REPOSITORY}" | tr '[:upper:]' '[:lower:]')
+        universe="ghcr.io/${repo}/revdepx-universe"
+        echo "universe=${universe}" >> "${GITHUB_OUTPUT}"
+
+        # Delta warm start: begin from the previous universe image when it
+        # is fresh enough and stands on the same base (same R, same
+        # toolchain recipe); otherwise from the base image. pak upgrades
+        # whatever is stale either way -- the plan's fingerprints are
+        # CRAN-now, so a stale donor must never freeze versions.
+        from="${BASE_IMAGE}"
+        base_tag="${BASE_IMAGE##*:}"
+        if docker pull "${universe}:latest"; then
+          created=$(docker inspect --format '{{ .Created }}' "${universe}:latest" | cut -dT -f1)
+          age_days=$(( ( $(date +%s) - $(date -d "${created}" +%s) ) / 86400 ))
+          prior_base=$(docker run --rm "${universe}:latest" \
+            sh -c 'cat /opt/revdepx/lib-index.json 2>/dev/null' |
+            jq -r '.base_image // ""' || true)
+          if [ "${age_days}" -le "${REVDEPX_IMAGE_MAX_AGE_DAYS}" ] \
+            && [ "${prior_base}" = "${base_tag}" ]; then
+            echo "Starting from ${universe}:latest (${age_days} day(s) old, base ${prior_base})"
+            from="${universe}:latest"
+          else
+            echo "Previous universe image not reusable (age ${age_days} d, base '${prior_base}' vs '${base_tag}'); starting from the base image"
+          fi
+        else
+          echo "No previous universe image; starting from the base image"
+        fi
+
+        mkdir -p "${RUNNER_TEMP}/pak-cache" "${RUNNER_TEMP}/universe-out" \
+          "${RUNNER_TEMP}/universe-tmp"
+        # A /tmp must be world-writable with the sticky bit -- apt-key
+        # writes its temporary config there and apt's sandboxed _apt user
+        # cannot use a 755 directory: with a plain mkdir every repository
+        # fails signature verification ("Couldn't create temporary file
+        # /tmp/apt.conf.XXXX") and every apt-get pak runs fails with it.
+        # Reproduced and verified against rocker/r-ver:4.5.3 locally.
+        chmod 1777 "${RUNNER_TEMP}/universe-tmp"
+
+        # Streamed from inside this step, on top of the file-writing
+        # sampler the earlier step backgrounded: that one keeps appending
+        # to its RESOURCE_LOG, but its stdout stops reaching the job log
+        # the moment its own step ends -- and when a runner dies, the
+        # streamed lines are all that survives (the artifact upload and
+        # the `always()` steps die with it).
+        RESOURCE_PHASE_FILE="${RUNNER_TEMP}/universe-out/phase" \
+          ./.github/workflows/revdepx/watch-resources.sh watch 120 "universe build" &
+        sampler=$!
+        trap 'kill "${sampler}" 2> /dev/null || true' EXIT
+
+        status=0
+        # The memory cap contains OOM kills to the container: the sysreqs
+        # survey once ballooned past 14 GB and the GLOBAL oom-killer chose
+        # the fat R process over the runner agent by luck, not design.
+        docker run --name revdepx-universe-build \
+          --memory 14g --memory-swap 14g \
+          -v "${GITHUB_WORKSPACE}/.github/workflows/revdepx:/revdepx/scripts:ro" \
+          -v "${RUNNER_TEMP}/plan/plan.json:/revdepx/plan.json:ro" \
+          -v "${RUNNER_TEMP}/pak-cache:/root/.cache/R/pkgcache" \
+          -v "${RUNNER_TEMP}/universe-out:/revdepx/out" \
+          -v "${RUNNER_TEMP}/universe-tmp:/tmp" \
+          -e PLAN=/revdepx/plan.json \
+          -e OUT_DIR=/revdepx/out \
+          -e PKG_SYSREQS=true \
+          -e REVDEPX_BASE_IMAGE="${base_tag}" \
+          -e RESOURCE_PHASE_FILE=/revdepx/out/phase \
+          "${from}" \
+          Rscript /revdepx/scripts/image.R || status=$?
+        # Root in the container wrote the pak cache; without this the
+        # cache post-step's tar hits its 600 lock files and the save is
+        # skipped ("Permission denied"). On failure paths too -- a partial
+        # cache is precisely what makes the retry cheap.
+        sudo chown -R "$(id -u):$(id -g)" "${RUNNER_TEMP}/pak-cache" || true
+        if [ "${status}" -ne 0 ]; then
+          echo "::error::The universe image build failed (exit ${status}); shards will fall back to building their own libraries"
+          exit "${status}"
+        fi
+      shell: bash

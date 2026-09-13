@@ -1,0 +1,19 @@
+name: "Make room for the dependency universe"
+description: >
+  Free the runner's main disk before installing a universe of packages into it.
+
+runs:
+  using: "composite"
+  steps:
+    - name: "Make room for the dependency universe"
+      id: main
+      run: |
+        before=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
+        sudo rm -rf /usr/local/lib/android /usr/share/dotnet /opt/ghc \
+          /usr/local/.ghcup /opt/hostedtoolcache/CodeQL \
+          /usr/local/share/powershell /usr/share/swift || true
+        sudo docker image prune --all --force > /dev/null 2>&1 || true
+        after=$(df -BG --output=avail / | tail -1 | tr -dc '0-9')
+        echo "Free disk: ${before}G -> ${after}G"
+        free -g
+      shell: bash

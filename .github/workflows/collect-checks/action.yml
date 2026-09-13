@@ -1,0 +1,152 @@
+name: "Collect the outcomes of a smoke test's checks"
+description: >
+  Turn the outcomes of steps that ran with `continue-on-error` into a report
+  the run publishes, and into the two values a caller needs to act on them.
+
+  GitHub reports such a step as `conclusion: success` however it ended, and the
+  real result lives in `steps.<id>.outcome`, which no endpoint serves. Only the
+  workflow can read it, so only the workflow can name the checks; everything
+  after that -- finding this job in the run's listing, turning each check into a
+  link to the step that ran it, the annotations, the table -- is the same work
+  in every repository, and it lives here.
+
+  The report is written to `$RUNNER_TEMP` rather than printed. The caller prints
+  it from the step that goes red, so that the annotations and the table belong
+  to that step and reach the tail of its log.
+
+inputs:
+  token:
+    description: "GitHub token, pass secrets.GITHUB_TOKEN. Reads the run's job listing, and needs no more than the `actions: read` that implies."
+    required: true
+  checks:
+    description: >
+      One `<step name>|<label>|<outcome>` per line, in the order the steps run.
+      The step name is the display name of the step, which is how the job
+      listing names it and the only handle on its number; the label is what the
+      report calls it; the outcome is that step's `outcome`, which is `success`,
+      `failure` or `skipped`.
+    required: true
+
+outputs:
+  failed_count:
+    description: "How many checks did not end in `success` or `skipped`."
+    value: ${{ steps.outcomes.outputs.failed_count }}
+  failed_labels:
+    description: "The labels of those checks, each prefixed with a cross, ready to be read by a step name. Empty when none failed."
+    value: ${{ steps.outcomes.outputs.failed_labels }}
+  report:
+    description: "Path of the plain-text report, for the caller to print."
+    value: ${{ steps.outcomes.outputs.report }}
+  summary:
+    description: "Path of the Markdown report, for the caller to append to the job summary."
+    value: ${{ steps.outcomes.outputs.summary }}
+
+runs:
+  using: "composite"
+  steps:
+    - name: Collect the outcomes of the checks
+      id: outcomes
+      env:
+        GH_TOKEN: ${{ inputs.token }}
+        CHECKS: ${{ inputs.checks }}
+      run: |
+        ## -- Collect the outcomes of the checks --
+        # Deliberately not `-e`: an unreadable job listing costs the deep links,
+        # it must not cost the summary that carries them.
+        set -uo pipefail
+
+        run_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+
+        # A runner runs one job at a time, so its name picks this job out of the
+        # listing; the only job still in progress is the fallback for a listing
+        # that does not report a runner yet.
+        jobs_json=$(
+          gh api --paginate \
+            "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/attempts/${GITHUB_RUN_ATTEMPT}/jobs" \
+            --jq '.jobs[] | {id, status, runner_name, steps}'
+        ) || jobs_json=""
+
+        job=$(printf '%s\n' "${jobs_json}" | jq -c 'select(.runner_name == env.RUNNER_NAME)' | head -n 1)
+        if [ -z "${job}" ]; then
+          job=$(printf '%s\n' "${jobs_json}" | jq -c 'select(.status == "in_progress")' | head -n 1)
+        fi
+
+        job_id=$(printf '%s' "${job}" | jq -r '.id // empty' 2>/dev/null)
+        if [ -n "${job_id}" ]; then
+          job_url="${run_url}/job/${job_id}"
+        else
+          job_url="${run_url}"
+          echo "::warning title=rcc: no deep links::This job is not in the run's job listing, so the links in the summary point at the run."
+        fi
+
+        link() {
+          number=$(printf '%s' "${job}" | jq -r --arg name "${1}" '.steps[]? | select(.name == $name) | .number' 2>/dev/null | head -n 1)
+          if [ -n "${job_id}" ] && [ -n "${number}" ]; then
+            printf '%s#step:%s:1' "${job_url}" "${number}"
+          else
+            printf '%s' "${job_url}"
+          fi
+        }
+
+        preamble="Every check below runs with continue-on-error, so GitHub reports it as a successful step whatever it did. This table is where its outcome is published, and each link opens the step itself."
+
+        # The report is written rather than printed, and the next step prints it,
+        # so that the annotations and the table belong to the step that goes red.
+        md="${RUNNER_TEMP}/collect-checks.md"
+        log="${RUNNER_TEMP}/collect-checks.log"
+
+        {
+          echo "## Smoke test summary"
+          echo
+          echo "${preamble}"
+          echo
+          echo "| Check | Result |"
+          echo "| --- | --- |"
+        } > "${md}"
+
+        {
+          echo "${preamble}"
+          echo
+        } > "${log}"
+
+        labels=""
+        failed=0
+        check_failed=false
+
+        while IFS='|' read -r name label outcome; do
+          [ -n "${name}" ] || continue
+          outcome="${outcome:-skipped}"
+          url=$(link "${name}")
+
+          case "${outcome}" in
+            success) icon="✅" ;;
+            skipped) icon="⏭️" ;;
+            *)
+              icon="❌"
+              failed=$((failed + 1))
+              labels="${labels} ❌ ${label}"
+              [ "${label}" = "R CMD check" ] && check_failed=true
+              echo "::error title=rcc: ${label} failed::The \"${name}\" step failed. It is reported green because it runs with continue-on-error; read it at ${url}" >> "${log}"
+              ;;
+          esac
+
+          echo "| [${label}](${url}) | ${icon} ${outcome} |" >> "${md}"
+          echo "${icon} ${outcome} -- ${label} -- ${url}" >> "${log}"
+        done <<< "${CHECKS}"
+
+        if [ "${failed}" -ne 0 ]; then
+          note="${failed} check(s) failed. The step this is reported on is red on their behalf; nothing failed in the step itself."
+          if [ "${check_failed}" = true ]; then
+            note="${note} R CMD check attaches its \`check\` directory to the run: ${run_url}#artifacts"
+          fi
+          printf '\n%s\n' "${note}" >> "${md}"
+          printf '\n%s\n' "${note}" >> "${log}"
+        fi
+
+        {
+          echo "failed_count=${failed}"
+          echo "failed_labels=${labels}"
+          echo "report=${log}"
+          echo "summary=${md}"
+        } >> "${GITHUB_OUTPUT}"
+      shell: bash

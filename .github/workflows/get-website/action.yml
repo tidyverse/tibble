@@ -1,4 +1,6 @@
 name: "Action to resolve Config/Needs/website against the configured repositories"
+description: >
+  Resolve `Config/Needs/website` into refs pak can install, dropping what no configured repository carries.
 inputs:
   needs:
     description: "The `needs` value the caller passed to the install action"
