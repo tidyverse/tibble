@@ -15,9 +15,21 @@ on:
       - master
     paths:
       - ".github/workflows/fledge.yaml"
-  # daily run
+  # Daily, and deliberately hours ahead of `rcc` (`10 1 * * *`).
+  #
+  # A push made with `GITHUB_TOKEN` raises no events, so a bump that lands on the
+  # default branch triggers nothing and it is the scheduled `rcc` run that checks
+  # it. That only works while the bump is already in place when `rcc` starts.
+  # 40 minutes was not enough of a margin: GitHub delays each schedule on its own,
+  # by tens of minutes and independently per workflow, which had squeezed the gap
+  # to 23 minutes in the busiest repository of this kit -- and where the default
+  # branch cannot be pushed, the bump only lands once the pull request below has
+  # merged, which waits for a full `rcc` smoke test.
+  #
+  # The minute is off the hour and off the half hour on purpose; those are the
+  # most contended, and the most delayed.
   schedule:
-  - cron: "30 0 * * *"
+  - cron: "40 21 * * *"
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.ref }}-${{ github.head_ref || '' }}-${{ github.base_ref || '' }}
@@ -108,46 +120,84 @@ jobs:
           packages: ${{ github.repository == 'cynkra/fledge' && 'local::.' || 'cynkra/fledge' }}
           cache-version: fledge-1
 
-      - name: Count rulesets
-        # Assume that branch is protected if ruleset exists
-        id: rulesets
-        env:
-          GH_TOKEN: ${{ github.token }}
-        run: |
-          n_rulesets=$(gh api repos/${{ github.repository }}/rulesets -q length)
-          echo "count=${n_rulesets}" >> $GITHUB_OUTPUT
-        shell: bash
-
-      - name: Switch to branch if branch protection is enabled
-        if: github.ref_protected == 'true' || inputs.pr == 'true' || steps.rulesets.outputs.count > 0
-        run: |
-          git checkout -b fledge
-          git push -f -u origin HEAD
-        shell: bash
-
-      - name: Bump version
+      - name: Bump the version, pushing to the default branch where that is allowed
+        id: bump
         env:
           GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+          # `workflow_dispatch` can ask for the pull request route regardless.
+          FORCE_PR: ${{ inputs.pr }}
         run: |
-          check_default_branch <- ("${{ github.ref_protected == 'true' || inputs.pr == 'true' || steps.rulesets.outputs.count > 0 }}" != "true")
-          if (fledge::bump_version(which = "dev", no_change_behavior = "noop", check_default_branch = check_default_branch)) {
-            fledge::finalize_version(push = TRUE)
+          ## -- Bump the version --
+          # A pull request is only needed where the default branch cannot be
+          # pushed, and no API answers that question. `GET /repos/.../rulesets`,
+          # which this step used to count, says nothing about *this* token; nor
+          # does `GET /repos/.../rules/branches/{branch}`, which reports a
+          # branch's rules whether or not the caller bypasses them -- checked
+          # against a repository whose ruleset grants an always-bypass that the
+          # caller holds, and the rule is listed all the same. So push, and let
+          # the remote answer: `fledge:::push_head()` compares the local commit
+          # with the upstream one afterwards and aborts when the remote did not
+          # move, which is the rejection this turns into a route.
+          gha_output <- function(...) {
+            cat(sprintf(...), file = Sys.getenv("GITHUB_OUTPUT"), append = TRUE)
           }
+
+          if (!fledge::bump_version(which = "dev", no_change_behavior = "noop")) {
+            gha_output("bumped=false\n")
+            quit(save = "no")
+          }
+
+          gha_output("bumped=true\n")
+
+          if (Sys.getenv("FORCE_PR") == "true") {
+            # Commit and tag locally, and leave the push to the fallback below.
+            fledge::finalize_version()
+            gha_output("pushed=false\n")
+            quit(save = "no")
+          }
+
+          pushed <- tryCatch(
+            {
+              fledge::finalize_version(push = TRUE)
+              TRUE
+            },
+            error = function(e) {
+              message("Could not push the bump to the default branch, opening a pull request instead:")
+              message(conditionMessage(e))
+              FALSE
+            }
+          )
+
+          gha_output("pushed=%s\n", if (pushed) "true" else "false")
         shell: Rscript {0}
 
-      - name: Create and merge PR if branch protection is enabled
-        if: github.ref_protected == 'true' || inputs.pr == 'true' || steps.rulesets.outputs.count > 0
+      # Nothing is triggered where the push above succeeded: an event raised by
+      # `GITHUB_TOKEN` starts no workflow, so the bump waits for the scheduled
+      # `rcc` run, which is what the cron at the top of this file makes room for.
+      - name: Open and auto-merge a pull request where it could not
+        if: steps.bump.outputs.bumped == 'true' && steps.bump.outputs.pushed != 'true'
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BASE: ${{ github.event.repository.default_branch }}
         run: |
-          set -ex
-          if [ -n "$(git diff main --numstat)" ]; then
-            gh pr create --base main --head fledge --fill-first
-            gh workflow run rcc -f ref=$(git rev-parse HEAD)
-            gh pr merge --squash --auto
-          else
-            echo "No changes."
+          ## -- Open and auto-merge a pull request --
+          set -euxo pipefail
+
+          git switch -c fledge
+          git push -f -u origin HEAD
+
+          # `finalize_version()` tags the commit, and the direct push aborted
+          # before it got to the tag.
+          tag=$(git tag --points-at HEAD | head -n 1)
+          if [ -n "${tag}" ]; then
+            git push -f origin "refs/tags/${tag}"
           fi
+
+          gh pr create --base "${BASE}" --head fledge --fill-first
+          # This one does have to be asked for. The pull request is gated on the
+          # `rcc` status, and the branch push above raised no event either.
+          gh workflow run rcc -f ref="$(git rev-parse HEAD)"
+          gh pr merge --squash --auto
         shell: bash
 
       - name: Check release
