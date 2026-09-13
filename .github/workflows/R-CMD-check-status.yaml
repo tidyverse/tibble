@@ -51,6 +51,7 @@ jobs:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           REPO: ${{ github.repository }}
           RUN_ID: ${{ github.event.workflow_run.id }}
+          RUN_ATTEMPT: ${{ github.event.workflow_run.run_attempt }}
           RUN_STATUS: ${{ github.event.workflow_run.status }}
           RUN_CONCLUSION: ${{ github.event.workflow_run.conclusion }}
           RUN_URL: ${{ github.event.workflow_run.html_url }}
@@ -101,13 +102,68 @@ jobs:
             sha="${HEAD_SHA}"
           fi
 
+          description="${RUN_NAME}"
+          target_url="${RUN_URL}"
+
+          # A pull request shows this status as one line, and `rcc` pointing at
+          # the run leaves every reader to open it and find which of its fifty
+          # jobs is red. Name them instead, and when only one job failed, point
+          # at the step inside it -- `#step:<n>:<line>` is the anchor the job
+          # page numbers its steps by.
+          #
+          # Job names come from the workflow file of the head ref, so a fork
+          # writes them (see rule 1 above). They stay data: jq emits them,
+          # nothing evaluates them, and control characters go first so that a
+          # name can never turn into a workflow command in this log. The
+          # listing is best effort -- without it the status is what it was.
+          if [ "${state}" = "failure" ]; then
+            jobs=$(
+              gh api --paginate \
+                "repos/${REPO}/actions/runs/${RUN_ID}/attempts/${RUN_ATTEMPT}/jobs" \
+                --jq '
+                  def bad: . == "failure" or . == "timed_out" or . == "cancelled";
+                  .jobs[] | {
+                    id,
+                    name: (.name | gsub("[[:cntrl:]]"; " ") | .[0:80]),
+                    failed: (.conclusion | bad),
+                    step: ([.steps[]? | select(.conclusion | bad) | .number] | first)
+                  }
+                '
+            ) || jobs=""
+
+            total=$(printf '%s\n' "${jobs}" | grep -c . || true)
+            failures=$(printf '%s\n' "${jobs}" | jq -c 'select(.failed)') || failures=""
+            count=$(printf '%s\n' "${failures}" | grep -c . || true)
+
+            if [ "${count}" -gt 0 ]; then
+              # A status description is cut off at 140 characters, and half a
+              # job name is worth less than a count, so name them all only while
+              # they fit.
+              names=$(printf '%s\n' "${failures}" | jq -rs 'map(.name) | join(", ")')
+              description="${count} of ${total} jobs failed: ${names}"
+              if [ "${#description}" -gt 140 ]; then
+                first=$(printf '%s\n' "${failures}" | jq -r '.name' | head -n 1)
+                description="${count} of ${total} jobs failed: ${first}, and $((count - 1)) more"
+                description="${description:0:140}"
+              fi
+
+              if [ "${count}" -eq 1 ]; then
+                target_url="${RUN_URL}/job/$(printf '%s' "${failures}" | jq -r '.id')"
+                step=$(printf '%s' "${failures}" | jq -r '.step // empty')
+                if [ -n "${step}" ]; then
+                  target_url="${target_url}#step:${step}:1"
+                fi
+              fi
+            fi
+          fi
+
           gh api \
             --method POST \
             -H "Accept: application/vnd.github+json" \
             -H "X-GitHub-Api-Version: 2022-11-28" \
             "repos/${REPO}/statuses/${sha}" \
             -f "state=${state}" \
-            -f "target_url=${RUN_URL}" \
-            -f "description=${RUN_NAME}" \
+            -f "target_url=${target_url}" \
+            -f "description=${description}" \
             -f "context=rcc"
         shell: bash

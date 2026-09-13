@@ -227,45 +227,147 @@ jobs:
           name: rcc-smoke-sha
           path: rcc-smoke-sha.txt
 
-      # This is the step that fails the job if any of the checks above failed
-      - name: Summarize checks
+      # This is the step that fails the job if any of the checks above failed.
+      #
+      # Those checks run with `continue-on-error`, and GitHub reports such a step
+      # as `conclusion: success` however it ended, so through the API a smoke test
+      # that went red is a job of green steps with one red step at the end of it.
+      # The real result lives in `steps.<id>.outcome`, which no endpoint serves,
+      # so this step is the only place it can be published, and it publishes it
+      # four times over, cheapest lookup first:
+      #
+      #   * in its own name, which the job listing already carries, so that naming
+      #     the failed checks costs nothing beyond listing the jobs;
+      #   * as `::error` annotations, which the check-run annotations endpoint
+      #     serves and the pull request shows without anyone opening a log;
+      #   * on stdout, because a log is read from its tail, and on a job this long
+      #     the failure itself scrolled out of the tail an hour ago;
+      #   * in the job summary, for a human.
+      #
+      # Each of them links to the step that failed. The link needs this job's id,
+      # which no context carries, and the step's number, which is what the job
+      # page's `#step:` anchor counts; both come from the run's job listing, and
+      # the links degrade to the job or the run when it cannot be read.
+      - name: >-
+          Summarize checks${{ steps.versions-matrix.outcome == 'failure' && ' ❌ R versions matrix' || '' }}${{
+          steps.dep-suggests-matrix.outcome == 'failure' && ' ❌ Suggested dependencies matrix' || '' }}${{
+          steps.style.outcome == 'failure' && ' ❌ Style' || '' }}${{
+          steps.snapshots.outcome == 'failure' && ' ❌ Snapshots' || '' }}${{
+          steps.roxygenize.outcome == 'failure' && ' ❌ Roxygenize' || '' }}${{
+          steps.commit.outcome == 'failure' && ' ❌ Commit' || '' }}${{
+          steps.check.outcome == 'failure' && ' ❌ R CMD check' || '' }}${{
+          steps.pkgdown-build.outcome == 'failure' && ' ❌ pkgdown build' || '' }}${{
+          steps.pkgdown-deploy.outcome == 'failure' && ' ❌ pkgdown deploy' || '' }}
         if: always()
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          # One `<step name>|<label>|<outcome>` per line, in the order the steps
+          # run. The step name is the display name of the step above, which is
+          # how the job listing names it and the only handle on its number.
+          CHECKS: |
+            Collect the R versions into a matrix|R versions matrix|${{ steps.versions-matrix.outcome }}
+            Collect the suggested dependencies into a matrix|Suggested dependencies matrix|${{ steps.dep-suggests-matrix.outcome }}
+            Style the R sources|Style|${{ steps.style.outcome }}
+            Update the testthat snapshots|Snapshots|${{ steps.snapshots.outcome }}
+            Roxygenize the documentation|Roxygenize|${{ steps.roxygenize.outcome }}
+            Commit and push the generated changes|Commit|${{ steps.commit.outcome }}
+            Run R CMD check|R CMD check|${{ steps.check.outcome }}
+            Build the pkgdown website|pkgdown build|${{ steps.pkgdown-build.outcome }}
+            Build and deploy the pkgdown website|pkgdown deploy|${{ steps.pkgdown-deploy.outcome }}
         run: |
           ## -- Summarize checks --
-          status=0
+          # Deliberately not `-e`: an unreadable job listing costs the deep links,
+          # it must not cost the summary that carries them.
+          set -uo pipefail
 
-          report() {
-            outcome="${2:-skipped}"
+          run_url="${GITHUB_SERVER_URL}/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}"
+
+          # A runner runs one job at a time, so its name picks this job out of the
+          # listing; the only job still in progress is the fallback for a listing
+          # that does not report a runner yet.
+          jobs_json=$(
+            gh api --paginate \
+              "repos/${GITHUB_REPOSITORY}/actions/runs/${GITHUB_RUN_ID}/attempts/${GITHUB_RUN_ATTEMPT}/jobs" \
+              --jq '.jobs[] | {id, status, runner_name, steps}'
+          ) || jobs_json=""
+
+          job=$(printf '%s\n' "${jobs_json}" | jq -c 'select(.runner_name == env.RUNNER_NAME)' | head -n 1)
+          if [ -z "${job}" ]; then
+            job=$(printf '%s\n' "${jobs_json}" | jq -c 'select(.status == "in_progress")' | head -n 1)
+          fi
+
+          job_id=$(printf '%s' "${job}" | jq -r '.id // empty' 2>/dev/null)
+          if [ -n "${job_id}" ]; then
+            job_url="${run_url}/job/${job_id}"
+          else
+            job_url="${run_url}"
+            echo "::warning title=rcc: no deep links::This job is not in the run's job listing, so the links below point at the run."
+          fi
+
+          link() {
+            number=$(printf '%s' "${job}" | jq -r --arg name "${1}" '.steps[]? | select(.name == $name) | .number' 2>/dev/null | head -n 1)
+            if [ -n "${job_id}" ] && [ -n "${number}" ]; then
+              printf '%s#step:%s:1' "${job_url}" "${number}"
+            else
+              printf '%s' "${job_url}"
+            fi
+          }
+
+          rows=""
+          plain=""
+          failed=0
+          check_failed=false
+
+          while IFS='|' read -r name label outcome; do
+            [ -n "${name}" ] || continue
+            outcome="${outcome:-skipped}"
+            url=$(link "${name}")
+
             case "${outcome}" in
               success) icon="✅" ;;
               skipped) icon="⏭️" ;;
-              *) icon="❌" ; status=1 ;;
+              *)
+                icon="❌"
+                failed=$((failed + 1))
+                [ "${label}" = "R CMD check" ] && check_failed=true
+                echo "::error title=rcc: ${label} failed::The \"${name}\" step failed. It is reported green because it runs with continue-on-error; read it at ${url}"
+                ;;
             esac
-            echo "| ${1} | ${icon} ${outcome} |" >> "${GITHUB_STEP_SUMMARY}"
-          }
+
+            rows="${rows}| [${label}](${url}) | ${icon} ${outcome} |"$'\n'
+            plain="${plain}${icon} ${outcome} -- ${label} -- ${url}"$'\n'
+          done <<< "${CHECKS}"
+
+          preamble="Every check below runs with continue-on-error, so GitHub reports it as a successful step whatever it did. This table is where its outcome is published, and each link opens the step itself."
 
           {
             echo "## Smoke test summary"
             echo
+            echo "${preamble}"
+            echo
             echo "| Check | Result |"
             echo "| --- | --- |"
+            printf '%s' "${rows}"
           } >> "${GITHUB_STEP_SUMMARY}"
 
-          report "R versions matrix" "${{ steps.versions-matrix.outcome }}"
-          report "Suggested dependencies matrix" "${{ steps.dep-suggests-matrix.outcome }}"
-          report "Style" "${{ steps.style.outcome }}"
-          report "Snapshots" "${{ steps.snapshots.outcome }}"
-          report "Roxygenize" "${{ steps.roxygenize.outcome }}"
-          report "Commit" "${{ steps.commit.outcome }}"
-          report "R CMD check" "${{ steps.check.outcome }}"
-          report "pkgdown build" "${{ steps.pkgdown-build.outcome }}"
-          report "pkgdown deploy" "${{ steps.pkgdown-deploy.outcome }}"
+          # The same table on stdout, which is what a log tail returns.
+          echo "${preamble}"
+          echo
+          printf '%s' "${plain}"
 
-          if [ "${status}" -ne 0 ]; then
-            printf '\nAt least one check failed, see the log for details.\n' >> "${GITHUB_STEP_SUMMARY}"
+          if [ "${failed}" -eq 0 ]; then
+            exit 0
           fi
 
-          exit "${status}"
+          note="${failed} check(s) failed. This step is red on their behalf; nothing failed in the step itself."
+          if [ "${check_failed}" = true ]; then
+            note="${note} R CMD check attaches its \`check\` directory to the run: ${run_url}#artifacts"
+          fi
+
+          printf '\n%s\n' "${note}" >> "${GITHUB_STEP_SUMMARY}"
+          echo
+          echo "${note}"
+          exit 1
         shell: bash
 
       - name: Update status for rcc (final)
