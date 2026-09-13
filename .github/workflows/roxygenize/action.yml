@@ -3,6 +3,7 @@ description: >
   This action regenerates the documentation with `roxygen2::roxygenize()`.
   roxygen2 has no strict mode, so the warnings it emits are collected,
   and the step fails if there are any.
+  Deprecation warnings are annotated, but they do not fail the step.
 
 runs:
   using: "composite"
@@ -16,26 +17,49 @@ runs:
         # to roxygenize(), e.g. from loading the package. Collecting the
         # warnings of the roxygenize() call keeps the generated documentation,
         # which the commit step still picks up, and fails the step afterwards.
+        #
+        # Deprecation warnings are carved out of that gate. A third-party
+        # roclet such as `devtag` can call a function that roxygen2 has
+        # deprecated, and the package that merely uses the roclet has no way
+        # to act on it -- the fix belongs in the roclet, not here. They are
+        # still annotated, so they stay visible and can be chased upstream.
+        # The match is on the condition class, never on the message text:
+        # `.Deprecated()` signals a `deprecatedWarning`, and
+        # `lifecycle::deprecate_warn()` a `lifecycle_warning_deprecated`,
+        # while an ordinary `warning()` carries neither.
+        deprecated <- c("deprecatedWarning", "lifecycle_warning_deprecated")
+
         warns <- character()
+        depr <- character()
 
         withCallingHandlers(
           roxygen2::roxygenize(),
           warning = function(w) {
-            warns <<- c(warns, conditionMessage(w))
+            if (any(class(w) %in% deprecated)) {
+              depr <<- c(depr, conditionMessage(w))
+            } else {
+              warns <<- c(warns, conditionMessage(w))
+            }
             invokeRestart("muffleWarning")
           }
         )
 
-        if (length(warns) == 0) {
-          writeLines("roxygen2 emitted no warnings.")
-        } else {
-          # Workflow commands are single-line, the payload needs escaping
-          escape <- function(x) {
-            x <- gsub("%", "%25", x, fixed = TRUE)
-            x <- gsub("\r", "%0D", x, fixed = TRUE)
-            gsub("\n", "%0A", x, fixed = TRUE)
-          }
+        # Workflow commands are single-line, the payload needs escaping
+        escape <- function(x) {
+          x <- gsub("%", "%25", x, fixed = TRUE)
+          x <- gsub("\r", "%0D", x, fixed = TRUE)
+          gsub("\n", "%0A", x, fixed = TRUE)
+        }
 
+        if (length(depr) > 0) {
+          writeLines(sprintf("roxygen2 emitted %d deprecation warning(s), these do not fail the step:", length(depr)))
+          writeLines(paste0("* ", depr))
+          writeLines(sprintf("::warning title=roxygen2 deprecation::%s", escape(depr)))
+        }
+
+        if (length(warns) == 0) {
+          writeLines("roxygen2 emitted no warnings that fail the step.")
+        } else {
           writeLines(sprintf("roxygen2 emitted %d warning(s):", length(warns)))
           writeLines(paste0("* ", warns))
           writeLines(sprintf("::warning title=roxygen2::%s", escape(warns)))
