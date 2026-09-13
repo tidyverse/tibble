@@ -32,12 +32,12 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Report the GitHub API rate limit
-        uses: ./.github/workflows/rate-limit
+        uses: cynkra/cynkratemplate/.github/actions/rate-limit@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Configure the Git identity
-        uses: ./.github/workflows/git-identity
+        uses: cynkra/cynkratemplate/.github/actions/git-identity@main
         if: github.event_name == 'push'
 
       - name: Run the repository-specific before-install steps
@@ -45,7 +45,7 @@ jobs:
         if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
 
       - name: Install R and the package dependencies
-        uses: ./.github/workflows/install
+        uses: cynkra/cynkratemplate/.github/actions/install@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           cache-version: pkgdown-2
@@ -57,9 +57,9 @@ jobs:
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
       - name: Build the pkgdown website
-        uses: ./.github/workflows/pkgdown-build
+        uses: cynkra/cynkratemplate/.github/actions/pkgdown-build@main
         if: github.event_name != 'push'
 
       - name: Build and deploy the pkgdown website
-        uses: ./.github/workflows/pkgdown-deploy
+        uses: cynkra/cynkratemplate/.github/actions/pkgdown-deploy@main
         if: github.event_name == 'push'

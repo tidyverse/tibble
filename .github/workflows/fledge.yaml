@@ -50,7 +50,7 @@ jobs:
       # `./.github/workflows/...` reference would need the checkout back.
       - name: Check if not forked and NEWS.md mentions fledge
         id: check
-        uses: cynkra/cynkratemplate/.github/workflows/fledge-check-news@main
+        uses: cynkra/cynkratemplate/.github/actions/fledge-check-news@main
         with:
           gh-token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -71,7 +71,7 @@ jobs:
           fetch-tags: true
 
       - name: Configure the Git identity
-        uses: ./.github/workflows/git-identity
+        uses: cynkra/cynkratemplate/.github/actions/git-identity@main
 
       - name: Update apt
         run: |
@@ -79,7 +79,7 @@ jobs:
         shell: bash
 
       - name: Install R and the package dependencies
-        uses: ./.github/workflows/install
+        uses: cynkra/cynkratemplate/.github/actions/install@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           packages: ${{ github.repository == 'cynkra/fledge' && 'local::.' || 'cynkra/fledge' }}

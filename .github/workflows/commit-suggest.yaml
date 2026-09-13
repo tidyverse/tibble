@@ -82,14 +82,14 @@ jobs:
       - name: Find PR number for branch from correct head repository
         id: find-pr
         if: steps.check-artifact.outputs.has_diff == 'true'
-        uses: cynkra/cynkratemplate/.github/workflows/commit-suggest-find-pr@main
+        uses: cynkra/cynkratemplate/.github/actions/commit-suggest-find-pr@main
         with:
           gh-token: ${{ github.token }}
           head-branch: ${{ github.event.workflow_run.head_branch }}
           head-owner: ${{ github.event.workflow_run.head_repository.owner.login }}
       - name: Generate comment body
         if: steps.check-artifact.outputs.has_diff == 'true' && steps.find-pr.outputs.pr_number != ''
-        uses: cynkra/cynkratemplate/.github/workflows/commit-suggest-body@main
+        uses: cynkra/cynkratemplate/.github/actions/commit-suggest-body@main
         with:
           run-id: ${{ github.event.workflow_run.id }}
           repo: ${{ github.repository }}

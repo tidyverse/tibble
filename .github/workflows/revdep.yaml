@@ -39,7 +39,7 @@ jobs:
       # https://docs.github.com/en/free-pro-team@latest/rest/reference/actions#workflow-runs
       - name: Collect the reverse dependencies
         id: set-matrix
-        uses: ./.github/workflows/revdep-collect-deps
+        uses: cynkra/cynkratemplate/.github/actions/revdep-collect-deps@main
 
   check-matrix:
     runs-on: ubuntu-26.04
@@ -48,7 +48,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Check matrix definition
-        uses: ./.github/workflows/matrix-check
+        uses: cynkra/cynkratemplate/.github/actions/matrix-check@main
         with:
           matrix: ${{ needs.matrix.outputs.matrix }}
 
@@ -94,7 +94,7 @@ jobs:
       - uses: r-lib/actions/setup-pandoc@v2
 
       - name: Close the log group that setup-pandoc leaves open
-        # See `.github/workflows/install/action.yml` for why this is needed.
+        # See `.github/actions/install/action.yml` for why this is needed.
         # Fixed upstream by https://github.com/r-lib/actions/pull/1103.
         if: runner.os == 'Linux'
         run: |
@@ -122,11 +122,11 @@ jobs:
         shell: Rscript {0}
 
       - name: Session info old
-        uses: ./.github/workflows/session-info
+        uses: cynkra/cynkratemplate/.github/actions/session-info@main
 
       - name: Check old
         # Avoid downloading binary package from RSPM
-        uses: ./.github/workflows/revdep-check-old
+        uses: cynkra/cynkratemplate/.github/actions/revdep-check-old@main
         with:
           package: ${{ matrix.package }}
       - name: Install local package
@@ -135,14 +135,14 @@ jobs:
         shell: Rscript {0}
 
       - name: Session info new
-        uses: ./.github/workflows/session-info
+        uses: cynkra/cynkratemplate/.github/actions/session-info@main
 
       - name: Check new
-        uses: ./.github/workflows/revdep-check-new
+        uses: cynkra/cynkratemplate/.github/actions/revdep-check-new@main
         with:
           package: ${{ matrix.package }}
       - name: Compare
-        uses: ./.github/workflows/revdep-compare
+        uses: cynkra/cynkratemplate/.github/actions/revdep-compare@main
         with:
           package: ${{ matrix.package }}
       - name: Upload check results

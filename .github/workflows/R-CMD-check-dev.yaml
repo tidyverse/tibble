@@ -28,7 +28,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Report the GitHub API rate limit
-        uses: ./.github/workflows/rate-limit
+        uses: cynkra/cynkratemplate/.github/actions/rate-limit@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
@@ -36,7 +36,7 @@ jobs:
 
       - name: Collect the dependencies into a matrix
         id: set-matrix
-        uses: ./.github/workflows/dep-matrix
+        uses: cynkra/cynkratemplate/.github/actions/dep-matrix@main
 
   check-matrix:
     runs-on: ubuntu-26.04
@@ -48,7 +48,7 @@ jobs:
       - uses: actions/checkout@v6
 
       - name: Check matrix definition
-        uses: ./.github/workflows/matrix-check
+        uses: cynkra/cynkratemplate/.github/actions/matrix-check@main
         with:
           matrix: ${{ needs.matrix.outputs.matrix }}
 
@@ -74,7 +74,7 @@ jobs:
         if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
 
       - name: Install R and the package dependencies
-        uses: ./.github/workflows/install
+        uses: cynkra/cynkratemplate/.github/actions/install@main
         with:
           cache-version: rcc-dev-base-1
           needs: build, check
@@ -82,18 +82,18 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Session info
-        uses: ./.github/workflows/session-info
+        uses: cynkra/cynkratemplate/.github/actions/session-info@main
 
       - name: Run the repository-specific after-install steps
         uses: ./.github/workflows/custom/after-install
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
       - name: Update the testthat snapshots
-        uses: ./.github/workflows/update-snapshots
+        uses: cynkra/cynkratemplate/.github/actions/update-snapshots@main
         if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
 
       - name: Run R CMD check
-        uses: ./.github/workflows/check
+        uses: cynkra/cynkratemplate/.github/actions/check@main
         with:
           results: ${{ matrix.package }}
 
@@ -123,7 +123,7 @@ jobs:
         if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
 
       - name: Install R and the package dependencies
-        uses: ./.github/workflows/install
+        uses: cynkra/cynkratemplate/.github/actions/install@main
         with:
           cache-version: rcc-dev-${{ matrix.package }}-1
           needs: build, check
@@ -141,17 +141,17 @@ jobs:
         shell: Rscript {0}
 
       - name: Session info
-        uses: ./.github/workflows/session-info
+        uses: cynkra/cynkratemplate/.github/actions/session-info@main
 
       - name: Run the repository-specific after-install steps
         uses: ./.github/workflows/custom/after-install
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
       - name: Update the testthat snapshots
-        uses: ./.github/workflows/update-snapshots
+        uses: cynkra/cynkratemplate/.github/actions/update-snapshots@main
         if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
 
       - name: Run R CMD check
-        uses: ./.github/workflows/check
+        uses: cynkra/cynkratemplate/.github/actions/check@main
         with:
           results: ${{ matrix.package }}

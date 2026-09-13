@@ -278,7 +278,7 @@ jobs:
       # instead of a bare exit 143.
       - name: Make room for the dependency universe
         if: steps.plan.outputs.shards != '0' && inputs.dry-run != true
-        uses: ./.github/workflows/revdep2-disk-room
+        uses: cynkra/cynkratemplate/.github/actions/revdep2-disk-room@main
       # The preflight downloads every dependency binary once; saving the pak
       # cache under the plan's hash hands the shards a warm start.
       - name: Cache the pak package cache
@@ -297,7 +297,7 @@ jobs:
         # here would take the shard matrix with it.
         continue-on-error: true
         if: steps.plan.outputs.shards != '0' && inputs.dry-run != true
-        uses: ./.github/workflows/revdep2-install-universe
+        uses: cynkra/cynkratemplate/.github/actions/revdep2-install-universe@main
         with:
           gh-token: ${{ github.token }}
           plan: ${{ runner.temp }}/plan.json
@@ -376,7 +376,7 @@ jobs:
           ref: ${{ inputs.ref || github.ref }}
 
       - name: Install R and the package dependencies
-        uses: ./.github/workflows/install
+        uses: cynkra/cynkratemplate/.github/actions/install@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           cache-version: revdep2-1
@@ -510,7 +510,7 @@ jobs:
         uses: r-lib/actions/setup-pandoc@v2
 
       - name: Close the log group that setup-pandoc leaves open
-        # See `.github/workflows/install/action.yml` for why this is needed.
+        # See `.github/actions/install/action.yml` for why this is needed.
         # Fixed upstream by https://github.com/r-lib/actions/pull/1103.
         if: runner.os == 'Linux'
         run: |
@@ -589,7 +589,7 @@ jobs:
       # a later write is what reliably overrides an earlier one. This step runs
       # after it and before both driver steps.
       - name: Point the driver at this runner's directories
-        uses: ./.github/workflows/revdep2-driver-env
+        uses: cynkra/cynkratemplate/.github/actions/revdep2-driver-env@main
         with:
           not-cran-input: ${{ env.REVDEP2_NOT_CRAN }}
       # Two steps, one driver. The install is minutes to an hour and the checks
@@ -871,7 +871,7 @@ jobs:
           && vars.REVDEP2_COMMIT_REPORT != 'false'
           && steps.collect.outputs.compared != '0'
         continue-on-error: true
-        uses: ./.github/workflows/revdep-commit-report
+        uses: cynkra/cynkratemplate/.github/actions/revdep-commit-report@main
         with:
           ref: ${{ inputs.ref }}
 

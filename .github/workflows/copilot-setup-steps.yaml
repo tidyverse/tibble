@@ -34,7 +34,7 @@ jobs:
         if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
 
       - name: Install R and the package dependencies
-        uses: ./.github/workflows/install
+        uses: cynkra/cynkratemplate/.github/actions/install@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           cache-version: copilot

@@ -93,26 +93,26 @@ jobs:
 
       - name: Update status for rcc (pending)
         if: github.actor != 'Copilot' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
-        uses: ./.github/workflows/commit-status
+        uses: cynkra/cynkratemplate/.github/actions/commit-status@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           state: pending
           sha: ${{ inputs.ref }}
 
       - name: Report the GitHub API rate limit
-        uses: ./.github/workflows/rate-limit
+        uses: cynkra/cynkratemplate/.github/actions/rate-limit@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Configure the Git identity
-        uses: ./.github/workflows/git-identity
+        uses: cynkra/cynkratemplate/.github/actions/git-identity@main
 
       - name: Run the repository-specific before-install steps
         uses: ./.github/workflows/custom/before-install
         if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
 
       - name: Install R and the package dependencies
-        uses: ./.github/workflows/install
+        uses: cynkra/cynkratemplate/.github/actions/install@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           cache-version: rcc-smoke-2
@@ -144,24 +144,24 @@ jobs:
         # - workflow_dispatch if not requested
         # Always run for other events.
         if: (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name != github.repository || startsWith(github.head_ref, 'cran-')) && (github.event_name != 'workflow_dispatch' || inputs.versions-matrix)
-        uses: ./.github/workflows/versions-matrix
+        uses: cynkra/cynkratemplate/.github/actions/versions-matrix@main
 
       - name: Collect the suggested dependencies into a matrix
         id: dep-suggests-matrix
         continue-on-error: true
         # Not for workflow_dispatch if not requested, always run for other events
         if: github.event_name != 'workflow_dispatch' || inputs.dep-suggests-matrix
-        uses: ./.github/workflows/dep-suggests-matrix
+        uses: cynkra/cynkratemplate/.github/actions/dep-suggests-matrix@main
 
       - name: Determine repository state
         id: repo-state
-        uses: ./.github/workflows/repo-state
+        uses: cynkra/cynkratemplate/.github/actions/repo-state@main
 
       # Styling on foreign PRs works through the format-suggest workflow
       - name: Style the R sources
         id: style
         continue-on-error: true
-        uses: ./.github/workflows/style
+        uses: cynkra/cynkratemplate/.github/actions/style@main
         if: steps.repo-state.outputs.foreign != 'true' || steps.repo-state.outputs.is_pr != 'true'
 
       # Snapshot tests can't work in a way similar to format-suggests
@@ -169,14 +169,14 @@ jobs:
       - name: Update the testthat snapshots
         id: snapshots
         continue-on-error: true
-        uses: ./.github/workflows/update-snapshots
+        uses: cynkra/cynkratemplate/.github/actions/update-snapshots@main
         with:
           base: ${{ inputs.ref || github.head_ref }}
 
       - name: Roxygenize the documentation
         id: roxygenize
         continue-on-error: true
-        uses: ./.github/workflows/roxygenize
+        uses: cynkra/cynkratemplate/.github/actions/roxygenize@main
 
       - name: Remove config files from previous iteration
         run: |
@@ -186,21 +186,21 @@ jobs:
       - name: Commit and push the generated changes
         id: commit
         continue-on-error: true
-        uses: ./.github/workflows/commit
+        uses: cynkra/cynkratemplate/.github/actions/commit@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run R CMD check
         id: check
         continue-on-error: true
-        uses: ./.github/workflows/check
+        uses: cynkra/cynkratemplate/.github/actions/check@main
         with:
           results: ${{ runner.os }}-smoke-test
 
       - name: Build the pkgdown website
         id: pkgdown-build
         continue-on-error: true
-        uses: ./.github/workflows/pkgdown-build
+        uses: cynkra/cynkratemplate/.github/actions/pkgdown-build@main
         if: github.event_name != 'push'
 
       # Deliberately deploy only on push
@@ -212,7 +212,7 @@ jobs:
       - name: Build and deploy the pkgdown website
         id: pkgdown-deploy
         continue-on-error: true
-        uses: ./.github/workflows/pkgdown-deploy
+        uses: cynkra/cynkratemplate/.github/actions/pkgdown-deploy@main
         if: github.event_name == 'push' && steps.check.outcome == 'success'
 
       # Upload sha as artifact
@@ -259,7 +259,7 @@ jobs:
       - name: Collect the outcomes of the checks
         id: outcomes
         if: always()
-        uses: ./.github/workflows/collect-checks
+        uses: cynkra/cynkratemplate/.github/actions/collect-checks@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           # One `<step name>|<label>|<outcome>` per line, in the order the steps
@@ -284,7 +284,7 @@ jobs:
       - name: >-
           Summarize checks${{ steps.outcomes.outputs.failed_labels }}
         if: always()
-        uses: ./.github/workflows/summarize-checks
+        uses: cynkra/cynkratemplate/.github/actions/summarize-checks@main
         with:
           failed-count: ${{ steps.outcomes.outputs.failed_count }}
           report: ${{ steps.outcomes.outputs.report }}
@@ -292,7 +292,7 @@ jobs:
 
       - name: Update status for rcc (final)
         if: always() && (github.actor != 'Copilot') && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository)
-        uses: ./.github/workflows/commit-status
+        uses: cynkra/cynkratemplate/.github/actions/commit-status@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           state: ${{ job.status }}
@@ -302,7 +302,7 @@ jobs:
       - name: Update status for rcc (Copilot)
         # Update status directly when triggered by Copilot or bots, since they can't dispatch workflows
         if: always() && (github.actor == 'Copilot')
-        uses: ./.github/workflows/commit-status
+        uses: cynkra/cynkratemplate/.github/actions/commit-status@main
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           state: ${{ job.status }}
@@ -325,12 +325,12 @@ jobs:
           ref: ${{ needs.rcc-smoke.outputs.sha }}
 
       - name: Show the R versions matrix
-        uses: ./.github/workflows/matrix-check
+        uses: cynkra/cynkratemplate/.github/actions/matrix-check@main
         with:
           matrix: ${{ needs.rcc-smoke.outputs.versions-matrix }}
 
       - name: Show the suggested dependencies matrix
-        uses: ./.github/workflows/matrix-check
+        uses: cynkra/cynkratemplate/.github/actions/matrix-check@main
         with:
           matrix: ${{ needs.rcc-smoke.outputs.dep-suggests-matrix }}
 
@@ -380,7 +380,7 @@ jobs:
         if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
 
       - name: Install R and the package dependencies
-        uses: ./.github/workflows/install
+        uses: cynkra/cynkratemplate/.github/actions/install@main
         with:
           r-version: ${{ matrix.r }}
           cache-version: rcc-full-1
@@ -392,9 +392,9 @@ jobs:
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
       - name: Must allow NOTEs if packages are missing, even with _R_CHECK_FORCE_SUGGESTS_
-        uses: ./.github/workflows/allow-notes-when-deps-missing
+        uses: cynkra/cynkratemplate/.github/actions/allow-notes-when-deps-missing@main
       - name: Update the testthat snapshots
-        uses: ./.github/workflows/update-snapshots
+        uses: cynkra/cynkratemplate/.github/actions/update-snapshots@main
         # Generic escape hatch: a custom action may set SKIP_UPDATE_SNAPSHOTS
         # to opt out of running the snapshot updater,
         # which runs tests directly via testthat::test_local()
@@ -404,7 +404,7 @@ jobs:
           base: ${{ github.head_ref }}
 
       - name: Run R CMD check
-        uses: ./.github/workflows/check
+        uses: cynkra/cynkratemplate/.github/actions/check@main
         if: ${{ ! matrix.covr }}
         with:
           # Include the architecture: the matrix pairs each arm64 runner with an
@@ -414,7 +414,7 @@ jobs:
           results: ${{ runner.os }}-${{ runner.arch }}-r${{ matrix.r }}
 
       - name: Compute and upload the test coverage
-        uses: ./.github/workflows/covr
+        uses: cynkra/cynkratemplate/.github/actions/covr@main
         if: ${{ matrix.covr }}
         with:
           token: ${{ secrets.CODECOV_TOKEN }}
@@ -446,7 +446,7 @@ jobs:
         if: hashFiles('.github/workflows/custom/before-install/action.yml') != ''
 
       - name: Install R and the package dependencies
-        uses: ./.github/workflows/install
+        uses: cynkra/cynkratemplate/.github/actions/install@main
         with:
           cache-version: rcc-dev-${{ matrix.package }}-1
           needs: build, check
@@ -464,7 +464,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Session info
-        uses: ./.github/workflows/session-info
+        uses: cynkra/cynkratemplate/.github/actions/session-info@main
 
       - name: Run the repository-specific after-install steps
         uses: ./.github/workflows/custom/after-install
@@ -484,7 +484,7 @@ jobs:
         shell: Rscript {0}
 
       - name: Run R CMD check
-        uses: ./.github/workflows/check
+        uses: cynkra/cynkratemplate/.github/actions/check@main
         with:
           results: ${{ matrix.package }}
 

@@ -14,7 +14,7 @@ on:
   #      binaries) is loaded from the BASE repository, not from the PR checkout.
   #      This is the critical point. The naive pattern
   #        - uses: actions/checkout@v6      # ref: fork head
-  #        - uses: ./.github/workflows/style
+  #        - uses: cynkra/cynkratemplate/.github/actions/style@main
   #      resolves `./...style` from the *checked-out fork*, so an attacker only
   #      has to edit their fork's `style/action.yml` to run arbitrary commands
   #      with our token and secrets. Here we run the base repo's copy instead

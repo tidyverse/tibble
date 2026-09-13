@@ -53,7 +53,7 @@ jobs:
 
     steps:
       - name: Update commit status
-        uses: cynkra/cynkratemplate/.github/workflows/rcc-status-update@main
+        uses: cynkra/cynkratemplate/.github/actions/rcc-status-update@main
         with:
           gh-token: ${{ secrets.GITHUB_TOKEN }}
           repo: ${{ github.repository }}
