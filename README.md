@@ -9,7 +9,7 @@
 <!-- badges: start -->
 
 [![R-CMD-check](https://github.com/tidyverse/tibble/workflows/rcc/badge.svg)](https://github.com/tidyverse/tibble/actions)
-[![Codecov test coverage](https://codecov.io/gh/tidyverse/tibble/branch/main/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/tibble?branch=main)
+[![Codecov test coverage](https://codecov.io/gh/tidyverse/tibble/graph/badge.svg)](https://app.codecov.io/gh/tidyverse/tibble/tree/main)
 [![CRAN_Status_Badge](https://www.r-pkg.org/badges/version/tibble)](https://cran.r-project.org/package=tibble)
 [![Life cycle](https://img.shields.io/badge/lifecycle-stable-brightgreen.svg)](https://lifecycle.r-lib.org/articles/stages.html)
 <!-- badges: end -->
