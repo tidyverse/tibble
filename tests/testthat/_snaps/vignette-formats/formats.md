@@ -21,7 +21,8 @@ library(tibble)
 ## Overview
 
 This vignette shows how to decorate columns for custom formatting.
-We use the formattable package for demonstration because it already contains useful vector classes that apply a custom formatting to numbers.
+We use the formattable package for demonstration
+because it already contains useful vector classes that apply a custom formatting to numbers.
 
 
 ``` r
@@ -127,7 +128,8 @@ There are two principal options where to apply formatting for results: right bef
 
 
 
-Applying formatting early in the process gives the added benefit of showing the data in a useful format during the "Tidy", "Transform", and "Visualize" stages.
+Applying formatting early in the process gives the added benefit of showing the data in a useful format
+during the "Tidy", "Transform", and "Visualize" stages.
 For this to be useful, we need to ensure that the formatting options applied early:
 
 - give a good user experience for analysis
@@ -139,7 +141,8 @@ For this to be useful, we need to ensure that the formatting options applied ear
     - are applied in the various communication options
     - support everything necessary to present the data in the desired way
 
-Ensuring stickiness is difficult, and is insufficient for a dbplyr workflow where parts of the "Tidy", "Transform" or even "Visualize" stages are run on the database.
+Ensuring stickiness is difficult, and is insufficient for a dbplyr workflow
+where parts of the "Tidy", "Transform" or even "Visualize" stages are run on the database.
 Often it's possible to derive a rule-based approach for formatting.
 
 

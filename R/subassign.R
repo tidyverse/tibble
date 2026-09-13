@@ -60,8 +60,8 @@
 
   j <- vectbl_as_new_col_index(j, x, j_arg)
 
-  # New columns are added to the end, provide index to avoid matching column
-  # names again
+  # New columns are added to the end,
+  # provide index to avoid matching column names again
   value <- list(value)
 
   # j is already pretty

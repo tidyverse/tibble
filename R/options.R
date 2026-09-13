@@ -33,8 +33,8 @@
 #' # view() would show the default 1000 rows e.g. for a lazy data frame
 #' @section Options for the tibble package:
 tibble_options <- list2(
-  #' - `view_max`: Maximum number of rows shown by [view()]
-  #'   if the input is not a data frame, passed on to [head()]. Default: `1000`.
+  #' - `view_max`: Maximum number of rows shown by [view()] if the input is not a data frame, passed on to [head()].
+  #'   Default: `1000`.
   view_max = make_option_impl(
     getOption("tibble.view_max", default = 1000L)
   ),

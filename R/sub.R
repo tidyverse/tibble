@@ -1,25 +1,20 @@
 #' Subsetting tibbles
 #'
 #' @description
-#' Accessing columns, rows, or cells via `$`, `[[`, or `[` is mostly similar to
-#' [regular data frames][base::Extract]. However, the
-#' behavior is different for tibbles and data frames in some cases:
-#' * `[` always returns a tibble by default, even if
-#'   only one column is accessed.
-#' * Partial matching of column names with `$` and `[[` is not supported, and
-#'   `NULL` is returned.
+#' Accessing columns, rows, or cells via `$`, `[[`, or `[` is mostly similar to [regular data frames][base::Extract].
+#' However, the behavior is different for tibbles and data frames in some cases:
+#' * `[` always returns a tibble by default, even if only one column is accessed.
+#' * Partial matching of column names with `$` and `[[` is not supported, and `NULL` is returned.
 #'   For `$`, a warning is given.
-#' * Only scalars (vectors of length one) or vectors with the
-#'   same length as the number of rows can be used for assignment.
+#' * Only scalars (vectors of length one) or vectors with the same length as the number of rows can be used for assignment.
 #' * Rows outside of the tibble's boundaries cannot be accessed.
-#' * When updating with `[[<-` and `[<-`, type changes of entire columns are
-#'   supported, but updating a part of a column requires that the new value is
-#'   coercible to the existing type.
+#' * When updating with `[[<-` and `[<-`, type changes of entire columns are supported,
+#'   but updating a part of a column requires that the new value is coercible to the existing type.
 #'   See [vec_slice()] for the underlying implementation.
 #'
-#' Unstable return type and implicit partial matching can lead to surprises and
-#' bugs that are hard to catch. If you rely on code that requires the original
-#' data frame behavior, coerce to a data frame via [as.data.frame()].
+#' Unstable return type and implicit partial matching can lead to surprises and bugs that are hard to catch.
+#' If you rely on code that requires the original data frame behavior,
+#' coerce to a data frame via [as.data.frame()].
 #'
 #' @details
 #' For better compatibility with older code written for regular data frames,

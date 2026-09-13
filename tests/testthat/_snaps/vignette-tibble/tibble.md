@@ -58,8 +58,8 @@ It encapsulates best practices for data frames:
     #> 3     3 <int [20]>
     ```
 
-    List-columns are often created by `tidyr::nest()`, but they can be useful to
-    create by hand.
+    List-columns are often created by `tidyr::nest()`,
+    but they can be useful to create by hand.
 
   * It never adjusts the names of variables:
 
@@ -115,7 +115,8 @@ timing
 
 
 
-The speed of `as.data.frame()` is not usually a bottleneck when used interactively, but can be a problem when combining thousands of messy inputs into one tidy data frame.
+The speed of `as.data.frame()` is not usually a bottleneck when used interactively,
+but can be a problem when combining thousands of messy inputs into one tidy data frame.
 
 ## Tibbles vs data frames
 
@@ -152,9 +153,14 @@ You can control the default appearance with options:
 * `options(pillar.print_max = n, pillar.print_min = m)`: if there are more than `n` rows, print only the first `m` rows.
   Use `options(pillar.print_max = Inf)` to always show all rows.
 
-* `options(pillar.width = n)`: use `n` character slots horizontally to show the data. If `n > getOption("width")`, this will result in multiple tiers. Use `options(pillar.width = Inf)` to always print all columns, regardless of the width of the screen.
+* `options(pillar.width = n)`: use `n` character slots horizontally to show the data.
+  If `n > getOption("width")`, this will result in multiple tiers.
+  Use `options(pillar.width = Inf)` to always print all columns, regardless of the width of the screen.
 
-See `?pillar::pillar_options` and `?tibble_options` for the available options, `vignette("types")` for an overview of the type abbreviations, `vignette("numbers")` for details on the formatting of numbers, and `vignette("digits")` for a comparison with data frame printing.
+See `?pillar::pillar_options` and `?tibble_options` for the available options,
+`vignette("types")` for an overview of the type abbreviations,
+`vignette("numbers")` for details on the formatting of numbers,
+and `vignette("digits")` for a comparison with data frame printing.
 
 ### Subsetting
 

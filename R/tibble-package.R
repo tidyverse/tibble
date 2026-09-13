@@ -43,24 +43,21 @@ NULL
 #' @details
 #' `r lifecycle::badge("stable")`
 #'
-#' The tibble package provides utilities for handling __tibbles__, where
-#' "tibble" is a colloquial term for the S3 [`tbl_df`] class. The [`tbl_df`]
-#' class is a special case of the base [`data.frame`][base::data.frame()]
-#' class, developed in response to lessons learned over many years of data
-#' analysis with data frames.
+#' The tibble package provides utilities for handling __tibbles__,
+#' where "tibble" is a colloquial term for the S3 [`tbl_df`] class.
+#' The [`tbl_df`] class is a special case of the base [`data.frame`][base::data.frame()] class,
+#' developed in response to lessons learned over many years of data analysis with data frames.
 #'
-#' Tibble is the central data structure for the set of packages known as the
-#' [tidyverse](https://tidyverse.org/packages/), including
-#' [dplyr](https://dplyr.tidyverse.org/),
+#' Tibble is the central data structure for the set of packages known as the [tidyverse](https://tidyverse.org/packages/),
+#' including [dplyr](https://dplyr.tidyverse.org/),
 #' [ggplot2](https://ggplot2.tidyverse.org/),
 #' [tidyr](https://tidyr.tidyverse.org/), and
 #' [readr](https://readr.tidyverse.org/).
 #'
 #' General resources:
 #'   * Website for the tibble package: <https://tibble.tidyverse.org>
-#'   * [Vectors chapter](https://adv-r.hadley.nz/vectors-chap.html) in *Advanced R*
-#'     (2nd edition), specifically the
-#'     [Data frames and tibbles section](https://adv-r.hadley.nz/vectors-chap.html#tibble)
+#'   * [Vectors chapter](https://adv-r.hadley.nz/vectors-chap.html) in *Advanced R* (2nd edition),
+#'     specifically the [Data frames and tibbles section](https://adv-r.hadley.nz/vectors-chap.html#tibble)
 #'
 #' Resources on specific topics:
 #'   * Create a tibble: [tibble()], [as_tibble()], [tribble()], [enframe()]

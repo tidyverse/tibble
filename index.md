@@ -17,7 +17,13 @@
 
 ## Overview
 
-A **tibble**, or `tbl_df`, is a modern reimagining of the data.frame, keeping what time has proven to be effective, and throwing out what is not. Tibbles are data.frames that are lazy and surly: they do less (i.e. they don't change variable names or types, and don't do partial matching) and complain more (e.g. when a variable does not exist). This forces you to confront problems earlier, typically leading to cleaner, more expressive code. Tibbles also have an enhanced `print()` method which makes them easier to use with large datasets containing complex objects.
+A **tibble**, or `tbl_df`, is a modern reimagining of the data.frame,
+keeping what time has proven to be effective, and throwing out what is not.
+Tibbles are data.frames that are lazy and surly:
+they do less (i.e. they don't change variable names or types, and don't do partial matching)
+and complain more (e.g. when a variable does not exist).
+This forces you to confront problems earlier, typically leading to cleaner, more expressive code.
+Tibbles also have an enhanced `print()` method which makes them easier to use with large datasets containing complex objects.
 
 If you are new to tibbles, the best place to start is the [tibbles chapter](https://r4ds.had.co.nz/tibbles.html) in *R for data science*.
 
@@ -76,7 +82,12 @@ tibble(x = 1:5, y = 1, z = x^2 + y)
 #> [38;5;250m5[39m     5     1    26
 ```
 
-`tibble()` does much less than `data.frame()`: it never changes the type of the inputs (e.g. it keeps list columns as is), it never changes the names of variables, it only recycles inputs of length 1, and it never creates `row.names()`. You can read more about these features in `vignette("tibble")`.
+`tibble()` does much less than `data.frame()`:
+it never changes the type of the inputs (e.g. it keeps list columns as is),
+it never changes the names of variables,
+it only recycles inputs of length 1,
+and it never creates `row.names()`.
+You can read more about these features in `vignette("tibble")`.
 
 You can define a tibble row-by-row with `tribble()`:
 
@@ -95,4 +106,6 @@ tribble(
 
 ## Related work
 
-The tibble print method draws inspiration from [data.table](https://rdatatable.gitlab.io/data.table), and [frame](https://github.com/patperry/r-frame). Like `data.table::data.table()`, `tibble()` doesn't change column names and doesn't use rownames.
+The tibble print method draws inspiration from [data.table](https://rdatatable.gitlab.io/data.table),
+and [frame](https://github.com/patperry/r-frame).
+Like `data.table::data.table()`, `tibble()` doesn't change column names and doesn't use rownames.

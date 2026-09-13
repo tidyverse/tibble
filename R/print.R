@@ -5,17 +5,14 @@
 #'
 #' * Tibbles only print as many rows and columns as fit on one screen,
 #'   supplemented by a summary of the remaining rows and columns.
-#' * Tibble reveals the type of each column, which keeps the user informed about
-#'   whether a variable is, e.g., `<chr>` or `<fct>` (character versus factor).
-#'   See `vignette("types")` for an overview of common
-#'   type abbreviations.
+#' * Tibble reveals the type of each column,
+#'   which keeps the user informed about whether a variable is, e.g., `<chr>` or `<fct>` (character versus factor).
+#'   See `vignette("types")` for an overview of common type abbreviations.
 #'
-#' Printing can be tweaked for a one-off call by calling `print()` explicitly
-#' and setting arguments like `n` and `width`. More persistent control is
-#' available by setting the options described in [pillar::pillar_options].
+#' Printing can be tweaked for a one-off call by calling `print()` explicitly and setting arguments like `n` and `width`.
+#' More persistent control is available by setting the options described in [pillar::pillar_options].
 #' See also `vignette("digits")` for a comparison to base options,
-#' and `vignette("numbers")` that showcases [num()] and [char()]
-#' for creating columns with custom formatting options.
+#' and `vignette("numbers")` that showcases [num()] and [char()] for creating columns with custom formatting options.
 #'
 #' As of tibble 3.1.0, printing is handled entirely by the \pkg{pillar} package.
 #' If you implement a package that extends tibble,
@@ -26,18 +23,17 @@
 # Copied from pillar::format.tbl() to avoid roxygen2 warning
 #' @inheritParams rlang::args_dots_empty
 #' @param x Object to format or print.
-#' @param n Number of rows to show. If `NULL`, the default, will print all rows
-#'   if less than the `print_max` [option][pillar::pillar_options].
-#'   Otherwise, will print as many rows as specified by the
-#'   `print_min` [option][pillar::pillar_options].
-#' @param width Width of text output to generate. This defaults to `NULL`, which
-#'   means use the `width` [option][pillar::pillar_options].
+#' @param n Number of rows to show.
+#'   If `NULL`, the default, will print all rows if less than the `print_max` [option][pillar::pillar_options].
+#'   Otherwise, will print as many rows as specified by the `print_min` [option][pillar::pillar_options].
+#' @param width Width of text output to generate.
+#'   This defaults to `NULL`, which means use the `width` [option][pillar::pillar_options].
 #' @param max_extra_cols Number of extra columns to print abbreviated information for,
-#'   if the width is too small for the entire tibble. If `NULL`,
-#'   the `max_extra_cols` [option][pillar::pillar_options] is used.
+#'   if the width is too small for the entire tibble.
+#'   If `NULL`, the `max_extra_cols` [option][pillar::pillar_options] is used.
 #'   The previously defined `n_extra` argument is soft-deprecated.
-#' @param max_footer_lines Maximum number of footer lines. If `NULL`,
-#'   the `max_footer_lines` [option][pillar::pillar_options] is used.
+#' @param max_footer_lines Maximum number of footer lines.
+#'   If `NULL`, the `max_footer_lines` [option][pillar::pillar_options] is used.
 #'
 #' @examples
 #' print(as_tibble(mtcars))
@@ -96,20 +92,19 @@ format.tbl_df <- function(
 #' See `vignette("extending", package = "pillar")` for details.
 #'
 #' @param x Object to format or print.
-#' @param n Number of rows to show. If `NULL`, the default, will print all rows
-#'   if less than option `tibble.print_max`. Otherwise, will print
-#'   `tibble.print_min` rows.
-#' @param width Width of text output to generate. This defaults to `NULL`, which
-#'   means use `getOption("tibble.width")` or (if also `NULL`)
-#'   `getOption("width")`; the latter displays only the columns that fit on one
-#'   screen. You can also set `options(tibble.width = Inf)` to override this
-#'   default and always print all columns, this may be slow for very wide tibbles.
+#' @param n Number of rows to show.
+#'   If `NULL`, the default, will print all rows if less than option `tibble.print_max`.
+#'   Otherwise, will print `tibble.print_min` rows.
+#' @param width Width of text output to generate.
+#'   This defaults to `NULL`, which means use `getOption("tibble.width")` or (if also `NULL`) `getOption("width")`;
+#'   the latter displays only the columns that fit on one screen.
+#'   You can also set `options(tibble.width = Inf)` to override this default and always print all columns,
+#'   this may be slow for very wide tibbles.
 #' @param n_extra Number of extra columns to print abbreviated information for,
-#'   if the width is too small for the entire tibble. If `NULL`, the default,
-#'   will print information about at most `tibble.max_extra_cols` extra columns.
+#'   if the width is too small for the entire tibble.
+#'   If `NULL`, the default, will print information about at most `tibble.max_extra_cols` extra columns.
 #'
-#' @return An object with a `print()` method that will print the input
-#'   similarly to a tibble.
+#' @return An object with a `print()` method that will print the input similarly to a tibble.
 #'   The internal data format is an implementation detail, do not rely on it.
 #' @export
 #' @keywords internal

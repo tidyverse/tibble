@@ -35,7 +35,8 @@ See `?pillar::pillar_options` and `?tibble_options` for an overview over all opt
 The default for `getOption("digits")` is 7, whereas the `"pillar.sigfig"` option defaults to 3.
 In the default setting, pillar prints the first three digits only (i.e. the digits that represent > 99.9% of the value of the number).
 Another difference is that pillar will show at most the specified number of significant digits, even if space is available.
-The rationale is to allow a quick glance over the most significant digits of a number, without spending too much horizontal space and without distraction from insignificant digits.
+The rationale is to allow a quick glance over the most significant digits of a number,
+without spending too much horizontal space and without distraction from insignificant digits.
 
 ```{r}
 options(digits = 3)

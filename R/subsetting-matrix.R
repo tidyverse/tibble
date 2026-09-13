@@ -60,8 +60,7 @@ matrix_to_cells <- function(j, x, j_arg, call = caller_env()) {
     abort_subset_matrix_must_have_same_dimensions(j_arg, call)
   }
 
-  # Need unlist(list(...)) because apply() isn't type stable if the return
-  # has the same length everywhere
+  # Need unlist(list(...)) because apply() isn't type stable if the return has the same length everywhere
   # FIXME: Faster with a C implementation?
   cells <- unlist(apply(j, 2, function(x) list(which(x))), recursive = FALSE)
   cells

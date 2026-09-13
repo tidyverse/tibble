@@ -1,18 +1,16 @@
 #' Add rows to a data frame
 #'
 #' @description
-#' This is a convenient way to add one or more rows of data to an existing data
-#' frame. See [tribble()] for an easy way to create an complete
-#' data frame row-by-row. Use [tibble_row()] to ensure that the new data
-#' has only one row.
+#' This is a convenient way to add one or more rows of data to an existing data frame.
+#' See [tribble()] for an easy way to create an complete data frame row-by-row.
+#' Use [tibble_row()] to ensure that the new data has only one row.
 #'
 #' `add_case()` is an alias of `add_row()`.
 #'
 #' @param .data Data frame to append to.
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
-#'   Name-value pairs, passed on to [tibble()]. Values can be defined
-#'   only for columns that already exist in `.data` and unset columns will get an
-#'   `NA` value.
+#'   Name-value pairs, passed on to [tibble()].
+#'   Values can be defined only for columns that already exist in `.data` and unset columns will get an `NA` value.
 #' @param .before,.after One-based row index where to add the new rows,
 #'   default: after last row.
 #' @family addition
@@ -99,15 +97,14 @@ rbind_at <- function(old, new, pos) {
 
 #' Add columns to a data frame
 #'
-#' This is a convenient way to add one or more columns to an existing data
-#' frame.
+#' This is a convenient way to add one or more columns to an existing data frame.
 #'
 #' @param .data Data frame to append to.
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
-#'   Name-value pairs, passed on to [tibble()]. All values must have
-#'   the same size of `.data` or size 1.
-#' @param .before,.after One-based column index or column name where to add the
-#'   new columns, default: after last column.
+#'   Name-value pairs, passed on to [tibble()].
+#'   All values must have the same size of `.data` or size 1.
+#' @param .before,.after One-based column index or column name where to add the new columns,
+#'   default: after last column.
 #' @inheritParams tibble
 #' @family addition
 #' @examples
