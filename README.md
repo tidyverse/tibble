@@ -25,6 +25,33 @@ Tibbles also have an enhanced `print()` method which makes them easier to use wi
 
 If you are new to tibbles, the best place to start is the [tibbles chapter](https://r4ds.had.co.nz/tibbles.html) in *R for data science*.
 
+## Goals and non-goals
+
+tibble aims to:
+
+- Provide the `tbl_df` class:
+  a data frame that never changes the type or the name of an input,
+  only recycles values of length 1, and never creates row names.
+- Fail early rather than guess:
+  `$` never partially matches and warns when a column is absent, and `[` always returns a data frame.
+- Define subsetting and subset assignment as a small set of invariants,
+  and document every point where they differ from data frames, in [`vignette("invariants")`](https://tibble.tidyverse.org/articles/invariants.html).
+- Show a data frame compactly:
+  the rows and columns that fit on one screen, plus an abbreviation of each column's type, catalogued in [`vignette("types")`](https://tibble.tidyverse.org/articles/types.html).
+- Stay extensible:
+  `new_tibble()` and `tbl_sum()` let other packages build classes on `"tbl_df"`, or on `"tbl"` alone, as [`vignette("extending")`](https://tibble.tidyverse.org/articles/extending.html) describes.
+
+It is explicitly not trying to:
+
+- Format the output itself:
+  as of tibble 3.1.0 printing is handled entirely by pillar, which also owns the display options and the extension points for them.
+- Define column types:
+  any vctrs vector can be a column, and a new type is implemented with vctrs rather than here.
+- Be a drop-in replacement for `data.frame()`:
+  row names are dropped instead of stored, and arithmetic is not defined across all columns.
+- Convert arbitrary objects:
+  `as_tibble()` is for inputs that are already data frames, lists, matrices, or tables.
+
 ## Installation
 
 ``` r
