@@ -1,5 +1,22 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.1.9027
+
+## Features
+
+### ci
+
+- Align the `revdep2`, `revdep4` and `revdepx` subsystems with `rigraph`.
+
+## Continuous integration
+
+- Survive an archived CRAN package, cache revdep compiles (@krlmlr, #1698).
+
+## Uncategorized
+
+- Ci: Fail the roxygenize step on roxygen2 warnings (#111).
+
+
 # tibble 3.3.1.9026
 
 ## Bug fixes
