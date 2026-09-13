@@ -40,27 +40,22 @@ Default \code{FALSE}, ignored when accessing a column via \code{tbl[j]} .}
 Tibbles are stricter than data frames in what is accepted here.}
 }
 \description{
-Accessing columns, rows, or cells via \code{$}, \code{[[}, or \code{[} is mostly similar to
-\link[base:Extract]{regular data frames}. However, the
-behavior is different for tibbles and data frames in some cases:
+Accessing columns, rows, or cells via \code{$}, \code{[[}, or \code{[} is mostly similar to \link[base:Extract]{regular data frames}.
+However, the behavior is different for tibbles and data frames in some cases:
 \itemize{
-\item \code{[} always returns a tibble by default, even if
-only one column is accessed.
-\item Partial matching of column names with \code{$} and \code{[[} is not supported, and
-\code{NULL} is returned.
+\item \code{[} always returns a tibble by default, even if only one column is accessed.
+\item Partial matching of column names with \code{$} and \code{[[} is not supported, and \code{NULL} is returned.
 For \code{$}, a warning is given.
-\item Only scalars (vectors of length one) or vectors with the
-same length as the number of rows can be used for assignment.
+\item Only scalars (vectors of length one) or vectors with the same length as the number of rows can be used for assignment.
 \item Rows outside of the tibble's boundaries cannot be accessed.
-\item When updating with \verb{[[<-} and \verb{[<-}, type changes of entire columns are
-supported, but updating a part of a column requires that the new value is
-coercible to the existing type.
+\item When updating with \verb{[[<-} and \verb{[<-}, type changes of entire columns are supported,
+but updating a part of a column requires that the new value is coercible to the existing type.
 See \code{\link[vctrs:vec_slice]{vec_slice()}} for the underlying implementation.
 }
 
-Unstable return type and implicit partial matching can lead to surprises and
-bugs that are hard to catch. If you rely on code that requires the original
-data frame behavior, coerce to a data frame via \code{\link[=as.data.frame]{as.data.frame()}}.
+Unstable return type and implicit partial matching can lead to surprises and bugs that are hard to catch.
+If you rely on code that requires the original data frame behavior,
+coerce to a data frame via \code{\link[=as.data.frame]{as.data.frame()}}.
 }
 \details{
 For better compatibility with older code written for regular data frames,

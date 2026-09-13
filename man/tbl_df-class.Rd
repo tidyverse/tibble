@@ -6,19 +6,17 @@
 \title{\code{tbl_df} class}
 \description{
 The \code{tbl_df} class is a subclass of \code{\link[base:data.frame]{data.frame}},
-created in order to have different default behaviour. The colloquial term
-"tibble" refers to a data frame that has the \code{tbl_df} class. Tibble is the
-central data structure for the set of packages known as the
-\href{https://tidyverse.org/packages/}{tidyverse}, including
-\href{https://dplyr.tidyverse.org/}{dplyr},
+created in order to have different default behaviour.
+The colloquial term "tibble" refers to a data frame that has the \code{tbl_df} class.
+Tibble is the central data structure for the set of packages known as the \href{https://tidyverse.org/packages/}{tidyverse},
+including \href{https://dplyr.tidyverse.org/}{dplyr},
 \href{https://ggplot2.tidyverse.org/}{ggplot2},
 \href{https://tidyr.tidyverse.org/}{tidyr}, and
 \href{https://readr.tidyverse.org/}{readr}.
 
-The general ethos is that tibbles are lazy and surly: they do less and
-complain more than base \link{data.frame}s. This forces
-problems to be tackled earlier and more explicitly, typically leading to code
-that is more expressive and robust.
+The general ethos is that tibbles are lazy and surly: they do less and complain more than base \link{data.frame}s.
+This forces problems to be tackled earlier and more explicitly,
+typically leading to code that is more expressive and robust.
 }
 \section{Properties of \code{tbl_df}}{
 
@@ -26,48 +24,46 @@ that is more expressive and robust.
 Objects of class \code{tbl_df} have:
 \itemize{
 \item A \code{class} attribute of \code{c("tbl_df", "tbl", "data.frame")}.
-\item A base type of \code{"list"}, where each element of the list has the same
-\code{\link[vctrs:vec_size]{vctrs::vec_size()}}.
-\item A \code{names} attribute that is a character vector the same length as the
-underlying list.
+\item A base type of \code{"list"}, where each element of the list has the same \code{\link[vctrs:vec_size]{vctrs::vec_size()}}.
+\item A \code{names} attribute that is a character vector the same length as the underlying list.
 \item A \code{row.names} attribute, included for compatibility with \link{data.frame}.
 This attribute is only consulted to query the number of rows,
-any row names that might be stored there are ignored
-by most tibble methods.
+any row names that might be stored there are ignored by most tibble methods.
 }
 }
 
 \section{Behavior of \code{tbl_df}}{
 
 
-How default behaviour of tibbles differs from that of
-\link{data.frame}s, during creation and access:
+How default behaviour of tibbles differs from that of \link{data.frame}s, during creation and access:
 \itemize{
-\item Column data is not coerced. A character vector is not turned into a factor.
+\item Column data is not coerced.
+A character vector is not turned into a factor.
 List-columns are expressly anticipated and do not require special tricks.
 Internal names are never stripped from column data.
 Read more in \code{\link[=tibble]{tibble()}}.
 \item Recycling only happens for a length 1 input.
 Read more in \code{\link[vctrs:vec_recycle]{vctrs::vec_recycle()}}.
 \item Column names are not munged, although missing names are auto-populated.
-Empty and duplicated column names are strongly discouraged, but the user
-must indicate how to resolve. Read more in \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
-\item Row names are not added and are strongly discouraged, in favor of storing
-that info as a column. Read about in \link{rownames}.
-\item \code{df[, j]} returns a tibble; it does not automatically extract the column
-inside. \code{df[, j, drop = FALSE]} is the default. Read more in \link{subsetting}.
-\item There is no partial matching when \code{$} is used to index by name. \code{df$name}
-for a nonexistent name generates a warning. Read more in \link{subsetting}.
+Empty and duplicated column names are strongly discouraged, but the user must indicate how to resolve.
+Read more in \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
+\item Row names are not added and are strongly discouraged, in favor of storing that info as a column.
+Read about in \link{rownames}.
+\item \code{df[, j]} returns a tibble; it does not automatically extract the column inside.
+\code{df[, j, drop = FALSE]} is the default.
+Read more in \link{subsetting}.
+\item There is no partial matching when \code{$} is used to index by name.
+\code{df$name} for a nonexistent name generates a warning.
+Read more in \link{subsetting}.
 }
 
 See \code{vignette("invariants")} for a detailed description of the behavior.
 
 Furthermore, printing and inspection are a very high priority.
-The goal is to convey as much information as possible, in a concise way,
-even for large and complex tibbles. Read more in \link{formatting}.
+The goal is to convey as much information as possible, in a concise way, even for large and complex tibbles.
+Read more in \link{formatting}.
 }
 
 \seealso{
-\code{\link[=tibble]{tibble()}}, \code{\link[=as_tibble]{as_tibble()}}, \code{\link[=tribble]{tribble()}}, \code{\link[=print.tbl]{print.tbl()}},
-\code{\link[=glimpse]{glimpse()}}
+\code{\link[=tibble]{tibble()}}, \code{\link[=as_tibble]{as_tibble()}}, \code{\link[=tribble]{tribble()}}, \code{\link[=print.tbl]{print.tbl()}}, \code{\link[=glimpse]{glimpse()}}
 }
