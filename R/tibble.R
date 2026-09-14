@@ -250,6 +250,16 @@ tibble_quos <- function(
   mask <- new_data_mask_with_data(env)
 
   first_size <- .rows
+  if (
+    !is.null(first_size) &&
+      (!is.numeric(first_size) ||
+        length(first_size) != 1 ||
+        is.na(first_size) ||
+        first_size < 0 ||
+        first_size != trunc(first_size))
+  ) {
+    abort_bad_rows_arg(first_size, call = call)
+  }
 
   for (j in seq_along(xs)) {
     res <- eval_tidy(xs[[j]], mask)
@@ -395,6 +405,16 @@ abort_tibble_row_size_one <- function(j, name, size, call = caller_env()) {
     problems(
       "All vectors must be size one, use `list()` to wrap.",
       paste0("Column ", desc, " is of size ", size, ".")
+    )
+  )
+}
+
+abort_bad_rows_arg <- function(rows, call = caller_env()) {
+  tibble_abort(
+    call = call,
+    problems(
+      "`.rows` must be `NULL` or a single nonnegative whole number.",
+      paste0("`.rows` is ", deparse(rows)[[1]], ".")
     )
   )
 }
