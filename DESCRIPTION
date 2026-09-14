@@ -63,4 +63,11 @@ Config/testthat/start-first: vignette-formats, as_tibble, add, invariants
 Config/usethis/last-upkeep: 2025-06-07
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-Config/roxygen2/version: 8.1.0.9000
+Config/roxygen2/version: 8.1.0.9100
+Config/cynkra/roxygen2: The .9100 suffix on Config/roxygen2/version marks a patched
+    roxygen2, not an upstream development build. Upstream numbers its own
+    development builds x.y.z.9000; the build that documents this package takes the
+    same x.y.z and uses .9100. It is upstream plus the sentence-spacing fix from
+    krlmlr/roxygen2@f-sentence-spacing, installed by
+    .github/workflows/roxygen2-fork. Regenerating man/ with a stock roxygen2 drops
+    the gap after every sentence that ends a line.
