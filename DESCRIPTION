@@ -4,9 +4,9 @@ Version: 3.3.1.9028
 Authors@R: c(
     person("Kirill", "Müller", , "kirill@cynkra.com", role = c("aut", "cre"),
            comment = c(ORCID = "0000-0002-1416-3412")),
-    person("Hadley", "Wickham", , "hadley@rstudio.com", role = "aut"),
+    person("Hadley", "Wickham", , "hadley@posit.co", role = "aut"),
     person("Romain", "Francois", , "romain@r-enthusiasts.com", role = "ctb"),
-    person("Jennifer", "Bryan", , "jenny@rstudio.com", role = "ctb"),
+    person("Jennifer", "Bryan", , "jenny@posit.co", role = "ctb"),
     person("Posit Software, PBC", role = c("cph", "fnd"),
            comment = c(ROR = "03wc8by49"))
   )
