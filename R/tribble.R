@@ -2,8 +2,7 @@
 #'
 #' @description
 #' Create [tibble]s using an easier to read row-by-row layout.
-#' This is useful for small tables of data where readability is
-#' important.  Please see \link{tibble-package} for a general introduction.
+#' This is useful for small tables of data where readability is important.  Please see \link{tibble-package} for a general introduction.
 #'
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
 #'   Arguments specifying the structure of a `tibble`.
@@ -49,10 +48,9 @@ tribble <- function(...) {
 #' Row-wise matrix creation
 #'
 #' @description
-#' Create matrices laying out the data in rows, similar to
-#' `matrix(..., byrow = TRUE)`, with a nicer-to-read syntax.
-#' This is useful for small matrices, e.g. covariance matrices, where readability
-#' is important. The syntax is inspired by [tribble()].
+#' Create matrices laying out the data in rows, similar to `matrix(..., byrow = TRUE)`, with a nicer-to-read syntax.
+#' This is useful for small matrices, e.g. covariance matrices, where readability is important.
+#' The syntax is inspired by [tribble()].
 #'
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
 #'   Arguments specifying the structure of a `frame_matrix`.
@@ -90,8 +88,7 @@ extract_frame_data_from_dots <- function(..., .call = caller_env()) {
     abort_tribble_named_after_tilde(.call)
   }
   if (length(frame_rest) == 0L) {
-    # Can't decide on type in absence of data -- use logical which is
-    # coercible to all types
+    # Can't decide on type in absence of data -- use logical which is coercible to all types
     frame_rest <- unspecified()
   }
 
@@ -138,8 +135,7 @@ validate_rectangular_shape <- function(
   }
 
   # Figure out the associated number of rows and number of columns,
-  # and validate that the supplied formula produces a rectangular
-  # structure.
+  # and validate that the supplied formula produces a rectangular structure.
   if (length(frame_rest) %% length(frame_names) != 0) {
     abort_tribble_non_rectangular(length(frame_names), length(frame_rest), call)
   }

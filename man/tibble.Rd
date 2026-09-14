@@ -20,71 +20,60 @@ tibble_row(
 }
 \arguments{
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
-A set of name-value pairs. These arguments are
-processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{\link[rlang:!!]{!!}} and
-unquote-splice via \code{\link[rlang:!!!]{!!!}}. Use \verb{:=} to create columns that start with a dot.
+A set of name-value pairs.
+These arguments are processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{\link[rlang:!!]{!!}} and unquote-splice via \code{\link[rlang:!!!]{!!!}}.
+Use \verb{:=} to create columns that start with a dot.
 
 Arguments are evaluated sequentially.
-You can refer to previously created elements directly or using the \link[rlang:.data]{.data}
-pronoun.
-To refer explicitly to objects in the calling environment, use \code{\link[rlang:!!]{!!}} or
-\link[rlang:.env]{.env}, e.g. \code{!!.data} or \code{.env$.data} for the special case of an object
-named \code{.data}.}
+You can refer to previously created elements directly or using the \link[rlang:.data]{.data} pronoun.
+To refer explicitly to objects in the calling environment, use \code{\link[rlang:!!]{!!}} or \link[rlang:.env]{.env},
+e.g. \code{!!.data} or \code{.env$.data} for the special case of an object named \code{.data}.}
 
-\item{.rows}{The number of rows, useful to create a 0-column tibble or
-just as an additional check.}
+\item{.rows}{The number of rows, useful to create a 0-column tibble or just as an additional check.}
 
 \item{.name_repair}{Treatment of problematic column names:
 \itemize{
 \item \code{"minimal"}: No name repair or checks, beyond basic existence,
 \item \code{"unique"}: Make sure names are unique and not empty,
-\item \code{"check_unique"}: (default value), no name repair, but check they are
-\code{unique},
+\item \code{"check_unique"}: (default value), no name repair, but check they are \code{unique},
 \item \code{"universal"}: Make the names \code{unique} and syntactic
 \item \code{"unique_quiet"}: Same as \code{"unique"}, but "quiet"
 \item \code{"universal_quiet"}: Same as \code{"universal"}, but "quiet"
-\item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
-for names in the style of base R).
+\item a function: apply custom name repair (e.g., \code{.name_repair = make.names} for names in the style of base R).
 \item A purrr-style anonymous function, see \code{\link[rlang:as_function]{rlang::as_function()}}
 }
 
 This argument is passed on as \code{repair} to \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
-See there for more details on these terms and the strategies used
-to enforce them.}
+See there for more details on these terms and the strategies used to enforce them.}
 }
 \value{
-A tibble, which is a colloquial term for an object of class
-\code{\link[=tbl_df-class]{tbl_df}}. A \code{\link[=tbl_df-class]{tbl_df}} object is also a data
-frame, i.e. it has class \code{data.frame}.
+A tibble, which is a colloquial term for an object of class \code{\link[=tbl_df-class]{tbl_df}}.
+A \code{\link[=tbl_df-class]{tbl_df}} object is also a data frame, i.e. it has class \code{data.frame}.
 }
 \description{
-\code{tibble()} constructs a data frame. It is used like \code{\link[base:data.frame]{base::data.frame()}}, but
-with a couple notable differences:
+\code{tibble()} constructs a data frame.
+It is used like \code{\link[base:data.frame]{base::data.frame()}}, but with a couple notable differences:
 \itemize{
-\item The returned data frame has the class \code{\link[=tbl_df-class]{tbl_df}}, in
-addition to \code{data.frame}. This allows so-called "tibbles" to exhibit some
-special behaviour, such as \link[=formatting]{enhanced printing}. Tibbles are
-fully described in \code{\link[=tbl_df-class]{tbl_df}}.
-\item \code{tibble()} is much lazier than \code{\link[base:data.frame]{base::data.frame()}} in terms of
-transforming the user's input.
+\item The returned data frame has the class \code{\link[=tbl_df-class]{tbl_df}}, in addition to \code{data.frame}.
+This allows so-called "tibbles" to exhibit some special behaviour, such as \link[=formatting]{enhanced printing}.
+Tibbles are fully described in \code{\link[=tbl_df-class]{tbl_df}}.
+\item \code{tibble()} is much lazier than \code{\link[base:data.frame]{base::data.frame()}} in terms of transforming the user's input.
 \itemize{
 \item List-columns are expressly anticipated and do not require special tricks.
 \item Column names are not modified.
 \item Inner names in columns are left unchanged.
 \item For R < 4.0, \href{https://blog.r-project.org/2020/02/16/stringsasfactors/}{character vectors were not coerced to factor}.
 }
-\item \code{tibble()} builds columns sequentially. When defining a column, you can
-refer to columns created earlier in the call. Only columns of length one
-are recycled.
+\item \code{tibble()} builds columns sequentially.
+When defining a column, you can refer to columns created earlier in the call.
+Only columns of length one are recycled.
 \item If a column evaluates to a data frame or tibble, it is nested or spliced.
-If it evaluates to a matrix or a array, it remains a matrix or array,
-respectively.
+If it evaluates to a matrix or a array, it remains a matrix or array, respectively.
 See examples.
 }
 
 \code{tibble_row()} constructs a data frame that is guaranteed to occupy one row.
-Vector columns are required to have size one, non-vector columns are wrapped
-in a list.
+Vector columns are required to have size one, non-vector columns are wrapped in a list.
 }
 \examples{
 # Unnamed arguments are named with their expression:
@@ -185,9 +174,9 @@ try(tibble(a = 2, b = !!bogus))
 tibble_row(a = 1, lm = lm(Height ~ Girth + Volume, data = trees))
 }
 \seealso{
-Use \code{\link[=as_tibble]{as_tibble()}} to turn an existing object into a tibble. Use
-\code{enframe()} to convert a named vector into a tibble. Name repair is
-detailed in \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
+Use \code{\link[=as_tibble]{as_tibble()}} to turn an existing object into a tibble.
+Use \code{enframe()} to convert a named vector into a tibble.
+Name repair is detailed in \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
 See \link[rlang:quasiquotation]{quasiquotation} for more details on tidy dots semantics,
 i.e. exactly how  the \code{...} argument is processed.
 }

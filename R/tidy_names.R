@@ -4,18 +4,17 @@
 #' `r lifecycle::badge("superseded")`
 #'
 #' @description
-#' `tidy_names()`, `set_tidy_names()`, and `repair_names()` were early efforts
-#' to facilitate *post hoc* name repair in tibble, given that [tibble()] and
-#' [as_tibble()] did not do this.
+#' `tidy_names()`, `set_tidy_names()`, and `repair_names()` were early efforts to facilitate *post hoc* name repair in tibble,
+#' given that [tibble()] and [as_tibble()] did not do this.
 #'
-#' From tibble v2.0.0, the `.name_repair` argument gives direct access to three
-#' specific levels of name repair: `minimal`, `unique`, and `universal`.
+#' From tibble v2.0.0, the `.name_repair` argument gives direct access to three specific levels of name repair:
+#' `minimal`, `unique`, and `universal`.
 #' See [vctrs::vec_as_names()] for the implementation of the underlying logic.
 #'
 #' @section Life cycle:
 #'
-#' These functions are superseded. The `repair_names()` logic
-#' will also remain available in [vctrs::vec_as_names_legacy()].
+#' These functions are superseded.
+#' The `repair_names()` logic will also remain available in [vctrs::vec_as_names_legacy()].
 #'
 #' ```
 #' tibble(..., `.name_repair = "unique"`)
@@ -31,9 +30,9 @@
 #'
 #' @param x A vector.
 #' @param name A `names` attribute, usually a character vector.
-#' @param syntactic Should names be made syntactically valid? If `FALSE`, uses
-#'   same logic as `.name_repair = "unique"`. If `TRUE`, uses same logic as
-#'   `.name_repair = "universal"`.
+#' @param syntactic Should names be made syntactically valid?
+#'   If `FALSE`, uses same logic as `.name_repair = "unique"`.
+#'   If `TRUE`, uses same logic as `.name_repair = "universal"`.
 #' @param quiet Whether to suppress messages about name repair.
 #'
 #' @return `x` with repaired names or a repaired version of `name`.
@@ -114,8 +113,7 @@ set_tidy_names <- function(x, syntactic = FALSE, quiet = FALSE) {
 }
 
 #' @param prefix A string, the prefix to use for new column names.
-#' @param sep A string inserted between the column name and de-duplicating
-#'   number.
+#' @param sep A string inserted between the column name and de-duplicating number.
 #' @export
 #' @rdname name-repair-superseded
 repair_names <- function(x, prefix = "V", sep = "") {

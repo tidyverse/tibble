@@ -76,7 +76,8 @@ tibble(
 #> 5 1200.5000   1200.5 1200.50   12.0  10000   1.23k A B C D E F G ~ T U V W X Y Z
 ```
 
-The pillar package that is responsible for the display of tibbles tries hard to get the number display right, however it is impossible to accommodate all use cases.
+The pillar package that is responsible for the display of tibbles tries hard to get the number display right,
+however it is impossible to accommodate all use cases.
 Whenever the default formatting does not suit the application, `num()` or `char()` allow redefining the formatting for individual columns.
 The formatting survives most data transformations.
 
@@ -130,7 +131,8 @@ markets %>%
 
 Formatting numbers is useful for presentation of results.
 If defined early on in the analysis, the formatting options survive most operations.
-It is worth defining output options that suit your data once early on in the process, to benefit from the formatting throughout the analysis.
+It is worth defining output options that suit your data once early on in the process,
+to benefit from the formatting throughout the analysis.
 We are working on seamlessly applying this formatting to the final presentation (plots, tables, ...).
 
 

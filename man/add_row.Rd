@@ -11,18 +11,16 @@ add_row(.data, ..., .before = NULL, .after = NULL)
 \item{.data}{Data frame to append to.}
 
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
-Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. Values can be defined
-only for columns that already exist in \code{.data} and unset columns will get an
-\code{NA} value.}
+Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}.
+Values can be defined only for columns that already exist in \code{.data} and unset columns will get an \code{NA} value.}
 
 \item{.before, .after}{One-based row index where to add the new rows,
 default: after last row.}
 }
 \description{
-This is a convenient way to add one or more rows of data to an existing data
-frame. See \code{\link[=tribble]{tribble()}} for an easy way to create an complete
-data frame row-by-row. Use \code{\link[=tibble_row]{tibble_row()}} to ensure that the new data
-has only one row.
+This is a convenient way to add one or more rows of data to an existing data frame.
+See \code{\link[=tribble]{tribble()}} for an easy way to create an complete data frame row-by-row.
+Use \code{\link[=tibble_row]{tibble_row()}} to ensure that the new data has only one row.
 
 \code{add_case()} is an alias of \code{add_row()}.
 }

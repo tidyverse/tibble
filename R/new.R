@@ -2,8 +2,7 @@
 #'
 #' @description
 #' Creates or validates a subclass of a tibble.
-#' These function is mostly useful for package authors that implement subclasses
-#' of a tibble, like \pkg{sf} or \pkg{tsibble}.
+#' These function is mostly useful for package authors that implement subclasses of a tibble, like \pkg{sf} or \pkg{tsibble}.
 #'
 #' `new_tibble()` creates a new object as a subclass of `tbl_df`, `tbl` and `data.frame`.
 #' This function is optimized for performance, checks are reduced to a minimum.
@@ -13,13 +12,12 @@
 #' @param ... Name-value pairs of additional attributes.
 #' @param nrow The number of rows, inferred from `x` if omitted.
 #' @param class Subclasses to assign to the new object, default: none.
-#' @param subclass Deprecated, retained for compatibility. Please use the `class` argument.
+#' @param subclass Deprecated, retained for compatibility.
+#'   Please use the `class` argument.
 #'
 #' @seealso
-#' [tibble()] and [as_tibble()] for ways to construct a tibble
-#' with recycling of scalars and automatic name repair,
-#' and [vctrs::df_list()] and [vctrs::new_data_frame()]
-#' for lower-level implementations.
+#' [tibble()] and [as_tibble()] for ways to construct a tibble with recycling of scalars and automatic name repair,
+#' and [vctrs::df_list()] and [vctrs::new_data_frame()] for lower-level implementations.
 #'
 #' @export
 #' @examples
@@ -51,8 +49,7 @@ new_tibble <- function(x, ..., nrow = NULL, class = NULL, subclass = NULL) {
   }
 
   #' The `nrow` argument may be omitted as of tibble 3.1.4.
-  #' If present, every element of the list `x` should have [vctrs::vec_size()]
-  #' equal to this value.
+  #' If present, every element of the list `x` should have [vctrs::vec_size()] equal to this value.
   #' (But this is not checked by the constructor).
   #' This takes the place of the "row.names" attribute in a data frame.
   if (!is.null(nrow)) {
@@ -128,8 +125,7 @@ new_tibble <- function(x, ..., nrow = NULL, class = NULL, subclass = NULL) {
 
 #' @description
 #' `validate_tibble()` checks a tibble for internal consistency.
-#' Correct behavior can be guaranteed only if this function
-#' runs without raising an error.
+#' Correct behavior can be guaranteed only if this function runs without raising an error.
 #'
 #' @rdname new_tibble
 #' @export

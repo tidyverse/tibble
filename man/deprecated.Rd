@@ -32,8 +32,8 @@ Use \code{\link[=tibble]{tibble()}} instead of \code{data_frame()}.
 
 Use \link[rlang:quasiquotation]{quasiquotation} instead of \code{tibble_()}, \code{data_frame_()}, and \code{lst_()}.
 
-Use \code{\link[=as_tibble]{as_tibble()}} instead of \code{as_data_frame()} or \code{as.tibble()}, but mind the
-new signature and semantics.
+Use \code{\link[=as_tibble]{as_tibble()}} instead of \code{as_data_frame()} or \code{as.tibble()},
+but mind the new signature and semantics.
 
 Use \code{\link[=tribble]{tribble()}} instead of \code{frame_data()}.
 }

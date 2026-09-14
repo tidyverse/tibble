@@ -1,13 +1,12 @@
 #' Build a list
 #'
 #' @description
-#' `lst()` constructs a list, similar to [base::list()], but with some of the
-#' same features as [tibble()]. `lst()` builds components sequentially. When
-#' defining a component, you can refer to components created earlier in the
-#' call. `lst()` also generates missing names automatically.
+#' `lst()` constructs a list, similar to [base::list()], but with some of the same features as [tibble()].
+#' `lst()` builds components sequentially.
+#' When defining a component, you can refer to components created earlier in the call.
+#' `lst()` also generates missing names automatically.
 #'
-#' See [rlang::list2()] for a simpler and faster alternative without tibble's
-#' evaluation and auto-name semantics.
+#' See [rlang::list2()] for a simpler and faster alternative without tibble's evaluation and auto-name semantics.
 #'
 #' @inheritParams tibble
 #' @return A named list.

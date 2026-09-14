@@ -34,7 +34,8 @@ set_num_opts(
 
 \item{...}{These dots are for future extensions and must be empty.}
 
-\item{sigfig}{Define the number of significant digits to show. Must be one or greater.
+\item{sigfig}{Define the number of significant digits to show.
+Must be one or greater.
 The \code{"pillar.sigfig"} \link[pillar:pillar_options]{option} is not consulted.
 Can't be combined with \code{digits}.}
 
@@ -53,12 +54,11 @@ Must be combined with \code{label}.}
 
 \item{notation}{One of \code{"fit"}, \code{"dec"}, \code{"sci"}, \code{"eng"}, or \code{"si"}.
 \itemize{
-\item \code{"fit"}: Use decimal notation if it fits and if it consumes 13 digits or less,
-otherwise use scientific notation. (The default for numeric pillars.)
+\item \code{"fit"}: Use decimal notation if it fits and if it consumes 13 digits or less, otherwise use scientific notation.
+(The default for numeric pillars.)
 \item \code{"dec"}: Use decimal notation, regardless of width.
 \item \code{"sci"}: Use scientific notation.
-\item \code{"eng"}: Use engineering notation, i.e. scientific notation
-using exponents that are a multiple of three.
+\item \code{"eng"}: Use engineering notation, i.e. scientific notation using exponents that are a multiple of three.
 \item \code{"si"}: Use SI notation, prefixes between \code{1e-24} and \code{1e24} are supported.
 }}
 
@@ -66,17 +66,15 @@ using exponents that are a multiple of three.
 \code{-Inf} uses the smallest, \code{+Inf} the largest fixed_exponent present in the data.
 The default is to use varying exponents.}
 
-\item{extra_sigfig}{If \code{TRUE}, increase the number of significant digits if the data consists of
-numbers of the same magnitude with subtle differences.}
+\item{extra_sigfig}{If \code{TRUE}, increase the number of significant digits
+if the data consists of numbers of the same magnitude with subtle differences.}
 }
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#experimental}{\figure{lifecycle-experimental.svg}{options: alt='[Experimental]'}}}{\strong{[Experimental]}}
 
-Constructs a numeric vector that can be formatted with predefined
-significant digits, or with a maximum or fixed number of digits
-after the decimal point.
-Scaling is supported, as well as forcing a decimal, scientific
-or engineering notation.
+Constructs a numeric vector that can be formatted with predefined significant digits,
+or with a maximum or fixed number of digits after the decimal point.
+Scaling is supported, as well as forcing a decimal, scientific or engineering notation.
 If a label is given, it is shown in the header of a column.
 
 The formatting is applied when the vector is printed or formatted,
