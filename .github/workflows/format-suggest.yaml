@@ -11,15 +11,15 @@ on:
   # treated strictly as *data to be formatted*, never as code to run:
   #
   #   1. The formatter tooling (the `style` action and the air / clang-format
-  #      binaries) is loaded from the BASE repository, not from the PR checkout.
-  #      This is the critical point. The naive pattern
+  #      binaries) is never loaded from the PR checkout. This is the critical
+  #      point. The naive pattern
   #        - uses: actions/checkout@v6      # ref: fork head
-  #        - uses: cynkra/cynkratemplate/.github/actions/style@main
+  #        - uses: ./.github/workflows/style
   #      resolves `./...style` from the *checked-out fork*, so an attacker only
   #      has to edit their fork's `style/action.yml` to run arbitrary commands
-  #      with our token and secrets. Here we run the base repo's copy instead
-  #      (checked out into `ci-base/`), so the fork controls only the input
-  #      files, not the code that executes.
+  #      with our token and secrets. A `owner/repo/path@ref` reference is
+  #      fetched from that repository instead of from the workspace, so the
+  #      fork controls only the input files, not the code that executes.
   #   2. air and clang-format merely parse and re-print source; they do not
   #      evaluate it. No build / install / test step ever runs the fork's code.
   #   3. The PR is checked out with `persist-credentials: false`, so the token
@@ -83,8 +83,8 @@ jobs:
       # The untrusted PR code, checked out at the workspace root. It is DATA
       # only -- nothing below executes it. `allow-unsafe-pr-checkout` is required
       # by actions/checkout@v6 for a fork ref under pull_request_target; it is
-      # safe here specifically because the code that runs comes from `ci-base/`
-      # (the base repo), never from this checkout. See the security notes above.
+      # safe here specifically because the code that runs is fetched from
+      # `cynkra/cynkratemplate`, never from this checkout. See the notes above.
       - name: Check out PR code (treated as data)
         uses: actions/checkout@v6
         with:
@@ -92,19 +92,12 @@ jobs:
           persist-credentials: false
           allow-unsafe-pr-checkout: true
 
-      # The trusted formatter tooling, from the base repository, into a separate
-      # directory the fork cannot influence.
-      - name: Check out trusted tooling from base repo
-        uses: actions/checkout@v6
-        with:
-          path: ci-base
-          persist-credentials: false
-
-      # Runs the base repo's `style` action against the PR code at the workspace
-      # root. Because the action comes from `ci-base/`, the fork controls only
-      # the files being formatted, not the code that runs.
+      # Runs the trusted `style` action against the PR code at the workspace
+      # root. Because the action is fetched from `cynkra/cynkratemplate` rather
+      # than resolved out of the workspace, the fork controls only the files
+      # being formatted, not the code that runs.
       - name: Format
-        uses: ./ci-base/.github/workflows/style
+        uses: cynkra/cynkratemplate/.github/actions/style@main
 
       - name: Suggest
         uses: reviewdog/action-suggester@2558ba17e65a9039e73764a73009fc05fef28a46 # v1

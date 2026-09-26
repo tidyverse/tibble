@@ -458,9 +458,17 @@ jobs:
           pkg <- "${{ matrix.package }}"
           pkgs <- tools::package_dependencies(pkg, reverse = TRUE)[[1]]
           installed <- rownames(utils::installed.packages())
-          to_remove <- c(pkg, intersect(pkgs, installed))
+          # `pkg` belongs inside the intersect() as much as its reverse
+          # dependencies do. It may legitimately not be installed -- a package
+          # pinned as `<pkg>=?ignore` in Config/gha/extra-packages never is --
+          # and then there is nothing to remove and nothing wrong: the job is
+          # checking that the package builds without it, which already holds.
+          to_remove <- intersect(c(pkg, pkgs), installed)
           print(to_remove)
-          remove.packages(to_remove)
+          # remove.packages() without `lib` looks only in .libPaths()[1] and
+          # errors on anything it does not find there, so name the library
+          # each package actually lives in.
+          for (p in to_remove) remove.packages(p, lib = dirname(find.package(p)))
         shell: Rscript {0}
 
       - name: Session info

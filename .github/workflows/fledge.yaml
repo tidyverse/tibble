@@ -158,11 +158,26 @@ jobs:
             git push -f origin "refs/tags/${tag}"
           fi
 
-          gh pr create --base "${BASE}" --head fledge --fill-first
+          # The pull request from an earlier night may still be open, when its
+          # checks never ran or never passed, and the force-push above has
+          # already moved it to this bump. `gh pr create` fails for a branch
+          # that has one, and under `set -e` that used to skip the two calls
+          # below -- the ones that get it checked and merged -- so it stayed
+          # open, and this step failed, every night after. Reuse it instead,
+          # retitled, since a squash merge takes its message from the title.
+          pr=$(gh pr list --head fledge --base "${BASE}" --state open --json url --jq '.[0].url // empty')
+          if [ -n "${pr}" ]; then
+            gh pr edit "${pr}" --title "$(git log -1 --format=%s)" --body "$(git log -1 --format=%b)"
+          else
+            pr=$(gh pr create --base "${BASE}" --head fledge --fill-first)
+          fi
+
           # This one does have to be asked for. The pull request is gated on the
           # `rcc` status, and the branch push above raised no event either.
           gh workflow run rcc -f ref="$(git rev-parse HEAD)"
-          gh pr merge --squash --auto
+          if [ "$(gh pr view "${pr}" --json autoMergeRequest --jq '.autoMergeRequest != null')" != "true" ]; then
+            gh pr merge "${pr}" --squash --auto
+          fi
         shell: bash
 
       - name: Check release

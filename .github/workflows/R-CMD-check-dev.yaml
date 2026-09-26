@@ -95,7 +95,7 @@ jobs:
       - name: Run R CMD check
         uses: cynkra/cynkratemplate/.github/actions/check@main
         with:
-          results: ${{ matrix.package }}
+          results: base
 
   R-CMD-check-dev:
     needs:
