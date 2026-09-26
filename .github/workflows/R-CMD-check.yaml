@@ -128,7 +128,8 @@ jobs:
           cache-version: rcc-smoke-2
           needs: build, check, website, roxygen2
           # Beware of using dev pkgdown here, has brought in dev dependencies in the past
-          extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/pkgdown deps::.
+          # covr and xml2 are what the covr leg of rcc-full installs, for the coverage step below.
+          extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/pkgdown r-lib/covr any::xml2 deps::.
 
       - name: Run the repository-specific after-install steps
         uses: ./.github/workflows/custom/after-install
@@ -210,6 +211,21 @@ jobs:
         with:
           results: ${{ runner.os }}-smoke-test
 
+      # A pull request from this repository gets no version matrix (see the step
+      # that collects it), and so no covr leg either. Coverage is computed here
+      # instead, from the environment the smoke test already installed, so that
+      # such a pull request still gets a coverage report. In the smoke test rather
+      # than a job of its own, because this job's status is the pull request's
+      # `rcc` status: a separate job would let it turn green, and auto-merge go
+      # ahead, while coverage was still running.
+      - name: Compute and upload the test coverage
+        id: covr
+        continue-on-error: true
+        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && !startsWith(github.head_ref, 'cran-')
+        uses: cynkra/cynkratemplate/.github/actions/covr@main
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
+
       - name: Build the pkgdown website
         id: pkgdown-build
         continue-on-error: true
@@ -287,6 +303,7 @@ jobs:
             Roxygenize the documentation|Roxygenize|${{ steps.roxygenize.outcome }}
             Commit and push the generated changes|Commit|${{ steps.commit.outcome }}
             Run R CMD check|R CMD check|${{ steps.check.outcome }}
+            Compute and upload the test coverage|Coverage|${{ steps.covr.outcome }}
             Build the pkgdown website|pkgdown build|${{ steps.pkgdown-build.outcome }}
             Build and deploy the pkgdown website|pkgdown deploy|${{ steps.pkgdown-deploy.outcome }}
 
