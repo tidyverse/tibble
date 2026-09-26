@@ -9,8 +9,9 @@
 # shards: the heaviest round-robin first, everything else placed where it
 # shares the most dependencies. The shard count follows the parallel capacity,
 # because only max-parallel shards ever run at once and every shard past that
-# pays another setup without starting any earlier (see revdep2/README.md for
-# the algorithm and its trade-offs).
+# pays another setup without starting any earlier (see
+# https://github.com/cynkra/cynkratemplate/blob/main/.github/actions/revdep2/README.md
+# for the algorithm and its trade-offs).
 #
 # The build job compiles the dev version once into the binary artifact every
 # shard installs; it needs only the checkout, so it runs in parallel with
@@ -40,7 +41,8 @@
 # Results land in artifacts:
 #   revdep2-report    the merged report -- fetch with
 #                     `gh run download <run-id> --name revdep2-report`
-#                     or ./.github/workflows/revdep2/fetch.sh <run-id>
+#                     or .github/actions/revdep2/fetch.sh <run-id>,
+#                     run from a checkout of cynkra/cynkratemplate
 #   revdep2-baseline  old-version results, reused by later runs when the
 #                     revdep's version, our CRAN version, the R series and the
 #                     resolved dependency versions all still match (and the
@@ -58,7 +60,7 @@
 #
 # Dispatch-only, deliberately: nothing here runs on push. `ref` checks any
 # branch, tag or commit SHA (the dispatch itself can only target a branch or
-# tag, and the tree must contain these scripts), `depth` widens the net to
+# tag; the scripts come with the actions, not from that tree), `depth` widens the net to
 # transitive reverse dependencies, and `dry-run` stops after planning. Check
 # results never turn the run red -- the summary and the report artifact are
 # the deliverable; only infrastructure failures fail jobs.
@@ -67,7 +69,7 @@ on:
   workflow_dispatch:
     inputs:
       ref:
-        description: "Branch, tag, or commit SHA to check (the tree must contain the revdep2 scripts); default: the dispatched ref"
+        description: "Branch, tag, or commit SHA to check; default: the dispatched ref"
         type: string
         default: ""
       packages:
@@ -224,6 +226,10 @@ jobs:
       actions: read
 
     steps:
+      # The scripts are served with the kit's actions, not copied into the repository.
+      - name: Locate the revdep scripts
+        uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
+
       - name: Check out the ref under test
         uses: actions/checkout@v6
         with:
@@ -252,7 +258,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
           OUT: ${{ runner.temp }}/plan.json
         run: |
-          Rscript ./.github/workflows/revdep2/plan.R
+          Rscript "${REVDEP2_DIR}/plan.R"
         shell: bash
 
       # Before anything can fail: the shards are planned, and the plan is
@@ -317,8 +323,8 @@ jobs:
       - name: Report what the install consumed
         if: always() && steps.plan.outputs.shards != '0' && inputs.dry-run != true
         run: |
-          ./.github/workflows/revdep2/watch-resources.sh once "after the job"
-          ./.github/workflows/revdep2/watch-resources.sh oom
+          "${REVDEP2_DIR}/watch-resources.sh" once "after the job"
+          "${REVDEP2_DIR}/watch-resources.sh" oom
           du -sh ~/.cache/R/pkgcache "${RUNNER_TEMP}/lib" 2>/dev/null || true
         shell: bash
 
@@ -371,6 +377,10 @@ jobs:
       contents: read
 
     steps:
+      # The scripts are served with the kit's actions, not copied into the repository.
+      - name: Locate the revdep scripts
+        uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
+
       - name: Check out the ref under test
         uses: actions/checkout@v6
         with:
@@ -387,7 +397,7 @@ jobs:
         env:
           OUT_DIR: ${{ runner.temp }}/pkg
         run: |
-          Rscript ./.github/workflows/revdep2/build.R
+          Rscript "${REVDEP2_DIR}/build.R"
         shell: bash
 
       - name: Upload the package binary
@@ -502,6 +512,10 @@ jobs:
       PKG_SYSREQS: true
 
     steps:
+      # The scripts are served with the kit's actions, not copied into the repository.
+      - name: Locate the revdep scripts
+        uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
+
       - name: Check out the ref under test
         uses: actions/checkout@v6
         with:
@@ -619,7 +633,7 @@ jobs:
       # upload.
       - name: Start the resource sampler
         run: |
-          watch=./.github/workflows/revdep2/watch-resources.sh
+          watch="${REVDEP2_DIR}/watch-resources.sh"
           "${watch}" once "shard ${SHARD} before the install"
           RESOURCE_LOG="${RUNNER_TEMP}/results/resources.log" \
             "${watch}" watch 30 "shard ${SHARD}" &
@@ -630,7 +644,7 @@ jobs:
         env:
           PHASE: install
         run: |
-          Rscript ./.github/workflows/revdep2/shard.R
+          Rscript "${REVDEP2_DIR}/shard.R"
         shell: bash
 
       # The checks run in three slices, each followed by an upload.
@@ -667,7 +681,7 @@ jobs:
           PHASE: check
           CHECK_SLICE: 1/3
         run: |
-          Rscript ./.github/workflows/revdep2/shard.R
+          Rscript "${REVDEP2_DIR}/shard.R"
         shell: bash
 
       # Named per attempt: a re-run of one shard must not overwrite the results
@@ -691,7 +705,7 @@ jobs:
           PHASE: check
           CHECK_SLICE: 2/3
         run: |
-          Rscript ./.github/workflows/revdep2/shard.R
+          Rscript "${REVDEP2_DIR}/shard.R"
         shell: bash
 
       - name: Upload the shard results (2 of 3)
@@ -710,7 +724,7 @@ jobs:
           PHASE: check
           CHECK_SLICE: 3/3
         run: |
-          Rscript ./.github/workflows/revdep2/shard.R
+          Rscript "${REVDEP2_DIR}/shard.R"
         shell: bash
 
       # Before the final upload, so the last sample and the OOM verdict ride in
@@ -720,8 +734,8 @@ jobs:
       - name: Report what the shard consumed
         if: always()
         run: |
-          ./.github/workflows/revdep2/watch-resources.sh once "shard ${SHARD} after the checks"
-          ./.github/workflows/revdep2/watch-resources.sh oom
+          "${REVDEP2_DIR}/watch-resources.sh" once "shard ${SHARD} after the checks"
+          "${REVDEP2_DIR}/watch-resources.sh" oom
           df -BG / "${RUNNER_TEMP}" 2>/dev/null || true
         shell: bash
 
@@ -767,6 +781,10 @@ jobs:
       actions: read
 
     steps:
+      # The scripts are served with the kit's actions, not copied into the repository.
+      - name: Locate the revdep scripts
+        uses: cynkra/cynkratemplate/.github/actions/revdep-scripts@main
+
       - name: Check out the ref under test
         uses: actions/checkout@v6
         with:
@@ -832,7 +850,7 @@ jobs:
           BASELINE_OUT: ${{ runner.temp }}/baseline
           TIMINGS_OUT: ${{ runner.temp }}/timings
         run: |
-          Rscript ./.github/workflows/revdep2/collect.R
+          Rscript "${REVDEP2_DIR}/collect.R"
         shell: bash
 
       - name: Upload the report
