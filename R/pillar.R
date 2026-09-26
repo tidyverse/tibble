@@ -3,11 +3,9 @@
 #' @description
 #' `r lifecycle::badge("experimental")`
 #'
-#' Constructs a numeric vector that can be formatted with predefined
-#' significant digits, or with a maximum or fixed number of digits
-#' after the decimal point.
-#' Scaling is supported, as well as forcing a decimal, scientific
-#' or engineering notation.
+#' Constructs a numeric vector that can be formatted with predefined significant digits,
+#' or with a maximum or fixed number of digits after the decimal point.
+#' Scaling is supported, as well as forcing a decimal, scientific or engineering notation.
 #' If a label is given, it is shown in the header of a column.
 #'
 #' The formatting is applied when the vector is printed or formatted,
@@ -18,7 +16,8 @@
 #' @family vector classes
 #' @inheritParams rlang::args_dots_empty
 #' @param x A numeric vector.
-#' @param sigfig Define the number of significant digits to show. Must be one or greater.
+#' @param sigfig Define the number of significant digits to show.
+#'   Must be one or greater.
 #'   The `"pillar.sigfig"` [option][pillar::pillar_options] is not consulted.
 #'   Can't be combined with `digits`.
 #' @param digits Number of digits after the decimal points to show.
@@ -32,20 +31,19 @@
 #'   Useful for displaying e.g. percentages.
 #'   Must be combined with `label`.
 #' @param notation One of `"fit"`, `"dec"`, `"sci"`, `"eng"`, or `"si"`.
-#'   - `"fit"`: Use decimal notation if it fits and if it consumes 13 digits or less,
-#'     otherwise use scientific notation. (The default for numeric pillars.)
+#'   - `"fit"`: Use decimal notation if it fits and if it consumes 13 digits or less, otherwise use scientific notation.
+#'     (The default for numeric pillars.)
 #'   - `"dec"`: Use decimal notation, regardless of width.
 #'   - `"sci"`: Use scientific notation.
-#'   - `"eng"`: Use engineering notation, i.e. scientific notation
-#'       using exponents that are a multiple of three.
+#'   - `"eng"`: Use engineering notation, i.e. scientific notation using exponents that are a multiple of three.
 #'   - `"si"`: Use SI notation, prefixes between `1e-24` and `1e24` are supported.
 #' @param fixed_exponent
 #'   Use the same exponent for all numbers in scientific, engineering or SI notation.
 #'   `-Inf` uses the smallest, `+Inf` the largest fixed_exponent present in the data.
 #'   The default is to use varying exponents.
 #' @param extra_sigfig
-#'   If `TRUE`, increase the number of significant digits if the data consists of
-#'   numbers of the same magnitude with subtle differences.
+#'   If `TRUE`, increase the number of significant digits
+#'   if the data consists of numbers of the same magnitude with subtle differences.
 #' @export
 #' @examples
 #' # Display as a vector

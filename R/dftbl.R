@@ -7,11 +7,10 @@ set_dftbl_hooks <- function() {
   set_dftbl_chunk_hook()
 }
 
-# Defines a `dftbl` knitr option. If this chunk option is set, code is duplicated
-# (running with tibbles or data frames, respectively): one line of df code
-# followed by the same line of the corresponding tibble code.
-# The code is also evaluated, if the results are identical (disregarding the
-# class), only the tibble copy is retained.
+# Defines a `dftbl` knitr option.
+# If this chunk option is set, code is duplicated (running with tibbles or data frames, respectively):
+# one line of df code followed by the same line of the corresponding tibble code.
+# The code is also evaluated, if the results are identical (disregarding the class), only the tibble copy is retained.
 #
 set_dftbl_opts_hook <- function(width) {
   force(width)
@@ -100,8 +99,7 @@ set_dftbl_knit_hook <- function(width) {
 }
 
 # dftbl chunks are shown side by side, with the help of an HTML table.
-# Each source chunk introduces a new table cell, even chunks also introduce
-# a new table row.
+# Each source chunk introduces a new table cell, even chunks also introduce a new table row.
 # vertical-align: top keeps the table rows nicely aligned.
 # This places some limitations on the chunk sources but works well so far.
 set_dftbl_source_hook <- function() {

@@ -2,64 +2,54 @@
 #'
 #' @description
 #'
-#' `tibble()` constructs a data frame. It is used like [base::data.frame()], but
-#' with a couple notable differences:
+#' `tibble()` constructs a data frame.
+#' It is used like [base::data.frame()], but with a couple notable differences:
 #'
-#'   * The returned data frame has the class [`tbl_df`][tbl_df-class], in
-#'     addition to `data.frame`. This allows so-called "tibbles" to exhibit some
-#'     special behaviour, such as [enhanced printing][formatting]. Tibbles are
-#'     fully described in [`tbl_df`][tbl_df-class].
-#'   * `tibble()` is much lazier than [base::data.frame()] in terms of
-#'     transforming the user's input.
+#'   * The returned data frame has the class [`tbl_df`][tbl_df-class], in addition to `data.frame`.
+#'     This allows so-called "tibbles" to exhibit some special behaviour, such as [enhanced printing][formatting].
+#'     Tibbles are fully described in [`tbl_df`][tbl_df-class].
+#'   * `tibble()` is much lazier than [base::data.frame()] in terms of transforming the user's input.
 #'
 #'       - List-columns are expressly anticipated and do not require special tricks.
 #'       - Column names are not modified.
 #'       - Inner names in columns are left unchanged.
 #'       - For R < 4.0, [character vectors were not coerced to factor](https://blog.r-project.org/2020/02/16/stringsasfactors/).
 #'
-#'   * `tibble()` builds columns sequentially. When defining a column, you can
-#'     refer to columns created earlier in the call. Only columns of length one
-#'     are recycled.
+#'   * `tibble()` builds columns sequentially.
+#'     When defining a column, you can refer to columns created earlier in the call.
+#'     Only columns of length one are recycled.
 #'   * If a column evaluates to a data frame or tibble, it is nested or spliced.
-#'     If it evaluates to a matrix or a array, it remains a matrix or array,
-#'     respectively.
+#'     If it evaluates to a matrix or a array, it remains a matrix or array, respectively.
 #'     See examples.
 #'
 #' @param ... <[`dynamic-dots`][rlang::dyn-dots]>
-#'   A set of name-value pairs. These arguments are
-#'   processed with [rlang::quos()] and support unquote via [`!!`] and
-#'   unquote-splice via [`!!!`]. Use `:=` to create columns that start with a dot.
+#'   A set of name-value pairs.
+#'   These arguments are processed with [rlang::quos()] and support unquote via [`!!`] and unquote-splice via [`!!!`].
+#'   Use `:=` to create columns that start with a dot.
 #'
 #'   Arguments are evaluated sequentially.
-#'   You can refer to previously created elements directly or using the [.data]
-#'   pronoun.
-#'   To refer explicitly to objects in the calling environment, use [`!!`] or
-#'   [.env], e.g. `!!.data` or `.env$.data` for the special case of an object
-#'   named `.data`.
-#' @param .rows The number of rows, useful to create a 0-column tibble or
-#'   just as an additional check.
+#'   You can refer to previously created elements directly or using the [.data] pronoun.
+#'   To refer explicitly to objects in the calling environment, use [`!!`] or [.env],
+#'   e.g. `!!.data` or `.env$.data` for the special case of an object named `.data`.
+#' @param .rows The number of rows, useful to create a 0-column tibble or just as an additional check.
 #' @param .name_repair Treatment of problematic column names:
 #'   * `"minimal"`: No name repair or checks, beyond basic existence,
 #'   * `"unique"`: Make sure names are unique and not empty,
-#'   * `"check_unique"`: (default value), no name repair, but check they are
-#'     `unique`,
+#'   * `"check_unique"`: (default value), no name repair, but check they are `unique`,
 #'   * `"universal"`: Make the names `unique` and syntactic
 #'   * `"unique_quiet"`: Same as `"unique"`, but "quiet"
 #'   * `"universal_quiet"`: Same as `"universal"`, but "quiet"
-#'   * a function: apply custom name repair (e.g., `.name_repair = make.names`
-#'     for names in the style of base R).
+#'   * a function: apply custom name repair (e.g., `.name_repair = make.names` for names in the style of base R).
 #'   * A purrr-style anonymous function, see [rlang::as_function()]
 #'
 #'   This argument is passed on as `repair` to [vctrs::vec_as_names()].
-#'   See there for more details on these terms and the strategies used
-#'   to enforce them.
+#'   See there for more details on these terms and the strategies used to enforce them.
 #'
-#' @return A tibble, which is a colloquial term for an object of class
-#'   [`tbl_df`][tbl_df-class]. A [`tbl_df`][tbl_df-class] object is also a data
-#'   frame, i.e. it has class `data.frame`.
-#' @seealso Use [as_tibble()] to turn an existing object into a tibble. Use
-#'   `enframe()` to convert a named vector into a tibble. Name repair is
-#'   detailed in [vctrs::vec_as_names()].
+#' @return A tibble, which is a colloquial term for an object of class [`tbl_df`][tbl_df-class].
+#'   A [`tbl_df`][tbl_df-class] object is also a data frame, i.e. it has class `data.frame`.
+#' @seealso Use [as_tibble()] to turn an existing object into a tibble.
+#'   Use `enframe()` to convert a named vector into a tibble.
+#'   Name repair is detailed in [vctrs::vec_as_names()].
 #'   See [quasiquotation] for more details on tidy dots semantics,
 #'   i.e. exactly how  the `...` argument is processed.
 #' @export
@@ -178,8 +168,7 @@ tibble <- function(
 #'
 #' @description
 #' `tibble_row()` constructs a data frame that is guaranteed to occupy one row.
-#' Vector columns are required to have size one, non-vector columns are wrapped
-#' in a list.
+#' Vector columns are required to have size one, non-vector columns are wrapped in a list.
 #'
 #' @rdname tibble
 #' @export
@@ -255,8 +244,8 @@ tibble_quos <- function(
     res <- eval_tidy(xs[[j]], mask)
 
     if (!is.null(res)) {
-      # Single-row mode: Vectors must be length one, non-vectors are wrapped
-      # in a list (which is length one by definition)
+      # Single-row mode: Vectors must be length one,
+      # non-vectors are wrapped in a list (which is length one by definition)
       if (single_row) {
         if (vec_is(res)) {
           if (vec_size(res) != 1) {

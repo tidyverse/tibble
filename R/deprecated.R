@@ -56,8 +56,8 @@ lst_ <- function(xs) {
 }
 
 #' @description
-#' Use [as_tibble()] instead of `as_data_frame()` or `as.tibble()`, but mind the
-#' new signature and semantics.
+#' Use [as_tibble()] instead of `as_data_frame()` or `as.tibble()`,
+#' but mind the new signature and semantics.
 #'
 #' @export
 #' @rdname deprecated

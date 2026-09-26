@@ -17,9 +17,9 @@ repair_names(x, prefix = "V", sep = "")
 \arguments{
 \item{name}{A \code{names} attribute, usually a character vector.}
 
-\item{syntactic}{Should names be made syntactically valid? If \code{FALSE}, uses
-same logic as \code{.name_repair = "unique"}. If \code{TRUE}, uses same logic as
-\code{.name_repair = "universal"}.}
+\item{syntactic}{Should names be made syntactically valid?
+If \code{FALSE}, uses same logic as \code{.name_repair = "unique"}.
+If \code{TRUE}, uses same logic as \code{.name_repair = "universal"}.}
 
 \item{quiet}{Whether to suppress messages about name repair.}
 
@@ -27,8 +27,7 @@ same logic as \code{.name_repair = "unique"}. If \code{TRUE}, uses same logic as
 
 \item{prefix}{A string, the prefix to use for new column names.}
 
-\item{sep}{A string inserted between the column name and de-duplicating
-number.}
+\item{sep}{A string inserted between the column name and de-duplicating number.}
 }
 \value{
 \code{x} with repaired names or a repaired version of \code{name}.
@@ -36,19 +35,18 @@ number.}
 \description{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#superseded}{\figure{lifecycle-superseded.svg}{options: alt='[Superseded]'}}}{\strong{[Superseded]}}
 
-\code{tidy_names()}, \code{set_tidy_names()}, and \code{repair_names()} were early efforts
-to facilitate \emph{post hoc} name repair in tibble, given that \code{\link[=tibble]{tibble()}} and
-\code{\link[=as_tibble]{as_tibble()}} did not do this.
+\code{tidy_names()}, \code{set_tidy_names()}, and \code{repair_names()} were early efforts to facilitate \emph{post hoc} name repair in tibble,
+given that \code{\link[=tibble]{tibble()}} and \code{\link[=as_tibble]{as_tibble()}} did not do this.
 
-From tibble v2.0.0, the \code{.name_repair} argument gives direct access to three
-specific levels of name repair: \code{minimal}, \code{unique}, and \code{universal}.
+From tibble v2.0.0, the \code{.name_repair} argument gives direct access to three specific levels of name repair:
+\code{minimal}, \code{unique}, and \code{universal}.
 See \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}} for the implementation of the underlying logic.
 }
 \section{Life cycle}{
 
 
-These functions are superseded. The \code{repair_names()} logic
-will also remain available in \code{\link[vctrs:vec_as_names_legacy]{vctrs::vec_as_names_legacy()}}.
+These functions are superseded.
+The \code{repair_names()} logic will also remain available in \code{\link[vctrs:vec_as_names_legacy]{vctrs::vec_as_names_legacy()}}.
 
 \if{html}{\out{<div class="sourceCode">}}\preformatted{tibble(..., `.name_repair = "unique"`)
 ## is preferred to

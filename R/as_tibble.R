@@ -1,49 +1,42 @@
 #' Coerce lists, matrices, and more to data frames
 #'
 #' @description
-#' `as_tibble()` turns an existing object, such as a data frame or
-#' matrix, into a so-called tibble, a data frame with class [`tbl_df`]. This is
-#' in contrast with [tibble()], which builds a tibble from individual columns.
-#' `as_tibble()` is to [`tibble()`] as [base::as.data.frame()] is to
-#' [base::data.frame()].
+#' `as_tibble()` turns an existing object, such as a data frame or matrix,
+#' into a so-called tibble, a data frame with class [`tbl_df`].
+#' This is in contrast with [tibble()], which builds a tibble from individual columns.
+#' `as_tibble()` is to [`tibble()`] as [base::as.data.frame()] is to [base::data.frame()].
 #'
 #' `as_tibble()` is an S3 generic, with methods for:
-#' * [`data.frame`][base::data.frame()]: Thin wrapper around the `list` method
-#'   that implements tibble's treatment of [rownames].
-#' * [`matrix`][base::matrix()], [`poly`][stats::poly()],
-#'   [`ts`][stats::ts()], [`table`][base::table()]
+#' * [`data.frame`][base::data.frame()]: Thin wrapper around the `list` method that implements tibble's treatment of [rownames].
+#' * [`matrix`][base::matrix()], [`poly`][stats::poly()], [`ts`][stats::ts()], [`table`][base::table()]
 #' * Default: Other inputs are first coerced with [base::as.data.frame()].
 #'
 #' @section Row names:
 #' The default behavior is to silently remove row names.
 #'
-#' New code should explicitly convert row names to a new column using the
-#' `rownames` argument.
+#' New code should explicitly convert row names to a new column using the `rownames` argument.
 #'
-#' For existing code that relies on the retention of row names, call
-#' `pkgconfig::set_config("tibble::rownames" = NA)` in your script or in your
-#' package's [.onLoad()]  function.
+#' For existing code that relies on the retention of row names,
+#' call `pkgconfig::set_config("tibble::rownames" = NA)` in your script or in your package's [.onLoad()]  function.
 #'
 #' @section Life cycle:
 #' Using `as_tibble()` for vectors is superseded as of version 3.0.0,
-#' prefer the more expressive `as_tibble_row()` and
-#' `as_tibble_col()` variants for new code.
+#' prefer the more expressive `as_tibble_row()` and `as_tibble_col()` variants for new code.
 #'
-#' @seealso [tibble()] constructs a tibble from individual columns. [enframe()]
-#'   converts a named vector to a tibble with a column of names and column of
-#'   values. Name repair is implemented using [vctrs::vec_as_names()].
+#' @seealso [tibble()] constructs a tibble from individual columns.
+#'   [enframe()] converts a named vector to a tibble with a column of names and column of values.
+#'   Name repair is implemented using [vctrs::vec_as_names()].
 #'
-#' @param x A data frame, list, matrix, or other object that could reasonably be
-#'   coerced to a tibble.
+#' @param x A data frame, list, matrix, or other object that could reasonably be coerced to a tibble.
 #' @param ... Unused, for extensibility.
 #' @inheritParams tibble
 #' @param rownames How to treat existing row names of a data frame or matrix:
-#'   * `NULL`: remove row names. This is the default.
+#'   * `NULL`: remove row names.
+#'     This is the default.
 #'   * `NA`: keep row names.
-#'   * A string: the name of a new column. Existing rownames are transferred
-#'     into this column and the `row.names` attribute is deleted.
-#'     No name repair is applied to the new column name, even if `x` already contains
-#'     a column of that name.
+#'   * A string: the name of a new column.
+#'     Existing rownames are transferred into this column and the `row.names` attribute is deleted.
+#'     No name repair is applied to the new column name, even if `x` already contains a column of that name.
 #'     Use `as_tibble(rownames_to_column(...))` to safeguard against this case.
 #'
 #'  Read more in [rownames].

@@ -18,8 +18,7 @@ A \link{tibble}.
 }
 \description{
 Create \link{tibble}s using an easier to read row-by-row layout.
-This is useful for small tables of data where readability is
-important.  Please see \link{tibble-package} for a general introduction.
+This is useful for small tables of data where readability is important.  Please see \link{tibble-package} for a general introduction.
 }
 \examples{
 tribble(

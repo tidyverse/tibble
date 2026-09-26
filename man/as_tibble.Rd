@@ -57,40 +57,35 @@ as_tibble_row(
 as_tibble_col(x, column_name = "value")
 }
 \arguments{
-\item{x}{A data frame, list, matrix, or other object that could reasonably be
-coerced to a tibble.}
+\item{x}{A data frame, list, matrix, or other object that could reasonably be coerced to a tibble.}
 
 \item{...}{Unused, for extensibility.}
 
-\item{.rows}{The number of rows, useful to create a 0-column tibble or
-just as an additional check.}
+\item{.rows}{The number of rows, useful to create a 0-column tibble or just as an additional check.}
 
 \item{.name_repair}{Treatment of problematic column names:
 \itemize{
 \item \code{"minimal"}: No name repair or checks, beyond basic existence,
 \item \code{"unique"}: Make sure names are unique and not empty,
-\item \code{"check_unique"}: (default value), no name repair, but check they are
-\code{unique},
+\item \code{"check_unique"}: (default value), no name repair, but check they are \code{unique},
 \item \code{"universal"}: Make the names \code{unique} and syntactic
 \item \code{"unique_quiet"}: Same as \code{"unique"}, but "quiet"
 \item \code{"universal_quiet"}: Same as \code{"universal"}, but "quiet"
-\item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
-for names in the style of base R).
+\item a function: apply custom name repair (e.g., \code{.name_repair = make.names} for names in the style of base R).
 \item A purrr-style anonymous function, see \code{\link[rlang:as_function]{rlang::as_function()}}
 }
 
 This argument is passed on as \code{repair} to \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
-See there for more details on these terms and the strategies used
-to enforce them.}
+See there for more details on these terms and the strategies used to enforce them.}
 
 \item{rownames}{How to treat existing row names of a data frame or matrix:
 \itemize{
-\item \code{NULL}: remove row names. This is the default.
+\item \code{NULL}: remove row names.
+This is the default.
 \item \code{NA}: keep row names.
-\item A string: the name of a new column. Existing rownames are transferred
-into this column and the \code{row.names} attribute is deleted.
-No name repair is applied to the new column name, even if \code{x} already contains
-a column of that name.
+\item A string: the name of a new column.
+Existing rownames are transferred into this column and the \code{row.names} attribute is deleted.
+No name repair is applied to the new column name, even if \code{x} already contains a column of that name.
 Use \code{as_tibble(rownames_to_column(...))} to safeguard against this case.
 }
 
@@ -105,18 +100,15 @@ For compatibility only, do not use for new code.}
 \item{column_name}{Name of the column.}
 }
 \description{
-\code{as_tibble()} turns an existing object, such as a data frame or
-matrix, into a so-called tibble, a data frame with class \code{\link{tbl_df}}. This is
-in contrast with \code{\link[=tibble]{tibble()}}, which builds a tibble from individual columns.
-\code{as_tibble()} is to \code{\link[=tibble]{tibble()}} as \code{\link[base:as.data.frame]{base::as.data.frame()}} is to
-\code{\link[base:data.frame]{base::data.frame()}}.
+\code{as_tibble()} turns an existing object, such as a data frame or matrix,
+into a so-called tibble, a data frame with class \code{\link{tbl_df}}.
+This is in contrast with \code{\link[=tibble]{tibble()}}, which builds a tibble from individual columns.
+\code{as_tibble()} is to \code{\link[=tibble]{tibble()}} as \code{\link[base:as.data.frame]{base::as.data.frame()}} is to \code{\link[base:data.frame]{base::data.frame()}}.
 
 \code{as_tibble()} is an S3 generic, with methods for:
 \itemize{
-\item \code{\link[base:data.frame]{data.frame}}: Thin wrapper around the \code{list} method
-that implements tibble's treatment of \link{rownames}.
-\item \code{\link[base:matrix]{matrix}}, \code{\link[stats:poly]{poly}},
-\code{\link[stats:ts]{ts}}, \code{\link[base:table]{table}}
+\item \code{\link[base:data.frame]{data.frame}}: Thin wrapper around the \code{list} method that implements tibble's treatment of \link{rownames}.
+\item \code{\link[base:matrix]{matrix}}, \code{\link[stats:poly]{poly}}, \code{\link[stats:ts]{ts}}, \code{\link[base:table]{table}}
 \item Default: Other inputs are first coerced with \code{\link[base:as.data.frame]{base::as.data.frame()}}.
 }
 
@@ -129,19 +121,16 @@ If the input is a list, all elements must have size one.
 
 The default behavior is to silently remove row names.
 
-New code should explicitly convert row names to a new column using the
-\code{rownames} argument.
+New code should explicitly convert row names to a new column using the \code{rownames} argument.
 
-For existing code that relies on the retention of row names, call
-\code{pkgconfig::set_config("tibble::rownames" = NA)} in your script or in your
-package's \code{\link[=.onLoad]{.onLoad()}}  function.
+For existing code that relies on the retention of row names,
+call \code{pkgconfig::set_config("tibble::rownames" = NA)} in your script or in your package's \code{\link[=.onLoad]{.onLoad()}}  function.
 }
 
 \section{Life cycle}{
 
 Using \code{as_tibble()} for vectors is superseded as of version 3.0.0,
-prefer the more expressive \code{as_tibble_row()} and
-\code{as_tibble_col()} variants for new code.
+prefer the more expressive \code{as_tibble_row()} and \code{as_tibble_col()} variants for new code.
 }
 
 \examples{
@@ -160,7 +149,7 @@ as_tibble_col(
 )
 }
 \seealso{
-\code{\link[=tibble]{tibble()}} constructs a tibble from individual columns. \code{\link[=enframe]{enframe()}}
-converts a named vector to a tibble with a column of names and column of
-values. Name repair is implemented using \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
+\code{\link[=tibble]{tibble()}} constructs a tibble from individual columns.
+\code{\link[=enframe]{enframe()}} converts a named vector to a tibble with a column of names and column of values.
+Name repair is implemented using \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
 }

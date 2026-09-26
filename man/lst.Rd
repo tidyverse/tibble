@@ -8,28 +8,25 @@ lst(...)
 }
 \arguments{
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
-A set of name-value pairs. These arguments are
-processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{\link[rlang:!!]{!!}} and
-unquote-splice via \code{\link[rlang:!!!]{!!!}}. Use \verb{:=} to create columns that start with a dot.
+A set of name-value pairs.
+These arguments are processed with \code{\link[rlang:quos]{rlang::quos()}} and support unquote via \code{\link[rlang:!!]{!!}} and unquote-splice via \code{\link[rlang:!!!]{!!!}}.
+Use \verb{:=} to create columns that start with a dot.
 
 Arguments are evaluated sequentially.
-You can refer to previously created elements directly or using the \link[rlang:.data]{.data}
-pronoun.
-To refer explicitly to objects in the calling environment, use \code{\link[rlang:!!]{!!}} or
-\link[rlang:.env]{.env}, e.g. \code{!!.data} or \code{.env$.data} for the special case of an object
-named \code{.data}.}
+You can refer to previously created elements directly or using the \link[rlang:.data]{.data} pronoun.
+To refer explicitly to objects in the calling environment, use \code{\link[rlang:!!]{!!}} or \link[rlang:.env]{.env},
+e.g. \code{!!.data} or \code{.env$.data} for the special case of an object named \code{.data}.}
 }
 \value{
 A named list.
 }
 \description{
-\code{lst()} constructs a list, similar to \code{\link[base:list]{base::list()}}, but with some of the
-same features as \code{\link[=tibble]{tibble()}}. \code{lst()} builds components sequentially. When
-defining a component, you can refer to components created earlier in the
-call. \code{lst()} also generates missing names automatically.
+\code{lst()} constructs a list, similar to \code{\link[base:list]{base::list()}}, but with some of the same features as \code{\link[=tibble]{tibble()}}.
+\code{lst()} builds components sequentially.
+When defining a component, you can refer to components created earlier in the call.
+\code{lst()} also generates missing names automatically.
 
-See \code{\link[rlang:list2]{rlang::list2()}} for a simpler and faster alternative without tibble's
-evaluation and auto-name semantics.
+See \code{\link[rlang:list2]{rlang::list2()}} for a simpler and faster alternative without tibble's evaluation and auto-name semantics.
 }
 \examples{
 # the value of n can be used immediately in the definition of x

@@ -17,10 +17,9 @@ and support unquote via \code{\link[rlang:!!]{!!}} and unquote-splice via \code{
 A \link{matrix}.
 }
 \description{
-Create matrices laying out the data in rows, similar to
-\code{matrix(..., byrow = TRUE)}, with a nicer-to-read syntax.
-This is useful for small matrices, e.g. covariance matrices, where readability
-is important. The syntax is inspired by \code{\link[=tribble]{tribble()}}.
+Create matrices laying out the data in rows, similar to \code{matrix(..., byrow = TRUE)}, with a nicer-to-read syntax.
+This is useful for small matrices, e.g. covariance matrices, where readability is important.
+The syntax is inspired by \code{\link[=tribble]{tribble()}}.
 }
 \examples{
 frame_matrix(

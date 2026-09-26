@@ -27,13 +27,16 @@ vignette: >
 
 
 
-This vignette defines invariants for subsetting and subset-assignment for tibbles, and illustrates where their behaviour differs from data frames.
+This vignette defines invariants for subsetting and subset-assignment for tibbles,
+and illustrates where their behaviour differs from data frames.
 The goal is to define a small set of invariants that consistently define how behaviors interact.
 Some behaviors are defined using functions of the vctrs package, e.g. `vec_slice()`, `vec_recycle()` and `vec_as_index()`.
 Refer to their documentation for more details about the invariants that they follow.
 
-The subsetting and subassignment operators for data frames and tibbles are particularly tricky, because they support both row and column indexes, both of which are optionally missing.
-We resolve this by first defining column access with `[[` and `$`, then column-wise subsetting with `[`, then row-wise subsetting, then the composition of both.
+The subsetting and subassignment operators for data frames and tibbles are particularly tricky,
+because they support both row and column indexes, both of which are optionally missing.
+We resolve this by first defining column access with `[[` and `$`,
+then column-wise subsetting with `[`, then row-wise subsetting, then the composition of both.
 
 ## Conventions
 
@@ -663,7 +666,8 @@ tbl$not_present
 Then `x[c(j_1, j_2, ..., j_n)]` is equivalent to `tibble(x[[j_1]], x[[j_2]], ..., x[[j_n]])`, keeping the corresponding column names.
 This implies that `j` must be a numeric or character vector, or a logical vector with length 1 or `ncol(x)`.[^subset-extract-commute]
 
-[^subset-extract-commute]: `x[j][[jj]]` is equal to `x[[ j[[jj]] ]]`, in particular `x[j][[1]]` is equal to `x[[j]]` for scalar numeric or integer `j`.
+[^subset-extract-commute]: `x[j][[jj]]` is equal to `x[[ j[[jj]] ]]`,
+in particular `x[j][[1]]` is equal to `x[[j]]` for scalar numeric or integer `j`.
 
 
 <table class="dftbl"><tbody><tr style="vertical-align:top"><td>
@@ -956,7 +960,8 @@ identical(tbl2[, 2, drop = TRUE], tbl2[[2]])
 
 `x[i, ]` is equal to `tibble(vec_slice(x[[1]], i), vec_slice(x[[2]], i), ...)`.[^row-subset-efficiency]
 
-[^row-subset-efficiency]: Row subsetting `x[i, ]` is not defined in terms of `x[[j]][i]` because that definition does not generalise to matrix and data frame columns.
+[^row-subset-efficiency]: Row subsetting `x[i, ]` is not defined in terms of `x[[j]][i]`
+because that definition does not generalise to matrix and data frame columns.
 For efficiency and backward compatibility, `i` is converted to an integer vector by `vec_as_index(i, nrow(x))` first.
 
 <table class="dftbl"><tbody><tr style="vertical-align:top"><td>
@@ -1285,7 +1290,8 @@ identical(tbl2[2:3, 1:2], tbl2[1:2][2:3, ])
 `i` must be a numeric vector of length 1.
 `x[[i, j]]` is equal to `x[i, ][[j]]`, or `vctrs::vec_slice(x[[j]], i)`.[^bracket2-flip]
 
-[^bracket2-flip]: Cell subsetting `x[[i, j]]` is not defined in terms of `x[[j]][[i]]` because that definition does not generalise to list, matrix and data frame columns.
+[^bracket2-flip]: Cell subsetting `x[[i, j]]` is not defined in terms of `x[[j]][[i]]`
+because that definition does not generalise to list, matrix and data frame columns.
 A more efficient implementation of `x[[i, j]]` would check that `j` is a scalar and forward to `x[i, j][[1]]`.
 
 
@@ -2197,7 +2203,8 @@ with_tbl(tbl[["l"]] <- 0)
 
 ### `a` is a list or data frame
 
-If `inherits(a, "list")` or `inherits(a, "data.frame")` is `TRUE`, then `x[j] <- a` is equivalent to `x[[j[[1]]] <- a[[1]]`, `x[[j[[2]]]] <- a[[2]]`, ...
+If `inherits(a, "list")` or `inherits(a, "data.frame")` is `TRUE`,
+then `x[j] <- a` is equivalent to `x[[j[[1]]] <- a[[1]]`, `x[[j[[2]]]] <- a[[2]]`, ...
 
 <table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
@@ -2339,7 +2346,8 @@ with_tbl(tbl[c(1, 1)] <- list(1, 2))
 
 </td></tr></tbody></table>
 
-If `a` contains `NULL` values, the corresponding columns are removed *after* updating (i.e. position indexes refer to columns before any modifications).
+If `a` contains `NULL` values, the corresponding columns are removed *after* updating
+(i.e. position indexes refer to columns before any modifications).
 
 <table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 
@@ -3878,7 +3886,8 @@ with_tbl2(tbl2[2:3, 2] <- tbl[1:2, 1])
 
 </td></tr></tbody></table>
 
-A notable exception is the population of a column full of `NA` (which is of type `logical`), or the use of `NA` on the right-hand side of the assignment.
+A notable exception is the population of a column full of `NA` (which is of type `logical`),
+or the use of `NA` on the right-hand side of the assignment.
 
 <table class="dftbl"><tbody><tr style="vertical-align:top"><td>
 

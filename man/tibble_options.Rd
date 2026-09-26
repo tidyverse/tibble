@@ -22,8 +22,8 @@ An option value of \code{NULL} means that the default is used.
 \section{Options for the tibble package}{
 
 \itemize{
-\item \code{view_max}: Maximum number of rows shown by \code{\link[=view]{view()}}
-if the input is not a data frame, passed on to \code{\link[=head]{head()}}. Default: \code{1000}.
+\item \code{view_max}: Maximum number of rows shown by \code{\link[=view]{view()}} if the input is not a data frame, passed on to \code{\link[=head]{head()}}.
+Default: \code{1000}.
 }
 }
 

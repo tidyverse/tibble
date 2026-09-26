@@ -17,33 +17,29 @@ add_column(
 \item{.data}{Data frame to append to.}
 
 \item{...}{<\code{\link[rlang:dyn-dots]{dynamic-dots}}>
-Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}. All values must have
-the same size of \code{.data} or size 1.}
+Name-value pairs, passed on to \code{\link[=tibble]{tibble()}}.
+All values must have the same size of \code{.data} or size 1.}
 
-\item{.before, .after}{One-based column index or column name where to add the
-new columns, default: after last column.}
+\item{.before, .after}{One-based column index or column name where to add the new columns,
+default: after last column.}
 
 \item{.name_repair}{Treatment of problematic column names:
 \itemize{
 \item \code{"minimal"}: No name repair or checks, beyond basic existence,
 \item \code{"unique"}: Make sure names are unique and not empty,
-\item \code{"check_unique"}: (default value), no name repair, but check they are
-\code{unique},
+\item \code{"check_unique"}: (default value), no name repair, but check they are \code{unique},
 \item \code{"universal"}: Make the names \code{unique} and syntactic
 \item \code{"unique_quiet"}: Same as \code{"unique"}, but "quiet"
 \item \code{"universal_quiet"}: Same as \code{"universal"}, but "quiet"
-\item a function: apply custom name repair (e.g., \code{.name_repair = make.names}
-for names in the style of base R).
+\item a function: apply custom name repair (e.g., \code{.name_repair = make.names} for names in the style of base R).
 \item A purrr-style anonymous function, see \code{\link[rlang:as_function]{rlang::as_function()}}
 }
 
 This argument is passed on as \code{repair} to \code{\link[vctrs:vec_as_names]{vctrs::vec_as_names()}}.
-See there for more details on these terms and the strategies used
-to enforce them.}
+See there for more details on these terms and the strategies used to enforce them.}
 }
 \description{
-This is a convenient way to add one or more columns to an existing data
-frame.
+This is a convenient way to add one or more columns to an existing data frame.
 }
 \examples{
 # add_column ---------------------------------

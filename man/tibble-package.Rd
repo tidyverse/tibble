@@ -12,15 +12,13 @@ Provides a 'tbl_df' class (the 'tibble') with stricter checking and better forma
 \details{
 \ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#stable}{\figure{lifecycle-stable.svg}{options: alt='[Stable]'}}}{\strong{[Stable]}}
 
-The tibble package provides utilities for handling \strong{tibbles}, where
-"tibble" is a colloquial term for the S3 \code{\link{tbl_df}} class. The \code{\link{tbl_df}}
-class is a special case of the base \code{\link[base:data.frame]{data.frame}}
-class, developed in response to lessons learned over many years of data
-analysis with data frames.
+The tibble package provides utilities for handling \strong{tibbles},
+where "tibble" is a colloquial term for the S3 \code{\link{tbl_df}} class.
+The \code{\link{tbl_df}} class is a special case of the base \code{\link[base:data.frame]{data.frame}} class,
+developed in response to lessons learned over many years of data analysis with data frames.
 
-Tibble is the central data structure for the set of packages known as the
-\href{https://tidyverse.org/packages/}{tidyverse}, including
-\href{https://dplyr.tidyverse.org/}{dplyr},
+Tibble is the central data structure for the set of packages known as the \href{https://tidyverse.org/packages/}{tidyverse},
+including \href{https://dplyr.tidyverse.org/}{dplyr},
 \href{https://ggplot2.tidyverse.org/}{ggplot2},
 \href{https://tidyr.tidyverse.org/}{tidyr}, and
 \href{https://readr.tidyverse.org/}{readr}.
@@ -28,9 +26,8 @@ Tibble is the central data structure for the set of packages known as the
 General resources:
 \itemize{
 \item Website for the tibble package: \url{https://tibble.tidyverse.org}
-\item \href{https://adv-r.hadley.nz/vectors-chap.html}{Vectors chapter} in \emph{Advanced R}
-(2nd edition), specifically the
-\href{https://adv-r.hadley.nz/vectors-chap.html#tibble}{Data frames and tibbles section}
+\item \href{https://adv-r.hadley.nz/vectors-chap.html}{Vectors chapter} in \emph{Advanced R} (2nd edition),
+specifically the \href{https://adv-r.hadley.nz/vectors-chap.html#tibble}{Data frames and tibbles section}
 }
 
 Resources on specific topics:
