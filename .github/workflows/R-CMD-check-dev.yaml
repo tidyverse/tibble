@@ -57,6 +57,9 @@ jobs:
 
     name: base
 
+    outputs:
+      binary: ${{ steps.binary.outputs.artifact-name }}
+
     permissions:
       # Both required by the update-snapshots action, which opens a pull
       # request with refreshed snapshots.
@@ -78,7 +81,7 @@ jobs:
         with:
           cache-version: rcc-dev-base-1
           needs: build, check
-          extra-packages: "any::rcmdcheck any::remotes ."
+          extra-packages: "any::rcmdcheck any::remotes"
           token: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Session info
@@ -87,6 +90,12 @@ jobs:
       - name: Run the repository-specific after-install steps
         uses: ./.github/workflows/custom/after-install
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
+
+      - name: Build, install and upload the binary package
+        id: binary
+        uses: cynkra/cynkratemplate/.github/actions/build-binary@main
+        with:
+          name: ubuntu-26.04-rrelease-base
 
       - name: Update the testthat snapshots
         uses: cynkra/cynkratemplate/.github/actions/update-snapshots@main
@@ -127,8 +136,14 @@ jobs:
         with:
           cache-version: rcc-dev-${{ matrix.package }}-1
           needs: build, check
-          extra-packages: "any::rcmdcheck r-lib/remotes@f-618-universe ."
+          extra-packages: "any::rcmdcheck r-lib/remotes@f-618-universe"
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Same runner and R version as the base job, so its binary fits.
+      - name: Install the package from the base job's binary
+        uses: cynkra/cynkratemplate/.github/actions/install-binary@main
+        with:
+          name: ${{ needs.R-CMD-check-base.outputs.binary }}
 
       - name: Install dev version of ${{ matrix.package }}
         env:

@@ -77,6 +77,7 @@ jobs:
       sha: ${{ steps.commit.outputs.sha }}
       versions-matrix: ${{ steps.versions-matrix.outputs.matrix }}
       dep-suggests-matrix: ${{ steps.dep-suggests-matrix.outputs.matrix }}
+      binary: ${{ steps.binary.outputs.artifact-name }}
 
     name: "Smoke test: stock R"
 
@@ -124,11 +125,14 @@ jobs:
         uses: ./.github/workflows/custom/after-install
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
-      # Must come after the custom after-install workflow
-      - name: Install package
-        run: |
-          _R_SHLIB_STRIP_=true R CMD INSTALL .
-        shell: bash
+      # Must come after the custom after-install workflow.
+      # Builds the commit as pushed: the styling and roxygenizing below may
+      # push a new commit on top, which this binary does not include.
+      - name: Build, install and upload the binary package
+        id: binary
+        uses: cynkra/cynkratemplate/.github/actions/build-binary@main
+        with:
+          name: ubuntu-26.04-rrelease-smoke
 
       # From here on, every step is marked `continue-on-error: true` so that a
       # failing check doesn't hide the results of all the checks that follow.
@@ -391,6 +395,19 @@ jobs:
         uses: ./.github/workflows/custom/after-install
         if: hashFiles('.github/workflows/custom/after-install/action.yml') != ''
 
+      # Before the snapshot tests and the check, which reuse its compilation:
+      # `load_all()` finds the shared object in `src/`, and `R CMD check` hits ccache.
+      - name: Build, install and upload the binary package
+        uses: cynkra/cynkratemplate/.github/actions/build-binary@main
+        # The covr entries run no check and build an instrumented package of their own.
+        if: ${{ ! matrix.covr }}
+        with:
+          # `matrix.os` rather than `runner.os`: ubuntu-24.04 and ubuntu-26.04
+          # are both "Linux", and their binaries differ. `matrix.desc` tells
+          # apart the custom entries that share an OS and an R version, so an
+          # entry that shares both with another one needs a `desc`.
+          name: ${{ matrix.os }}-r${{ matrix.r }}${{ matrix.desc && format('-{0}', matrix.desc) || '' }}
+
       - name: Must allow NOTEs if packages are missing, even with _R_CHECK_FORCE_SUGGESTS_
         uses: cynkra/cynkratemplate/.github/actions/allow-notes-when-deps-missing@main
       - name: Update the testthat snapshots
@@ -450,8 +467,14 @@ jobs:
         with:
           cache-version: rcc-dev-${{ matrix.package }}-1
           needs: build, check
-          extra-packages: "any::rcmdcheck any::remotes ."
+          extra-packages: "any::rcmdcheck any::remotes"
           token: ${{ secrets.GITHUB_TOKEN }}
+
+      # Same runner and R version as the smoke test, so its binary fits.
+      - name: Install the package from the smoke test's binary
+        uses: cynkra/cynkratemplate/.github/actions/install-binary@main
+        with:
+          name: ${{ needs.rcc-smoke.outputs.binary }}
 
       - name: Remove ${{ matrix.package }} and all strong dependencies
         run: |
