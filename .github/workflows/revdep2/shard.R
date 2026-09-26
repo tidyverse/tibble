@@ -614,8 +614,17 @@ runnable <- names(sources)
 # last one with nothing but the cheap ones -- and the deadline, which stops the
 # shard when the next check will not fit, would then bite unevenly. Round robin
 # gives every slice the same mix.
+#
+# Not `seq(index, length(runnable), by = of)`: seq() refuses a `from` past
+# `to` ("wrong sign in 'by' argument"), so that spelling is an R *error* for a
+# shard with fewer runnable packages than slices. A one-package shard, the
+# common retry case, checked its package in slice 1 and then crashed slices 2
+# and 3, turning the job red; an empty `runnable` -- every package a depfail --
+# crashed slice 1 before a single manifest line was written. Filtering the
+# positions lets such a slice select nothing and check nothing.
 if (check_slice$of > 1L) {
-  mine <- seq(check_slice$index, length(runnable), by = check_slice$of)
+  mine <- seq_along(runnable)
+  mine <- mine[mine %% check_slice$of == check_slice$index %% check_slice$of]
   inform(sprintf(
     "Slice %d/%d: %d of this shard's %d runnable package(s)",
     check_slice$index,
