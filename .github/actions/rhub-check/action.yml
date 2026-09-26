@@ -1,0 +1,46 @@
+name: "Check on one R-hub platform"
+description: >
+  Run R CMD check for one entry of the matrices that `rhub-setup` produces,
+  in its container or on its virtual machine.
+  The calling job's matrix must be named `config`:
+  `r-hub/actions/run-check` reads `matrix.config.label` to decide
+  which sanitizer, valgrind or rchk findings to look for.
+
+inputs:
+  job-config:
+    description: "The `job-config` of the matrix entry."
+    required: true
+  token:
+    description: "Passed on to the R-hub actions, which use it for runs that `rhub::rhub_check()` starts."
+    required: false
+    default: ""
+  setup-r:
+    description: "Whether to install R first: `true` on a virtual machine, `false` in a container, which brings its own."
+    required: false
+    default: "false"
+
+runs:
+  using: "composite"
+  steps:
+    - uses: r-hub/actions/checkout@v1
+
+    - uses: r-hub/actions/setup-r@v1
+      if: inputs.setup-r == 'true'
+      with:
+        job-config: ${{ inputs.job-config }}
+        token: ${{ inputs.token }}
+
+    - uses: r-hub/actions/platform-info@v1
+      with:
+        job-config: ${{ inputs.job-config }}
+        token: ${{ inputs.token }}
+
+    - uses: r-hub/actions/setup-deps@v1
+      with:
+        job-config: ${{ inputs.job-config }}
+        token: ${{ inputs.token }}
+
+    - uses: r-hub/actions/run-check@v1
+      with:
+        job-config: ${{ inputs.job-config }}
+        token: ${{ inputs.token }}

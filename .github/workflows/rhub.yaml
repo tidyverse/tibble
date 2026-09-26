@@ -1,0 +1,103 @@
+# R-hub checks: the CRAN check flavours the `rcc` matrix does not cover,
+# such as the sanitizers, valgrind and rchk, run in R-hub's containers and virtual machines.
+# Derived from R-hub's generic workflow,
+# https://github.com/r-hub/actions/blob/v1/workflows/rhub.yaml,
+# and still what `rhub::rhub_check()` dispatches: it passes the platforms in the `config` input.
+#
+# A push to a `cran-*` branch checks the release candidate on the package's platforms:
+# `Config/gha/rhub-platforms` in DESCRIPTION, or else a default that depends on
+# whether the package has compiled code.
+# The `rhub-setup` action chooses them, see `platforms.R` beside it.
+name: R-hub
+run-name: >-
+  ${{ github.event_name == 'push' && format('Release candidate {0}', github.ref_name) || github.event.inputs.id || format('Manual run by @{0}', github.triggering_actor) }}${{ github.event_name != 'push' && format(': {0}', github.event.inputs.name || github.event.inputs.config || 'the package''s platforms') || '' }}
+
+on:
+  push:
+    branches:
+      - "cran-*"
+  workflow_dispatch:
+    inputs:
+      config:
+        description: >-
+          Comma-separated list of R-hub platforms to use.
+          Empty uses the package's platforms, see the top of rhub.yaml.
+          Full list: https://r-hub.github.io/containers/
+        type: string
+        default: ""
+      name:
+        description: "Run name. You can leave this empty."
+        type: string
+      id:
+        description: "Unique ID. You can leave this empty."
+        type: string
+
+# A push supersedes the previous push to the same branch.
+# Dispatched runs, which is how `rhub::rhub_check()` starts one, never cancel each other.
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}-${{ github.event_name == 'push' && 'push' || github.run_id }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  setup:
+    runs-on: ubuntu-26.04
+    timeout-minutes: 15
+
+    outputs:
+      containers: ${{ steps.setup.outputs.containers }}
+      platforms: ${{ steps.setup.outputs.platforms }}
+
+    steps:
+      - uses: actions/checkout@v6
+        with:
+          persist-credentials: false
+
+      - name: Choose the platforms
+        id: setup
+        uses: cynkra/cynkratemplate/.github/actions/rhub-setup@main
+        with:
+          config: ${{ github.event.inputs.config }}
+
+  linux-containers:
+    needs: setup
+    if: needs.setup.outputs.containers != '' && needs.setup.outputs.containers != '[]'
+    runs-on: ubuntu-26.04
+    # No `timeout-minutes`, unlike the rest of the kit: an instrumented build and check
+    # is slow by design (valgrind on duckdb-r has taken up to 353 minutes),
+    # so the check jobs keep GitHub's six-hour default.
+    name: ${{ matrix.config.label }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # Named `config`: `rhub-check` relies on `matrix.config.label`.
+        config: ${{ fromJson(needs.setup.outputs.containers) }}
+    container:
+      image: ${{ matrix.config.container }}
+
+    steps:
+      - uses: cynkra/cynkratemplate/.github/actions/rhub-check@main
+        with:
+          job-config: ${{ matrix.config.job-config }}
+          token: ${{ secrets.RHUB_TOKEN }}
+
+  other-platforms:
+    needs: setup
+    if: needs.setup.outputs.platforms != '' && needs.setup.outputs.platforms != '[]'
+    runs-on: ${{ matrix.config.os }}
+    # No `timeout-minutes`, like the container checks above.
+    name: ${{ matrix.config.label }}
+    strategy:
+      fail-fast: false
+      matrix:
+        # Named `config`: `rhub-check` relies on `matrix.config.label`.
+        config: ${{ fromJson(needs.setup.outputs.platforms) }}
+
+    steps:
+      - uses: cynkra/cynkratemplate/.github/actions/rhub-check@main
+        with:
+          job-config: ${{ matrix.config.job-config }}
+          token: ${{ secrets.RHUB_TOKEN }}
+          setup-r: true

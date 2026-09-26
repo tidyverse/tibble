@@ -1,0 +1,48 @@
+name: "Choose the R-hub platforms"
+description: >
+  Choose the R-hub platforms to check the package on,
+  and resolve them into the container and virtual-machine matrices that `rhub-check` runs.
+
+inputs:
+  config:
+    description: >
+      Comma- or space-separated R-hub platforms, overriding the package's own.
+      Empty uses `Config/gha/rhub-platforms` from DESCRIPTION,
+      or else the default for the package, see `platforms.R`.
+    required: false
+    default: ""
+
+outputs:
+  config:
+    description: "The chosen platforms, comma-separated, empty for none."
+    value: ${{ steps.choose.outputs.config }}
+  containers:
+    description: "Matrix of the container platforms, `[]` for none."
+    value: ${{ steps.setup.outputs.containers || '[]' }}
+  platforms:
+    description: "Matrix of the virtual-machine platforms, `[]` for none."
+    value: ${{ steps.setup.outputs.platforms || '[]' }}
+
+runs:
+  using: "composite"
+  steps:
+    - uses: r-lib/actions/setup-r@v2
+      with:
+        use-public-rspm: true
+
+    - name: Choose the platforms
+      id: choose
+      env:
+        REQUESTED: ${{ inputs.config }}
+      run: |
+        Rscript "${{ github.action_path }}/platforms.R"
+      shell: bash
+
+    # Skipped rather than called with an empty list: the outputs above turn a
+    # skipped step into two empty matrices, without pulling R-hub's image.
+    - name: Resolve the platforms into matrices
+      id: setup
+      if: steps.choose.outputs.config != ''
+      uses: r-hub/actions/setup@v1
+      with:
+        config: ${{ steps.choose.outputs.config }}
