@@ -17,7 +17,7 @@ See vignette(&quot;extending&quot;, package = &quot;pillar&quot;) for details.">
 
     <a class="navbar-brand me-2" href="../index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.3.1.9027</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.3.1.9028</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -90,29 +90,28 @@ See <code><a href="https://pillar.r-lib.org/articles/extending.html" class="exte
 
 
 <dt id="arg-n">n<a class="anchor" aria-label="anchor" href="#arg-n"></a></dt>
-<dd><p>Number of rows to show. If <code>NULL</code>, the default, will print all rows
-if less than option <code>tibble.print_max</code>. Otherwise, will print
-<code>tibble.print_min</code> rows.</p></dd>
+<dd><p>Number of rows to show.
+If <code>NULL</code>, the default, will print all rows if less than option <code>tibble.print_max</code>.
+Otherwise, will print <code>tibble.print_min</code> rows.</p></dd>
 
 
 <dt id="arg-width">width<a class="anchor" aria-label="anchor" href="#arg-width"></a></dt>
-<dd><p>Width of text output to generate. This defaults to <code>NULL</code>, which
-means use <code>getOption("tibble.width")</code> or (if also <code>NULL</code>)
-<code>getOption("width")</code>; the latter displays only the columns that fit on one
-screen. You can also set <code>options(tibble.width = Inf)</code> to override this
-default and always print all columns, this may be slow for very wide tibbles.</p></dd>
+<dd><p>Width of text output to generate.
+This defaults to <code>NULL</code>, which means use <code>getOption("tibble.width")</code> or (if also <code>NULL</code>) <code>getOption("width")</code>;
+the latter displays only the columns that fit on one screen.
+You can also set <code>options(tibble.width = Inf)</code> to override this default and always print all columns,
+this may be slow for very wide tibbles.</p></dd>
 
 
 <dt id="arg-n-extra">n_extra<a class="anchor" aria-label="anchor" href="#arg-n-extra"></a></dt>
 <dd><p>Number of extra columns to print abbreviated information for,
-if the width is too small for the entire tibble. If <code>NULL</code>, the default,
-will print information about at most <code>tibble.max_extra_cols</code> extra columns.</p></dd>
+if the width is too small for the entire tibble.
+If <code>NULL</code>, the default, will print information about at most <code>tibble.max_extra_cols</code> extra columns.</p></dd>
 
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An object with a <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> method that will print the input
-similarly to a tibble.
+    <p>An object with a <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code> method that will print the input similarly to a tibble.
 The internal data format is an implementation detail, do not rely on it.</p>
     </div>
 

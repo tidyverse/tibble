@@ -15,6 +15,44 @@ easier to use with large datasets containing complex objects.
 If you are new to tibbles, the best place to start is the [tibbles
 chapter](https://r4ds.had.co.nz/tibbles.html) in *R for data science*.
 
+## Goals and non-goals
+
+tibble aims to:
+
+- Provide the `tbl_df` class: a data frame that never changes the type
+  or the name of an input, only recycles values of length 1, and never
+  creates row names.
+- Fail early rather than guess: `$` never partially matches and warns
+  when a column is absent, and `[` always returns a data frame.
+- Define subsetting and subset assignment as a small set of invariants,
+  and document every point where they differ from data frames, in
+  [`vignette("invariants")`](https://tibble.tidyverse.org/dev/articles/invariants.md).
+- Show a data frame compactly: the rows and columns that fit on one
+  screen, plus an abbreviation of each column’s type, catalogued in
+  [`vignette("types")`](https://tibble.tidyverse.org/dev/articles/types.md).
+- Stay extensible:
+  [`new_tibble()`](https://tibble.tidyverse.org/dev/reference/new_tibble.md)
+  and [`tbl_sum()`](https://pillar.r-lib.org/reference/tbl_sum.html) let
+  other packages build classes on `"tbl_df"`, or on `"tbl"` alone, as
+  [`vignette("extending")`](https://tibble.tidyverse.org/dev/articles/extending.md)
+  describes.
+
+It is explicitly not trying to:
+
+- Format the output itself: as of tibble 3.1.0 printing is handled
+  entirely by pillar, which also owns the display options and the
+  extension points for them.
+- Define column types: any vctrs vector can be a column, and a new type
+  is implemented with vctrs rather than here.
+- Be a drop-in replacement for
+  [`data.frame()`](https://rdrr.io/r/base/data.frame.html): row names
+  are dropped instead of stored, and arithmetic is not defined across
+  all columns.
+- Convert arbitrary objects:
+  [`as_tibble()`](https://tibble.tidyverse.org/dev/reference/as_tibble.md)
+  is for inputs that are already data frames, lists, matrices, or
+  tables.
+
 ## Installation
 
 ``` r
@@ -45,17 +83,17 @@ Create a tibble from an existing object with
 data <- data.frame(a = 1:3, b = letters[1:3], c = Sys.Date() - 1:3)
 data
 #>   a b          c
-#> 1 1 a 2025-06-18
-#> 2 2 b 2025-06-17
-#> 3 3 c 2025-06-16
+#> 1 1 a 2026-09-12
+#> 2 2 b 2026-09-11
+#> 3 3 c 2026-09-10
 
 as_tibble(data)
 #> # A tibble: 3 × 3
 #>       a b     c         
 #>   <int> <chr> <date>    
-#> 1     1 a     2025-06-18
-#> 2     2 b     2025-06-17
-#> 3     3 c     2025-06-16
+#> 1     1 a     2026-09-12
+#> 2     2 b     2026-09-11
+#> 3     3 c     2026-09-10
 ```
 
 This will work for reasonable inputs that are already data.frames,

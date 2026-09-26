@@ -1,5 +1,36 @@
 # Changelog
 
+## tibble 3.3.1.9028
+
+### Chore
+
+- Remove Copilot setup steps.
+
+### Uncategorized
+
+- Refactor(ci): Serve the actions from this repository instead of
+  copying them (cynkra/cynkratemplate#121).
+
+- Refactor(ci): Move every script out of the workflows and into a named
+  action (cynkra/cynkratemplate#120).
+
+- Refactor(ci): Make an action of what the workflows say more than once.
+
+- Refactor(ci): Move every script that could change out of the
+  workflows.
+
+- Refactor(ci): Extract the last three scripts, which only a named
+  action can hold.
+
+- Fix(ci): Keep the raw name expression out of the running job’s step
+  list (cynkra/cynkratemplate#119).
+
+- Fix(fledge): Push the bump to the default branch wherever that is
+  allowed (cynkra/cynkratemplate#117).
+
+- Fix(ci): Exempt deprecation warnings from the roxygenize warning gate
+  (cynkra/cynkratemplate#114).
+
 ## tibble 3.3.1.9027
 
 ### Features

@@ -31,7 +31,7 @@
 
     <a class="navbar-brand me-2" href="index.html">tibble</a>
 
-    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.3.1.9027</small>
+    <small class="nav-text text-danger me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="In-development version">3.3.1.9028</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -98,6 +98,25 @@
 <p>If you are new to tibbles, the best place to start is the <a href="https://r4ds.had.co.nz/tibbles.html" class="external-link">tibbles chapter</a> in <em>R for data science</em>.</p>
 </div>
 <div class="section level2">
+<h2 id="goals-and-non-goals">Goals and non-goals<a class="anchor" aria-label="anchor" href="#goals-and-non-goals"></a>
+</h2>
+<p>tibble aims to:</p>
+<ul>
+<li>Provide the <code>tbl_df</code> class: a data frame that never changes the type or the name of an input, only recycles values of length 1, and never creates row names.</li>
+<li>Fail early rather than guess: <code>$</code> never partially matches and warns when a column is absent, and <code>[</code> always returns a data frame.</li>
+<li>Define subsetting and subset assignment as a small set of invariants, and document every point where they differ from data frames, in <code><a href="articles/invariants.html">vignette("invariants")</a></code>.</li>
+<li>Show a data frame compactly: the rows and columns that fit on one screen, plus an abbreviation of each column’s type, catalogued in <code><a href="articles/types.html">vignette("types")</a></code>.</li>
+<li>Stay extensible: <code><a href="reference/new_tibble.html">new_tibble()</a></code> and <code><a href="https://pillar.r-lib.org/reference/tbl_sum.html" class="external-link">tbl_sum()</a></code> let other packages build classes on <code>"tbl_df"</code>, or on <code>"tbl"</code> alone, as <code><a href="articles/extending.html">vignette("extending")</a></code> describes.</li>
+</ul>
+<p>It is explicitly not trying to:</p>
+<ul>
+<li>Format the output itself: as of tibble 3.1.0 printing is handled entirely by pillar, which also owns the display options and the extension points for them.</li>
+<li>Define column types: any vctrs vector can be a column, and a new type is implemented with vctrs rather than here.</li>
+<li>Be a drop-in replacement for <code><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame()</a></code>: row names are dropped instead of stored, and arithmetic is not defined across all columns.</li>
+<li>Convert arbitrary objects: <code><a href="reference/as_tibble.html">as_tibble()</a></code> is for inputs that are already data frames, lists, matrices, or tables.</li>
+</ul>
+</div>
+<div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
@@ -121,17 +140,17 @@
 <code class="sourceCode R"><span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>a <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, b <span class="op">=</span> <span class="va">letters</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">]</span>, c <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/Sys.time.html" class="external-link">Sys.Date</a></span><span class="op">(</span><span class="op">)</span> <span class="op">-</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span></span>
 <span><span class="va">data</span></span>
 <span><span class="co">#&gt;   a b          c</span></span>
-<span><span class="co">#&gt; 1 1 a 2025-06-18</span></span>
-<span><span class="co">#&gt; 2 2 b 2025-06-17</span></span>
-<span><span class="co">#&gt; 3 3 c 2025-06-16</span></span>
+<span><span class="co">#&gt; 1 1 a 2026-09-12</span></span>
+<span><span class="co">#&gt; 2 2 b 2026-09-11</span></span>
+<span><span class="co">#&gt; 3 3 c 2026-09-10</span></span>
 <span></span>
 <span><span class="fu"><a href="reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">data</span><span class="op">)</span></span>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 3 × 3</span></span></span>
 <span><span class="co">#&gt;       <span style="font-weight: bold;">a</span> <span style="font-weight: bold;">b</span>     <span style="font-weight: bold;">c</span>         </span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;date&gt;</span>    </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 a     2025-06-18</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 b     2025-06-17</span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 c     2025-06-16</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span>     1 a     2026-09-12</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">2</span>     2 b     2026-09-11</span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">3</span>     3 c     2026-09-10</span></span></code></pre></div>
 <p>This will work for reasonable inputs that are already data.frames, lists, matrices, or tables.</p>
 <p>You can also create a new tibble from column vectors with <code><a href="reference/tibble.html">tibble()</a></code>:</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
@@ -215,7 +234,7 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/tidyverse/tibble/actions" class="external-link"><img src="https://github.com/tidyverse/tibble/workflows/rcc/badge.svg" alt="R-CMD-check"></a></li>
-<li><a href="https://app.codecov.io/gh/tidyverse/tibble?branch=main" class="external-link"><img src="https://codecov.io/gh/tidyverse/tibble/branch/main/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://app.codecov.io/gh/tidyverse/tibble/tree/main" class="external-link"><img src="https://codecov.io/gh/tidyverse/tibble/graph/badge.svg" alt="Codecov test coverage"></a></li>
 <li><a href="https://cran.r-project.org/package=tibble" class="external-link"><img src="https://www.r-pkg.org/badges/version/tibble" alt="CRAN_Status_Badge"></a></li>
 <li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-stable-brightgreen.svg" alt="Life cycle"></a></li>
 </ul>
