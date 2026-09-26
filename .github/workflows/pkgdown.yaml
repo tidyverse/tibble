@@ -21,6 +21,7 @@ permissions: {}
 jobs:
   pkgdown:
     runs-on: ubuntu-26.04
+    timeout-minutes: 120 # longest run seen: 137 min, in duckdb-r
 
     name: "pkgdown"
 

@@ -11,6 +11,7 @@ on:
 jobs:
   lock:
     runs-on: ubuntu-26.04
+    timeout-minutes: 15 # longest run seen: 2 min
     steps:
       # Pinned to a commit, not to `@patch-1`: a branch ref is mutable, so
       # anything landing on that branch would run here with write access to

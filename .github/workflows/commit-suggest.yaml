@@ -47,6 +47,7 @@ permissions: {}
 jobs:
   commit-suggest:
     runs-on: ubuntu-26.04
+    timeout-minutes: 15 # longest run seen: 1 min
     if: github.event.workflow_run.event == 'pull_request'
 
     permissions:

@@ -41,6 +41,7 @@ jobs:
   format-suggest:
     name: format-suggest
     runs-on: ubuntu-26.04
+    timeout-minutes: 15 # longest run seen: 1 min
     # Only run this job if changes come from a fork.
     # We commit changes directly on the main repository.
     if: github.event.pull_request.head.repo.full_name != github.repository

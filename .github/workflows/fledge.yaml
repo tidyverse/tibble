@@ -40,6 +40,7 @@ permissions: {}
 jobs:
   check_news:
     runs-on: ubuntu-26.04
+    timeout-minutes: 15 # longest run seen: 1 min
     permissions:
       contents: read
     outputs:
@@ -56,6 +57,7 @@ jobs:
 
   fledge:
     runs-on: ubuntu-26.04
+    timeout-minutes: 60 # longest run seen: 16 min
     needs: check_news
     if: needs.check_news.outputs.should_run == 'true'
     permissions:
