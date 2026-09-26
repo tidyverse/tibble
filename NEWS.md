@@ -1,5 +1,16 @@
 <!-- NEWS.md is maintained by https://fledge.cynkra.com, contributors should not edit this file -->
 
+# tibble 3.3.1.9029
+
+## Chore
+
+- Update `@rstudio.com` author emails to `@posit.co` (@krlmlr, #1699).
+
+## Documentation
+
+- Adopt the shared README rendering configuration (@krlmlr, #1700).
+
+
 # tibble 3.3.1.9028
 
 ## Chore
