@@ -70,13 +70,13 @@ Authors:
 - Kirill Müller <kirill@cynkra.com>
   ([ORCID](https://orcid.org/0000-0002-1416-3412))
 
-- Hadley Wickham <hadley@rstudio.com>
+- Hadley Wickham <hadley@posit.co>
 
 Other contributors:
 
 - Romain Francois <romain@r-enthusiasts.com> \[contributor\]
 
-- Jennifer Bryan <jenny@rstudio.com> \[contributor\]
+- Jennifer Bryan <jenny@posit.co> \[contributor\]
 
 - Posit Software, PBC ([ROR](https://ror.org/03wc8by49)) \[copyright
   holder, funder\]
