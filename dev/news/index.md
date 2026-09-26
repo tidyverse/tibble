@@ -1,5 +1,19 @@
 # Changelog
 
+## tibble 3.3.1.9029
+
+### Chore
+
+- Update `@rstudio.com` author emails to `@posit.co`
+  ([@krlmlr](https://github.com/krlmlr),
+  [\#1699](https://github.com/tidyverse/tibble/issues/1699)).
+
+### Documentation
+
+- Adopt the shared README rendering configuration
+  ([@krlmlr](https://github.com/krlmlr),
+  [\#1700](https://github.com/tidyverse/tibble/issues/1700)).
+
 ## tibble 3.3.1.9028
 
 ### Chore
