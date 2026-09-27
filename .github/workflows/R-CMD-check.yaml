@@ -211,21 +211,6 @@ jobs:
         with:
           results: ${{ runner.os }}-smoke-test
 
-      # A pull request from this repository gets no version matrix (see the step
-      # that collects it), and so no covr leg either. Coverage is computed here
-      # instead, from the environment the smoke test already installed, so that
-      # such a pull request still gets a coverage report. In the smoke test rather
-      # than a job of its own, because this job's status is the pull request's
-      # `rcc` status: a separate job would let it turn green, and auto-merge go
-      # ahead, while coverage was still running.
-      - name: Compute and upload the test coverage
-        id: covr
-        continue-on-error: true
-        if: github.event_name == 'pull_request' && github.event.pull_request.head.repo.full_name == github.repository && !startsWith(github.head_ref, 'cran-')
-        uses: cynkra/cynkratemplate/.github/actions/covr@main
-        with:
-          token: ${{ secrets.CODECOV_TOKEN }}
-
       - name: Build the pkgdown website
         id: pkgdown-build
         continue-on-error: true
@@ -243,6 +228,22 @@ jobs:
         continue-on-error: true
         uses: cynkra/cynkratemplate/.github/actions/pkgdown-deploy@main
         if: github.event_name == 'push' && steps.check.outcome == 'success'
+
+      # Coverage for every run, from the environment the smoke test already
+      # installed, so that pull requests and the default branch are measured the
+      # same way. The version matrix no longer has a covr entry of its own;
+      # entries a repository adds in .github/versions-matrix.R, such as extra
+      # backends, still run there.
+      # In the smoke test rather than a job of its own, because this job's status
+      # is the `rcc` status of a pull request from this repository: a separate job
+      # would let it turn green, and auto-merge go ahead, while coverage was still
+      # running. After the pkgdown steps, so that a push deploys its site first.
+      - name: Compute and upload the test coverage
+        id: covr
+        continue-on-error: true
+        uses: cynkra/cynkratemplate/.github/actions/covr@main
+        with:
+          token: ${{ secrets.CODECOV_TOKEN }}
 
       # Upload sha as artifact
       - name: Record the commit SHA reached by the smoke test
@@ -303,9 +304,9 @@ jobs:
             Roxygenize the documentation|Roxygenize|${{ steps.roxygenize.outcome }}
             Commit and push the generated changes|Commit|${{ steps.commit.outcome }}
             Run R CMD check|R CMD check|${{ steps.check.outcome }}
-            Compute and upload the test coverage|Coverage|${{ steps.covr.outcome }}
             Build the pkgdown website|pkgdown build|${{ steps.pkgdown-build.outcome }}
             Build and deploy the pkgdown website|pkgdown deploy|${{ steps.pkgdown-deploy.outcome }}
+            Compute and upload the test coverage|Coverage|${{ steps.covr.outcome }}
 
       # This step stays in the workflow because it is the one that goes red, and
       # both of the things that makes it worth reading -- the name the job
