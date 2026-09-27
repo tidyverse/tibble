@@ -129,7 +129,12 @@ jobs:
           needs: build, check, website, roxygen2
           # Beware of using dev pkgdown here, has brought in dev dependencies in the past
           # covr and xml2 are what the covr leg of rcc-full installs, for the coverage step below.
-          extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/pkgdown r-lib/covr any::xml2 deps::.
+          # rmarkdown re-renders README.Rmd for the repositories that opt in.
+          # It is only a Suggests of most of these packages, and of pkgdown, so
+          # ask for it by name rather than hope it arrives as somebody's
+          # dependency. cynkratemplate supplies the output format those READMEs
+          # declare, so it belongs here rather than in thirty DESCRIPTIONs.
+          extra-packages: any::rcmdcheck r-lib/roxygen2 any::decor r-lib/pkgdown r-lib/covr any::xml2 any::rmarkdown cynkra/cynkratemplate deps::.
 
       - name: Run the repository-specific after-install steps
         uses: ./.github/workflows/custom/after-install
@@ -191,6 +196,15 @@ jobs:
         id: roxygenize
         continue-on-error: true
         uses: cynkra/cynkratemplate/.github/actions/roxygenize@main
+
+      # After roxygenize, so a README rendering against the installed package
+      # sees documentation that is already up to date, and before the commit
+      # step, so the rendered files ride along in the same commit. The action
+      # is a no-op unless the repository sets `Config/cynkra/render-readme`.
+      - name: Re-render the README
+        id: render-readme
+        continue-on-error: true
+        uses: cynkra/cynkratemplate/.github/actions/render-readme@main
 
       - name: Remove config files from previous iteration
         run: |
@@ -302,6 +316,7 @@ jobs:
             Style the R sources|Style|${{ steps.style.outcome }}
             Update the testthat snapshots|Snapshots|${{ steps.snapshots.outcome }}
             Roxygenize the documentation|Roxygenize|${{ steps.roxygenize.outcome }}
+            Re-render the README|README|${{ steps.render-readme.outcome }}
             Commit and push the generated changes|Commit|${{ steps.commit.outcome }}
             Run R CMD check|R CMD check|${{ steps.check.outcome }}
             Build the pkgdown website|pkgdown build|${{ steps.pkgdown-build.outcome }}
