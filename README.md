@@ -21,7 +21,7 @@ Tibbles are data.frames that are lazy and surly:
 they do less (i.e. they don't change variable names or types, and don't do partial matching)
 and complain more (e.g. when a variable does not exist).
 This forces you to confront problems earlier, typically leading to cleaner, more expressive code.
-Tibbles also have an enhanced `print()` method which makes them easier to use with large datasets containing complex objects.
+Tibbles also have an enhanced [`print()`](https://rdrr.io/r/base/print.html) method which makes them easier to use with large datasets containing complex objects.
 
 If you are new to tibbles, the best place to start is the [tibbles chapter](https://r4ds.had.co.nz/tibbles.html) in *R for data science*.
 
@@ -39,7 +39,7 @@ tibble aims to:
 - Show a data frame compactly:
   the rows and columns that fit on one screen, plus an abbreviation of each column's type, catalogued in [`vignette("types")`](https://tibble.tidyverse.org/articles/types.html).
 - Stay extensible:
-  `new_tibble()` and `tbl_sum()` let other packages build classes on `"tbl_df"`, or on `"tbl"` alone, as [`vignette("extending")`](https://tibble.tidyverse.org/articles/extending.html) describes.
+  [`new_tibble()`](https://tibble.tidyverse.org/reference/new_tibble.html) and [`tbl_sum()`](https://pillar.r-lib.org/reference/tbl_sum.html) let other packages build classes on `"tbl_df"`, or on `"tbl"` alone, as [`vignette("extending")`](https://tibble.tidyverse.org/articles/extending.html) describes.
 
 It is explicitly not trying to:
 
@@ -47,10 +47,10 @@ It is explicitly not trying to:
   as of tibble 3.1.0 printing is handled entirely by pillar, which also owns the display options and the extension points for them.
 - Define column types:
   any vctrs vector can be a column, and a new type is implemented with vctrs rather than here.
-- Be a drop-in replacement for `data.frame()`:
+- Be a drop-in replacement for [`data.frame()`](https://rdrr.io/r/base/data.frame.html):
   row names are dropped instead of stored, and arithmetic is not defined across all columns.
 - Convert arbitrary objects:
-  `as_tibble()` is for inputs that are already data frames, lists, matrices, or tables.
+  [`as_tibble()`](https://tibble.tidyverse.org/reference/as_tibble.html) is for inputs that are already data frames, lists, matrices, or tables.
 
 ## Installation
 
@@ -72,7 +72,7 @@ pak::pak("tidyverse/tibble")
 library(tibble)
 ```
 
-Create a tibble from an existing object with `as_tibble()`:
+Create a tibble from an existing object with [`as_tibble()`](https://tibble.tidyverse.org/reference/as_tibble.html):
 
 ``` r
 data <- data.frame(a = 1:3, b = letters[1:3], c = Sys.Date() - 1:3)
@@ -93,7 +93,7 @@ as_tibble(data)
 
 This will work for reasonable inputs that are already data.frames, lists, matrices, or tables.
 
-You can also create a new tibble from column vectors with `tibble()`:
+You can also create a new tibble from column vectors with [`tibble()`](https://tibble.tidyverse.org/reference/tibble.html):
 
 ``` r
 tibble(x = 1:5, y = 1, z = x^2 + y)
@@ -107,14 +107,14 @@ tibble(x = 1:5, y = 1, z = x^2 + y)
 #> 5     5     1    26
 ```
 
-`tibble()` does much less than `data.frame()`:
+[`tibble()`](https://tibble.tidyverse.org/reference/tibble.html) does much less than [`data.frame()`](https://rdrr.io/r/base/data.frame.html):
 it never changes the type of the inputs (e.g. it keeps list columns as is),
 it never changes the names of variables,
 it only recycles inputs of length 1,
-and it never creates `row.names()`.
+and it never creates [`row.names()`](https://rdrr.io/r/base/row.names.html).
 You can read more about these features in [`vignette("tibble")`](https://tibble.tidyverse.org/articles/tibble.html).
 
-You can define a tibble row-by-row with `tribble()`:
+You can define a tibble row-by-row with [`tribble()`](https://tibble.tidyverse.org/reference/tribble.html):
 
 ``` r
 tribble(
@@ -133,7 +133,7 @@ tribble(
 
 The tibble print method draws inspiration from [data.table](https://rdatatable.gitlab.io/data.table),
 and [frame](https://github.com/patperry/r-frame).
-Like `data.table::data.table()`, `tibble()` doesn't change column names and doesn't use rownames.
+Like [`data.table::data.table()`](https://r-datatable.com/reference/data.table.html), [`tibble()`](https://tibble.tidyverse.org/reference/tibble.html) doesn't change column names and doesn't use rownames.
 
 ------------------------------------------------------------------------
 

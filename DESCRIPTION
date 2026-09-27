@@ -56,6 +56,7 @@ VignetteBuilder:
 Config/autostyle/rmd: false
 Config/autostyle/scope: line_breaks
 Config/autostyle/strict: true
+Config/Needs/readme: data.table
 Config/Needs/website: tidyverse/tidytemplate
 Config/testthat/edition: 3
 Config/testthat/parallel: true
