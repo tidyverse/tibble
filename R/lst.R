@@ -48,7 +48,7 @@ lst_quos <- function(xs) {
   output <- rep_named(rep_along(xs, ""), list(NULL))
 
   for (i in seq_along(xs)) {
-    unique_output <- output[
+    unique_output <- output[seq_len(i)][
       !duplicated(names(output)[seq_len(i)], fromLast = TRUE)
     ]
     res <- eval_tidy(xs[[i]], unique_output)
