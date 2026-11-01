@@ -27,7 +27,7 @@
       str(as_tibble(trees[integer()]), width = 70L)
     Output
       tibble [31 x 0] (S3: tbl_df/tbl/data.frame)
-       Named list()
+      Named list()
     Code
       # Non-syntactic names
       df <- tibble(!!!set_names(c(5, 3), c("mean(x)", "var(x)")))
@@ -47,17 +47,17 @@
        $ e: Factor w/ 2 levels "a","b": 1 2 NA
        $ f: Date[1:3], format: "2015-12-10" ...
        $ g: POSIXct[1:3], format: "2015-12-09 10:51:35" ...
-       $ h:List of 3
+       $ h: List of 3
         ..$ : int 1
         ..$ : int 2
         ..$ : int NA
-       $ i:List of 3
-        ..$ :List of 2
+       $ i: List of 3
+        ..$ : List of 2
         .. ..$ : num 1
         .. ..$ : int [1:2] 2 3
-        ..$ :List of 1
+        ..$ : List of 1
         .. ..$ : int [1:3] 4 5 6
-        ..$ :List of 1
+        ..$ : List of 1
         .. ..$ : logi NA
     Code
       # options(tibble.width = 50)
@@ -71,17 +71,17 @@
        $ e: Factor w/ 2 levels "a","b": 1 2 NA
        $ f: Date[1:3], format: "2015-12-10" "2015-12-11" ...
        $ g: POSIXct[1:3], format: "2015-12-09 10:51:35" "2015-12-09 10:51:36" ...
-       $ h:List of 3
+       $ h: List of 3
         ..$ : int 1
         ..$ : int 2
         ..$ : int NA
-       $ i:List of 3
-        ..$ :List of 2
+       $ i: List of 3
+        ..$ : List of 2
         .. ..$ : num 1
         .. ..$ : int [1:2] 2 3
-        ..$ :List of 1
+        ..$ : List of 1
         .. ..$ : int [1:3] 4 5 6
-        ..$ :List of 1
+        ..$ : List of 1
         .. ..$ : logi NA
     Code
       # options(tibble.width = 35)
@@ -95,23 +95,23 @@
        $ e: Factor w/ 2 levels "a","b": 1 2 NA
        $ f: Date[1:3], format: "2015-12-10" "2015-12-11" ...
        $ g: POSIXct[1:3], format: "2015-12-09 10:51:35" "2015-12-09 10:51:36" ...
-       $ h:List of 3
+       $ h: List of 3
         ..$ : int 1
         ..$ : int 2
         ..$ : int NA
-       $ i:List of 3
-        ..$ :List of 2
+       $ i: List of 3
+        ..$ : List of 2
         .. ..$ : num 1
         .. ..$ : int [1:2] 2 3
-        ..$ :List of 1
+        ..$ : List of 1
         .. ..$ : int [1:3] 4 5 6
-        ..$ :List of 1
+        ..$ : List of 1
         .. ..$ : logi NA
     Code
       # non-tibble
       str(5)
     Output
-       num 5
+      num 5
     Code
       Volume <- unique(trees$Volume)
       data <- unname(split(trees, trees$Volume))
@@ -120,124 +120,124 @@
     Output
       tibble [30 x 2] (S3: tbl_df/tbl/data.frame)
        $ Volume: num [1:30] 10.3 10.2 16.4 18.8 19.7 15.6 18.2 22.6 19.9 24.2 ...
-       $ data  :List of 30
-        ..$ :'data.frame':	1 obs. of  3 variables:
+       $ data  : List of 30
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 8.8
         .. ..$ Height: num 63
         .. ..$ Volume: num 10.2
-        ..$ :'data.frame':	2 obs. of  3 variables:
+        ..$ : 'data.frame':	2 obs. of  3 variables:
         .. ..$ Girth : num [1:2] 8.3 8.6
         .. ..$ Height: num [1:2] 70 65
         .. ..$ Volume: num [1:2] 10.3 10.3
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 11
         .. ..$ Height: num 66
         .. ..$ Volume: num 15.6
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 10.5
         .. ..$ Height: num 72
         .. ..$ Volume: num 16.4
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 11
         .. ..$ Height: num 75
         .. ..$ Volume: num 18.2
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 10.7
         .. ..$ Height: num 81
         .. ..$ Volume: num 18.8
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 12
         .. ..$ Height: num 75
         .. ..$ Volume: num 19.1
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 10.8
         .. ..$ Height: num 83
         .. ..$ Volume: num 19.7
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 11.2
         .. ..$ Height: num 75
         .. ..$ Volume: num 19.9
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 11.4
         .. ..$ Height: num 76
         .. ..$ Volume: num 21
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 11.7
         .. ..$ Height: num 69
         .. ..$ Volume: num 21.3
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 11.4
         .. ..$ Height: num 76
         .. ..$ Volume: num 21.4
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 12.9
         .. ..$ Height: num 74
         .. ..$ Volume: num 22.2
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 11.1
         .. ..$ Height: num 80
         .. ..$ Volume: num 22.6
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 11.3
         .. ..$ Height: num 79
         .. ..$ Volume: num 24.2
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 13.8
         .. ..$ Height: num 64
         .. ..$ Volume: num 24.9
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 13.7
         .. ..$ Height: num 71
         .. ..$ Volume: num 25.7
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 13.3
         .. ..$ Height: num 86
         .. ..$ Volume: num 27.4
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 14.2
         .. ..$ Height: num 80
         .. ..$ Volume: num 31.7
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 12.9
         .. ..$ Height: num 85
         .. ..$ Volume: num 33.8
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 14
         .. ..$ Height: num 78
         .. ..$ Volume: num 34.5
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 14.5
         .. ..$ Height: num 74
         .. ..$ Volume: num 36.3
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 16
         .. ..$ Height: num 72
         .. ..$ Volume: num 38.3
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 16.3
         .. ..$ Height: num 77
         .. ..$ Volume: num 42.6
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 18
         .. ..$ Height: num 80
         .. ..$ Volume: num 51
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 18
         .. ..$ Height: num 80
         .. ..$ Volume: num 51.5
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 17.3
         .. ..$ Height: num 81
         .. ..$ Volume: num 55.4
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 17.5
         .. ..$ Height: num 82
         .. ..$ Volume: num 55.7
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 17.9
         .. ..$ Height: num 80
         .. ..$ Volume: num 58.3
-        ..$ :'data.frame':	1 obs. of  3 variables:
+        ..$ : 'data.frame':	1 obs. of  3 variables:
         .. ..$ Girth : num 20.6
         .. ..$ Height: num 87
         .. ..$ Volume: num 77
@@ -248,124 +248,124 @@
     Output
       tibble [30 x 2] (S3: tbl_df/tbl/data.frame)
        $ Volume: num [1:30] 10.3 10.2 16.4 18.8 19.7 15.6 18.2 22.6 19.9 24.2 ...
-       $ data  :List of 30
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+       $ data  : List of 30
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 8.8
         .. ..$ Height: num 63
         .. ..$ Volume: num 10.2
-        ..$ : tibble [2 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [2 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num [1:2] 8.3 8.6
         .. ..$ Height: num [1:2] 70 65
         .. ..$ Volume: num [1:2] 10.3 10.3
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 11
         .. ..$ Height: num 66
         .. ..$ Volume: num 15.6
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 10.5
         .. ..$ Height: num 72
         .. ..$ Volume: num 16.4
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 11
         .. ..$ Height: num 75
         .. ..$ Volume: num 18.2
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 10.7
         .. ..$ Height: num 81
         .. ..$ Volume: num 18.8
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 12
         .. ..$ Height: num 75
         .. ..$ Volume: num 19.1
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 10.8
         .. ..$ Height: num 83
         .. ..$ Volume: num 19.7
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 11.2
         .. ..$ Height: num 75
         .. ..$ Volume: num 19.9
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 11.4
         .. ..$ Height: num 76
         .. ..$ Volume: num 21
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 11.7
         .. ..$ Height: num 69
         .. ..$ Volume: num 21.3
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 11.4
         .. ..$ Height: num 76
         .. ..$ Volume: num 21.4
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 12.9
         .. ..$ Height: num 74
         .. ..$ Volume: num 22.2
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 11.1
         .. ..$ Height: num 80
         .. ..$ Volume: num 22.6
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 11.3
         .. ..$ Height: num 79
         .. ..$ Volume: num 24.2
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 13.8
         .. ..$ Height: num 64
         .. ..$ Volume: num 24.9
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 13.7
         .. ..$ Height: num 71
         .. ..$ Volume: num 25.7
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 13.3
         .. ..$ Height: num 86
         .. ..$ Volume: num 27.4
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 14.2
         .. ..$ Height: num 80
         .. ..$ Volume: num 31.7
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 12.9
         .. ..$ Height: num 85
         .. ..$ Volume: num 33.8
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 14
         .. ..$ Height: num 78
         .. ..$ Volume: num 34.5
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 14.5
         .. ..$ Height: num 74
         .. ..$ Volume: num 36.3
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 16
         .. ..$ Height: num 72
         .. ..$ Volume: num 38.3
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 16.3
         .. ..$ Height: num 77
         .. ..$ Volume: num 42.6
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 18
         .. ..$ Height: num 80
         .. ..$ Volume: num 51
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 18
         .. ..$ Height: num 80
         .. ..$ Volume: num 51.5
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 17.3
         .. ..$ Height: num 81
         .. ..$ Volume: num 55.4
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 17.5
         .. ..$ Height: num 82
         .. ..$ Volume: num 55.7
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 17.9
         .. ..$ Height: num 80
         .. ..$ Volume: num 58.3
-        ..$ : tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
+        ..$ :  tibble [1 x 3] (S3: tbl_df/tbl/data.frame)
         .. ..$ Girth : num 20.6
         .. ..$ Height: num 87
         .. ..$ Volume: num 77
