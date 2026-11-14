@@ -9,7 +9,7 @@
 #' @keywords internal
 #' @name deprecated
 data_frame <- function(...) {
-  deprecate_warn("1.1.0", "data_frame()", "tibble()")
+  deprecate_stop("3.3.0", "data_frame()", details = 'Please use `tibble()` to create a tibble and `vctrs::data_frame()` to create a data frame.')
 
   # Unquote-splice to avoid argument matching
   tibble(!!!quos(...))
