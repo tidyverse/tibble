@@ -14,6 +14,9 @@
 #' which adds a column at the start of the dataframe of ascending sequential row ids starting at 1.
 #' Note that this will remove any existing row names.
 #'
+#' For a tibble, [as.data.frame()] ignores the `row.names` argument.
+#' Use `column_to_rownames()` to set row names from a column during conversion.
+#'
 #' @return `column_to_rownames()` always returns a data frame.
 #'   `has_rownames()` returns a scalar logical.
 #'   All other functions return an object of the same class as the input.
@@ -32,6 +35,11 @@
 #' mtcars_tbl <- rownames_to_column(mtcars, var = "car") %>% as_tibble()
 #' mtcars_tbl
 #' column_to_rownames(mtcars_tbl, var = "car") %>% head()
+#'
+#' # Set row names after converting to a data frame ----------------------
+#' df <- as.data.frame(tibble(x = 1:2))
+#' rownames(df) <- c("a", "b")
+#' df
 #'
 #' # Adding rowid as a column --------------------------------------------
 #' rowid_to_column(trees) %>% head()

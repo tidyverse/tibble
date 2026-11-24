@@ -42,6 +42,9 @@ or convert them back-and-forth between an explicit column (\code{rownames_to_col
 Also included is \code{rowid_to_column()},
 which adds a column at the start of the dataframe of ascending sequential row ids starting at 1.
 Note that this will remove any existing row names.
+
+For a tibble, \code{\link[=as.data.frame]{as.data.frame()}} ignores the \code{row.names} argument.
+Use \code{column_to_rownames()} to set row names from a column during conversion.
 }
 \examples{
 # Detect row names ----------------------------------------------------
@@ -55,6 +58,11 @@ remove_rownames(mtcars) \%>\% has_rownames()
 mtcars_tbl <- rownames_to_column(mtcars, var = "car") \%>\% as_tibble()
 mtcars_tbl
 column_to_rownames(mtcars_tbl, var = "car") \%>\% head()
+
+# Set row names after converting to a data frame ----------------------
+df <- as.data.frame(tibble(x = 1:2))
+rownames(df) <- c("a", "b")
+df
 
 # Adding rowid as a column --------------------------------------------
 rowid_to_column(trees) \%>\% head()
