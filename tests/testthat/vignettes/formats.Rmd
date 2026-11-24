@@ -120,11 +120,29 @@ The diagram below shows the principal stages of data analysis and exploration fr
 ```{r}
 #| echo: false
 #| eval: !expr (Sys.getenv("IN_GALLEY") == "")
+mermaid_with_alt <- function(text, alt) {
+  htmlwidgets::onRender(
+    DiagrammeR::mermaid(text),
+    "function(el, x, alt) {
+      el.setAttribute('role', 'img');
+      el.setAttribute('aria-label', alt);
+    }",
+    data = alt
+  )
+}
+
 text <- paste(
   readLines(here::here("vignettes/r4ds.mmd")),
   collapse = "\n"
 )
-DiagrammeR::mermaid(text)
+mermaid_with_alt(
+  text,
+  paste(
+    "Import leads to tidying, transformation, and visualization.",
+    "Visualization leads to communication or modeling.",
+    "Modeling feeds back into transformation."
+  )
+)
 ```
 
 The subsequent diagram adds data formats, communication options, and explicit data formatting.
@@ -138,7 +156,16 @@ text <- paste(
   readLines(here::here("vignettes/formats.mmd")),
   collapse = "\n"
 )
-DiagrammeR::mermaid(text)
+mermaid_with_alt(
+  text,
+  paste(
+    "CSV files, APIs, DBI, and dbplyr feed data import.",
+    "dbplyr also feeds tidying, transformation, and visualization.",
+    "Format for analysis after import or for communication after visualization.",
+    "The communication format can also be applied earlier for analysis.",
+    "Communication can use gt, ggplot2, DT, or plotly."
+  )
+)
 ```
 
 Applying formatting early in the process gives the added benefit of showing the data in a useful format
