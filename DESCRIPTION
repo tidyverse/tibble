@@ -41,6 +41,7 @@ Suggests:
     here,
     hms,
     htmltools,
+    htmlwidgets,
     knitr,
     lubridate,
     nycflights13,
