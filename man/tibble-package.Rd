@@ -60,7 +60,7 @@ Other contributors:
 \itemize{
   \item Romain Francois \email{romain@r-enthusiasts.com} [contributor]
   \item Jennifer Bryan \email{jenny@posit.co} [contributor]
-  \item Posit Software, PBC (\href{https://ror.org/03wc8by49}{ROR}) [copyright holder, funder]
+  \item Posit Software, PBC (ROR: 03wc8by49, \verb{https://ror.org/03wc8by49}) [copyright holder, funder]
 }
 
 }
