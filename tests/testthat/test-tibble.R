@@ -252,5 +252,8 @@ test_that("output test", {
     tibble(a = 1, a = 1)
     tibble(a = new_environment())
     tibble(a = 1, b = 2:3, c = 4:6, d = 7:10)
+    tibble(a = 1:3, .rows = c(1L, 5L))
+    tibble(a = 1:3, .rows = 1.5)
+    tibble(.rows = -1)
   })
 })
