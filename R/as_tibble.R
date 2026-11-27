@@ -366,8 +366,8 @@ as_tibble_row <- function(
   } else {
     x <- vectbl_set_names(x, NULL)
     slices <- lapply(seq_len(vec_size(x)), vec_slice, x = x)
-    names(slices) <- names
   }
+  names(slices) <- names
 
   check_all_lengths_one(slices)
 
